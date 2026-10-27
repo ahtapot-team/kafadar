@@ -1,6 +1,6 @@
 {
   "deck_id": "cift",
-  "version": 1,
+  "version": 2,
   "lang": "tr",
   "cards": [
     {
@@ -222,6 +222,186 @@
     {
       "id": "cift-55",
       "text": "Sevgilinin doğum gününü takvim hatırlatmasıyla hatırlamak."
+    },
+    {
+      "id": "cift-56",
+      "text": "Sevgilinle ortak bir sosyal medya hesabı açmak."
+    },
+    {
+      "id": "cift-57",
+      "text": "Sevgilinin her paylaşımını beğenmek zorunda hissetmek."
+    },
+    {
+      "id": "cift-58",
+      "text": "Sevgilinin arkadaş ortamında senin hakkında şaka yapması."
+    },
+    {
+      "id": "cift-59",
+      "text": "Sevgilinle her hafta sonu aynı yere gitmek."
+    },
+    {
+      "id": "cift-60",
+      "text": "Sevgilinin seni ailesine \"arkadaşım\" diye tanıtması."
+    },
+    {
+      "id": "cift-61",
+      "text": "İlk buluşmaya geç kalıp kahve ısmarlayarak telafi etmek."
+    },
+    {
+      "id": "cift-62",
+      "text": "Sevgilinin doğum gününü haftalar önceden planlamak."
+    },
+    {
+      "id": "cift-63",
+      "text": "Sevgilinin hediye ettiği kıyafeti hiç giymemek."
+    },
+    {
+      "id": "cift-64",
+      "text": "Sevgilinin telefonunda duvar kâğıdı olmak istemek."
+    },
+    {
+      "id": "cift-65",
+      "text": "Sevgilinle tatilde her öğünü fotoğraflamak."
+    },
+    {
+      "id": "cift-66",
+      "text": "Sevgilinin kıyafet seçimine karışmak."
+    },
+    {
+      "id": "cift-67",
+      "text": "Sevgilinin ailesinin yanında el ele tutuşmak."
+    },
+    {
+      "id": "cift-68",
+      "text": "Kavgada sessiz kalıp konuyu ertesi güne bırakmak."
+    },
+    {
+      "id": "cift-69",
+      "text": "Sevgilinin seni hep aynı lakapla çağırması."
+    },
+    {
+      "id": "cift-70",
+      "text": "Sevgilinin her hafta arkadaşlarıyla oyun gecesine gitmesi."
+    },
+    {
+      "id": "cift-71",
+      "text": "Sevgilinin restoranda senin yerine sipariş vermesi."
+    },
+    {
+      "id": "cift-72",
+      "text": "Sevgilinin mesajlarının ekran görüntüsünü alıp arkadaşlarına sormak."
+    },
+    {
+      "id": "cift-73",
+      "text": "Sevgilinle aynı diziyi aynı anda ayrı evlerde izlemek."
+    },
+    {
+      "id": "cift-74",
+      "text": "Sevgiline ilk buluşmada çiçek almak."
+    },
+    {
+      "id": "cift-75",
+      "text": "Birlikte gitmeniz gereken düğüne sevgilinin arkadaşıyla gitmesi."
+    },
+    {
+      "id": "cift-76",
+      "text": "Sevgilinin seni sosyal medyada takip etmemesi."
+    },
+    {
+      "id": "cift-77",
+      "text": "Sevgilinle aynı spor salonuna yazılmak."
+    },
+    {
+      "id": "cift-78",
+      "text": "Sevgilinin eski sevgilisiyle ortak bir evcil hayvana bakmaya devam etmesi."
+    },
+    {
+      "id": "cift-79",
+      "text": "Sevgilinle ortak bir banka hesabı açmak."
+    },
+    {
+      "id": "cift-80",
+      "text": "Sevgilinin her yıldönümünde aynı restorana gitmek istemesi."
+    },
+    {
+      "id": "cift-81",
+      "text": "Sürpriz için sevgilinin arkadaşlarıyla gizli grup kurmak."
+    },
+    {
+      "id": "cift-82",
+      "text": "Sevgilinin gece seni uyandırıp \"uyudun mu?\" diye sorması."
+    },
+    {
+      "id": "cift-83",
+      "text": "Sevgilinle aynı parfümü kullanmak."
+    },
+    {
+      "id": "cift-84",
+      "text": "Kavgadan sonra ilk mesajı hep aynı kişinin atması."
+    },
+    {
+      "id": "cift-85",
+      "text": "Sevgilinin konuşurken telefonla ilgilenmesi."
+    },
+    {
+      "id": "cift-86",
+      "text": "Sevgilinin senin hobine hiç ilgi göstermemesi."
+    },
+    {
+      "id": "cift-87",
+      "text": "Sevgilinle çift kostümü giyip partiye gitmek."
+    },
+    {
+      "id": "cift-88",
+      "text": "Sevgilinin bütün kararları sana bırakması."
+    },
+    {
+      "id": "cift-89",
+      "text": "\"Bugün ne yesek?\" sorusuna hiçbir zaman cevap verememek."
+    },
+    {
+      "id": "cift-90",
+      "text": "Sevgilinin bir ünlüyle çekilmiş fotoğrafını kıskanmak."
+    },
+    {
+      "id": "cift-91",
+      "text": "Bayramı sevgilinin ailesiyle geçirmek."
+    },
+    {
+      "id": "cift-92",
+      "text": "Sevgilinin her şarkı için \"bu bizim şarkımız\" demesi."
+    },
+    {
+      "id": "cift-93",
+      "text": "Sevgilinin doğum gününde ona şiir yazmak."
+    },
+    {
+      "id": "cift-94",
+      "text": "Sevgilinin kendi numarasını senin telefonuna \"❤️\" diye kaydetmesi."
+    },
+    {
+      "id": "cift-95",
+      "text": "Tanıştığınız günü her ay kutlamak."
+    },
+    {
+      "id": "cift-96",
+      "text": "Sevgilinin film izlerken sürekli tahmin yürütmesi."
+    },
+    {
+      "id": "cift-97",
+      "text": "Sevgilinin seninle değil oyun konsoluyla daha çok vakit geçirmesi."
+    },
+    {
+      "id": "cift-98",
+      "text": "Sevgilinin uzun mesajlarına tek kelimeyle cevap vermek."
+    },
+    {
+      "id": "cift-99",
+      "text": "Sevgilinin kıskançlığını şirin bulmak."
+    },
+    {
+      "id": "cift-100",
+      "text": "Sevgilinin seni arkadaşlarına sürekli övmesi."
     }
   ]
 }

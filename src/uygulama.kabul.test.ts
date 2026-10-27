@@ -11,6 +11,7 @@ import {
   kabulOdaDeploy,
   kabulOdaGuvenlik,
   kabulCasusUi,
+  kabulCasusKayit,
   kabulOdaKimlik,
 } from './kabul';
 import { oyunlar } from './games/registry';
@@ -28,7 +29,7 @@ describe('KK-1: ana ekran oyun listesi', () => {
 
 describe('KK-7 / KK-21: soru desteleri', () => {
   for (const ad of ['arkadas', 'cift', 'aile']) {
-    it(`${ad}: en az 50 geçerli kart, sürümlü, kimlikli`, () => {
+    it(`${ad}: en az 100 geçerli kart, sürümlü, kimlikli`, () => {
       const deste = JSON.parse(
         readFileSync(
           new URL(`../content/decks/${ad}.json`, import.meta.url),
@@ -38,7 +39,7 @@ describe('KK-7 / KK-21: soru desteleri', () => {
       expect(deste.deck_id).toBe(ad);
       expect(deste.lang).toBe('tr');
       expect(Number.isInteger(deste.version)).toBe(true);
-      expect(deste.cards.length).toBeGreaterThanOrEqual(50);
+      expect(deste.cards.length).toBeGreaterThanOrEqual(100);
       expect(desteHatalari(deste)).toEqual([]);
     });
   }
@@ -367,6 +368,21 @@ describe('Casus kim: kayıt listesi, arayüz ve altyapı sözleşmesi (KK-42…K
     expect(kayit).toMatch(/casus-kim/);
     expect(kayit).toMatch(/ekran/);
   });
+
+  kabulCasusKayit(
+    'Casus ekranı kayıttan okurken durumGecerliMi kullanır (KK-14)',
+    () => {
+      const dosyalar = [...kaynaklar('app'), ...kaynaklar('src')].filter(
+        ({ icerik }) => icerik.includes('casus-kart'),
+      );
+      expect(dosyalar.length).toBeGreaterThan(0);
+      expect(
+        dosyalar.some(({ icerik }) =>
+          /oyunOku[^;]*durumGecerliMi/s.test(icerik),
+        ),
+      ).toBe(true);
+    },
+  );
 
   kabulCasusUi('ekranlar sözleşmedeki testID adlarını kullanır', () => {
     const kaynak = [...kaynaklar('app'), ...kaynaklar('src')]
