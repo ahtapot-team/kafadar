@@ -25,3 +25,13 @@ npm run format     # Prettier
 ## PR önizlemesi (EAS Update)
 
 Bir kerelik kurulum: Expo hesabı aç, `EXPO_TOKEN` oluştur (expo.dev → Access tokens), repo secret'ı olarak ekle, `eas init` ve `eas update:configure` ile `app.json`'a projectId ve `updates.url` yaz. Sonra her PR'a QR ve link yorumu düşer.
+
+## Son main'i telefonda aç (kalıcı Expo Go linki)
+
+Main'e her push'ta `eas update --channel main` çalışır. Expo Go'da şu link her zaman son main'i açar:
+
+```
+exp://u.expo.dev/4172ae7b-3cdd-4faf-b89b-c8c1266ebe56?channel-name=main&runtime-version=exposdk%3A58.0.0
+```
+
+Web önizleme: https://metehantopalhan.github.io/kafadar/
