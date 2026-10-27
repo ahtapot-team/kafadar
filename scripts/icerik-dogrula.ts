@@ -1,4 +1,4 @@
-// content/decks/*.json ve content/casus/*.json dosyalarını doğrular; hata varsa 1 ile çıkar.
+// content/decks, content/casus ve content/onon altındaki *.json dosyalarını doğrular; hata varsa 1 ile çıkar.
 import { readdirSync, readFileSync } from 'node:fs';
 import { casusDesteHatalari } from '../src/games/casus-kim/deste.ts';
 import { desteHatalari } from '../src/core/deste.ts';
@@ -16,4 +16,5 @@ const kontrol = <T>(klasorAdi: string, dogrula: (d: T) => string[]) => {
 };
 kontrol('decks', desteHatalari);
 kontrol('casus', casusDesteHatalari);
+kontrol('onon', desteHatalari);
 process.exit(hataVar ? 1 : 0);
