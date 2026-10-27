@@ -10,6 +10,7 @@ import {
   kabulOda,
   kabulOdaDeploy,
   kabulOdaGuvenlik,
+  kabulOdaKimlik,
 } from './kabul';
 import { oyunlar } from './games/registry';
 
@@ -312,6 +313,25 @@ describe('oda sunucu kabuğu: belirteç sunucuda, kriptografik üretilir (#48)',
         expect(icerik, f).toMatch(/crypto\.randomUUID\(|getRandomValues\(/);
         expect(icerik, f).toMatch(/tip:\s*['"]katil['"][^}]*kimlik/s);
       }
+    },
+  );
+});
+
+describe('oyuncu belirteci adreste değil, ilk WebSocket mesajında (güvenlik)', () => {
+  // URL'ler Cloudflare/proxy günlüklerinde saklanır; belirteç gizli kalmalı. Sunucu ve istemci birlikte değişir,
+  // bu yüzden tek test ikisini birden ister (son merge edilen bayrağı kapatır).
+  kabulOdaKimlik(
+    'sunucu adresten kimlik okumaz, istemci adrese kimlik koymaz; ilk mesaj {t:"kimlik"}',
+    () => {
+      const sunucu = dosyaIcerik('sunucu/src/index.ts');
+      expect(sunucu).not.toMatch(/searchParams\.get\(\s*['"]kimlik['"]\s*\)/);
+      expect(sunucu).toMatch(/['"]kimlik['"]/);
+      expect(sunucu).toMatch(/t\s*===?\s*['"]kimlik['"]|t:\s*['"]kimlik['"]/);
+      const mesaj = dosyaIcerik('src/oda/mesaj.ts');
+      expect(mesaj).not.toMatch(/islem:\s*['"]don['"][^}]*kimlik/);
+      expect(mesaj).toMatch(/t:\s*['"]kimlik['"]/);
+      const ws = dosyaIcerik('src/baglanti/ws.ts');
+      expect(ws).toMatch(/t:\s*['"]kimlik['"]/);
     },
   );
 });
