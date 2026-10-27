@@ -306,3 +306,16 @@ describe('KK-22: saf, serileştirilebilir, tohumlu durum makinesi', () => {
     },
   );
 });
+
+describe('KK-25: geçerli kart oy girişi ve açıklamada aynı kalır', () => {
+  kabul('kart, sonraki gelene dek değişmez ve her aşamada erişilebilir', () => {
+    const d = yeni();
+    const kart = gecerliKart(d);
+    const oylandi = oyla(d, { Ali: 'OK', Ayşe: 'NOK' });
+    expect(gecerliKart(oylandi)).toEqual(kart); // oy girişi
+    const acik = oyVeGoster(d, { Ali: 'OK', Ayşe: 'NOK', Can: 'OK' });
+    expect(acik.asama).toBe('acik');
+    expect(gecerliKart(acik)).toEqual(kart); // açıklama
+    expect(gecerliKart(sonraki(acik))).not.toEqual(kart);
+  });
+});
