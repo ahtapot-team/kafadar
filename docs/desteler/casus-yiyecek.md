@@ -1,4 +1,4 @@
-# Deste: Casus kim — Yiyecek ve içecek (taslak v1)
+# Deste: Casus kim — Yiyecek ve içecek (taslak v2)
 
 > deck_id: casus-yiyecek · lang: tr · 12+ · biçim: `kelime — ipucu` (ipucu casusa gösterilir, kelimeyi içermez)
 
@@ -60,6 +60,50 @@
 54. Boza — Leblebi
 55. Salep — Tarçın
 56. Waffle — Kare kare
+57. Hünkar beğendi — Patlıcan
+58. Karnıyarık — Kıyma
+59. İmam bayıldı — Zeytinyağlı
+60. Dolma — Asma yaprağı
+61. Çiğ köfte — Nar ekşisi
+62. Kısır — Bulgur
+63. Humus — Nohut
+64. Falafel — Tahin
+65. Tantuni — Mersin
+66. Pişmaniye — Pamuk gibi
+67. Künefe — Hatay
+68. Sütlaç — Fırında
+69. Kazandibi — Yanık
+70. Profiterol — Çikolata sosu
+71. Tiramisu — İtalyan tatlısı
+72. Krep — İnce
+73. Omlet — Tava
+74. Sahanda yumurta — Sarısı
+75. Sosisli sandviç — Hardal
+76. Tavuk kanat — Barbekü sos
+77. Balık ekmek — Eminönü
+78. Hamsi — Mısır unu
+79. Levrek — Kılçık
+80. Karides — Güveç
+81. Ahtapot — Vantuz
+82. Mercimek köftesi — Kırmızı
+83. Ezogelin — Kış akşamı
+84. Tarhana — Kurutmak
+85. Turşu — Sirke
+86. Kavun — Yaz akşamı
+87. Nar — Taneler
+88. Kiraz — Küpe
+89. Mandalina — Kolay soyulur
+90. Ananas — Tropikal
+91. Avokado — Büyük çekirdek
+92. Hindistan cevizi — Palmiye
+93. Pamuk şeker — Lunapark
+94. Gofret — Katlar
+95. Cips — Çıtır
+96. Ihlamur — Soğuk algınlığı
+97. Şalgam — Adana
+98. Soda — Kabarcık
+99. Espresso — Küçük fincan
+100. Milkshake — Pipet
 
 ## Örnek sorular (tartışma ekranında döner)
 

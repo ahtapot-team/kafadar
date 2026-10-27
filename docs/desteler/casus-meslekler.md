@@ -1,4 +1,4 @@
-# Deste: Casus kim — Meslekler (taslak v1)
+# Deste: Casus kim — Meslekler (taslak v2)
 
 > deck_id: casus-meslekler · lang: tr · 12+ · biçim: `kelime — ipucu` (ipucu casusa gösterilir, kelimeyi içermez)
 
@@ -60,6 +60,50 @@
 54. Temizlik görevlisi — Paspas
 55. Güvenlik görevlisi — Telsiz
 56. Tercüman — İki dil
+57. Pastacı — Krema torbası
+58. Barista — Latte sanatı
+59. Kasiyer — Barkod
+60. Emlakçı — Kiralık
+61. Noter — Mühür
+62. Diyetisyen — Kalori
+63. Fizyoterapist — Egzersiz bandı
+64. Optisyen — Gözlük camı
+65. Cerrah — Neşter
+66. Ebe — Doğum
+67. Otobüs şoförü — Durak
+68. Kamyoncu — Uzun yol
+69. Makinist — Ray
+70. Tamirci — İngiliz anahtarı
+71. Boyacı — Rulo fırça
+72. Duvar ustası — Tuğla
+73. Çilingir — Kilit
+74. Saatçi — Akrep ve yelkovan
+75. Kuyumcu — Pırlanta
+76. Grafik tasarımcı — Logo
+77. Editör — Düzeltme
+78. Yazar — Roman
+79. Şair — Dize
+80. Yönetmen — Set
+81. Kameraman — Çekim
+82. Sunucu — Canlı yayın
+83. Dansçı — Koreografi
+84. Davulcu — Baget
+85. Orkestra şefi — Baton
+86. Antrenör — Taktik tahtası
+87. Hakem — Kırmızı kart
+88. Jokey — At
+89. Dalgıç — Oksijen tüpü
+90. Hava trafik kontrolörü — Kule
+91. Diplomat — Büyükelçilik
+92. Muhtar — Mahalle
+93. Profesör — Kürsü
+94. Meteorolog — Hava durumu
+95. Jeolog — Deprem
+96. Astronom — Gezegen
+97. Oyun geliştirici — Seviye tasarımı
+98. Animatör — Otel eğlencesi
+99. Rehber — Turist
+100. Çoban — Sürü
 
 ## Örnek sorular (tartışma ekranında döner)
 
