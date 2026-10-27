@@ -9,6 +9,7 @@ import {
   taslakEkle,
   ISIM_MAKS,
 } from '../src/core/oyuncular';
+import { oyunlar } from '../src/games/registry';
 import { useDurum } from '../src/durum';
 import { bosluk, dokunmaAlani, yaricap } from '../src/tema';
 import { Dugme, Ekran, Yazi, GeriCubugu } from '../src/ui';
@@ -17,13 +18,14 @@ import { Dugme, Ekran, Yazi, GeriCubugu } from '../src/ui';
 export default function Oyuncular() {
   const router = useRouter();
   const { oyunda } = useLocalSearchParams<{ oyunda?: string }>();
-  const { renk, oyuncular, oyunculariAyarla, gecenEkip } = useDurum();
+  const { renk, oyuncular, oyunculariAyarla, gecenEkip, oyunId } = useDurum();
+  const oyun = oyunlar.find((o) => o.id === oyunId);
   const [ad, setAd] = useState('');
   const hata = ad ? isimHatasi(ad) : null;
   // Girdide yazılı isim "Devam"da otomatik eklenir; düğme buna göre açılır (#26).
   const taslakli = taslakEkle(oyuncular, ad);
   const taslakVar = taslakli.length > oyuncular.length;
-  const durum = baslayabilir(taslakli);
+  const durum = baslayabilir(taslakli, oyun?.minOyuncu);
 
   const ekle = () => {
     if (!taslakVar) return;
@@ -37,7 +39,7 @@ export default function Oyuncular() {
       setAd('');
     }
     if (oyunda) router.back();
-    else router.push('/paket');
+    else router.push((oyun?.kurulum ?? '/paket') as '/paket');
   };
 
   return (

@@ -19,13 +19,15 @@ type Gezinme = {
 export default function Oyun() {
   const router = useRouter();
   const gezinme = useNavigation<Gezinme>();
-  const { oyunId, kurulum, oyunuBitir } = useDurum();
+  const { oyunId, kurulum, oyunuBitir, hazir } = useDurum();
   const [cikisOnayi, setCikisOnayi] = useState(false);
   const izinli = useRef(false);
 
-  const oyun =
-    oyunlar.find((o) => o.id === oyunId && o.ekran) ??
-    oyunlar.find((o) => o.aktif && o.ekran);
+  // Kayıttan hangi oyun olduğu bulunana kadar (hazir) hiçbir oyun ekranı yüklenmez; yanlış oyun kaydı silmesin.
+  const oyun = hazir
+    ? (oyunlar.find((o) => o.id === oyunId && o.ekran) ??
+      oyunlar.find((o) => o.aktif && o.ekran))
+    : undefined;
   const OyunEkrani = useMemo(
     () => (oyun?.ekran ? lazy(oyun.ekran) : null),
     [oyun],

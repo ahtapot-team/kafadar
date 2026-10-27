@@ -16,14 +16,15 @@ import {
   type Depo,
 } from './core/kayit';
 import type { Paket } from './desteler';
-import {
-  type Durum as OyunDurumu,
-  durumGecerliMi,
-} from './games/ok-mu-nok/oyun';
+import { oyunlar } from './games/registry';
 import { renkler, type Renkler, type Tema } from './tema';
 
 export type Ayar = { ses: boolean; titresim: boolean; tema: Tema };
 export type Kurulum = { paket: Paket; tur: 10 | 20 | null };
+
+// Kayıtlı oyun, kayıtlı oyunlardan herhangi biri için geçerli şemadaysa geçerlidir.
+const herhangiGecerli = (d: unknown): d is unknown =>
+  oyunlar.some((o) => o.gecerliMi?.(d));
 
 const AYAR_ANAHTARI = 'kafadar:ayar';
 const VARSAYILAN: Ayar = { ses: true, titresim: true, tema: 'koyu' };
@@ -38,6 +39,8 @@ type Durum = {
   gecenEkip: string[];
   oyunId: string | null; // ana ekranda seçilen oyun
   oyunuSec: (id: string) => void;
+  oyunAyari: Record<string, unknown>; // oyunun kurulum ekranında seçtikleri (oyuna özel)
+  oyunAyariniAyarla: (a: Record<string, unknown>) => void;
   kurulum: Kurulum;
   kurulumuAyarla: (k: Kurulum) => void;
   yarimOyunVar: boolean; // açılışta kayıtlı oyun bulundu
@@ -69,6 +72,7 @@ export function DurumSaglayici({
     tur: 10,
   });
   const [oyunId, oyunuSec] = useState<string | null>(null);
+  const [oyunAyari, oyunAyariniAyarla] = useState<Record<string, unknown>>({});
   const [yarimOyunVar, setYarimOyunVar] = useState(false);
 
   useEffect(() => {
@@ -81,9 +85,12 @@ export function DurumSaglayici({
       }
       setGecenEkip(await sonEkipOku(depo));
       // Geçersiz/bozuk kayıt burada silinir; "Devam et" yalnızca geçerli kayıtta çıkar (KK-14).
-      setYarimOyunVar(
-        (await oyunOku<OyunDurumu>(depo, durumGecerliMi)) !== null,
-      );
+      const kayit = await oyunOku<unknown>(depo, herhangiGecerli);
+      const sahibi = kayit
+        ? oyunlar.find((o) => o.gecerliMi?.(kayit))
+        : undefined;
+      if (sahibi) oyunuSec(sahibi.id); // devam edilecek oyun kayıttan bulunur
+      setYarimOyunVar(!!sahibi);
       setHazir(true);
     })();
   }, [depo]);
@@ -121,6 +128,8 @@ export function DurumSaglayici({
       gecenEkip,
       oyunId,
       oyunuSec,
+      oyunAyari,
+      oyunAyariniAyarla,
       kurulum,
       kurulumuAyarla,
       yarimOyunVar,
@@ -134,6 +143,7 @@ export function DurumSaglayici({
       oyuncular,
       gecenEkip,
       oyunId,
+      oyunAyari,
       kurulum,
       yarimOyunVar,
       oyunuBaslat,

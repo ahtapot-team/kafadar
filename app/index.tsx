@@ -120,7 +120,7 @@ export default function Ana() {
               etiket={oyun.ad}
               onPress={() => {
                 oyunuSec(oyun.id);
-                router.push('/mod');
+                router.push(oyun.modSecimi ? '/mod' : '/oyuncular');
               }}
             />
           ),

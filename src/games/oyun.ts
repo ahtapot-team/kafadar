@@ -18,4 +18,9 @@ export type Oyun = {
   aktif: boolean;
   // Ekran tembel yüklenir: mantık testleri (node) React Native'e dokunmaz.
   ekran?: () => Promise<{ default: ComponentType<OyunEkraniProps> }>;
+  modSecimi?: boolean; // ana ekrandan sonra "Tek telefon / Oda" seçimi var mı (yalnızca OK mu NOK mu)
+  minOyuncu?: number; // oyuncular ekranında en az kaç kişi (varsayılan 2)
+  kurulum?: string; // oyuncular ekranından sonraki ayar ekranı (varsayılan '/paket')
+  // Kayıtlı yarım oyunun bu oyuna ait geçerli durum olup olmadığı (bozuk kayıt reddedilir, KK-14).
+  gecerliMi?: (durum: unknown) => boolean;
 };
