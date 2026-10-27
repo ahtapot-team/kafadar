@@ -1,6 +1,6 @@
 {
   "deck_id": "aile",
-  "version": 1,
+  "version": 2,
   "lang": "tr",
   "cards": [
     {
@@ -222,6 +222,186 @@
     {
       "id": "aile-55",
       "text": "Tatilde otel yerine akrabanın evinde kalmak."
+    },
+    {
+      "id": "aile-56",
+      "text": "Annenin her telefonda \"yemek yedin mi?\" diye sorması."
+    },
+    {
+      "id": "aile-57",
+      "text": "Babanın navigasyona güvenmeyip kendi bildiği yoldan gitmesi."
+    },
+    {
+      "id": "aile-58",
+      "text": "Kardeşinle aynı odayı paylaşmak."
+    },
+    {
+      "id": "aile-59",
+      "text": "Pazar kahvaltısını her hafta aynı saatte yapmak."
+    },
+    {
+      "id": "aile-60",
+      "text": "Akrabaların seni hâlâ küçük çocuk gibi görmesi."
+    },
+    {
+      "id": "aile-61",
+      "text": "Annenin senin arkadaşlarınla arkadaş olması."
+    },
+    {
+      "id": "aile-62",
+      "text": "Babanın her fotoğrafta poz vermeyi reddetmesi."
+    },
+    {
+      "id": "aile-63",
+      "text": "Kardeşinin seni her konuda taklit etmesi."
+    },
+    {
+      "id": "aile-64",
+      "text": "Ailecek bir diziyi sadece birlikte izlemek."
+    },
+    {
+      "id": "aile-65",
+      "text": "Anneannenin her gelişinde yemek getirmesi."
+    },
+    {
+      "id": "aile-66",
+      "text": "Aile tatilini en küçük çocuğun planlaması."
+    },
+    {
+      "id": "aile-67",
+      "text": "Kardeşinin doğum gününü unutmak."
+    },
+    {
+      "id": "aile-68",
+      "text": "Annenin telefonunda yazı boyutunun çok büyük olması."
+    },
+    {
+      "id": "aile-69",
+      "text": "Babanın kumanda elindeyken uyuyakalması."
+    },
+    {
+      "id": "aile-70",
+      "text": "Evde herkesin kendine ait bir çay bardağı olması."
+    },
+    {
+      "id": "aile-71",
+      "text": "Kardeşine ders anlatırken sabrını kaybetmek."
+    },
+    {
+      "id": "aile-72",
+      "text": "Aile yemeğinde siyaset konuşmak."
+    },
+    {
+      "id": "aile-73",
+      "text": "Bayramda misafire kolonya ikram etmek."
+    },
+    {
+      "id": "aile-74",
+      "text": "Ev işlerinin haftalık bir tabloyla bölüşülmesi."
+    },
+    {
+      "id": "aile-75",
+      "text": "Annenin odanı sen yokken toplaması."
+    },
+    {
+      "id": "aile-76",
+      "text": "Babanın kendi esprisine kendisinin gülmesi."
+    },
+    {
+      "id": "aile-77",
+      "text": "Kardeşinle aynı okulda okumak."
+    },
+    {
+      "id": "aile-78",
+      "text": "Ailecek telefonsuz bir akşam yapmak."
+    },
+    {
+      "id": "aile-79",
+      "text": "Sabahları tek banyoyu en uzun kullanan kişi olmak."
+    },
+    {
+      "id": "aile-80",
+      "text": "Dedenin teknolojiyi senin sayende öğrenmesi."
+    },
+    {
+      "id": "aile-81",
+      "text": "Ailecek karaoke yapmak."
+    },
+    {
+      "id": "aile-82",
+      "text": "Babanın seni arkadaşlarının önünde çocukluk lakabınla çağırması."
+    },
+    {
+      "id": "aile-83",
+      "text": "Kuzenlerle her yaz aynı yerde tatil yapmak."
+    },
+    {
+      "id": "aile-84",
+      "text": "Akrabaların karne gününde notlarını sorması."
+    },
+    {
+      "id": "aile-85",
+      "text": "Annenin sana sormadan kıyafet alması."
+    },
+    {
+      "id": "aile-86",
+      "text": "Ailecek bir evcil hayvan sahiplenmek."
+    },
+    {
+      "id": "aile-87",
+      "text": "Kardeşinin seni her konuda geçmeye çalışması."
+    },
+    {
+      "id": "aile-88",
+      "text": "Evde Wi-Fi şifresini sadece babanın bilmesi."
+    },
+    {
+      "id": "aile-89",
+      "text": "Aile grubunda herkesin aynı anda farklı konudan konuşması."
+    },
+    {
+      "id": "aile-90",
+      "text": "Bayram sabahı erkenden kalkıp ziyarete gitmek."
+    },
+    {
+      "id": "aile-91",
+      "text": "Annenin sofrada \"biraz daha al\" diye ısrar etmesi."
+    },
+    {
+      "id": "aile-92",
+      "text": "Babanın uzun yolculukta hiç mola vermemesi."
+    },
+    {
+      "id": "aile-93",
+      "text": "Kardeşine kendi eski telefonunu vermek."
+    },
+    {
+      "id": "aile-94",
+      "text": "Ailenin seni sürekli kuzeninle kıyaslaması."
+    },
+    {
+      "id": "aile-95",
+      "text": "Misafirlikte ikram edilen her şeyden yemek zorunda hissetmek."
+    },
+    {
+      "id": "aile-96",
+      "text": "Akşam yemeğinde herkesin gününü anlatması."
+    },
+    {
+      "id": "aile-97",
+      "text": "Annenin dizide olan her şeye yorum yapması."
+    },
+    {
+      "id": "aile-98",
+      "text": "Ailecek bisiklet turuna çıkmak."
+    },
+    {
+      "id": "aile-99",
+      "text": "Kardeşinin sana sormadan şarkı listeni değiştirmesi."
+    },
+    {
+      "id": "aile-100",
+      "text": "Teyzenin her bayram aynı hediyeyi getirmesi."
     }
   ]
 }

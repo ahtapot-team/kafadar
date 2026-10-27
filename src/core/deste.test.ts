@@ -72,3 +72,24 @@ describe('content/decks', () => {
     });
   }
 });
+
+describe('OK mu NOK mu desteleri (#87)', () => {
+  for (const ad of ['arkadas', 'cift', 'aile']) {
+    it(`${ad}: 100 kart, sürüm 2, eski 55 id aynen`, () => {
+      const d = JSON.parse(
+        readFileSync(
+          new URL(`../../content/decks/${ad}.json`, import.meta.url),
+          'utf8',
+        ),
+      ) as Deste;
+      expect(d.cards).toHaveLength(100);
+      expect(d.version).toBeGreaterThanOrEqual(2);
+      // Yarım kalmış oyun eski sürümle biter: ilk 55 kartın id'leri değişmez.
+      const eski = Array.from(
+        { length: 55 },
+        (_, i) => `${ad}-${String(i + 1).padStart(2, '0')}`,
+      );
+      expect(d.cards.slice(0, 55).map((c) => c.id)).toEqual(eski);
+    });
+  }
+});

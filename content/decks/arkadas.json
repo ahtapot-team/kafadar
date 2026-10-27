@@ -1,6 +1,6 @@
 {
   "deck_id": "arkadas",
-  "version": 1,
+  "version": 2,
   "lang": "tr",
   "cards": [
     {
@@ -222,6 +222,186 @@
     {
       "id": "arkadas-55",
       "text": "Arkadaşının önerdiği diziyi ondan önce bitirip ona spoiler vermek."
+    },
+    {
+      "id": "arkadas-56",
+      "text": "Arkadaşının ödünç verdiği kıyafeti yıkamadan geri vermek."
+    },
+    {
+      "id": "arkadas-57",
+      "text": "Grup sohbetinde mesajları okuyup hiç yazmamak."
+    },
+    {
+      "id": "arkadas-58",
+      "text": "Arkadaşının yeni sevgilisini ilk buluşmada sorguya çekmek."
+    },
+    {
+      "id": "arkadas-59",
+      "text": "Arkadaşının uyurken çekilmiş fotoğrafını hikâyede paylaşmak."
+    },
+    {
+      "id": "arkadas-60",
+      "text": "Ortak tatil için para toplanırken \"sonra veririm\" demek."
+    },
+    {
+      "id": "arkadas-61",
+      "text": "Arkadaşının evine haber vermeden gitmek."
+    },
+    {
+      "id": "arkadas-62",
+      "text": "Yeni arkadaşlarının yanında sürekli eski arkadaşlarından bahsetmek."
+    },
+    {
+      "id": "arkadas-63",
+      "text": "Ortak hediye yerine doğum gününe tek başına hediye almak."
+    },
+    {
+      "id": "arkadas-64",
+      "text": "Arkadaşının ailesine onun yaramazlıklarını anlatmak."
+    },
+    {
+      "id": "arkadas-65",
+      "text": "Maçta rakip takımı tutan arkadaşının yanında gol sevinci yapmak."
+    },
+    {
+      "id": "arkadas-66",
+      "text": "Arkadaşının yemek fotoğrafına \"bunu ben de yaparım\" yorumu yazmak."
+    },
+    {
+      "id": "arkadas-67",
+      "text": "Arkadaşının telefonundan şakayla sevgilisine mesaj atmak."
+    },
+    {
+      "id": "arkadas-68",
+      "text": "Kuralları bilmeyen arkadaşını oyunda yenip çok sevinmek."
+    },
+    {
+      "id": "arkadas-69",
+      "text": "Arkadaşına sormadan onun numarasını başkasına vermek."
+    },
+    {
+      "id": "arkadas-70",
+      "text": "Buluşmada herkesin telefonu masaya ters kapatması."
+    },
+    {
+      "id": "arkadas-71",
+      "text": "Hasta arkadaşına çorba götürmek yerine mesajla geçmiş olsun demek."
+    },
+    {
+      "id": "arkadas-72",
+      "text": "Arkadaşının yeni aldığı ayakkabının aynısını almak."
+    },
+    {
+      "id": "arkadas-73",
+      "text": "Toplu yemekte siparişi herkes adına tek başına vermek."
+    },
+    {
+      "id": "arkadas-74",
+      "text": "Arkadaşına hediye olarak kendi sevdiğin bir şeyi almak."
+    },
+    {
+      "id": "arkadas-75",
+      "text": "Arkadaşının hoşlandığı kişiyle eskiden çıktığını ondan saklamak."
+    },
+    {
+      "id": "arkadas-76",
+      "text": "Kamp gecesinde herkes uyurken korku hikâyesi anlatmaya devam etmek."
+    },
+    {
+      "id": "arkadas-77",
+      "text": "Gece 00:00'da doğum günü mesajını ilk atan olmak için yarışmak."
+    },
+    {
+      "id": "arkadas-78",
+      "text": "Arkadaşının kitabının sayfa kenarlarını katlamak."
+    },
+    {
+      "id": "arkadas-79",
+      "text": "Ağlayan arkadaşını güldürmeye çalışmak."
+    },
+    {
+      "id": "arkadas-80",
+      "text": "Arkadaşının en kötü fotoğrafını onun doğum gününde paylaşmak."
+    },
+    {
+      "id": "arkadas-81",
+      "text": "Grup tatilinde plandan ayrılıp tek başına gezmeye gitmek."
+    },
+    {
+      "id": "arkadas-82",
+      "text": "Arkadaşına her buluşmada aynı şakayı yapmak."
+    },
+    {
+      "id": "arkadas-83",
+      "text": "Arkadaş grubunun içinde iki kişilik özel grup kurmak."
+    },
+    {
+      "id": "arkadas-84",
+      "text": "Arkadaşının yanında sürekli kulaklıkla gezmek."
+    },
+    {
+      "id": "arkadas-85",
+      "text": "Doğum gününü kutlamayan arkadaşına küsmek."
+    },
+    {
+      "id": "arkadas-86",
+      "text": "Arkadaşının evinde buzdolabını sormadan açmak."
+    },
+    {
+      "id": "arkadas-87",
+      "text": "Kavga edince ortak arkadaşları taraf tutmaya zorlamak."
+    },
+    {
+      "id": "arkadas-88",
+      "text": "Uzun süredir görüşmediğin arkadaşını sadece bir iş için aramak."
+    },
+    {
+      "id": "arkadas-89",
+      "text": "Arkadaşının gönderdiği her videoya \"izleyeceğim\" deyip izlememek."
+    },
+    {
+      "id": "arkadas-90",
+      "text": "Toplu buluşmaların hep aynı kişinin evinde yapılması."
+    },
+    {
+      "id": "arkadas-91",
+      "text": "Her plana fikir söylemeden \"sen bilirsin\" demek."
+    },
+    {
+      "id": "arkadas-92",
+      "text": "Arkadaşının hikâyesini bitirmesine izin vermeden araya girmek."
+    },
+    {
+      "id": "arkadas-93",
+      "text": "Arkadaşınla aynı kişiden hoşlandığını öğrenince geri çekilmek."
+    },
+    {
+      "id": "arkadas-94",
+      "text": "Biri yokken plan yapıp sonra onu da çağırmak."
+    },
+    {
+      "id": "arkadas-95",
+      "text": "Arkadaşına yeni işinde ne kadar maaş aldığını sormak."
+    },
+    {
+      "id": "arkadas-96",
+      "text": "Arkadaşının çaldığı şarkıyı her seferinde değiştirmek."
+    },
+    {
+      "id": "arkadas-97",
+      "text": "Grup fotoğrafını çeken kişinin hiçbir fotoğrafta olmaması."
+    },
+    {
+      "id": "arkadas-98",
+      "text": "Arkadaşının yazım hatasını grupta düzeltmek."
+    },
+    {
+      "id": "arkadas-99",
+      "text": "Arkadaşının sınav sonucunu ondan önce öğrenip söylemek."
+    },
+    {
+      "id": "arkadas-100",
+      "text": "Ödünç aldığın oyunu bitirmeden geri vermemek."
     }
   ]
 }
