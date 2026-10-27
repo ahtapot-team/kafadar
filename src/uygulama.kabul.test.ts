@@ -1,7 +1,7 @@
 import { readdirSync, readFileSync } from 'node:fs';
 import { describe, expect, it } from 'vitest';
 import { desteHatalari } from './core/deste';
-import { kabul, kabulKk25, kabulKk26 } from './kabul';
+import { kabul, kabulKk25, kabulKk26, kabulKk27 } from './kabul';
 import { oyunlar } from './games/registry';
 
 describe('KK-1: ana ekran oyun listesi', () => {
@@ -119,15 +119,24 @@ describe('KK-26: oyun dışı ekranlarda Geri, oyun içinde geri yok', () => {
   });
 });
 
-describe('KK-27: Ayarlar yalnızca ana ekranda', () => {
-  it('Ayarlar düğmesi ve /ayarlar gezintisi yalnızca app/index.tsx içinde', () => {
+describe('KK-27: Ayarlar yalnızca ana ekranda, sağ üstte sabit küçük ikon', () => {
+  it('ikon ve /ayarlar gezintisi yalnızca app/index.tsx içinde', () => {
     const dosyalar = [...kaynaklar('app'), ...kaynaklar('src/oyun-ekranlari')];
     for (const { f, icerik } of dosyalar) {
       if (f.endsWith('app/index.tsx') || f.endsWith('app/ayarlar.tsx'))
         continue;
-      expect(icerik, f).not.toMatch(/testID="ayarlar"/);
+      expect(icerik, f).not.toMatch(/testID="ayarlar(-ikon)?"/);
       expect(icerik, f).not.toMatch(/['"]\/ayarlar['"]/);
     }
-    expect(dosyaIcerik('app/index.tsx')).toMatch(/testID="ayarlar"/);
   });
+
+  kabulKk27(
+    'ana ekranda "Ayarlar" metinli büyük düğme yok, adlı ayarlar ikonu var',
+    () => {
+      const ana = dosyaIcerik('app/index.tsx');
+      expect(ana).toMatch(/testID="ayarlar(-ikon)?"/);
+      expect(ana).not.toMatch(/etiket="Ayarlar"/);
+      expect(ana).toMatch(/accessibilityLabel="Ayarlar"/); // ikon ekran okuyucuda adlı
+    },
+  );
 });
