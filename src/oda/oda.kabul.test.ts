@@ -1,7 +1,7 @@
 import { describe, expect } from 'vitest';
 import type { Deste } from '../core/deste';
 import { rngOlustur } from '../core/rng';
-import { kabulOdaMantik as kabul } from '../kabul';
+import { kabulOdaGuvenlik, kabulOdaMantik as kabul } from '../kabul';
 import {
   BOSTA_MS,
   type Kimlik,
@@ -462,4 +462,57 @@ describe('KK-40: saf, serileştirilebilir, deterministik', () => {
     const calis = () => final(oyna(kur(['A', 'B', 'C'], 3), dokuz(3)).d);
     expect(calis()).toEqual(calis());
   });
+});
+
+describe('oyuncu belirteci (güvenlik, #48)', () => {
+  const sade = (tohum: number, kimlik: string) =>
+    odaKur({
+      kod: 'ABCD',
+      kurucuAd: 'A',
+      kurucuKimlik: kimlik,
+      deste: deste(),
+      tohum,
+      simdi: T0,
+    });
+
+  kabul(
+    'verilen belirteç aynen kullanılır; aynı tohum + farklı kimlik farklı belirteç',
+    () => {
+      const a = sade(5, 'gizli-aaaaaaaaaaaa');
+      const b = sade(5, 'gizli-bbbbbbbbbbbb');
+      expect(a.kimlik).toBe('gizli-aaaaaaaaaaaa');
+      expect(b.kimlik).toBe('gizli-bbbbbbbbbbbb');
+      const s = isle(
+        a.durum,
+        { tip: 'katil', ad: 'B', kimlik: 'gizli-cccccccccccc' },
+        T0,
+      );
+      expect(s.kimlik).toBe('gizli-cccccccccccc');
+      // verilen belirteçle yapılan olay o oyuncuya işler
+      const basla = ok(s.durum, { tip: 'baslat', kimlik: a.kimlik }, T0);
+      const d = cevapla(basla, 'gizli-cccccccccccc', 'OK', T0 + 1_000);
+      expect(gorunum(d, 'gizli-cccccccccccc', T0 + 1_000).benimOyum).toBe('OK');
+      expect(gorunum(d, a.kimlik, T0 + 1_000).benimOyum).toBeNull();
+    },
+  );
+
+  kabulOdaGuvenlik(
+    'var olan bir belirteçle katılma reddedilir ya da yeni belirteç verilir (devralma yok)',
+    () => {
+      const a = sade(5, 'gizli-aaaaaaaaaaaa');
+      const s = isle(
+        a.durum,
+        { tip: 'katil', ad: 'Hileci', kimlik: a.kimlik },
+        T0,
+      );
+      expect(s.hata !== undefined || s.kimlik !== a.kimlik).toBe(true);
+      // ne olursa olsun kurucunun belirteci hâlâ yalnızca kurucuya işler
+      const basla = isle(
+        isle(a.durum, { tip: 'katil', ad: 'B' }, T0).durum,
+        { tip: 'baslat', kimlik: a.kimlik },
+        T0,
+      );
+      expect(basla.hata).toBeUndefined();
+    },
+  );
 });

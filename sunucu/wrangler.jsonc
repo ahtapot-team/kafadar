@@ -1,0 +1,12 @@
+{
+  "name": "kafadar-oda",
+  "main": "src/index.ts",
+  "compatibility_date": "2026-10-01",
+  "durable_objects": {
+    "bindings": [
+      { "name": "ODA", "class_name": "Oda" },
+      { "name": "SINIR", "class_name": "Sinir" },
+    ],
+  },
+  "migrations": [{ "tag": "v1", "new_sqlite_classes": ["Oda", "Sinir"] }],
+}
