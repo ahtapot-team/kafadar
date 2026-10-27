@@ -11,18 +11,19 @@ import {
   kabulOdaDeploy,
   kabulOdaGuvenlik,
   kabulCasusUi,
+  kabulCasusUiSon,
   kabulCasusKayit,
   kabulOdaKimlik,
 } from './kabul';
 import { oyunlar } from './games/registry';
 
 describe('KK-1: ana ekran oyun listesi', () => {
-  kabul('OK mu NOK mu aktif; 10/10 ama ve Casus kim "Yakında"', () => {
+  kabul('OK mu NOK mu ve Casus kim aktif; 10/10 ama "Yakında"', () => {
     const aktiflik = Object.fromEntries(oyunlar.map((o) => [o.id, o.aktif]));
     expect(aktiflik).toEqual({
       'ok-mu-nok': true,
       '10-10-ama': false,
-      'casus-kim': false,
+      'casus-kim': true, // KK-42: #81'de aktif
     });
   });
 });
@@ -384,7 +385,7 @@ describe('Casus kim: kayıt listesi, arayüz ve altyapı sözleşmesi (KK-42…K
     },
   );
 
-  kabulCasusUi('ekranlar sözleşmedeki testID adlarını kullanır', () => {
+  kabulCasusUiSon('ekranlar sözleşmedeki testID adlarını kullanır', () => {
     const kaynak = [...kaynaklar('app'), ...kaynaklar('src')]
       .map(({ icerik }) => icerik)
       .join('\n');

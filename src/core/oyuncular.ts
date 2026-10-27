@@ -29,12 +29,15 @@ export function benzersizIsim(ad: string, mevcut: readonly string[]): string {
 export const ekleyebilir = (oyuncular: readonly string[]) =>
   oyuncular.length < OYUNCU_MAKS;
 
-export function baslayabilir(oyuncular: readonly string[]): {
+export function baslayabilir(
+  oyuncular: readonly string[],
+  min: number = OYUNCU_MIN, // oyuna göre (ör. Casus kim 3)
+): {
   tamam: boolean;
   neden?: string;
 } {
-  if (oyuncular.length < OYUNCU_MIN)
-    return { tamam: false, neden: `En az ${OYUNCU_MIN} oyuncu gerekli` };
+  if (oyuncular.length < min)
+    return { tamam: false, neden: `En az ${min} oyuncu gerekli` };
   return { tamam: true };
 }
 
