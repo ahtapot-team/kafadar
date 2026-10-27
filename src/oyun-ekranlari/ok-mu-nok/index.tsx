@@ -20,6 +20,12 @@ import { AcikEkrani } from './acik';
 import { BitisEkrani } from './bitis';
 import { KartEkrani } from './kart';
 import { OyEkrani } from './oy';
+import {
+  GizliPaylasim,
+  KartPaylasimi,
+  OdulPaylasimi,
+  usePaylas,
+} from './paylasim';
 
 export default function OkMuNokEkrani({
   deste,
@@ -31,6 +37,7 @@ export default function OkMuNokEkrani({
   const { oyuncular: ekip, oyunculariAyarla, kurulum } = useDurum();
   const [durum, setDurum] = useState<Durum | null>(null);
   const ref = useRef<Durum | null>(null);
+  const paylasim = usePaylas();
   const [tanitilan, setTanitilan] = useState<number | null>(null); // kart tanıtımı (çevirme + geri sayım) biten kart
 
   const gonder = useCallback((olay: Olay) => {
@@ -120,14 +127,26 @@ export default function OkMuNokEkrani({
 
   if (durum.asama === 'acik')
     return (
-      <AcikEkrani
-        key={durum.tamamlanan}
-        oyuncular={durum.oyuncular}
-        oylar={durum.oylar}
-        sonuc={sonuc(durum)}
-        onSonraki={() => gonder({ tip: 'sonraki' })}
-        onBitir={() => gonder({ tip: 'bitir' })}
-      />
+      <>
+        <AcikEkrani
+          key={durum.tamamlanan}
+          oyuncular={durum.oyuncular}
+          oylar={durum.oylar}
+          sonuc={sonuc(durum)}
+          onSonraki={() => gonder({ tip: 'sonraki' })}
+          onBitir={() => gonder({ tip: 'bitir' })}
+          onPaylas={paylasim.paylas}
+        />
+        <GizliPaylasim gorunum={paylasim.ref}>
+          <KartPaylasimi
+            kart={gecerliKart(durum).text}
+            sonuc={sonuc(durum).metin}
+            oylar={durum.oylar}
+            oyuncular={durum.oyuncular}
+            paket={paket}
+          />
+        </GizliPaylasim>
+      </>
     );
 
   if (durum.asama === 'desteBitti')
@@ -150,12 +169,22 @@ export default function OkMuNokEkrani({
     );
 
   return (
-    <BitisEkrani
-      kartSayisi={durum.gecmis.length}
-      oduller={oduller(durum)}
-      kartMetni={kartMetni}
-      onTekrar={() => baslat(durum.oyuncular)}
-      onAnaMenu={onAnaMenu}
-    />
+    <>
+      <BitisEkrani
+        kartSayisi={durum.gecmis.length}
+        oduller={oduller(durum)}
+        kartMetni={kartMetni}
+        onTekrar={() => baslat(durum.oyuncular)}
+        onAnaMenu={onAnaMenu}
+        onPaylas={paylasim.paylas}
+      />
+      <GizliPaylasim gorunum={paylasim.ref}>
+        <OdulPaylasimi
+          oduller={oduller(durum)}
+          kartMetni={kartMetni}
+          kartSayisi={durum.gecmis.length}
+        />
+      </GizliPaylasim>
+    </>
   );
 }
