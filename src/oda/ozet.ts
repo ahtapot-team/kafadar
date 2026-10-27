@@ -38,3 +38,10 @@ export function kisisel(f: Final, ad: string) {
 // Erken biten oyun (kuran çıktı / tek oyuncu kaldı, KK-38): tamamlanan soru sayısı SORU_SAYISI'ndan azdır.
 export const erkenBitti = (f: Final, soruSayisi: number) =>
   f.yuzdeler.length < soruSayisi;
+
+// Odadan ayrılanlar (#73): önceki görünümdeki oyuncu adlarından yenisinde olmayanlar. Sunucu ayrılanı listeden düşürür;
+// istemci farkı "X ayrıldı" olarak gösterir.
+export const ayrilanlar = (
+  onceki: readonly string[],
+  simdi: readonly string[],
+) => onceki.filter((ad) => !simdi.includes(ad));
