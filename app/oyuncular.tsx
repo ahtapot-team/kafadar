@@ -43,10 +43,7 @@ export default function Oyuncular() {
   return (
     <Ekran>
       <Yazi tur="baslik">Oyuncular</Yazi>
-      <Yazi soluk>
-        {oyuncular.length} / 12 kişi. Boş kareye dokunmanın cezası yok, isimler
-        de.
-      </Yazi>
+      <Yazi soluk>{oyuncular.length} / 12 kişi</Yazi>
       {oyuncular.map((o, i) => (
         <View
           key={o}
