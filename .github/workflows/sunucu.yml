@@ -12,6 +12,9 @@ on:
       - 'content/decks/**'
       - '.github/workflows/sunucu.yml'
 
+permissions:
+  contents: read
+
 concurrency:
   group: sunucu-dagitim
   cancel-in-progress: false
@@ -23,8 +26,9 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - uses: cloudflare/wrangler-action@v3
+      - uses: cloudflare/wrangler-action@9acf94ace14e7dc412b076f2c5c20b8ce93c79cd # v3
         with:
+          wranglerVersion: '4.154.0'
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           workingDirectory: sunucu
