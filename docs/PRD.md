@@ -220,7 +220,7 @@ Tek telefonda, açık oyla oynanır; OK mu NOK mu akışının neredeyse aynıs�
 - [ ] KK-57: Açıklamada ortalama (bir ondalık), en düşük ve en yüksek puan verenler, oybirliği konfetisi ve "Tam bölündünüz" (uçlar arası fark ≥ 8) gösterilir. "Hareketi azalt" açıksa animasyon yerine sade gösterim.
 - [ ] KK-58: Oturum sonunda En acımasız, Melek kalpli ve Ruh ikizleri ödülleri gösterilir; 9:16 paylaşım görseli üretilir.
 - [ ] KK-59: Kart sorusu (10/10 ama …) puan girişi ve açıklama boyunca görünür kalır (KK-25 gibi).
-- [ ] KK-60: 3 paket, her birinde en az 100 kart; boş, yinelenen (tr) ya da 140 karakterden uzun kart yok; her kart "10/10 ama" ile başlar; içerik 12+.
+- [ ] KK-60: 3 paket, her birinde en az 100 kart; boş, yinelenen (tr) ya da 140 karakterden uzun kart yok; her kart "10/10 ama" ifadesini içerir (Sevgili adayı ve Arkadaş paketlerinde "10/10 ama …", Gündelik hayatta "Ev 10/10 ama …"); içerik 12+.
 - [ ] KK-61: Oyun mantığı saf, tohumlu, serileştirilebilir bir durum makinesidir (KK-22); kabul testleri sahte tohumla çalışır.
 - [ ] KK-62: Gerçek cihaz kapısı: `docs/GERCEK-CIHAZ-KONTROL.md`'ye 10/10 ama bölümü eklenir ve işaretlenmeden oyun "bitti" sayılmaz.
 
