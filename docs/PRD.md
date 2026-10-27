@@ -132,6 +132,11 @@ Birden fazla telefonla oynanır. Bir telefon oda kurar, diğerleri kodla kendi t
 | Sonuç görünürlüğü | Önce yüzdeler, sonra "kim ne dedi" | Videoda en çok ses getiren an | pm önerisi, Murat onayı (27.10.2026) |
 | Kuran kişi | Kuran telefon da oynar | En basit, kimse dışarıda kalmaz | pm önerisi, Murat onayı (27.10.2026) |
 | Süre ve sayı | 15 sn, 10 soru, 2–12 oyuncu | Metehan'ın isteği + mevcut oyuncu sınırı | pm önerisi, Murat onayı (27.10.2026) |
+| Kopuk oyuncu | Kopuk oyuncu, "herkes cevapladı" beklemesini uzatmaz; süre bitince boş sayılır | Oyun takılmaz | backend önerisi, qa kabulü (27.10.2026) |
+| Lobide kuran çıkarsa | Sıradaki oyuncu kurucu olur, oda kapanmaz | Oda boşa gitmez | backend önerisi, qa kabulü (27.10.2026) |
+| Süre sınırı | 15. saniyede ve sonrasında gelen cevap reddedilir | Herkese eşit süre | backend önerisi, qa kabulü (27.10.2026) |
+| Oyundan çıkanlar | Ödüllere girmez; o ana kadarki cevapları finalde görünür | Sonuç bozulmaz | backend önerisi, qa kabulü (27.10.2026) |
+| Oyuncu belirteci | Kriptografik rastgele üretilir, tahmin edilemez | Başkası adına cevap verilemez (güvenlik) | qa şartı (27.10.2026) |
 
 ### Riskler (oda modu)
 - **Cloudflare hesabı:** Bir insan ücretsiz bir Cloudflare hesabı açar ve API token'ını repo secret'ı olarak ekler (Expo'daki gibi). Token gruba yapıştırılmaz. Backend başlamadan ücretsiz katmanın yettiğini doğrular.
