@@ -9,9 +9,10 @@
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "typecheck": "tsc --noEmit",
-    "test": "vitest run",
+    "test": "vitest run --exclude \"**/*.kabul.test.ts\" --exclude \"**/node_modules/**\"",
     "icerik": "node scripts/icerik-dogrula.ts",
-    "build": "expo export --platform android"
+    "build": "expo export --platform android",
+    "kabul": "vitest run kabul"
   },
   "dependencies": {
     "expo": "~58.0.19",
