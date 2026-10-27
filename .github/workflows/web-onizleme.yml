@@ -1,0 +1,90 @@
+# Web önizleme: main → Pages kökü (/kafadar/), her PR → /kafadar/pr/<no>/ (gh-pages dalı). Link PR'a yorum olarak yazılır.
+name: Web önizleme
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, closed]
+  push:
+    branches: [main]
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: web-onizleme-gh-pages
+  cancel-in-progress: false
+
+jobs:
+  yayinla:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        if: github.event.action != 'closed'
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Build (alt yol önizlemeye göre)
+        if: github.event.action != 'closed'
+        env:
+          EXPO_NO_TELEMETRY: '1'
+        run: |
+          if [ "${{ github.event_name }}" = "push" ]; then
+            export EXPO_BASE_URL=/${{ github.event.repository.name }}
+          else
+            export EXPO_BASE_URL=/${{ github.event.repository.name }}/pr/${{ github.event.number }}
+          fi
+          npm ci
+          npm run build:web
+
+      - name: gh-pages dalını hazırla
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git fetch origin gh-pages || true
+          if git rev-parse --verify origin/gh-pages >/dev/null 2>&1; then
+            git worktree add "$RUNNER_TEMP/site" origin/gh-pages
+          else
+            git worktree add --detach "$RUNNER_TEMP/site"
+            git -C "$RUNNER_TEMP/site" checkout --orphan gh-pages
+            git -C "$RUNNER_TEMP/site" rm -rf . >/dev/null 2>&1 || true
+          fi
+
+      - name: Yayın dizinini güncelle
+        run: |
+          SITE="$RUNNER_TEMP/site"
+          if [ "${{ github.event_name }}" = "push" ]; then
+            find "$SITE" -mindepth 1 -maxdepth 1 ! -name .git ! -name pr -exec rm -rf {} +
+            cp -r dist/. "$SITE/"
+          elif [ "${{ github.event.action }}" = "closed" ]; then
+            rm -rf "$SITE/pr/${{ github.event.number }}"
+          else
+            rm -rf "$SITE/pr/${{ github.event.number }}"
+            mkdir -p "$SITE/pr/${{ github.event.number }}"
+            cp -r dist/. "$SITE/pr/${{ github.event.number }}/"
+          fi
+          touch "$SITE/.nojekyll"  # _expo/ klasörü Jekyll tarafından atlanmasın
+
+      - name: Yayınla
+        run: |
+          cd "$RUNNER_TEMP/site"
+          git add -A
+          git diff --cached --quiet || git commit -m "Yayın: ${{ github.sha }}"
+          git push origin HEAD:gh-pages
+
+      - name: Linki PR'a yaz
+        if: github.event_name == 'pull_request' && github.event.action != 'closed'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const url = `https://${context.repo.owner}.github.io/${context.repo.repo}/pr/${context.issue.number}/`;
+            const marker = '<!-- web-onizleme -->';
+            const body = `${marker}\n🔗 Web önizleme: ${url}`;
+            const { data } = await github.rest.issues.listComments({ ...context.repo, issue_number: context.issue.number });
+            const mevcut = data.find((c) => c.body?.startsWith(marker));
+            if (mevcut) await github.rest.issues.updateComment({ ...context.repo, comment_id: mevcut.id, body });
+            else await github.rest.issues.createComment({ ...context.repo, issue_number: context.issue.number, body });
