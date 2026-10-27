@@ -1,0 +1,46 @@
+# Her PR için EAS Update yayınlar; Expo Go ile açılan QR ve linki PR'a yorum olarak yazar (KK-23).
+# Gerekli repo secret'ı: EXPO_TOKEN. Ayrıca app.json'da EAS projectId ve updates.url olmalı (README).
+name: Önizleme
+
+on:
+  pull_request:
+
+permissions:
+  contents: read
+  pull-requests: write
+
+concurrency:
+  group: onizleme-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  yayinla:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Token yoksa önizleme atlanır
+        if: env.EXPO_TOKEN == ''
+        run: echo "EXPO_TOKEN tanımlı değil, önizleme atlandı."
+
+      - uses: expo/expo-github-action@v8
+        if: env.EXPO_TOKEN != ''
+        with:
+          eas-version: latest
+          token: ${{ secrets.EXPO_TOKEN }}
+
+      - run: npm ci
+        if: env.EXPO_TOKEN != ''
+
+      - uses: expo/expo-github-action/preview@v8
+        if: env.EXPO_TOKEN != ''
+        with:
+          command: eas update --auto

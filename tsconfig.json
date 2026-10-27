@@ -1,0 +1,16 @@
+{
+  "extends": "expo/tsconfig.base",
+  "compilerOptions": {
+    "strict": true,
+    "noEmit": true,
+    "allowImportingTsExtensions": true
+  },
+  "include": [
+    "app",
+    "src",
+    "scripts",
+    "*.config.*",
+    "expo-env.d.ts",
+    ".expo/types/**/*.ts"
+  ]
+}
