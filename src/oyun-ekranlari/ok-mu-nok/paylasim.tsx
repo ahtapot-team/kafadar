@@ -39,9 +39,11 @@ export function usePaylas() {
 export function GizliPaylasim({
   gorunum,
   children,
+  baslik = 'OK mu NOK mu?',
 }: {
   gorunum: RefObject<ComponentRef<typeof View> | null>;
   children: ReactNode;
+  baslik?: string;
 }) {
   return (
     <View
@@ -87,7 +89,7 @@ export function GizliPaylasim({
         <Text
           style={{ fontFamily: font.kalin, fontSize: 13, color: r.metinSoluk }}
         >
-          OK mu NOK mu?
+          {baslik}
         </Text>
       </View>
       {children}

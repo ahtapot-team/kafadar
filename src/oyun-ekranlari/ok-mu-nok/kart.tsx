@@ -19,6 +19,10 @@ type Props = {
   sira: number;
   toplam: string; // "20" ya da "∞"
   paket: string;
+  // Oyuna özel metinler (varsayılan OK mu NOK mu).
+  etiket?: string;
+  soru?: string;
+  altMetin?: string;
   onBitti: () => void;
   onCik: () => void;
 };
@@ -28,6 +32,9 @@ export function KartEkrani({
   sira,
   toplam,
   paket,
+  etiket = 'Durum',
+  soru = 'OK mu, NOK mu?',
+  altMetin = 'Başparmaklar hazır!',
   onBitti,
   onCik,
 }: Props) {
@@ -138,7 +145,7 @@ export function KartEkrani({
             }}
           >
             <Yazi tur="etiket" style={{ color: renk.marka }}>
-              Durum
+              {etiket}
             </Yazi>
           </View>
           <Text
@@ -151,7 +158,7 @@ export function KartEkrani({
             {metin}
           </Text>
           <Yazi tur="etiket" style={{ color: renk.kontur }}>
-            OK mu, NOK mu?
+            {soru}
           </Yazi>
         </Animated.View>
       </View>
@@ -190,7 +197,7 @@ export function KartEkrani({
         })}
       </View>
       <Yazi tur="etiket" soluk style={{ textAlign: 'center' }}>
-        Başparmaklar hazır!
+        {altMetin}
       </Yazi>
     </Ekran>
   );
