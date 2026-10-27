@@ -29,7 +29,7 @@ export const BEKLEYEN = {
   odaKimlik: false,
   casusMantik: false,
   casusUi: false,
-  casusUiSon: true, // #82: tüm Casus kim ekranlarının testID sözleşmesi
+  casusUiSon: false, // #82: tüm Casus kim ekranlarının testID sözleşmesi
   casusKayit: false,
   casusKayitUi: false, // #81: Casus ekranı oyunOku(depo, durumGecerliMi) kullanır
 };

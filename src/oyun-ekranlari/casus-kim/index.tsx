@@ -1,6 +1,7 @@
 // Casus kim ekranı (#81): devir perdesi → basılı tut-gör kart (testID casus-kart, kart.tsx) → "Gördüm" (KK-44…KK-47). Tartışma ve sonrası #82.
 // Kayıt: oyunOku(depo, durumGecerliMi) ile okunur; bozuk kayıt reddedilir, açık kart geri yüklenmez.
 import { useCallback, useEffect, useRef, useState } from 'react';
+import { Platform } from 'react-native';
 import { Pressable, View } from 'react-native';
 import { oyunKaydet, oyunOku } from '../../core/kayit';
 import { depo } from '../../depo';
@@ -17,15 +18,21 @@ import {
   oySonucu,
   oylamaAdaylari,
   siradaki,
+  sonuc,
+  tahminSecenekleri,
   yeniOyun,
 } from '../../games/casus-kim/casus';
 import type { OyunEkraniProps } from '../../games/oyun';
 import { bosluk, dokunmaAlani, yaricap } from '../../tema';
 import { titret } from '../../titresim';
 import { Dugme, Ekran, Yazi } from '../../ui';
+import { usePaylas, GizliPaylasim } from '../ok-mu-nok/paylasim';
 import { Aciklama } from './aciklama';
 import { Cark } from './cark';
 import { Oylama } from './oylama';
+import { PaylasimIcerik } from './paylasim';
+import { SonucEkrani } from './sonuc';
+import { Tahmin } from './tahmin';
 import { Tartisma } from './tartisma';
 import { casusPaketleri } from './desteler';
 import { GizliKart, useGizli } from './kart';
@@ -38,6 +45,7 @@ export default function CasusEkrani({ onCik, onAnaMenu }: OyunEkraniProps) {
 
   const [carkGoster, setCarkGoster] = useState(false); // son kart görülünce çark (yenilemede tekrar gösterilmez)
   const [simdi, setSimdi] = useState(Date.now());
+  const paylas = usePaylas();
 
   const gonder = useCallback((olay: Olay) => {
     if (!ref.current) return;
@@ -285,13 +293,70 @@ export default function CasusEkrani({ onCik, onAnaMenu }: OyunEkraniProps) {
     );
   }
 
-  // Tahmin ve sonuç ekranları bir sonraki PR'da.
+  if (durum.asama === 'tahmin')
+    return (
+      <Tahmin
+        kim={
+          oySonucu({ ...durum, asama: 'aciklama' })?.secilen ??
+          durum.secilen ??
+          ''
+        }
+        ipucu={durum.kartlar.ipucu}
+        siklar={tahminSecenekleri(durum)}
+        onTahmin={(kelime) => gonder({ tip: 'tahmin', kelime })}
+        onBitir={bitir}
+        onCik={onCik}
+      />
+    );
+
+  // Sonuç
+  const s = sonuc(durum);
+  const neden =
+    s.kazanan === 'grup'
+      ? `${durum.secilen} casus çıktı ama kelimeyi bilemedi. Kelime:`
+      : durum.secilen === null
+        ? 'Oylama iki turda da eşit kaldı; kural gereği casuslar kazandı. Kelime:'
+        : durum.casuslar.includes(durum.secilen)
+          ? `${durum.secilen} kelimeyi bildi:`
+          : `Grup yanlış kişiyi (${durum.secilen}) seçti. Kelime:`;
+  const tekrar = () => {
+    const kullanilan = (
+      (oyunAyari.kullanilan as string[] | undefined) ?? []
+    ).concat(kelimeKartId(durum));
+    const d = yeniOyun({
+      oyuncular: durum.oyuncular,
+      deste: paket.deste,
+      casusSayisi: durum.casuslar.length,
+      sureDk:
+        durum.sureMs === null ? null : ((durum.sureMs / 60_000) as 3 | 5 | 8),
+      tohum: Date.now(),
+      kullanilan,
+    });
+    oyunAyariniAyarla({
+      ...oyunAyari,
+      kullanilan: [...kullanilan, kelimeKartId(d)],
+    });
+    ref.current = d;
+    setDurum(d);
+    setGordu(false);
+    setCarkGoster(false);
+    oyunKaydet(depo, d).catch(() => {});
+  };
   return (
-    <Ekran>
-      <Yazi tur="baslik">{durum.asama === 'tahmin' ? 'Tahmin' : 'Sonuç'}</Yazi>
-      <Yazi soluk>Bu ekran bir sonraki PR'da.</Yazi>
-      <View style={{ flex: 1 }} />
-      <Dugme etiket="Ana menü" onPress={onAnaMenu} />
-    </Ekran>
+    <>
+      <SonucEkrani
+        sonuc={s}
+        ipucu={durum.kartlar.ipucu}
+        neden={neden}
+        onTekrar={tekrar}
+        onPaylas={paylas.paylas}
+        onAnaMenu={onAnaMenu}
+      />
+      {Platform.OS !== 'web' && (
+        <GizliPaylasim gorunum={paylas.ref}>
+          <PaylasimIcerik sonuc={s} ipucu={durum.kartlar.ipucu} />
+        </GizliPaylasim>
+      )}
+    </>
   );
 }
