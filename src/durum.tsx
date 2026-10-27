@@ -16,6 +16,10 @@ import {
   type Depo,
 } from './core/kayit';
 import type { Paket } from './desteler';
+import {
+  type Durum as OyunDurumu,
+  durumGecerliMi,
+} from './games/ok-mu-nok/oyun';
 import { renkler, type Renkler, type Tema } from './tema';
 
 export type Ayar = { ses: boolean; titresim: boolean; tema: Tema };
@@ -76,7 +80,10 @@ export function DurumSaglayici({
         // bozuk ayar: varsayılanla devam
       }
       setGecenEkip(await sonEkipOku(depo));
-      setYarimOyunVar((await oyunOku(depo)) !== null); // bozuk kayıt burada silinir
+      // Geçersiz/bozuk kayıt burada silinir; "Devam et" yalnızca geçerli kayıtta çıkar (KK-14).
+      setYarimOyunVar(
+        (await oyunOku<OyunDurumu>(depo, durumGecerliMi)) !== null,
+      );
       setHazir(true);
     })();
   }, [depo]);
