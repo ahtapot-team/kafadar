@@ -112,6 +112,9 @@ export default function OnOnAmaEkrani({
         sira={durum.tamamlanan + 1}
         toplam={toplam}
         paket={paket.ad}
+        etiket="10/10"
+        soru="Yeni puanın kaç?"
+        altMetin="Parmaklar hazır: 0'dan 10'a!"
         onBitti={() => setTanitilan(durum.tamamlanan)}
         onCik={onCik}
       />
