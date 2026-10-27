@@ -1,7 +1,7 @@
 import { readdirSync, readFileSync } from 'node:fs';
 import { describe, expect, it } from 'vitest';
 import { desteHatalari } from './core/deste';
-import { kabul, kabulKk25, kabulKk26, kabulKk27 } from './kabul';
+import { kabul, kabulCila, kabulKk25, kabulKk26, kabulKk27 } from './kabul';
 import { oyunlar } from './games/registry';
 
 describe('KK-1: ana ekran oyun listesi', () => {
@@ -137,6 +137,46 @@ describe('KK-27: Ayarlar yalnızca ana ekranda, sağ üstte sabit küçük ikon'
       expect(ana).toMatch(/testID="ayarlar(-ikon)?"/);
       expect(ana).not.toMatch(/etiket="Ayarlar"/);
       expect(ana).toMatch(/accessibilityLabel="Ayarlar"/); // ikon ekran okuyucuda adlı
+    },
+  );
+});
+
+describe('#36 cila: v1 sonrası küçük açıklar', () => {
+  // Arayüz test aracı yok (Semih 1C): kaynak düzeyinde sözleşme; davranışı QA önizlemede doğrular.
+  kabulCila(
+    "bozuk kayıt okuma sırasında reddedilir: durum.tsx oyunOku'ya doğrulayıcı verir",
+    () => {
+      // "Devam et" sorusu yalnızca geçerli kayıtta çıkar (KK-14): oyunOku(depo, doğrulayıcı)
+      expect(dosyaIcerik('src/durum.tsx')).toMatch(
+        /oyunOku(<[^>]+>)?\(\s*depo\s*,/,
+      );
+    },
+  );
+
+  kabulCila('geçersiz adreste Türkçe sade sayfa: app/+not-found.tsx', () => {
+    const icerik = dosyaIcerik('app/+not-found.tsx');
+    expect(icerik).toMatch(/Sayfa bulunamadı/);
+    expect(icerik).toMatch(/testID="ana-ekrana-don"/);
+    expect(icerik).not.toMatch(/Unmatched/);
+  });
+
+  kabulCila(
+    "Paylaş düğmesi web'de gizlenir: düğmenin dosyasında Platform.OS denetimi var",
+    () => {
+      const dosyalar = kaynaklar('src/oyun-ekranlari').filter(({ icerik }) =>
+        /testID="paylas"/.test(icerik),
+      );
+      expect(dosyalar.length).toBeGreaterThan(0);
+      for (const { f, icerik } of dosyalar) {
+        expect(icerik, f).toMatch(/Platform\.OS/);
+      }
+    },
+  );
+
+  kabulCila(
+    "keep-awake web'de çağrılmaz: app/oyun.tsx koşulsuz useKeepAwake() çağırmaz",
+    () => {
+      expect(dosyaIcerik('app/oyun.tsx')).not.toMatch(/useKeepAwake\(\s*\)/);
     },
   );
 });
