@@ -1,6 +1,6 @@
 # Kafadar (çalışma adı) — Ürün gereksinimleri (PRD)
 
-> Durum: v1 ONAYLANDI (27.10.2026, Semih). v2 oda modu ONAYLANDI (27.10.2026, Murat). v3 Casus kim ONAYLANDI (27.10.2026, Metehan).
+> Durum: v1 ONAYLANDI (27.10.2026, Semih). v2 oda modu ONAYLANDI (27.10.2026, Murat). v3 Casus kim ONAYLANDI (27.10.2026, Metehan). v4 10/10 ama ONAYLANDI (27.10.2026, Metehan).
 > Bu dosya projenin tek doğruluk kaynağıdır. Ajanlar sohbet geçmişine değil buraya bakar.
 > Kapsam değişirse önce bu dosya güncellenir ve yeniden onaylanır.
 
@@ -204,7 +204,7 @@ Tek telefonda, elden ele oynanır. Herkes aynı kelimeyi görür, casus göremez
 - qa: En büyük risk gizlilik ve kayıttan devamda rol sızıntısı. Eşit oy ve tahmin kuralları yazılı olmalı. M.
 - İnsanlar: Murat istedi; süre modu ve casus sayısını belirledi (27.10.2026).
 
-## v4: 10/10 ama (taslak, 28.10.2026) — ONAY BEKLİYOR
+## v4: 10/10 ama (28.10.2026) — ONAYLANDI (Metehan)
 Tek telefonda, açık oyla oynanır; OK mu NOK mu akışının neredeyse aynısıdır. Kartta kusursuz bir kişi ya da şey ve bir "ama" yazar: "10/10 ama sabah 5'te kalkıyor". Herkes aynı anda parmaklarıyla 0–10 arası yeni puanını gösterir. Sonuç dağılımı ve en uç puanlar dramatik biçimde açıklanır. Ana ekranda "Yakında"dan aktife geçer.
 
 ### Akış
@@ -227,7 +227,7 @@ Tek telefonda, açık oyla oynanır; OK mu NOK mu akışının neredeyse aynıs�
 ### Kapsam dışı (v4)
 - Oda modunda 10/10 ama. Gizli puan. Ondalıklı puan.
 
-### Kararlar (10/10 ama, pm önerisi — onayla kesinleşir)
+### Kararlar (10/10 ama, pm önerisi — Metehan onayı, 27.10.2026 22:22)
 | Karar | Seçim | Gerekçe |
 |---|---|---|
 | Oynanış | Tek telefon, açık puan (parmakla 0–10) | Videodaki oynanışın aynısı, OK mu NOK mu ile aynı çekirdek |
