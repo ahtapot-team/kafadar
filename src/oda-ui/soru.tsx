@@ -13,10 +13,12 @@ import { YenidenBaglaniyor } from './yeniden';
 function Dev({
   oy,
   secili,
+  pasif,
   onPress,
 }: {
   oy: Oy;
   secili: boolean;
+  pasif: boolean;
   onPress: () => void;
 }) {
   const { renk } = useDurum();
@@ -26,7 +28,8 @@ function Dev({
       testID={oy === 'OK' ? 'oda-oy-ok' : 'oda-oy-nok'}
       accessibilityRole="button"
       accessibilityLabel={oy}
-      accessibilityState={{ selected: secili }}
+      accessibilityState={{ selected: secili, disabled: pasif }}
+      disabled={pasif}
       onPress={onPress}
       style={{
         flex: 1,
@@ -38,6 +41,7 @@ function Dev({
         alignItems: 'center',
         justifyContent: 'center',
         gap: bosluk.xs,
+        opacity: pasif ? 0.5 : 1,
         boxShadow: `5px 5px 0 ${renk.golge}`,
       }}
     >
@@ -83,7 +87,12 @@ export function SoruEkrani({
   const sn = Math.ceil(kalan / 1000);
   return (
     <Ekran>
-      <OdaUst kod={g.kod} orta={`Soru ${g.soruNo} / 10`} sag={String(sn)} />
+      <OdaUst
+        kod={g.kod}
+        orta={`Soru ${g.soruNo} / 10`}
+        sag={String(sn)}
+        sagTestID="oda-geri-sayim"
+      />
       <View
         style={{
           height: 8,
@@ -135,6 +144,7 @@ export function SoruEkrani({
             key={oy}
             oy={oy}
             secili={g.benimOyum === oy}
+            pasif={durum.baglanti !== 'acik'} // bağlantı yokken cevap yutulmasın
             onPress={() => {
               titret('secim', ayar.titresim);
               onOyla(oy);

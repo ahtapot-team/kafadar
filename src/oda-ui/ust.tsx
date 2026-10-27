@@ -8,10 +8,12 @@ export function OdaUst({
   kod,
   orta,
   sag,
+  sagTestID,
 }: {
   kod: string;
   orta: string;
   sag?: string;
+  sagTestID?: string;
 }) {
   const { renk } = useDurum();
   return (
@@ -34,7 +36,11 @@ export function OdaUst({
       <Yazi tur="etiket" soluk style={{ flex: 1, textAlign: 'center' }}>
         {orta}
       </Yazi>
-      <Yazi tur="etiket" style={{ minWidth: 40, textAlign: 'right' }}>
+      <Yazi
+        testID={sagTestID}
+        tur="etiket"
+        style={{ minWidth: 40, textAlign: 'right' }}
+      >
         {sag ?? ''}
       </Yazi>
     </View>
