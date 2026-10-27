@@ -73,7 +73,7 @@ Her madde test edilebilir olmalı; QA bunlardan otomatik kabul testleri yazar.
 - [ ] KK-13: "Paylaş" 1080×1920 boyutunda, logo ve oyun adı içeren bir sonuç görseli üretir ve sistem paylaşım menüsünü açar.
 - [ ] KK-25: Kart metni geri sayımdan sonra kaybolmaz. Kart küçülüp ekranın üstüne yapışır, oy girişi ve açıklama anı ekranlarında hep görünür. Uzun metinde taşma olmaz, metin 16pt'nin altına inmez. (Semih, 27.10.2026: "kullanıcı soruyu unutabilir ya da tekrar okumak isteyebilir")
 - [ ] KK-26: Oyun dışı her ekranda (Oyuncular, Paket/Süre, Ayarlar) görünür bir "Geri" düğmesi vardır ve bir önceki ekrana döner. Girilen bilgiler (oyuncular, seçimler) kaybolmaz. Oyun başladıktan sonra geri dönüş yoktur: oyun ekranlarındaki geri/kapat düğmesi ve sistem geri hareketi "Oyundan çık?" onayını açar (KK-15). (Semih, 27.10.2026, seçenek B)
-- [ ] KK-27: Ayarlar düğmesi yalnızca ana ekranda görünür. Oyuncular, Paket/Süre ve oyun ekranlarında görünmez. (Semih, 27.10.2026)
+- [ ] KK-27: Ana ekranda büyük bir "Ayarlar" düğmesi yoktur. Ayarlar, ana ekranın sağ üstünde küçük ve sabit bir ⚙️ ikonuyla açılır: ikon yer değiştirmez, ekran kaysa da yerinde durur, dokunma alanı en az 48px, erişilebilirlik etiketi "Ayarlar". Diğer ekranlarda ayarlar girişi yoktur. (Semih, 27.10.2026 13:33 düzeltmesi)
 
 ### Uygulama durumu
 - [ ] KK-14: Her oydan ve her karttan sonra oyun kaydedilir. Uygulama kapatılıp açılınca "Devam et / Yeni oyun" sorulur. Kayıt sürümlüdür. Okunamayan ya da eski kayıtta uygulama çökmez, kayıt güvenle sıfırlanır.
