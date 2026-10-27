@@ -201,6 +201,9 @@ export function isle(durum: OdaDurum, olay: Olay, simdi: number): Sonuc {
         return hata(durum, 'basladi', 'Oyun başladı, katılım kapalı.');
       if (d.oyuncular.length >= OYUNCU_MAKS)
         return hata(durum, 'dolu', 'Oda dolu (en çok 12 kişi).');
+      // Savunma derinliği: var olan bir belirteç yeniden verilemez (başkasının yerine geçme yok).
+      if (olay.kimlik && d.oyuncular.some((p) => p.kimlik === olay.kimlik))
+        return hata(durum, 'tanimsiz', 'Bu belirteç zaten kullanılıyor.');
       const { kimlik, ad } = ekle(d, olay.ad, olay.kimlik);
       d.sonEtkinlik = simdi;
       return { durum: d, kimlik, ad };
