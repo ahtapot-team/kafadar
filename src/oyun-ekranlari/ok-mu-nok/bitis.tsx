@@ -1,5 +1,5 @@
 // Oturum sonu ödülleri (KK-12): Aykırı ruh, Ruh ikizleri, Olay kart.
-import { View } from 'react-native';
+import { Platform, View } from 'react-native';
 import { useDurum } from '../../durum';
 import { bosluk, yaricap } from '../../tema';
 import { Dugme, Ekran, Yazi } from '../../ui';
@@ -107,12 +107,15 @@ export function BitisEkrani({
         <View style={{ flex: 1 }}>
           <Dugme testID="tekrar-oyna" etiket="Tekrar oyna" onPress={onTekrar} />
         </View>
-        <IkonDugme
-          testID="paylas"
-          simge="⇪"
-          etiket="Paylaş"
-          onPress={onPaylas}
-        />
+        {/* Web'de paylaşım menüsü/yakalama yok: düğme yalnızca yerel uygulamada */}
+        {Platform.OS !== 'web' && (
+          <IkonDugme
+            testID="paylas"
+            simge="⇪"
+            etiket="Paylaş"
+            onPress={onPaylas}
+          />
+        )}
       </View>
       <Dugme
         testID="ana-menu"

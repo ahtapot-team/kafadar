@@ -1,4 +1,4 @@
-import { useKeepAwake } from 'expo-keep-awake';
+import { activateKeepAwakeAsync, deactivateKeepAwake } from 'expo-keep-awake';
 import { useNavigation, useRouter } from 'expo-router';
 import { Platform } from 'react-native';
 import { lazy, Suspense, useEffect, useMemo, useRef, useState } from 'react';
@@ -17,7 +17,6 @@ type Gezinme = {
 
 // Oyun çerçevesi: geri onayı, ekran açık kalır. İçeriği seçilen oyunun ekranı çizer (registry'den).
 export default function Oyun() {
-  useKeepAwake(); // oyun sürerken ekran kapanmaz (KK-16)
   const router = useRouter();
   const gezinme = useNavigation<Gezinme>();
   const { oyunId, kurulum, oyunuBitir } = useDurum();
@@ -31,6 +30,13 @@ export default function Oyun() {
     () => (oyun?.ekran ? lazy(oyun.ekran) : null),
     [oyun],
   );
+
+  // Oyun sürerken ekran kapanmaz (KK-16). Web'de çağrılmaz: Wake Lock desteği yok/uyarı verir.
+  useEffect(() => {
+    if (Platform.OS === 'web') return;
+    activateKeepAwakeAsync('oyun').catch(() => {});
+    return () => void deactivateKeepAwake('oyun');
+  }, []);
 
   // Android geri tuşu ve iOS kaydırarak geri: onay iste (KK-15).
   useEffect(

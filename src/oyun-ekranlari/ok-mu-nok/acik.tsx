@@ -1,6 +1,6 @@
 // Açıklama anı (KK-11): çubuklar ~2 sn'de dolar, sayılar birlikte artar; tek azınlıkta sarsıntı.
 import { useEffect, useState } from 'react';
-import { View } from 'react-native';
+import { Platform, View } from 'react-native';
 import Animated, {
   Easing,
   useAnimatedStyle,
@@ -230,12 +230,15 @@ export function AcikEkrani({
             onPress={onSonraki}
           />
         </View>
-        <IkonDugme
-          testID="paylas"
-          simge="⇪"
-          etiket="Paylaş"
-          onPress={onPaylas}
-        />
+        {/* Web'de paylaşım menüsü/yakalama yok: düğme yalnızca yerel uygulamada */}
+        {Platform.OS !== 'web' && (
+          <IkonDugme
+            testID="paylas"
+            simge="⇪"
+            etiket="Paylaş"
+            onPress={onPaylas}
+          />
+        )}
       </View>
       <Dugme testID="bitir" tur="ikincil" etiket="Bitir" onPress={onBitir} />
     </Ekran>

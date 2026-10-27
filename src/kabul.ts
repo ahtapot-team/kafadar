@@ -13,7 +13,7 @@ export const BEKLEYEN = {
   kk25: false,
   kk26: false,
   kk27: false,
-  cila: true,
+  cila: false,
 };
 
 export const kabul = BEKLEYEN.cekirdek ? it.fails : it;
