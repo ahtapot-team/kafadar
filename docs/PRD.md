@@ -1,6 +1,6 @@
 # Kafadar (çalışma adı) — Ürün gereksinimleri (PRD)
 
-> Durum: TASLAK (onay bekliyor)
+> Durum: ONAYLANDI (27.10.2026, Semih)
 > Bu dosya projenin tek doğruluk kaynağıdır. Ajanlar sohbet geçmişine değil buraya bakar.
 > Kapsam değişirse önce bu dosya güncellenir ve yeniden onaylanır.
 
@@ -88,6 +88,9 @@ Her madde test edilebilir olmalı; QA bunlardan otomatik kabul testleri yazar.
 - [ ] KK-22: Oyun mantığı arayüzden ayrı, saf ve serileştirilebilir bir durum makinesidir (durum + olay → yeni durum). Rastgelelik tohumludur: aynı tohum aynı kart sırasını verir.
 - [ ] KK-23: Her PR'a telefondan QR ile açılan bir önizleme linki yorum olarak yazılır. CI (biçim, lint, tip, gizli anahtar, test) yeşildir.
 - [ ] KK-24: Gerçek cihaz kapısı: 1 iOS ve 1 Android cihazda bir insan tam bir oturum oynar ve kontrol listesini işaretler. Animasyonlar takılmaz. Bu işaret olmadan sürüm "bitti" sayılmaz.
+
+## Geliştirme ilkesi (Semih, 27.10.2026)
+**Overengineering yok.** En az kodla, en basit çözüm, yalnızca bugünkü ihtiyaç kadar. Yapı genişlemeye açık olacak ama ileriye dönük soyutlama, genel çerçeve ya da "belki lazım olur" kodu yazılmayacak. Yeni bağımlılık yalnızca gerçekten gerekiyorsa eklenir ve PR'da gerekçesi yazılır. Aşağıdaki mimari şartlar bu ilkeye göre en sade haliyle uygulanır. Örneğin oyun kayıt listesi basit bir dizidir, eklenti çatısı değildir.
 
 ## Mimari şartlar
 - **Oyun = eklenti.** Ana ekran oyunları bir kayıt listesinden okur. Yeni oyun eklemek için yeni bir modül, bir deste ve kayıt listesine bir satır yeterlidir. Çekirdek ve mevcut oyunlar değişmez (KK-2).
