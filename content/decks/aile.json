@@ -1,0 +1,227 @@
+{
+  "deck_id": "aile",
+  "version": 1,
+  "lang": "tr",
+  "cards": [
+    {
+      "id": "aile-01",
+      "text": "Bayramda harçlık yerine hediye kartı vermek."
+    },
+    {
+      "id": "aile-02",
+      "text": "Akşam yemeğinde telefona bakmak."
+    },
+    {
+      "id": "aile-03",
+      "text": "Kardeşinin kıyafetini sormadan giymek."
+    },
+    {
+      "id": "aile-04",
+      "text": "Annenin aramasını meşgule atmak."
+    },
+    {
+      "id": "aile-05",
+      "text": "Aile tatilinde herkesin gün boyu ayrı gezmesi."
+    },
+    {
+      "id": "aile-06",
+      "text": "Babanın kumandayı kimseye vermemesi."
+    },
+    {
+      "id": "aile-07",
+      "text": "Misafir gelince her şeyi dolaba tıkıp \"topladım\" demek."
+    },
+    {
+      "id": "aile-08",
+      "text": "Akrabanın \"maaşın ne kadar?\" diye sorması."
+    },
+    {
+      "id": "aile-09",
+      "text": "Bayram ziyaretini mesajla geçiştirmek."
+    },
+    {
+      "id": "aile-10",
+      "text": "Aile grubuna her sabah \"günaydın\" görseli atmak."
+    },
+    {
+      "id": "aile-11",
+      "text": "Kardeşinin odasına kapıyı çalmadan girmek."
+    },
+    {
+      "id": "aile-12",
+      "text": "Sofrada ailenin önünde sevgilinden bahsetmek."
+    },
+    {
+      "id": "aile-13",
+      "text": "Annenin yemeğine sormadan ketçap eklemek."
+    },
+    {
+      "id": "aile-14",
+      "text": "\"Doydum\" deyip sofradan kalkıp sonra atıştırmak."
+    },
+    {
+      "id": "aile-15",
+      "text": "Bulaşığı sıradaki kardeşe bırakmak."
+    },
+    {
+      "id": "aile-16",
+      "text": "Teyzenin \"ne zaman evleneceksin?\" diye sorması."
+    },
+    {
+      "id": "aile-17",
+      "text": "Annenin sosyal medyada seni etiketlemesi."
+    },
+    {
+      "id": "aile-18",
+      "text": "Yemek masasında haber izlemek."
+    },
+    {
+      "id": "aile-19",
+      "text": "Pazar sabahı kahvaltı için herkesi erkenden uyandırmak."
+    },
+    {
+      "id": "aile-20",
+      "text": "\"Hediye istemiyorum\" deyip hediye gelmeyince küsmek."
+    },
+    {
+      "id": "aile-21",
+      "text": "Kardeşinin sırrını annene söylemek."
+    },
+    {
+      "id": "aile-22",
+      "text": "Anneannenin her gelişte \"çok zayıflamışsın\" demesi."
+    },
+    {
+      "id": "aile-23",
+      "text": "Bayram şekerini saklayıp kimseye vermemek."
+    },
+    {
+      "id": "aile-24",
+      "text": "Arabada ön koltuğa hep aynı kişinin oturması."
+    },
+    {
+      "id": "aile-25",
+      "text": "Ailecek dizi izlerken sürekli \"şimdi ne olacak?\" diye sormak."
+    },
+    {
+      "id": "aile-26",
+      "text": "Akraba ziyaretinde odaya kapanıp hiç çıkmamak."
+    },
+    {
+      "id": "aile-27",
+      "text": "Yemekten sonra çay demlemeyi hep aynı kişiye bırakmak."
+    },
+    {
+      "id": "aile-28",
+      "text": "Kardeşinin şarj aletini kendi odana götürmek."
+    },
+    {
+      "id": "aile-29",
+      "text": "Harçlık bitince kardeşinden borç almak."
+    },
+    {
+      "id": "aile-30",
+      "text": "Kardeşini anne babaya şikâyet etmek."
+    },
+    {
+      "id": "aile-31",
+      "text": "Annenin dolabını izinsiz karıştırmak."
+    },
+    {
+      "id": "aile-32",
+      "text": "Evde terliksiz dolaşmak."
+    },
+    {
+      "id": "aile-33",
+      "text": "Babanın her mesajı büyük harfle yazması."
+    },
+    {
+      "id": "aile-34",
+      "text": "Yılbaşında aile oyunu yerine herkesin telefona gömülmesi."
+    },
+    {
+      "id": "aile-35",
+      "text": "Doğum günü pastasını mumları üflemeden kesmek."
+    },
+    {
+      "id": "aile-36",
+      "text": "Sofradaki son köfteyi sormadan almak."
+    },
+    {
+      "id": "aile-37",
+      "text": "Kardeşinin oyun hesabıyla oynayıp maçı kaybetmek."
+    },
+    {
+      "id": "aile-38",
+      "text": "Evcil hayvana kimseye sormadan isim koymak."
+    },
+    {
+      "id": "aile-39",
+      "text": "Hiç tanımadığın akrabanın düğününe gitmek."
+    },
+    {
+      "id": "aile-40",
+      "text": "Annenin yemeğine tadına bakmadan tuz eklemek."
+    },
+    {
+      "id": "aile-41",
+      "text": "Odanı sadece haftada bir toplamak."
+    },
+    {
+      "id": "aile-42",
+      "text": "Çocukluk fotoğraflarını misafirlere göstermek."
+    },
+    {
+      "id": "aile-43",
+      "text": "Bayramda el öpmek yerine sarılmak."
+    },
+    {
+      "id": "aile-44",
+      "text": "Eve dönüş saatinin 22:00 olması."
+    },
+    {
+      "id": "aile-45",
+      "text": "Anne babanın çocuğunun telefonunu kontrol etmesi."
+    },
+    {
+      "id": "aile-46",
+      "text": "Kardeşinin arkadaşları gelince salonu onlara bırakmamak."
+    },
+    {
+      "id": "aile-47",
+      "text": "Ailecek yolculukta müziği hep aynı kişinin seçmesi."
+    },
+    {
+      "id": "aile-48",
+      "text": "Dedenin aynı hikâyeyi yüzüncü kez anlatması ve yeniymiş gibi dinlemek."
+    },
+    {
+      "id": "aile-49",
+      "text": "Doğum gününü ailenle değil arkadaşlarınla kutlamak."
+    },
+    {
+      "id": "aile-50",
+      "text": "Anne babanın çocuğunu sosyal medyada takip etmesi."
+    },
+    {
+      "id": "aile-51",
+      "text": "Kahvaltıda fırına hep en küçük kardeşin gönderilmesi."
+    },
+    {
+      "id": "aile-52",
+      "text": "Misafir gidince arkasından konuşmak."
+    },
+    {
+      "id": "aile-53",
+      "text": "Kardeşin uyurken çektiğin fotoğrafı aile grubuna atmak."
+    },
+    {
+      "id": "aile-54",
+      "text": "Ödevi bitirmeden oyun oynamak."
+    },
+    {
+      "id": "aile-55",
+      "text": "Tatilde otel yerine akrabanın evinde kalmak."
+    }
+  ]
+}
