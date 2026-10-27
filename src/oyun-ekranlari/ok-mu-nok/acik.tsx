@@ -1,5 +1,5 @@
 // Açıklama anı (KK-11): çubuklar ~2 sn'de dolar, sayılar birlikte artar; tek azınlıkta sarsıntı.
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { View } from 'react-native';
 import Animated, {
   Easing,
@@ -115,6 +115,12 @@ export function AcikEkrani({
   const azalt = useReducedMotion();
   const veren = oyuncular.filter((o) => oylar[o]);
   const sarsinti = useSharedValue(0);
+  // Göster'e hızlı çift dokunuş açıklamayı atlamasın: Sonraki kısa süre pasif.
+  const [sonrakiHazir, setSonrakiHazir] = useState(false);
+  useEffect(() => {
+    const t = setTimeout(() => setSonrakiHazir(true), 600);
+    return () => clearTimeout(t);
+  }, []);
   const giris = useSharedValue(azalt ? 1 : 0);
 
   useEffect(() => {
@@ -214,7 +220,12 @@ export function AcikEkrani({
         style={{ flexDirection: 'row', gap: bosluk.m, alignItems: 'center' }}
       >
         <View style={{ flex: 1 }}>
-          <Dugme testID="sonraki" etiket="Sonraki kart" onPress={onSonraki} />
+          <Dugme
+            testID="sonraki"
+            etiket="Sonraki kart"
+            pasif={!sonrakiHazir}
+            onPress={onSonraki}
+          />
         </View>
         <IkonDugme
           testID="paylas"
