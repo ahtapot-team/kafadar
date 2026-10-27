@@ -56,7 +56,7 @@ const bekle = async (kosul: () => boolean, ms = 20_000) => {
 };
 
 const kuran = await baglan('islem=kur&ad=Ali&paket=arkadas');
-assert.match(kuran.kod, /^[A-Z2-9]{4}$/);
+assert.match(kuran.kod, /^\d{6}$/);
 const istemciler = [kuran];
 for (let i = 1; i < N; i++)
   istemciler.push(await baglan(`islem=katil&kod=${kuran.kod}&ad=Ali`)); // hepsi "Ali": isim kuralı
@@ -66,8 +66,13 @@ assert.deepEqual(
 );
 await bekle(() => kuran.gorunum?.oyuncular.length === N);
 
+// Biçimi bozuk kodlar (5/7 hane, harf, boşluk) reddedilir
+for (const kotu of ['12345', '1234567', 'ABCD12']) {
+  const k = await baglan(`islem=katil&kod=${kotu}&ad=X`);
+  assert.equal(k.hata?.kod, 'kapali', kotu);
+}
 // Yanlış kod: Türkçe hata çerçevesi
-const yanlis = await baglan('islem=katil&kod=ZZZZ&ad=X');
+const yanlis = await baglan('islem=katil&kod=999999&ad=X');
 assert.equal(yanlis.hata?.kod, 'kapali');
 assert(yanlis.hata?.mesaj);
 

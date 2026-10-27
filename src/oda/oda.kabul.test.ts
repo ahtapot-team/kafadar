@@ -98,12 +98,11 @@ const dokuz = (n: number): (Oy | null)[][] =>
   Array.from({ length: SORU_SAYISI }, () => hepsi(n, 'OK'));
 
 describe('KK-29: oda kodu', () => {
-  kabul('kod 4 karakter, O 0 I 1 yok, çeşitli', () => {
+  kabul('kod 6 rakam (000000–999999), çeşitli', () => {
     const rng = rngOlustur(7);
     const kodlar = Array.from({ length: 500 }, () => kodUret(rng));
     for (const k of kodlar) {
-      expect(k).toMatch(/^[A-Z2-9]{4}$/);
-      expect(k).not.toMatch(/[OI01]/);
+      expect(k).toMatch(/^\d{6}$/);
     }
     expect(new Set(kodlar).size).toBeGreaterThan(50);
   });
