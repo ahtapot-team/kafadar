@@ -6,6 +6,7 @@ import {
 import { Stack } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { OdaSaglayici } from '../src/baglanti/baglam';
 import { depo } from '../src/depo';
 import { DurumSaglayici, useDurum } from '../src/durum';
 import { hareket } from '../src/tema';
@@ -36,7 +37,9 @@ export default function Layout() {
   return (
     <SafeAreaProvider>
       <DurumSaglayici depo={depo}>
-        <Yigin />
+        <OdaSaglayici depo={depo}>
+          <Yigin />
+        </OdaSaglayici>
       </DurumSaglayici>
     </SafeAreaProvider>
   );

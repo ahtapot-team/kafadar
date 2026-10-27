@@ -5,6 +5,8 @@ import {
   Pressable,
   ScrollView,
   Text,
+  TextInput,
+  type TextInputProps,
   View,
   type StyleProp,
   type TextStyle,
@@ -252,5 +254,29 @@ export function GeriCubugu({ testID }: { testID: string }) {
       <Yazi>←</Yazi>
       <Yazi tur="etiket">Geri</Yazi>
     </Pressable>
+  );
+}
+
+// Tek satırlık metin girdisi (isim, oda kodu): 48px+, kalın kenarlı.
+export function Girdi({ style, ...p }: TextInputProps) {
+  const { renk } = useDurum();
+  return (
+    <TextInput
+      placeholderTextColor={renk.metinSoluk}
+      style={[
+        {
+          minHeight: dokunmaAlani,
+          paddingHorizontal: bosluk.l,
+          borderRadius: yaricap.cip,
+          borderWidth: 3,
+          borderColor: renk.kontur,
+          backgroundColor: renk.yuzey,
+          color: renk.metin,
+          fontSize: 17,
+        },
+        style,
+      ]}
+      {...p}
+    />
   );
 }
