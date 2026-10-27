@@ -1,0 +1,299 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kafadar — Casus kim ekranları</title>
+<!-- #80. Çıkartma kiti (design/TASARIM-SISTEMI.md). Oyun rengi nötr mavi (marka-2); yeşil yalnızca "grup yakaladı", kırmızı yalnızca "casus kazandı" (KK-52).
+     Kullanım: ?tema=koyu|acik&boy=390x844|375x667. Tek dış kaynak: Google Fonts. -->
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&display=swap" rel="stylesheet">
+<style>
+  :root { --kontur: #0B0920; --golge: #7C6CFF; --marka: #FFD23F; --marka-2: #5B8CFF; --ok: #3DDC84; --nok: #FF5A4E; --w: 390px; --h: 844px; }
+  [data-tema="koyu"] { --zemin: #16123F; --yuzey: #2B2570; --metin: #FFF8E7; --soluk: #B9B3E8; --ok-metin: #3DDC84; --nok-metin: #FF5A4E; }
+  [data-tema="acik"] { --zemin: #FFF8E7; --yuzey: #FFFFFF; --metin: #16123F; --soluk: #5B5585; --ok-metin: #0F8A4B; --nok-metin: #D63A2F; }
+  * { box-sizing: border-box; }
+  body { margin: 0; padding: 32px 24px; background: #DCD9E8; font-family: 'Bricolage Grotesque', system-ui, sans-serif; }
+  h1 { margin: 0 0 24px; font-size: 22px; color: #2a2640; text-align: center; }
+  #ekranlar { display: flex; flex-wrap: wrap; gap: 36px 28px; justify-content: center; }
+  figure { margin: 0; } figcaption { font-size: 14px; font-weight: 700; color: #4a4566; margin-bottom: 8px; max-width: var(--w); }
+  .ekran { position: relative; width: var(--w); height: var(--h); overflow: hidden; border-radius: 28px; background: var(--zemin); color: var(--metin);
+    display: flex; flex-direction: column; gap: 14px; padding: calc(var(--h) * 0.06) 22px 26px; box-shadow: 0 16px 40px rgba(20,16,50,.22); }
+  .ust { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+  .esnek { flex: 1; min-height: 0; }
+  .orta { display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
+  .ikon-dg { width: 48px; height: 48px; flex: none; border-radius: 16px; border: 3px solid var(--kontur); background: var(--yuzey); color: var(--metin); display: grid; place-items: center; }
+  .dg { display: flex; align-items: center; justify-content: center; gap: 10px; width: 100%; height: 62px; border-radius: 20px; border: 4px solid var(--kontur);
+    background: var(--marka); color: var(--kontur); box-shadow: 5px 5px 0 var(--golge); font: 800 20px 'Bricolage Grotesque', sans-serif; }
+  .dg.ikincil { background: var(--yuzey); color: var(--metin); }
+  .dg.hayalet { background: transparent; color: var(--soluk); border-color: transparent; box-shadow: none; height: 48px; font-size: 16px; }
+  .baslik { margin: 0; font-size: 34px; font-weight: 800; letter-spacing: -0.03em; line-height: 1.05; }
+  .etiket { font-size: 13px; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; color: var(--soluk); }
+  .govde { font-size: 16px; font-weight: 500; line-height: 1.45; color: var(--soluk); margin: 0; }
+  .sticker { display: inline-block; transform: rotate(-4deg); padding: 4px 16px 8px; border-radius: 16px; border: 4px solid var(--kontur);
+    box-shadow: 5px 5px 0 var(--golge); font-weight: 800; letter-spacing: -0.03em; line-height: 1; color: var(--kontur); }
+  .cip { display: inline-flex; align-items: center; gap: 6px; white-space: nowrap; padding: 6px 12px; border-radius: 12px; border: 3px solid var(--kontur); font-weight: 800; font-size: 15px; background: var(--yuzey); color: var(--metin); }
+  .cip.sec { background: var(--marka-2); color: var(--kontur); }
+  .oyun { background: var(--marka-2); color: var(--kontur); transform: rotate(2deg); }
+  .kart { padding: 22px 20px; border-radius: 30px; border: 4px solid var(--kontur); background: var(--marka-2); color: var(--kontur); box-shadow: 8px 8px 0 var(--golge); }
+  .rol { height: calc(var(--h) * 0.42); display: flex; flex-direction: column; justify-content: space-between; transform: rotate(-2deg); }
+  .rol .ana { font-size: 34px; font-weight: 800; letter-spacing: -0.02em; line-height: 1.1; }
+  .rol .alt { font-size: 18px; font-weight: 700; }
+  .bolum { display: flex; gap: 8px; }
+  .bolum > div { flex: 1; height: 52px; border-radius: 14px; border: 3px solid var(--kontur); background: var(--yuzey); display: grid; place-items: center; font-weight: 800; font-size: 16px; }
+  .bolum > div.sec { background: var(--marka-2); color: var(--kontur); box-shadow: 4px 4px 0 var(--golge); }
+  .satir { display: flex; align-items: center; justify-content: space-between; gap: 12px; min-height: 56px; padding: 0 14px; border-radius: 18px; border: 3px solid var(--kontur); background: var(--yuzey); font-weight: 800; font-size: 17px; }
+  .adim { display: flex; align-items: center; gap: 10px; }
+  .adim span { width: 44px; height: 44px; border-radius: 14px; border: 3px solid var(--kontur); display: grid; place-items: center; font-size: 22px; background: var(--zemin); }
+  .halka { position: relative; width: 150px; height: 150px; display: grid; place-items: center; }
+  .halka svg { position: absolute; inset: 0; transform: rotate(-90deg); }
+  .sik { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+  .sik > div { height: 64px; border-radius: 18px; border: 4px solid var(--kontur); background: var(--yuzey); display: grid; place-items: center; font-weight: 800; font-size: 20px; }
+  .sik > div.sec { background: var(--marka-2); color: var(--kontur); box-shadow: 5px 5px 0 var(--golge); transform: rotate(-2deg); }
+  .bulanik { position: absolute; inset: 0; backdrop-filter: blur(18px); background: rgba(22,18,63,.55); display: grid; place-items: center; }
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="kapat" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></g></symbol>
+  <symbol id="parmak" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11V5a2 2 0 0 1 4 0v6"/><path d="M13 9a2 2 0 0 1 4 0v3"/><path d="M17 11a2 2 0 0 1 4 0v4a7 7 0 0 1-7 7h-1a7 7 0 0 1-5.5-2.7L4 15.5a2 2 0 0 1 3-2.6L9 15"/></g></symbol>
+  <symbol id="goz" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12Z"/><circle cx="12" cy="12" r="3"/></g></symbol>
+</svg>
+
+<h1 id="baslik">Kafadar — Casus kim</h1>
+<div id="ekranlar"></div>
+
+<template data-ad="1 · Ayarlar (KK-43, KK-48)">
+  <section class="ekran">
+    <div class="ust"><button class="ikon-dg" aria-label="Geri">‹</button><div class="etiket">Casus kim · 8 oyuncu</div><div style="width: 48px"></div></div>
+    <h2 class="baslik">Hazırlık</h2>
+    <div class="etiket">Paket</div>
+    <div class="bolum"><div class="sec">Yerler</div><div style="font-size: 14px">Yiyecek-içecek</div><div>Meslekler</div></div>
+    <div class="etiket" style="margin-top: 6px">Casus sayısı</div>
+    <div class="satir"><span>Casus</span><span class="adim"><span>−</span><b style="font-size: 26px; min-width: 20px; text-align: center">1</b><span>+</span></span></div>
+    <p class="govde" style="font-size: 14px">8 kişide en çok 2 casus olabilir. Casuslar birbirini bilmez.</p>
+    <div class="etiket" style="margin-top: 6px">Toplam tartışma süresi</div>
+    <div class="bolum"><div class="sec">Kapalı</div><div>3 dk</div><div>5 dk</div><div>8 dk</div></div>
+    <div class="esnek"></div>
+    <button class="dg">Kartları dağıt</button>
+  </section>
+</template>
+
+<template data-ad="2 · Devir perdesi (KK-44)">
+  <section class="ekran">
+    <div class="ust"><span class="cip oyun">Casus kim</span><div class="etiket">3 / 8 gördü</div><button class="ikon-dg" aria-label="Oyunu bitir"><svg width="20" height="20"><use href="#kapat"/></svg></button></div>
+    <div class="orta esnek" style="gap: 18px">
+      <p class="govde" style="font-size: 20px">Telefonu ver</p>
+      <span class="sticker" style="background: var(--marka); font-size: 64px; padding: 8px 24px 14px">Ayşe</span>
+      <p class="govde">Diğerleri ekrana bakmasın.</p>
+    </div>
+    <button class="dg">Ben Ayşe'yim</button>
+  </section>
+</template>
+
+<template data-ad="3 · Kart kapalı: basılı tut (KK-44)">
+  <section class="ekran">
+    <div class="ust"><span class="cip oyun">Casus kim</span><div class="etiket">Ayşe</div><div style="width: 48px"></div></div>
+    <div class="esnek" style="display: flex; align-items: center">
+      <div class="kart rol" style="width: 100%; background: var(--yuzey); color: var(--metin); align-items: center; justify-content: center; gap: 14px; text-align: center">
+        <svg width="56" height="56" style="color: var(--marka-2)"><use href="#parmak"/></svg>
+        <div style="font-size: 24px; font-weight: 800">Görmek için basılı tut</div>
+        <p class="govde" style="font-size: 15px">Bırakınca kart kapanır.</p>
+      </div>
+    </div>
+    <button class="dg ikincil" style="box-shadow: none; opacity: .5" disabled>Gördüm</button>
+  </section>
+</template>
+
+<template data-ad="4a · Kart açık: normal oyuncu (KK-45)">
+  <section class="ekran">
+    <div class="ust"><span class="cip oyun">Casus kim</span><div class="etiket">Ayşe</div><div style="width: 48px"></div></div>
+    <div class="esnek" style="display: flex; align-items: center">
+      <div class="kart rol" style="width: 100%">
+        <div class="etiket" style="color: #1b2b66">Rolün</div>
+        <div><div class="ana">Kelime: Plaj</div><div class="alt" style="margin-top: 10px">Casus bilmiyor. Ele verme.</div></div>
+        <div style="display: flex; align-items: center; gap: 8px; font-weight: 700; font-size: 15px"><svg width="20" height="20"><use href="#goz"/></svg>Bırakınca kapanır</div>
+      </div>
+    </div>
+    <button class="dg">Gördüm</button>
+  </section>
+</template>
+
+<template data-ad="4b · Kart açık: casus (4a ile aynı düzen, renk, boyut)">
+  <section class="ekran">
+    <div class="ust"><span class="cip oyun">Casus kim</span><div class="etiket">Mert</div><div style="width: 48px"></div></div>
+    <div class="esnek" style="display: flex; align-items: center">
+      <div class="kart rol" style="width: 100%">
+        <div class="etiket" style="color: #1b2b66">Rolün</div>
+        <div><div class="ana">Sen casussun</div><div class="alt" style="margin-top: 10px">İpucu: Güneş kremi</div></div>
+        <div style="display: flex; align-items: center; gap: 8px; font-weight: 700; font-size: 15px"><svg width="20" height="20"><use href="#goz"/></svg>Bırakınca kapanır</div>
+      </div>
+    </div>
+    <button class="dg">Gördüm</button>
+  </section>
+</template>
+
+<template data-ad="5 · Herkes gördü: çark (KK-48)">
+  <section class="ekran">
+    <div class="ust"><span class="cip oyun">Casus kim</span><div class="etiket">8 / 8 gördü</div><div style="width: 48px"></div></div>
+    <div class="orta esnek" style="gap: 18px">
+      <div style="position: relative; width: 250px; height: 250px">
+        <svg viewBox="-110 -110 220 220" width="250" height="250" class="cark" aria-hidden="true"></svg>
+        <div style="position: absolute; top: -12px; left: 50%; transform: translateX(-50%); width: 0; height: 0; border-left: 16px solid transparent; border-right: 16px solid transparent; border-top: 28px solid var(--marka); filter: drop-shadow(0 0 0 var(--kontur))"></div>
+      </div>
+      <span class="sticker" style="background: var(--marka); font-size: 34px">İlk soru Deniz'den!</span>
+    </div>
+    <button class="dg">Tartışmaya başla</button>
+  </section>
+</template>
+
+<template data-ad="6 · Tartışma: süre açık (KK-48)">
+  <section class="ekran">
+    <div class="ust"><span class="cip oyun">Casus kim</span><div class="etiket">Tartışma</div><button class="ikon-dg" aria-label="Oyunu bitir"><svg width="20" height="20"><use href="#kapat"/></svg></button></div>
+    <div class="orta" style="margin-top: 6px">
+      <div class="halka"><svg width="150" height="150" viewBox="0 0 150 150"><circle cx="75" cy="75" r="64" fill="none" stroke="var(--yuzey)" stroke-width="12"/><circle cx="75" cy="75" r="64" fill="none" stroke="var(--marka-2)" stroke-width="12" stroke-linecap="round" stroke-dasharray="402" stroke-dashoffset="160"/></svg>
+        <div><div style="font-size: 40px; font-weight: 800; font-variant-numeric: tabular-nums">3:01</div><div class="etiket">/ 5 dk</div></div></div>
+    </div>
+    <div class="kart" style="transform: rotate(-2deg); background: var(--marka)">
+      <div class="etiket" style="color: #3a3560">Örnek soru · 3/12</div>
+      <div style="margin-top: 8px; font-size: 26px; font-weight: 800; letter-spacing: -0.02em; line-height: 1.15">Oraya kiminle gidersin?</div>
+    </div>
+    <p class="govde" style="font-size: 14px; text-align: center">Sorular kendiliğinden döner. Kelimeyi söylemek yok!</p>
+    <div class="esnek"></div>
+    <button class="dg">Oylamaya geç</button>
+  </section>
+</template>
+
+<template data-ad="7 · Oylama: açık oy (KK-49)">
+  <section class="ekran" style="gap: 10px">
+    <div class="ust"><span class="cip oyun">Casus kim</span><div class="etiket">6 / 8 girildi</div><button class="ikon-dg" aria-label="Oyunu bitir"><svg width="20" height="20"><use href="#kapat"/></svg></button></div>
+    <h2 class="baslik" style="font-size: 30px">Kim kimi gösterdi?</h2>
+    <div class="satir"><span>Ayşe →</span><span class="cip sec">Mert</span></div>
+    <div class="satir"><span>Mert →</span><span class="cip sec">Can</span></div>
+    <div class="satir"><span>Deniz →</span><span class="cip sec">Mert</span></div>
+    <div class="satir" style="border-color: var(--marka); box-shadow: 4px 4px 0 var(--golge)"><span>Can →</span><span class="govde" style="font-size: 14px">seç</span></div>
+    <div class="liste" style="display: flex; flex-wrap: wrap; gap: 8px; padding: 2px 4px">
+      <span class="cip">Ayşe</span><span class="cip">Mert</span><span class="cip">Deniz</span><span class="cip">Elif</span><span class="cip">Ali</span><span class="cip">Zeynep</span><span class="cip">Murat</span>
+    </div>
+    <div class="esnek"></div>
+    <button class="dg" style="background: var(--yuzey); color: var(--soluk); border-style: dashed; box-shadow: none" disabled>Kartı çevir · 2 kişi kaldı</button>
+  </section>
+</template>
+
+<template data-ad="8a · Açıklama: casus değil">
+  <section class="ekran">
+    <div class="ust"><span class="cip oyun">Casus kim</span><div class="etiket">Mert · 4 oy</div><div style="width: 48px"></div></div>
+    <div class="orta esnek" style="gap: 22px">
+      <div class="kart rol" style="width: 82%; background: var(--yuzey); color: var(--metin); justify-content: center; text-align: center; gap: 10px">
+        <div style="font-size: 48px; font-weight: 800; letter-spacing: -0.03em">Mert</div>
+        <div class="etiket">casus</div>
+        <span class="sticker" style="align-self: center; background: var(--metin); color: var(--zemin); font-size: 44px; transform: rotate(-8deg)">DEĞİL!</span>
+      </div>
+      <p class="govde">Yanlış kişi. Casus aranızda saklanmayı başardı…</p>
+    </div>
+    <button class="dg">Casusu göster</button>
+  </section>
+</template>
+
+<template data-ad="8b · Açıklama: casus yakalandı">
+  <section class="ekran">
+    <div class="ust"><span class="cip oyun">Casus kim</span><div class="etiket">Ayşe · 5 oy</div><div style="width: 48px"></div></div>
+    <div class="orta esnek" style="gap: 22px">
+      <div class="kart rol" style="width: 82%; justify-content: center; text-align: center; gap: 10px">
+        <div class="etiket" style="color: #1b2b66">Casus</div>
+        <div style="font-size: 52px; font-weight: 800; letter-spacing: -0.03em">Ayşe 🕵️</div>
+      </div>
+      <p class="govde">Ama daha bitmedi: Ayşe kelimeyi bilirse casus kazanır.</p>
+    </div>
+    <button class="dg">Ayşe tahmin etsin</button>
+  </section>
+</template>
+
+<template data-ad="9 · Casusun tahmini: 6 şık (KK-50)">
+  <section class="ekran">
+    <div class="ust"><span class="cip oyun">Casus kim</span><div class="etiket">Ayşe tahmin ediyor</div><div style="width: 48px"></div></div>
+    <h2 class="baslik">Kelime neydi?</h2>
+    <p class="govde">İpucun: Güneş kremi</p>
+    <div class="sik"><div>Havuz</div><div class="sec">Plaj</div><div>Kayak merkezi</div><div>Sahil kasabası</div><div>Tekne</div><div>Lunapark</div></div>
+    <div class="esnek"></div>
+    <button class="dg">Kesin cevabım</button>
+  </section>
+</template>
+
+<template data-ad="10a · Sonuç: grup kazandı (yeşil, KK-52)">
+  <section class="ekran">
+    <div class="orta esnek" style="gap: 16px">
+      <span class="sticker" style="background: var(--ok); font-size: 40px">Casusu yakaladınız!</span>
+      <p class="govde">Ayşe “Havuz” dedi. Kelime:</p>
+      <div style="font-size: 54px; font-weight: 800; letter-spacing: -0.03em">Plaj</div>
+      <div style="display: flex; gap: 8px; flex-wrap: wrap; justify-content: center"><span class="cip">Casus: Ayşe</span><span class="cip">İpucu: Güneş kremi</span></div>
+    </div>
+    <div style="display: flex; gap: 14px"><button class="dg">Tekrar oyna</button><button class="dg ikincil" style="width: 140px">Paylaş</button></div>
+  </section>
+</template>
+
+<template data-ad="10b · Sonuç: casus kazandı (kırmızı, KK-52)">
+  <section class="ekran">
+    <div class="orta esnek" style="gap: 16px">
+      <span class="sticker" style="background: var(--nok); font-size: 40px">Casus kazandı!</span>
+      <p class="govde">Ayşe kelimeyi bildi:</p>
+      <div style="font-size: 54px; font-weight: 800; letter-spacing: -0.03em">Plaj</div>
+      <div style="display: flex; gap: 8px; flex-wrap: wrap; justify-content: center"><span class="cip">Casus: Ayşe</span><span class="cip">İpucu: Güneş kremi</span></div>
+    </div>
+    <div style="display: flex; gap: 14px"><button class="dg">Tekrar oyna</button><button class="dg ikincil" style="width: 140px">Paylaş</button></div>
+  </section>
+</template>
+
+<template data-ad="11 · Oyunu bitir (kazanan yok, KK-48) · Eşitlik notu (KK-49)">
+  <section class="ekran">
+    <div class="orta esnek" style="gap: 16px">
+      <span class="sticker" style="background: var(--yuzey); color: var(--metin); font-size: 38px">Oyun bitirildi</span>
+      <p class="govde">Kazanan yok. İşte cevaplar:</p>
+      <div style="font-size: 46px; font-weight: 800">Plaj</div>
+      <span class="cip">Casus: Ayşe</span>
+      <div class="kart" style="margin-top: 18px; background: var(--yuzey); color: var(--metin); transform: rotate(1.5deg); text-align: left; width: 100%">
+        <div class="etiket">Eşitlikte</div>
+        <p class="govde" style="color: var(--metin); margin-top: 6px">“Mert ve Can berabere! Yalnızca ikisi arasında bir kez daha oylayın.” Yine eşitse casus kazanır.</p>
+      </div>
+    </div>
+    <button class="dg">Ana menü</button>
+  </section>
+</template>
+
+<template data-ad="12 · Arka plana alınınca (KK-46)">
+  <section class="ekran">
+    <div class="esnek" style="display: flex; align-items: center"><div class="kart rol" style="width: 100%"></div></div>
+    <div class="bulanik"><span class="sticker" style="background: var(--marka); font-size: 44px">Kafadar!</span></div>
+  </section>
+</template>
+
+<script>
+  const p = new URLSearchParams(location.search);
+  const tema = p.get('tema') === 'acik' ? 'acik' : 'koyu';
+  const [w, h] = (p.get('boy') || '390x844').split('x').map(Number);
+  document.documentElement.dataset.tema = tema;
+  document.documentElement.style.setProperty('--w', w + 'px');
+  document.documentElement.style.setProperty('--h', h + 'px');
+  document.getElementById('baslik').textContent = `Kafadar — Casus kim · ${tema === 'koyu' ? 'Koyu' : 'Açık'} · ${w}×${h}`;
+  const kap = document.getElementById('ekranlar');
+  document.querySelectorAll('template').forEach(t => {
+    const f = document.createElement('figure'), c = document.createElement('figcaption');
+    c.textContent = t.dataset.ad; f.append(c, t.content.cloneNode(true)); kap.append(f);
+  });
+  // Çark: 8 dilim, isimler; seçilen (Deniz) üstte
+  const adlar = ['Deniz', 'Elif', 'Ali', 'Zeynep', 'Murat', 'Ayşe', 'Mert', 'Can'];
+  document.querySelectorAll('.cark').forEach(svg => {
+    const n = adlar.length, r = 100, parca = [];
+    adlar.forEach((ad, i) => {
+      const a0 = (i - 0.5) / n * 2 * Math.PI - Math.PI / 2, a1 = (i + 0.5) / n * 2 * Math.PI - Math.PI / 2, am = (a0 + a1) / 2;
+      const d = `M0 0 L${r * Math.cos(a0)} ${r * Math.sin(a0)} A${r} ${r} 0 0 1 ${r * Math.cos(a1)} ${r * Math.sin(a1)} Z`;
+      const renk = i === 0 ? 'var(--marka)' : i % 2 ? 'var(--marka-2)' : 'var(--yuzey)';
+      const yazi = i === 0 || i % 2 ? 'var(--kontur)' : 'var(--metin)';
+      parca.push(`<path d="${d}" fill="${renk}" stroke="var(--kontur)" stroke-width="4"/>`,
+        `<text x="${62 * Math.cos(am)}" y="${62 * Math.sin(am)}" fill="${yazi}" font-size="15" font-weight="800" text-anchor="middle" dominant-baseline="middle" transform="rotate(${am * 180 / Math.PI + (Math.cos(am) < -0.01 ? 180 : 0)} ${62 * Math.cos(am)} ${62 * Math.sin(am)})">${ad}</text>`);
+    });
+    parca.push('<circle r="16" fill="var(--zemin)" stroke="var(--kontur)" stroke-width="4"/>');
+    svg.innerHTML = parca.join('');
+  });
+</script>
+</body>
+</html>

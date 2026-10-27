@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kafadar — Casus kim paylaşım görseli</title>
+<!-- #80: Casus kim sonucu 9:16 (1080×1920). Yeşil = grup yakaladı (KK-52). Tek dış kaynak: Google Fonts. -->
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&display=swap" rel="stylesheet">
+<style>
+  :root { --zemin: #16123F; --yuzey: #2B2570; --metin: #FFF8E7; --soluk: #B9B3E8; --kontur: #0B0920; --golge: #7C6CFF;
+    --marka: #FFD23F; --marka-2: #5B8CFF; --ok: #3DDC84; --nok: #FF5A4E; }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: #DCD9E8; font-family: 'Bricolage Grotesque', system-ui, sans-serif; }
+  .gorsel { width: 1080px; height: 1920px; margin: 0 auto; background: var(--zemin); color: var(--metin); padding: 120px 90px 100px;
+    display: flex; flex-direction: column; gap: 96px; overflow: hidden; }
+  .sticker { display: inline-block; transform: rotate(-4deg); border: 10px solid var(--kontur); border-radius: 44px; box-shadow: 14px 14px 0 var(--golge);
+    font-weight: 800; letter-spacing: -0.03em; line-height: 1; color: var(--kontur); }
+  .kart { border: 10px solid var(--kontur); border-radius: 70px; box-shadow: 20px 20px 0 var(--golge); padding: 70px 64px; background: var(--marka-2); color: var(--kontur); }
+  .cip { display: inline-block; padding: 16px 30px; border-radius: 30px; border: 8px solid var(--kontur); background: var(--yuzey); font-size: 44px; font-weight: 800; }
+</style>
+</head>
+<body>
+<div class="gorsel">
+  <div style="display: flex; justify-content: space-between; align-items: center">
+    <span class="sticker" style="background: var(--marka); font-size: 96px; padding: 16px 44px 26px">Kafadar!</span>
+    <span class="sticker" style="background: var(--marka-2); font-size: 52px; padding: 14px 30px 20px; transform: rotate(3deg)">Casus kim?</span>
+  </div>
+  <div class="kart" style="transform: rotate(-3deg); text-align: center">
+    <div style="font-size: 44px; font-weight: 800; letter-spacing: 0.1em">CASUS</div>
+    <div style="font-size: 190px; font-weight: 800; letter-spacing: -0.04em; line-height: 1.05">Ayşe 🕵️</div>
+  </div>
+  <div style="display: flex; flex-direction: column; align-items: center; gap: 24px; text-align: center">
+    <div style="font-size: 52px; font-weight: 700; color: var(--soluk)">“Havuz” dedi. Kelime:</div>
+    <div style="font-size: 170px; font-weight: 800; letter-spacing: -0.04em; line-height: 1">Plaj</div>
+  </div>
+  <span class="sticker" style="align-self: center; background: var(--ok); font-size: 96px; padding: 18px 50px 30px">Yakalandı!</span>
+  <div style="display: flex; gap: 20px; justify-content: center"><span class="cip">8 oyuncu</span><span class="cip">Yerler paketi</span></div>
+  <div style="margin-top: auto; text-align: center; font-size: 40px; font-weight: 700; color: var(--soluk)">Kafadar ile oynandı · Casus kim?</div>
+</div>
+</body>
+</html>
