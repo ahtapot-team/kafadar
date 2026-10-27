@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kafadar — C · Gece Dergisi</title>
+<!-- Tek dış kaynak: Google Fonts (uygulamada font paketlenecek) -->
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#E9E7F0;font-family:system-ui,sans-serif;padding:32px 16px}
+h1{margin:0 0 8px;font-size:20px;color:#2a2640;text-align:center}
+p.not{margin:0 0 20px;font-size:14px;color:#4a4566;text-align:center}
+.sahne{display:flex;flex-wrap:wrap;gap:40px;justify-content:center;align-items:flex-start}
+figure{margin:0;border-radius:28px;overflow:hidden;box-shadow:0 20px 50px rgba(20,16,50,.25)}
+</style>
+</head>
+<body>
+<h1>Kafadar — C · Gece Dergisi</h1>
+<p class="not">OK = yeşil (onay) · NOK = kırmızı (ret) · marka rengi nötr, oy rengiyle karışmaz</p>
+<div class="sahne">
+<figure><div style="width: 520px; height: 844px; box-sizing: border-box; padding: 48px 40px; background: #0B0B0B; color: #F2EDE4; font-family: Inter, system-ui, sans-serif; display: flex; flex-direction: column; gap: 40px">
+  <div style="display: flex; align-items: center; gap: 20px">
+    <div style="width: 84px; height: 84px; border-radius: 50%; background: #F2EDE4; color: #0B0B0B; display: flex; align-items: center; justify-content: center; font-family: 'Instrument Serif', serif; font-style: italic; font-size: 64px; line-height: 1; padding-bottom: 6px; box-sizing: border-box">K</div>
+    <div style="font-family: 'Instrument Serif', serif; font-size: 76px; line-height: 1; letter-spacing: -0.02em">Kafadar<span style="font-style: italic">.</span></div>
+  </div>
+
+  <div style="display: flex; flex-direction: column; gap: 14px">
+    <div style="font-size: 12px; font-weight: 600; letter-spacing: 0.18em; color: #9A948A">RENK</div>
+    <div style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px">
+      <div style="display: flex; flex-direction: column; gap: 8px"><div style="height: 88px; border-radius: 4px; background: #0B0B0B; border: 1px solid #333"></div><div style="font-size: 12px; font-weight: 600">Mürekkep</div><div style="font-size: 11px; color: #9A948A">#0B0B0B</div></div>
+      <div style="display: flex; flex-direction: column; gap: 8px"><div style="height: 88px; border-radius: 4px; background: #F2EDE4"></div><div style="font-size: 12px; font-weight: 600">Marka · Krem</div><div style="font-size: 11px; color: #9A948A">#F2EDE4</div></div>
+      <div style="display: flex; flex-direction: column; gap: 8px"><div style="height: 88px; border-radius: 4px; background: #5FD38D"></div><div style="font-size: 12px; font-weight: 600">OK · Yeşil</div><div style="font-size: 11px; color: #9A948A">#5FD38D</div></div>
+      <div style="display: flex; flex-direction: column; gap: 8px"><div style="height: 88px; border-radius: 4px; background: #FF453A"></div><div style="font-size: 12px; font-weight: 600">NOK · Kırmızı</div><div style="font-size: 11px; color: #9A948A">#FF453A</div></div>
+    </div>
+  </div>
+
+  <div style="display: flex; flex-direction: column; gap: 14px">
+    <div style="font-size: 12px; font-weight: 600; letter-spacing: 0.18em; color: #9A948A">YAZI</div>
+    <div style="font-family: 'Instrument Serif', serif; font-size: 54px; line-height: 1; letter-spacing: -0.01em">OK mu, <span style="font-style: italic; color: #FF453A">NOK</span> mu?</div>
+    <div style="font-size: 14px; color: #9A948A">Instrument Serif · kart, başlık, açıklama anı</div>
+    <div style="font-size: 18px; line-height: 1.5">Herkes başparmağını gösterir, telefon sonucu söyler.</div>
+    <div style="font-size: 14px; color: #9A948A">Inter · gövde, düğme, etiket</div>
+  </div>
+
+  <div style="display: flex; flex-direction: column; gap: 14px">
+    <div style="font-size: 12px; font-weight: 600; letter-spacing: 0.18em; color: #9A948A">OY</div>
+    <div style="display: flex; gap: 12px">
+      <div style="flex: 1; display: flex; align-items: center; justify-content: center; gap: 10px; height: 64px; border-radius: 999px; background: #5FD38D; color: #0B0B0B; font-weight: 700; font-size: 18px; letter-spacing: 0.08em">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 10v12"></path><path d="M15 5.88 14 10h5.83a2 2 0 0 1 1.92 2.56l-2.33 8A2 2 0 0 1 17.5 22H4a2 2 0 0 1-2-2v-8a2 2 0 0 1 2-2h2.76a2 2 0 0 0 1.79-1.11L12 2a3.13 3.13 0 0 1 3 3.88Z"></path></svg>OK
+      </div>
+      <div style="flex: 1; display: flex; align-items: center; justify-content: center; gap: 10px; height: 64px; border-radius: 999px; background: #FF453A; color: #0B0B0B; font-weight: 700; font-size: 18px; letter-spacing: 0.08em">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="transform: rotate(180deg)"><path d="M7 10v12"></path><path d="M15 5.88 14 10h5.83a2 2 0 0 1 1.92 2.56l-2.33 8A2 2 0 0 1 17.5 22H4a2 2 0 0 1-2-2v-8a2 2 0 0 1 2-2h2.76a2 2 0 0 0 1.79-1.11L12 2a3.13 3.13 0 0 1 3 3.88Z"></path></svg>NOK
+      </div>
+    </div>
+  </div>
+</div></figure>
+<figure><div style="width: 390px; height: 844px; box-sizing: border-box; padding: 60px 20px 36px; background: #0B0B0B; color: #F2EDE4; font-family: Inter, system-ui, sans-serif; display: flex; flex-direction: column; gap: 22px">
+  <div style="display: flex; align-items: center; justify-content: space-between">
+    <button aria-label="Oyundan çık" style="width: 48px; height: 48px; border-radius: 50%; border: 1px solid #3A3833; background: transparent; color: #F2EDE4; display: flex; align-items: center; justify-content: center">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></svg>
+    </button>
+    <div style="font-size: 13px; font-weight: 600; letter-spacing: 0.16em; color: #9A948A">ARKADAŞ · 04 / 20</div>
+    <div style="width: 48px"></div>
+  </div>
+
+  <div style="margin-top: 10px; flex: 1; max-height: 500px; padding: 30px 26px 26px; box-sizing: border-box; border-radius: 6px; background: #F2EDE4; color: #0B0B0B; display: flex; flex-direction: column; justify-content: space-between">
+    <div style="display: flex; justify-content: space-between; font-size: 12px; font-weight: 600; letter-spacing: 0.18em; color: #6B665E"><div>DURUM</div><div>Nº 04</div></div>
+    <div style="font-family: 'Instrument Serif', serif; font-size: 46px; line-height: 1.04; letter-spacing: -0.01em">Doğum gününü unutup <span style="font-style: italic">“sürprizin yarın”</span> demek.</div>
+    <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid #CFC8BB; padding-top: 14px; font-size: 14px; font-weight: 600"><div>OK mu, NOK mu?</div><div style="font-family: 'Instrument Serif', serif; font-style: italic; font-size: 22px; color: #0B0B0B">Kafadar.</div></div>
+  </div>
+
+  <div style="display: flex; align-items: baseline; justify-content: center; gap: 28px; font-family: 'Instrument Serif', serif; padding: 10px 0">
+    <div style="font-size: 48px; color: #3A3833">3</div>
+    <div style="font-size: 120px; line-height: 0.9; font-style: italic; color: #F2EDE4">2</div>
+    <div style="font-size: 48px; color: #3A3833">1</div>
+  </div>
+  <div style="text-align: center; font-size: 13px; font-weight: 600; letter-spacing: 0.18em; color: #9A948A">BAŞPARMAKLAR HAZIR</div>
+</div></figure>
+<figure><div style="width: 390px; height: 844px; box-sizing: border-box; padding: 60px 20px 36px; background: #0B0B0B; color: #F2EDE4; font-family: Inter, system-ui, sans-serif; display: flex; flex-direction: column; gap: 26px">
+  <div style="font-size: 13px; font-weight: 600; letter-spacing: 0.16em; color: #9A948A">SONUÇ · Nº 04</div>
+
+  <div style="font-family: 'Instrument Serif', serif; font-size: 64px; line-height: 0.98; letter-spacing: -0.01em">Ayşe,<br><span style="font-style: italic">tek başına</span> <span style="color: #FF453A">NOK.</span></div>
+
+  <div style="font-family: 'Instrument Serif', serif; font-style: italic; font-size: 20px; line-height: 1.35; color: #9A948A">“Doğum gününü unutup ‘sürprizin yarın’ demek.”</div>
+
+  <div style="flex: 1; display: flex; flex-direction: column; justify-content: center; gap: 26px">
+    <div style="display: flex; flex-direction: column; gap: 10px">
+      <div style="display: flex; justify-content: space-between; align-items: baseline; color: #5FD38D">
+        <div style="display: flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 700; letter-spacing: 0.14em"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 10v12"></path><path d="M15 5.88 14 10h5.83a2 2 0 0 1 1.92 2.56l-2.33 8A2 2 0 0 1 17.5 22H4a2 2 0 0 1-2-2v-8a2 2 0 0 1 2-2h2.76a2 2 0 0 0 1.79-1.11L12 2a3.13 3.13 0 0 1 3 3.88Z"></path></svg>OK</div>
+        <div style="font-family: 'Instrument Serif', serif; font-size: 44px; line-height: 1">4</div>
+      </div>
+      <div style="height: 14px; border-radius: 99px; background: #1C1B19; overflow: hidden"><div style="width: 80%; height: 100%; background: #5FD38D"></div></div>
+      <div style="font-size: 15px; color: #9A948A">Mert · Deniz · Can · Elif</div>
+    </div>
+    <div style="display: flex; flex-direction: column; gap: 10px">
+      <div style="display: flex; justify-content: space-between; align-items: baseline; color: #FF453A">
+        <div style="display: flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 700; letter-spacing: 0.14em"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="transform: rotate(180deg)"><path d="M7 10v12"></path><path d="M15 5.88 14 10h5.83a2 2 0 0 1 1.92 2.56l-2.33 8A2 2 0 0 1 17.5 22H4a2 2 0 0 1-2-2v-8a2 2 0 0 1 2-2h2.76a2 2 0 0 0 1.79-1.11L12 2a3.13 3.13 0 0 1 3 3.88Z"></path></svg>NOK</div>
+        <div style="font-family: 'Instrument Serif', serif; font-size: 44px; line-height: 1">1</div>
+      </div>
+      <div style="height: 14px; border-radius: 99px; background: #1C1B19; overflow: hidden"><div style="width: 20%; height: 100%; background: #FF453A"></div></div>
+      <div style="font-size: 15px; color: #F2EDE4; font-weight: 600">Ayşe</div>
+    </div>
+  </div>
+
+  <div style="display: flex; gap: 12px">
+    <button style="flex: 1; height: 60px; border: 0; border-radius: 999px; background: #F2EDE4; color: #0B0B0B; font-family: Inter, sans-serif; font-weight: 700; font-size: 16px; letter-spacing: 0.06em">Sonraki kart</button>
+    <button aria-label="Paylaş" style="width: 60px; height: 60px; border-radius: 50%; border: 1px solid #3A3833; background: transparent; color: #F2EDE4; display: flex; align-items: center; justify-content: center">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"></path><path d="m16 6-4-4-4 4"></path><path d="M12 2v13"></path></svg>
+    </button>
+  </div>
+</div></figure>
+</div>
+</body>
+</html>
