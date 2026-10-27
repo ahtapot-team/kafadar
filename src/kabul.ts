@@ -5,13 +5,15 @@ import { it } from 'vitest';
 // (yani test gerçekten bir şey denemiyor demektir).
 // cekirdek = #6 (oyuncular, kayıt, registry), oyun = #7 (OK mu NOK mu durum makinesi),
 // kk25 = kart metni oy girişi ve açıklamada görünür kalır (#7 ekranları),
-// kk26 = oyun dışı ekranlarda Geri düğmesi, kk27 = Ayarlar sağ üst ikon (#37).
+// kk26 = oyun dışı ekranlarda Geri düğmesi, kk27 = Ayarlar sağ üst ikon (#37),
+// cila = v1 sonrası küçük açıklar (#36).
 export const BEKLEYEN = {
   cekirdek: false,
   oyun: false,
   kk25: false,
   kk26: false,
   kk27: false,
+  cila: true,
 };
 
 export const kabul = BEKLEYEN.cekirdek ? it.fails : it;
@@ -19,3 +21,4 @@ export const kabulOyun = BEKLEYEN.oyun ? it.fails : it;
 export const kabulKk25 = BEKLEYEN.kk25 ? it.fails : it;
 export const kabulKk26 = BEKLEYEN.kk26 ? it.fails : it;
 export const kabulKk27 = BEKLEYEN.kk27 ? it.fails : it;
+export const kabulCila = BEKLEYEN.cila ? it.fails : it;
