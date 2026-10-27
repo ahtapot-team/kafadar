@@ -23,7 +23,7 @@ export const BEKLEYEN = {
   odaMantik: false,
   odaGuvenlik: false,
   odaDeploy: false,
-  odaKimlik: true,
+  odaKimlik: false,
 };
 
 export const kabul = BEKLEYEN.cekirdek ? it.fails : it;
