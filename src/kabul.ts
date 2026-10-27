@@ -32,7 +32,7 @@ export const BEKLEYEN = {
   casusUiSon: true, // #82: tüm Casus kim ekranlarının testID sözleşmesi
   casusKayit: false,
   casusKayitUi: false,
-  odaCik: true, // #73: oyun içinde "Odadan çık?" (frontend #104 kapatır) // #81: Casus ekranı oyunOku(depo, durumGecerliMi) kullanır
+  odaCik: true, // #73: oyun içinde "Odadan çık?" (frontend #104 kapatır)
 };
 
 export const kabul = BEKLEYEN.cekirdek ? it.fails : it;
