@@ -108,9 +108,15 @@ export class OdaIstemci {
     this.sifirla();
   }
 
-  // Uygulama ön plana dönünce: bağlantı yoksa hemen dene (arka plan, ağ değişimi).
+  // Uygulama ön plana dönünce: bağlantıyı her zaman tazele (kapat + 'don'); arka plandan dönünce soket ölü olabilir.
+  // Final gösterilirken yeniden bağlanılmaz, final silinmez.
   onPlana() {
-    if (this.d.kimlik && this.d.baglanti !== 'acik') this.baglan();
+    if (!this.d.kimlik || this.bitti()) return;
+    this.baglan();
+  }
+
+  private bitti() {
+    return this.d.final !== null || this.d.gorunum?.asama === 'bitti';
   }
 
   private sifirla() {
@@ -159,7 +165,9 @@ export class OdaIstemci {
       this.ayarla({ final: m.final });
     } else if (m.t === 'hata') {
       // Odaya dönülemiyorsa (kapandı/tanımsız) kayıt geçersizdir: temiz başlangıç + hata.
-      if (this.d.kimlik && !this.ilk && this.d.baglanti !== 'acik') {
+      // Geçici hatada (cok-deneme vb.) kimlik silinmez, "yeniden" durumunda kalınır.
+      const olu = m.hata.kod === 'kapali' || m.hata.kod === 'tanimsiz';
+      if (olu && this.d.kimlik && !this.ilk && this.d.baglanti !== 'acik') {
         this.sifirla();
       }
       this.ayarla({ hata: m.hata });
@@ -168,7 +176,9 @@ export class OdaIstemci {
 
   private koptu() {
     this.tasima = null;
-    if (this.d.kimlik) {
+    if (this.d.kimlik && this.bitti()) {
+      this.ayarla({ baglanti: 'kapali' }); // oyun bitti: yeniden bağlanma yok, final kalır
+    } else if (this.d.kimlik) {
       // Odadayken kopma: aynı kimlikle geri dön (KK-37), aralıklı yeniden dene.
       this.ayarla({ baglanti: 'yeniden' });
       const bekle =

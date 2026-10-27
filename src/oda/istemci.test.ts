@@ -170,3 +170,118 @@ describe('oda istemcisi (#51)', () => {
     expect(b.i.durum.kod).toBeNull();
   });
 });
+
+// QA (#66 incelemesi): geçici hata, ön plana dönüş ve final davranışı. Sahte sunucu yerine elle sürülen taşıma.
+describe('oda istemcisi: dayanıklılık', () => {
+  const eldenTasima = () => {
+    const bagler: { acilis: unknown; d: import('./tasima').TasimaDinleyici }[] =
+      [];
+    const uret: import('./tasima').TasimaUretici = (acilis, d) => {
+      bagler.push({ acilis, d });
+      return { gonder: () => {}, kapat: () => {} };
+    };
+    const depo = depoYap();
+    const planli: (() => void)[] = [];
+    const i = new OdaIstemci({
+      uret,
+      depo,
+      saat: () => 0,
+      zamanla: (_ms, f) => {
+        planli.push(f);
+        return () => {};
+      },
+    });
+    const odada = () => {
+      i.kur('Ali', 'arkadas');
+      bagler
+        .at(-1)!
+        .d.mesaj({ t: 'tamam', kod: 'ABCD', kimlik: 'k1', ad: 'Ali' });
+    };
+    return { i, bagler, depo, planli, odada };
+  };
+  const gorunum = (asama: 'lobi' | 'soru' | 'bitti') =>
+    ({
+      t: 'gorunum',
+      simdi: 0,
+      gorunum: {
+        asama,
+        kod: 'ABCD',
+        oyuncular: [],
+        baslatGorunur: false,
+        baslatAktif: false,
+        cevapladi: [],
+        toplam: 0,
+      },
+    }) as never;
+
+  it("geçici hata (cok-deneme) kimliği silmez, 'yeniden'de kalır; kapali silinir", async () => {
+    const t = eldenTasima();
+    t.odada();
+    await akis();
+    t.bagler.at(-1)!.d.kapandi(); // koptu
+    expect(t.i.durum.baglanti).toBe('yeniden');
+    t.planli.splice(0).forEach((f) => f()); // yeniden dene → 'don'
+    expect(t.bagler.at(-1)!.acilis).toEqual({
+      islem: 'don',
+      kod: 'ABCD',
+      kimlik: 'k1',
+    });
+    t.bagler
+      .at(-1)!
+      .d.mesaj({
+        t: 'hata',
+        hata: { kod: 'cok-deneme', mesaj: 'Çok fazla deneme.' },
+      });
+    t.bagler.at(-1)!.d.kapandi();
+    expect(t.i.durum.kimlik).toBe('k1');
+    expect(t.i.durum.baglanti).toBe('yeniden');
+    expect(t.depo.veri.has(ODA_ANAHTARI)).toBe(true);
+    t.planli.splice(0).forEach((f) => f());
+    t.bagler
+      .at(-1)!
+      .d.mesaj({
+        t: 'hata',
+        hata: { kod: 'kapali', mesaj: 'Bu oda kapandı.' },
+      });
+    expect(t.i.durum.kimlik).toBeNull();
+    expect(t.depo.veri.has(ODA_ANAHTARI)).toBe(false);
+  });
+
+  it('ön plana dönünce bağlantı her zaman tazelenir (açıkken de)', async () => {
+    const t = eldenTasima();
+    t.odada();
+    await akis();
+    const once = t.bagler.length;
+    t.i.onPlana();
+    expect(t.bagler.length).toBe(once + 1);
+    expect(t.bagler.at(-1)!.acilis).toMatchObject({
+      islem: 'don',
+      kimlik: 'k1',
+    });
+  });
+
+  it('final gösterilirken yeniden bağlanma yok, final silinmez', async () => {
+    const t = eldenTasima();
+    t.odada();
+    t.bagler.at(-1)!.d.mesaj(gorunum('bitti'));
+    t.bagler
+      .at(-1)!
+      .d.mesaj({
+        t: 'final',
+        final: {
+          yuzdeler: [],
+          enTartismali: [],
+          oduller: { aykiriRuh: [], ruhIkizleri: [] },
+          kimNeDedi: {},
+          ayniOlan: {},
+        },
+      });
+    const once = t.bagler.length;
+    t.bagler.at(-1)!.d.kapandi();
+    t.i.onPlana();
+    expect(t.bagler.length).toBe(once);
+    expect(t.planli).toHaveLength(0);
+    expect(t.i.durum.final).not.toBeNull();
+    expect(t.i.durum.baglanti).toBe('kapali');
+  });
+});
