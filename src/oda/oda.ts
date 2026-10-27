@@ -33,7 +33,8 @@ export type OdaDurum = {
 };
 
 export type Olay =
-  | { tip: 'katil'; ad: string }
+  // `kimlik`: sunucunun crypto ile ürettiği tahmin edilemez belirteç. Verilmezse (yalnızca testler) tohumdan türetilir.
+  | { tip: 'katil'; ad: string; kimlik?: Kimlik }
   | { tip: 'baslat'; kimlik: Kimlik } // yalnızca kuran
   | { tip: 'cevapla'; kimlik: Kimlik; oy: Oy } // süre içinde değiştirilebilir, son cevap geçerli
   | { tip: 'kop'; kimlik: Kimlik } // bağlantı koptu
@@ -96,7 +97,7 @@ export function kodUret(rng: () => number): string {
   ).join('');
 }
 
-// Sunucunun tohumundan türetilen oyuncu belirteci (saf kalmak için rastgelelik tohumdan gelir).
+// Yalnızca testler için yedek: tohumdan türetilir, TAHMİN EDİLEBİLİR. Sunucu her zaman kendi (crypto) kimliğini verir.
 function kimlikUret(d: Pick<OdaDurum, 'kod' | 'tohum' | 'sayac'>): Kimlik {
   const rng = rngOlustur(d.tohum + d.sayac * 7919);
   const parca = () => Math.floor(rng() * 36 ** 6).toString(36);
@@ -107,6 +108,7 @@ function kimlikUret(d: Pick<OdaDurum, 'kod' | 'tohum' | 'sayac'>): Kimlik {
 export function odaKur(s: {
   kod: string;
   kurucuAd: string;
+  kurucuKimlik?: Kimlik; // sunucunun crypto ile ürettiği belirteç
   deste: Deste;
   tohum: number;
   simdi: number;
@@ -126,20 +128,24 @@ export function odaKur(s: {
     sonEtkinlik: s.simdi,
     bitis: null,
   };
-  const kimlik = ekle(d, s.kurucuAd);
+  const kimlik = ekle(d, s.kurucuAd, s.kurucuKimlik);
   d.kurucu = kimlik.kimlik;
   return { durum: d, kimlik: kimlik.kimlik };
 }
 
 // Aynı isim "Ali 2", "Ali 3" olur (büyük/küçük harf duyarsız, tr).
-function ekle(d: OdaDurum, istenen: string): { kimlik: Kimlik; ad: string } {
+function ekle(
+  d: OdaDurum,
+  istenen: string,
+  verilen?: Kimlik,
+): { kimlik: Kimlik; ad: string } {
   const anahtar = (x: string) => x.toLocaleLowerCase('tr');
   const taban = istenen.trim().slice(0, 16) || 'Oyuncu';
   const varMi = (x: string) =>
     d.oyuncular.some((p) => anahtar(p.ad) === anahtar(x));
   let ad = taban;
   for (let n = 2; varMi(ad); n++) ad = `${taban} ${n}`;
-  const kimlik = kimlikUret(d);
+  const kimlik = verilen ?? kimlikUret(d);
   d.sayac++;
   d.oyuncular.push({ kimlik, ad, bagli: true, ayrildi: false });
   return { kimlik, ad };
@@ -182,12 +188,11 @@ function belkiIlerle(d: OdaDurum, simdi: number) {
 
 export function isle(durum: OdaDurum, olay: Olay, simdi: number): Sonuc {
   const d = structuredClone(durum);
-  const o =
-    'kimlik' in olay
-      ? aktifler(d).find((p) => p.kimlik === olay.kimlik)
-      : undefined;
-  if ('kimlik' in olay && !o)
-    return hata(durum, 'tanimsiz', 'Bu oyuncu odada yok.');
+  const kimlikli = olay.tip !== 'katil' && olay.tip !== 'zaman';
+  const o = kimlikli
+    ? aktifler(d).find((p) => p.kimlik === olay.kimlik)
+    : undefined;
+  if (kimlikli && !o) return hata(durum, 'tanimsiz', 'Bu oyuncu odada yok.');
 
   switch (olay.tip) {
     case 'katil': {
@@ -196,7 +201,7 @@ export function isle(durum: OdaDurum, olay: Olay, simdi: number): Sonuc {
         return hata(durum, 'basladi', 'Oyun başladı, katılım kapalı.');
       if (d.oyuncular.length >= OYUNCU_MAKS)
         return hata(durum, 'dolu', 'Oda dolu (en çok 12 kişi).');
-      const { kimlik, ad } = ekle(d, olay.ad);
+      const { kimlik, ad } = ekle(d, olay.ad, olay.kimlik);
       d.sonEtkinlik = simdi;
       return { durum: d, kimlik, ad };
     }
