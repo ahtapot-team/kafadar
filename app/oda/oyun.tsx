@@ -1,6 +1,6 @@
 import { Redirect, useNavigation, useRouter } from 'expo-router';
 import { useEffect, useRef, useState } from 'react';
-import { View } from 'react-native';
+import { Platform, View } from 'react-native';
 import { useOda } from '../../src/baglanti/baglam';
 import { BeklemeEkrani } from '../../src/oda-ui/bekle';
 import { FinalEkrani } from '../../src/oda-ui/final';
@@ -46,6 +46,27 @@ export default function OdaOyun() {
       }),
     [gezinme, bitti, istemci],
   );
+
+  // Web: tarayıcı geri tuşu beforeRemove'u tetiklemez; app/oyun.tsx'teki gibi bir geçmiş girdisi ekleyip popstate'te sorarız (#73).
+  const bittiRef = useRef(bitti);
+  bittiRef.current = bitti;
+  useEffect(() => {
+    if (Platform.OS !== 'web') return;
+    window.history.pushState(null, '', window.location.href);
+    const geriGeldi = () => {
+      if (izinli.current) return;
+      if (bittiRef.current) {
+        izinli.current = true;
+        istemci.ayril();
+        window.history.back();
+        return;
+      }
+      window.history.pushState(null, '', window.location.href);
+      setCikisOnayi(true);
+    };
+    window.addEventListener('popstate', geriGeldi);
+    return () => window.removeEventListener('popstate', geriGeldi);
+  }, [istemci]);
 
   // Başka oyuncu ayrılınca ("X ayrıldı") kısa süre gösterilir; oyun kalanlarla sürer (KK-38).
   const adlar = g?.oyuncular.map((o) => o.ad).join('\u0000') ?? '';
