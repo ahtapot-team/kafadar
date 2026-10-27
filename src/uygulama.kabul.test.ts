@@ -11,7 +11,7 @@ import {
   kabulOdaDeploy,
   kabulOdaGuvenlik,
   kabulCasusUi,
-  kabulCasusKayit,
+  kabulCasusKayitUi,
   kabulOdaKimlik,
 } from './kabul';
 import { oyunlar } from './games/registry';
@@ -369,7 +369,7 @@ describe('Casus kim: kayıt listesi, arayüz ve altyapı sözleşmesi (KK-42…K
     expect(kayit).toMatch(/ekran/);
   });
 
-  kabulCasusKayit(
+  kabulCasusKayitUi(
     'Casus ekranı kayıttan okurken durumGecerliMi kullanır (KK-14)',
     () => {
       const dosyalar = [...kaynaklar('app'), ...kaynaklar('src')].filter(
