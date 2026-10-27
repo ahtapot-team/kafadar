@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kafadar — 10/10 ama ekranları</title>
+<!-- #107. Yalnızca OK mu NOK mu'dan farklı ekranlar; oyuncular, paket, 3-2-1, sonraki kart, devam et ve ayarlar aynı kalır (design/2-ekranlar).
+     Puan rengi anlama göre: 0–3 kırmızı (sert), 4–6 sarı (kararsız), 7–10 yeşil (cömert); her zaman sayıyla birlikte.
+     Kullanım: ?tema=koyu|acik&boy=390x844|375x667. Tek dış kaynak: Google Fonts. -->
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&display=swap" rel="stylesheet">
+<style>
+  :root { --kontur: #0B0920; --golge: #7C6CFF; --marka: #FFD23F; --marka-2: #5B8CFF; --ok: #3DDC84; --nok: #FF5A4E; --w: 390px; --h: 844px; }
+  [data-tema="koyu"] { --zemin: #16123F; --yuzey: #2B2570; --metin: #FFF8E7; --soluk: #B9B3E8; --ok-metin: #3DDC84; --nok-metin: #FF5A4E; }
+  [data-tema="acik"] { --zemin: #FFF8E7; --yuzey: #FFFFFF; --metin: #16123F; --soluk: #5B5585; --ok-metin: #0F8A4B; --nok-metin: #D63A2F; }
+  * { box-sizing: border-box; }
+  body { margin: 0; padding: 32px 24px; background: #DCD9E8; font-family: 'Bricolage Grotesque', system-ui, sans-serif; }
+  h1 { margin: 0 0 24px; font-size: 22px; color: #2a2640; text-align: center; }
+  #ekranlar { display: flex; flex-wrap: wrap; gap: 36px 28px; justify-content: center; }
+  figure { margin: 0; } figcaption { font-size: 14px; font-weight: 700; color: #4a4566; margin-bottom: 8px; max-width: var(--w); }
+  .ekran { position: relative; width: var(--w); height: var(--h); overflow: hidden; border-radius: 28px; background: var(--zemin); color: var(--metin);
+    display: flex; flex-direction: column; gap: 12px; padding: calc(var(--h) * 0.06) 22px 26px; box-shadow: 0 16px 40px rgba(20,16,50,.22); }
+  .ust { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+  .esnek { flex: 1; min-height: 0; }
+  .orta { display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
+  .ikon-dg { width: 48px; height: 48px; flex: none; border-radius: 16px; border: 3px solid var(--kontur); background: var(--yuzey); color: var(--metin); display: grid; place-items: center; font-weight: 800; }
+  .dg { display: flex; align-items: center; justify-content: center; gap: 10px; width: 100%; height: 62px; border-radius: 20px; border: 4px solid var(--kontur);
+    background: var(--marka); color: var(--kontur); box-shadow: 5px 5px 0 var(--golge); font: 800 20px 'Bricolage Grotesque', sans-serif; }
+  .dg.pasif { background: var(--yuzey); color: var(--soluk); border-style: dashed; box-shadow: none; }
+  .etiket { font-size: 13px; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; color: var(--soluk); }
+  .govde { font-size: 16px; font-weight: 500; line-height: 1.45; color: var(--soluk); margin: 0; }
+  .sticker { display: inline-block; transform: rotate(-4deg); padding: 4px 16px 8px; border-radius: 16px; border: 4px solid var(--kontur);
+    box-shadow: 5px 5px 0 var(--golge); font-weight: 800; letter-spacing: -0.03em; line-height: 1; color: var(--kontur); white-space: nowrap; }
+  .cip { display: inline-flex; align-items: center; gap: 6px; padding: 6px 12px; border-radius: 12px; border: 3px solid var(--kontur); font-weight: 800; font-size: 15px; background: var(--yuzey); color: var(--metin); white-space: nowrap; }
+  .kart { padding: 20px; border-radius: 30px; border: 4px solid var(--kontur); background: var(--marka); color: var(--kontur); box-shadow: 8px 8px 0 var(--golge); }
+  .mini-kart { padding: 12px 16px; border-radius: 20px; border: 3px solid var(--kontur); background: var(--marka); color: var(--kontur); font-weight: 800; font-size: 17px; line-height: 1.2; transform: rotate(-1deg); }
+  .on { display: inline-block; padding: 2px 10px 4px; border-radius: 12px; background: var(--kontur); color: var(--marka); transform: rotate(-3deg); }
+  .k { background: var(--nok); color: var(--kontur); } .s { background: var(--marka); color: var(--kontur); } .y { background: var(--ok); color: var(--kontur); }
+  .satir { display: flex; align-items: center; justify-content: space-between; gap: 10px; min-height: 52px; padding: 0 8px 0 14px; border-radius: 16px; border: 3px solid var(--kontur); background: var(--yuzey); font-weight: 800; font-size: 17px; }
+  .puan { width: 40px; height: 36px; border-radius: 10px; border: 3px solid var(--kontur); display: grid; place-items: center; font-weight: 800; font-size: 18px; }
+  .tus { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 8px; }
+  .tus > div { height: 52px; border-radius: 14px; border: 3px solid var(--kontur); background: var(--zemin); color: var(--metin); display: grid; place-items: center; font-weight: 800; font-size: 22px; }
+  .tus > div.k { box-shadow: inset 0 -6px 0 var(--nok); } .tus > div.s { box-shadow: inset 0 -6px 0 var(--marka); } .tus > div.y { box-shadow: inset 0 -6px 0 var(--ok); }
+  .tus > div.sec { background: var(--ok); color: var(--kontur); box-shadow: 4px 4px 0 var(--golge); transform: rotate(-4deg) scale(1.06); }
+  .bar { display: grid; grid-template-columns: 64px 1fr 34px; gap: 8px; align-items: center; font-weight: 800; font-size: 15px; }
+  .bar .yol { height: 30px; border-radius: 10px; border: 3px solid var(--kontur); background: var(--yuzey); overflow: hidden; }
+  .bar .yol i { display: block; height: 100%; border-right: 3px solid var(--kontur); }
+  .konfeti { position: absolute; width: 12px; height: 20px; border: 2px solid var(--kontur); border-radius: 3px; }
+</style>
+</head>
+<body>
+<h1 id="baslik">Kafadar — 10/10 ama</h1>
+<div id="ekranlar"></div>
+
+<template data-ad="1 · Kart (OK mu NOK mu kartının yerine)">
+  <section class="ekran">
+    <div class="ust"><button class="ikon-dg" aria-label="Oyundan çık">✕</button><div style="font-weight: 800; font-size: 18px">Kart 4 <span style="color: var(--soluk)">/ 20</span></div><span class="cip" style="background: var(--golge); color: var(--kontur); transform: rotate(3deg)">Sevgili adayı</span></div>
+    <div class="esnek" style="display: flex; align-items: center; padding: 6px">
+      <div class="kart" style="width: 100%; min-height: calc(var(--h) * 0.42); display: flex; flex-direction: column; justify-content: space-between; transform: rotate(-3deg)">
+        <span style="font-size: 64px; font-weight: 800; letter-spacing: -0.04em; line-height: 1"><span class="on">10/10</span></span>
+        <div style="font-size: calc(var(--w) * 0.085); font-weight: 800; letter-spacing: -0.025em; line-height: 1.08">ama her sabah 5'te kalkıp seni de kaldırıyor.</div>
+        <div style="font-size: 16px; font-weight: 700">Yeni puanın kaç?</div>
+      </div>
+    </div>
+    <div style="display: flex; justify-content: center; gap: 18px; align-items: center">
+      <div class="puan" style="width: 58px; height: 58px; border-radius: 50%; border: 4px solid var(--yuzey); color: var(--soluk); font-size: 26px">3</div>
+      <div style="transform: rotate(-6deg); width: 100px; height: 100px; border-radius: 50%; background: var(--metin); color: var(--zemin); border: 4px solid var(--kontur); box-shadow: 6px 6px 0 var(--golge); font-weight: 800; font-size: 60px; display: grid; place-items: center">2</div>
+      <div class="puan" style="width: 58px; height: 58px; border-radius: 50%; border: 4px solid var(--yuzey); color: var(--soluk); font-size: 26px">1</div>
+    </div>
+    <div style="text-align: center; font-size: 17px; font-weight: 700; color: var(--soluk)">Parmaklar hazır: 0'dan 10'a!</div>
+  </section>
+</template>
+
+<template data-ad="2 · Puan girişi, isim başına 0–10 (KK-56, KK-59)">
+  <section class="ekran" style="gap: 10px">
+    <div class="ust"><button class="ikon-dg" aria-label="Oyundan çık">✕</button><div class="etiket">3 / 5 girildi</div><div style="width: 48px"></div></div>
+    <div class="mini-kart"><span class="on" style="font-size: 15px">10/10</span> ama her sabah 5'te kalkıp seni de kaldırıyor.</div>
+    <div class="satir"><span>Ayşe</span><span class="puan k">2</span></div>
+    <div class="satir"><span>Mert</span><span class="puan s">6</span></div>
+    <div class="satir"><span>Deniz</span><span class="puan y">8</span></div>
+    <div style="padding: 12px; border-radius: 20px; border: 3px solid var(--kontur); background: var(--yuzey); box-shadow: 5px 5px 0 var(--golge)">
+      <div style="display: flex; justify-content: space-between; font-weight: 800; font-size: 18px; margin-bottom: 10px"><span>Can kaç verdi?</span><span class="etiket">0 · · · 10</span></div>
+      <div class="tus">
+        <div class="k">0</div><div class="k">1</div><div class="k">2</div><div class="k">3</div><div class="s">4</div><div class="s">5</div>
+        <div class="s">6</div><div class="y">7</div><div class="y">8</div><div class="y sec">9</div><div class="y" style="grid-column: span 2">10</div>
+      </div>
+    </div>
+    <div class="esnek"></div>
+    <button class="dg pasif" disabled>Göster · Elif kaldı</button>
+  </section>
+</template>
+
+<template data-ad="3a · Açıklama: ortalama + uçlar (KK-57)">
+  <section class="ekran">
+    <div class="mini-kart"><span class="on" style="font-size: 15px">10/10</span> ama her sabah 5'te kalkıp seni de kaldırıyor.</div>
+    <div class="orta" style="margin-top: 4px">
+      <div class="etiket">Yeni puan</div>
+      <div style="font-size: 96px; font-weight: 800; letter-spacing: -0.05em; line-height: 0.95">5,8<span style="font-size: 36px; color: var(--soluk)">/10</span></div>
+    </div>
+    <div style="display: flex; justify-content: space-between; align-items: center; gap: 8px">
+      <span class="sticker k" style="font-size: 22px">Ayşe 2 verdi!</span>
+      <span class="sticker y" style="font-size: 22px; transform: rotate(3deg)">Can 9 verdi!</span>
+    </div>
+    <div class="esnek" style="display: flex; flex-direction: column; justify-content: center; gap: 8px">
+      <div class="bar"><span>Can</span><span class="yol"><i class="y" style="width: 90%"></i></span><span>9</span></div>
+      <div class="bar"><span>Deniz</span><span class="yol"><i class="y" style="width: 80%"></i></span><span>8</span></div>
+      <div class="bar"><span>Mert</span><span class="yol"><i class="s" style="width: 60%"></i></span><span>6</span></div>
+      <div class="bar"><span>Elif</span><span class="yol"><i class="s" style="width: 40%"></i></span><span>4</span></div>
+      <div class="bar"><span>Ayşe</span><span class="yol"><i class="k" style="width: 20%"></i></span><span>2</span></div>
+    </div>
+    <button class="dg">Sonraki kart</button>
+  </section>
+</template>
+
+<template data-ad="3b · Açıklama: oybirliği, konfeti (KK-57)">
+  <section class="ekran">
+    <i class="konfeti y" style="top: 15%; left: 10%; transform: rotate(20deg)"></i><i class="konfeti" style="top: 12%; left: 48%; background: var(--marka); transform: rotate(-30deg)"></i>
+    <i class="konfeti y" style="top: 19%; left: 84%; transform: rotate(50deg)"></i><i class="konfeti" style="top: 30%; left: 70%; background: var(--marka-2); transform: rotate(-10deg)"></i>
+    <i class="konfeti" style="top: 33%; left: 6%; background: var(--marka); transform: rotate(70deg)"></i>
+    <div class="mini-kart"><span class="on" style="font-size: 15px">10/10</span> ama telefonu hep %100 şarjlı.</div>
+    <div class="orta esnek" style="gap: 12px">
+      <span class="sticker y" style="font-size: 40px">Hepiniz 8!</span>
+      <div style="font-size: 96px; font-weight: 800; letter-spacing: -0.05em; line-height: 0.95">8,0<span style="font-size: 36px; color: var(--soluk)">/10</span></div>
+      <p class="govde">Oybirliği · 5 / 5 aynı puan</p>
+    </div>
+    <button class="dg">Sonraki kart</button>
+  </section>
+</template>
+
+<template data-ad="3c · Açıklama: “Tam bölündünüz” (fark ≥ 8, KK-57)">
+  <section class="ekran">
+    <div class="mini-kart"><span class="on" style="font-size: 15px">10/10</span> ama annesiyle her gün 2 saat telefonda.</div>
+    <div class="orta" style="margin-top: 4px; gap: 6px">
+      <span class="sticker s" style="font-size: 30px">Tam bölündünüz!</span>
+      <div style="font-size: 80px; font-weight: 800; letter-spacing: -0.05em; line-height: 0.95">5,2<span style="font-size: 32px; color: var(--soluk)">/10</span></div>
+    </div>
+    <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; margin-top: 6px">
+      <div class="kart k" style="padding: 14px; box-shadow: 5px 5px 0 var(--golge); transform: rotate(-3deg); text-align: center"><div style="font-size: 54px; font-weight: 800; line-height: 1">0</div><div style="font-weight: 800">Ayşe</div></div>
+      <div class="kart y" style="padding: 14px; box-shadow: 5px 5px 0 var(--golge); transform: rotate(3deg); text-align: center"><div style="font-size: 54px; font-weight: 800; line-height: 1">10</div><div style="font-weight: 800">Can</div></div>
+    </div>
+    <p class="govde" style="text-align: center">Aranızda tam 10 puan var.</p>
+    <div class="esnek"></div>
+    <button class="dg">Sonraki kart</button>
+  </section>
+</template>
+
+<template data-ad="4 · Oturum sonu ödülleri (KK-58)">
+  <section class="ekran" style="gap: 12px">
+    <div class="etiket">20 kart bitti</div>
+    <h2 style="margin: 0; font-size: 32px; font-weight: 800; letter-spacing: -0.03em">Gecenin ödülleri</h2>
+    <div class="kart k" style="transform: rotate(-2deg); padding: 14px 18px; box-shadow: 5px 5px 0 var(--golge)">
+      <div class="etiket" style="color: #4a1510">En acımasız</div><div style="font-size: 26px; font-weight: 800">Ayşe</div><div style="font-size: 14px; font-weight: 600">Ortalama puanı 2,4</div>
+    </div>
+    <div class="kart y" style="transform: rotate(1.5deg); padding: 14px 18px; box-shadow: 5px 5px 0 var(--golge)">
+      <div class="etiket" style="color: #0d4a2a">Melek kalpli</div><div style="font-size: 26px; font-weight: 800">Can</div><div style="font-size: 14px; font-weight: 600">Ortalama puanı 8,9</div>
+    </div>
+    <div class="kart" style="transform: rotate(-1deg); padding: 14px 18px; background: var(--marka-2); box-shadow: 5px 5px 0 var(--golge)">
+      <div class="etiket" style="color: #1b2b66">Ruh ikizleri</div><div style="font-size: 26px; font-weight: 800">Mert & Deniz</div><div style="font-size: 14px; font-weight: 600">Puanları ortalama 0,6 farklı</div>
+    </div>
+    <div class="esnek"></div>
+    <div style="display: flex; gap: 14px"><button class="dg">Tekrar oyna</button><button class="ikon-dg" style="width: 62px; height: 62px; box-shadow: 5px 5px 0 var(--golge)" aria-label="Paylaş">↗</button></div>
+  </section>
+</template>
+
+<template data-ad="5 · “Hareketi azalt” açıkken açıklama (KK-57)">
+  <section class="ekran">
+    <div class="mini-kart"><span class="on" style="font-size: 15px">10/10</span> ama her sabah 5'te kalkıp seni de kaldırıyor.</div>
+    <div style="font-size: 30px; font-weight: 800">Yeni puan: 5,8 / 10</div>
+    <p class="govde">En düşük: Ayşe 2 · En yüksek: Can 9</p>
+    <div style="display: flex; flex-direction: column; gap: 8px">
+      <div class="satir"><span>Can</span><span class="puan y">9</span></div><div class="satir"><span>Deniz</span><span class="puan y">8</span></div>
+      <div class="satir"><span>Mert</span><span class="puan s">6</span></div><div class="satir"><span>Elif</span><span class="puan s">4</span></div>
+      <div class="satir"><span>Ayşe</span><span class="puan k">2</span></div>
+    </div>
+    <div class="esnek"></div>
+    <button class="dg">Sonraki kart</button>
+  </section>
+</template>
+
+<script>
+  const p = new URLSearchParams(location.search);
+  const tema = p.get('tema') === 'acik' ? 'acik' : 'koyu';
+  const [w, h] = (p.get('boy') || '390x844').split('x').map(Number);
+  document.documentElement.dataset.tema = tema;
+  document.documentElement.style.setProperty('--w', w + 'px');
+  document.documentElement.style.setProperty('--h', h + 'px');
+  document.getElementById('baslik').textContent = `Kafadar — 10/10 ama · ${tema === 'koyu' ? 'Koyu' : 'Açık'} · ${w}×${h}`;
+  const kap = document.getElementById('ekranlar');
+  document.querySelectorAll('template').forEach(t => {
+    const f = document.createElement('figure'), c = document.createElement('figcaption');
+    c.textContent = t.dataset.ad; f.append(c, t.content.cloneNode(true)); kap.append(f);
+  });
+</script>
+</body>
+</html>
