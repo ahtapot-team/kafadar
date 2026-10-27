@@ -1,0 +1,62 @@
+# Ahtapot kalite kontrolü — her yeni projede .github/workflows/ci.yml olarak eklenir.
+# Sıra hızlıdan yavaşa: biçim → lint → tip → gizli anahtar → test → diff büyüklüğü. Kırmızı PR incelemeye gitmez.
+# Node/TypeScript projeleri içindir; başka bir dil seçilirse aynı adımlar o dilin araçlarıyla uyarlanır.
+name: Kalite kontrolü
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  kontrol:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
+
+      - name: Biçim
+        run: npm run format:check --if-present
+
+      - name: Lint
+        run: npm run lint --if-present
+
+      - name: Tip kontrolü
+        run: npm run typecheck --if-present
+
+      - name: Gizli anahtar taraması
+        uses: gitleaks/gitleaks-action@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Testler
+        run: npm test --if-present
+
+      - name: Kabul testleri
+        run: npm run kabul --if-present
+
+      - name: Build
+        run: npm run build --if-present
+
+      - name: Diff büyüklüğü (800 satır üstü 'buyuk-pr' etiketi ister)
+        if: github.event_name == 'pull_request' && !contains(github.event.pull_request.labels.*.name, 'buyuk-pr')
+        run: |
+          ADDED=$(git diff --numstat origin/${{ github.base_ref }}...HEAD -- . ':(exclude)package-lock.json' | awk '{s+=$1} END {print s+0}')
+          echo "Eklenen satır: $ADDED"
+          if [ "$ADDED" -gt 800 ]; then
+            echo "::error::PR çok büyük ($ADDED satır). Bölün ya da insanlardan 'buyuk-pr' etiketi isteyin."
+            exit 1
+          fi

@@ -1,0 +1,11 @@
+{
+  "expo": {
+    "name": "Kafadar",
+    "slug": "kafadar",
+    "scheme": "kafadar",
+    "version": "0.0.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "dark",
+    "plugins": ["expo-router", "expo-status-bar"]
+  }
+}
