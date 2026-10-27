@@ -1,6 +1,7 @@
 // Ağ üzerinden uçtan uca deneme: N betikli istemci tek oyun oynar (2–12).
 // Kullanım: node sunucu/test/oyun.ts <http-adresi> [oyuncuSayisi=4]   (ör. http://localhost:8787)
 import assert from 'node:assert/strict';
+import { request } from 'node:http';
 
 const taban = process.argv[2];
 const N = Number(process.argv[3] ?? 4);
@@ -21,10 +22,12 @@ type Istemci = {
 };
 
 // Bağlanır; ilk 'tamam' ya da 'hata' çerçevesini bekler.
-function baglan(sorgu: string): Promise<Istemci> {
+function baglan(sorgu: string, ilk?: object): Promise<Istemci> {
+  assert(!sorgu.includes('kimlik'), 'belirteç adreste olmamalı');
   return new Promise((coz) => {
     const ws = new WebSocket(`${taban.replace(/^http/, 'ws')}/ws?${sorgu}`);
     const i: Istemci = { ad: '', kimlik: '', kod: '', ws, kapandi: false };
+    if (ilk) ws.onopen = () => ws.send(JSON.stringify(ilk));
     ws.onclose = () => {
       i.kapandi = true;
       coz(i);
@@ -67,6 +70,25 @@ const yanlis = await baglan('islem=katil&kod=ZZZZ&ad=X');
 assert.equal(yanlis.hata?.kod, 'kapali');
 assert(yanlis.hata?.mesaj);
 
+// WebSocket olmayan istek 426, bilinmeyen işlem 400 (500 değil)
+assert.equal((await fetch(`${taban}/ws`)).status, 426);
+const durumKodu = (yol: string) =>
+  new Promise<number>((coz, red) => {
+    const r = request(
+      `${taban}${yol}`,
+      { headers: { Connection: 'Upgrade', Upgrade: 'websocket' } },
+      (y) => coz(y.statusCode ?? 0),
+    );
+    r.on('error', red).end();
+  });
+assert.equal(await durumKodu('/ws?islem=yok'), 400);
+// Yanlış belirteç: hata çerçevesi
+const sahte = await baglan(`islem=don&kod=${kuran.kod}`, {
+  t: 'kimlik',
+  kimlik: 'yanlis',
+});
+assert.equal(sahte.hata?.kod, 'tanimsiz');
+
 // Yeniden bağlanma: kopan aynı belirteçle döner
 const kopan = istemciler[1];
 kopan.ws.close();
@@ -75,9 +97,10 @@ await bekle(
     kuran.gorunum?.oyuncular.some((o) => !(o as { bagli: boolean }).bagli) ??
     false,
 );
-istemciler[1] = await baglan(
-  `islem=don&kod=${kuran.kod}&kimlik=${kopan.kimlik}`,
-);
+istemciler[1] = await baglan(`islem=don&kod=${kuran.kod}`, {
+  t: 'kimlik',
+  kimlik: kopan.kimlik,
+});
 assert.equal(istemciler[1].ad, kopan.ad);
 
 kuran.ws.send(JSON.stringify({ t: 'baslat' }));
@@ -103,3 +126,15 @@ console.log(
   `TAMAM: ${N} istemci, kod ${kuran.kod}, 10 soru, final ${f.yuzdeler.length} sonuç`,
 );
 istemciler.forEach((i) => i.ws.close());
+
+// Opt-in (kur sayacını 1 dk doldurur): SINIR_TEST=1 node sunucu/test/oyun.ts <adres>
+if (process.env.SINIR_TEST) {
+  const sonuclar = [];
+  for (let i = 0; i < 8; i++) sonuclar.push(await baglan('islem=kur&ad=Hizli'));
+  assert(
+    sonuclar.some((i) => i.hata?.kod === 'cok-deneme'),
+    'kur hız sınırı yok',
+  );
+  sonuclar.forEach((i) => i.ws.close());
+  console.log('TAMAM: kur hız sınırı');
+}
