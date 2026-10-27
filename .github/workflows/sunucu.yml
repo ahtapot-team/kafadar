@@ -1,0 +1,35 @@
+# Oda sunucusunu (Cloudflare Worker + Durable Objects) main'e her merge'de dağıtır (KK-40).
+# Gerekli repo secret'ları: CLOUDFLARE_API_TOKEN, CLOUDFLARE_ACCOUNT_ID.
+name: Sunucu dağıtımı
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'sunucu/**'
+      - 'src/oda/**'
+      - 'src/core/**'
+      - 'content/decks/**'
+      - '.github/workflows/sunucu.yml'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: sunucu-dagitim
+  cancel-in-progress: false
+
+jobs:
+  dagit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: cloudflare/wrangler-action@9acf94ace14e7dc412b076f2c5c20b8ce93c79cd # v3
+        with:
+          wranglerVersion: '4.154.0'
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          workingDirectory: sunucu
+          command: deploy

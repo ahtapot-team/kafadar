@@ -1,7 +1,16 @@
 import { readdirSync, readFileSync } from 'node:fs';
 import { describe, expect, it } from 'vitest';
 import { desteHatalari } from './core/deste';
-import { kabul, kabulCila, kabulKk25, kabulKk26, kabulKk27 } from './kabul';
+import {
+  kabul,
+  kabulCila,
+  kabulKk25,
+  kabulKk26,
+  kabulKk27,
+  kabulOda,
+  kabulOdaDeploy,
+  kabulOdaGuvenlik,
+} from './kabul';
 import { oyunlar } from './games/registry';
 
 describe('KK-1: ana ekran oyun listesi', () => {
@@ -177,6 +186,132 @@ describe('#36 cila: v1 sonrası küçük açıklar', () => {
     "keep-awake web'de çağrılmaz: app/oyun.tsx koşulsuz useKeepAwake() çağırmaz",
     () => {
       expect(dosyaIcerik('app/oyun.tsx')).not.toMatch(/useKeepAwake\(\s*\)/);
+    },
+  );
+});
+
+describe('oda modu: arayüz ve altyapı sözleşmesi (KK-28…KK-40)', () => {
+  // Arayüz test aracı yok (Semih 1C): ekran sözleşmesi kaynak düzeyinde; davranış önizlemede ve
+  // gerçek cihazda (docs/GERCEK-CIHAZ-KONTROL.md, KK-41) doğrulanır.
+  const TESTIDLER = [
+    'mod-tek-telefon', // KK-28
+    'mod-oda-kur',
+    'mod-odaya-katil',
+    'oda-kodu', // KK-29
+    'oda-qr',
+    'katil-kod', // KK-30
+    'katil-ad',
+    'katil-gonder',
+    'katil-hata',
+    'lobi-oyuncu-', // KK-31 (sıra eki)
+    'lobi-baslat',
+    'oda-soru', // KK-32
+    'oda-geri-sayim',
+    'oda-oy-ok',
+    'oda-oy-nok',
+    'oda-bekle-sayac', // KK-34
+    'yeniden-baglaniyor', // KK-37
+    'final-yuzdeler', // KK-36
+    'final-kim-ne-dedi',
+    'final-kisisel',
+    'final-paylas',
+    'final-tekrar',
+  ];
+
+  kabulOda('oda ekranları sözleşmedeki testID adlarını kullanır', () => {
+    const kaynak = [...kaynaklar('app'), ...kaynaklar('src')]
+      .map(({ icerik }) => icerik)
+      .join('\n');
+    const eksik = TESTIDLER.filter((t) => !kaynak.includes(t));
+    expect(eksik).toEqual([]);
+  });
+
+  kabulOdaDeploy(
+    "sunucu main'e merge edilince otomatik dağıtılır (wrangler, push main)",
+    () => {
+      const klasor = new URL('../.github/workflows/', import.meta.url);
+      const akislar = readdirSync(klasor).map((f) =>
+        readFileSync(new URL(f, klasor), 'utf8'),
+      );
+      const dagitim = akislar.filter(
+        (a) => /wrangler/.test(a) && /deploy/.test(a),
+      );
+      expect(dagitim.length).toBeGreaterThan(0);
+      expect(dagitim.some((a) => /branches:\s*\[\s*main\s*\]/.test(a))).toBe(
+        true,
+      );
+    },
+  );
+
+  it('oda mantığı saf: src/oda içinde Date.now, Math.random, ağ ve React yok (KK-40)', () => {
+    const dosyalar = kaynaklar('src/oda');
+    expect(dosyalar.length).toBeGreaterThan(0);
+    for (const { f, icerik } of dosyalar) {
+      expect(icerik, f).not.toMatch(
+        /Date\.now\(|Math\.random\(|WebSocket|\bfetch\(/,
+      );
+      expect(icerik, f).not.toMatch(/from ['"](react|react-native|expo)/);
+    }
+  });
+
+  it('tek telefon modu çevrimdışı kalır: çekirdek ve OK mu NOK mu mantığı ağ kullanmaz (KK-28)', () => {
+    const dosyalar = [
+      ...kaynaklar('src/core'),
+      ...kaynaklar('src/games/ok-mu-nok'),
+    ];
+    for (const { f, icerik } of dosyalar) {
+      expect(icerik, f).not.toMatch(/WebSocket|\bfetch\(|from ['"].*\/oda\//);
+    }
+  });
+
+  it('gerçek cihaz listesinde KK-41 bölümü var', () => {
+    const liste = dosyaIcerik('docs/GERCEK-CIHAZ-KONTROL.md');
+    expect(liste).toMatch(/KK-41/);
+    expect(liste).toMatch(/arka plan/i);
+    expect(liste).toMatch(/uçak modu/i);
+  });
+});
+
+describe('oda sunucu kabuğu: belirteç sunucuda, kriptografik üretilir (#48)', () => {
+  const tsDosyalari = (klasor: string): { f: string; icerik: string }[] =>
+    readdirSync(new URL(`../${klasor}`, import.meta.url), { recursive: true })
+      .map(String)
+      .filter(
+        (f) =>
+          /\.ts$/.test(f) &&
+          !f.includes('node_modules') &&
+          !f.includes('.test.'),
+      )
+      .map((f) => ({
+        f: `${klasor}/${f}`,
+        icerik: readFileSync(
+          new URL(`../${klasor}/${f}`, import.meta.url),
+          'utf8',
+        ),
+      }));
+
+  kabulOdaGuvenlik(
+    'katil olayını işleyen sunucu kodu crypto ile ürettiği kimlik verir',
+    () => {
+      const adaylar = ['.', 'sunucu', 'worker', 'src']
+        .flatMap((k) => {
+          try {
+            return tsDosyalari(k);
+          } catch {
+            return [];
+          }
+        })
+        .filter(
+          ({ f }) =>
+            !f.replace(/^\.\//, '').startsWith('src/oda/') &&
+            !f.includes('node_modules'),
+        )
+        .filter(({ icerik }) => /tip:\s*['"]katil['"]/.test(icerik));
+      expect(adaylar.length).toBeGreaterThan(0);
+      for (const { f, icerik } of adaylar) {
+        expect(icerik, f).toMatch(/crypto\.randomUUID\(|getRandomValues\(/);
+        expect(icerik, f).toMatch(/tip:\s*['"]katil['"][^}]*kimlik/s);
+      }
     },
   );
 });
