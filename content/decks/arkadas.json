@@ -1,0 +1,227 @@
+{
+  "deck_id": "arkadas",
+  "version": 1,
+  "lang": "tr",
+  "cards": [
+    {
+      "id": "arkadas-01",
+      "text": "Arkadaşın, senin eski sevgilinle çıkmaya başlıyor."
+    },
+    {
+      "id": "arkadas-02",
+      "text": "Grup sohbetinde mesajı görüp saatlerce cevap vermemek."
+    },
+    {
+      "id": "arkadas-03",
+      "text": "Toplu yemekte hesabı herkesin kendi yediğine göre ödemesi."
+    },
+    {
+      "id": "arkadas-04",
+      "text": "Arkadaşının doğum gününü Instagram hikâyesinden öğrenmek."
+    },
+    {
+      "id": "arkadas-05",
+      "text": "Ödünç aldığın kitabı bir yıl sonra geri vermek."
+    },
+    {
+      "id": "arkadas-06",
+      "text": "Her buluşmaya 20 dakika geç kalmak."
+    },
+    {
+      "id": "arkadas-07",
+      "text": "Arkadaşının sırrını sevgiline anlatmak."
+    },
+    {
+      "id": "arkadas-08",
+      "text": "Grup tatilinde en iyi odayı ilk gelenin kapması."
+    },
+    {
+      "id": "arkadas-09",
+      "text": "Netflix şifresini arkadaş grubuyla paylaşmak."
+    },
+    {
+      "id": "arkadas-10",
+      "text": "Ortak fotoğrafı sadece sen güzel çıktın diye paylaşmak."
+    },
+    {
+      "id": "arkadas-11",
+      "text": "\"Yoldayım\" deyip evden yeni çıkmak."
+    },
+    {
+      "id": "arkadas-12",
+      "text": "Arkadaşının yemeğinden sormadan bir lokma almak."
+    },
+    {
+      "id": "arkadas-13",
+      "text": "Sesli mesajları 2x hızda dinlemek."
+    },
+    {
+      "id": "arkadas-14",
+      "text": "5 dakikalık sesli mesaj atmak."
+    },
+    {
+      "id": "arkadas-15",
+      "text": "Planı son dakika \"canım istemedi\" diye iptal etmek."
+    },
+    {
+      "id": "arkadas-16",
+      "text": "Arkadaşının çalıştığı kafede indirim beklemek."
+    },
+    {
+      "id": "arkadas-17",
+      "text": "Arkadaş grubunun sohbetini sessize almak."
+    },
+    {
+      "id": "arkadas-18",
+      "text": "Arkadaşının sevgilisini beğenmediğini ona açıkça söylemek."
+    },
+    {
+      "id": "arkadas-19",
+      "text": "Ortak hediyeye para vermeden karta imza atmak."
+    },
+    {
+      "id": "arkadas-20",
+      "text": "Maçı sonradan izleyecek arkadaşına skoru söylemek."
+    },
+    {
+      "id": "arkadas-21",
+      "text": "Arkadaşının ayrıldığı sevgilisini takip etmeye devam etmek."
+    },
+    {
+      "id": "arkadas-22",
+      "text": "\"Sana sonra anlatırım\" deyip hiç anlatmamak."
+    },
+    {
+      "id": "arkadas-23",
+      "text": "Toplu yemekte en pahalı yemeği söyleyip hesabı eşit bölmek."
+    },
+    {
+      "id": "arkadas-24",
+      "text": "Arkadaşından aldığın borcu unutmuş gibi yapmak."
+    },
+    {
+      "id": "arkadas-25",
+      "text": "Arkadaşının arabasını ödünç alıp benzini boş getirmek."
+    },
+    {
+      "id": "arkadas-26",
+      "text": "Gruba tatil fotoğraflarını 200 tane birden atmak."
+    },
+    {
+      "id": "arkadas-27",
+      "text": "Seni çağırmadıkları buluşmayı hikâyede görüp hesap sormak."
+    },
+    {
+      "id": "arkadas-28",
+      "text": "Arkadaşının telefonunda galeriye izinsiz bakmak."
+    },
+    {
+      "id": "arkadas-29",
+      "text": "Ev partisinde ayakkabıyla içeri girmek."
+    },
+    {
+      "id": "arkadas-30",
+      "text": "Arkadaşına misafirliğe eli boş gitmek."
+    },
+    {
+      "id": "arkadas-31",
+      "text": "Küsünce arkadaşına verdiğin hediyeyi geri istemek."
+    },
+    {
+      "id": "arkadas-32",
+      "text": "Kuyrukta arkadaşına yer tutmak."
+    },
+    {
+      "id": "arkadas-33",
+      "text": "Arkadaşının ilk denediği yemeğe dürüstçe \"kötü olmuş\" demek."
+    },
+    {
+      "id": "arkadas-34",
+      "text": "WhatsApp'ta mavi tiki kapatmak."
+    },
+    {
+      "id": "arkadas-35",
+      "text": "Grup sohbetinde her mesaja sadece çıkartmayla cevap vermek."
+    },
+    {
+      "id": "arkadas-36",
+      "text": "İlk buluşmaya en yakın arkadaşını da götürmek."
+    },
+    {
+      "id": "arkadas-37",
+      "text": "Ortak arkadaşınız hakkındaki dedikoduya katılmak."
+    },
+    {
+      "id": "arkadas-38",
+      "text": "Oyunda kaybedince oyunu yarıda bırakmak."
+    },
+    {
+      "id": "arkadas-39",
+      "text": "Arkadaşının yeni saç kesimini beğenmediğini yüzüne söylemek."
+    },
+    {
+      "id": "arkadas-40",
+      "text": "Gece 2'de \"uyudun mu?\" mesajı atmak."
+    },
+    {
+      "id": "arkadas-41",
+      "text": "Doğum gününü unutup ertesi gün \"dün çok meşguldüm\" demek."
+    },
+    {
+      "id": "arkadas-42",
+      "text": "Arkadaşının ödevini kopyalayıp ondan yüksek not almak."
+    },
+    {
+      "id": "arkadas-43",
+      "text": "Ortak tatilde her şeyi planlayan kişiye \"bu kadar plan yapma\" demek."
+    },
+    {
+      "id": "arkadas-44",
+      "text": "Birlikte gittiğiniz konserin tamamını telefonla çekmek."
+    },
+    {
+      "id": "arkadas-45",
+      "text": "Arkadaşının sevgilisiyle ondan daha iyi anlaşmak."
+    },
+    {
+      "id": "arkadas-46",
+      "text": "Takımı kaybettiği gece arkadaşına dalga geçen mesaj atmak."
+    },
+    {
+      "id": "arkadas-47",
+      "text": "Arkadaşının evinde kira ödemeden bir ay kalmak."
+    },
+    {
+      "id": "arkadas-48",
+      "text": "Düğüne sormadan yanında birini daha getirmek."
+    },
+    {
+      "id": "arkadas-49",
+      "text": "Arkadaşına aldığın hediyenin fiyat etiketini üstünde bırakmak."
+    },
+    {
+      "id": "arkadas-50",
+      "text": "Sınavdan önce \"hiç çalışmadım\" deyip tam not almak."
+    },
+    {
+      "id": "arkadas-51",
+      "text": "Arkadaşının attığı her paylaşıma sadece \"😂\" ile cevap vermek."
+    },
+    {
+      "id": "arkadas-52",
+      "text": "Arkadaşının şarj aletini alıp bir türlü geri vermemek."
+    },
+    {
+      "id": "arkadas-53",
+      "text": "Gruba eski bir fotoğraf atıp herkesi utandırmak."
+    },
+    {
+      "id": "arkadas-54",
+      "text": "Buluşma boyunca sürekli telefonla ilgilenmek."
+    },
+    {
+      "id": "arkadas-55",
+      "text": "Arkadaşının önerdiği diziyi ondan önce bitirip ona spoiler vermek."
+    }
+  ]
+}
