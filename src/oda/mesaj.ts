@@ -4,13 +4,15 @@ import type { Final, Gorunum, Hata, Kimlik, Oy } from './oda';
 
 export type Paket = 'arkadas' | 'cift' | 'aile';
 
+// Bağlanırken adres sorgusuyla gönderilir (?islem=kur&ad=…&paket=…); tarayıcı soketi tek bağlantıda odaya yönlenir.
+export type Acilis =
+  | { islem: 'kur'; ad: string; paket: Paket }
+  | { islem: 'katil'; kod: string; ad: string }
+  | { islem: 'don'; kod: string; kimlik: Kimlik }; // yeniden bağlanma (KK-37)
+
+// Bağlantı kurulduktan sonra istemciden giden mesajlar.
 export type Istemci =
-  | { t: 'kur'; ad: string; paket: Paket }
-  | { t: 'katil'; kod: string; ad: string }
-  | { t: 'don'; kod: string; kimlik: Kimlik } // yeniden bağlanma (KK-37)
-  | { t: 'baslat' }
-  | { t: 'cevapla'; oy: Oy }
-  | { t: 'ayril' };
+  { t: 'baslat' } | { t: 'cevapla'; oy: Oy } | { t: 'ayril' };
 
 // 'cok-deneme': kod denemesi hız sınırı (KK-30). 'baglanti': istemci tarafı (sunucuya ulaşılamadı).
 export type OdaHata = {

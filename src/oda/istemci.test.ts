@@ -18,7 +18,7 @@ const depoYap = (): Depo & { veri: Map<string, string> } => {
 const akis = () => new Promise((r) => setTimeout(r, 0));
 
 function kur() {
-  const sunucu = new SahteSunucu(1_000_000, rngOlustur(5), desteler);
+  const sunucu = new SahteSunucu(() => 1_000_000, rngOlustur(5), desteler);
   const istemci = (depo = depoYap()) => {
     const bekleyen: (() => void)[] = [];
     const i = new OdaIstemci({

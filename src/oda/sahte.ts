@@ -2,7 +2,7 @@
 // Gerçek sunucuyla aynı mesaj biçimini (mesaj.ts) konuşur; ağ yoktur.
 import type { Deste } from '../core/deste';
 import type { Rng } from '../core/rng';
-import type { Istemci, OdaHata, Paket, Sunucu } from './mesaj';
+import type { Acilis, Istemci, OdaHata, Paket, Sunucu } from './mesaj';
 import {
   type Kimlik,
   type OdaDurum,
@@ -14,22 +14,37 @@ import {
 } from './oda';
 import type { TasimaDinleyici, TasimaUretici } from './tasima';
 
+type KurKatilDon =
+  | { t: 'kur'; ad: string; paket: Paket }
+  | { t: 'katil'; kod: string; ad: string }
+  | { t: 'don'; kod: string; kimlik: Kimlik };
+
 type Baglanti = { d: TasimaDinleyici; kod?: string; kimlik?: Kimlik };
 
 export class SahteSunucu {
   private odalar = new Map<string, OdaDurum>();
   private baglantilar = new Set<Baglanti>();
 
+  get simdi() {
+    return this.saat() + this.ofset;
+  }
+
+  private ofset = 0; // ilerle() ile eklenen süre
+
   constructor(
-    public simdi: number,
+    private saat: () => number, // dışarıdan verilir (src/oda saf kalır)
     private rng: Rng,
     private desteler: Record<Paket, Deste>,
   ) {}
 
-  uret: TasimaUretici = (d) => {
+  uret: TasimaUretici = (acilis, d) => {
     const b: Baglanti = { d };
     this.baglantilar.add(b);
-    void Promise.resolve().then(() => this.baglantilar.has(b) && d.acildi());
+    void Promise.resolve().then(() => {
+      if (!this.baglantilar.has(b)) return;
+      d.acildi();
+      this.ac(b, acilis);
+    });
     return {
       gonder: (m) => this.al(b, m),
       kapat: () => void this.baglantilar.delete(b),
@@ -48,7 +63,7 @@ export class SahteSunucu {
 
   // Test: süre ilerler; sunucu alarmı çalışır.
   ilerle(ms: number) {
-    this.simdi += ms;
+    this.ofset += ms;
     for (const kod of this.odalar.keys()) this.olay(kod, { tip: 'zaman' });
   }
 
@@ -93,7 +108,23 @@ export class SahteSunucu {
     this.yay(kod);
   }
 
-  private al(b: Baglanti, m: Istemci) {
+  // Bağlanma komutu (kur/katil/don); hata gelirse hata çerçevesi gider ve soket kapanır (gerçek sunucu gibi).
+  private ac(b: Baglanti, a: Acilis) {
+    this.al(
+      b,
+      a.islem === 'kur'
+        ? { t: 'kur', ad: a.ad, paket: a.paket }
+        : a.islem === 'katil'
+          ? { t: 'katil', kod: a.kod, ad: a.ad }
+          : { t: 'don', kod: a.kod, kimlik: a.kimlik },
+    );
+    if (!b.kimlik) {
+      this.baglantilar.delete(b);
+      b.d.kapandi();
+    }
+  }
+
+  private al(b: Baglanti, m: Istemci | KurKatilDon) {
     if (m.t === 'kur') {
       let kod = kodUret(this.rng);
       while (this.odalar.has(kod)) kod = kodUret(this.rng);

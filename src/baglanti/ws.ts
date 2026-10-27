@@ -2,8 +2,10 @@
 import type { TasimaUretici } from '../oda/tasima';
 
 export function wsTasima(adres: string): TasimaUretici {
-  return (d) => {
-    const ws = new WebSocket(adres);
+  return (acilis, d) => {
+    const ws = new WebSocket(
+      `${adres}?${new URLSearchParams(acilis).toString()}`,
+    );
     let kapali = false;
     const bitir = () => {
       if (kapali) return;

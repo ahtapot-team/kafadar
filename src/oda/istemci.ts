@@ -2,7 +2,7 @@
 // bağlantı kopunca aynı kimlikle geri döner ve "Yeniden bağlanıyor…" durumunu tutar (KK-37).
 import type { Depo } from '../core/kayit';
 import type { Final, Gorunum, Kimlik } from './oda';
-import type { Istemci, OdaHata, Paket, Sunucu } from './mesaj';
+import type { Acilis, OdaHata, Paket, Sunucu } from './mesaj';
 import type { Tasima, TasimaUretici } from './tasima';
 
 export const ODA_ANAHTARI = 'kafadar:oda';
@@ -44,7 +44,7 @@ export class OdaIstemci {
   private d: IstemciDurumu = BOS;
   private dinleyiciler = new Set<(d: IstemciDurumu) => void>();
   private tasima: Tasima | null = null;
-  private ilk: Istemci | null = null; // bağlanınca gönderilecek ilk mesaj (kur/katil)
+  private ilk: Acilis | null = null; // bağlanırken gidecek komut (kur/katil)
   private iptal: (() => void) | null = null;
   private deneme = 0;
   private saat: () => number;
@@ -85,13 +85,13 @@ export class OdaIstemci {
 
   kur(ad: string, paket: Paket) {
     this.sifirla();
-    this.ilk = { t: 'kur', ad, paket };
+    this.ilk = { islem: 'kur', ad, paket };
     this.baglan();
   }
 
   katil(kod: string, ad: string) {
     this.sifirla();
-    this.ilk = { t: 'katil', kod: kod.trim().toUpperCase(), ad };
+    this.ilk = { islem: 'katil', kod: kod.trim().toUpperCase(), ad };
     this.baglan();
   }
 
@@ -130,12 +130,12 @@ export class OdaIstemci {
     this.tasima?.kapat();
     const odada = this.d.kimlik !== null;
     this.ayarla({ baglanti: odada ? 'yeniden' : 'baglaniyor', hata: null });
-    this.tasima = this.a.uret({
-      acildi: () => {
-        const { kod, kimlik } = this.d;
-        if (kimlik && kod) this.tasima?.gonder({ t: 'don', kod, kimlik });
-        else if (this.ilk) this.tasima?.gonder(this.ilk);
-      },
+    const { kod, kimlik } = this.d;
+    const acilis: Acilis | null =
+      kimlik && kod ? { islem: 'don', kod, kimlik } : this.ilk;
+    if (!acilis) return;
+    this.tasima = this.a.uret(acilis, {
+      acildi: () => {}, // sunucu önce 'tamam' ya da 'hata' gönderir
       mesaj: (m) => this.geldi(m),
       kapandi: () => this.koptu(),
     });

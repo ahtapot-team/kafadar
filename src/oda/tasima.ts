@@ -1,5 +1,5 @@
 // Taşıma: istemci mantığı (istemci.ts) ağdan ayrıdır. Gerçek bağlantı (src/baglanti) ya da testte/geliştirmede sahte sunucu.
-import type { Istemci, Sunucu } from './mesaj';
+import type { Acilis, Istemci, Sunucu } from './mesaj';
 
 export type TasimaDinleyici = {
   acildi(): void;
@@ -12,5 +12,8 @@ export type Tasima = {
   kapat(): void;
 };
 
-// Bir bağlantı açar; açılınca dinleyici.acildi çağrılır.
-export type TasimaUretici = (dinleyici: TasimaDinleyici) => Tasima;
+// Bir bağlantı açar (komut `acilis` ile gider); açılınca dinleyici.acildi çağrılır. Sunucu önce 'tamam' ya da 'hata' gönderir.
+export type TasimaUretici = (
+  acilis: Acilis,
+  dinleyici: TasimaDinleyici,
+) => Tasima;
