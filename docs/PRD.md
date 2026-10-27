@@ -1,6 +1,6 @@
 # Kafadar (çalışma adı) — Ürün gereksinimleri (PRD)
 
-> Durum: ONAYLANDI (27.10.2026, Semih)
+> Durum: v1 ONAYLANDI (27.10.2026, Semih). v2 oda modu bölümü ONAY BEKLİYOR (27.10.2026).
 > Bu dosya projenin tek doğruluk kaynağıdır. Ajanlar sohbet geçmişine değil buraya bakar.
 > Kapsam değişirse önce bu dosya güncellenir ve yeniden onaylanır.
 
@@ -9,7 +9,7 @@ Arkadaş grupları ve çiftler için, tek telefonda oynanan ve içine yeni oyunl
 
 ## Hedef kullanıcı ve platform
 - Kullanıcı: 2–12 kişilik arkadaş grupları, çiftler ve aileler. Türkiye, Türkçe.
-- Platform: iOS + Android yerel uygulama (App Store + Google Play). Tamamen çevrimdışı, sunucu yok.
+- Platform: iOS + Android yerel uygulama (App Store + Google Play). Tek telefon modu tamamen çevrimdışıdır, sunucu kullanmaz. Oda modu (v2) internet ve sunucu ister.
 
 ## Kapsam (v1)
 - Ana ekranda oyun listesi: OK mu NOK mu aktif, 10/10 ama ve Casus kim "Yakında".
@@ -25,9 +25,9 @@ Arkadaş grupları ve çiftler için, tek telefonda oynanan ve içine yeni oyunl
 
 ## Kapsam dışı (bilerek yapmıyoruz)
 - Diğer oyunlar: 10/10 ama, Casus kim (sonraki sürümler).
-- Oda koduyla çok telefonlu oyun, sunucu, hesap ya da giriş. Mimari bunlara hazır olacak.
+- Hesap ya da giriş. (Oda koduyla çok telefonlu oyun v2'de geliyor, aşağıdaki bölüme bakın.)
 - Gizli oy modu (telefon elden ele).
-- +18 içerik, reklam, uygulama içi satın alma, analitik ya da veri toplama.
+- +18 içerik, reklam, uygulama içi satın alma, analitik ya da veri toplama. (Oda modunda isimler yalnızca oyun süresince sunucuda tutulur, KK-39.)
 - İngilizce ve diğer diller (v1 yalnızca Türkçe; metinler ayrı dosyada tutulur).
 - Store yayını. Hesap ve uygulama adı kararı sonra verilecek. v1 kurulabilir derleme ve önizleme üretir.
 
@@ -91,6 +91,60 @@ Her madde test edilebilir olmalı; QA bunlardan otomatik kabul testleri yazar.
 - [ ] KK-22: Oyun mantığı arayüzden ayrı, saf ve serileştirilebilir bir durum makinesidir (durum + olay → yeni durum). Rastgelelik tohumludur: aynı tohum aynı kart sırasını verir.
 - [ ] KK-23: Her PR'a telefondan QR ile açılan bir önizleme linki yorum olarak yazılır. CI (biçim, lint, tip, gizli anahtar, test) yeşildir.
 - [ ] KK-24: Gerçek cihaz kapısı: 1 iOS ve 1 Android cihazda bir insan tam bir oturum oynar ve kontrol listesini işaretler. Animasyonlar takılmaz. Bu işaret olmadan sürüm "bitti" sayılmaz.
+
+## v2: Oda modu (Metehan, 27.10.2026) — ONAY BEKLİYOR
+Birden fazla telefonla oynanır. Bir telefon oda kurar, diğerleri kodla kendi telefonundan katılır. Herkes her soruyu süre içinde kendi telefonundan cevaplar. 10 soru peş peşe gelir. Sonuç her sorudan sonra değil, 10 soru bitince toplu dağılım olarak gösterilir. Tek telefon modu aynen kalır.
+
+### Akış
+1. **Mod seçimi:** OK mu NOK mu'ya dokununca "Tek telefon / Oda kur / Odaya katıl" seçilir.
+2. **Oda kur:** İsim ve paket seçilir. Dev bir oda kodu ve QR gösterilir.
+3. **Odaya katıl:** Kod ve isim girilir.
+4. **Lobi:** Katılanlar listeye düşer. Kuran kişi de oyuncudur ve "Başlat" yalnızca onda görünür.
+5. **Soru:** Herkesin telefonunda aynı soru, 15 sn geri sayım ve dev OK/NOK düğmeleri.
+6. **Bekleme:** "Cevabın alındı ✓ · 6/8 cevapladı" yazar. Herkes cevaplayınca ya da süre bitince sonraki soruya geçilir.
+7. **Final (10 soru sonra):** Her sorunun OK/NOK yüzdesi, en tartışmalı soru, ödüller. Ardından "kim ne dedi" görünümü. Her telefonda ayrıca kişisel kart ("7/10 çoğunlukla aynıydın"). Paylaş ve "Tekrar oyna".
+
+### Kabul kriterleri (oda modu)
+- [ ] KK-28: OK mu NOK mu'da "Tek telefon / Oda kur / Odaya katıl" seçimi vardır. Tek telefon modu değişmeden ve çevrimdışı çalışır; KK-16'daki uçak modu şartı yalnızca tek telefon modu için geçerlidir.
+- [ ] KK-29: Oda kurulunca 4 harfli bir kod (O, 0, I, 1 karakterleri kullanılmaz) ve aynı kodu açan bir QR gösterilir. Kod yalnızca açık bir oda için geçerlidir. Oda kapanınca kod artık kullanılamaz.
+- [ ] KK-30: Katılan kişi kod ve isim girer. Kod yanlışsa, oda kapalıysa, oda doluysa ya da oyun başladıysa Türkçe ve net bir hata gösterilir. Aynı isim gelirse "Ali 2" kuralı (KK-4) uygulanır. Kod denemelerine hız sınırı vardır.
+- [ ] KK-31: Lobide katılanlar birkaç saniye içinde tüm telefonlarda görünür. Kuran kişi de oyuncudur. "Başlat" yalnızca kuranda görünür ve en az 2 oyuncuyla açılır. Odada en çok 12 oyuncu olur. Oyun başlayınca yeni katılım kapanır.
+- [ ] KK-32: Her soru tüm telefonlarda aynı sırada ve aynı anda açılır; soru sırasını sunucu belirler. Her telefonda soru metni, 15 sn geri sayım ve OK/NOK düğmeleri vardır. Süre sunucu saatine göre işler; telefon saatleri farklı olsa da süre her yerde aynı anda biter.
+- [ ] KK-33: Oyuncu süre içinde cevabını değiştirebilir, son cevabı geçerlidir. Süre bittikten sonra gelen cevap reddedilir. Cevap vermeyen oyuncu o soruda "boş" sayılır ve sonuçta ayrı gösterilir.
+- [ ] KK-34: Odadaki herkes cevaplayınca süre beklenmeden sonraki soruya geçilir. Cevap veren kişi "Cevabın alındı ✓ · 6/8 cevapladı" ekranını görür. Kimin cevapladığı görünür, ne dediği görünmez.
+- [ ] KK-35: Bir oyun 10 sorudur. 10. soru bitene kadar hiçbir oy başka bir telefona gönderilmez; ağ trafiğinde de görünmez.
+- [ ] KK-36: Final dağılımı tüm telefonlarda gösterilir: 10 sorunun OK/NOK yüzdeleri (boşlar ayrı), en tartışmalı soru, ödüller (Aykırı ruh, Ruh ikizleri), ardından "kim ne dedi" görünümü. Her telefonda ayrıca kişisel kart vardır. Final 9:16 görsel olarak paylaşılabilir. "Hareketi azalt" açıksa animasyon yerine liste gösterilir.
+- [ ] KK-37: Bağlantısı kopan oyuncu (arka plana alma, ağ değişimi, kısa uçak modu) aynı kimlikle geri döner ve o an açık olan soruya katılır. Kopukken süresi biten sorular "boş" sayılır. Kopukken ekranda "Yeniden bağlanıyor…" görünür.
+- [ ] KK-38: Kuran kişi çıkarsa ya da bağlantısı koparsa oyun kalanlarla devam eder. Odada tek oyuncu kalırsa oyun biter ve o ana kadarki sonuçlar gösterilir.
+- [ ] KK-39: Oda ve oyuncu isimleri sunucuda yalnızca oyun süresince tutulur. Oyun bitince ya da oda 1 saat boşta kalınca silinir. Hesap, giriş ve analitik yoktur.
+- [ ] KK-40: Oda mantığı, KK-22 gibi saf ve serileştirilebilir bir durum makinesidir; saat ve rastgelelik dışarıdan verilir. Sunucu bu mantığı çalıştıran ince bir kabuktur. Kabul testleri sahte saat ve N sahte istemciyle ağsız çalışır. Sunucu main'e merge edilince otomatik dağıtılır.
+- [ ] KK-41: Gerçek cihaz kapısı: en az 3 telefonla (iOS ve Android, farklı ağlar) tam bir oyun oynanır. Bir telefon arka plana alınıp geri getirilir. Kontrol listesi `docs/GERCEK-CIHAZ-KONTROL.md`'ye eklenir ve işaretlenmeden oda modu "bitti" sayılmaz.
+
+### Kapsam dışı (v2)
+- Hesap ya da giriş. Oda içi sohbet. Sesli ya da görüntülü bağlantı.
+- Soru sayısı ve süre seçimi (sabit: 10 soru, 15 sn).
+- Diğer oyunların oda modu. Web hedef değildir; yalnızca test için kullanılır.
+
+### Kararlar (oda modu)
+| Karar | Seçim | Gerekçe | Karar veren |
+|---|---|---|---|
+| Sunucu | Cloudflare Workers + Durable Objects (her oda bir nesne, WebSocket) | Şimdilik ücretsiz başlanır. Süre ve oy otoritesi sunucudadır. Kuran telefon düşse de oda sürer. | Metehan (27.10.2026) |
+| Sonuç görünürlüğü | Önce yüzdeler, sonra "kim ne dedi" | Videoda en çok ses getiren an | pm varsayılanı, onayla kesinleşir |
+| Kuran kişi | Kuran telefon da oynar | En basit, kimse dışarıda kalmaz | pm varsayılanı, onayla kesinleşir |
+| Süre ve sayı | 15 sn, 10 soru, 2–12 oyuncu | Metehan'ın isteği + mevcut oyuncu sınırı | pm varsayılanı, onayla kesinleşir |
+
+### Riskler (oda modu)
+- **Cloudflare hesabı:** Bir insan ücretsiz bir Cloudflare hesabı açar ve API token'ını repo secret'ı olarak ekler (Expo'daki gibi). Token gruba yapıştırılmaz. Backend başlamadan ücretsiz katmanın yettiğini doğrular.
+- **Gizlilik:** İsimler sunucudan geçer. Store gizlilik etiketi ve gizlilik metni yayından önce güncellenir.
+- **Tempo:** Sonuç sona kaldığı için ortada gerilim düşebilir. Her sorudan sonra "herkes cevapladı" anı ses ve titreşimle verilir.
+- **Test:** Çok istemcili davranış önce sahte saat ve sahte istemcilerle, sonra önizlemede birkaç tarayıcıyla, en son gerçek telefonlarla doğrulanır.
+
+### Fikir turu özeti (oda modu)
+- backend: Cloudflare Durable Objects (oda = tek otorite) önerdi. Önce 1 oda, 2 telefon ve tek soruyla kısa bir deneme. Büyüklük L.
+- frontend: Mevcut durum makinesi yaşar, yeni bir taşıma katmanı eklenir. Önce saf mantık ve sahte taşıma. Büyüklük L.
+- tasarim: 6–7 yeni ekran, final bir "sahne" gibi akar, kişisel kart. Tasarım M, uçtan uca L.
+- qa: Kopma, geç katılan, süre senkronu ve kuran çıkışı sunucuda çözülür. Testler sahte saat ve N sahte istemciyle yapılır. Büyüklük L.
+- İnsanlar: Metehan istedi ve sunucu olarak Cloudflare'i seçti (27.10.2026).
 
 ## Geliştirme ilkesi (Semih, 27.10.2026)
 **Overengineering yok.** En az kodla, en basit çözüm, yalnızca bugünkü ihtiyaç kadar. Yapı genişlemeye açık olacak ama ileriye dönük soyutlama, genel çerçeve ya da "belki lazım olur" kodu yazılmayacak. Yeni bağımlılık yalnızca gerçekten gerekiyorsa eklenir ve PR'da gerekçesi yazılır. Aşağıdaki mimari şartlar bu ilkeye göre en sade haliyle uygulanır. Örneğin oyun kayıt listesi basit bir dizidir, eklenti çatısı değildir.
