@@ -2,6 +2,7 @@ import { Redirect, useRouter } from 'expo-router';
 import { useState } from 'react';
 import { useOda } from '../../src/baglanti/baglam';
 import { BeklemeEkrani } from '../../src/oda-ui/bekle';
+import { FinalEkrani } from '../../src/oda-ui/final';
 import { SoruEkrani } from '../../src/oda-ui/soru';
 import { YenidenBaglaniyor } from '../../src/oda-ui/yeniden';
 import { Dugme, Ekran, Yazi } from '../../src/ui';
@@ -50,17 +51,16 @@ export default function OdaOyun() {
     );
   }
 
-  // 'bitti': final ekranları bir sonraki PR'da.
+  // 'bitti': final (kuran çıkınca / tek oyuncu kalınca önce "Oda kapandı", KK-38). Tekrar oyna = yeni mod seçimi.
+  const cik = (hedef: '/' | '/mod') => {
+    istemci.ayril();
+    router.replace(hedef);
+  };
   return (
-    <Ekran>
-      <Yazi tur="baslik">Oyun bitti</Yazi>
-      <Dugme
-        etiket="Ana menü"
-        onPress={() => {
-          istemci.ayril();
-          router.replace('/');
-        }}
-      />
-    </Ekran>
+    <FinalEkrani
+      durum={durum}
+      onTekrar={() => cik('/mod')}
+      onAnaMenu={() => cik('/')}
+    />
   );
 }
