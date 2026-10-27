@@ -71,3 +71,24 @@ Tek telefon, elden ele; 1 iOS ve 1 Android cihaz. En az 4 kişiyle ya da 4 isim 
 | 13 | KK-54 | Baştan sona bir oyun takılmadan, animasyonlar akıcı; paylaş görseli (9:16) ve menüsü çalışıyor | | |
 
 **Sonuç:** ☐ iOS geçti  ☐ Android geçti  İmza: ______
+
+## 10/10 ama (KK-62)
+
+Tek telefon, elden ele; 1 iOS ve 1 Android cihaz. En az 4 kişiyle (ya da 4 isimle) tam bir oturum oynanır. Cihaz: ______  Sürüm: ______  Tarih: ______  Kim: ______
+
+| # | KK | Kontrol | iOS | Android |
+|---|---|---|---|---|
+| 1 | KK-55 | Ana ekranda 10/10 ama aktif; OK mu NOK mu ve Casus kim hâlâ çalışıyor | | |
+| 2 | KK-56 | Herkes için 0–10 düğmeleri; 0 ve 10 dahil her puan girilebiliyor; açıklamadan önce puan değiştirilebiliyor; herkes girmeden "Göster" kapalı | | |
+| 3 | KK-56 | Gerçek oyun: herkes aynı anda **parmaklarıyla** puanını gösteriyor, telefonu tutan kişi giriyor; düğmeler başparmakla rahat basılıyor | | |
+| 4 | KK-57 | Açıklama: ortalama (bir ondalık), en düşük ve en yüksek puan verenler doğru adlarla görünüyor | | |
+| 5 | KK-57 | Herkes aynı puanı verince konfeti; uçlar arası fark 8 ve üstünde "Tam bölündünüz" | | |
+| 6 | KK-57 | Ayarlardan **Hareketi azalt** açıkken animasyon yok, sade gösterim; kapalıyken akıcı | | |
+| 7 | KK-58 | Oturum sonunda En acımasız, Melek kalpli, Ruh ikizleri ödülleri doğru kişilere gidiyor (elle hesapla); 9:16 paylaşım görseli ve paylaşım menüsü çalışıyor | | |
+| 8 | KK-59 | Kart metni (10/10 ama …) puan girerken ve açıklamada ekranda okunuyor (uzun kartta da kesilmiyor) | | |
+| 9 | KK-60 | Üç pakette (Sevgili adayı, Arkadaş, Gündelik hayat) kartlar anlamlı; "10/10 ama" ifadesi her kartta; uygunsuz içerik yok (12+) | | |
+| 10 | KK-14 | Oyun ortasında uygulamayı kapat, aç: "Devam et" kaldığın karttan, puanlar korunarak sürüyor | | |
+| 11 | KK-62 | Baştan sona bir oturum takılmadan, animasyonlar akıcı | | |
+
+**Sonuç:** ☐ iOS geçti  ☐ Android geçti  İmza: ______
+

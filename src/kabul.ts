@@ -14,6 +14,7 @@ import { it } from 'vitest';
 // casusKayit = Casus kim kayıt şema doğrulayıcısı durumGecerliMi (#93),
 // casusKayitUi = Casus ekranı kayıttan okurken durumGecerliMi kullanır (frontend #81),
 // casusMantik = Casus kim saf durum makinesi + JSON desteler (#78), casusUi = ekranlar ve kayıt listesi (#80…#82),
+// ononMantik = 10/10 ama saf durum makinesi + JSON desteler (#106), ononUi = ekranlar ve kayıt listesi (#108),
 // odaMantik = oda mantığı (saf durum makinesi, KK-29…KK-40, #47).
 export const BEKLEYEN = {
   cekirdek: false,
@@ -33,6 +34,8 @@ export const BEKLEYEN = {
   casusKayit: false,
   casusKayitUi: false,
   odaCik: false, // #73: oyun içinde "Odadan çık?" (frontend #104 kapatır)
+  ononMantik: true,
+  ononUi: true,
 };
 
 export const kabul = BEKLEYEN.cekirdek ? it.fails : it;
@@ -52,3 +55,5 @@ export const kabulCasusUiSon = BEKLEYEN.casusUiSon ? it.fails : it;
 export const kabulCasusKayit = BEKLEYEN.casusKayit ? it.fails : it;
 export const kabulOdaCik = BEKLEYEN.odaCik ? it.fails : it;
 export const kabulCasusKayitUi = BEKLEYEN.casusKayitUi ? it.fails : it;
+export const kabulOnonMantik = BEKLEYEN.ononMantik ? it.fails : it;
+export const kabulOnonUi = BEKLEYEN.ononUi ? it.fails : it;
