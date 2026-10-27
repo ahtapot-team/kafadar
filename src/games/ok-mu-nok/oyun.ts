@@ -203,3 +203,43 @@ export function isle(d: Durum, olay: Olay): Durum {
       };
   }
 }
+
+const nesne = (x: unknown): x is Record<string, unknown> =>
+  typeof x === 'object' && x !== null && !Array.isArray(x);
+const metinDizisi = (x: unknown): x is string[] =>
+  Array.isArray(x) && x.every((m) => typeof m === 'string');
+const oylarMi = (x: unknown): x is Oylar =>
+  nesne(x) && Object.values(x).every((o) => o === 'OK' || o === 'NOK');
+
+// Kayıttan okunan durumun şeması (#27, KK-14): sürüm doğru olsa bile alanlar eksik/hatalıysa
+// false döner; çağıran kaydı siler ve yeni oyuna / ana ekrana düşer, arayüz çökmez.
+export function durumGecerliMi(d: unknown): d is Durum {
+  if (!nesne(d)) return false;
+  const { kartlar, sira } = d;
+  return (
+    ['oy', 'acik', 'desteBitti', 'bitti'].includes(d.asama as string) &&
+    nesne(d.deste) &&
+    typeof d.deste.deck_id === 'string' &&
+    typeof d.deste.version === 'number' &&
+    Array.isArray(kartlar) &&
+    kartlar.length > 0 &&
+    kartlar.every(
+      (k) => nesne(k) && typeof k.id === 'string' && typeof k.text === 'string',
+    ) &&
+    Number.isInteger(sira) &&
+    (sira as number) >= 0 &&
+    (sira as number) < kartlar.length &&
+    Number.isInteger(d.tamamlanan) &&
+    (d.uzunluk === null || d.uzunluk === 10 || d.uzunluk === 20) &&
+    typeof d.tohum === 'number' &&
+    Number.isInteger(d.karisim) &&
+    metinDizisi(d.oyuncular) &&
+    d.oyuncular.length > 0 &&
+    oylarMi(d.oylar) &&
+    nesne(d.sonOy) &&
+    Array.isArray(d.gecmis) &&
+    d.gecmis.every(
+      (g) => nesne(g) && typeof g.kartId === 'string' && oylarMi(g.oylar),
+    )
+  );
+}

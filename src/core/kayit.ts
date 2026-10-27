@@ -27,8 +27,12 @@ export async function sonEkipOku(depo: Depo): Promise<string[]> {
 export const oyunKaydet = <S>(depo: Depo, durum: S) =>
   depo.setItem(OYUN_ANAHTARI, JSON.stringify({ surum: KAYIT_SURUMU, durum }));
 
-// Kayıt yoksa null. Okunamayan ya da eski sürümlü kayıtta çökmez, kaydı siler ve null döner.
-export async function oyunOku<S>(depo: Depo): Promise<S | null> {
+// Kayıt yoksa null. Okunamayan, eski sürümlü ya da içeriği bozuk kayıtta çökmez, kaydı siler ve null döner.
+// `gecerli`: oyunun kendi durum şeması kontrolü (sürüm doğru ama alanlar eksik/hatalıysa kayıt reddedilir, #27).
+export async function oyunOku<S>(
+  depo: Depo,
+  gecerli?: (durum: unknown) => durum is S,
+): Promise<S | null> {
   try {
     const ham = await depo.getItem(OYUN_ANAHTARI);
     if (ham === null) return null;
@@ -37,7 +41,8 @@ export async function oyunOku<S>(depo: Depo): Promise<S | null> {
       k &&
       k.surum === KAYIT_SURUMU &&
       k.durum != null &&
-      typeof k.durum === 'object'
+      typeof k.durum === 'object' &&
+      (!gecerli || gecerli(k.durum))
     )
       return k.durum as S;
   } catch {
