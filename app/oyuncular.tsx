@@ -3,10 +3,10 @@ import { useState } from 'react';
 import { Pressable, TextInput, View } from 'react-native';
 import {
   baslayabilir,
-  benzersizIsim,
   ekleyebilir,
   isimDuzelt,
   isimHatasi,
+  taslakEkle,
   ISIM_MAKS,
 } from '../src/core/oyuncular';
 import { useDurum } from '../src/durum';
@@ -20,15 +20,25 @@ export default function Oyuncular() {
   const { renk, oyuncular, oyunculariAyarla, gecenEkip } = useDurum();
   const [ad, setAd] = useState('');
   const hata = ad ? isimHatasi(ad) : null;
-  const durum = baslayabilir(oyuncular);
+  // Girdide yazılı isim "Devam"da otomatik eklenir; düğme buna göre açılır (#26).
+  const taslakli = taslakEkle(oyuncular, ad);
+  const taslakVar = taslakli.length > oyuncular.length;
+  const durum = baslayabilir(taslakli);
 
   const ekle = () => {
-    if (isimHatasi(ad) || !ekleyebilir(oyuncular)) return;
-    oyunculariAyarla([...oyuncular, benzersizIsim(ad, oyuncular)]);
+    if (!taslakVar) return;
+    oyunculariAyarla(taslakli);
     setAd('');
   };
 
-  const bitti = () => (oyunda ? router.back() : router.push('/paket'));
+  const bitti = () => {
+    if (taslakVar) {
+      oyunculariAyarla(taslakli);
+      setAd('');
+    }
+    if (oyunda) router.back();
+    else router.push('/paket');
+  };
 
   return (
     <Ekran>
@@ -110,13 +120,13 @@ export default function Oyuncular() {
         />
       )}
       {!durum.tamam && (
-        <Yazi soluk testID="basla-neden">
+        <Yazi tur="etiket" testID="basla-neden">
           {durum.neden}
         </Yazi>
       )}
       <Dugme
         testID="basla"
-        etiket={oyunda ? 'Tamam' : 'Devam'}
+        etiket={taslakVar ? 'Ekle ve devam' : oyunda ? 'Tamam' : 'Devam'}
         pasif={!durum.tamam}
         onPress={bitti}
       />

@@ -37,3 +37,10 @@ export function baslayabilir(oyuncular: readonly string[]): {
     return { tamam: false, neden: `En az ${OYUNCU_MIN} oyuncu gerekli` };
   return { tamam: true };
 }
+
+// Girdide yazılı geçerli isim varsa listeye ekler; "Ekle"ye basılmadan "Devam"a basılırsa
+// isim kaybolmasın (#26). Geçersiz ya da liste doluysa listeyi olduğu gibi döndürür.
+export function taslakEkle(oyuncular: readonly string[], ad: string): string[] {
+  if (isimHatasi(ad) || !ekleyebilir(oyuncular)) return [...oyuncular];
+  return [...oyuncular, benzersizIsim(ad, oyuncular)];
+}
