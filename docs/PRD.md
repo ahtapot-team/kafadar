@@ -97,8 +97,8 @@ Birden fazla telefonla oynanır. Bir telefon oda kurar, diğerleri kodla kendi t
 
 ### Akış
 1. **Mod seçimi:** OK mu NOK mu'ya dokununca "Tek telefon / Oda kur / Odaya katıl" seçilir.
-2. **Oda kur:** İsim ve paket seçilir. Dev bir oda kodu ve QR gösterilir.
-3. **Odaya katıl:** Kod ve isim girilir.
+2. **Oda kur:** İsim ve paket seçilir. Dev, 6 haneli bir sayı kodu ve QR gösterilir.
+3. **Odaya katıl:** 6 haneli kod (sayı tuş takımıyla) ve isim girilir.
 4. **Lobi:** Katılanlar listeye düşer. Kuran kişi de oyuncudur ve "Başlat" yalnızca onda görünür.
 5. **Soru:** Herkesin telefonunda aynı soru, 15 sn geri sayım ve dev OK/NOK düğmeleri.
 6. **Bekleme:** "Cevabın alındı ✓ · 6/8 cevapladı" yazar. Herkes cevaplayınca ya da süre bitince sonraki soruya geçilir.
@@ -106,7 +106,7 @@ Birden fazla telefonla oynanır. Bir telefon oda kurar, diğerleri kodla kendi t
 
 ### Kabul kriterleri (oda modu)
 - [ ] KK-28: OK mu NOK mu'da "Tek telefon / Oda kur / Odaya katıl" seçimi vardır. Tek telefon modu değişmeden ve çevrimdışı çalışır; KK-16'daki uçak modu şartı yalnızca tek telefon modu için geçerlidir.
-- [ ] KK-29: Oda kurulunca 4 harfli bir kod (O, 0, I, 1 karakterleri kullanılmaz) ve aynı kodu açan bir QR gösterilir. Kod yalnızca açık bir oda için geçerlidir. Oda kapanınca kod artık kullanılamaz.
+- [ ] KK-29: Oda kurulunca yalnızca rakamlardan oluşan 6 haneli bir kod (ör. 482 913; okunurken 3+3 gruplanır) ve aynı kodu açan bir QR gösterilir. Kod girişinde sayı tuş takımı açılır. (Murat: "kod sadece sayı olsun", 27.10.2026; 6 hane pm önerisi, Metehan "herşeyi bitir" onayı) Kod yalnızca açık bir oda için geçerlidir. Oda kapanınca kod artık kullanılamaz.
 - [ ] KK-30: Katılan kişi kod ve isim girer. Kod yanlışsa, oda kapalıysa, oda doluysa ya da oyun başladıysa Türkçe ve net bir hata gösterilir. Aynı isim gelirse "Ali 2" kuralı (KK-4) uygulanır. Kod denemelerine hız sınırı vardır.
 - [ ] KK-31: Lobide katılanlar birkaç saniye içinde tüm telefonlarda görünür. Kuran kişi de oyuncudur. "Başlat" yalnızca kuranda görünür ve en az 2 oyuncuyla açılır. Odada en çok 12 oyuncu olur. Oyun başlayınca yeni katılım kapanır.
 - [ ] KK-32: Her soru tüm telefonlarda aynı sırada ve aynı anda açılır; soru sırasını sunucu belirler. Her telefonda soru metni, 15 sn geri sayım ve OK/NOK düğmeleri vardır. Süre sunucu saatine göre işler; telefon saatleri farklı olsa da süre her yerde aynı anda biter.
