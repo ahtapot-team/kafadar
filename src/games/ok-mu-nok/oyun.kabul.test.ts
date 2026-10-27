@@ -1,6 +1,6 @@
 import { describe, expect } from 'vitest';
 import type { Deste } from '../../core/deste';
-import { kabul } from '../../kabul';
+import { kabulOyun as kabul } from '../../kabul';
 import {
   type Durum,
   type Oduller,

@@ -1,8 +1,4 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-// QA iskeleti: imzalar kabul testleri içindir. Backend/frontend gerçekleştirir (KK-5, KK-14).
-// Oyundan bağımsızdır: durum türünü çağıran verir.
-
-const YOK = 'henüz yazılmadı';
+// Kayıt (KK-5, KK-14): oyundan bağımsız, sürümlü. Okunamayan ya da eski kayıt güvenle silinir.
 
 // AsyncStorage bu arayüze uyar; testte Map ile sahtelenir.
 export type Depo = {
@@ -15,35 +11,50 @@ export const OYUN_ANAHTARI = 'kafadar:oyun';
 export const EKIP_ANAHTARI = 'kafadar:son-ekip';
 export const KAYIT_SURUMU = 1;
 
-export async function sonEkipKaydet(
-  depo: Depo,
-  oyuncular: string[],
-): Promise<void> {
-  throw new Error(YOK);
-}
+export const sonEkipKaydet = (depo: Depo, oyuncular: string[]) =>
+  depo.setItem(EKIP_ANAHTARI, JSON.stringify(oyuncular));
 
 // Kayıt yoksa ya da bozuksa boş liste.
 export async function sonEkipOku(depo: Depo): Promise<string[]> {
-  throw new Error(YOK);
+  try {
+    const l: unknown = JSON.parse((await depo.getItem(EKIP_ANAHTARI)) ?? '[]');
+    return Array.isArray(l) && l.every((x) => typeof x === 'string') ? l : [];
+  } catch {
+    return [];
+  }
 }
 
-// OYUN_ANAHTARI altına { surum: KAYIT_SURUMU, durum } yazar.
-export async function oyunKaydet<S>(depo: Depo, durum: S): Promise<void> {
-  throw new Error(YOK);
-}
+export const oyunKaydet = <S>(depo: Depo, durum: S) =>
+  depo.setItem(OYUN_ANAHTARI, JSON.stringify({ surum: KAYIT_SURUMU, durum }));
 
-// Okunamayan ya da eski sürümlü kayıtta çökmez, kaydı siler ve null döner.
+// Kayıt yoksa null. Okunamayan ya da eski sürümlü kayıtta çökmez, kaydı siler ve null döner.
 export async function oyunOku<S>(depo: Depo): Promise<S | null> {
-  throw new Error(YOK);
+  try {
+    const ham = await depo.getItem(OYUN_ANAHTARI);
+    if (ham === null) return null;
+    const k: { surum?: unknown; durum?: unknown } | null = JSON.parse(ham);
+    if (
+      k &&
+      k.surum === KAYIT_SURUMU &&
+      k.durum != null &&
+      typeof k.durum === 'object'
+    )
+      return k.durum as S;
+  } catch {
+    // okunamayan kayıt: aşağıda silinir
+  }
+  await depo.removeItem(OYUN_ANAHTARI).catch(() => {});
+  return null;
 }
 
-// isle(durum, olay) çalıştırır, yeni durumu kaydeder ve döndürür.
-// "Her oydan ve her karttan sonra kaydedilir."
+// isle(durum, olay) çalıştırır, yeni durumu kaydeder ve döndürür ("her oydan ve karttan sonra").
 export async function isleKaydet<S, O>(
   depo: Depo,
   isle: (durum: S, olay: O) => S,
   durum: S,
   olay: O,
 ): Promise<S> {
-  throw new Error(YOK);
+  const yeni = isle(durum, olay);
+  await oyunKaydet(depo, yeni);
+  return yeni;
 }
