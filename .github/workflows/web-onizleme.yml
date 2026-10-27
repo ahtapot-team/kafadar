@@ -57,10 +57,10 @@ jobs:
       - name: Yayın dizinini güncelle
         run: |
           SITE="$RUNNER_TEMP/site"
+          touch "$SITE/.nojekyll"  # _expo/ klasörü Jekyll tarafından atlanmasın
           if [ "${{ github.event_name }}" = "push" ]; then
             find "$SITE" -mindepth 1 -maxdepth 1 ! -name .git ! -name pr -exec rm -rf {} +
             cp -r dist/. "$SITE/"
-            touch "$SITE/.nojekyll"
           elif [ "${{ github.event.action }}" = "closed" ]; then
             rm -rf "$SITE/pr/${{ github.event.number }}"
           else
