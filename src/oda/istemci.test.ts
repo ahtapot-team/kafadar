@@ -40,14 +40,14 @@ function kur() {
 }
 
 describe('oda istemcisi (#51)', () => {
-  it('oda kurulur: kod (4 harf) + kimlik gelir, kuran lobide görünür, Başlat yalnızca kuranda', async () => {
+  it('oda kurulur: kod (6 rakam) + kimlik gelir, kuran lobide görünür, Başlat yalnızca kuranda', async () => {
     const { istemci } = kur();
     const a = istemci();
     a.i.kur('Murat', 'arkadas');
     await akis();
     const d = a.i.durum;
     expect(d.baglanti).toBe('acik');
-    expect(d.kod).toMatch(/^[A-HJ-NP-Z2-9]{4}$/);
+    expect(d.kod).toMatch(/^\d{6}$/);
     expect(d.gorunum?.oyuncular.map((o) => o.ad)).toEqual(['Murat']);
     expect(d.gorunum?.baslatGorunur).toBe(true);
     expect(d.gorunum?.baslatAktif).toBe(false); // en az 2 oyuncu (KK-31)

@@ -85,16 +85,15 @@ export type Final = {
   ayniOlan: Record<string, number>; // oyuncu adı → çoğunlukla aynı olduğu soru sayısı ("7/10")
 };
 
-const HARFLER = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789'; // O, I, 0, 1 yok
 const DENEME_MAKS = 5; // KK-30: istemci başına dakikada 5 kod denemesi
 const DENEME_PENCERE_MS = 60_000;
 
-// 4 harfli kod; O, 0, I, 1 kullanılmaz (KK-29).
+// Oda kodu biçimi: tam 6 rakam (harf, boşluk, 5/7 hane geçersiz).
+export const kodGecerliMi = (kod: string) => /^\d{6}$/.test(kod);
+
+// 6 haneli rakam kodu: 000000–999999 (KK-29). Çakışma denetimi odayı kuran sunucudadır.
 export function kodUret(rng: () => number): string {
-  return Array.from(
-    { length: 4 },
-    () => HARFLER[Math.floor(rng() * HARFLER.length)],
-  ).join('');
+  return Array.from({ length: 6 }, () => Math.floor(rng() * 10)).join('');
 }
 
 // Yalnızca testler için yedek: tohumdan türetilir, TAHMİN EDİLEBİLİR. Sunucu her zaman kendi (crypto) kimliğini verir.

@@ -52,6 +52,7 @@ export default function Lobi() {
               flex: 1,
               aspectRatio: 1,
               maxHeight: 76,
+              marginLeft: i === 3 ? bosluk.m : 0, // 3+3 gruplu gösterim
               borderRadius: yaricap.cip,
               borderWidth: 3,
               borderColor: renk.kontur,

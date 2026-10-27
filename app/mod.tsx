@@ -27,7 +27,7 @@ export default function Mod() {
         etiket="Odaya katıl"
         onPress={() => router.push('/oda/katil')}
       />
-      <Yazi soluk>Arkadaşının 4 harfli kodu ile.</Yazi>
+      <Yazi soluk>Arkadaşının 6 haneli kodu ile.</Yazi>
       <Yazi tur="etiket" soluk>
         Oda modunda 10 soru, her biri 15 sn. Sonuçlar en sonda.
       </Yazi>
