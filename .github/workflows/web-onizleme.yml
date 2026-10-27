@@ -32,6 +32,7 @@ jobs:
         if: github.event.action != 'closed'
         env:
           EXPO_NO_TELEMETRY: '1'
+          EXPO_PUBLIC_ODA_SUNUCU: wss://kafadar-oda.kafadar.workers.dev/ws # oda modu sunucusu (herkese açık adres)
         run: |
           if [ "${{ github.event_name }}" = "push" ]; then
             export EXPO_BASE_URL=/${{ github.event.repository.name }}

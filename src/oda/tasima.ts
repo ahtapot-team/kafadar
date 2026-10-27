@@ -13,7 +13,9 @@ export type Tasima = {
 };
 
 // Bir bağlantı açar (komut `acilis` ile gider); açılınca dinleyici.acildi çağrılır. Sunucu önce 'tamam' ya da 'hata' gönderir.
+// `kimlik`: yalnızca 'don'da; taşıma bunu İLK mesaj olarak gönderir (adreste belirteç yok).
 export type TasimaUretici = (
   acilis: Acilis,
   dinleyici: TasimaDinleyici,
+  kimlik?: string,
 ) => Tasima;

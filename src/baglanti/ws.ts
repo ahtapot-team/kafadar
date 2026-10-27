@@ -2,7 +2,7 @@
 import type { TasimaUretici } from '../oda/tasima';
 
 export function wsTasima(adres: string): TasimaUretici {
-  return (acilis, d) => {
+  return (acilis, d, kimlik) => {
     const ws = new WebSocket(
       `${adres}?${new URLSearchParams(acilis).toString()}`,
     );
@@ -12,7 +12,11 @@ export function wsTasima(adres: string): TasimaUretici {
       kapali = true;
       d.kapandi();
     };
-    ws.onopen = () => d.acildi();
+    ws.onopen = () => {
+      if (acilis.islem === 'don')
+        ws.send(JSON.stringify({ t: 'kimlik', kimlik }));
+      d.acildi();
+    };
     ws.onmessage = (e) => {
       try {
         d.mesaj(JSON.parse(String(e.data)));

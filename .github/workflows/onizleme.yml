@@ -21,6 +21,7 @@ jobs:
     timeout-minutes: 15
     env:
       EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
+      EXPO_PUBLIC_ODA_SUNUCU: wss://kafadar-oda.kafadar.workers.dev/ws # oda modu sunucusu (herkese açık adres)
     steps:
       - uses: actions/checkout@v4
 

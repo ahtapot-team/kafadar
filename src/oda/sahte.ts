@@ -37,13 +37,13 @@ export class SahteSunucu {
     private desteler: Record<Paket, Deste>,
   ) {}
 
-  uret: TasimaUretici = (acilis, d) => {
+  uret: TasimaUretici = (acilis, d, kimlik) => {
     const b: Baglanti = { d };
     this.baglantilar.add(b);
     void Promise.resolve().then(() => {
       if (!this.baglantilar.has(b)) return;
       d.acildi();
-      this.ac(b, acilis);
+      this.ac(b, acilis, kimlik);
     });
     return {
       gonder: (m) => this.al(b, m),
@@ -109,14 +109,14 @@ export class SahteSunucu {
   }
 
   // Bağlanma komutu (kur/katil/don); hata gelirse hata çerçevesi gider ve soket kapanır (gerçek sunucu gibi).
-  private ac(b: Baglanti, a: Acilis) {
+  private ac(b: Baglanti, a: Acilis, kimlik?: string) {
     this.al(
       b,
       a.islem === 'kur'
         ? { t: 'kur', ad: a.ad, paket: a.paket }
         : a.islem === 'katil'
           ? { t: 'katil', kod: a.kod, ad: a.ad }
-          : { t: 'don', kod: a.kod, kimlik: a.kimlik },
+          : { t: 'don', kod: a.kod, kimlik: kimlik ?? '' },
     );
     if (!b.kimlik) {
       this.baglantilar.delete(b);
