@@ -1,0 +1,7 @@
+<script>
+  (function () {
+    var p = new URLSearchParams(location.search).get('p');
+    if (p !== null)
+      history.replaceState(null, '', location.pathname.replace(/\/$/, '') + p);
+  })();
+</script>
