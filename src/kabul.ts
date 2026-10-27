@@ -29,7 +29,7 @@ export const BEKLEYEN = {
   odaKimlik: false,
   casusMantik: false,
   casusUi: true,
-  casusKayit: true,
+  casusKayit: false,
   casusKayitUi: true,
 };
 

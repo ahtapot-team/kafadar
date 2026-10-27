@@ -256,3 +256,74 @@ export function sonuc(durum: CasusDurum): Sonuc {
     kartId: durum.kartlar.id,
   };
 }
+
+const nesne = (x: unknown): x is Record<string, unknown> =>
+  typeof x === 'object' && x !== null && !Array.isArray(x);
+const metinler = (x: unknown): x is string[] =>
+  Array.isArray(x) && x.every((s) => typeof s === 'string' && s !== '');
+const benzersiz = (a: string[]) => new Set(a).size === a.length;
+
+// Kayıttan okunan bilinmeyen veri geçerli bir CasusDurum mu (KK-14, KK-47)? Bozuk kayıt arayüzü çökertmez,
+// rol sızdırmaz: tutarsız her şey (olmayan oyuncu, taşan sıra, açık kart rol dışında…) reddedilir.
+export function durumGecerliMi(d: unknown): d is CasusDurum {
+  if (!nesne(d)) return false;
+  const asamalar = ['rol', 'tartisma', 'oylama', 'aciklama', 'tahmin', 'sonuc'];
+  if (!asamalar.includes(d.asama as string)) return false;
+  if (!metinler(d.oyuncular) || !benzersiz(d.oyuncular)) return false;
+  const o = d.oyuncular;
+  if (o.length < 1 || o.length > 12) return false;
+  const oyuncuMu = (s: unknown) => typeof s === 'string' && o.includes(s);
+
+  if (!metinler(d.casuslar) || !benzersiz(d.casuslar)) return false;
+  if (d.casuslar.length < 1 || d.casuslar.length > casusSiniri(o.length))
+    return false;
+  if (!d.casuslar.every(oyuncuMu)) return false;
+
+  const k = d.kartlar;
+  if (!nesne(k) || !metinler([k.id, k.kelime, k.ipucu])) return false;
+  if (!metinler(d.siklar) || !benzersiz(d.siklar)) return false;
+  if (d.siklar.length > 6 || !d.siklar.includes(k.kelime as string))
+    return false;
+
+  if (!oyuncuMu(d.baslayan)) return false;
+  if (
+    d.sureMs !== null &&
+    !(typeof d.sureMs === 'number' && Number.isFinite(d.sureMs) && d.sureMs > 0)
+  )
+    return false;
+
+  const rolde = d.asama === 'rol';
+  if (!Number.isInteger(d.sira)) return false;
+  const sira = d.sira as number;
+  if (sira < 0 || sira > o.length) return false;
+  if (rolde && sira >= o.length) return false;
+  const tartismaSonrasi = ['tartisma', 'oylama', 'aciklama', 'tahmin'].includes(
+    d.asama as string,
+  );
+  if (tartismaSonrasi && sira !== o.length) return false;
+  if (typeof d.acik !== 'boolean' || (d.acik && !rolde)) return false;
+  if (tartismaSonrasi) {
+    if (typeof d.tartismaBas !== 'number' || !Number.isFinite(d.tartismaBas))
+      return false;
+  } else if (d.tartismaBas !== null && typeof d.tartismaBas !== 'number')
+    return false;
+
+  if (d.tur !== 1 && d.tur !== 2) return false;
+  if (!metinler(d.adaylar) || !benzersiz(d.adaylar)) return false;
+  if (!d.adaylar.every(oyuncuMu)) return false;
+  if (d.asama === 'oylama' && d.adaylar.length < 2) return false;
+  if (!nesne(d.oylar)) return false;
+  for (const [veren, secilen] of Object.entries(d.oylar))
+    if (!oyuncuMu(veren) || !oyuncuMu(secilen) || veren === secilen)
+      return false;
+
+  if (d.secilen !== null && !oyuncuMu(d.secilen)) return false;
+  if ((d.asama === 'aciklama' || d.asama === 'tahmin') && d.secilen === null)
+    return false;
+  if (d.asama === 'tahmin' && !d.casuslar.includes(d.secilen as string))
+    return false;
+  if (d.kazanan !== null && d.kazanan !== 'casus' && d.kazanan !== 'grup')
+    return false;
+  if (d.asama !== 'sonuc' && d.kazanan !== null) return false;
+  return true;
+}
