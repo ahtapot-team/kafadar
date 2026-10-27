@@ -25,7 +25,7 @@ export const BEKLEYEN = {
   odaGuvenlik: false,
   odaDeploy: false,
   odaKimlik: false,
-  casusMantik: true,
+  casusMantik: false,
   casusUi: true,
 };
 

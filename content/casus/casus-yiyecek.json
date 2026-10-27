@@ -1,0 +1,521 @@
+{
+  "deck_id": "casus-yiyecek",
+  "version": 1,
+  "lang": "tr",
+  "sorular": [
+    "Bunu günün hangi saatinde yersin ya da içersin?",
+    "Sıcak mı, soğuk mu?",
+    "Evde mi yapılır, dışarıdan mı alınır?",
+    "Bunu en son ne zaman yedin ya da içtin?",
+    "Bunun yanına ne yakışır?",
+    "Tatlı mı, tuzlu mu?",
+    "Çocuklar sever mi?",
+    "Bunun için çatal gerekir mi?",
+    "Pahalı mı?",
+    "Özel günlerde olur mu?",
+    "Diyet yaparken tüketir misin?",
+    "Kokusu nasıldır?"
+  ],
+  "cards": [
+    {
+      "id": "casus-yiyecek-001",
+      "kelime": "Pizza",
+      "ipucu": "Dilim"
+    },
+    {
+      "id": "casus-yiyecek-002",
+      "kelime": "Lahmacun",
+      "ipucu": "İnce hamur"
+    },
+    {
+      "id": "casus-yiyecek-003",
+      "kelime": "Döner",
+      "ipucu": "Dürüm"
+    },
+    {
+      "id": "casus-yiyecek-004",
+      "kelime": "Mantı",
+      "ipucu": "Yoğurt"
+    },
+    {
+      "id": "casus-yiyecek-005",
+      "kelime": "Baklava",
+      "ipucu": "Şerbet"
+    },
+    {
+      "id": "casus-yiyecek-006",
+      "kelime": "Sushi",
+      "ipucu": "Yemek çubuğu"
+    },
+    {
+      "id": "casus-yiyecek-007",
+      "kelime": "Hamburger",
+      "ipucu": "Patates kızartması"
+    },
+    {
+      "id": "casus-yiyecek-008",
+      "kelime": "Menemen",
+      "ipucu": "Yumurta"
+    },
+    {
+      "id": "casus-yiyecek-009",
+      "kelime": "Simit",
+      "ipucu": "Susam"
+    },
+    {
+      "id": "casus-yiyecek-010",
+      "kelime": "Çay",
+      "ipucu": "İnce belli bardak"
+    },
+    {
+      "id": "casus-yiyecek-011",
+      "kelime": "Türk kahvesi",
+      "ipucu": "Fal"
+    },
+    {
+      "id": "casus-yiyecek-012",
+      "kelime": "Ayran",
+      "ipucu": "Köpük"
+    },
+    {
+      "id": "casus-yiyecek-013",
+      "kelime": "Dondurma",
+      "ipucu": "Külah"
+    },
+    {
+      "id": "casus-yiyecek-014",
+      "kelime": "Çikolata",
+      "ipucu": "Kakao"
+    },
+    {
+      "id": "casus-yiyecek-015",
+      "kelime": "Karpuz",
+      "ipucu": "Çekirdek"
+    },
+    {
+      "id": "casus-yiyecek-016",
+      "kelime": "Muz",
+      "ipucu": "Maymun"
+    },
+    {
+      "id": "casus-yiyecek-017",
+      "kelime": "Kokoreç",
+      "ipucu": "Bağırsak"
+    },
+    {
+      "id": "casus-yiyecek-018",
+      "kelime": "İskender",
+      "ipucu": "Tereyağı"
+    },
+    {
+      "id": "casus-yiyecek-019",
+      "kelime": "Kumpir",
+      "ipucu": "Patates"
+    },
+    {
+      "id": "casus-yiyecek-020",
+      "kelime": "Midye dolma",
+      "ipucu": "Limon"
+    },
+    {
+      "id": "casus-yiyecek-021",
+      "kelime": "Pilav",
+      "ipucu": "Pirinç"
+    },
+    {
+      "id": "casus-yiyecek-022",
+      "kelime": "Kuru fasulye",
+      "ipucu": "Pilav"
+    },
+    {
+      "id": "casus-yiyecek-023",
+      "kelime": "Çorba",
+      "ipucu": "Kaşık"
+    },
+    {
+      "id": "casus-yiyecek-024",
+      "kelime": "Pankek",
+      "ipucu": "Akçaağaç şurubu"
+    },
+    {
+      "id": "casus-yiyecek-025",
+      "kelime": "Patlamış mısır",
+      "ipucu": "Sinema"
+    },
+    {
+      "id": "casus-yiyecek-026",
+      "kelime": "Limonata",
+      "ipucu": "Ekşi"
+    },
+    {
+      "id": "casus-yiyecek-027",
+      "kelime": "Kola",
+      "ipucu": "Gazlı"
+    },
+    {
+      "id": "casus-yiyecek-028",
+      "kelime": "Su böreği",
+      "ipucu": "Kat kat"
+    },
+    {
+      "id": "casus-yiyecek-029",
+      "kelime": "Gözleme",
+      "ipucu": "Sac"
+    },
+    {
+      "id": "casus-yiyecek-030",
+      "kelime": "Köfte",
+      "ipucu": "Izgara"
+    },
+    {
+      "id": "casus-yiyecek-031",
+      "kelime": "Kebap",
+      "ipucu": "Şiş"
+    },
+    {
+      "id": "casus-yiyecek-032",
+      "kelime": "Tost",
+      "ipucu": "Kaşar"
+    },
+    {
+      "id": "casus-yiyecek-033",
+      "kelime": "Peynir",
+      "ipucu": "Kahvaltı"
+    },
+    {
+      "id": "casus-yiyecek-034",
+      "kelime": "Zeytin",
+      "ipucu": "Yeşil ve siyah"
+    },
+    {
+      "id": "casus-yiyecek-035",
+      "kelime": "Bal",
+      "ipucu": "Arı"
+    },
+    {
+      "id": "casus-yiyecek-036",
+      "kelime": "Reçel",
+      "ipucu": "Kavanoz"
+    },
+    {
+      "id": "casus-yiyecek-037",
+      "kelime": "Fındık",
+      "ipucu": "Karadeniz"
+    },
+    {
+      "id": "casus-yiyecek-038",
+      "kelime": "Lokum",
+      "ipucu": "Pudra şekeri"
+    },
+    {
+      "id": "casus-yiyecek-039",
+      "kelime": "Aşure",
+      "ipucu": "Komşuya dağıtmak"
+    },
+    {
+      "id": "casus-yiyecek-040",
+      "kelime": "Pide",
+      "ipucu": "Kayık"
+    },
+    {
+      "id": "casus-yiyecek-041",
+      "kelime": "Salata",
+      "ipucu": "Marul"
+    },
+    {
+      "id": "casus-yiyecek-042",
+      "kelime": "Makarna",
+      "ipucu": "Haşlamak"
+    },
+    {
+      "id": "casus-yiyecek-043",
+      "kelime": "Kek",
+      "ipucu": "Beş çayı"
+    },
+    {
+      "id": "casus-yiyecek-044",
+      "kelime": "Pasta",
+      "ipucu": "Mum"
+    },
+    {
+      "id": "casus-yiyecek-045",
+      "kelime": "Kurabiye",
+      "ipucu": "Süt ile"
+    },
+    {
+      "id": "casus-yiyecek-046",
+      "kelime": "Börek",
+      "ipucu": "Yufka"
+    },
+    {
+      "id": "casus-yiyecek-047",
+      "kelime": "Sucuk",
+      "ipucu": "Baharatlı"
+    },
+    {
+      "id": "casus-yiyecek-048",
+      "kelime": "Mısır",
+      "ipucu": "Koçan"
+    },
+    {
+      "id": "casus-yiyecek-049",
+      "kelime": "Kestane",
+      "ipucu": "Közde"
+    },
+    {
+      "id": "casus-yiyecek-050",
+      "kelime": "Portakal",
+      "ipucu": "C vitamini"
+    },
+    {
+      "id": "casus-yiyecek-051",
+      "kelime": "Çilek",
+      "ipucu": "Krema"
+    },
+    {
+      "id": "casus-yiyecek-052",
+      "kelime": "Elma",
+      "ipucu": "Newton"
+    },
+    {
+      "id": "casus-yiyecek-053",
+      "kelime": "Ekmek",
+      "ipucu": "Somun"
+    },
+    {
+      "id": "casus-yiyecek-054",
+      "kelime": "Boza",
+      "ipucu": "Leblebi"
+    },
+    {
+      "id": "casus-yiyecek-055",
+      "kelime": "Salep",
+      "ipucu": "Tarçın"
+    },
+    {
+      "id": "casus-yiyecek-056",
+      "kelime": "Waffle",
+      "ipucu": "Kare kare"
+    },
+    {
+      "id": "casus-yiyecek-057",
+      "kelime": "Hünkar beğendi",
+      "ipucu": "Patlıcan"
+    },
+    {
+      "id": "casus-yiyecek-058",
+      "kelime": "Karnıyarık",
+      "ipucu": "Kıyma"
+    },
+    {
+      "id": "casus-yiyecek-059",
+      "kelime": "İmam bayıldı",
+      "ipucu": "Zeytinyağlı"
+    },
+    {
+      "id": "casus-yiyecek-060",
+      "kelime": "Dolma",
+      "ipucu": "Asma yaprağı"
+    },
+    {
+      "id": "casus-yiyecek-061",
+      "kelime": "Çiğ köfte",
+      "ipucu": "Nar ekşisi"
+    },
+    {
+      "id": "casus-yiyecek-062",
+      "kelime": "Kısır",
+      "ipucu": "Bulgur"
+    },
+    {
+      "id": "casus-yiyecek-063",
+      "kelime": "Humus",
+      "ipucu": "Nohut"
+    },
+    {
+      "id": "casus-yiyecek-064",
+      "kelime": "Falafel",
+      "ipucu": "Tahin"
+    },
+    {
+      "id": "casus-yiyecek-065",
+      "kelime": "Tantuni",
+      "ipucu": "Mersin"
+    },
+    {
+      "id": "casus-yiyecek-066",
+      "kelime": "Pişmaniye",
+      "ipucu": "Pamuk gibi"
+    },
+    {
+      "id": "casus-yiyecek-067",
+      "kelime": "Künefe",
+      "ipucu": "Hatay"
+    },
+    {
+      "id": "casus-yiyecek-068",
+      "kelime": "Sütlaç",
+      "ipucu": "Fırında"
+    },
+    {
+      "id": "casus-yiyecek-069",
+      "kelime": "Kazandibi",
+      "ipucu": "Yanık"
+    },
+    {
+      "id": "casus-yiyecek-070",
+      "kelime": "Profiterol",
+      "ipucu": "Çikolata sosu"
+    },
+    {
+      "id": "casus-yiyecek-071",
+      "kelime": "Tiramisu",
+      "ipucu": "İtalyan tatlısı"
+    },
+    {
+      "id": "casus-yiyecek-072",
+      "kelime": "Krep",
+      "ipucu": "İnce"
+    },
+    {
+      "id": "casus-yiyecek-073",
+      "kelime": "Omlet",
+      "ipucu": "Tava"
+    },
+    {
+      "id": "casus-yiyecek-074",
+      "kelime": "Sahanda yumurta",
+      "ipucu": "Sarısı"
+    },
+    {
+      "id": "casus-yiyecek-075",
+      "kelime": "Sosisli sandviç",
+      "ipucu": "Hardal"
+    },
+    {
+      "id": "casus-yiyecek-076",
+      "kelime": "Tavuk kanat",
+      "ipucu": "Barbekü sos"
+    },
+    {
+      "id": "casus-yiyecek-077",
+      "kelime": "Balık ekmek",
+      "ipucu": "Eminönü"
+    },
+    {
+      "id": "casus-yiyecek-078",
+      "kelime": "Hamsi",
+      "ipucu": "Mısır unu"
+    },
+    {
+      "id": "casus-yiyecek-079",
+      "kelime": "Levrek",
+      "ipucu": "Kılçık"
+    },
+    {
+      "id": "casus-yiyecek-080",
+      "kelime": "Karides",
+      "ipucu": "Güveç"
+    },
+    {
+      "id": "casus-yiyecek-081",
+      "kelime": "Ahtapot",
+      "ipucu": "Vantuz"
+    },
+    {
+      "id": "casus-yiyecek-082",
+      "kelime": "Mercimek köftesi",
+      "ipucu": "Kırmızı"
+    },
+    {
+      "id": "casus-yiyecek-083",
+      "kelime": "Ezogelin",
+      "ipucu": "Kış akşamı"
+    },
+    {
+      "id": "casus-yiyecek-084",
+      "kelime": "Tarhana",
+      "ipucu": "Kurutmak"
+    },
+    {
+      "id": "casus-yiyecek-085",
+      "kelime": "Turşu",
+      "ipucu": "Sirke"
+    },
+    {
+      "id": "casus-yiyecek-086",
+      "kelime": "Kavun",
+      "ipucu": "Yaz akşamı"
+    },
+    {
+      "id": "casus-yiyecek-087",
+      "kelime": "Nar",
+      "ipucu": "Taneler"
+    },
+    {
+      "id": "casus-yiyecek-088",
+      "kelime": "Kiraz",
+      "ipucu": "Küpe"
+    },
+    {
+      "id": "casus-yiyecek-089",
+      "kelime": "Mandalina",
+      "ipucu": "Kolay soyulur"
+    },
+    {
+      "id": "casus-yiyecek-090",
+      "kelime": "Ananas",
+      "ipucu": "Tropikal"
+    },
+    {
+      "id": "casus-yiyecek-091",
+      "kelime": "Avokado",
+      "ipucu": "Büyük çekirdek"
+    },
+    {
+      "id": "casus-yiyecek-092",
+      "kelime": "Hindistan cevizi",
+      "ipucu": "Palmiye"
+    },
+    {
+      "id": "casus-yiyecek-093",
+      "kelime": "Pamuk şeker",
+      "ipucu": "Lunapark"
+    },
+    {
+      "id": "casus-yiyecek-094",
+      "kelime": "Gofret",
+      "ipucu": "Katlar"
+    },
+    {
+      "id": "casus-yiyecek-095",
+      "kelime": "Cips",
+      "ipucu": "Çıtır"
+    },
+    {
+      "id": "casus-yiyecek-096",
+      "kelime": "Ihlamur",
+      "ipucu": "Soğuk algınlığı"
+    },
+    {
+      "id": "casus-yiyecek-097",
+      "kelime": "Şalgam",
+      "ipucu": "Adana"
+    },
+    {
+      "id": "casus-yiyecek-098",
+      "kelime": "Soda",
+      "ipucu": "Kabarcık"
+    },
+    {
+      "id": "casus-yiyecek-099",
+      "kelime": "Espresso",
+      "ipucu": "Küçük fincan"
+    },
+    {
+      "id": "casus-yiyecek-100",
+      "kelime": "Milkshake",
+      "ipucu": "Pipet"
+    }
+  ]
+}

@@ -1,0 +1,521 @@
+{
+  "deck_id": "casus-meslekler",
+  "version": 1,
+  "lang": "tr",
+  "sorular": [
+    "Bu iş için üniversite okumak gerekir mi?",
+    "Bu kişi üniforma giyer mi?",
+    "Gece de çalışır mı?",
+    "Bu iş tehlikeli mi?",
+    "Bu kişiyle en son ne zaman karşılaştın?",
+    "Çocukken bu meslek hayalin miydi?",
+    "Bu iş masa başında mı, ayakta mı?",
+    "Bu kişi müşterilerle konuşur mu?",
+    "Bu işte hangi aleti kullanırsın?",
+    "Bu meslek iyi kazandırır mı?",
+    "Bu işi evden yapabilir misin?",
+    "Bu kişi hafta sonu çalışır mı?"
+  ],
+  "cards": [
+    {
+      "id": "casus-meslekler-001",
+      "kelime": "Doktor",
+      "ipucu": "Stetoskop"
+    },
+    {
+      "id": "casus-meslekler-002",
+      "kelime": "Öğretmen",
+      "ipucu": "Karne"
+    },
+    {
+      "id": "casus-meslekler-003",
+      "kelime": "Aşçı",
+      "ipucu": "Mutfak"
+    },
+    {
+      "id": "casus-meslekler-004",
+      "kelime": "Pilot",
+      "ipucu": "Kokpit"
+    },
+    {
+      "id": "casus-meslekler-005",
+      "kelime": "Polis",
+      "ipucu": "Kelepçe"
+    },
+    {
+      "id": "casus-meslekler-006",
+      "kelime": "İtfaiyeci",
+      "ipucu": "Yangın"
+    },
+    {
+      "id": "casus-meslekler-007",
+      "kelime": "Diş hekimi",
+      "ipucu": "Dolgu"
+    },
+    {
+      "id": "casus-meslekler-008",
+      "kelime": "Avukat",
+      "ipucu": "Mahkeme"
+    },
+    {
+      "id": "casus-meslekler-009",
+      "kelime": "Hakim",
+      "ipucu": "Tokmak"
+    },
+    {
+      "id": "casus-meslekler-010",
+      "kelime": "Garson",
+      "ipucu": "Bahşiş"
+    },
+    {
+      "id": "casus-meslekler-011",
+      "kelime": "Berber",
+      "ipucu": "Tıraş"
+    },
+    {
+      "id": "casus-meslekler-012",
+      "kelime": "Futbolcu",
+      "ipucu": "Forma"
+    },
+    {
+      "id": "casus-meslekler-013",
+      "kelime": "Şarkıcı",
+      "ipucu": "Mikrofon"
+    },
+    {
+      "id": "casus-meslekler-014",
+      "kelime": "Oyuncu",
+      "ipucu": "Senaryo"
+    },
+    {
+      "id": "casus-meslekler-015",
+      "kelime": "Yazılımcı",
+      "ipucu": "Bilgisayar"
+    },
+    {
+      "id": "casus-meslekler-016",
+      "kelime": "Mimar",
+      "ipucu": "Proje çizimi"
+    },
+    {
+      "id": "casus-meslekler-017",
+      "kelime": "Mühendis",
+      "ipucu": "Baret"
+    },
+    {
+      "id": "casus-meslekler-018",
+      "kelime": "Hemşire",
+      "ipucu": "İğne"
+    },
+    {
+      "id": "casus-meslekler-019",
+      "kelime": "Veteriner",
+      "ipucu": "Hayvanlar"
+    },
+    {
+      "id": "casus-meslekler-020",
+      "kelime": "Eczacı",
+      "ipucu": "İlaç"
+    },
+    {
+      "id": "casus-meslekler-021",
+      "kelime": "Kasap",
+      "ipucu": "Satır"
+    },
+    {
+      "id": "casus-meslekler-022",
+      "kelime": "Fırıncı",
+      "ipucu": "Hamur"
+    },
+    {
+      "id": "casus-meslekler-023",
+      "kelime": "Çiftçi",
+      "ipucu": "Traktör"
+    },
+    {
+      "id": "casus-meslekler-024",
+      "kelime": "Balıkçı",
+      "ipucu": "Olta"
+    },
+    {
+      "id": "casus-meslekler-025",
+      "kelime": "Postacı",
+      "ipucu": "Zarf"
+    },
+    {
+      "id": "casus-meslekler-026",
+      "kelime": "Kurye",
+      "ipucu": "Paket"
+    },
+    {
+      "id": "casus-meslekler-027",
+      "kelime": "Taksici",
+      "ipucu": "Sarı araç"
+    },
+    {
+      "id": "casus-meslekler-028",
+      "kelime": "Astronot",
+      "ipucu": "Uzay"
+    },
+    {
+      "id": "casus-meslekler-029",
+      "kelime": "Fotoğrafçı",
+      "ipucu": "Deklanşör"
+    },
+    {
+      "id": "casus-meslekler-030",
+      "kelime": "Gazeteci",
+      "ipucu": "Haber"
+    },
+    {
+      "id": "casus-meslekler-031",
+      "kelime": "Ressam",
+      "ipucu": "Tuval"
+    },
+    {
+      "id": "casus-meslekler-032",
+      "kelime": "Terzi",
+      "ipucu": "Dikiş makinesi"
+    },
+    {
+      "id": "casus-meslekler-033",
+      "kelime": "Tesisatçı",
+      "ipucu": "Su kaçağı"
+    },
+    {
+      "id": "casus-meslekler-034",
+      "kelime": "Elektrikçi",
+      "ipucu": "Kablo"
+    },
+    {
+      "id": "casus-meslekler-035",
+      "kelime": "Marangoz",
+      "ipucu": "Tahta"
+    },
+    {
+      "id": "casus-meslekler-036",
+      "kelime": "Kuaför",
+      "ipucu": "Saç boyası"
+    },
+    {
+      "id": "casus-meslekler-037",
+      "kelime": "Psikolog",
+      "ipucu": "Terapi"
+    },
+    {
+      "id": "casus-meslekler-038",
+      "kelime": "Dedektif",
+      "ipucu": "Büyüteç"
+    },
+    {
+      "id": "casus-meslekler-039",
+      "kelime": "Sihirbaz",
+      "ipucu": "Şapkadan tavşan"
+    },
+    {
+      "id": "casus-meslekler-040",
+      "kelime": "Palyaço",
+      "ipucu": "Kırmızı burun"
+    },
+    {
+      "id": "casus-meslekler-041",
+      "kelime": "Cankurtaran",
+      "ipucu": "Havuz kenarı"
+    },
+    {
+      "id": "casus-meslekler-042",
+      "kelime": "Kabin memuru",
+      "ipucu": "İkram arabası"
+    },
+    {
+      "id": "casus-meslekler-043",
+      "kelime": "Kaptan",
+      "ipucu": "Dümen"
+    },
+    {
+      "id": "casus-meslekler-044",
+      "kelime": "Asker",
+      "ipucu": "Üniforma"
+    },
+    {
+      "id": "casus-meslekler-045",
+      "kelime": "Bilim insanı",
+      "ipucu": "Laboratuvar"
+    },
+    {
+      "id": "casus-meslekler-046",
+      "kelime": "Arkeolog",
+      "ipucu": "Kazı"
+    },
+    {
+      "id": "casus-meslekler-047",
+      "kelime": "Kütüphaneci",
+      "ipucu": "Raf"
+    },
+    {
+      "id": "casus-meslekler-048",
+      "kelime": "Bankacı",
+      "ipucu": "Kredi"
+    },
+    {
+      "id": "casus-meslekler-049",
+      "kelime": "Muhasebeci",
+      "ipucu": "Fatura"
+    },
+    {
+      "id": "casus-meslekler-050",
+      "kelime": "Youtuber",
+      "ipucu": "Abone ol"
+    },
+    {
+      "id": "casus-meslekler-051",
+      "kelime": "Moda tasarımcısı",
+      "ipucu": "Defile"
+    },
+    {
+      "id": "casus-meslekler-052",
+      "kelime": "DJ",
+      "ipucu": "Plak"
+    },
+    {
+      "id": "casus-meslekler-053",
+      "kelime": "Bahçıvan",
+      "ipucu": "Budama makası"
+    },
+    {
+      "id": "casus-meslekler-054",
+      "kelime": "Temizlik görevlisi",
+      "ipucu": "Paspas"
+    },
+    {
+      "id": "casus-meslekler-055",
+      "kelime": "Güvenlik görevlisi",
+      "ipucu": "Telsiz"
+    },
+    {
+      "id": "casus-meslekler-056",
+      "kelime": "Tercüman",
+      "ipucu": "İki dil"
+    },
+    {
+      "id": "casus-meslekler-057",
+      "kelime": "Pastacı",
+      "ipucu": "Krema torbası"
+    },
+    {
+      "id": "casus-meslekler-058",
+      "kelime": "Barista",
+      "ipucu": "Latte sanatı"
+    },
+    {
+      "id": "casus-meslekler-059",
+      "kelime": "Kasiyer",
+      "ipucu": "Barkod"
+    },
+    {
+      "id": "casus-meslekler-060",
+      "kelime": "Emlakçı",
+      "ipucu": "Kiralık"
+    },
+    {
+      "id": "casus-meslekler-061",
+      "kelime": "Noter",
+      "ipucu": "Mühür"
+    },
+    {
+      "id": "casus-meslekler-062",
+      "kelime": "Diyetisyen",
+      "ipucu": "Kalori"
+    },
+    {
+      "id": "casus-meslekler-063",
+      "kelime": "Fizyoterapist",
+      "ipucu": "Egzersiz bandı"
+    },
+    {
+      "id": "casus-meslekler-064",
+      "kelime": "Optisyen",
+      "ipucu": "Gözlük camı"
+    },
+    {
+      "id": "casus-meslekler-065",
+      "kelime": "Cerrah",
+      "ipucu": "Neşter"
+    },
+    {
+      "id": "casus-meslekler-066",
+      "kelime": "Ebe",
+      "ipucu": "Doğum"
+    },
+    {
+      "id": "casus-meslekler-067",
+      "kelime": "Otobüs şoförü",
+      "ipucu": "Durak"
+    },
+    {
+      "id": "casus-meslekler-068",
+      "kelime": "Kamyoncu",
+      "ipucu": "Uzun yol"
+    },
+    {
+      "id": "casus-meslekler-069",
+      "kelime": "Makinist",
+      "ipucu": "Ray"
+    },
+    {
+      "id": "casus-meslekler-070",
+      "kelime": "Tamirci",
+      "ipucu": "İngiliz anahtarı"
+    },
+    {
+      "id": "casus-meslekler-071",
+      "kelime": "Boyacı",
+      "ipucu": "Rulo fırça"
+    },
+    {
+      "id": "casus-meslekler-072",
+      "kelime": "Duvar ustası",
+      "ipucu": "Tuğla"
+    },
+    {
+      "id": "casus-meslekler-073",
+      "kelime": "Çilingir",
+      "ipucu": "Kilit"
+    },
+    {
+      "id": "casus-meslekler-074",
+      "kelime": "Saatçi",
+      "ipucu": "Akrep ve yelkovan"
+    },
+    {
+      "id": "casus-meslekler-075",
+      "kelime": "Kuyumcu",
+      "ipucu": "Pırlanta"
+    },
+    {
+      "id": "casus-meslekler-076",
+      "kelime": "Grafik tasarımcı",
+      "ipucu": "Logo"
+    },
+    {
+      "id": "casus-meslekler-077",
+      "kelime": "Editör",
+      "ipucu": "Düzeltme"
+    },
+    {
+      "id": "casus-meslekler-078",
+      "kelime": "Yazar",
+      "ipucu": "Roman"
+    },
+    {
+      "id": "casus-meslekler-079",
+      "kelime": "Şair",
+      "ipucu": "Dize"
+    },
+    {
+      "id": "casus-meslekler-080",
+      "kelime": "Yönetmen",
+      "ipucu": "Set"
+    },
+    {
+      "id": "casus-meslekler-081",
+      "kelime": "Kameraman",
+      "ipucu": "Çekim"
+    },
+    {
+      "id": "casus-meslekler-082",
+      "kelime": "Sunucu",
+      "ipucu": "Canlı yayın"
+    },
+    {
+      "id": "casus-meslekler-083",
+      "kelime": "Dansçı",
+      "ipucu": "Koreografi"
+    },
+    {
+      "id": "casus-meslekler-084",
+      "kelime": "Davulcu",
+      "ipucu": "Baget"
+    },
+    {
+      "id": "casus-meslekler-085",
+      "kelime": "Orkestra şefi",
+      "ipucu": "Baton"
+    },
+    {
+      "id": "casus-meslekler-086",
+      "kelime": "Antrenör",
+      "ipucu": "Taktik tahtası"
+    },
+    {
+      "id": "casus-meslekler-087",
+      "kelime": "Hakem",
+      "ipucu": "Kırmızı kart"
+    },
+    {
+      "id": "casus-meslekler-088",
+      "kelime": "Jokey",
+      "ipucu": "At"
+    },
+    {
+      "id": "casus-meslekler-089",
+      "kelime": "Dalgıç",
+      "ipucu": "Oksijen tüpü"
+    },
+    {
+      "id": "casus-meslekler-090",
+      "kelime": "Hava trafik kontrolörü",
+      "ipucu": "Kule"
+    },
+    {
+      "id": "casus-meslekler-091",
+      "kelime": "Diplomat",
+      "ipucu": "Büyükelçilik"
+    },
+    {
+      "id": "casus-meslekler-092",
+      "kelime": "Muhtar",
+      "ipucu": "Mahalle"
+    },
+    {
+      "id": "casus-meslekler-093",
+      "kelime": "Profesör",
+      "ipucu": "Kürsü"
+    },
+    {
+      "id": "casus-meslekler-094",
+      "kelime": "Meteorolog",
+      "ipucu": "Hava durumu"
+    },
+    {
+      "id": "casus-meslekler-095",
+      "kelime": "Jeolog",
+      "ipucu": "Deprem"
+    },
+    {
+      "id": "casus-meslekler-096",
+      "kelime": "Astronom",
+      "ipucu": "Gezegen"
+    },
+    {
+      "id": "casus-meslekler-097",
+      "kelime": "Oyun geliştirici",
+      "ipucu": "Seviye tasarımı"
+    },
+    {
+      "id": "casus-meslekler-098",
+      "kelime": "Animatör",
+      "ipucu": "Otel eğlencesi"
+    },
+    {
+      "id": "casus-meslekler-099",
+      "kelime": "Rehber",
+      "ipucu": "Turist"
+    },
+    {
+      "id": "casus-meslekler-100",
+      "kelime": "Çoban",
+      "ipucu": "Sürü"
+    }
+  ]
+}
