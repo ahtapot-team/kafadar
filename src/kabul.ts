@@ -20,8 +20,8 @@ export const BEKLEYEN = {
   cila: false,
   oda: true,
   odaMantik: false,
-  odaGuvenlik: true,
-  odaDeploy: true,
+  odaGuvenlik: false,
+  odaDeploy: false,
 };
 
 export const kabul = BEKLEYEN.cekirdek ? it.fails : it;

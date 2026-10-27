@@ -35,3 +35,14 @@ exp://u.expo.dev/4172ae7b-3cdd-4faf-b89b-c8c1266ebe56?channel-name=main&runtime-
 ```
 
 Web önizleme: https://metehantopalhan.github.io/kafadar/
+
+## Oda sunucusu (Cloudflare Worker + Durable Objects)
+
+`sunucu/` içinde; kurallar `src/oda/oda.ts`'te (saf), sunucu yalnızca ince kabuk. main'e her merge'de `.github/workflows/sunucu.yml` dağıtır (secret'lar: `CLOUDFLARE_API_TOKEN`, `CLOUDFLARE_ACCOUNT_ID`). Protokol: `sunucu/src/index.ts` başındaki açıklama.
+
+Yerelde deneme (ağ üzerinden N istemci, 2–12):
+
+```
+cd sunucu && npx wrangler dev --port 8787      # bir terminalde
+npm run sunucu:test -- http://127.0.0.1:8787 12  # diğerinde
+```
