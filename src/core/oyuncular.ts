@@ -1,38 +1,39 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-// QA iskeleti: imzalar kabul testleri içindir. Backend/frontend gerçekleştirir.
-// Oyuncu kimliği = isim (isimler benzersizdir, KK-4).
-
-const YOK = 'henüz yazılmadı';
-
+// Oyuncu kuralları (KK-3, KK-4). Saf fonksiyonlar, arayüzden bağımsız.
 export const OYUNCU_MIN = 2;
 export const OYUNCU_MAKS = 12;
 export const ISIM_MAKS = 16;
 
-// Baştaki/sondaki boşlukları kırpar.
-export function isimDuzelt(ad: string): string {
-  throw new Error(YOK);
-}
+export const isimDuzelt = (ad: string) => ad.trim();
 
-// Kırpılmış isim boşsa ya da ISIM_MAKS karakterden uzunsa Türkçe mesaj, değilse null.
-// Emoji tek karakter sayılır.
+// Geçerliyse null, değilse Türkçe hata mesajı.
 export function isimHatasi(ad: string): string | null {
-  throw new Error(YOK);
+  const temiz = isimDuzelt(ad);
+  if (!temiz) return 'İsim boş olamaz';
+  if ([...temiz].length > ISIM_MAKS)
+    return `İsim en çok ${ISIM_MAKS} karakter olabilir`;
+  return null;
 }
 
-// İsim mevcutsa "Ali 2", "Ali 3" önerir; değilse (kırpılmış) adı aynen döndürür.
-export function benzersizIsim(ad: string, mevcut: string[]): string {
-  throw new Error(YOK);
+const ayniMi = (a: string, b: string) =>
+  a.toLocaleLowerCase('tr') === b.toLocaleLowerCase('tr');
+
+// Aynı isim varsa "Ali 2", "Ali 3"… önerir.
+export function benzersizIsim(ad: string, mevcut: readonly string[]): string {
+  const temiz = isimDuzelt(ad);
+  let aday = temiz;
+  for (let n = 2; mevcut.some((m) => ayniMi(m, aday)); n++)
+    aday = `${temiz} ${n}`;
+  return aday;
 }
 
-// 2'nin altında tamam=false ve neden yazılıdır.
-export function baslayabilir(oyuncular: string[]): {
+export const ekleyebilir = (oyuncular: readonly string[]) =>
+  oyuncular.length < OYUNCU_MAKS;
+
+export function baslayabilir(oyuncular: readonly string[]): {
   tamam: boolean;
   neden?: string;
 } {
-  throw new Error(YOK);
-}
-
-// 12 oyuncuda false (ekleme alanı gizlenir).
-export function ekleyebilir(oyuncular: string[]): boolean {
-  throw new Error(YOK);
+  if (oyuncular.length < OYUNCU_MIN)
+    return { tamam: false, neden: `En az ${OYUNCU_MIN} oyuncu gerekli` };
+  return { tamam: true };
 }

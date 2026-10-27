@@ -1,7 +1,7 @@
 # Kabul testleri: KK → test eşlemesi (#5)
 
 Çalıştırma: `npm run kabul` (CI'da ayrı adım). `npm test` yalnızca birim testleri koşar.
-Bekleyen testler `src/kabul.ts` içindeki `BEKLEYEN = true` bayrağıyla `it.fails` olarak işaretlidir (kırmızı = beklenen, CI kırılmaz).
+Bekleyen testler `src/kabul.ts` içindeki `BEKLEYEN` bayraklarıyla (`cekirdek` = #6, `oyun` = #7) `it.fails` olarak işaretlidir (kırmızı = beklenen, CI kırılmaz).
 **Geliştirici testleri yeşile çevirince `BEKLEYEN = false` yapar.** Bayrak açıkken geçen test CI'ı kırar. Kabul testlerini silmek, atlamak ya da gevşetmek yasaktır.
 
 ## Arayüz sözleşmesi (imzalar iskelet dosyalarda)
