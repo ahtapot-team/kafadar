@@ -50,7 +50,6 @@ function OyDugmesi({
         backgroundColor: secili ? dolgu : renk.yuzey,
         alignItems: 'center',
         justifyContent: 'center',
-        transform: [{ scale: secili ? 1 : 0.96 }],
       }}
     >
       <Yazi

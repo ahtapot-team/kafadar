@@ -1,6 +1,6 @@
 // OK mu NOK mu ekranı: saf durum makinesini (src/games/ok-mu-nok/oyun.ts) ekranlara bağlar ve her olaydan sonra kaydeder (KK-14).
 import { useCallback, useEffect, useRef, useState } from 'react';
-import { oyunKaydet, oyunOku } from '../../core/kayit';
+import { OYUN_ANAHTARI, oyunKaydet, oyunOku } from '../../core/kayit';
 import { depo } from '../../depo';
 import { paketler } from '../../desteler';
 import { useDurum } from '../../durum';
@@ -45,7 +45,11 @@ export default function OkMuNokEkrani({
     const yeni = isle(ref.current, olay);
     ref.current = yeni;
     setDurum(yeni);
-    oyunKaydet(depo, yeni).catch(() => {});
+    // Biten oyun "yarım oyun" olarak kalmasın (KK-14).
+    (yeni.asama === 'bitti'
+      ? depo.removeItem(OYUN_ANAHTARI)
+      : oyunKaydet(depo, yeni)
+    ).catch(() => {});
   }, []);
 
   const baslat = useCallback(
