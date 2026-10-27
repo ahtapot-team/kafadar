@@ -138,13 +138,17 @@ export class OdaIstemci {
     this.ayarla({ baglanti: odada ? 'yeniden' : 'baglaniyor', hata: null });
     const { kod, kimlik } = this.d;
     const acilis: Acilis | null =
-      kimlik && kod ? { islem: 'don', kod, kimlik } : this.ilk;
+      kimlik && kod ? { islem: 'don', kod } : this.ilk;
     if (!acilis) return;
-    this.tasima = this.a.uret(acilis, {
-      acildi: () => {}, // sunucu önce 'tamam' ya da 'hata' gönderir
-      mesaj: (m) => this.geldi(m),
-      kapandi: () => this.koptu(),
-    });
+    this.tasima = this.a.uret(
+      acilis,
+      {
+        acildi: () => {}, // sunucu önce 'tamam' ya da 'hata' gönderir
+        mesaj: (m) => this.geldi(m),
+        kapandi: () => this.koptu(),
+      },
+      kimlik ?? undefined, // 'don'da belirteç ilk mesajda gider
+    );
   }
 
   private geldi(m: Sunucu) {

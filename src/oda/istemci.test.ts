@@ -174,10 +174,13 @@ describe('oda istemcisi (#51)', () => {
 // QA (#66 incelemesi): geçici hata, ön plana dönüş ve final davranışı. Sahte sunucu yerine elle sürülen taşıma.
 describe('oda istemcisi: dayanıklılık', () => {
   const eldenTasima = () => {
-    const bagler: { acilis: unknown; d: import('./tasima').TasimaDinleyici }[] =
-      [];
-    const uret: import('./tasima').TasimaUretici = (acilis, d) => {
-      bagler.push({ acilis, d });
+    const bagler: {
+      acilis: unknown;
+      d: import('./tasima').TasimaDinleyici;
+      kimlik?: string;
+    }[] = [];
+    const uret: import('./tasima').TasimaUretici = (acilis, d, kimlik) => {
+      bagler.push({ acilis, d, kimlik });
       return { gonder: () => {}, kapat: () => {} };
     };
     const depo = depoYap();
@@ -221,11 +224,8 @@ describe('oda istemcisi: dayanıklılık', () => {
     t.bagler.at(-1)!.d.kapandi(); // koptu
     expect(t.i.durum.baglanti).toBe('yeniden');
     t.planli.splice(0).forEach((f) => f()); // yeniden dene → 'don'
-    expect(t.bagler.at(-1)!.acilis).toEqual({
-      islem: 'don',
-      kod: 'ABCD',
-      kimlik: 'k1',
-    });
+    expect(t.bagler.at(-1)!.acilis).toEqual({ islem: 'don', kod: 'ABCD' });
+    expect(t.bagler.at(-1)!.kimlik).toBe('k1'); // belirteç adreste değil, taşımaya ayrı verilir
     t.bagler.at(-1)!.d.mesaj({
       t: 'hata',
       hata: { kod: 'cok-deneme', mesaj: 'Çok fazla deneme.' },
@@ -250,10 +250,8 @@ describe('oda istemcisi: dayanıklılık', () => {
     const once = t.bagler.length;
     t.i.onPlana();
     expect(t.bagler.length).toBe(once + 1);
-    expect(t.bagler.at(-1)!.acilis).toMatchObject({
-      islem: 'don',
-      kimlik: 'k1',
-    });
+    expect(t.bagler.at(-1)!.acilis).toMatchObject({ islem: 'don' });
+    expect(t.bagler.at(-1)!.kimlik).toBe('k1');
   });
 
   it('final gösterilirken yeniden bağlanma yok, final silinmez', async () => {

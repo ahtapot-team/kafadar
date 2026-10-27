@@ -2,11 +2,9 @@
 import type { TasimaUretici } from '../oda/tasima';
 
 export function wsTasima(adres: string): TasimaUretici {
-  return (acilis, d) => {
-    // 'don': belirteç adreste değil, ilk istemci mesajında gider (adres/log sızıntısı olmasın).
-    const { kimlik, ...sorgu } = acilis as typeof acilis & { kimlik?: string };
+  return (acilis, d, kimlik) => {
     const ws = new WebSocket(
-      `${adres}?${new URLSearchParams(sorgu).toString()}`,
+      `${adres}?${new URLSearchParams(acilis).toString()}`,
     );
     let kapali = false;
     const bitir = () => {

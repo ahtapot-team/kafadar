@@ -8,11 +8,14 @@ export type Paket = 'arkadas' | 'cift' | 'aile';
 export type Acilis =
   | { islem: 'kur'; ad: string; paket: Paket }
   | { islem: 'katil'; kod: string; ad: string }
-  | { islem: 'don'; kod: string; kimlik: Kimlik }; // yeniden bağlanma (KK-37)
+  | { islem: 'don'; kod: string }; // yeniden bağlanma (KK-37); belirteç adreste değil, ilk mesajda gider
 
 // Bağlantı kurulduktan sonra istemciden giden mesajlar.
 export type Istemci =
-  { t: 'baslat' } | { t: 'cevapla'; oy: Oy } | { t: 'ayril' };
+  | { t: 'kimlik'; kimlik: Kimlik } // 'don' bağlantısının İLK mesajı: belirteç adrese konmaz (günlüklere sızmasın)
+  | { t: 'baslat' }
+  | { t: 'cevapla'; oy: Oy }
+  | { t: 'ayril' };
 
 // 'cok-deneme': kod denemesi hız sınırı (KK-30). 'baglanti': istemci tarafı (sunucuya ulaşılamadı).
 export type OdaHata = {
