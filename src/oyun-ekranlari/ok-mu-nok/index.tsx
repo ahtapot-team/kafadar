@@ -7,6 +7,7 @@ import { useDurum } from '../../durum';
 import {
   type Durum,
   type Olay,
+  durumGecerliMi,
   gecerliKart,
   gosterAktif,
   isle,
@@ -66,14 +67,15 @@ export default function OkMuNokEkrani({
   // Açılışta: kayıtlı yarım oyun varsa devam, yoksa yeni oyun.
   useEffect(() => {
     let iptal = false;
-    oyunOku<Durum>(depo).then((kayit) => {
+    oyunOku<Durum>(depo, durumGecerliMi).then((kayit) => {
       if (iptal) return;
       if (kayit) {
         ref.current = kayit;
         setDurum(kayit);
         setTanitilan(kayit.tamamlanan);
         oyunculariAyarla(kayit.oyuncular);
-      } else baslat(ekip);
+      } else if (ekip.length >= 2) baslat(ekip);
+      else onAnaMenu(); // bozuk kayıt silindi, oyuncu listesi yok: ana ekrana dön (#27)
     });
     return () => {
       iptal = true;
