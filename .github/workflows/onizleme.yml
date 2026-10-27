@@ -4,6 +4,8 @@ name: Önizleme
 
 on:
   pull_request:
+  push:
+    branches: [main]
 
 permissions:
   contents: read
@@ -41,6 +43,11 @@ jobs:
         if: env.EXPO_TOKEN != ''
 
       - uses: expo/expo-github-action/preview@v8
-        if: env.EXPO_TOKEN != ''
+        if: env.EXPO_TOKEN != '' && github.event_name == 'pull_request'
         with:
           command: eas update --auto
+
+      # main'e her push'ta son main yayınlanır: kalıcı Expo Go linki README'de.
+      - name: main için EAS Update
+        if: env.EXPO_TOKEN != '' && github.event_name == 'push'
+        run: eas update --channel main --message "main ${GITHUB_SHA::7}" --non-interactive
