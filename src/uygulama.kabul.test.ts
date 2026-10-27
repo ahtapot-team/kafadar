@@ -1,7 +1,7 @@
 import { readdirSync, readFileSync } from 'node:fs';
 import { describe, expect, it } from 'vitest';
 import { desteHatalari } from './core/deste';
-import { kabul } from './kabul';
+import { kabul, kabulKk25 } from './kabul';
 import { oyunlar } from './games/registry';
 
 describe('KK-1: ana ekran oyun listesi', () => {
@@ -68,4 +68,21 @@ describe('KK-22: oyun mantığı arayüzden ayrı', () => {
       expect(icerik, f).not.toMatch(/from ['"](react|react-native|expo)/);
     }
   });
+});
+
+describe('KK-25: kart metni oy girişinde ve açıklamada görünür kalır', () => {
+  // Arayüz test aracı yok (Semih 1C): ekranların kart metnini göstermesi kaynak düzeyinde
+  // korunur; gerçek görünüm ve boyut (≥16pt) önizlemede ve cihaz listesinde doğrulanır.
+  for (const dosya of ['oy', 'acik']) {
+    kabulKk25(
+      `${dosya}.tsx kart metnini testID="kart-metni" ile gösterir`,
+      () => {
+        const icerik = readFileSync(
+          new URL(`./oyun-ekranlari/ok-mu-nok/${dosya}.tsx`, import.meta.url),
+          'utf8',
+        );
+        expect(icerik).toMatch(/testID="kart-metni"/);
+      },
+    );
+  }
 });
