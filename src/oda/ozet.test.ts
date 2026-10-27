@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { erkenBitti, kisisel, okYuzde, tartismali } from './ozet';
+import { ayrilanlar, erkenBitti, kisisel, okYuzde, tartismali } from './ozet';
 import type { Final } from './oda';
 
 const f: Final = {
@@ -46,5 +46,19 @@ describe('oda final özetleri (KK-36)', () => {
     expect(
       erkenBitti({ ...f, yuzdeler: Array(10).fill(f.yuzdeler[0]) }, 10),
     ).toBe(false);
+  });
+});
+
+describe('odadan ayrılanlar (#73)', () => {
+  it('önceki listede olup yenisinde olmayanlar ayrılmıştır', () => {
+    expect(ayrilanlar(['Ali', 'Ayşe', 'Can'], ['Ali', 'Can'])).toEqual([
+      'Ayşe',
+    ]);
+    expect(ayrilanlar(['Ali', 'Ayşe'], ['Ali', 'Ayşe'])).toEqual([]);
+    expect(ayrilanlar([], ['Ali'])).toEqual([]);
+    expect(ayrilanlar(['Ali', 'Ayşe', 'Can'], ['Can'])).toEqual([
+      'Ali',
+      'Ayşe',
+    ]);
   });
 });

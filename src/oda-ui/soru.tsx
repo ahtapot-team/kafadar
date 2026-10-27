@@ -77,9 +77,11 @@ function Dev({
 export function SoruEkrani({
   durum,
   onOyla,
+  onCik,
 }: {
   durum: IstemciDurumu;
   onOyla: (oy: Oy) => void;
+  onCik: () => void;
 }) {
   const { renk, ayar } = useDurum();
   const g = durum.gorunum!;
@@ -92,6 +94,7 @@ export function SoruEkrani({
         orta={`Soru ${g.soruNo} / 10`}
         sag={String(sn)}
         sagTestID="oda-geri-sayim"
+        onCik={onCik}
       />
       <View
         style={{
