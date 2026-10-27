@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kafadar — oda finali seçenekleri</title>
+<!-- #49 KK-36: final dağılımı için 3 seçenek + ortak "en tartışmalı soru". Tek dış kaynak: Google Fonts. -->
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&display=swap" rel="stylesheet">
+<style>
+  :root { --zemin: #16123F; --yuzey: #2B2570; --metin: #FFF8E7; --soluk: #B9B3E8; --kontur: #0B0920; --golge: #7C6CFF;
+    --marka: #FFD23F; --marka-2: #5B8CFF; --ok: #3DDC84; --nok: #FF5A4E; }
+  * { box-sizing: border-box; }
+  body { margin: 0; padding: 32px 24px; background: #DCD9E8; font-family: 'Bricolage Grotesque', system-ui, sans-serif; }
+  h1 { margin: 0 0 24px; font-size: 22px; color: #2a2640; text-align: center; }
+  .sahne { display: flex; flex-wrap: wrap; gap: 36px 28px; justify-content: center; }
+  figure { margin: 0; } figcaption { font-size: 15px; font-weight: 800; color: #2a2640; margin-bottom: 8px; }
+  .ekran { width: 390px; height: 844px; overflow: hidden; border-radius: 28px; background: var(--zemin); color: var(--metin);
+    display: flex; flex-direction: column; gap: 14px; padding: 50px 22px 26px; box-shadow: 0 16px 40px rgba(20,16,50,.22); }
+  .ust { display: flex; align-items: center; justify-content: space-between; }
+  .cip { display: inline-flex; align-items: center; gap: 6px; padding: 6px 12px; border-radius: 12px; border: 3px solid var(--kontur); font-weight: 800; font-size: 15px; background: var(--yuzey); color: var(--metin); }
+  .oda { background: var(--marka-2); color: var(--kontur); transform: rotate(2deg); }
+  .etiket { font-size: 13px; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; color: var(--soluk); }
+  .baslik { margin: 0; font-size: 32px; font-weight: 800; letter-spacing: -0.03em; line-height: 1.05; }
+  .govde { margin: 0; font-size: 15px; font-weight: 500; line-height: 1.4; color: var(--soluk); }
+  .sticker { display: inline-block; transform: rotate(-4deg); padding: 4px 16px 8px; border-radius: 16px; border: 4px solid var(--kontur); box-shadow: 5px 5px 0 var(--golge); font-weight: 800; letter-spacing: -0.03em; line-height: 1; color: var(--kontur); }
+  .dg { display: grid; place-items: center; height: 62px; border-radius: 20px; border: 4px solid var(--kontur); background: var(--marka); color: var(--kontur); box-shadow: 5px 5px 0 var(--golge); font-weight: 800; font-size: 20px; }
+  .yigin { display: flex; height: 100%; border-radius: inherit; overflow: hidden; }
+  .yigin i { display: block; height: 100%; }
+  .yigin .o { background: var(--ok); } .yigin .n { background: var(--nok); } .yigin .b { background: var(--yuzey); }
+  /* A */
+  .satir { display: grid; grid-template-columns: 1fr 44px; gap: 4px 8px; align-items: center; }
+  .satir .ad { font-size: 13px; font-weight: 700; color: var(--soluk); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; grid-column: 1 / -1; }
+  .satir .cubuk { height: 26px; border-radius: 10px; border: 3px solid var(--kontur); }
+  .satir .yuzde { font-size: 15px; font-weight: 800; text-align: right; color: var(--ok); }
+  /* B */
+  .eko { flex: 1; display: grid; grid-template-columns: repeat(10, minmax(0, 1fr)); gap: 6px; align-items: end; }
+  .eko .sutun { height: 100%; display: flex; flex-direction: column-reverse; border-radius: 10px; border: 3px solid var(--kontur); overflow: hidden; background: var(--yuzey); }
+  .eko .sutun i { display: block; width: 100%; }
+  .eko .sutun.secili { box-shadow: 0 0 0 3px var(--marka); }
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="bas" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M7 10v12"/><path d="M15 5.88 14 10h5.83a2 2 0 0 1 1.92 2.56l-2.33 8A2 2 0 0 1 17.5 22H4a2 2 0 0 1-2-2v-8a2 2 0 0 1 2-2h2.76a2 2 0 0 0 1.79-1.11L12 2a3.13 3.13 0 0 1 3 3.88Z"/></g></symbol>
+</svg>
+<h1>Kafadar — oda finali: dağılım için 3 seçenek</h1>
+<div class="sahne">
+
+  <figure><figcaption>A · Liste — 10 satır, sırayla dolar (hareketi azalt'ta da bu)</figcaption>
+    <section class="ekran">
+      <div class="ust"><span class="cip oda">ZEPA</span><div class="etiket">Final · 1/5</div><span style="width: 60px"></span></div>
+      <h2 class="baslik">10 soruda oda</h2>
+      <div id="liste" style="display: flex; flex-direction: column; gap: 9px"></div>
+      <div style="margin-top: auto; display: flex; gap: 14px; font-size: 13px; font-weight: 800"><span style="color: var(--ok)">■ OK</span><span style="color: var(--nok)">■ NOK</span><span style="color: var(--soluk)">■ boş</span></div>
+      <div class="dg">En tartışmalı soru →</div>
+    </section>
+  </figure>
+
+  <figure><figcaption>B · Ekolayzer — 10 sütun yükselir, dokununca soru açılır</figcaption>
+    <section class="ekran">
+      <div class="ust"><span class="cip oda">ZEPA</span><div class="etiket">Final · 1/5</div><span style="width: 60px"></span></div>
+      <div><div class="etiket">Bu oda</div><div style="font-size: 58px; font-weight: 800; letter-spacing: -0.04em; line-height: 1"><span style="color: var(--ok)">%43</span> OK</div></div>
+      <div class="eko" id="eko"></div>
+      <div style="display: grid; grid-template-columns: repeat(10, minmax(0, 1fr)); gap: 6px; text-align: center; font-size: 13px; font-weight: 800; color: var(--soluk)" id="eko-no"></div>
+      <div style="padding: 12px 14px; border-radius: 16px; border: 3px solid var(--kontur); background: var(--yuzey); font-size: 15px; font-weight: 700">S3 · Sevgilinin telefonunu karıştırmak · <span style="color: var(--ok)">4 OK</span> · <span style="color: var(--nok)">4 NOK</span></div>
+      <div class="dg">En tartışmalı soru →</div>
+    </section>
+  </figure>
+
+  <figure><figcaption>C · Flaş tur — sorular 1,2 sn'de bir kendiliğinden akar</figcaption>
+    <section class="ekran">
+      <div class="ust"><span class="cip oda">ZEPA</span><div class="etiket">Flaş tur</div><span style="width: 60px"></span></div>
+      <div style="display: flex; gap: 6px; justify-content: center" id="noktalar"></div>
+      <div style="padding: 24px 20px; border-radius: 30px; border: 4px solid var(--kontur); background: var(--marka); color: var(--kontur); box-shadow: 8px 8px 0 var(--golge); transform: rotate(-2deg); margin-top: 6px">
+        <div class="etiket" style="color: #3a3560">Soru 4 / 10</div>
+        <div style="margin-top: 8px; font-size: 30px; font-weight: 800; letter-spacing: -0.025em; line-height: 1.1">Gruptaki sesli mesajı 2x hızda dinlemek.</div>
+      </div>
+      <div style="flex: 1; display: flex; flex-direction: column; justify-content: center; gap: 12px">
+        <div style="display: flex; justify-content: space-between; font-size: 46px; font-weight: 800; letter-spacing: -0.03em"><span style="color: var(--ok)">%88</span><span style="color: var(--nok)">%12</span></div>
+        <div style="height: 64px; border-radius: 22px; border: 4px solid var(--kontur); box-shadow: 5px 5px 0 var(--golge)"><div class="yigin"><i class="o" style="width: 88%; border-right: 4px solid var(--kontur)"></i><i class="n" style="width: 12%"></i></div></div>
+        <div style="display: flex; justify-content: space-between; font-size: 18px; font-weight: 800"><span style="color: var(--ok); display: flex; gap: 6px; align-items: center"><svg width="20" height="20"><use href="#bas"/></svg>OK · 7</span><span style="color: var(--nok); display: flex; gap: 6px; align-items: center"><svg width="20" height="20" style="transform: rotate(180deg)"><use href="#bas"/></svg>NOK · 1</span></div>
+      </div>
+      <p class="govde" style="text-align: center">Dokun: durdur · kaydır: geri/ileri</p>
+    </section>
+  </figure>
+
+  <figure><figcaption>Ortak · En tartışmalı soru (her seçenekten sonra)</figcaption>
+    <section class="ekran">
+      <div class="ust"><span class="cip oda">ZEPA</span><div class="etiket">Final · 2/5</div><span style="width: 60px"></span></div>
+      <span class="sticker" style="background: var(--marka); font-size: 34px; align-self: flex-start; margin-top: 8px">Odayı ikiye böldü!</span>
+      <div style="padding: 22px 20px; border-radius: 30px; border: 4px solid var(--kontur); background: var(--yuzey); transform: rotate(1.5deg)">
+        <div class="etiket">Soru 3</div>
+        <div style="margin-top: 8px; font-size: 30px; font-weight: 800; letter-spacing: -0.025em; line-height: 1.1">Sevgilinin telefonunu gizlice karıştırmak.</div>
+      </div>
+      <div style="flex: 1; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; align-content: center">
+        <div style="display: flex; flex-direction: column; gap: 8px"><div style="font-size: 48px; font-weight: 800; color: var(--ok)">4</div><div style="display: flex; gap: 6px; align-items: center; font-weight: 800; color: var(--ok)"><svg width="20" height="20"><use href="#bas"/></svg>OK</div><div class="govde">Murat, Mert, Deniz, Can</div></div>
+        <div style="display: flex; flex-direction: column; gap: 8px"><div style="font-size: 48px; font-weight: 800; color: var(--nok)">4</div><div style="display: flex; gap: 6px; align-items: center; font-weight: 800; color: var(--nok)"><svg width="20" height="20" style="transform: rotate(180deg)"><use href="#bas"/></svg>NOK</div><div class="govde">Ayşe, Elif, Ali, Zeynep</div></div>
+      </div>
+      <div class="dg">Ödüller →</div>
+    </section>
+  </figure>
+</div>
+
+<script>
+  // 8 oyunculu örnek oda: [soru, OK, NOK, boş]
+  const S = [
+    ['Doğum gününü unutup “sürpriz yarın” demek', 2, 6, 0], ['Arkadaşının sevgilisiyle gizlice yazışmak', 1, 7, 0],
+    ['Sevgilinin telefonunu gizlice karıştırmak', 4, 4, 0], ['Sesli mesajı 2x hızda dinlemek', 7, 1, 0],
+    ['Hesabı kuruşu kuruşuna bölmek', 5, 2, 1], ['Gelen hediyeyi başkasına hediye etmek', 3, 5, 0],
+    ['Ödünç kitabı hiç geri vermemek', 1, 7, 0], ['Eski sevgiliyle arkadaş kalmak', 6, 2, 0],
+    ['Dizinin sonunu söylemek', 2, 5, 1], ['Mesajı görüp cevap vermemek', 3, 5, 0],
+  ];
+  const yuzde = (x) => Math.round(x / 8 * 100);
+  document.getElementById('liste').innerHTML = S.map(([q, o, n, b], i) => `
+    <div class="satir"><div class="ad">${i + 1}. ${q}</div>
+      <div class="cubuk"><div class="yigin"><i class="o" style="width:${yuzde(o)}%"></i><i class="n" style="width:${yuzde(n)}%"></i><i class="b" style="width:${yuzde(b)}%"></i></div></div>
+      <div class="yuzde">%${yuzde(o)}</div></div>`).join('');
+  document.getElementById('eko').innerHTML = S.map(([, o, n, b], i) =>
+    `<div class="sutun${i === 2 ? ' secili' : ''}"><i style="height:${yuzde(o)}%;background:var(--ok)"></i><i style="height:${yuzde(n)}%;background:var(--nok)"></i></div>`).join('');
+  document.getElementById('eko-no').innerHTML = S.map((_, i) => `<span style="${i === 2 ? 'color:var(--marka)' : ''}">${i + 1}</span>`).join('');
+  document.getElementById('noktalar').innerHTML = S.map((_, i) =>
+    `<i style="width:${i === 3 ? 26 : 12}px;height:12px;border-radius:99px;border:2px solid var(--kontur);background:${i < 3 ? 'var(--marka)' : i === 3 ? 'var(--metin)' : 'var(--yuzey)'}"></i>`).join('');
+</script>
+</body>
+</html>
