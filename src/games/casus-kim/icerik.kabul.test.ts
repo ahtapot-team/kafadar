@@ -33,11 +33,11 @@ function ayristir(deste: string) {
   return { kelimeler, sorular };
 }
 
-describe('KK-51: Casus kim içeriği (md taslağı)', () => {
+describe("KK-51: Casus kim içeriği (md taslağı, 100'lük paketler: Murat)", () => {
   for (const deste of PAKETLER) {
-    it(`${deste}: ≥50 kelime, ≥10 örnek soru, biçim doğru, tekrarsız, ipucu kelimeyi içermez`, () => {
+    it(`${deste}: ≥100 kelime, ≥10 örnek soru, biçim doğru, tekrarsız, ipucu kelimeyi içermez`, () => {
       const { kelimeler, sorular } = ayristir(deste);
-      expect(kelimeler.length).toBeGreaterThanOrEqual(50);
+      expect(kelimeler.length).toBeGreaterThanOrEqual(100);
       expect(sorular.length).toBeGreaterThanOrEqual(10);
       expect(
         kelimeler.every((k) => k !== null),
@@ -77,6 +77,26 @@ describe('KK-51: Casus kim desteleri JSON şemasıyla yüklenir', () => {
       );
       expect(new Set(json.cards.map((c) => c.id)).size).toBe(json.cards.length);
       expect(json.cards.every((c) => c.id.startsWith(`${deste}-`))).toBe(true);
+    });
+  }
+});
+
+// KK-7/KK-21 (Murat 27.10.2026: desteler 100'e): OK mu NOK mu md desteleri.
+describe('KK-7: OK mu NOK mu md desteleri 100 kart', () => {
+  for (const deste of ['arkadas', 'cift', 'aile']) {
+    it(`${deste}: ≥100 kart, tekrarsız, ≤140 karakter`, () => {
+      const kartlar = oku(`docs/desteler/${deste}.md`)
+        .split('\n')
+        .filter((s) => /^\d+\.\s/.test(s))
+        .map((s) => s.replace(/^\d+\.\s+/, '').trim());
+      expect(kartlar.length).toBeGreaterThanOrEqual(100);
+      expect(new Set(kartlar.map(tr)).size, 'kart tekrarı').toBe(
+        kartlar.length,
+      );
+      for (const k of kartlar) {
+        expect(k.length, k).toBeGreaterThan(0);
+        expect(k.length, k).toBeLessThanOrEqual(140);
+      }
     });
   }
 });
