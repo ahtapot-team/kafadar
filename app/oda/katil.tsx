@@ -61,7 +61,7 @@ export default function OdayaKatil() {
           onChangeText={(t) => setKod(sayiYap(t))}
           keyboardType="number-pad"
           inputMode="numeric"
-          maxLength={HANE}
+          maxLength={32} // yapıştırılan "482 913" önce sayiYap'tan geçer, 6 haneye orada kırpılır
           autoCorrect={false}
           caretHidden
           style={{
@@ -71,6 +71,7 @@ export default function OdayaKatil() {
             right: 0,
             bottom: 0,
             opacity: 0.02,
+            color: 'transparent', // girdideki metin kutuların arkasında görünmesin
             fontSize: 40,
           }}
         />
