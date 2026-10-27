@@ -24,7 +24,7 @@ Arkadaş grupları ve çiftler için, tek telefonda oynanan ve içine yeni oyunl
 - Genişletilebilir mimari: oyunlar eklenti olarak eklenir.
 
 ## Kapsam dışı (bilerek yapmıyoruz)
-- Diğer oyunlar: 10/10 ama, Casus kim (sonraki sürümler).
+- Diğer oyunlar: 10/10 ama (sonraki sürümler). Casus kim v3'te geliyor, aşağıdaki bölüme bakın.
 - Hesap ya da giriş. (Oda koduyla çok telefonlu oyun v2'de geliyor, aşağıdaki bölüme bakın.)
 - Gizli oy modu (telefon elden ele).
 - +18 içerik, reklam, uygulama içi satın alma, analitik ya da veri toplama. (Oda modunda isimler yalnızca oyun süresince sunucuda tutulur, KK-39.)
@@ -136,7 +136,7 @@ Birden fazla telefonla oynanır. Bir telefon oda kurar, diğerleri kodla kendi t
 | Lobide kuran çıkarsa | Sıradaki oyuncu kurucu olur, oda kapanmaz | Oda boşa gitmez | backend önerisi, qa kabulü (27.10.2026) |
 | Süre sınırı | 15. saniyede ve sonrasında gelen cevap reddedilir | Herkese eşit süre | backend önerisi, qa kabulü (27.10.2026) |
 | Oyundan çıkanlar | Ödüllere girmez; o ana kadarki cevapları finalde görünür | Sonuç bozulmaz | backend önerisi, qa kabulü (27.10.2026) |
-| Oyuncu belirteci | Kriptografik rastgele üretilir, tahmin edilemez | Başkası adına cevap verilemez (güvenlik) | qa şartı (27.10.2026) |
+| Oyuncu belirteci | Kriptografik rastgele üretilir, tahmin edilemez. Bağlantı adresinde değil, bağlantıdan sonraki ilk mesajda gönderilir. | Başkası adına cevap verilemez, belirteç log'lara düşmez (güvenlik) | qa şartı (27.10.2026), #69 |
 
 ### Riskler (oda modu)
 - **Cloudflare hesabı:** Bir insan ücretsiz bir Cloudflare hesabı açar ve API token'ını repo secret'ı olarak ekler (Expo'daki gibi). Token gruba yapıştırılmaz. Backend başlamadan ücretsiz katmanın yettiğini doğrular.
@@ -150,6 +150,59 @@ Birden fazla telefonla oynanır. Bir telefon oda kurar, diğerleri kodla kendi t
 - tasarim: 6–7 yeni ekran, final bir "sahne" gibi akar, kişisel kart. Tasarım M, uçtan uca L.
 - qa: Kopma, geç katılan, süre senkronu ve kuran çıkışı sunucuda çözülür. Testler sahte saat ve N sahte istemciyle yapılır. Büyüklük L.
 - İnsanlar: Metehan istedi ve sunucu olarak Cloudflare'i seçti (27.10.2026).
+
+## v3: Casus kim (Murat, 27.10.2026) — ONAY BEKLİYOR
+Tek telefonda, elden ele oynanır. Herkes aynı kelimeyi görür, casus göremez; casusa yalnızca bir ipucu verilir. Oyuncular birbirine soru sorar, sonunda casusu oylar. OK mu NOK mu'dan sonraki ikinci oyundur ve ana ekranda "Yakında"dan aktife geçer.
+
+### Akış
+1. **Oyuncular:** Mevcut oyuncu ekranı, en az 3 kişi.
+2. **Ayarlar:** Paket (Yerler / Yiyecek ve içecek / Meslekler), casus sayısı (varsayılan 1), tartışma süresi (Kapalı / 3 / 5 / 8 dk, varsayılan Kapalı).
+3. **Devir perdesi:** Tam ekran "Telefonu Ayşe'ye ver". Ayşe "Ben Ayşe'yim"e dokunur.
+4. **Kart:** Basılı tutunca kelime görünür ("Plaj"). Casus "Sen casussun 🕵️" ve bir ipucu görür ("Güneş kremi"). Bırakınca kart kapanır. "Gördüm" → sıradaki oyuncunun perdesi.
+5. **Herkes gördü:** Kimin soru sormaya başlayacağı kısa bir çark animasyonuyla rastgele seçilir.
+6. **Tartışma:** Ekranda örnek sorular döner ("Oraya kiminle gidersin?"). Süre açıksa toplam süre için bir geri sayım halkası görünür (oyuncu başına süre yok); süre bitince titreşim ve oylamaya geçiş. Telefonu tutan kişi (moderatör) süre dolmadan da istediği an "Oylamaya geç" diyebilir.
+7. **Oylama:** Açık oy. Herkes casus sandığı kişiyi parmağıyla gösterir; telefonu tutan kişi her oyuncunun seçtiği ismi girer.
+8. **Açıklama:** En çok oy alanın kartı çevrilir: "Mert casus DEĞİL!" ya da "Casus: Ayşe 🕵️".
+9. **Casusun tahmini:** Yakalanan casus kelimeyi 6 şık arasından seçer. 3-2-1 sonra doğru kelime açılır.
+10. **Sonuç:** Kim kazandı, tüm casuslar ve kelime gösterilir. Paylaş (9:16), "Tekrar oyna" (aynı ekip, yeni kelime).
+
+### Kabul kriterleri (Casus kim)
+- [ ] KK-42: Ana ekranda Casus kim aktiftir ve OK mu NOK mu ile aynı çekirdeği (oyuncular, paket, ayarlar, kayıt) kullanır. Yeni oyun yalnızca bir modül, bir deste ve kayıt listesinde bir satırla eklenir (KK-2).
+- [ ] KK-43: En az 3, en çok 12 oyuncu. Casus sayısı varsayılan 1'dir. Oyuncu sayısına göre artırılabilir: en fazla oyuncu sayısının dörtte biri (3–7 kişi: 1, 8–11 kişi: 2'ye kadar, 12 kişi: 3'e kadar). Casuslar rastgele seçilir, aynı tohum aynı casusları verir. Casuslar birbirini bilmez.
+- [ ] KK-44: Her oyuncuya kartından önce adının yazdığı tam ekran bir devir perdesi gösterilir. Kart içeriği yalnızca basılı tutulurken görünür ve ekranda yalnızca o sırada bulunur. Bırakınca 150 ms içinde kapanır.
+- [ ] KK-45: Casus kartı ve normal kart aynı renk, düzen, yazı boyutu ve titreşimle gösterilir; yan bakışta ayırt edilemez. Kelime orta boyda yazılır, dev yazıyla gösterilmez.
+- [ ] KK-46: "Gördüm"e basan oyuncunun kartı bir daha açılamaz. Geri tuşu veya hareketi "Oyundan çık?" sorar (KK-15). Uygulama arka plana alınınca açık kart hemen kapanır ve ekran gizlenir.
+- [ ] KK-47: Kayıt ve devam (KK-14) kimin kartını gördüğünü saklar. Uygulama yeniden açılınca kartını görmüş oyuncular tekrar rol ekranına dönmez, kalanlar devir perdesinden devam eder. Açık kart asla geri yüklenmez.
+- [ ] KK-48: Herkes kartını görünce ilk soru soracak kişi rastgele seçilir. Tartışma ekranında paketin örnek soruları döner. Süre isteğe bağlıdır ve tüm tartışma için tek bir toplam süredir. Süre açıksa geri sayım gerçek saate göre işler (arka plana alınsa da doğru biter); bitince titreşim ve oylamaya geçiş olur. Moderatör süre dolmadan istediği an oylamaya geçebilir. Moderatör oyunun her aşamasında "Oyunu bitir" ile oyunu sonlandırabilir; bu durumda casuslar ve kelime gösterilir, kazanan ilan edilmez.
+- [ ] KK-49: Oylama açık oydur. En çok oyu alan kişinin kartı çevrilir. Eşitlik olursa yalnızca eşit kalanlar arasında bir kez daha oylanır; yine eşitse casuslar kazanır.
+- [ ] KK-50: Oylanan kişi casussa kelimeyi 6 şık arasından tahmin eder (doğru kelime + aynı paketten 5 kelime). Bilirse casuslar kazanır, bilemezse grup kazanır. Oylanan kişi casus değilse casuslar kazanır. Sonuçta tüm casuslar ve kelime gösterilir.
+- [ ] KK-51: Bir oturumda aynı kelime tekrar gelmez. Her paket en az 50 kelime içerir. Her kelimenin bir ipucu vardır; ipucu kelimenin kendisini içermez (Türkçe `tr` yerel ayarıyla otomatik içerik testi). Her paketin en az 10 örnek sorusu vardır. İçerik 12+ yaşa uygundur.
+- [ ] KK-52: Renk kuralı: yeşil yalnızca "grup casusu yakaladı", kırmızı yalnızca "casus kazandı" anlamında kullanılır. Oyunun kendi rengi nötrdür; casus için ayrı bir "tehlike" rengi yoktur.
+- [ ] KK-53: Oyun mantığı saf, tohumlu ve serileştirilebilir bir durum makinesidir (KK-22). Kabul testleri sahte tohum ve saatle çalışır: her oyuncu kartını tam bir kez görür, "Gördüm" sonrası görünüm rolü tekrar vermez, kayıttan devamda rol sızmaz.
+- [ ] KK-54: Gerçek cihaz kapısı: `docs/GERCEK-CIHAZ-KONTROL.md`'ye Casus kim bölümü eklenir (basılı tut, arka plana alma, uygulama değiştiricide gizlilik, tam bir oyun) ve işaretlenmeden oyun "bitti" sayılmaz.
+
+### Kapsam dışı (v3)
+- Oda modunda Casus kim (çok telefon). Mantık ileride taşınabilecek şekilde yazılır.
+- Puanlama, çok turlu seri, liderlik tablosu.
+- Ekran görüntüsü engeli (yeni bağımlılık ister). Basılı tutma ve otomatik kapanma ile risk azaltılır.
+- Yazarak kelime tahmini (yalnızca şıklı).
+
+### Kararlar (Casus kim)
+| Karar | Seçim | Gerekçe | Karar veren |
+|---|---|---|---|
+| Süre modu | İsteğe bağlı, tüm tartışma için toplam süre (oyuncu başına değil): Kapalı / 3 / 5 / 8 dk. Moderatör süre dolmadan oylamaya geçebilir ya da oyunu bitirebilir. | Videoda gerilim, istemeyen kapatır | Murat (27.10.2026) |
+| Casus sayısı | Varsayılan 1, oyuncu sayısına göre artırılabilir | Büyük gruplarda oyun dengelenir | Murat (27.10.2026) |
+| Oyunun sonu | Uygulamada açık oylama + yakalanan casusa şıklı tahmin | En heyecanlı an, yazım hatası riski yok | pm önerisi, onayla kesinleşir |
+| İpucu türü | Kelimeyle ilgili tek bir kelime ya da ifade (kategori değil) | Casusa yetecek kadar yardım, ele vermeden | pm önerisi, onayla kesinleşir |
+| Deste şeması | `{deck_id, version, lang, sorular[], cards[{id, kelime, ipucu}]}`; OK mu NOK mu destesine dokunulmaz | Ayrı oyun, ayrı şema | backend önerisi |
+| İçerik | 3 paket × 50+ kelime, taslağı pm yazar, insanlar düzeltir | v1'deki desteler gibi | pm |
+
+### Fikir turu özeti (Casus kim)
+- backend: Aynı saf durum makinesi kalıbı, ayrı deste şeması ve doğrulama. Backend S, toplam M.
+- frontend: Çekirdeğin çoğu yeniden kullanılır. Basılı tut-gör, otomatik kapanma, arka planda gizleme. M-L, 3 PR'a bölünür.
+- tasarim: 8–9 ekran, devir perdesi, iki aşamalı açıklama videosu, casus kartı ayırt edilemez, renk kuralı. M.
+- qa: En büyük risk gizlilik ve kayıttan devamda rol sızıntısı. Eşit oy ve tahmin kuralları yazılı olmalı. M.
+- İnsanlar: Murat istedi; süre modu ve casus sayısını belirledi (27.10.2026).
 
 ## Geliştirme ilkesi (Semih, 27.10.2026)
 **Overengineering yok.** En az kodla, en basit çözüm, yalnızca bugünkü ihtiyaç kadar. Yapı genişlemeye açık olacak ama ileriye dönük soyutlama, genel çerçeve ya da "belki lazım olur" kodu yazılmayacak. Yeni bağımlılık yalnızca gerçekten gerekiyorsa eklenir ve PR'da gerekçesi yazılır. Aşağıdaki mimari şartlar bu ilkeye göre en sade haliyle uygulanır. Örneğin oyun kayıt listesi basit bir dizidir, eklenti çatısı değildir.
