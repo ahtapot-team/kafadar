@@ -36,7 +36,7 @@ Arkadaş grupları ve çiftler için, tek telefonda oynanan ve içine yeni oyunl
 2. **Ana ekran:** Oyun kartları ve ayarlar. OK mu NOK mu'ya dokunulur.
 3. **Oyuncular:** 2–12 isim girilir. "Geçen seferki ekip" tek dokunuşla gelir.
 4. **Paket ve süre:** Arkadaş / Çift / Aile paketi ve 10 / 20 kart ya da sınırsız tur uzunluğu seçilir.
-5. **Kart:** Kart çevrilerek açılır, dev yazıyla gösterilir. 3-2-1 geri sayım (titreşimli) sonunda herkes başparmağını gösterir.
+5. **Kart:** Kart çevrilerek açılır, dev yazıyla gösterilir. 3-2-1 geri sayım (titreşimli) sonunda herkes başparmağını gösterir. Sonra kart küçülüp ekranın üstüne yapışır; soru oy girişi ve açıklama anı boyunca görünür kalır.
 6. **Oy girişi:** Telefonu tutan kişi her isme OK 👍 ya da NOK 👎 işaretler. Herkes işaretlenince "Göster" açılır.
 7. **Açıklama anı:** Çubuklar dolar. Tek azınlıkta "Ayşe tek başına NOK!", oybirliğinde konfeti, eşitlikte "Tam ikiye bölündünüz" gösterilir.
 8. **Sonraki kart:** "Sonraki" ya da "Atla" ile 5. adıma dönülür. Kart limiti dolunca veya "Bitir"e basılınca 9. adıma geçilir.
@@ -71,6 +71,7 @@ Her madde test edilebilir olmalı; QA bunlardan otomatik kabul testleri yazar.
   - Eşitlikte "Tam ikiye bölündünüz" yazar.
 - [ ] KK-12: Oturum sonunda Aykırı ruh (en çok azınlıkta kalan), Ruh ikizleri (en çok aynı oyu veren ikili) ve Olay kart (oyları en dengeli bölünen kart) ödülleri verilir. Eşitlikte tüm kazananlar gösterilir. 2 kişilik oyunda Aykırı ruh verilmez.
 - [ ] KK-13: "Paylaş" 1080×1920 boyutunda, logo ve oyun adı içeren bir sonuç görseli üretir ve sistem paylaşım menüsünü açar.
+- [ ] KK-25: Kart metni geri sayımdan sonra kaybolmaz. Kart küçülüp ekranın üstüne yapışır, oy girişi ve açıklama anı ekranlarında hep görünür. Uzun metinde taşma olmaz, metin 16pt'nin altına inmez. (Semih, 27.10.2026: "kullanıcı soruyu unutabilir ya da tekrar okumak isteyebilir")
 
 ### Uygulama durumu
 - [ ] KK-14: Her oydan ve her karttan sonra oyun kaydedilir. Uygulama kapatılıp açılınca "Devam et / Yeni oyun" sorulur. Kayıt sürümlüdür. Okunamayan ya da eski kayıtta uygulama çökmez, kayıt güvenle sıfırlanır.
