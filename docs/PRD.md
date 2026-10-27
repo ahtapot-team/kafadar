@@ -195,7 +195,7 @@ Tek telefonda, elden ele oynanır. Herkes aynı kelimeyi görür, casus göremez
 | Oyunun sonu | Uygulamada açık oylama + yakalanan casusa şıklı tahmin | En heyecanlı an, yazım hatası riski yok | pm önerisi, Metehan onayı (27.10.2026) |
 | İpucu türü | Kelimeyle ilgili tek bir kelime ya da ifade (kategori değil) | Casusa yetecek kadar yardım, ele vermeden | pm önerisi, Metehan onayı (27.10.2026) |
 | Deste şeması | `{deck_id, version, lang, sorular[], cards[{id, kelime, ipucu}]}`; OK mu NOK mu destesine dokunulmaz | Ayrı oyun, ayrı şema | backend önerisi |
-| İçerik | 3 paket × 50+ kelime, taslağı pm yazar, insanlar düzeltir | v1'deki desteler gibi | pm |
+| İçerik | 3 paket × 100 kelime + ipucu, 12 örnek soru; taslağı pm yazar, insanlar düzeltir | v1'deki desteler gibi | pm, Murat (100) |
 
 ### Fikir turu özeti (Casus kim)
 - backend: Aynı saf durum makinesi kalıbı, ayrı deste şeması ve doğrulama. Backend S, toplam M.

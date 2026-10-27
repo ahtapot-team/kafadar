@@ -12,6 +12,7 @@ import { it } from 'vitest';
 // odaDeploy = sunucunun main'e merge'de wrangler ile dağıtımı (#48),
 // odaGuvenlik = belirteç çakışma koruması + sunucu kabuğunun crypto belirteci (#48),
 // casusKayit = Casus kim kayıt şema doğrulayıcısı durumGecerliMi (#93),
+// casusKayitUi = Casus ekranı kayıttan okurken durumGecerliMi kullanır (frontend #81),
 // casusMantik = Casus kim saf durum makinesi + JSON desteler (#78), casusUi = ekranlar ve kayıt listesi (#80…#82),
 // odaMantik = oda mantığı (saf durum makinesi, KK-29…KK-40, #47).
 export const BEKLEYEN = {
@@ -30,6 +31,7 @@ export const BEKLEYEN = {
   casusUi: false,
   casusUiSon: true, // #82: tüm Casus kim ekranlarının testID sözleşmesi
   casusKayit: false,
+  casusKayitUi: false, // #81: Casus ekranı oyunOku(depo, durumGecerliMi) kullanır
 };
 
 export const kabul = BEKLEYEN.cekirdek ? it.fails : it;
@@ -47,3 +49,4 @@ export const kabulCasusMantik = BEKLEYEN.casusMantik ? it.fails : it;
 export const kabulCasusUi = BEKLEYEN.casusUi ? it.fails : it;
 export const kabulCasusUiSon = BEKLEYEN.casusUiSon ? it.fails : it;
 export const kabulCasusKayit = BEKLEYEN.casusKayit ? it.fails : it;
+export const kabulCasusKayitUi = BEKLEYEN.casusKayitUi ? it.fails : it;
