@@ -160,7 +160,7 @@ Tek telefonda, elden ele oynanır. Herkes aynı kelimeyi görür, casus göremez
 3. **Devir perdesi:** Tam ekran "Telefonu Ayşe'ye ver". Ayşe "Ben Ayşe'yim"e dokunur.
 4. **Kart:** Basılı tutunca kelime görünür ("Plaj"). Casus "Sen casussun 🕵️" ve bir ipucu görür ("Güneş kremi"). Bırakınca kart kapanır. "Gördüm" → sıradaki oyuncunun perdesi.
 5. **Herkes gördü:** Kimin soru sormaya başlayacağı kısa bir çark animasyonuyla rastgele seçilir.
-6. **Tartışma:** Ekranda örnek sorular döner ("Oraya kiminle gidersin?"). Süre açıksa geri sayım halkası görünür; süre bitince titreşim ve oylamaya geçiş. Süre kapalıysa "Oylamaya geç" düğmesi.
+6. **Tartışma:** Ekranda örnek sorular döner ("Oraya kiminle gidersin?"). Süre açıksa toplam süre için bir geri sayım halkası görünür (oyuncu başına süre yok); süre bitince titreşim ve oylamaya geçiş. Telefonu tutan kişi (moderatör) süre dolmadan da istediği an "Oylamaya geç" diyebilir.
 7. **Oylama:** Açık oy. Herkes casus sandığı kişiyi parmağıyla gösterir; telefonu tutan kişi her oyuncunun seçtiği ismi girer.
 8. **Açıklama:** En çok oy alanın kartı çevrilir: "Mert casus DEĞİL!" ya da "Casus: Ayşe 🕵️".
 9. **Casusun tahmini:** Yakalanan casus kelimeyi 6 şık arasından seçer. 3-2-1 sonra doğru kelime açılır.
@@ -173,7 +173,7 @@ Tek telefonda, elden ele oynanır. Herkes aynı kelimeyi görür, casus göremez
 - [ ] KK-45: Casus kartı ve normal kart aynı renk, düzen, yazı boyutu ve titreşimle gösterilir; yan bakışta ayırt edilemez. Kelime orta boyda yazılır, dev yazıyla gösterilmez.
 - [ ] KK-46: "Gördüm"e basan oyuncunun kartı bir daha açılamaz. Geri tuşu veya hareketi "Oyundan çık?" sorar (KK-15). Uygulama arka plana alınınca açık kart hemen kapanır ve ekran gizlenir.
 - [ ] KK-47: Kayıt ve devam (KK-14) kimin kartını gördüğünü saklar. Uygulama yeniden açılınca kartını görmüş oyuncular tekrar rol ekranına dönmez, kalanlar devir perdesinden devam eder. Açık kart asla geri yüklenmez.
-- [ ] KK-48: Herkes kartını görünce ilk soru soracak kişi rastgele seçilir. Tartışma ekranında paketin örnek soruları döner. Süre açıksa geri sayım gerçek saate göre işler (arka plana alınsa da doğru biter); bitince titreşim ve oylamaya geçiş olur.
+- [ ] KK-48: Herkes kartını görünce ilk soru soracak kişi rastgele seçilir. Tartışma ekranında paketin örnek soruları döner. Süre isteğe bağlıdır ve tüm tartışma için tek bir toplam süredir. Süre açıksa geri sayım gerçek saate göre işler (arka plana alınsa da doğru biter); bitince titreşim ve oylamaya geçiş olur. Moderatör süre dolmadan istediği an oylamaya geçebilir. Moderatör oyunun her aşamasında "Oyunu bitir" ile oyunu sonlandırabilir; bu durumda casuslar ve kelime gösterilir, kazanan ilan edilmez.
 - [ ] KK-49: Oylama açık oydur. En çok oyu alan kişinin kartı çevrilir. Eşitlik olursa yalnızca eşit kalanlar arasında bir kez daha oylanır; yine eşitse casuslar kazanır.
 - [ ] KK-50: Oylanan kişi casussa kelimeyi 6 şık arasından tahmin eder (doğru kelime + aynı paketten 5 kelime). Bilirse casuslar kazanır, bilemezse grup kazanır. Oylanan kişi casus değilse casuslar kazanır. Sonuçta tüm casuslar ve kelime gösterilir.
 - [ ] KK-51: Bir oturumda aynı kelime tekrar gelmez. Her paket en az 50 kelime içerir. Her kelimenin bir ipucu vardır; ipucu kelimenin kendisini içermez (Türkçe `tr` yerel ayarıyla otomatik içerik testi). Her paketin en az 10 örnek sorusu vardır. İçerik 12+ yaşa uygundur.
@@ -190,7 +190,7 @@ Tek telefonda, elden ele oynanır. Herkes aynı kelimeyi görür, casus göremez
 ### Kararlar (Casus kim)
 | Karar | Seçim | Gerekçe | Karar veren |
 |---|---|---|---|
-| Süre modu | İsteğe bağlı tartışma geri sayımı: Kapalı / 3 / 5 / 8 dk | Videoda gerilim, istemeyen kapatır | Murat (27.10.2026) |
+| Süre modu | İsteğe bağlı, tüm tartışma için toplam süre (oyuncu başına değil): Kapalı / 3 / 5 / 8 dk. Moderatör süre dolmadan oylamaya geçebilir ya da oyunu bitirebilir. | Videoda gerilim, istemeyen kapatır | Murat (27.10.2026) |
 | Casus sayısı | Varsayılan 1, oyuncu sayısına göre artırılabilir | Büyük gruplarda oyun dengelenir | Murat (27.10.2026) |
 | Oyunun sonu | Uygulamada açık oylama + yakalanan casusa şıklı tahmin | En heyecanlı an, yazım hatası riski yok | pm önerisi, onayla kesinleşir |
 | İpucu türü | Kelimeyle ilgili tek bir kelime ya da ifade (kategori değil) | Casusa yetecek kadar yardım, ele vermeden | pm önerisi, onayla kesinleşir |
