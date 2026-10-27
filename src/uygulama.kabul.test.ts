@@ -8,6 +8,7 @@ import {
   kabulKk26,
   kabulKk27,
   kabulOda,
+  kabulOdaDeploy,
   kabulOdaGuvenlik,
 } from './kabul';
 import { oyunlar } from './games/registry';
@@ -225,7 +226,7 @@ describe('oda modu: arayüz ve altyapı sözleşmesi (KK-28…KK-40)', () => {
     expect(eksik).toEqual([]);
   });
 
-  kabulOda(
+  kabulOdaDeploy(
     "sunucu main'e merge edilince otomatik dağıtılır (wrangler, push main)",
     () => {
       const klasor = new URL('../.github/workflows/', import.meta.url);
@@ -301,7 +302,9 @@ describe('oda sunucu kabuğu: belirteç sunucuda, kriptografik üretilir (#48)',
           }
         })
         .filter(
-          ({ f }) => !f.startsWith('src/oda/') && !f.includes('node_modules'),
+          ({ f }) =>
+            !f.replace(/^\.\//, '').startsWith('src/oda/') &&
+            !f.includes('node_modules'),
         )
         .filter(({ icerik }) => /tip:\s*['"]katil['"]/.test(icerik));
       expect(adaylar.length).toBeGreaterThan(0);
