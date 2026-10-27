@@ -1,7 +1,7 @@
 import { readdirSync, readFileSync } from 'node:fs';
 import { describe, expect, it } from 'vitest';
 import { desteHatalari } from './core/deste';
-import { kabul, kabulKk25 } from './kabul';
+import { kabul, kabulKk25, kabulKk26 } from './kabul';
 import { oyunlar } from './games/registry';
 
 describe('KK-1: ana ekran oyun listesi', () => {
@@ -85,4 +85,49 @@ describe('KK-25: kart metni oy girişinde ve açıklamada görünür kalır', ()
       },
     );
   }
+});
+
+const dosyaIcerik = (yol: string) =>
+  readFileSync(new URL(`../${yol}`, import.meta.url), 'utf8');
+
+describe('KK-26: oyun dışı ekranlarda Geri, oyun içinde geri yok', () => {
+  // Arayüz test aracı yok (Semih 1C): düğmenin varlığı kaynak düzeyinde korunur;
+  // "Geri'de bilgiler korunur" ve "Ayarlar'a dönüş" önizlemede tıklanarak doğrulanır.
+  for (const ekran of ['oyuncular', 'paket']) {
+    kabulKk26(
+      `${ekran}.tsx görünür bir Geri düğmesi (testID="geri") içerir`,
+      () => {
+        expect(dosyaIcerik(`app/${ekran}.tsx`)).toMatch(/testID="geri"/);
+      },
+    );
+  }
+
+  it('ayarlar.tsx Geri düğmesi içerir (zaten var, korunur)', () => {
+    expect(dosyaIcerik('app/ayarlar.tsx')).toMatch(/testID="geri"/);
+  });
+
+  it('oyun ekranları Geri düğmesi içermez (çıkış onayı vardır, KK-15)', () => {
+    const dosyalar = [
+      ...kaynaklar('app').filter(({ f }) => f.endsWith('/oyun.tsx')),
+      ...kaynaklar('src/oyun-ekranlari'),
+    ];
+    expect(dosyalar.length).toBeGreaterThan(0);
+    for (const { f, icerik } of dosyalar) {
+      expect(icerik, f).not.toMatch(/testID="geri"/);
+    }
+    expect(dosyaIcerik('app/oyun.tsx')).toMatch(/cikis-onay-evet/);
+  });
+});
+
+describe('KK-27: Ayarlar yalnızca ana ekranda', () => {
+  it('Ayarlar düğmesi ve /ayarlar gezintisi yalnızca app/index.tsx içinde', () => {
+    const dosyalar = [...kaynaklar('app'), ...kaynaklar('src/oyun-ekranlari')];
+    for (const { f, icerik } of dosyalar) {
+      if (f.endsWith('app/index.tsx') || f.endsWith('app/ayarlar.tsx'))
+        continue;
+      expect(icerik, f).not.toMatch(/testID="ayarlar"/);
+      expect(icerik, f).not.toMatch(/['"]\/ayarlar['"]/);
+    }
+    expect(dosyaIcerik('app/index.tsx')).toMatch(/testID="ayarlar"/);
+  });
 });
