@@ -1,10 +1,12 @@
 import * as Linking from 'expo-linking';
 import { useRouter } from 'expo-router';
+import { useEffect } from 'react';
 import { View } from 'react-native';
 import { Qr } from '../../src/baglanti/qr';
 import { useOda } from '../../src/baglanti/baglam';
 import { useDurum } from '../../src/durum';
 import { bosluk, yaricap } from '../../src/tema';
+import { YenidenBaglaniyor } from '../../src/oda-ui/yeniden';
 import { Dugme, Ekran, Yazi } from '../../src/ui';
 
 // Lobi (KK-31): kod, QR (kuran), katılanlar; Başlat yalnızca kuranda. Kopunca "Yeniden bağlanıyor…" (KK-37).
@@ -13,6 +15,10 @@ export default function Lobi() {
   const { renk } = useDurum();
   const { istemci, durum } = useOda();
   const g = durum.gorunum;
+
+  useEffect(() => {
+    if (g && g.asama !== 'lobi') router.replace('/oda/oyun');
+  }, [g, router]);
 
   if (!durum.kod)
     return (
@@ -105,9 +111,6 @@ export default function Lobi() {
           </View>
         ))}
       </View>
-      {g && g.asama !== 'lobi' && (
-        <Yazi testID="lobi-basladi">Oyun başladı…</Yazi>
-      )}
       {durum.hata && <Yazi testID="lobi-hata">{durum.hata.mesaj}</Yazi>}
       <View style={{ flex: 1 }} />
       {g?.baslatGorunur && (
@@ -130,33 +133,7 @@ export default function Lobi() {
         etiket="Odadan ayrıl"
         onPress={ayril}
       />
-      {durum.baglanti === 'yeniden' && (
-        <View
-          testID="yeniden-baglaniyor"
-          accessibilityRole="alert"
-          accessibilityLiveRegion="polite"
-          style={{
-            position: 'absolute',
-            left: bosluk.l,
-            right: bosluk.l,
-            top: '35%',
-            padding: bosluk.xl,
-            borderRadius: yaricap.kart,
-            borderWidth: 4,
-            borderColor: renk.kontur,
-            backgroundColor: renk.marka2,
-            gap: bosluk.s,
-          }}
-        >
-          <Yazi tur="baslik" style={{ color: renk.kontur, fontSize: 26 }}>
-            Yeniden bağlanıyor…
-          </Yazi>
-          <Yazi style={{ color: renk.kontur }}>
-            Odadaki yerin duruyor. Bağlanınca açık olan soruya katılırsın; kaçan
-            sorular "boş" sayılır.
-          </Yazi>
-        </View>
-      )}
+      {durum.baglanti === 'yeniden' && <YenidenBaglaniyor />}
     </Ekran>
   );
 }
