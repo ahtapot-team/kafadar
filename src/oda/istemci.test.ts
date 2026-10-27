@@ -226,23 +226,19 @@ describe('oda istemcisi: dayanıklılık', () => {
       kod: 'ABCD',
       kimlik: 'k1',
     });
-    t.bagler
-      .at(-1)!
-      .d.mesaj({
-        t: 'hata',
-        hata: { kod: 'cok-deneme', mesaj: 'Çok fazla deneme.' },
-      });
+    t.bagler.at(-1)!.d.mesaj({
+      t: 'hata',
+      hata: { kod: 'cok-deneme', mesaj: 'Çok fazla deneme.' },
+    });
     t.bagler.at(-1)!.d.kapandi();
     expect(t.i.durum.kimlik).toBe('k1');
     expect(t.i.durum.baglanti).toBe('yeniden');
     expect(t.depo.veri.has(ODA_ANAHTARI)).toBe(true);
     t.planli.splice(0).forEach((f) => f());
-    t.bagler
-      .at(-1)!
-      .d.mesaj({
-        t: 'hata',
-        hata: { kod: 'kapali', mesaj: 'Bu oda kapandı.' },
-      });
+    t.bagler.at(-1)!.d.mesaj({
+      t: 'hata',
+      hata: { kod: 'kapali', mesaj: 'Bu oda kapandı.' },
+    });
     expect(t.i.durum.kimlik).toBeNull();
     expect(t.depo.veri.has(ODA_ANAHTARI)).toBe(false);
   });
@@ -264,18 +260,16 @@ describe('oda istemcisi: dayanıklılık', () => {
     const t = eldenTasima();
     t.odada();
     t.bagler.at(-1)!.d.mesaj(gorunum('bitti'));
-    t.bagler
-      .at(-1)!
-      .d.mesaj({
-        t: 'final',
-        final: {
-          yuzdeler: [],
-          enTartismali: [],
-          oduller: { aykiriRuh: [], ruhIkizleri: [] },
-          kimNeDedi: {},
-          ayniOlan: {},
-        },
-      });
+    t.bagler.at(-1)!.d.mesaj({
+      t: 'final',
+      final: {
+        yuzdeler: [],
+        enTartismali: [],
+        oduller: { aykiriRuh: [], ruhIkizleri: [] },
+        kimNeDedi: {},
+        ayniOlan: {},
+      },
+    });
     const once = t.bagler.length;
     t.bagler.at(-1)!.d.kapandi();
     t.i.onPlana();
