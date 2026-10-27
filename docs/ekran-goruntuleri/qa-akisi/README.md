@@ -1,6 +1,6 @@
 # QA akışı: canlı ana sayfa, 390×844 (2x)
 
-Kaynak: https://metehantopalhan.github.io/kafadar/ (main, #7 merge sonrası), betikli tarayıcı (dokunmatik, Chrome). 4 oyuncu: Ali, Ayşe, Can, Deniz.
+Kaynak: https://ahtapot-team.github.io/kafadar/ (main, #7 merge sonrası), betikli tarayıcı (dokunmatik, Chrome). 4 oyuncu: Ali, Ayşe, Can, Deniz.
 
 | Dosya | Adım |
 |---|---|
