@@ -169,7 +169,7 @@ export function AcikEkrani({
 
   return (
     <Ekran>
-      <KartSeridi metin={kart} />
+      <KartSeridi testID="kart-metni" metin={kart} />
       {sonuc.tip === 'oybirligi' && !azalt && (
         <Konfeti
           renkler={[

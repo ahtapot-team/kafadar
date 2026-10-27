@@ -82,7 +82,7 @@ export function OyEkrani({
         orta={`${verilen} / ${oyuncular.length} işaretlendi`}
         onCik={onCik}
       />
-      <KartSeridi metin={kart} />
+      <KartSeridi testID="kart-metni" metin={kart} />
       <Yazi tur="baslik">Kim ne dedi?</Yazi>
       {oyuncular.map((ad, i) => (
         <View
