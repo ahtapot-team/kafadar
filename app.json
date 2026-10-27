@@ -6,6 +6,12 @@
     "version": "0.0.0",
     "orientation": "portrait",
     "userInterfaceStyle": "dark",
-    "plugins": ["expo-router", "expo-status-bar", "expo-sharing", "expo-font"]
+    "plugins": ["expo-router", "expo-status-bar", "expo-sharing", "expo-font"],
+    "owner": "ahtapot-team",
+    "extra": {
+      "eas": {
+        "projectId": "4172ae7b-3cdd-4faf-b89b-c8c1266ebe56"
+      }
+    }
   }
 }
