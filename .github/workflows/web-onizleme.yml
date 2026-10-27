@@ -40,6 +40,7 @@ jobs:
           fi
           npm ci
           npm run build:web
+          sed -i '/<head>/r web/geri-yukle.html' dist/index.html
 
       - name: gh-pages dalını hazırla
         run: |
@@ -67,6 +68,7 @@ jobs:
             mkdir -p "$SITE/pr/${{ github.event.number }}"
             cp -r dist/. "$SITE/pr/${{ github.event.number }}/"
           fi
+          cp web/404.html "$SITE/404.html"  # derin bağlantı yenilemesi (SPA)
           touch "$SITE/.nojekyll"  # _expo/ klasörü Jekyll tarafından atlanmasın
 
       - name: Yayınla
