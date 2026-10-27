@@ -26,3 +26,26 @@ Her satıra ✅ ya da ❌ + not yaz. ❌ olan her madde issue olur.
 | 17 | KK-24 | Düşük seviye Android cihazda (varsa) animasyonlar akıcı | | |
 
 **Sonuç:** ☐ iOS geçti  ☐ Android geçti  İmza: ______
+
+## Oda modu (KK-41)
+
+En az **3 telefonla** (en az 1 iOS ve 1 Android, **farklı ağlarda**: biri wifi, biri mobil veri) tam bir oyun oynanır. Sunucu: dağıtılmış canlı sürüm. Telefonlar: ______ / ______ / ______  Tarih: ______  Kim: ______
+
+| # | KK | Kontrol | Tel 1 | Tel 2 | Tel 3 |
+|---|---|---|---|---|---|
+| 1 | KK-28 | OK mu NOK mu'da "Tek telefon / Oda kur / Odaya katıl" var; Tek telefon eskisi gibi çalışıyor (uçak modunda da) | | | |
+| 2 | KK-29 | Oda kur: 4 harfli kod ve QR gösteriliyor; kodda O, 0, I, 1 yok; başka telefonla QR okutunca oda açılıyor | | | |
+| 3 | KK-30 | Yanlış kod, dolu oda ve başlamış oyun için Türkçe net hata; aynı isim "Ali 2" oluyor | | | |
+| 4 | KK-31 | Lobide katılanlar birkaç sn içinde her telefonda görünüyor; Başlat yalnızca kuranda, tek kişiyle pasif | | | |
+| 5 | KK-32 | Soru her telefonda aynı anda açılıyor; geri sayımlar aynı anda bitiyor (telefon saatini elle 5 dk kaydırınca da) | | | |
+| 6 | KK-33 | Süre içinde cevap değişiyor, son cevap sayılıyor; süre bitince düğmeler kilitleniyor; cevapsız kalan soru "boş" | | | |
+| 7 | KK-34 | "Cevabın alındı ✓ · N/M cevapladı" görünüyor; herkes cevaplayınca süre beklenmeden sonraki soruya geçiliyor; başkasının cevabı görünmüyor | | | |
+| 8 | KK-36 | Final: yüzdeler (boşlar ayrı), en tartışmalı soru, ödüller, "kim ne dedi", kişisel kart; 9:16 paylaşım görseli; "Hareketi azalt" açıkken liste | | | |
+| 9 | KK-37 | Tel 2'yi oyun sırasında **arka plana al**, 20 sn sonra getir: "Yeniden bağlanıyor…" sonra o anki soruya katıldı; kopukken biten soru boş | | | |
+| 10 | KK-37 | Tel 3'te **kısa uçak modu** (5 sn aç-kapa): aynı kimlikle geri döndü, oyun bozulmadı | | | |
+| 11 | KK-37 | Tel 3'ü wifi'dan mobil veriye geçir (ağ değişimi): oyun sürüyor | | | |
+| 12 | KK-38 | Kuran telefonu kapat: oyun kalanlarla devam ediyor; geriye tek telefon kalınca oyun bitiyor ve sonuçlar gösteriliyor | | | |
+| 13 | KK-39 | Oyun bitince aynı kodla katılmayı dene: kod geçersiz; (sunucu kaydında isimler silindi: backend doğrular) | | | |
+| 14 | KK-41 | Baştan sona 10 soruluk tam oyun takılmadan, kasmadan oynandı (3 telefonla) | | | |
+
+**Sonuç:** ☐ iOS geçti  ☐ Android geçti  İmza: ______
