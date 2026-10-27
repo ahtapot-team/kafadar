@@ -1,6 +1,6 @@
 # Kafadar (çalışma adı) — Ürün gereksinimleri (PRD)
 
-> Durum: v1 ONAYLANDI (27.10.2026, Semih). v2 oda modu ONAYLANDI (27.10.2026, Murat).
+> Durum: v1 ONAYLANDI (27.10.2026, Semih). v2 oda modu ONAYLANDI (27.10.2026, Murat). v3 Casus kim ONAYLANDI (27.10.2026, Metehan).
 > Bu dosya projenin tek doğruluk kaynağıdır. Ajanlar sohbet geçmişine değil buraya bakar.
 > Kapsam değişirse önce bu dosya güncellenir ve yeniden onaylanır.
 
@@ -20,7 +20,7 @@ Arkadaş grupları ve çiftler için, tek telefonda oynanan ve içine yeni oyunl
   - oturum kaydı ve devam etme
   - ayarlar (ses, titreşim, tema)
 - OK mu NOK mu: kart, 3-2-1 geri sayım, açık oy girişi, açıklama anı, oturum sonu ödülleri, paylaşılabilir sonuç görseli.
-- Her biri en az 50 kartlık 3 soru destesi. İçerik 12+ yaşa uygun.
+- Her biri en az 100 kartlık 3 soru destesi (Murat, 27.10.2026). İçerik 12+ yaşa uygun.
 - Genişletilebilir mimari: oyunlar eklenti olarak eklenir.
 
 ## Kapsam dışı (bilerek yapmıyoruz)
@@ -55,7 +55,7 @@ Her madde test edilebilir olmalı; QA bunlardan otomatik kabul testleri yazar.
 - [ ] KK-4: İsim boşluklar kırpıldıktan sonra 1–16 karakterdir, boş isim kabul edilmez. Aynı isim girilirse "Ali 2" önerilir. Emoji ve Türkçe karakter desteklenir.
 - [ ] KK-5: Son oyuncu listesi saklanır ve "Geçen seferki ekip" ile tek dokunuşla gelir.
 - [ ] KK-6: Oyun ortasında oyuncu eklenip çıkarılabilir. Ödüller yalnızca oyuncunun katıldığı kartlardan hesaplanır.
-- [ ] KK-7: Arkadaş, Çift ve Aile paketlerinin her birinde en az 50 kart vardır. Tur uzunluğu 10 / 20 kart ya da sınırsız seçilebilir.
+- [ ] KK-7: Arkadaş, Çift ve Aile paketlerinin her birinde en az 100 kart vardır. Tur uzunluğu 10 / 20 kart ya da sınırsız seçilebilir.
 - [ ] KK-8: Bir oturumda aynı kart tekrar gelmez. Deste bitince "Karıştırıp baştan?" sorulur.
 
 ### OK mu NOK mu
@@ -151,7 +151,7 @@ Birden fazla telefonla oynanır. Bir telefon oda kurar, diğerleri kodla kendi t
 - qa: Kopma, geç katılan, süre senkronu ve kuran çıkışı sunucuda çözülür. Testler sahte saat ve N sahte istemciyle yapılır. Büyüklük L.
 - İnsanlar: Metehan istedi ve sunucu olarak Cloudflare'i seçti (27.10.2026).
 
-## v3: Casus kim (Murat, 27.10.2026) — ONAY BEKLİYOR
+## v3: Casus kim (Murat, 27.10.2026) — ONAYLANDI (Metehan, 27.10.2026)
 Tek telefonda, elden ele oynanır. Herkes aynı kelimeyi görür, casus göremez; casusa yalnızca bir ipucu verilir. Oyuncular birbirine soru sorar, sonunda casusu oylar. OK mu NOK mu'dan sonraki ikinci oyundur ve ana ekranda "Yakında"dan aktife geçer.
 
 ### Akış
@@ -176,7 +176,7 @@ Tek telefonda, elden ele oynanır. Herkes aynı kelimeyi görür, casus göremez
 - [ ] KK-48: Herkes kartını görünce ilk soru soracak kişi rastgele seçilir. Tartışma ekranında paketin örnek soruları döner. Süre isteğe bağlıdır ve tüm tartışma için tek bir toplam süredir. Süre açıksa geri sayım gerçek saate göre işler (arka plana alınsa da doğru biter); bitince titreşim ve oylamaya geçiş olur. Moderatör süre dolmadan istediği an oylamaya geçebilir. Moderatör oyunun her aşamasında "Oyunu bitir" ile oyunu sonlandırabilir; bu durumda casuslar ve kelime gösterilir, kazanan ilan edilmez.
 - [ ] KK-49: Oylama açık oydur. En çok oyu alan kişinin kartı çevrilir. Eşitlik olursa yalnızca eşit kalanlar arasında bir kez daha oylanır; yine eşitse casuslar kazanır.
 - [ ] KK-50: Oylanan kişi casussa kelimeyi 6 şık arasından tahmin eder (doğru kelime + aynı paketten 5 kelime). Bilirse casuslar kazanır, bilemezse grup kazanır. Oylanan kişi casus değilse casuslar kazanır. Sonuçta tüm casuslar ve kelime gösterilir.
-- [ ] KK-51: Bir oturumda aynı kelime tekrar gelmez. Her paket en az 50 kelime içerir. Her kelimenin bir ipucu vardır; ipucu kelimenin kendisini içermez (Türkçe `tr` yerel ayarıyla otomatik içerik testi). Her paketin en az 10 örnek sorusu vardır. İçerik 12+ yaşa uygundur.
+- [ ] KK-51: Bir oturumda aynı kelime tekrar gelmez. Her paket en az 100 kelime içerir. Her kelimenin bir ipucu vardır; ipucu kelimenin kendisini içermez (Türkçe `tr` yerel ayarıyla otomatik içerik testi). Her paketin en az 10 örnek sorusu vardır. İçerik 12+ yaşa uygundur.
 - [ ] KK-52: Renk kuralı: yeşil yalnızca "grup casusu yakaladı", kırmızı yalnızca "casus kazandı" anlamında kullanılır. Oyunun kendi rengi nötrdür; casus için ayrı bir "tehlike" rengi yoktur.
 - [ ] KK-53: Oyun mantığı saf, tohumlu ve serileştirilebilir bir durum makinesidir (KK-22). Kabul testleri sahte tohum ve saatle çalışır: her oyuncu kartını tam bir kez görür, "Gördüm" sonrası görünüm rolü tekrar vermez, kayıttan devamda rol sızmaz.
 - [ ] KK-54: Gerçek cihaz kapısı: `docs/GERCEK-CIHAZ-KONTROL.md`'ye Casus kim bölümü eklenir (basılı tut, arka plana alma, uygulama değiştiricide gizlilik, tam bir oyun) ve işaretlenmeden oyun "bitti" sayılmaz.
@@ -192,8 +192,8 @@ Tek telefonda, elden ele oynanır. Herkes aynı kelimeyi görür, casus göremez
 |---|---|---|---|
 | Süre modu | İsteğe bağlı, tüm tartışma için toplam süre (oyuncu başına değil): Kapalı / 3 / 5 / 8 dk. Moderatör süre dolmadan oylamaya geçebilir ya da oyunu bitirebilir. | Videoda gerilim, istemeyen kapatır | Murat (27.10.2026) |
 | Casus sayısı | Varsayılan 1, oyuncu sayısına göre artırılabilir | Büyük gruplarda oyun dengelenir | Murat (27.10.2026) |
-| Oyunun sonu | Uygulamada açık oylama + yakalanan casusa şıklı tahmin | En heyecanlı an, yazım hatası riski yok | pm önerisi, onayla kesinleşir |
-| İpucu türü | Kelimeyle ilgili tek bir kelime ya da ifade (kategori değil) | Casusa yetecek kadar yardım, ele vermeden | pm önerisi, onayla kesinleşir |
+| Oyunun sonu | Uygulamada açık oylama + yakalanan casusa şıklı tahmin | En heyecanlı an, yazım hatası riski yok | pm önerisi, Metehan onayı (27.10.2026) |
+| İpucu türü | Kelimeyle ilgili tek bir kelime ya da ifade (kategori değil) | Casusa yetecek kadar yardım, ele vermeden | pm önerisi, Metehan onayı (27.10.2026) |
 | Deste şeması | `{deck_id, version, lang, sorular[], cards[{id, kelime, ipucu}]}`; OK mu NOK mu destesine dokunulmaz | Ayrı oyun, ayrı şema | backend önerisi |
 | İçerik | 3 paket × 50+ kelime, taslağı pm yazar, insanlar düzeltir | v1'deki desteler gibi | pm |
 
@@ -227,7 +227,7 @@ Tek telefonda, elden ele oynanır. Herkes aynı kelimeyi görür, casus göremez
 
 ## Riskler ve açık sorular
 - **"Dandik" riski:** Animasyon ve oyun hissi kabul kriteridir. Tasarım hareket kitini önce video olarak gösterir. Gerçek cihaz kapısı (KK-24) olmadan sürüm bitmiş sayılmaz.
-- **İçerik kalitesi:** 150'den fazla kart gerekiyor. Taslağı pm yazar, insanlar düzeltir.
+- **İçerik kalitesi:** Her oyunda 300 kart/kelime var (paket başına 100). Taslağı pm yazar, insanlar düzeltir.
 - **Expo hesabı:** EAS Build ve Update için ücretsiz bir Expo hesabı ve `EXPO_TOKEN` gerekir. Hesabı bir insan açar, token'ı backend repo secret'ı olarak ekler.
 - **EAS ücretsiz katmanı:** Derleme kotası sınırlıdır. Derlemeler yalnızca main'e merge edilince ve sürüm çıkarken yapılır.
 - **Store takvimi:** Google, yeni kişisel hesaplarda yayın öncesi 12 test kullanıcısıyla 14 gün kapalı test istiyor. Apple hesabı yıllık 99$.
