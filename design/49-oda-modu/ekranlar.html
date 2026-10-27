@@ -1,0 +1,276 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kafadar — oda modu ekranları</title>
+<!-- #49. Çıkartma kiti (design/TASARIM-SISTEMI.md). Kullanım: ?tema=koyu|acik&boy=390x844|375x667. Tek dış kaynak: Google Fonts. -->
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&display=swap" rel="stylesheet">
+<style>
+  :root { --kontur: #0B0920; --golge: #7C6CFF; --marka: #FFD23F; --marka-2: #5B8CFF; --ok: #3DDC84; --nok: #FF5A4E; --w: 390px; --h: 844px; }
+  [data-tema="koyu"] { --zemin: #16123F; --yuzey: #2B2570; --metin: #FFF8E7; --soluk: #B9B3E8; --ok-metin: #3DDC84; --nok-metin: #FF5A4E; }
+  [data-tema="acik"] { --zemin: #FFF8E7; --yuzey: #FFFFFF; --metin: #16123F; --soluk: #5B5585; --ok-metin: #0F8A4B; --nok-metin: #D63A2F; }
+  * { box-sizing: border-box; }
+  body { margin: 0; padding: 32px 24px; background: #DCD9E8; font-family: 'Bricolage Grotesque', system-ui, sans-serif; }
+  h1 { margin: 0 0 24px; font-size: 22px; color: #2a2640; text-align: center; }
+  #ekranlar { display: flex; flex-wrap: wrap; gap: 36px 28px; justify-content: center; }
+  figure { margin: 0; } figcaption { font-size: 14px; font-weight: 700; color: #4a4566; margin-bottom: 8px; }
+  .ekran { position: relative; width: var(--w); height: var(--h); overflow: hidden; border-radius: 28px; background: var(--zemin); color: var(--metin);
+    display: flex; flex-direction: column; gap: 14px; padding: calc(var(--h) * 0.06) 22px 26px; box-shadow: 0 16px 40px rgba(20,16,50,.22); }
+  .ust { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+  .esnek { flex: 1; min-height: 0; }
+  .orta { display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
+  .ikon-dg { width: 48px; height: 48px; flex: none; border-radius: 16px; border: 3px solid var(--kontur); background: var(--yuzey); color: var(--metin); display: grid; place-items: center; }
+  .dg { display: flex; align-items: center; justify-content: center; gap: 10px; width: 100%; height: 62px; border-radius: 20px; border: 4px solid var(--kontur);
+    background: var(--marka); color: var(--kontur); box-shadow: 5px 5px 0 var(--golge); font: 800 20px 'Bricolage Grotesque', sans-serif; }
+  .dg.ikincil { background: var(--yuzey); color: var(--metin); }
+  .baslik { margin: 0; font-size: 34px; font-weight: 800; letter-spacing: -0.03em; line-height: 1.05; }
+  .etiket { font-size: 13px; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; color: var(--soluk); }
+  .govde { font-size: 16px; font-weight: 500; line-height: 1.45; color: var(--soluk); margin: 0; }
+  .sticker { display: inline-block; transform: rotate(-4deg); padding: 4px 16px 8px; border-radius: 16px; border: 4px solid var(--kontur);
+    box-shadow: 5px 5px 0 var(--golge); font-weight: 800; letter-spacing: -0.03em; line-height: 1; color: var(--kontur); }
+  .cip { display: inline-flex; align-items: center; gap: 6px; padding: 6px 12px; border-radius: 12px; border: 3px solid var(--kontur); font-weight: 800; font-size: 15px; background: var(--yuzey); color: var(--metin); }
+  .oda { background: var(--marka-2); color: var(--kontur); transform: rotate(2deg); }
+  .kart { padding: 22px 20px; border-radius: 30px; border: 4px solid var(--kontur); background: var(--marka); color: var(--kontur); box-shadow: 8px 8px 0 var(--golge); }
+  .secim { padding: 16px 18px; border-radius: 22px; border: 4px solid var(--kontur); display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+  .kutular { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; }
+  .kutular > div { height: 72px; border-radius: 18px; border: 4px solid var(--kontur); background: var(--yuzey); display: grid; place-items: center; font-size: 40px; font-weight: 800; }
+  .kutular.dev > div { height: 84px; background: var(--marka); color: var(--kontur); box-shadow: 5px 5px 0 var(--golge); font-size: 50px; }
+  .girdi { height: 56px; border-radius: 18px; border: 3px solid var(--kontur); background: var(--yuzey); display: flex; align-items: center; padding: 0 16px; font-size: 17px; font-weight: 600; }
+  .hata { display: flex; gap: 10px; align-items: flex-start; padding: 12px 14px; border-radius: 16px; border: 3px solid var(--kontur); background: var(--yuzey); font-weight: 700; font-size: 15px; }
+  .hata b { color: var(--nok-metin); }
+  .liste { display: flex; flex-wrap: wrap; gap: 8px; }
+  .oy-dg { flex: 1; height: 150px; border-radius: 28px; border: 4px solid var(--kontur); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px;
+    font-size: 30px; font-weight: 800; background: var(--yuzey); color: var(--metin); }
+  .oy-dg.ok { background: var(--ok); color: var(--kontur); box-shadow: 6px 6px 0 var(--golge); transform: rotate(-2deg); }
+  .oy-dg.nok-soluk { color: var(--nok-metin); }
+  .oy-dg.ok-soluk { color: var(--ok-metin); }
+  .halka { position: relative; width: 64px; height: 64px; display: grid; place-items: center; font-weight: 800; font-size: 24px; }
+  .halka svg { position: absolute; inset: 0; transform: rotate(-90deg); }
+  .perde { position: absolute; inset: 0; background: rgba(11,9,32,.72); display: flex; align-items: flex-end; padding: 22px; }
+  .tik { width: 22px; height: 22px; border-radius: 50%; background: var(--marka); border: 2px solid var(--kontur); display: inline-grid; place-items: center; color: var(--kontur); font-size: 13px; font-weight: 800; }
+  .bekliyor { opacity: .55; border-style: dashed; }
+  .matris { display: grid; grid-template-columns: 74px repeat(10, minmax(0, 1fr)); gap: 4px; align-items: center; font-size: 13px; font-weight: 800; }
+  .matris i { aspect-ratio: 1; border-radius: 6px; border: 2px solid var(--kontur); }
+  .matris .o { background: var(--ok); } .matris .n { background: var(--nok); } .matris .b { background: var(--yuzey); }
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="bas" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M7 10v12"/><path d="M15 5.88 14 10h5.83a2 2 0 0 1 1.92 2.56l-2.33 8A2 2 0 0 1 17.5 22H4a2 2 0 0 1-2-2v-8a2 2 0 0 1 2-2h2.76a2 2 0 0 0 1.79-1.11L12 2a3.13 3.13 0 0 1 3 3.88Z"/></g></symbol>
+  <symbol id="geri" viewBox="0 0 24 24"><path d="m15 18-6-6 6-6" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="kapat" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></g></symbol>
+  <symbol id="telefon" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><rect x="6" y="2" width="12" height="20" rx="3"/><path d="M11 18h2"/></g></symbol>
+  <symbol id="wifi" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M2 8.8a15 15 0 0 1 20 0M5 12.6a10 10 0 0 1 14 0M8.5 16.4a5 5 0 0 1 7 0"/><circle cx="12" cy="20" r="1"/></g></symbol>
+</svg>
+
+<h1 id="baslik">Kafadar — oda modu</h1>
+<div id="ekranlar"></div>
+
+<template data-ad="1 · Mod seçimi (KK-28)">
+  <section class="ekran">
+    <div class="ust"><button class="ikon-dg" aria-label="Geri"><svg width="22" height="22"><use href="#geri"/></svg></button><div class="etiket">OK mu NOK mu</div><div style="width: 48px"></div></div>
+    <h2 class="baslik">Nasıl oynuyoruz?</h2>
+    <div class="secim" style="background: var(--marka); color: var(--kontur); box-shadow: 6px 6px 0 var(--golge); transform: rotate(-1.5deg)">
+      <div><div style="font-size: 24px; font-weight: 800">Tek telefon</div><div style="font-size: 15px; font-weight: 600">Telefon elden ele, internet gerekmez</div></div>
+      <svg width="34" height="34"><use href="#telefon"/></svg>
+    </div>
+    <div class="secim" style="background: var(--marka-2); color: var(--kontur); box-shadow: 6px 6px 0 var(--golge); transform: rotate(1deg)">
+      <div><div style="font-size: 24px; font-weight: 800">Oda kur</div><div style="font-size: 15px; font-weight: 600">Herkes kendi telefonundan oynar</div></div>
+      <span style="display: flex"><svg width="28" height="28"><use href="#telefon"/></svg><svg width="28" height="28" style="margin-left: -10px"><use href="#telefon"/></svg></span>
+    </div>
+    <div class="secim" style="background: var(--yuzey)">
+      <div><div style="font-size: 24px; font-weight: 800">Odaya katıl</div><div style="font-size: 15px; font-weight: 600; color: var(--soluk)">Arkadaşının 4 harfli kodu ile</div></div>
+      <span class="cip" style="font-size: 14px; letter-spacing: .1em">ZEPA</span>
+    </div>
+    <div class="esnek"></div>
+    <p class="govde" style="text-align: center; font-size: 14px">Oda modunda 10 soru, her biri 15 sn. Sonuçlar en sonda.</p>
+  </section>
+</template>
+
+<template data-ad="2 · Oda kur — kod, QR, lobi (KK-29, KK-31)">
+  <section class="ekran">
+    <div class="ust"><button class="ikon-dg" aria-label="Odayı kapat"><svg width="22" height="22"><use href="#kapat"/></svg></button><div class="etiket">Arkadaş destesi</div><span class="cip oda">ODA</span></div>
+    <div class="orta" style="gap: 10px">
+      <div class="etiket">Oda kodu</div>
+      <div class="kutular dev" style="width: 100%"><div>Z</div><div>E</div><div>P</div><div>A</div></div>
+      <div style="display: flex; gap: 14px; align-items: center; margin-top: 6px">
+        <div class="qr" style="width: 104px; height: 104px; padding: 6px; background: #fff; border: 4px solid var(--kontur); border-radius: 14px"></div>
+        <p class="govde" style="text-align: left; font-size: 15px; max-width: 170px">Kamerayla okut ya da kodu söyle.</p>
+      </div>
+    </div>
+    <div class="etiket" style="margin-top: 4px">4 kişi odada · en az 2, en çok 12</div>
+    <div class="liste">
+      <span class="cip" style="background: var(--marka); color: var(--kontur)">Murat (sen) ★</span><span class="cip">Ayşe</span><span class="cip">Mert</span><span class="cip" style="transform: rotate(-3deg); background: var(--marka-2); color: var(--kontur)">Deniz · yeni!</span>
+    </div>
+    <div class="esnek"></div>
+    <button class="dg">Başlat · 4 kişi</button>
+  </section>
+</template>
+
+<template data-ad="3 · Odaya katıl (KK-30)">
+  <section class="ekran">
+    <div class="ust"><button class="ikon-dg" aria-label="Geri"><svg width="22" height="22"><use href="#geri"/></svg></button><div class="etiket">Odaya katıl</div><div style="width: 48px"></div></div>
+    <h2 class="baslik">Kodu gir</h2>
+    <div class="kutular"><div>Z</div><div>E</div><div>P</div><div style="border-style: dashed"><span style="width: 3px; height: 36px; background: var(--metin)"></span></div></div>
+    <p class="govde" style="font-size: 14px">Harf ve rakam karışmasın diye kodlarda O, 0, I ve 1 yok.</p>
+    <div class="etiket" style="margin-top: 8px">Adın</div>
+    <div class="girdi">Ayşe</div>
+    <div class="esnek"></div>
+    <button class="dg">Katıl</button>
+  </section>
+</template>
+
+<template data-ad="4 · Katıl — hata (KK-30)">
+  <section class="ekran">
+    <div class="ust"><button class="ikon-dg" aria-label="Geri"><svg width="22" height="22"><use href="#geri"/></svg></button><div class="etiket">Odaya katıl</div><div style="width: 48px"></div></div>
+    <h2 class="baslik">Kodu gir</h2>
+    <div class="kutular"><div style="border-color: var(--nok)">Z</div><div style="border-color: var(--nok)">E</div><div style="border-color: var(--nok)">P</div><div style="border-color: var(--nok)">E</div></div>
+    <div class="hata"><b>!</b><span>Bu kodla açık bir oda yok. Kodu arkadaşına tekrar sor.</span></div>
+    <div class="etiket" style="margin-top: 8px">Diğer hatalar</div>
+    <p class="govde" style="font-size: 14px">“Oda dolu (12/12).” · “Oyun başladı, bir sonrakine katıl.” · “Oda kapandı.” · “Çok fazla deneme, 30 sn bekle.”</p>
+    <div class="esnek"></div>
+    <button class="dg">Tekrar dene</button>
+  </section>
+</template>
+
+<template data-ad="5 · Lobi — katılan (KK-31)">
+  <section class="ekran">
+    <div class="ust"><button class="ikon-dg" aria-label="Odadan çık"><svg width="22" height="22"><use href="#kapat"/></svg></button><div class="etiket">Lobi</div><span class="cip oda">ZEPA</span></div>
+    <div class="orta esnek" style="gap: 18px">
+      <span class="sticker" style="background: var(--marka-2); font-size: 40px">İçeridesin!</span>
+      <p class="govde">Murat oyunu başlatınca ilk soru herkese aynı anda gelecek.</p>
+      <div class="liste" style="justify-content: center">
+        <span class="cip">Murat ★</span><span class="cip" style="background: var(--marka); color: var(--kontur)">Ayşe (sen)</span><span class="cip">Mert</span><span class="cip">Deniz</span><span class="cip bekliyor">katılıyor…</span>
+      </div>
+    </div>
+    <p class="govde" style="text-align: center; font-size: 14px">10 soru · 15 sn · cevaplar sonuna kadar gizli</p>
+  </section>
+</template>
+
+<template data-ad="6 · Soru (KK-32, KK-33)">
+  <section class="ekran">
+    <div class="ust">
+      <span class="cip oda">ZEPA</span>
+      <div style="font-weight: 800; font-size: 18px">Soru 3 <span style="color: var(--soluk)">/ 10</span></div>
+      <div class="halka"><svg width="64" height="64" viewBox="0 0 64 64"><circle cx="32" cy="32" r="27" fill="none" stroke="var(--yuzey)" stroke-width="6"/><circle cx="32" cy="32" r="27" fill="none" stroke="var(--marka)" stroke-width="6" stroke-linecap="round" stroke-dasharray="170" stroke-dashoffset="68"/></svg>9</div>
+    </div>
+    <div class="kart" style="transform: rotate(-2deg); margin-top: 8px">
+      <div class="etiket" style="color: #3a3560">Durum</div>
+      <div style="margin-top: 10px; font-size: calc(var(--w) * 0.075); font-weight: 800; letter-spacing: -0.025em; line-height: 1.1">Sevgilinin telefonunu gizlice karıştırmak.</div>
+    </div>
+    <div class="esnek"></div>
+    <div style="display: flex; gap: 14px">
+      <button class="oy-dg ok"><svg width="40" height="40"><use href="#bas"/></svg>OK</button>
+      <button class="oy-dg nok-soluk"><svg width="40" height="40" style="transform: rotate(180deg)"><use href="#bas"/></svg>NOK</button>
+    </div>
+    <p class="govde" style="text-align: center; font-size: 14px">Süre bitene kadar fikrini değiştirebilirsin.</p>
+  </section>
+</template>
+
+<template data-ad="7 · Bekleme — cevabın alındı (KK-34)">
+  <section class="ekran">
+    <div class="ust"><span class="cip oda">ZEPA</span><div style="font-weight: 800; font-size: 18px">Soru 3 <span style="color: var(--soluk)">/ 10</span></div><div class="halka" style="color: var(--soluk)">6</div></div>
+    <div class="orta esnek" style="gap: 16px">
+      <span class="sticker" style="background: var(--marka); font-size: 40px">Cevabın alındı ✓</span>
+      <div style="font-size: 54px; font-weight: 800; letter-spacing: -0.03em">6 / 8</div>
+      <p class="govde">cevapladı. Kim ne dedi en sonda.</p>
+      <div class="liste" style="justify-content: center">
+        <span class="cip"><span class="tik">✓</span>Murat</span><span class="cip"><span class="tik">✓</span>Ayşe</span><span class="cip"><span class="tik">✓</span>Mert</span><span class="cip"><span class="tik">✓</span>Deniz</span>
+        <span class="cip"><span class="tik">✓</span>Can</span><span class="cip"><span class="tik">✓</span>Elif</span><span class="cip bekliyor">Ali…</span><span class="cip bekliyor">Zeynep…</span>
+      </div>
+    </div>
+    <p class="govde" style="text-align: center; font-size: 14px">Herkes cevaplayınca beklemeden sonraki soru gelir.</p>
+  </section>
+</template>
+
+<template data-ad="8 · Yeniden bağlanıyor (KK-37)">
+  <section class="ekran">
+    <div class="ust"><span class="cip oda">ZEPA</span><div style="font-weight: 800; font-size: 18px">Soru 5 / 10</div><div style="width: 64px"></div></div>
+    <div class="kart" style="transform: rotate(-2deg); margin-top: 8px; height: 40%; opacity: .5"></div>
+    <div class="perde" style="align-items: center; justify-content: center">
+      <div class="kart" style="width: 100%; background: var(--zemin); color: var(--metin); transform: rotate(-1.5deg); display: flex; flex-direction: column; align-items: center; gap: 12px; text-align: center">
+        <svg width="44" height="44" style="color: var(--marka)"><use href="#wifi"/></svg>
+        <div style="font-size: 28px; font-weight: 800">Yeniden bağlanıyor…</div>
+        <p class="govde" style="font-size: 15px">Odadaki yerin duruyor. Bağlanınca açık olan soruya katılırsın; kaçan sorular “boş” sayılır.</p>
+      </div>
+    </div>
+  </section>
+</template>
+
+<template data-ad="9 · Oda kapandı (KK-38)">
+  <section class="ekran">
+    <div class="orta esnek" style="gap: 16px">
+      <span class="sticker" style="background: var(--yuzey); color: var(--metin); font-size: 40px">Oda kapandı</span>
+      <p class="govde">Odada senden başka kimse kalmadı. 6 sorunun sonucu hazır.</p>
+    </div>
+    <button class="dg">Sonuçları gör</button>
+    <button class="dg ikincil" style="box-shadow: none">Ana menü</button>
+  </section>
+</template>
+
+<template data-ad="10 · Final — kim ne dedi (KK-36)">
+  <section class="ekran" style="gap: 12px">
+    <div class="ust"><span class="cip oda">ZEPA</span><div class="etiket">Final · 4/5</div><div style="width: 48px"></div></div>
+    <h2 class="baslik">Kim ne dedi?</h2>
+    <div class="matris">
+      <span></span><span style="grid-column: span 10; display: flex; justify-content: space-between; color: var(--soluk); font-size: 11px"><span>S1</span><span>S5</span><span>S10</span></span>
+      <span>Murat</span><i class="o"></i><i class="o"></i><i class="n"></i><i class="o"></i><i class="o"></i><i class="n"></i><i class="o"></i><i class="o"></i><i class="n"></i><i class="o"></i>
+      <span style="color: var(--nok-metin)">Ayşe</span><i class="n"></i><i class="n"></i><i class="n"></i><i class="o"></i><i class="n"></i><i class="n"></i><i class="o"></i><i class="n"></i><i class="n"></i><i class="n"></i>
+      <span>Mert</span><i class="o"></i><i class="o"></i><i class="n"></i><i class="o"></i><i class="o"></i><i class="n"></i><i class="o"></i><i class="o"></i><i class="b"></i><i class="o"></i>
+      <span>Deniz</span><i class="o"></i><i class="o"></i><i class="n"></i><i class="o"></i><i class="o"></i><i class="o"></i><i class="o"></i><i class="o"></i><i class="n"></i><i class="o"></i>
+      <span>Can</span><i class="o"></i><i class="n"></i><i class="o"></i><i class="o"></i><i class="b"></i><i class="n"></i><i class="o"></i><i class="o"></i><i class="n"></i><i class="o"></i>
+      <span>Elif</span><i class="o"></i><i class="o"></i><i class="n"></i><i class="n"></i><i class="o"></i><i class="n"></i><i class="o"></i><i class="o"></i><i class="o"></i><i class="o"></i>
+      <span>Ali</span><i class="n"></i><i class="n"></i><i class="n"></i><i class="o"></i><i class="o"></i><i class="o"></i><i class="n"></i><i class="o"></i><i class="n"></i><i class="n"></i>
+      <span>Zeynep</span><i class="n"></i><i class="n"></i><i class="n"></i><i class="o"></i><i class="b"></i><i class="n"></i><i class="n"></i><i class="o"></i><i class="b"></i><i class="n"></i>
+    </div>
+    <div class="liste" style="font-size: 13px"><span class="cip" style="font-size: 13px"><i style="width: 14px; height: 14px; border-radius: 4px; background: var(--ok); border: 2px solid var(--kontur)"></i>OK</span><span class="cip" style="font-size: 13px"><i style="width: 14px; height: 14px; border-radius: 4px; background: var(--nok); border: 2px solid var(--kontur)"></i>NOK</span><span class="cip" style="font-size: 13px"><i style="width: 14px; height: 14px; border-radius: 4px; background: var(--yuzey); border: 2px solid var(--kontur)"></i>boş</span></div>
+    <p class="govde" style="font-size: 14px">Ekran okuyucu satır satır okur: “Ayşe: 2 OK, 8 NOK”.</p>
+    <div class="esnek"></div>
+    <button class="dg">Senin kartın →</button>
+  </section>
+</template>
+
+<template data-ad="11 · Final — kişisel kart (KK-36)">
+  <section class="ekran">
+    <div class="ust"><span class="cip oda">ZEPA</span><div class="etiket">Final · 5/5</div><div style="width: 48px"></div></div>
+    <div class="orta esnek" style="gap: 14px">
+      <div class="kart" style="width: 100%; transform: rotate(-2deg); text-align: left">
+        <div class="etiket" style="color: #3a3560">Mert, bu odada sen</div>
+        <div style="margin-top: 8px; font-size: 64px; font-weight: 800; letter-spacing: -0.04em; line-height: 1">7/10</div>
+        <div style="font-size: 22px; font-weight: 800">çoğunlukla aynıydın</div>
+        <div style="margin-top: 14px; display: flex; gap: 8px; flex-wrap: wrap">
+          <span class="cip" style="background: var(--marka-2); color: var(--kontur)">Ruh ikizin: Deniz</span>
+          <span class="cip" style="background: var(--ok); color: var(--kontur)">6 OK</span><span class="cip" style="background: var(--nok); color: var(--kontur)">3 NOK</span><span class="cip" style="background: var(--zemin); color: var(--metin)">1 boş</span>
+        </div>
+      </div>
+    </div>
+    <div style="display: flex; gap: 14px"><button class="dg">Paylaş</button><button class="dg ikincil">Tekrar oyna</button></div>
+  </section>
+</template>
+
+<script>
+  const p = new URLSearchParams(location.search);
+  const tema = p.get('tema') === 'acik' ? 'acik' : 'koyu';
+  const [w, h] = (p.get('boy') || '390x844').split('x').map(Number);
+  document.documentElement.dataset.tema = tema;
+  document.documentElement.style.setProperty('--w', w + 'px');
+  document.documentElement.style.setProperty('--h', h + 'px');
+  document.getElementById('baslik').textContent = `Kafadar — oda modu · ${tema === 'koyu' ? 'Koyu' : 'Açık'} · ${w}×${h}`;
+  const kap = document.getElementById('ekranlar');
+  document.querySelectorAll('template').forEach(t => {
+    const f = document.createElement('figure'), c = document.createElement('figcaption');
+    c.textContent = t.dataset.ad; f.append(c, t.content.cloneNode(true)); kap.append(f);
+  });
+  // QR yer tutucu (gerçek QR uygulamada üretilir): köşe işaretleri + sabit desen
+  document.querySelectorAll('.qr').forEach(q => {
+    const n = 21, s = [];
+    const dolu = (x, y) => { for (const [a, b] of [[0, 0], [n - 7, 0], [0, n - 7]]) if (x >= a && x < a + 7 && y >= b && y < b + 7) {
+      const i = x - a, j = y - b; return i === 0 || j === 0 || i === 6 || j === 6 || (i > 1 && i < 5 && j > 1 && j < 5); }
+      return ((x * 7 + y * 13 + x * y) % 5) < 2; };
+    for (let y = 0; y < n; y++) for (let x = 0; x < n; x++) if (dolu(x, y)) s.push(`<rect x="${x}" y="${y}" width="1" height="1"/>`);
+    q.innerHTML = `<svg viewBox="0 0 ${n} ${n}" width="100%" height="100%" fill="#0B0920" shape-rendering="crispEdges" role="img" aria-label="Oda kodu QR">${s.join('')}</svg>`;
+  });
+</script>
+</body>
+</html>
