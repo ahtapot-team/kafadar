@@ -35,6 +35,7 @@ Bekleyen testler `src/kabul.ts` içindeki `BEKLEYEN` bayraklarıyla (`cekirdek` 
 | KK-26 | `uygulama.kabul.test.ts` (oyuncular/paket/ayarlar `geri` düğmesi, oyun ekranlarında geri yok); "Geri'de liste korunur" önizlemede | ekran bekleyen (`BEKLEYEN.kk26`), oyun-içi yeşil |
 | KK-27 | `uygulama.kabul.test.ts` (ikon yalnızca app/index.tsx'te; ana ekranda metinli "Ayarlar" düğmesi yok, `ayarlar` testID'li ikon `accessibilityLabel` ile var); sağ üstte sabit durması önizlemede | ekran bekleyen (`BEKLEYEN.kk27`), koruma yeşil |
 | #36 cila | `uygulama.kabul.test.ts` (durum.tsx doğrulayıcı verir, `+not-found.tsx` Türkçe, Paylaş web'de gizli, keep-awake web'de yok); davranış önizlemede | bekleyen (`BEKLEYEN.cila`) |
+| KK-28…KK-41 (oda modu) | `src/oda/oda.kabul.test.ts` (saf durum makinesi, sahte saat + N sahte istemci, ağsız: KK-29…KK-40), `uygulama.kabul.test.ts` (testID sözleşmesi, wrangler dağıtımı, saflık/çevrimdışı korumaları, KK-41 liste varlığı); QR, paylaşım görseli, gerçek ağ ve süre: önizleme + `GERCEK-CIHAZ-KONTROL.md` (KK-41, insan) | bekleyen (`BEKLEYEN.oda`), korumalar yeşil |
 | KK-24 | `GERCEK-CIHAZ-KONTROL.md` (ayrı PR), insan işaretler | cihaz |
 
 ## testID adları (frontend bunları kullanır)
@@ -47,3 +48,6 @@ Deste bitti: `karistir-evet`, `karistir-hayir`
 Oturum sonu: `odul-aykiri-ruh`, `odul-ruh-ikizleri`, `odul-olay-kart`, `paylas`, `tekrar-oyna`, `ana-menu`
 Her an: `cikis-onay-evet`, `cikis-onay-hayir`; ayarlar: `ayar-ses`, `ayar-titresim`, `ayar-tema`
 (`<i>` oyuncunun sıra numarası, 0'dan; isim yerine sıra kullanılır çünkü isimde emoji/boşluk olabilir.)
+
+## Oda modu arayüz sözleşmesi (`src/oda/oda.ts`, #47)
+`kodUret`, `odaKur`, `isle(durum, olay, simdi)`, `gorunum(durum, kimlik, simdi)`, `final`, `silinmeli`, `denemeSiniri`. Olaylar: `katil`, `baslat`, `cevapla`, `kop`, `don`, `ayril`, `zaman`. Hata varsa durum değişmez. Belirtilmeyen, bilerek test edilmeyen davranışlar: kopuk oyuncunun erken geçişi bekletip bekletmediği, lobide kuranın ayrılması, süre sınırında tam milisaniye, oyun biter bitmez silme gecikmesi, 3–2 gibi çoklu azınlık metni.
