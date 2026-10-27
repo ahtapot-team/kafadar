@@ -31,7 +31,8 @@ export const BEKLEYEN = {
   casusUi: false,
   casusUiSon: true, // #82: tüm Casus kim ekranlarının testID sözleşmesi
   casusKayit: false,
-  casusKayitUi: false, // #81: Casus ekranı oyunOku(depo, durumGecerliMi) kullanır
+  casusKayitUi: false,
+  odaCik: true, // #73: oyun içinde "Odadan çık?" (frontend #104 kapatır)
 };
 
 export const kabul = BEKLEYEN.cekirdek ? it.fails : it;
@@ -49,4 +50,5 @@ export const kabulCasusMantik = BEKLEYEN.casusMantik ? it.fails : it;
 export const kabulCasusUi = BEKLEYEN.casusUi ? it.fails : it;
 export const kabulCasusUiSon = BEKLEYEN.casusUiSon ? it.fails : it;
 export const kabulCasusKayit = BEKLEYEN.casusKayit ? it.fails : it;
+export const kabulOdaCik = BEKLEYEN.odaCik ? it.fails : it;
 export const kabulCasusKayitUi = BEKLEYEN.casusKayitUi ? it.fails : it;
