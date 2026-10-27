@@ -1,6 +1,6 @@
 import { describe, expect } from 'vitest';
 import type { Deste } from './deste';
-import { kabul } from '../kabul';
+import { kabul, kabulOyun } from '../kabul';
 import {
   type Depo,
   EKIP_ANAHTARI,
@@ -69,7 +69,7 @@ describe('KK-14: oturum kaydı ve devam etme', () => {
     expect(await oku(depoYap())).toBeNull();
   });
 
-  kabul('her oydan ve her karttan sonra kaydedilir', async () => {
+  kabulOyun('her oydan ve her karttan sonra kaydedilir', async () => {
     const depo = depoYap();
     let d = yeni();
     d = await kaydet(depo, d, {
@@ -92,7 +92,7 @@ describe('KK-14: oturum kaydı ve devam etme', () => {
     expect(await oku(depo)).toEqual(d);
   });
 
-  kabul('kapanıp açılınca kalınan yerden aynı oyun sürer', async () => {
+  kabulOyun('kapanıp açılınca kalınan yerden aynı oyun sürer', async () => {
     const depo = depoYap();
     let d = yeni();
     for (const oyuncu of ['Ali', 'Ayşe', 'Can']) {
@@ -126,7 +126,7 @@ describe('KK-14: oturum kaydı ve devam etme', () => {
     },
   );
 
-  kabul('kayıt sürümlüdür', async () => {
+  kabulOyun('kayıt sürümlüdür', async () => {
     const depo = depoYap();
     await kaydet(depo, yeni(), { tip: 'bitir' });
     const ham = JSON.parse((await depo.getItem(OYUN_ANAHTARI)) ?? '{}');
