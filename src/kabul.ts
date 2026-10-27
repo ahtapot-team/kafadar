@@ -28,7 +28,7 @@ export const BEKLEYEN = {
   odaKimlik: false,
   casusMantik: false,
   casusUi: true,
-  casusKayit: true,
+  casusKayit: false,
 };
 
 export const kabul = BEKLEYEN.cekirdek ? it.fails : it;
