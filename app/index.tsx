@@ -59,7 +59,7 @@ function Logo() {
 
 export default function Ana() {
   const router = useRouter();
-  const { yarimOyunVar, oyunuBitir, hazir } = useDurum();
+  const { yarimOyunVar, oyunuBitir, hazir, oyunuSec } = useDurum();
   const [soruldu, setSoruldu] = useState(false);
   return (
     <Ekran>
@@ -80,7 +80,10 @@ export default function Ana() {
             key={oyun.id}
             testID={`ana-oyun-${oyun.id}`}
             etiket={oyun.ad}
-            onPress={() => router.push('/oyuncular')}
+            onPress={() => {
+              oyunuSec(oyun.id);
+              router.push('/oyuncular');
+            }}
           />
         ),
       )}

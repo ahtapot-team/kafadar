@@ -32,6 +32,8 @@ type Durum = {
   oyuncular: string[];
   oyunculariAyarla: (liste: string[]) => void;
   gecenEkip: string[];
+  oyunId: string | null; // ana ekranda seçilen oyun
+  oyunuSec: (id: string) => void;
   kurulum: Kurulum;
   kurulumuAyarla: (k: Kurulum) => void;
   yarimOyunVar: boolean; // açılışta kayıtlı oyun bulundu
@@ -62,6 +64,7 @@ export function DurumSaglayici({
     paket: 'arkadas',
     tur: 10,
   });
+  const [oyunId, oyunuSec] = useState<string | null>(null);
   const [yarimOyunVar, setYarimOyunVar] = useState(false);
 
   useEffect(() => {
@@ -90,6 +93,7 @@ export function DurumSaglayici({
 
   const oyunuBaslat = useCallback(() => {
     setYarimOyunVar(false);
+    depo.removeItem(OYUN_ANAHTARI).catch(() => {}); // eski kayıt yeni oyuna karışmasın
     setGecenEkip(oyuncular);
     sonEkipKaydet(depo, oyuncular).catch(() => {});
   }, [depo, oyuncular]);
@@ -108,6 +112,8 @@ export function DurumSaglayici({
       oyuncular,
       oyunculariAyarla,
       gecenEkip,
+      oyunId,
+      oyunuSec,
       kurulum,
       kurulumuAyarla,
       yarimOyunVar,
@@ -120,6 +126,7 @@ export function DurumSaglayici({
       ayarla,
       oyuncular,
       gecenEkip,
+      oyunId,
       kurulum,
       yarimOyunVar,
       oyunuBaslat,

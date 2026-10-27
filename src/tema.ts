@@ -46,20 +46,34 @@ export const hareket = {
   dugmeBas: 90,
   dugmeBirak: 150,
   azaltilmisSolma: 150,
+  geriSayimAdimi: 1000,
+  sayiGirisi: 250,
+  oySecimi: 160,
+  cubukDolma: 2000,
+  sticker: 300,
+  sarsinti: 400,
+  konfeti: 1500,
 };
 export const easing = {
   yay: [0.34, 1.56, 0.64, 1] as const,
   yumusak: [0.2, 0.8, 0.2, 1] as const,
+  cubuk: [0.16, 1, 0.3, 1] as const,
+};
+
+// Tek aile: Bricolage Grotesque (app/_layout.tsx'te yüklenir).
+export const font = {
+  kalin: 'BricolageGrotesque_800ExtraBold',
+  orta: 'BricolageGrotesque_500Medium',
 };
 
 export const yazi = {
-  baslikXl: { fontSize: 48, fontWeight: '800' as const, letterSpacing: -1.4 },
-  baslik: { fontSize: 36, fontWeight: '800' as const },
-  dugme: { fontSize: 21, fontWeight: '800' as const },
-  govde: { fontSize: 17, fontWeight: '500' as const, lineHeight: 25 },
+  baslikXl: { fontFamily: font.kalin, fontSize: 48, letterSpacing: -1.4 },
+  baslik: { fontFamily: font.kalin, fontSize: 36 },
+  dugme: { fontFamily: font.kalin, fontSize: 21 },
+  govde: { fontFamily: font.orta, fontSize: 17, lineHeight: 25 },
   etiket: {
+    fontFamily: font.kalin,
     fontSize: 14,
-    fontWeight: '800' as const,
     letterSpacing: 1.1,
     textTransform: 'uppercase' as const,
   },
