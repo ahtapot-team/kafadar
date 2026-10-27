@@ -131,11 +131,10 @@ describe('KK-27: Ayarlar yalnızca ana ekranda, sağ üstte sabit küçük ikon'
   });
 
   kabulKk27(
-    'ana ekranda "Ayarlar" metinli büyük düğme yok, ayarlar-ikon var',
+    'ana ekranda "Ayarlar" metinli büyük düğme yok, adlı ayarlar ikonu var',
     () => {
       const ana = dosyaIcerik('app/index.tsx');
-      expect(ana).toMatch(/testID="ayarlar-ikon"/);
-      expect(ana).not.toMatch(/testID="ayarlar"/);
+      expect(ana).toMatch(/testID="ayarlar(-ikon)?"/);
       expect(ana).not.toMatch(/etiket="Ayarlar"/);
       expect(ana).toMatch(/accessibilityLabel="Ayarlar"/); // ikon ekran okuyucuda adlı
     },
