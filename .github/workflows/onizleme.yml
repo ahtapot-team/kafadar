@@ -40,12 +40,6 @@ jobs:
       - run: npm ci
         if: env.EXPO_TOKEN != ''
 
-      - name: GEÇİCİ eas init (projectId'yi yazdırır)
-        if: env.EXPO_TOKEN != ''
-        run: |
-          eas init --account ahtapot-team --force --non-interactive
-          git diff app.json
-
       - uses: expo/expo-github-action/preview@v8
         if: env.EXPO_TOKEN != ''
         with:
