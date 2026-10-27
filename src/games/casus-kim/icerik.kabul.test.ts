@@ -100,3 +100,22 @@ describe('KK-7: OK mu NOK mu md desteleri 100 kart', () => {
     });
   }
 });
+
+// KK-7: OK mu NOK mu JSON desteleri md ile aynı metinleri taşır (#87).
+describe('KK-7: OK mu NOK mu JSON desteleri md ile eşit', () => {
+  for (const deste of ['arkadas', 'cift', 'aile']) {
+    it(`${deste}.json: md ile aynı 100 metin, sürüm ≥2, kimlikler benzersiz`, () => {
+      const json = JSON.parse(oku(`content/decks/${deste}.json`)) as {
+        version: number;
+        cards: { id: string; text: string }[];
+      };
+      const md = oku(`docs/desteler/${deste}.md`)
+        .split('\n')
+        .filter((s) => /^\d+\.\s/.test(s))
+        .map((s) => s.replace(/^\d+\.\s+/, '').trim());
+      expect(json.cards.map((c) => c.text)).toEqual(md);
+      expect(json.version).toBeGreaterThanOrEqual(2);
+      expect(new Set(json.cards.map((c) => c.id)).size).toBe(json.cards.length);
+    });
+  }
+});
