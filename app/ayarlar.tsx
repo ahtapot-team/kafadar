@@ -1,7 +1,6 @@
-import { useRouter } from 'expo-router';
 import { Switch, View } from 'react-native';
 import { useDurum } from '../src/durum';
-import { Dugme, Ekran, Yazi } from '../src/ui';
+import { Ekran, GeriCubugu, Yazi } from '../src/ui';
 
 function Satir({
   ad,
@@ -38,10 +37,10 @@ function Satir({
 }
 
 export default function Ayarlar() {
-  const router = useRouter();
   const { ayar, ayarla } = useDurum();
   return (
     <Ekran>
+      <GeriCubugu testID="geri" />
       <Yazi tur="baslik">Ayarlar</Yazi>
       <Satir
         testID="ayar-ses"
@@ -60,12 +59,6 @@ export default function Ayarlar() {
         ad="Koyu tema"
         deger={ayar.tema === 'koyu'}
         onDegis={(koyu) => ayarla({ tema: koyu ? 'koyu' : 'acik' })}
-      />
-      <Dugme
-        tur="ikincil"
-        testID="geri"
-        etiket="Geri"
-        onPress={() => router.back()}
       />
     </Ekran>
   );

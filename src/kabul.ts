@@ -10,8 +10,8 @@ export const BEKLEYEN = {
   cekirdek: false,
   oyun: false,
   kk25: false,
-  kk26: true,
-  kk27: true,
+  kk26: false,
+  kk27: false,
 };
 
 export const kabul = BEKLEYEN.cekirdek ? it.fails : it;

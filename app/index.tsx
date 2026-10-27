@@ -1,6 +1,7 @@
 import { useRouter } from 'expo-router';
 import { useEffect, useState } from 'react';
-import { AccessibilityInfo } from 'react-native';
+import { AccessibilityInfo, Pressable, View } from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import Animated, {
   Easing,
   useAnimatedStyle,
@@ -9,7 +10,13 @@ import Animated, {
 } from 'react-native-reanimated';
 import { oyunlar } from '../src/games/registry';
 import { useDurum } from '../src/durum';
-import { easing, hareket } from '../src/tema';
+import {
+  dokunmaAlani,
+  easing,
+  hareket,
+  kenarBosluk,
+  yaricap,
+} from '../src/tema';
 import { Diyalog, Dugme, Ekran, Yazi } from '../src/ui';
 
 // Logo açılışı ≤1 sn (KK-1). "Hareketi azalt" açıksa yalnızca kısa solma.
@@ -57,64 +64,91 @@ function Logo() {
   );
 }
 
+// Sabit ayarlar ikonu: ekranın sağ üstünde, kaydırınca da yerinde durur (KK-27); yalnızca ana ekranda.
+function AyarlarIkonu() {
+  const router = useRouter();
+  const { renk } = useDurum();
+  const ust = useSafeAreaInsets().top;
+  return (
+    <Pressable
+      testID="ayarlar"
+      accessibilityRole="button"
+      accessibilityLabel="Ayarlar"
+      onPress={() => router.push('/ayarlar')}
+      style={{
+        position: 'absolute',
+        top: ust + 8,
+        right: kenarBosluk,
+        width: dokunmaAlani,
+        height: dokunmaAlani,
+        borderRadius: yaricap.cip,
+        borderWidth: 3,
+        borderColor: renk.kontur,
+        backgroundColor: renk.yuzey,
+        alignItems: 'center',
+        justifyContent: 'center',
+      }}
+    >
+      <Yazi>⚙️</Yazi>
+    </Pressable>
+  );
+}
+
 export default function Ana() {
   const router = useRouter();
   const { yarimOyunVar, oyunuBitir, hazir, oyunuSec } = useDurum();
   const [soruldu, setSoruldu] = useState(false);
   return (
-    <Ekran>
-      <Logo />
-      <Yazi soluk>Bir oyun seç, telefonu ele ver.</Yazi>
-      {oyunlar.map((oyun) =>
-        !oyun.aktif ? (
+    <View style={{ flex: 1 }}>
+      <Ekran>
+        <Logo />
+        <Yazi soluk>Bir oyun seç, telefonu ele ver.</Yazi>
+        {oyunlar.map((oyun) =>
+          !oyun.aktif ? (
+            <Dugme
+              key={oyun.id}
+              tur="ikincil"
+              pasif
+              testID={`ana-oyun-yakinda-${oyun.id}`}
+              etiket={`${oyun.ad} · Yakında`}
+              onPress={() => {}}
+            />
+          ) : (
+            <Dugme
+              key={oyun.id}
+              testID={`ana-oyun-${oyun.id}`}
+              etiket={oyun.ad}
+              onPress={() => {
+                oyunuSec(oyun.id);
+                router.push('/oyuncular');
+              }}
+            />
+          ),
+        )}
+        <Diyalog
+          gorunur={hazir && yarimOyunVar && !soruldu}
+          baslik="Yarım kalan oyun var"
+        >
           <Dugme
-            key={oyun.id}
-            tur="ikincil"
-            pasif
-            testID={`ana-oyun-yakinda-${oyun.id}`}
-            etiket={`${oyun.ad} · Yakında`}
-            onPress={() => {}}
-          />
-        ) : (
-          <Dugme
-            key={oyun.id}
-            testID={`ana-oyun-${oyun.id}`}
-            etiket={oyun.ad}
+            testID="devam-et"
+            etiket="Devam et"
             onPress={() => {
-              oyunuSec(oyun.id);
-              router.push('/oyuncular');
+              setSoruldu(true);
+              router.push('/oyun');
             }}
           />
-        ),
-      )}
-      <Dugme
-        tur="ikincil"
-        testID="ayarlar"
-        etiket="Ayarlar"
-        onPress={() => router.push('/ayarlar')}
-      />
-      <Diyalog
-        gorunur={hazir && yarimOyunVar && !soruldu}
-        baslik="Yarım kalan oyun var"
-      >
-        <Dugme
-          testID="devam-et"
-          etiket="Devam et"
-          onPress={() => {
-            setSoruldu(true);
-            router.push('/oyun');
-          }}
-        />
-        <Dugme
-          testID="yeni-oyun"
-          tur="ikincil"
-          etiket="Yeni oyun"
-          onPress={() => {
-            oyunuBitir();
-            setSoruldu(true);
-          }}
-        />
-      </Diyalog>
-    </Ekran>
+          <Dugme
+            testID="yeni-oyun"
+            tur="ikincil"
+            etiket="Yeni oyun"
+            onPress={() => {
+              oyunuBitir();
+              setSoruldu(true);
+            }}
+          />
+        </Diyalog>
+      </Ekran>
+      <AyarlarIkonu />
+    </View>
   );
 }

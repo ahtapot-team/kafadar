@@ -1,4 +1,4 @@
-// Ortak bileşenler (tasarım sistemi v1): Ekran, Yazi, Dugme, Cip, Diyalog.
+// Ortak bileşenler (tasarım sistemi v1): Ekran, Yazi, Dugme, Cip, Diyalog, GeriCubugu.
 import { useState, type ReactNode } from 'react';
 import {
   Modal,
@@ -9,6 +9,7 @@ import {
   type StyleProp,
   type TextStyle,
 } from 'react-native';
+import { useRouter } from 'expo-router';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useDurum } from './durum';
 import {
@@ -220,5 +221,36 @@ export function Diyalog({
         </View>
       </View>
     </Modal>
+  );
+}
+
+// Oyun dışı ekranların ortak üst çubuğu (KK-26): görünür "Geri", ≥48px, ekran okuyucu etiketli.
+// Bir önceki ekrana döner; girilen oyuncular ve seçimler durumda korunur. Geçmiş yoksa ana ekrana gider.
+export function GeriCubugu({ testID }: { testID: string }) {
+  const router = useRouter();
+  const { renk } = useDurum();
+  return (
+    <Pressable
+      testID={testID}
+      accessibilityRole="button"
+      accessibilityLabel="Geri"
+      onPress={() => (router.canGoBack() ? router.back() : router.replace('/'))}
+      style={{
+        alignSelf: 'flex-start',
+        minHeight: dokunmaAlani,
+        minWidth: dokunmaAlani,
+        flexDirection: 'row',
+        alignItems: 'center',
+        gap: bosluk.s,
+        paddingHorizontal: bosluk.l,
+        borderRadius: yaricap.cip,
+        borderWidth: 3,
+        borderColor: renk.kontur,
+        backgroundColor: renk.yuzey,
+      }}
+    >
+      <Yazi>←</Yazi>
+      <Yazi tur="etiket">Geri</Yazi>
+    </Pressable>
   );
 }

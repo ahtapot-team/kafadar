@@ -11,7 +11,7 @@ import {
 } from '../src/core/oyuncular';
 import { useDurum } from '../src/durum';
 import { bosluk, dokunmaAlani, yaricap } from '../src/tema';
-import { Dugme, Ekran, Yazi } from '../src/ui';
+import { Dugme, Ekran, Yazi, GeriCubugu } from '../src/ui';
 
 // Oyun öncesi: oyuncu listesi kurulur. `?oyunda=1` ile oyun ortasında düzenlenir (KK-6).
 export default function Oyuncular() {
@@ -42,6 +42,7 @@ export default function Oyuncular() {
 
   return (
     <Ekran>
+      {!oyunda && <GeriCubugu testID="geri" />}
       <Yazi tur="baslik">Oyuncular</Yazi>
       <Yazi soluk>{oyuncular.length} / 12 kişi</Yazi>
       {oyuncular.map((o, i) => (

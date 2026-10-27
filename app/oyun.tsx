@@ -1,5 +1,6 @@
 import { useKeepAwake } from 'expo-keep-awake';
 import { useNavigation, useRouter } from 'expo-router';
+import { Platform } from 'react-native';
 import { lazy, Suspense, useEffect, useMemo, useRef, useState } from 'react';
 import { oyunlar } from '../src/games/registry';
 import { desteler } from '../src/desteler';
@@ -21,7 +22,6 @@ export default function Oyun() {
   const gezinme = useNavigation<Gezinme>();
   const { oyunId, kurulum, oyunuBitir } = useDurum();
   const [cikisOnayi, setCikisOnayi] = useState(false);
-  const bekleyen = useRef<unknown>(null);
   const izinli = useRef(false);
 
   const oyun =
@@ -38,17 +38,31 @@ export default function Oyun() {
       gezinme.addListener('beforeRemove', (e) => {
         if (izinli.current) return;
         e.preventDefault();
-        bekleyen.current = e.data.action;
         setCikisOnayi(true);
       }),
     [gezinme],
   );
 
+  // Web: tarayıcı geri tuşu beforeRemove'u tetiklemez. Aynı adresli bir ek geçmiş girdisi koyup
+  // geri gelince onayı açıyoruz (KK-15 web'de de geçerli).
+  useEffect(() => {
+    if (Platform.OS !== 'web') return;
+    window.history.pushState(null, '', window.location.href);
+    const geriGeldi = () => {
+      if (izinli.current) return;
+      window.history.pushState(null, '', window.location.href);
+      setCikisOnayi(true);
+    };
+    window.addEventListener('popstate', geriGeldi);
+    return () => window.removeEventListener('popstate', geriGeldi);
+  }, []);
+
   const cik = () => {
     izinli.current = true;
     setCikisOnayi(false);
     oyunuBitir();
-    if (bekleyen.current) gezinme.dispatch(bekleyen.current);
+    // Çıkınca oyun dışı ekranlara değil ana ekrana dön (oyuna geri dönüş yok, KK-26).
+    if (router.canDismiss()) router.dismissAll();
     else router.replace('/');
   };
 
@@ -60,7 +74,6 @@ export default function Oyun() {
             deste={desteler[kurulum.paket]}
             uzunluk={kurulum.tur}
             onCik={() => {
-              bekleyen.current = null;
               setCikisOnayi(true);
             }}
             onOyuncular={() =>
@@ -77,7 +90,6 @@ export default function Oyun() {
           tur="ikincil"
           etiket="Oyuna dön"
           onPress={() => {
-            bekleyen.current = null;
             setCikisOnayi(false);
           }}
         />
