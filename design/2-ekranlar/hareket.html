@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kafadar — hareket prototipi</title>
+<!-- Animasyonlu prototip: kart çevirme → 3-2-1 → açıklama (tek azınlık) → kart → 3-2-1 → oybirliği. Süreler: design/TASARIM-SISTEMI.md § Hareket -->
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&display=swap" rel="stylesheet">
+<style>
+  :root { --zemin: #16123F; --yuzey: #2B2570; --metin: #FFF8E7; --soluk: #B9B3E8; --kontur: #0B0920; --golge: #7C6CFF;
+    --marka: #FFD23F; --marka-2: #5B8CFF; --ok: #3DDC84; --nok: #FF5A4E;
+    --yay: cubic-bezier(.34,1.56,.64,1); --akis: cubic-bezier(.2,.8,.2,1); --dolus: cubic-bezier(.16,1,.3,1); }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; height: 100%; background: var(--zemin); }
+  body { display: grid; place-items: center; font-family: 'Bricolage Grotesque', system-ui, sans-serif; color: var(--metin); }
+  .ekran { position: relative; width: 390px; height: 844px; overflow: hidden; background: var(--zemin); }
+  .sahne { position: absolute; inset: 0; padding: 56px 22px 30px; display: flex; flex-direction: column; gap: 18px;
+    opacity: 0; transform: translateX(40px); transition: opacity 280ms var(--akis), transform 280ms var(--akis); pointer-events: none; }
+  .sahne.aktif { opacity: 1; transform: none; }
+  .ust { display: flex; justify-content: space-between; align-items: center; }
+  .cip { display: inline-flex; align-items: center; gap: 6px; padding: 6px 12px; border-radius: 12px; border: 3px solid var(--kontur); font-weight: 800; font-size: 15px; color: var(--kontur); }
+  .ikon-dg { width: 48px; height: 48px; border-radius: 16px; border: 3px solid var(--kontur); background: var(--yuzey); display: grid; place-items: center; color: var(--metin); }
+
+  .yigin { position: relative; margin-top: 34px; height: 380px; perspective: 1200px; }
+  .arka { position: absolute; inset: 18px -6px -14px 10px; border-radius: 30px; background: var(--marka-2); border: 4px solid var(--kontur); transform: rotate(5deg); }
+  .kart { position: absolute; inset: 0; transform-style: preserve-3d; transform: rotate(-3deg) rotateY(180deg); transition: transform 450ms var(--akis); }
+  .cevrildi .kart { transform: rotate(-3deg) rotateY(0deg); }
+  .yuz { position: absolute; inset: 0; border-radius: 30px; border: 4px solid var(--kontur); box-shadow: 8px 8px 0 var(--golge); backface-visibility: hidden; }
+  .on { background: var(--marka); color: var(--kontur); padding: 28px 24px; display: flex; flex-direction: column; justify-content: space-between; }
+  .sirt { background: var(--marka-2); transform: rotateY(180deg); display: grid; place-items: center; }
+  .sirt span { transform: rotate(-6deg); padding: 8px 18px 12px; border-radius: 18px; background: var(--marka); border: 4px solid var(--kontur); font-weight: 800; font-size: 40px; color: var(--kontur); }
+  .kart-metin { font-weight: 800; font-size: 35px; line-height: 1.08; letter-spacing: -0.025em; }
+
+  .sayac { display: flex; justify-content: center; align-items: center; gap: 18px; margin-top: auto; }
+  .halka { width: 64px; height: 64px; border-radius: 50%; border: 4px solid var(--yuzey); color: var(--soluk); font-weight: 800; font-size: 28px; display: grid; place-items: center;
+    transition: all 250ms var(--yay); }
+  .halka.simdi { width: 108px; height: 108px; background: var(--metin); color: var(--zemin); border-color: var(--kontur); box-shadow: 6px 6px 0 var(--golge); font-size: 64px; transform: rotate(-6deg) scale(1); }
+  .halka.pop { transform: rotate(-6deg) scale(1.4); transition: none; }
+  .halka.bitti { opacity: .35; }
+  .ipucu { text-align: center; font-size: 19px; font-weight: 700; color: var(--soluk); }
+
+  .sticker { display: inline-block; padding: 4px 16px 8px; border-radius: 16px; border: 4px solid var(--kontur); box-shadow: 6px 6px 0 var(--golge);
+    font-weight: 800; font-size: 50px; letter-spacing: -0.03em; line-height: 1; color: var(--kontur); transform: rotate(-10deg) scale(.6); opacity: 0;
+    transition: transform 300ms var(--yay), opacity 150ms; }
+  .goster .sticker { transform: rotate(-4deg) scale(1); opacity: 1; }
+  .alt-baslik { font-weight: 800; font-size: 38px; letter-spacing: -0.03em; line-height: 1.05; opacity: 0; transition: opacity 200ms 150ms; }
+  .goster .alt-baslik { opacity: 1; }
+  .satir { display: flex; justify-content: space-between; align-items: center; font-weight: 800; font-size: 22px; }
+  .cubuk { height: 54px; border-radius: 18px; border: 4px solid var(--kontur); background: var(--yuzey); overflow: hidden; }
+  .cubuk i { display: block; height: 100%; width: 0; border-right: 4px solid var(--kontur); transition: width 2000ms var(--dolus); }
+  .liste { display: flex; flex-wrap: wrap; gap: 8px; opacity: 0; transition: opacity 250ms; }
+  .doldu .liste { opacity: 1; }
+  .sars { animation: sars 400ms linear; }
+  @keyframes sars { 0%,100% { transform: translateX(0) rotate(-4deg); } 12%,62% { transform: translateX(-8px) rotate(-4deg); } 37%,87% { transform: translateX(8px) rotate(-4deg); } }
+  .dg { height: 62px; border-radius: 20px; border: 4px solid var(--kontur); background: var(--marka); color: var(--kontur); box-shadow: 5px 5px 0 var(--golge);
+    font: 800 21px 'Bricolage Grotesque', sans-serif; display: grid; place-items: center; transition: transform 90ms ease-out, box-shadow 90ms ease-out; }
+  .dg.bas { transform: translate(4px, 4px); box-shadow: 1px 1px 0 var(--golge); }
+  .konfeti { position: absolute; top: -30px; width: 12px; height: 20px; border: 2px solid var(--kontur); border-radius: 3px; }
+  .yag .konfeti { animation: dus 1500ms ease-in forwards; }
+  @keyframes dus { to { transform: translateY(var(--y)) translateX(var(--x)) rotate(var(--r)); opacity: .9; } }
+  .basp { width: 22px; height: 22px; }
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="bas" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M7 10v12"/><path d="M15 5.88 14 10h5.83a2 2 0 0 1 1.92 2.56l-2.33 8A2 2 0 0 1 17.5 22H4a2 2 0 0 1-2-2v-8a2 2 0 0 1 2-2h2.76a2 2 0 0 0 1.79-1.11L12 2a3.13 3.13 0 0 1 3 3.88Z"/></g></symbol>
+</svg>
+<div class="ekran">
+  <!-- Kart sahnesi -->
+  <section class="sahne" id="kartS">
+    <div class="ust">
+      <span class="ikon-dg"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></span>
+      <div style="font-weight: 800; font-size: 18px">Kart <span id="no">4</span> <span style="color: var(--soluk)">/ 20</span></div>
+      <span class="cip" style="background: var(--golge); transform: rotate(3deg)">Arkadaş</span>
+    </div>
+    <div class="yigin" id="yigin">
+      <div class="arka"></div>
+      <div class="kart">
+        <div class="yuz sirt"><span>Kafadar!</span></div>
+        <div class="yuz on">
+          <span class="cip" style="align-self: flex-start; background: var(--kontur); color: var(--marka); font-size: 13px">DURUM</span>
+          <div class="kart-metin" id="metin"></div>
+          <div style="font-size: 17px; font-weight: 700">OK mu, NOK mu?</div>
+        </div>
+      </div>
+    </div>
+    <div class="sayac"><div class="halka" id="h3">3</div><div class="halka" id="h2">2</div><div class="halka" id="h1">1</div></div>
+    <div class="ipucu" id="ipucu">Hazır olun…</div>
+  </section>
+
+  <!-- Açıklama sahnesi -->
+  <section class="sahne" id="sonucS">
+    <div style="display: flex; flex-direction: column; align-items: flex-start; gap: 10px; margin-top: 14px; min-height: 130px">
+      <span class="sticker" id="stk"></span>
+      <div class="alt-baslik" id="alt"></div>
+    </div>
+    <div style="flex: 1; display: flex; flex-direction: column; justify-content: center; gap: 22px">
+      <div style="display: flex; flex-direction: column; gap: 10px">
+        <div class="satir" style="color: var(--ok)"><span style="display: flex; gap: 8px; align-items: center"><svg class="basp"><use href="#bas"/></svg>OK</span><span id="okS">0</span></div>
+        <div class="cubuk"><i id="okC" style="background: var(--ok)"></i></div>
+        <div class="liste" id="okL"></div>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 10px" id="nokBlok">
+        <div class="satir" style="color: var(--nok)"><span style="display: flex; gap: 8px; align-items: center"><svg class="basp" style="transform: rotate(180deg)"><use href="#bas"/></svg>NOK</span><span id="nokS">0</span></div>
+        <div class="cubuk"><i id="nokC" style="background: var(--nok)"></i></div>
+        <div class="liste" id="nokL"></div>
+      </div>
+    </div>
+    <div class="dg" id="sonraki">Sonraki kart</div>
+    <div id="konfetiler"></div>
+  </section>
+</div>
+
+<script>
+const $ = id => document.getElementById(id);
+const bekle = ms => new Promise(r => setTimeout(r, ms));
+const turlar = [
+  { no: 4, metin: 'Doğum gününü unutup “sürprizin yarın” demek.', ok: ['Mert','Deniz','Can','Elif'], nok: ['Ayşe'],
+    sticker: 'Ayşe', renk: 'var(--nok)', alt: 'tek başına <span style="color:var(--nok)">NOK!</span>' },
+  { no: 5, metin: 'Arkadaşının şarkısını grupta “bu ne ya” diye paylaşmak.', ok: [], nok: ['Ayşe','Mert','Deniz','Can','Elif'],
+    sticker: 'Hepiniz', renk: 'var(--nok)', alt: '<span style="color:var(--nok)">NOK</span> dediniz!' },
+];
+function sahne(id) { document.querySelectorAll('.sahne').forEach(s => s.classList.toggle('aktif', s.id === id)); }
+function cipler(el, isimler, renk) { el.innerHTML = isimler.map(i => `<span class="cip" style="background:${renk}">${i}</span>`).join(''); }
+function say(el, hedef, sure) { const t0 = performance.now(); (function f(t) { const k = Math.min(1, (t - t0) / sure);
+  el.textContent = Math.round(hedef * (1 - Math.pow(1 - k, 4))); if (k < 1) requestAnimationFrame(f); })(t0); }
+
+async function tur(t) {
+  // Kart
+  $('no').textContent = t.no; $('metin').textContent = t.metin; $('ipucu').textContent = 'Hazır olun…';
+  ['h3','h2','h1'].forEach(h => $(h).className = 'halka');
+  $('yigin').classList.remove('cevrildi'); sahne('kartS'); await bekle(500);
+  $('yigin').classList.add('cevrildi'); await bekle(900);
+  for (const h of ['h3','h2','h1']) {
+    $(h).className = 'halka simdi pop'; void $(h).offsetWidth; $(h).className = 'halka simdi';
+    $('ipucu').textContent = h === 'h1' ? 'Başparmaklar!' : 'Başparmaklar hazır!';
+    await bekle(1000); $(h).className = 'halka bitti';
+  }
+  // Açıklama
+  const S = $('sonucS'); S.classList.remove('goster','doldu','yag');
+  $('okC').style.transition = 'none'; $('nokC').style.transition = 'none'; $('okC').style.width = '0'; $('nokC').style.width = '0';
+  $('okS').textContent = 0; $('nokS').textContent = 0; $('konfetiler').innerHTML = '';
+  $('stk').textContent = t.sticker; $('stk').style.background = t.renk; $('alt').innerHTML = t.alt;
+  cipler($('okL'), t.ok, 'var(--ok)'); cipler($('nokL'), t.nok, 'var(--nok)');
+  sahne('sonucS'); await bekle(350);
+  const n = t.ok.length + t.nok.length;
+  $('okC').style.transition = ''; $('nokC').style.transition = '';
+  $('okC').style.width = (t.ok.length / n * 100) + '%'; $('nokC').style.width = (t.nok.length / n * 100) + '%';
+  say($('okS'), t.ok.length, 2000); say($('nokS'), t.nok.length, 2000);
+  await bekle(2000); S.classList.add('doldu', 'goster'); await bekle(320);
+  if (t.ok.length && t.nok.length) { // tek azınlık: sarsıntı
+    const azinlik = (t.nok.length < t.ok.length ? $('nokL') : $('okL')).firstElementChild;
+    $('stk').classList.add('sars'); azinlik.classList.add('sars'); await bekle(420); $('stk').classList.remove('sars');
+  } else { // oybirliği: konfeti
+    const renkler = ['var(--marka)', t.ok.length ? 'var(--ok)' : 'var(--nok)', 'var(--marka-2)'];
+    $('konfetiler').innerHTML = Array.from({ length: 60 }, (_, i) =>
+      `<i class="konfeti" style="left:${(i * 37) % 100}%;background:${renkler[i % 3]};--y:${520 + (i * 53) % 320}px;--x:${((i * 29) % 80) - 40}px;--r:${(i * 97) % 720}deg;animation-delay:${(i % 10) * 30}ms"></i>`).join('');
+    S.classList.add('yag');
+  }
+  await bekle(1700);
+  $('sonraki').classList.add('bas'); await bekle(120); $('sonraki').classList.remove('bas'); await bekle(200);
+}
+(async () => { await document.fonts.ready; for (;;) { for (const t of turlar) await tur(t); } })();
+</script>
+</body>
+</html>
