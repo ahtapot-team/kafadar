@@ -17,6 +17,8 @@ jobs:
   yayinla:
     runs-on: ubuntu-latest
     timeout-minutes: 15
+    env:
+      EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
     steps:
       - uses: actions/checkout@v4
 
@@ -25,13 +27,20 @@ jobs:
           node-version: 22
           cache: npm
 
+      - name: Token yoksa önizleme atlanır
+        if: env.EXPO_TOKEN == ''
+        run: echo "EXPO_TOKEN tanımlı değil, önizleme atlandı."
+
       - uses: expo/expo-github-action@v8
+        if: env.EXPO_TOKEN != ''
         with:
           eas-version: latest
           token: ${{ secrets.EXPO_TOKEN }}
 
       - run: npm ci
+        if: env.EXPO_TOKEN != ''
 
       - uses: expo/expo-github-action/preview@v8
+        if: env.EXPO_TOKEN != ''
         with:
           command: eas update --auto
