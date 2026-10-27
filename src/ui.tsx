@@ -34,6 +34,7 @@ export function Yazi({
   children: ReactNode;
   testID?: string;
   accessibilityLabel?: string;
+  numberOfLines?: number;
 }) {
   const { renk } = useDurum();
   return (
