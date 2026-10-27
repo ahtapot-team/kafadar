@@ -7,7 +7,8 @@ import { it } from 'vitest';
 // kk25 = kart metni oy girişi ve açıklamada görünür kalır (#7 ekranları),
 // kk26 = oyun dışı ekranlarda Geri düğmesi, kk27 = Ayarlar sağ üst ikon (#37),
 // cila = v1 sonrası küçük açıklar (#36),
-// oda = çok telefonlu oda modu KK-28…KK-40 (#47).
+// oda = çok telefonlu oda modu: arayüz testID + wrangler deploy (#48, frontend),
+// odaMantik = oda mantığı (saf durum makinesi, KK-29…KK-40, #47).
 export const BEKLEYEN = {
   cekirdek: false,
   oyun: false,
@@ -16,6 +17,7 @@ export const BEKLEYEN = {
   kk27: false,
   cila: false,
   oda: true,
+  odaMantik: false,
 };
 
 export const kabul = BEKLEYEN.cekirdek ? it.fails : it;
@@ -25,3 +27,4 @@ export const kabulKk26 = BEKLEYEN.kk26 ? it.fails : it;
 export const kabulKk27 = BEKLEYEN.kk27 ? it.fails : it;
 export const kabulCila = BEKLEYEN.cila ? it.fails : it;
 export const kabulOda = BEKLEYEN.oda ? it.fails : it;
+export const kabulOdaMantik = BEKLEYEN.odaMantik ? it.fails : it;

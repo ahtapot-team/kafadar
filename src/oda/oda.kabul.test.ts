@@ -1,7 +1,7 @@
 import { describe, expect } from 'vitest';
 import type { Deste } from '../core/deste';
 import { rngOlustur } from '../core/rng';
-import { kabulOda as kabul } from '../kabul';
+import { kabulOdaMantik as kabul } from '../kabul';
 import {
   BOSTA_MS,
   type Kimlik,
