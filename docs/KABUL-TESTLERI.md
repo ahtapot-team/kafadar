@@ -31,6 +31,7 @@ Bekleyen testler `src/kabul.ts` içindeki `BEKLEYEN` bayraklarıyla (`cekirdek` 
 | KK-21 | `deste.test.ts` + `uygulama.kabul.test.ts` | yeşil |
 | KK-22 | `oyun.kabul.test.ts` (tohum, saflık, JSON) + `uygulama.kabul.test.ts` (UI içe aktarmaz) | bekleyen + yeşil |
 | KK-23 | CI + önizleme workflow'u (EXPO_TOKEN bekliyor) | CI |
+| KK-25 | `oyun.kabul.test.ts` (kart oy/açıklamada aynı), `uygulama.kabul.test.ts` (oy.tsx ve acik.tsx `kart-metni` gösterir); boyut ≥16pt ve görünüm: önizleme + cihaz | mantık yeşil, ekran bekleyen (`BEKLEYEN.kk25`) |
 | KK-24 | `GERCEK-CIHAZ-KONTROL.md` (ayrı PR), insan işaretler | cihaz |
 
 ## testID adları (frontend bunları kullanır)
