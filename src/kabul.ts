@@ -8,6 +8,7 @@ import { it } from 'vitest';
 // kk26 = oyun dışı ekranlarda Geri düğmesi, kk27 = Ayarlar sağ üst ikon (#37),
 // cila = v1 sonrası küçük açıklar (#36),
 // oda = çok telefonlu oda modu: arayüz testID + wrangler deploy (#48, frontend),
+// odaKimlik = belirteç adreste değil ilk WS mesajında (#48, sunucu + istemci),
 // odaDeploy = sunucunun main'e merge'de wrangler ile dağıtımı (#48),
 // odaGuvenlik = belirteç çakışma koruması + sunucu kabuğunun crypto belirteci (#48),
 // odaMantik = oda mantığı (saf durum makinesi, KK-29…KK-40, #47).
@@ -22,6 +23,7 @@ export const BEKLEYEN = {
   odaMantik: false,
   odaGuvenlik: false,
   odaDeploy: false,
+  odaKimlik: true,
 };
 
 export const kabul = BEKLEYEN.cekirdek ? it.fails : it;
@@ -34,3 +36,4 @@ export const kabulOda = BEKLEYEN.oda ? it.fails : it;
 export const kabulOdaMantik = BEKLEYEN.odaMantik ? it.fails : it;
 export const kabulOdaGuvenlik = BEKLEYEN.odaGuvenlik ? it.fails : it;
 export const kabulOdaDeploy = BEKLEYEN.odaDeploy ? it.fails : it;
+export const kabulOdaKimlik = BEKLEYEN.odaKimlik ? it.fails : it;
