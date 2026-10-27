@@ -34,4 +34,4 @@ Main'e her push'ta `eas update --channel main` çalışır. Expo Go'da şu link 
 exp://u.expo.dev/4172ae7b-3cdd-4faf-b89b-c8c1266ebe56?channel-name=main&runtime-version=exposdk%3A58.0.0
 ```
 
-Web önizleme: https://metehantopalhan.github.io/kafadar/
+Web önizleme: https://ahtapot-team.github.io/kafadar/
