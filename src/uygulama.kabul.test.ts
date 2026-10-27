@@ -24,7 +24,7 @@ describe('KK-1: ana ekran oyun listesi', () => {
     const aktiflik = Object.fromEntries(oyunlar.map((o) => [o.id, o.aktif]));
     expect(aktiflik).toEqual({
       'ok-mu-nok': true,
-      '10-10-ama': false,
+      '10-10-ama': true,
       'casus-kim': true, // KK-42: #81'de aktif
     });
   });

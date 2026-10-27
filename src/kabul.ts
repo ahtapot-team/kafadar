@@ -35,7 +35,7 @@ export const BEKLEYEN = {
   casusKayitUi: false,
   odaCik: false, // #73: oyun içinde "Odadan çık?" (frontend #104 kapatır)
   ononMantik: false,
-  ononUi: true,
+  ononUi: false,
 };
 
 export const kabul = BEKLEYEN.cekirdek ? it.fails : it;
