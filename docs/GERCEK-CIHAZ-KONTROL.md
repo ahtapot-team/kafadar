@@ -49,3 +49,25 @@ En az **3 telefonla** (en az 1 iOS ve 1 Android, **farklı ağlarda**: biri wifi
 | 14 | KK-41 | Baştan sona 10 soruluk tam oyun takılmadan, kasmadan oynandı (3 telefonla) | | | |
 
 **Sonuç:** ☐ iOS geçti  ☐ Android geçti  İmza: ______
+
+## Casus kim (KK-54)
+
+Tek telefon, elden ele; 1 iOS ve 1 Android cihaz. En az 4 kişiyle ya da 4 isim girerek tam bir oyun oynanır. Cihaz: ______  Sürüm: ______  Tarih: ______  Kim: ______
+
+| # | KK | Kontrol | iOS | Android |
+|---|---|---|---|---|
+| 1 | KK-42 | Ana ekranda Casus kim aktif; OK mu NOK mu hâlâ çalışıyor | | |
+| 2 | KK-43 | 3, 8 ve 12 kişide casus sayısı sınırı (1 / 2'ye kadar / 3'e kadar); ayarlar (paket, casus sayısı, süre) kayıtlı geliyor | | |
+| 3 | KK-44 | Her oyuncudan önce "Telefonu X'e ver" perdesi; kart yalnızca basılı tutarken görünür, bırakınca hemen kapanır | | |
+| 4 | KK-45 | Casus kartı ve normal kart yan bakışta ayırt edilemiyor (renk, düzen, yazı boyutu, titreşim aynı) | | |
+| 5 | KK-46 | "Gördüm"den sonra kart bir daha açılmıyor; geri tuşu/kaydırma "Oyundan çık?" soruyor | | |
+| 6 | KK-46 | Kartı basılı tutarken uygulamayı **arka plana al** (ana ekran / bildirim çubuğu): kart kapanıyor, geri gelince perde yeniden | | |
+| 7 | KK-46 | **Uygulama değiştirici** (son uygulamalar) görünümünde rol/kelime görünmüyor | | |
+| 8 | KK-47 | Roller dağıtılırken uygulamayı tamamen kapat, aç: görenler tekrar rol görmüyor, kalanlar perdeden devam ediyor, açık kart geri gelmiyor | | |
+| 9 | KK-48 | Tartışma süresi açıkken uygulamayı arka plana al: süre gerçek saatle doğru bitiyor; bitince titreşim ve oylamaya geçiş; "Oylamaya geç" ve "Oyunu bitir" çalışıyor | | |
+| 10 | KK-49 | Oylama: kendine oy yok; eşitlikte yalnızca eşit kalanlar yeniden oylanıyor; yine eşitse casuslar kazanıyor | | |
+| 11 | KK-50 | Casus yakalanınca 6 şıklı tahmin; doğru/yanlış sonuç; casus değilse casuslar kazanıyor | | |
+| 12 | KK-52 | Renk kuralı: yeşil yalnızca "grup yakaladı", kırmızı yalnızca "casus kazandı" | | |
+| 13 | KK-54 | Baştan sona bir oyun takılmadan, animasyonlar akıcı; paylaş görseli (9:16) ve menüsü çalışıyor | | |
+
+**Sonuç:** ☐ iOS geçti  ☐ Android geçti  İmza: ______
