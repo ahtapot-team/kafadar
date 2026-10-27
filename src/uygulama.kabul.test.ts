@@ -8,6 +8,7 @@ import {
   kabulKk26,
   kabulKk27,
   kabulOda,
+  kabulOdaGuvenlik,
 } from './kabul';
 import { oyunlar } from './games/registry';
 
@@ -268,4 +269,46 @@ describe('oda modu: arayüz ve altyapı sözleşmesi (KK-28…KK-40)', () => {
     expect(liste).toMatch(/arka plan/i);
     expect(liste).toMatch(/uçak modu/i);
   });
+});
+
+describe('oda sunucu kabuğu: belirteç sunucuda, kriptografik üretilir (#48)', () => {
+  const tsDosyalari = (klasor: string): { f: string; icerik: string }[] =>
+    readdirSync(new URL(`../${klasor}`, import.meta.url), { recursive: true })
+      .map(String)
+      .filter(
+        (f) =>
+          /\.ts$/.test(f) &&
+          !f.includes('node_modules') &&
+          !f.includes('.test.'),
+      )
+      .map((f) => ({
+        f: `${klasor}/${f}`,
+        icerik: readFileSync(
+          new URL(`../${klasor}/${f}`, import.meta.url),
+          'utf8',
+        ),
+      }));
+
+  kabulOdaGuvenlik(
+    'katil olayını işleyen sunucu kodu crypto ile ürettiği kimlik verir',
+    () => {
+      const adaylar = ['.', 'sunucu', 'worker', 'src']
+        .flatMap((k) => {
+          try {
+            return tsDosyalari(k);
+          } catch {
+            return [];
+          }
+        })
+        .filter(
+          ({ f }) => !f.startsWith('src/oda/') && !f.includes('node_modules'),
+        )
+        .filter(({ icerik }) => /tip:\s*['"]katil['"]/.test(icerik));
+      expect(adaylar.length).toBeGreaterThan(0);
+      for (const { f, icerik } of adaylar) {
+        expect(icerik, f).toMatch(/crypto\.randomUUID\(|getRandomValues\(/);
+        expect(icerik, f).toMatch(/tip:\s*['"]katil['"][^}]*kimlik/s);
+      }
+    },
+  );
 });
