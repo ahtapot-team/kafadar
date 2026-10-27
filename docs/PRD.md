@@ -24,7 +24,7 @@ Arkadaş grupları ve çiftler için, tek telefonda oynanan ve içine yeni oyunl
 - Genişletilebilir mimari: oyunlar eklenti olarak eklenir.
 
 ## Kapsam dışı (bilerek yapmıyoruz)
-- Diğer oyunlar: 10/10 ama (sonraki sürümler). Casus kim v3'te geliyor, aşağıdaki bölüme bakın.
+- Casus kim v3'te, 10/10 ama v4'te geliyor; aşağıdaki bölümlere bakın.
 - Hesap ya da giriş. (Oda koduyla çok telefonlu oyun v2'de geliyor, aşağıdaki bölüme bakın.)
 - Gizli oy modu (telefon elden ele).
 - +18 içerik, reklam, uygulama içi satın alma, analitik ya da veri toplama. (Oda modunda isimler yalnızca oyun süresince sunucuda tutulur, KK-39.)
@@ -97,8 +97,8 @@ Birden fazla telefonla oynanır. Bir telefon oda kurar, diğerleri kodla kendi t
 
 ### Akış
 1. **Mod seçimi:** OK mu NOK mu'ya dokununca "Tek telefon / Oda kur / Odaya katıl" seçilir.
-2. **Oda kur:** İsim ve paket seçilir. Dev bir oda kodu ve QR gösterilir.
-3. **Odaya katıl:** Kod ve isim girilir.
+2. **Oda kur:** İsim ve paket seçilir. Dev, 6 haneli bir sayı kodu ve QR gösterilir.
+3. **Odaya katıl:** 6 haneli kod (sayı tuş takımıyla) ve isim girilir.
 4. **Lobi:** Katılanlar listeye düşer. Kuran kişi de oyuncudur ve "Başlat" yalnızca onda görünür.
 5. **Soru:** Herkesin telefonunda aynı soru, 15 sn geri sayım ve dev OK/NOK düğmeleri.
 6. **Bekleme:** "Cevabın alındı ✓ · 6/8 cevapladı" yazar. Herkes cevaplayınca ya da süre bitince sonraki soruya geçilir.
@@ -106,7 +106,7 @@ Birden fazla telefonla oynanır. Bir telefon oda kurar, diğerleri kodla kendi t
 
 ### Kabul kriterleri (oda modu)
 - [ ] KK-28: OK mu NOK mu'da "Tek telefon / Oda kur / Odaya katıl" seçimi vardır. Tek telefon modu değişmeden ve çevrimdışı çalışır; KK-16'daki uçak modu şartı yalnızca tek telefon modu için geçerlidir.
-- [ ] KK-29: Oda kurulunca 4 harfli bir kod (O, 0, I, 1 karakterleri kullanılmaz) ve aynı kodu açan bir QR gösterilir. Kod yalnızca açık bir oda için geçerlidir. Oda kapanınca kod artık kullanılamaz.
+- [ ] KK-29: Oda kurulunca yalnızca rakamlardan oluşan 6 haneli bir kod (ör. 482 913; okunurken 3+3 gruplanır) ve aynı kodu açan bir QR gösterilir. Kod girişinde sayı tuş takımı açılır. (Murat: "kod sadece sayı olsun", 27.10.2026; 6 hane pm önerisi, Metehan "herşeyi bitir" onayı) Kod yalnızca açık bir oda için geçerlidir. Oda kapanınca kod artık kullanılamaz.
 - [ ] KK-30: Katılan kişi kod ve isim girer. Kod yanlışsa, oda kapalıysa, oda doluysa ya da oyun başladıysa Türkçe ve net bir hata gösterilir. Aynı isim gelirse "Ali 2" kuralı (KK-4) uygulanır. Kod denemelerine hız sınırı vardır.
 - [ ] KK-31: Lobide katılanlar birkaç saniye içinde tüm telefonlarda görünür. Kuran kişi de oyuncudur. "Başlat" yalnızca kuranda görünür ve en az 2 oyuncuyla açılır. Odada en çok 12 oyuncu olur. Oyun başlayınca yeni katılım kapanır.
 - [ ] KK-32: Her soru tüm telefonlarda aynı sırada ve aynı anda açılır; soru sırasını sunucu belirler. Her telefonda soru metni, 15 sn geri sayım ve OK/NOK düğmeleri vardır. Süre sunucu saatine göre işler; telefon saatleri farklı olsa da süre her yerde aynı anda biter.
@@ -203,6 +203,36 @@ Tek telefonda, elden ele oynanır. Herkes aynı kelimeyi görür, casus göremez
 - tasarim: 8–9 ekran, devir perdesi, iki aşamalı açıklama videosu, casus kartı ayırt edilemez, renk kuralı. M.
 - qa: En büyük risk gizlilik ve kayıttan devamda rol sızıntısı. Eşit oy ve tahmin kuralları yazılı olmalı. M.
 - İnsanlar: Murat istedi; süre modu ve casus sayısını belirledi (27.10.2026).
+
+## v4: 10/10 ama (taslak, 28.10.2026) — ONAY BEKLİYOR
+Tek telefonda, açık oyla oynanır; OK mu NOK mu akışının neredeyse aynısıdır. Kartta kusursuz bir kişi ya da şey ve bir "ama" yazar: "10/10 ama sabah 5'te kalkıyor". Herkes aynı anda parmaklarıyla 0–10 arası yeni puanını gösterir. Sonuç dağılımı ve en uç puanlar dramatik biçimde açıklanır. Ana ekranda "Yakında"dan aktife geçer.
+
+### Akış
+1. **Oyuncular ve paket:** Mevcut ekranlar (2–12 kişi). Paketler: Sevgili adayı / Arkadaş / Gündelik hayat.
+2. **Kart:** "10/10 ama …" dev yazıyla açılır, 3-2-1 geri sayım.
+3. **Puan:** Herkes parmaklarıyla 0–10 gösterir (iki el = 10). Telefonu tutan kişi her isme puanı girer (0–10 düğmeleri).
+4. **Açıklama:** Ortalama büyük sayıyla gelir. En düşük ve en yüksek puan verenler gösterilir ("Ayşe 0 verdi!"). Herkes aynı puanı verdiyse konfeti, uçlar arası fark 8 ve üstüyse "Tam bölündünüz".
+5. **Sonraki kart / oturum sonu:** OK mu NOK mu ile aynı. Ödüller: En acımasız (ortalaması en düşük), Melek kalpli (en yüksek), Ruh ikizleri (puanları en yakın iki kişi).
+
+### Kabul kriterleri (10/10 ama)
+- [ ] KK-55: Ana ekranda 10/10 ama aktiftir. Oyun yalnızca yeni bir modül, bir deste ve kayıt listesinde bir satırla eklenir (KK-2). Oyuncu, paket, süre, kayıt ve ayarlar çekirdekten gelir.
+- [ ] KK-56: Her oyuncu için 0–10 arası tam sayı puan girilir. Herkes girilince "Göster" açılır. Puan açıklamaya kadar değiştirilebilir.
+- [ ] KK-57: Açıklamada ortalama (bir ondalık), en düşük ve en yüksek puan verenler, oybirliği konfetisi ve "Tam bölündünüz" (uçlar arası fark ≥ 8) gösterilir. "Hareketi azalt" açıksa animasyon yerine sade gösterim.
+- [ ] KK-58: Oturum sonunda En acımasız, Melek kalpli ve Ruh ikizleri ödülleri gösterilir; 9:16 paylaşım görseli üretilir.
+- [ ] KK-59: Kart sorusu (10/10 ama …) puan girişi ve açıklama boyunca görünür kalır (KK-25 gibi).
+- [ ] KK-60: 3 paket, her birinde en az 100 kart; boş, yinelenen (tr) ya da 140 karakterden uzun kart yok; her kart "10/10 ama" ifadesini içerir (Sevgili adayı ve Arkadaş paketlerinde "10/10 ama …", Gündelik hayatta "Ev 10/10 ama …"); içerik 12+.
+- [ ] KK-61: Oyun mantığı saf, tohumlu, serileştirilebilir bir durum makinesidir (KK-22); kabul testleri sahte tohumla çalışır.
+- [ ] KK-62: Gerçek cihaz kapısı: `docs/GERCEK-CIHAZ-KONTROL.md`'ye 10/10 ama bölümü eklenir ve işaretlenmeden oyun "bitti" sayılmaz.
+
+### Kapsam dışı (v4)
+- Oda modunda 10/10 ama. Gizli puan. Ondalıklı puan.
+
+### Kararlar (10/10 ama, pm önerisi — onayla kesinleşir)
+| Karar | Seçim | Gerekçe |
+|---|---|---|
+| Oynanış | Tek telefon, açık puan (parmakla 0–10) | Videodaki oynanışın aynısı, OK mu NOK mu ile aynı çekirdek |
+| Paketler | Sevgili adayı / Arkadaş / Gündelik hayat | Akımın en çok paylaşılan konuları |
+| İçerik | 3 × 100 kart, taslağı pm yazar | Diğer oyunlarla aynı çıta |
 
 ## Geliştirme ilkesi (Semih, 27.10.2026)
 **Overengineering yok.** En az kodla, en basit çözüm, yalnızca bugünkü ihtiyaç kadar. Yapı genişlemeye açık olacak ama ileriye dönük soyutlama, genel çerçeve ya da "belki lazım olur" kodu yazılmayacak. Yeni bağımlılık yalnızca gerçekten gerekiyorsa eklenir ve PR'da gerekçesi yazılır. Aşağıdaki mimari şartlar bu ilkeye göre en sade haliyle uygulanır. Örneğin oyun kayıt listesi basit bir dizidir, eklenti çatısı değildir.

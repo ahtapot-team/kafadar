@@ -14,6 +14,7 @@ import {
   kabulCasusUiSon,
   kabulCasusKayitUi,
   kabulOdaKimlik,
+  kabulOdaCik,
 } from './kabul';
 import { oyunlar } from './games/registry';
 
@@ -429,4 +430,32 @@ describe('Casus kim: kayıt listesi, arayüz ve altyapı sözleşmesi (KK-42…K
     expect(liste).toMatch(/basılı tut/i);
     expect(liste).toMatch(/uygulama değiştirici/i);
   });
+});
+
+describe('oda modu: oyun içinde odadan çık (#73, KK-38)', () => {
+  // Ekran sözleşmesi kaynak düzeyinde; asıl davranış önizlemede 3 sekmeyle denenir.
+  const oda = () =>
+    [...kaynaklar('app/oda'), ...kaynaklar('src/oda-ui')].map((k) => k.icerik);
+
+  kabulOdaCik('oda ekranları çıkış ikonu ve onay testID adlarını taşır', () => {
+    const kaynak = oda().join('\n');
+    for (const t of ['oda-cik', 'cikis-onay-evet', 'cikis-onay-hayir'])
+      expect(kaynak, t).toContain(t);
+    expect(kaynak).toContain('oda-ayrildi'); // diğer telefonlarda "X ayrıldı"
+  });
+
+  kabulOdaCik('geri tuşu/hareketi ve ikon "Odadan çık?" onayını açar', () => {
+    const kaynak = oda().join('\n');
+    expect(kaynak).toContain('Odadan çık?');
+    expect(kaynak).toMatch(/beforeRemove|BackHandler|popstate/);
+  });
+
+  kabulOdaCik(
+    'çıkış onayı "Oyuna dön" seçeneğiyle oyuna geri dönüş sunar (onaysız çıkış yok)',
+    () => {
+      const kaynak = oda().join('\n');
+      expect(kaynak).toContain('Oyuna dön');
+      expect(kaynak).toMatch(/leave|ayril|ayrıl/i);
+    },
+  );
 });

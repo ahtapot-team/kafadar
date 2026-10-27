@@ -11,16 +11,23 @@ import { YenidenBaglaniyor } from './yeniden';
 export function BeklemeEkrani({
   durum,
   onDegistir,
+  onCik,
 }: {
   durum: IstemciDurumu;
   onDegistir: () => void;
+  onCik: () => void;
 }) {
   const { renk } = useDurum();
   const g = durum.gorunum!;
   const sn = Math.ceil(useKalan(durum) / 1000);
   return (
     <Ekran>
-      <OdaUst kod={g.kod} orta={`Soru ${g.soruNo} / 10`} sag={String(sn)} />
+      <OdaUst
+        kod={g.kod}
+        orta={`Soru ${g.soruNo} / 10`}
+        sag={String(sn)}
+        onCik={onCik}
+      />
       <View style={{ flex: 1, justifyContent: 'center', gap: bosluk.l }}>
         <View
           style={{
