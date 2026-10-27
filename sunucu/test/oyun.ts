@@ -1,7 +1,8 @@
 // Ağ üzerinden uçtan uca deneme: N betikli istemci tek oyun oynar (2–12).
 // Kullanım: node sunucu/test/oyun.ts <http-adresi> [oyuncuSayisi=4]   (ör. http://localhost:8787)
 import assert from 'node:assert/strict';
-import { request } from 'node:http';
+import { request as httpIstek } from 'node:http';
+import { request as httpsIstek } from 'node:https';
 
 const taban = process.argv[2];
 const N = Number(process.argv[3] ?? 4);
@@ -74,7 +75,8 @@ assert(yanlis.hata?.mesaj);
 assert.equal((await fetch(`${taban}/ws`)).status, 426);
 const durumKodu = (yol: string) =>
   new Promise<number>((coz, red) => {
-    const r = request(
+    const istek = taban.startsWith('https') ? httpsIstek : httpIstek;
+    const r = istek(
       `${taban}${yol}`,
       { headers: { Connection: 'Upgrade', Upgrade: 'websocket' } },
       (y) => coz(y.statusCode ?? 0),
@@ -92,6 +94,8 @@ assert.equal(sahte.hata?.kod, 'tanimsiz');
 // Yeniden bağlanma: kopan aynı belirteçle döner
 const kopan = istemciler[1];
 kopan.ws.close();
+// Kapanış el sıkışması tamamlanmalı (tarayıcıda CLOSING'de takılmasın)
+await bekle(() => kopan.ws.readyState === WebSocket.CLOSED, 5_000);
 await bekle(
   () =>
     kuran.gorunum?.oyuncular.some((o) => !(o as { bagli: boolean }).bagli) ??

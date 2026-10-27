@@ -157,8 +157,12 @@ export class Oda extends DurableObject<Env> {
     for (const ws of this.ctx.getWebSockets()) {
       const { kimlik } = this.ek(ws);
       if (!kimlik) continue; // henüz kimlik doğrulanmadı
-      gonder(ws, { t: 'gorunum', gorunum: gorunum(d, kimlik, simdi), simdi });
-      if (d.asama === 'bitti') gonder(ws, { t: 'final', final: final(d) });
+      try {
+        gonder(ws, { t: 'gorunum', gorunum: gorunum(d, kimlik, simdi), simdi });
+        if (d.asama === 'bitti') gonder(ws, { t: 'final', final: final(d) });
+      } catch {
+        /* kapanmakta olan soket: diğerlerine yayın sürsün */
+      }
     }
   }
   // Kimlik doğrulanmış soketi odaya bağlar ve ilk durumu yayınlar.
@@ -255,8 +259,8 @@ export class Oda extends DurableObject<Env> {
     this.yayinla(s.durum);
   }
 
-  private async kopar(ws: WebSocket) {
-    const { kimlik } = this.ek(ws);
+  // Kimlik soket kapanmadan ÖNCE okunmalı (kapanan soketin eki okunamaz).
+  private async kopar(ws: WebSocket, kimlik?: string) {
     if (!kimlik) return; // kimliksiz bekleyen soket
     const baska = this.ctx
       .getWebSockets()
@@ -268,11 +272,26 @@ export class Oda extends DurableObject<Env> {
     await this.kaydet(s.durum);
     this.yayinla(s.durum);
   }
-  webSocketClose(ws: WebSocket) {
-    return this.kopar(ws);
+  // Kapanış el sıkışması sunucuda tamamlanmazsa tarayıcı soketi CLOSING'de takılı kalabilir; kod geçerliyse aynen yansıtılır.
+  async webSocketClose(ws: WebSocket, code: number) {
+    const { kimlik } = this.ek(ws);
+    const gecerli =
+      code >= 1000 && code < 5000 && ![1004, 1005, 1006, 1015].includes(code);
+    try {
+      ws.close(gecerli ? code : 1000, 'kapandı');
+    } catch {
+      /* zaten kapalı */
+    }
+    await this.kopar(ws, kimlik);
   }
-  webSocketError(ws: WebSocket) {
-    return this.kopar(ws);
+  async webSocketError(ws: WebSocket) {
+    const { kimlik } = this.ek(ws);
+    try {
+      ws.close(1011, 'hata');
+    } catch {
+      /* zaten kapalı */
+    }
+    await this.kopar(ws, kimlik);
   }
 
   // Soru süresi dolunca ilerletir; kimlik göndermeyen soketi kapatır; boşta/bitmiş oda 1 saat sonra silinir (KK-39).
