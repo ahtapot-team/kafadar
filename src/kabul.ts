@@ -5,7 +5,7 @@ import { it } from 'vitest';
 // (yani test gerçekten bir şey denemiyor demektir).
 // cekirdek = #6 (oyuncular, kayıt, registry), oyun = #7 (OK mu NOK mu durum makinesi),
 // kk25 = kart metni oy girişi ve açıklamada görünür kalır (#7 ekranları).
-export const BEKLEYEN = { cekirdek: false, oyun: false, kk25: true };
+export const BEKLEYEN = { cekirdek: false, oyun: false, kk25: false };
 
 export const kabul = BEKLEYEN.cekirdek ? it.fails : it;
 export const kabulOyun = BEKLEYEN.oyun ? it.fails : it;

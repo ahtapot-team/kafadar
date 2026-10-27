@@ -74,3 +74,35 @@ export function UstCubuk({
     </View>
   );
 }
+
+// KK-25: kart metni geri sayımdan sonra kaybolmaz; küçülüp üstte durur (oy girişi ve açıklama anında).
+// Yazı 16pt'nin altına inmez, uzun metin satır kaydırır.
+export function KartSeridi({
+  metin,
+  testID,
+}: {
+  metin: string;
+  testID: string;
+}) {
+  const { renk } = useDurum();
+  return (
+    <View
+      accessibilityLabel={`Kart: ${metin}`}
+      style={{
+        backgroundColor: renk.marka,
+        borderWidth: 3,
+        borderColor: renk.kontur,
+        borderRadius: yaricap.cip,
+        padding: bosluk.m,
+        boxShadow: `3px 3px 0 ${renk.golge}`,
+      }}
+    >
+      <Yazi
+        testID={testID}
+        style={{ color: renk.kontur, fontSize: 16, lineHeight: 22 }}
+      >
+        {metin}
+      </Yazi>
+    </View>
+  );
+}

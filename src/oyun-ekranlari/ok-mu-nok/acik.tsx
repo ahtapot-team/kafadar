@@ -17,9 +17,10 @@ import { Dugme, Ekran, Yazi } from '../../ui';
 import type { Oy, Sonuc } from '../../games/ok-mu-nok/oyun';
 import { useSayi } from './anim';
 import { Konfeti } from './konfeti';
-import { IkonDugme } from './ortak';
+import { IkonDugme, KartSeridi } from './ortak';
 
 type Props = {
+  kart: string;
   oyuncular: string[];
   oylar: Record<string, Oy>;
   sonuc: Sonuc;
@@ -104,6 +105,7 @@ function Cubuk({
 }
 
 export function AcikEkrani({
+  kart,
   oyuncular,
   oylar,
   sonuc,
@@ -167,6 +169,7 @@ export function AcikEkrani({
 
   return (
     <Ekran>
+      <KartSeridi testID="kart-metni" metin={kart} />
       {sonuc.tip === 'oybirligi' && !azalt && (
         <Konfeti
           renkler={[

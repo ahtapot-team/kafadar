@@ -5,9 +5,10 @@ import { bosluk, dokunmaAlani, yaricap } from '../../tema';
 import { titret } from '../../titresim';
 import { Dugme, Ekran, Yazi } from '../../ui';
 import type { Oy } from '../../games/ok-mu-nok/oyun';
-import { UstCubuk } from './ortak';
+import { KartSeridi, UstCubuk } from './ortak';
 
 type Props = {
+  kart: string;
   oyuncular: string[];
   oylar: Record<string, Oy>;
   gosterAktif: boolean;
@@ -63,6 +64,7 @@ function OyDugmesi({
 }
 
 export function OyEkrani({
+  kart,
   oyuncular,
   oylar,
   gosterAktif,
@@ -80,6 +82,7 @@ export function OyEkrani({
         orta={`${verilen} / ${oyuncular.length} işaretlendi`}
         onCik={onCik}
       />
+      <KartSeridi testID="kart-metni" metin={kart} />
       <Yazi tur="baslik">Kim ne dedi?</Yazi>
       {oyuncular.map((ad, i) => (
         <View

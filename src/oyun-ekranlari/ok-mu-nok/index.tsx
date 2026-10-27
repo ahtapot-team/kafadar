@@ -116,6 +116,7 @@ export default function OkMuNokEkrani({
   if (durum.asama === 'oy')
     return (
       <OyEkrani
+        kart={gecerliKart(durum).text}
         oyuncular={durum.oyuncular}
         oylar={durum.oylar}
         gosterAktif={gosterAktif(durum)}
@@ -133,6 +134,7 @@ export default function OkMuNokEkrani({
     return (
       <>
         <AcikEkrani
+          kart={gecerliKart(durum).text}
           key={durum.tamamlanan}
           oyuncular={durum.oyuncular}
           oylar={durum.oylar}
