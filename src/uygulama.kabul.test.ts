@@ -16,6 +16,7 @@ import {
   kabulOdaKimlik,
   kabulOdaCik,
   kabulOnonUi,
+  kabulOnonUiEkran,
 } from './kabul';
 import { oyunlar } from './games/registry';
 
@@ -500,7 +501,7 @@ describe('10/10 ama: kayıt listesi, arayüz ve altyapı sözleşmesi (KK-55…K
     expect(TESTIDLER.filter((t) => !kaynak.includes(t))).toEqual([]);
   });
 
-  kabulOnonUi(
+  kabulOnonUiEkran(
     'kart metni puan girişinde ve açıklamada görünür kalır (KK-59)',
     () => {
       const dosyalar = ekranlar();
@@ -517,7 +518,7 @@ describe('10/10 ama: kayıt listesi, arayüz ve altyapı sözleşmesi (KK-55…K
     },
   );
 
-  kabulOnonUi(
+  kabulOnonUiEkran(
     '"Hareketi azalt" açıkken konfeti/açıklama animasyonu sade (KK-57)',
     () => {
       const kaynak = ekranlar()
