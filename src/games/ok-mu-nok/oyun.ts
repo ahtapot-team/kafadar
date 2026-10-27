@@ -103,7 +103,8 @@ export function oduller(d: Durum): Oduller {
   const sayac: Record<string, number> = {};
   const ciftler: Record<string, number> = {};
   for (const { oylar } of d.gecmis) {
-    const { ok, nok, verenler } = say(oylar, Object.keys(oylar));
+    // Ödüller yalnızca hâlâ oyunda olanlara verilir; çıkarılanlar sayaçlara hiç girmez.
+    const { ok, nok, verenler } = say(oylar, d.oyuncular);
     if (ok !== nok && ok > 0 && nok > 0) {
       const az = ok < nok ? 'OK' : 'NOK';
       for (const o of verenler)
@@ -127,20 +128,15 @@ export function oduller(d: Durum): Oduller {
           .filter((k) => kayit[k] === m)
           .map(harita);
   };
+  // Olay kart: oyları en dengeli bölünen kart (çıkarılanların oyları da o kartta verilmişti).
   const farklar = d.gecmis.map((g) => {
     const { ok, nok } = say(g.oylar, Object.keys(g.oylar));
     return Math.abs(ok - nok);
   });
   const enDengeli = Math.min(...farklar);
   return {
-    aykiriRuh:
-      d.oyuncular.length < 3
-        ? []
-        : enCok(sayac, (k) => k).filter((o) => d.oyuncular.includes(o)),
-    ruhIkizleri: enCok(
-      ciftler,
-      (k) => JSON.parse(k) as [string, string],
-    ).filter(([a, b]) => [a, b].every((o) => d.oyuncular.includes(o))),
+    aykiriRuh: d.oyuncular.length < 3 ? [] : enCok(sayac, (k) => k),
+    ruhIkizleri: enCok(ciftler, (k) => JSON.parse(k) as [string, string]),
     olayKart: d.gecmis
       .filter((_, i) => farklar[i] === enDengeli)
       .map((g) => g.kartId),
