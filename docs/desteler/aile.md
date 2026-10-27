@@ -1,4 +1,4 @@
-# Deste: Aile (taslak v1)
+# Deste: Aile (taslak v2)
 
 > deck_id: aile · lang: tr · 12+ · her satır bir kart (≤140 karakter)
 
@@ -57,3 +57,48 @@
 53. Kardeşin uyurken çektiğin fotoğrafı aile grubuna atmak.
 54. Ödevi bitirmeden oyun oynamak.
 55. Tatilde otel yerine akrabanın evinde kalmak.
+56. Annenin her telefonda "yemek yedin mi?" diye sorması.
+57. Babanın navigasyona güvenmeyip kendi bildiği yoldan gitmesi.
+58. Kardeşinle aynı odayı paylaşmak.
+59. Pazar kahvaltısını her hafta aynı saatte yapmak.
+60. Akrabaların seni hâlâ küçük çocuk gibi görmesi.
+61. Annenin senin arkadaşlarınla arkadaş olması.
+62. Babanın her fotoğrafta poz vermeyi reddetmesi.
+63. Kardeşinin seni her konuda taklit etmesi.
+64. Ailecek bir diziyi sadece birlikte izlemek.
+65. Anneannenin her gelişinde yemek getirmesi.
+66. Aile tatilini en küçük çocuğun planlaması.
+67. Kardeşinin doğum gününü unutmak.
+68. Annenin telefonunda yazı boyutunun çok büyük olması.
+69. Babanın kumanda elindeyken uyuyakalması.
+70. Evde herkesin kendine ait bir çay bardağı olması.
+71. Kardeşine ders anlatırken sabrını kaybetmek.
+72. Aile yemeğinde siyaset konuşmak.
+73. Bayramda misafire kolonya ikram etmek.
+74. Ev işlerinin haftalık bir tabloyla bölüşülmesi.
+75. Annenin odanı sen yokken toplaması.
+76. Babanın kendi esprisine kendisinin gülmesi.
+77. Kardeşinle aynı okulda okumak.
+78. Ailecek telefonsuz bir akşam yapmak.
+79. Sabahları tek banyoyu en uzun kullanan kişi olmak.
+80. Dedenin teknolojiyi senin sayende öğrenmesi.
+81. Ailecek karaoke yapmak.
+82. Babanın seni arkadaşlarının önünde çocukluk lakabınla çağırması.
+83. Kuzenlerle her yaz aynı yerde tatil yapmak.
+84. Akrabaların karne gününde notlarını sorması.
+85. Annenin sana sormadan kıyafet alması.
+86. Ailecek bir evcil hayvan sahiplenmek.
+87. Kardeşinin seni her konuda geçmeye çalışması.
+88. Evde Wi-Fi şifresini sadece babanın bilmesi.
+89. Aile grubunda herkesin aynı anda farklı konudan konuşması.
+90. Bayram sabahı erkenden kalkıp ziyarete gitmek.
+91. Annenin sofrada "biraz daha al" diye ısrar etmesi.
+92. Babanın uzun yolculukta hiç mola vermemesi.
+93. Kardeşine kendi eski telefonunu vermek.
+94. Ailenin seni sürekli kuzeninle kıyaslaması.
+95. Misafirlikte ikram edilen her şeyden yemek zorunda hissetmek.
+96. Akşam yemeğinde herkesin gününü anlatması.
+97. Annenin dizide olan her şeye yorum yapması.
+98. Ailecek bisiklet turuna çıkmak.
+99. Kardeşinin sana sormadan şarkı listeni değiştirmesi.
+100. Teyzenin her bayram aynı hediyeyi getirmesi.

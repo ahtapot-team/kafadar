@@ -11,6 +11,7 @@ import { it } from 'vitest';
 // odaKimlik = belirteç adreste değil ilk WS mesajında (#48, sunucu + istemci),
 // odaDeploy = sunucunun main'e merge'de wrangler ile dağıtımı (#48),
 // odaGuvenlik = belirteç çakışma koruması + sunucu kabuğunun crypto belirteci (#48),
+// casusMantik = Casus kim saf durum makinesi + JSON desteler (#78), casusUi = ekranlar ve kayıt listesi (#80…#82),
 // odaMantik = oda mantığı (saf durum makinesi, KK-29…KK-40, #47).
 export const BEKLEYEN = {
   cekirdek: false,
@@ -24,6 +25,8 @@ export const BEKLEYEN = {
   odaGuvenlik: false,
   odaDeploy: false,
   odaKimlik: false,
+  casusMantik: true,
+  casusUi: true,
 };
 
 export const kabul = BEKLEYEN.cekirdek ? it.fails : it;
@@ -37,3 +40,5 @@ export const kabulOdaMantik = BEKLEYEN.odaMantik ? it.fails : it;
 export const kabulOdaGuvenlik = BEKLEYEN.odaGuvenlik ? it.fails : it;
 export const kabulOdaDeploy = BEKLEYEN.odaDeploy ? it.fails : it;
 export const kabulOdaKimlik = BEKLEYEN.odaKimlik ? it.fails : it;
+export const kabulCasusMantik = BEKLEYEN.casusMantik ? it.fails : it;
+export const kabulCasusUi = BEKLEYEN.casusUi ? it.fails : it;

@@ -1,4 +1,4 @@
-# Deste: Çift (taslak v1)
+# Deste: Çift (taslak v2)
 
 > deck_id: cift · lang: tr · 12+ · her satır bir kart (≤140 karakter)
 
@@ -57,3 +57,48 @@
 53. Sevgilinin, yaptığın yemeği beğenmediğini dürüstçe söylemesi.
 54. Oyun oynarken sevgilinin mesajını görmezden gelmek.
 55. Sevgilinin doğum gününü takvim hatırlatmasıyla hatırlamak.
+56. Sevgilinle ortak bir sosyal medya hesabı açmak.
+57. Sevgilinin her paylaşımını beğenmek zorunda hissetmek.
+58. Sevgilinin arkadaş ortamında senin hakkında şaka yapması.
+59. Sevgilinle her hafta sonu aynı yere gitmek.
+60. Sevgilinin seni ailesine "arkadaşım" diye tanıtması.
+61. İlk buluşmaya geç kalıp kahve ısmarlayarak telafi etmek.
+62. Sevgilinin doğum gününü haftalar önceden planlamak.
+63. Sevgilinin hediye ettiği kıyafeti hiç giymemek.
+64. Sevgilinin telefonunda duvar kâğıdı olmak istemek.
+65. Sevgilinle tatilde her öğünü fotoğraflamak.
+66. Sevgilinin kıyafet seçimine karışmak.
+67. Sevgilinin ailesinin yanında el ele tutuşmak.
+68. Kavgada sessiz kalıp konuyu ertesi güne bırakmak.
+69. Sevgilinin seni hep aynı lakapla çağırması.
+70. Sevgilinin her hafta arkadaşlarıyla oyun gecesine gitmesi.
+71. Sevgilinin restoranda senin yerine sipariş vermesi.
+72. Sevgilinin mesajlarının ekran görüntüsünü alıp arkadaşlarına sormak.
+73. Sevgilinle aynı diziyi aynı anda ayrı evlerde izlemek.
+74. Sevgiline ilk buluşmada çiçek almak.
+75. Birlikte gitmeniz gereken düğüne sevgilinin arkadaşıyla gitmesi.
+76. Sevgilinin seni sosyal medyada takip etmemesi.
+77. Sevgilinle aynı spor salonuna yazılmak.
+78. Sevgilinin eski sevgilisiyle ortak bir evcil hayvana bakmaya devam etmesi.
+79. Sevgilinle ortak bir banka hesabı açmak.
+80. Sevgilinin her yıldönümünde aynı restorana gitmek istemesi.
+81. Sürpriz için sevgilinin arkadaşlarıyla gizli grup kurmak.
+82. Sevgilinin gece seni uyandırıp "uyudun mu?" diye sorması.
+83. Sevgilinle aynı parfümü kullanmak.
+84. Kavgadan sonra ilk mesajı hep aynı kişinin atması.
+85. Sevgilinin konuşurken telefonla ilgilenmesi.
+86. Sevgilinin senin hobine hiç ilgi göstermemesi.
+87. Sevgilinle çift kostümü giyip partiye gitmek.
+88. Sevgilinin bütün kararları sana bırakması.
+89. "Bugün ne yesek?" sorusuna hiçbir zaman cevap verememek.
+90. Sevgilinin bir ünlüyle çekilmiş fotoğrafını kıskanmak.
+91. Bayramı sevgilinin ailesiyle geçirmek.
+92. Sevgilinin her şarkı için "bu bizim şarkımız" demesi.
+93. Sevgilinin doğum gününde ona şiir yazmak.
+94. Sevgilinin kendi numarasını senin telefonuna "❤️" diye kaydetmesi.
+95. Tanıştığınız günü her ay kutlamak.
+96. Sevgilinin film izlerken sürekli tahmin yürütmesi.
+97. Sevgilinin seninle değil oyun konsoluyla daha çok vakit geçirmesi.
+98. Sevgilinin uzun mesajlarına tek kelimeyle cevap vermek.
+99. Sevgilinin kıskançlığını şirin bulmak.
+100. Sevgilinin seni arkadaşlarına sürekli övmesi.
