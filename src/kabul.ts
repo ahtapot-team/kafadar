@@ -36,6 +36,7 @@ export const BEKLEYEN = {
   odaCik: false, // #73: oyun içinde "Odadan çık?" (frontend #104 kapatır)
   ononMantik: false,
   ononUi: false,
+  ononOda: true, // #118: 10/10 ama oda türü (mantık, backend #119)
   ononUiEkran: false,
 };
 
@@ -59,3 +60,4 @@ export const kabulCasusKayitUi = BEKLEYEN.casusKayitUi ? it.fails : it;
 export const kabulOnonMantik = BEKLEYEN.ononMantik ? it.fails : it;
 export const kabulOnonUiEkran = BEKLEYEN.ononUiEkran ? it.fails : it;
 export const kabulOnonUi = BEKLEYEN.ononUi ? it.fails : it;
+export const kabulOnonOda = BEKLEYEN.ononOda ? it.fails : it;

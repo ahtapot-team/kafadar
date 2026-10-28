@@ -62,3 +62,13 @@ JSON desteler: `content/onon/<deck_id>.json` (`onon-arkadas`, `onon-gundelik`, `
 testID: `onon-kart-metni`, `onon-puan-<oyuncu sırası>-<0..10>`, `onon-goster`, `onon-ortalama`, `onon-en-dusuk`, `onon-en-yuksek`, `onon-bolundu`, `onon-konfeti`, `onon-sonraki`, `onon-atla`, `onon-bitir`, `onon-odul-en-acimasiz`, `onon-odul-melek-kalpli`, `onon-odul-ruh-ikizleri`, `onon-paylas`, `onon-tekrar-oyna`, `onon-ana-menu`, `onon-karistir-evet`, `onon-karistir-hayir`.
 Bayraklar (`src/kabul.ts`): `ononMantik` (backend #106 kapatır), `ononUi` (frontend #108 kapatır; ayrıca KK-1 testindeki `'10-10-ama': false` beklentisini `true` yapar).
 
+## 10/10 ama oda modu sözleşmesi (`src/oda/oda.ts`, #118 → backend #119, frontend #121)
+Oda durum makinesine tür eklenir; imzalar iskelette (`src/oda/oda.ts`), testler `src/oda/onon-oda.kabul.test.ts`. `odaKur({…, tur?: 'ok-mu-nok' | 'on-on-ama'})` (varsayılan OK mu NOK mu); `OdaDurum` yeni alanlar `tur`, `acik`, `puanlar`, `puanGecmis`; yeni olaylar `puanla {kimlik, puan}` ve `sonraki {kimlik}`; yeni hata kodu `gecersiz`. `gorunum(durum, kimlik, simdi)`: `tur` (her odada), 10/10 ama'da `benimPuanim`, `aciklama` (`ortalama`, `enDusuk`, `enYuksek`, `oybirligi`, `bolundu`, `puanlar` ad→puan|null), `sonrakiGorunur`; `cevapladi`/`toplam` aynı anlamda. `onOnFinal(durum)`: `kartlar`, `oduller` (`enAcimasiz`, `melekKalpli`, `ruhIkizleri`), `kisisel`. Kurallar:
+- Her oda tek türde: 10/10 ama odasında `cevapla`, OK mu NOK mu odasında `puanla`/`sonraki` hata verir.
+- Puan 0–10 tam sayı (geçersiz → `gecersiz`, durum değişmez); süre içinde değiştirilebilir; süre bitince `sure-doldu`; açıklama aşamasında yeni puan reddedilir.
+- Herkes (bağlı) puan verince ya da süre dolup `zaman` gelince **açıklama** (`acik`); açıklama süresiz bekler. Boş kişi ortalamaya/uçlara girmez; hiç puan yoksa ortalama ve uçlar `null`. `oybirligi` en az 2 puan verenin hepsi aynı; `bolundu` fark ≥ 8.
+- Açıklamaya kadar başkasının puanı hiçbir görünümde yer almaz (testte: yalnızca başkasının puanı farklı iki durumun görünümleri eşit).
+- `sonraki`: yalnızca açıklama aşamasında; yalnızca yetkili (kuran bağlı ve oyundaysa kuran, değilse sıradaki bağlı oyuncu); 10. kartın açıklamasındaki `sonraki` finale (`asama: 'bitti'`) götürür.
+- Ödüller (KK-58 kuralları): verdiği puanların ortalaması en düşük/en yüksek (herkes eşitse boş, eşitlikte hepsi), ruh ikizleri = ortak kartlarda mutlak fark ortalaması en küçük ikili(ler); boşlar hariç; ayrılanlar ödüle girmez, kişisel kartta kalır (çıkış anındaki kart sayılmaz).
+Bayrak `ononOda` (`src/kabul.ts`, backend #119 kapatır). Frontend (#121) testID sözleşmesini tasarım #120 bitince ayrıca yazarım.
+

@@ -92,3 +92,24 @@ Tek telefon, elden ele; 1 iOS ve 1 Android cihaz. En az 4 kişiyle (ya da 4 isim
 
 **Sonuç:** ☐ iOS geçti  ☐ Android geçti  İmza: ______
 
+## 10/10 ama oda modu (KK-72)
+
+En az 3 telefon (karışık iOS/Android), aynı Wi-Fi ve en az bir telefonda mobil veri; canlı sunucu. Biri oda kurar, diğerleri 6 haneli kodla katılır; tam bir oyun (10 kart). Kuran: ______  Sürüm: ______  Tarih: ______
+
+| # | KK | Kontrol | Sonuç |
+|---|---|---|---|
+| 1 | KK-63 | 10/10 ama'da "Tek telefon / Oda kur / Odaya katıl" seçimi var; tek telefon modu çevrimdışı hâlâ çalışıyor (uçak modu) | |
+| 2 | KK-63 | Kod, QR ve lobi OK mu NOK mu odasıyla aynı; OK mu NOK mu ekranından kodla girenler 10/10 ama odasına düşüyor | |
+| 3 | KK-64 | Kart tüm telefonlarda aynı anda açılıyor; kart metni, 15 sn geri sayım ve 0–10 düğmeleri görünüyor; geri sayımlar telefon saatleri farklı olsa da aynı anda bitiyor | |
+| 4 | KK-65 | Puan değiştirilebiliyor (son puan geçerli); süre bitince puan girilemiyor; puan vermeyen telefon "boş" sayılıyor | |
+| 5 | KK-65 | Puan verince "Puanın alındı ✓ · n/N" görünüyor (kimin verdiği görünür, kaç verdiği görünmez); herkes verince süre beklemeden açıklama geliyor | |
+| 6 | KK-66 | Açıklamadan önce hiçbir telefonda başkasının puanı görünmüyor (yan yana bakarak ve ağ izleyerek: puan mesajı yok) | |
+| 7 | KK-67 | Açıklama tüm telefonlarda aynı anda: ortalama, en düşük/en yüksek puan verenler; oybirliğinde konfeti, fark ≥ 8'de "Tam bölündünüz"; ardından herkesin puanı; "Hareketi azalt" açıkken sade | |
+| 8 | KK-68 | "Sonraki kart" yalnızca kuranda; diğerleri "Kuran kişi bekleniyor…" | |
+| 9 | KK-68 | Açıklamada kuranın uygulamasını kapat (ya da uçak modu): "Sonraki kart" sıradaki telefona geçiyor, oyun takılmıyor | |
+| 10 | KK-70 | Bir telefonu oyun ortasında kapat, tekrar aç: odaya geri dönüyor, kopukken biten kart onda "boş" | |
+| 11 | KK-69 | 10. kartın ardından final: ödüller (En acımasız, Melek kalpli, Ruh ikizleri) elle hesapla doğru kişilere gidiyor; oyundan çıkan ödül almıyor; kişisel kart ve 9:16 paylaşım görseli çalışıyor | |
+| 12 | KK-72 | Baştan sona oyun takılmadan; bir telefon kilit ekranına gidip gelince bağlantı toparlanıyor | |
+
+**Sonuç:** ☐ geçti  İmza: ______
+
