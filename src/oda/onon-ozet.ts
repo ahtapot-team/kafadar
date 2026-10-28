@@ -1,5 +1,4 @@
-/* eslint-disable @typescript-eslint/no-unused-vars -- iskelet: gövdeler #121'de yazılır */
-// 10/10 ama oda modu istemci türetmeleri (saf, React'sız). İSKELET (#125 → frontend #121): gövdeler henüz yok.
+// 10/10 ama oda modu istemci türetmeleri (saf, React'sız). Saf, React'sız.
 import type { Aciklama, OnOnFinal } from './oda';
 
 // Final kişisel kartı (KK-69): "Deniz, bu odada ortalaman 7,4 · odanın ortalamasından 1,8 cömert · Ruh ikizin: Mert ·
@@ -13,13 +12,40 @@ export type OnOnKisisel = {
   bos: number; // puan vermediği kart sayısı
 };
 
-export function onOnKisisel(_f: OnOnFinal, _ad: string): OnOnKisisel {
-  throw new Error('10/10 ama istemci türetmeleri henüz yazılmadı (#121)');
+const bir = (n: number) => Math.round(n * 10) / 10;
+const sayilar = (l: (number | null)[]) =>
+  l.filter((x): x is number => x !== null);
+const ort = (l: number[]) => l.reduce((a, b) => a + b, 0) / l.length;
+
+export function onOnKisisel(f: OnOnFinal, ad: string): OnOnKisisel {
+  const verilen = f.kisisel[ad]?.verilen ?? [];
+  const benim = sayilar(verilen);
+  const oda = sayilar(Object.values(f.kisisel).flatMap((k) => k.verilen));
+  const ortalama = benim.length ? ort(benim) : null;
+  const ikiz = f.oduller.ruhIkizleri.find((c) => c.includes(ad));
+  return {
+    ortalama: ortalama === null ? null : bir(ortalama),
+    odaFarki:
+      ortalama === null || !oda.length ? null : bir(ortalama - ort(oda)),
+    ikiz: ikiz ? (ikiz[0] === ad ? ikiz[1] : ikiz[0]) : null,
+    enYuksek: benim.length ? Math.max(...benim) : null,
+    enDusuk: benim.length ? Math.min(...benim) : null,
+    bos: verilen.length - benim.length,
+  };
 }
 
 // Açıklamada çubuk sırası: puan azalan; eşitlikte `puanlar` kayıt (oyuncu) sırası; boş (null) en sonda.
-export function puanSirasi(
-  _a: Aciklama,
-): { ad: string; puan: number | null }[] {
-  throw new Error('10/10 ama istemci türetmeleri henüz yazılmadı (#121)');
+export function puanSirasi(a: Aciklama): { ad: string; puan: number | null }[] {
+  return Object.entries(a.puanlar)
+    .map(([ad, puan], i) => ({ ad, puan, i }))
+    .sort((x, y) =>
+      x.puan === y.puan
+        ? x.i - y.i
+        : x.puan === null
+          ? 1
+          : y.puan === null
+            ? -1
+            : y.puan - x.puan,
+    )
+    .map(({ ad, puan }) => ({ ad, puan }));
 }

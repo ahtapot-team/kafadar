@@ -38,7 +38,7 @@ export const BEKLEYEN = {
   ononUi: false,
   ononOda: false, // #118: 10/10 ama oda türü (mantık, backend #119)
   ononUiEkran: false,
-  ononOdaIstemci: true, // #125: 10/10 ama oda istemcisi: mesajlar, durum, türetmeler (frontend #121)
+  ononOdaIstemci: false, // #125: 10/10 ama oda istemcisi: mesajlar, durum, türetmeler (frontend #121)
   ononOdaUi: true, // #125: 10/10 ama oda ekranları (testID sözleşmesi, frontend #121)
 };
 
