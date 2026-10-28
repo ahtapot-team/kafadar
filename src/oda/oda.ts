@@ -16,7 +16,14 @@ type Oyuncu = { kimlik: Kimlik; ad: string; bagli: boolean; ayrildi: boolean };
 type Gecmis = { kartId: string; oylar: Record<Kimlik, Oy | null> };
 
 // 'lobi' → 'soru' → 'bitti'. JSON'a çevrilebilir. Oylar yalnızca sunucuda tutulur; istemciye gorunum() verilir.
+// Oda türü: her oda tek bir oyun türündedir (KK-63). Varsayılan 'ok-mu-nok'.
+export type OdaTuru = 'ok-mu-nok' | 'on-on-ama';
+
 export type OdaDurum = {
+  tur: OdaTuru;
+  acik: boolean; // yalnızca 10/10 ama: şu anki kartın açıklaması gösteriliyor (kuran "Sonraki kart"ı bekler)
+  puanlar: Record<Kimlik, number>; // yalnızca 10/10 ama: şu anki kartın gizli puanları (0–10)
+  puanGecmis: { kartId: string; puanlar: Record<Kimlik, number | null> }[]; // yalnızca 10/10 ama: açıklanmış kartlar (puansız = null)
   asama: 'lobi' | 'soru' | 'bitti';
   kod: string;
   kurucu: Kimlik;
@@ -40,6 +47,8 @@ export type Olay =
   | { tip: 'kop'; kimlik: Kimlik } // bağlantı koptu
   | { tip: 'don'; kimlik: Kimlik } // aynı kimlikle geri döndü
   | { tip: 'ayril'; kimlik: Kimlik }
+  | { tip: 'puanla'; kimlik: Kimlik; puan: number } // yalnızca 10/10 ama odası; süre içinde değiştirilebilir
+  | { tip: 'sonraki'; kimlik: Kimlik } // yalnızca 10/10 ama, açıklamadan sonra, yalnızca yetkili (kuran / yetki devri)
   | { tip: 'zaman' }; // sunucu alarmı: süre dolduysa sonraki soruya (ya da finale) geçer
 
 export type Hata = {
@@ -50,6 +59,7 @@ export type Hata = {
     | 'yetkisiz' // kuran değil
     | 'yetersiz' // 2'den az oyuncu
     | 'sure-doldu' // süre bittikten sonra gelen cevap
+    | 'gecersiz' // 10/10 ama: 0–10 tam sayı olmayan puan, ya da yanlış aşamada/türde olay
     | 'tanimsiz'; // bilinmeyen kimlik
   mesaj: string; // Türkçe, net
 };
@@ -75,6 +85,39 @@ export type Gorunum = {
   cevapladi: string[]; // cevap vermiş oyuncuların adları (ne dediği değil)
   toplam: number; // oyuncu sayısı ("6/8")
   benimOyum?: Oy | null; // yalnızca kendi cevabı
+  // --- 10/10 ama odası (tur === 'on-on-ama'); OK mu NOK mu odasında tur 'ok-mu-nok' ve bu alanlar yoktur ---
+  tur?: OdaTuru; // katılan, hangi oyunun ekranından gelirse gelsin odanın oyununa girer (KK-63)
+  benimPuanim?: number | null; // yalnızca kendi gizli puanı (açıklamadan önce)
+  aciklama?: Aciklama; // yalnızca açıklama aşamasında, herkeste aynı (KK-67)
+  sonrakiGorunur?: boolean; // "Sonraki kart" yalnızca yetkilide true (KK-68)
+};
+
+// KK-67: boş (puan vermeyen) kişi ortalamaya ve uçlara girmez; hiç puan yoksa ortalama/uçlar null.
+export type Aciklama = {
+  ortalama: number | null; // bir ondalık
+  enDusuk: { puan: number; kisiler: string[] } | null; // oyuncu sırasıyla adlar
+  enYuksek: { puan: number; kisiler: string[] } | null;
+  oybirligi: boolean; // puan verenlerin hepsi aynı puanı verdi (en az 2 kişi)
+  bolundu: boolean; // en yüksek − en düşük ≥ 8
+  puanlar: Record<string, number | null>; // ad → puan (null = boş), açıklamadan sonra herkes görür
+};
+
+// KK-69: 10/10 ama finali. Boşlar ortalamaya girmez; ayrılanlar ödüllere girmez ama kişisel kartta kalır.
+export type OnOnFinal = {
+  kartlar: {
+    kartId: string;
+    ortalama: number | null;
+    puanlar: Record<string, number | null>;
+  }[];
+  oduller: {
+    enAcimasiz: string[];
+    melekKalpli: string[];
+    ruhIkizleri: [string, string][];
+  };
+  kisisel: Record<
+    string,
+    { ortalama: number | null; verilen: (number | null)[] }
+  >; // ad → verdiği puanlar kart sırasıyla
 };
 
 export type Final = {
@@ -111,8 +154,13 @@ export function odaKur(s: {
   deste: Deste;
   tohum: number;
   simdi: number;
+  tur?: OdaTuru; // varsayılan 'ok-mu-nok'
 }): { durum: OdaDurum; kimlik: Kimlik } {
   const d: OdaDurum = {
+    tur: s.tur ?? 'ok-mu-nok',
+    acik: false,
+    puanlar: {},
+    puanGecmis: [],
     asama: 'lobi',
     kod: s.kod,
     kurucu: '',
@@ -254,6 +302,10 @@ export function isle(durum: OdaDurum, olay: Olay, simdi: number): Sonuc {
       if (aktifler(d).length <= 1) bitir(d, simdi);
       else belkiIlerle(d, simdi);
       return { durum: d };
+    case 'puanla':
+    case 'sonraki':
+      // İSKELET (#118 → backend #119): 10/10 ama odası henüz yok.
+      return hata(durum, 'gecersiz', '10/10 ama odası henüz yazılmadı.');
     case 'zaman':
       if (d.asama === 'soru' && simdi - d.baslangic >= SORU_MS)
         ilerle(d, simdi);
@@ -269,6 +321,7 @@ export function gorunum(
   const d = durum;
   const soru = d.asama === 'soru';
   return {
+    tur: d.tur,
     asama: d.asama,
     kod: d.kod,
     oyuncular: aktifler(d).map((p) => ({ ad: p.ad, bagli: p.bagli })),
@@ -367,4 +420,10 @@ export function denemeSiniri(
   );
   const izin = son.length < DENEME_MAKS;
   return { izin, kayit: { ...eski, [istemci]: izin ? [...son, simdi] : son } };
+}
+
+// KK-69: 10/10 ama finali (yalnızca 'bitti' aşamasında anlamlı). İSKELET (#118 → backend #119).
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+export function onOnFinal(_durum: OdaDurum): OnOnFinal {
+  throw new Error('10/10 ama odası henüz yazılmadı (#119)');
 }
