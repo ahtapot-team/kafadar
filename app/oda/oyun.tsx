@@ -4,8 +4,12 @@ import { Platform, View } from 'react-native';
 import { useOda } from '../../src/baglanti/baglam';
 import { BeklemeEkrani } from '../../src/oda-ui/bekle';
 import { FinalEkrani } from '../../src/oda-ui/final';
+import { OnAciklamaEkrani } from '../../src/oda-ui/onon-aciklama';
+import { OnFinalEkrani } from '../../src/oda-ui/onon-final';
+import { OnBeklemeEkrani, OnPuanEkrani } from '../../src/oda-ui/onon-puan';
 import { SoruEkrani } from '../../src/oda-ui/soru';
 import { YenidenBaglaniyor } from '../../src/oda-ui/yeniden';
+import { odaTuru } from '../../src/oda/istemci';
 import { ayrilanlar } from '../../src/oda/ozet';
 import { useDurum } from '../../src/durum';
 import { bosluk, yaricap } from '../../src/tema';
@@ -30,6 +34,7 @@ export default function OdaOyun() {
   const izinli = useRef(false);
   const onceki = useRef<string[]>([]);
   const g = durum.gorunum;
+  const onon = odaTuru(durum) === 'on-on-ama'; // ekran odanın oyunundan seçilir (KK-63)
   const bitti = g?.asama === 'bitti';
 
   // Android geri tuşu / iOS geri hareketi: oyun sürerken "Odadan çık?" sorar; final'de sormadan ayrılır (#73).
@@ -112,7 +117,30 @@ export default function OdaOyun() {
     const cevapladi = g.benimOyum != null && degistirNo !== g.soruNo;
     return (
       <>
-        {cevapladi ? (
+        {onon ? (
+          g.aciklama ? (
+            <OnAciklamaEkrani
+              durum={durum}
+              onSonraki={() => istemci.sonraki()}
+              onCik={() => setCikisOnayi(true)}
+            />
+          ) : g.benimPuanim != null && degistirNo !== g.soruNo ? (
+            <OnBeklemeEkrani
+              durum={durum}
+              onDegistir={() => setDegistirNo(g.soruNo ?? null)}
+              onCik={() => setCikisOnayi(true)}
+            />
+          ) : (
+            <OnPuanEkrani
+              durum={durum}
+              onPuan={(p) => {
+                istemci.puanla(p);
+                setDegistirNo(null);
+              }}
+              onCik={() => setCikisOnayi(true)}
+            />
+          )
+        ) : cevapladi ? (
           <BeklemeEkrani
             durum={durum}
             onDegistir={() => setDegistirNo(g.soruNo ?? null)}
@@ -173,7 +201,13 @@ export default function OdaOyun() {
     istemci.ayril();
     router.replace(hedef);
   };
-  return (
+  return onon ? (
+    <OnFinalEkrani
+      durum={durum}
+      onTekrar={() => cik('/mod')}
+      onAnaMenu={() => cik('/')}
+    />
+  ) : (
     <FinalEkrani
       durum={durum}
       onTekrar={() => cik('/mod')}
