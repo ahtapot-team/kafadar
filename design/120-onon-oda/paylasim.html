@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kafadar — 10/10 ama oda paylaşım görseli</title>
+<!-- #120 KK-69: oda finali 9:16 (1080×1920). Puan rengi: 0–3 kırmızı, 4–6 sarı, 7–10 yeşil. Tek dış kaynak: Google Fonts. -->
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&display=swap" rel="stylesheet">
+<style>
+  :root { --zemin: #16123F; --yuzey: #2B2570; --metin: #FFF8E7; --soluk: #B9B3E8; --kontur: #0B0920; --golge: #7C6CFF;
+    --marka: #FFD23F; --marka-2: #5B8CFF; --ok: #3DDC84; --nok: #FF5A4E; }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: #DCD9E8; font-family: 'Bricolage Grotesque', system-ui, sans-serif; }
+  .gorsel { width: 1080px; height: 1920px; margin: 0 auto; background: var(--zemin); color: var(--metin); padding: 120px 90px 100px;
+    display: flex; flex-direction: column; gap: 60px; overflow: hidden; }
+  .sticker { display: inline-block; transform: rotate(-4deg); border: 10px solid var(--kontur); border-radius: 44px; box-shadow: 14px 14px 0 var(--golge);
+    font-weight: 800; letter-spacing: -0.03em; line-height: 1; color: var(--kontur); white-space: nowrap; }
+  .eko { height: 420px; display: grid; grid-template-columns: repeat(10, minmax(0, 1fr)); gap: 18px; align-items: end; }
+  .eko i { display: block; border-radius: 22px; border: 8px solid var(--kontur); }
+  .odul { padding: 34px 44px; border-radius: 50px; border: 10px solid var(--kontur); box-shadow: 14px 14px 0 var(--golge); color: var(--kontur); display: flex; justify-content: space-between; align-items: center; }
+  .odul b { font-size: 64px; } .odul span { font-size: 38px; font-weight: 800; letter-spacing: 0.06em; }
+</style>
+</head>
+<body>
+<div class="gorsel">
+  <div style="display: flex; justify-content: space-between; align-items: center">
+    <span class="sticker" style="background: var(--marka); font-size: 96px; padding: 16px 44px 26px">Kafadar!</span>
+    <span class="sticker" style="background: var(--marka-2); font-size: 48px; padding: 14px 28px 20px; transform: rotate(3deg)">10/10 ama · ODA</span>
+  </div>
+  <div>
+    <div style="font-size: 44px; font-weight: 800; letter-spacing: 0.08em; color: var(--soluk)">10 KARTTA BU ODA ORTALAMA</div>
+    <div style="font-size: 220px; font-weight: 800; letter-spacing: -0.05em; line-height: 0.95">5,6<span style="font-size: 80px; color: var(--soluk)">/10</span></div>
+  </div>
+  <div class="eko" id="eko"></div>
+  <div style="display: flex; flex-direction: column; gap: 30px">
+    <div class="odul" style="background: var(--nok); transform: rotate(-2deg)"><span>EN ACIMASIZ</span><b>Ayşe</b></div>
+    <div class="odul" style="background: var(--ok); transform: rotate(1.5deg)"><span>MELEK KALPLİ</span><b>Can</b></div>
+    <div class="odul" style="background: var(--marka-2); transform: rotate(-1deg)"><span>RUH İKİZLERİ</span><b>Mert & Deniz</b></div>
+  </div>
+  <div style="margin-top: auto; text-align: center; font-size: 40px; font-weight: 700; color: var(--soluk)">Kafadar ile oynandı · 8 kişi · Sevgili adayı</div>
+</div>
+<script>
+  // 10 kartın oda ortalaması (örnek); renk puan bandına göre
+  const O = [5.3, 7.8, 2.4, 6.1, 8.9, 5.1, 3.2, 6.6, 4.8, 5.8];
+  const renk = (x) => x < 4 ? 'var(--nok)' : x < 7 ? 'var(--marka)' : 'var(--ok)';
+  document.getElementById('eko').innerHTML = O.map(x => `<i style="height:${x * 10}%;background:${renk(x)}"></i>`).join('');
+</script>
+</body>
+</html>
