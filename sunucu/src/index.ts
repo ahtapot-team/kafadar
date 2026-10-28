@@ -1,16 +1,18 @@
 // Oda sunucusu: ince kabuk. Kurallar src/oda/oda.ts'te (saf); burada yalnızca ağ, saat, kimlik ve saklama var.
 //
-// Tek WebSocket: GET /ws?islem=kur&ad=Ali&paket=arkadas|cift|aile
+// Tek WebSocket: GET /ws?islem=kur&ad=Ali&paket=arkadas|cift|aile   (OK mu NOK mu)
+//                GET /ws?islem=kur&ad=Ali&oyun=on-on-ama&paket=arkadas|gundelik|sevgili   (10/10 ama)
 //                GET /ws?islem=katil&kod=ABCD&ad=Ali
 //                GET /ws?islem=don&kod=ABCD   → İLK istemci mesajı {t:'kimlik', kimlik:'<belirteç>'} (yeniden bağlanma;
 //                                                belirteç adreste/günlükte görünmesin diye URL'de yok, 10 sn içinde gelmezse soket kapanır)
 // sunucu → istemci (JSON, `t` alanı):
-//   {t:'tamam', kod, kimlik, ad}          kur/katil/don başarısı (ad: "Ali 2" çözülmüş)
+//   {t:'tamam', kod, kimlik, ad, tur}     kur/katil/don başarısı (ad: "Ali 2" çözülmüş; tur: odanın oyunu)
 //   {t:'gorunum', gorunum, simdi}         her durum değişiminde, kişiye özel; simdi = sunucu saati (ms)
 //   {t:'final', final}                    yalnızca oyun bitince
 //   {t:'hata', hata:{kod,mesaj}}          Türkçe mesaj; bağlanma hatasında soket kapanır, oyun içi hatada açık kalır
 // WebSocket olmayan istek 426, bilinmeyen işlem 400 döner.
-// istemci → sunucu: {t:'baslat'} | {t:'cevapla', oy:'OK'|'NOK'} | {t:'ayril'}
+// istemci → sunucu: {t:'baslat'} | {t:'ayril'}
+//   OK mu NOK mu odası: {t:'cevapla', oy:'OK'|'NOK'}   |   10/10 ama odası: {t:'puanla', puan:0–10} | {t:'sonraki'} (yalnızca yetkili)
 import { DurableObject } from 'cloudflare:workers';
 import type { Deste } from '../../src/core/deste';
 import {
@@ -20,6 +22,7 @@ import {
   SORU_MS,
   denemeSiniri,
   final,
+  onOnFinal,
   gorunum,
   isle,
   kodGecerliMi,
@@ -30,6 +33,9 @@ import {
 import aile from '../../content/decks/aile.json';
 import arkadas from '../../content/decks/arkadas.json';
 import cift from '../../content/decks/cift.json';
+import ononArkadas from '../../content/onon/onon-arkadas.json';
+import ononGundelik from '../../content/onon/onon-gundelik.json';
+import ononSevgili from '../../content/onon/onon-sevgili.json';
 
 type Env = {
   ODA: DurableObjectNamespace<Oda>;
@@ -41,6 +47,12 @@ type Ek = { kimlik?: string; bas?: number };
 const KIMLIK_MS = 10_000;
 
 const DESTELER: Record<string, Deste> = { arkadas, cift, aile };
+// 10/10 ama paketleri (oyun=on-on-ama): paket adı arkadas | gundelik | sevgili
+const ONON_DESTELER: Record<string, Deste> = {
+  arkadas: ononArkadas,
+  gundelik: ononGundelik,
+  sevgili: ononSevgili,
+};
 const gonder = (ws: WebSocket, govde: object) => ws.send(JSON.stringify(govde));
 
 // Tarayıcılar yükseltme öncesi HTTP hata gövdesini okuyamaz; hata bir WS çerçevesi olarak gider, sonra soket kapanır.
@@ -84,7 +96,10 @@ export default {
           'cok-deneme',
           'Çok fazla oda kurdunuz. Biraz bekleyin.',
         );
-      const deste = DESTELER[q.get('paket') ?? 'arkadas'];
+      const tur = q.get('oyun') === 'on-on-ama' ? 'on-on-ama' : 'ok-mu-nok';
+      const deste = (tur === 'on-on-ama' ? ONON_DESTELER : DESTELER)[
+        q.get('paket') ?? 'arkadas'
+      ];
       if (!deste) return hataSoketi('tanimsiz', 'Bilinmeyen deste.');
       for (let i = 0; i < 5; i++) {
         const kod = kodUret(rastgele);
@@ -96,6 +111,7 @@ export default {
             kod,
             kurucuAd: q.get('ad') ?? '',
             kurucuKimlik: kimlik,
+            tur,
             deste,
             tohum: Math.floor(rastgele() * 2 ** 32),
           }),
@@ -127,8 +143,16 @@ export class Oda extends DurableObject<Env> {
   async varMi() {
     return (await this.yukle()) !== undefined;
   }
-  private yukle() {
-    return this.ctx.storage.get<OdaDurum>('d');
+  // Önceki sürümde kurulmuş odalarda yeni alanlar yoktur: OK mu NOK mu odası sayılır.
+  private async yukle() {
+    const d = await this.ctx.storage.get<OdaDurum>('d');
+    if (d) {
+      d.tur ??= 'ok-mu-nok';
+      d.acik ??= false;
+      d.puanlar ??= {};
+      d.puanGecmis ??= [];
+    }
+    return d;
   }
   private async kaydet(d: OdaDurum) {
     await this.ctx.storage.put('d', d);
@@ -139,7 +163,9 @@ export class Oda extends DurableObject<Env> {
     const silme =
       (d.asama === 'bitti' ? (d.bitis ?? d.sonEtkinlik) : d.sonEtkinlik) +
       BOSTA_MS;
-    const sure = d.asama === 'soru' ? d.baslangic + SORU_MS : Infinity;
+    // 10/10 ama açıklaması süresiz bekler: o sırada soru süresi alarmı kurulmaz.
+    const sure =
+      d.asama === 'soru' && !d.acik ? d.baslangic + SORU_MS : Infinity;
     const bekleyen = this.bekleyenler().map((a) => (a.bas ?? 0) + KIMLIK_MS);
     return this.ctx.storage.setAlarm(Math.min(silme, sure, ...bekleyen) + 1);
   }
@@ -159,7 +185,11 @@ export class Oda extends DurableObject<Env> {
       if (!kimlik) continue; // henüz kimlik doğrulanmadı
       try {
         gonder(ws, { t: 'gorunum', gorunum: gorunum(d, kimlik, simdi), simdi });
-        if (d.asama === 'bitti') gonder(ws, { t: 'final', final: final(d) });
+        if (d.asama === 'bitti')
+          gonder(ws, {
+            t: 'final',
+            final: d.tur === 'on-on-ama' ? onOnFinal(d) : final(d),
+          });
       } catch {
         /* kapanmakta olan soket: diğerlerine yayın sürsün */
       }
@@ -169,7 +199,7 @@ export class Oda extends DurableObject<Env> {
   private async baglandi(ws: WebSocket, d: OdaDurum, kimlik: string) {
     ws.serializeAttachment({ kimlik } satisfies Ek);
     const ad = d.oyuncular.find((p) => p.kimlik === kimlik)?.ad;
-    gonder(ws, { t: 'tamam', kod: d.kod, kimlik, ad });
+    gonder(ws, { t: 'tamam', kod: d.kod, kimlik, ad, tur: d.tur });
     await this.kaydet(d);
     this.yayinla(d);
   }
@@ -222,7 +252,7 @@ export class Oda extends DurableObject<Env> {
   }
 
   async webSocketMessage(ws: WebSocket, mesaj: string | ArrayBuffer) {
-    let m: { t?: string; oy?: string; kimlik?: string };
+    let m: { t?: string; oy?: string; kimlik?: string; puan?: number };
     try {
       m = JSON.parse(String(mesaj));
     } catch {
@@ -250,6 +280,9 @@ export class Oda extends DurableObject<Env> {
     else if (m.t === 'ayril') olay = { tip: 'ayril', kimlik };
     else if (m.t === 'cevapla' && (m.oy === 'OK' || m.oy === 'NOK'))
       olay = { tip: 'cevapla', kimlik, oy: m.oy };
+    else if (m.t === 'puanla' && typeof m.puan === 'number')
+      olay = { tip: 'puanla', kimlik, puan: m.puan };
+    else if (m.t === 'sonraki') olay = { tip: 'sonraki', kimlik };
     else return;
     const d = await this.yukle();
     if (!d) return;

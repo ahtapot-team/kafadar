@@ -3,6 +3,7 @@
 // mantığı çalıştıran ince bir kabuktur; her olayda kendi saatini `simdi` olarak verir.
 import type { Deste, Kart } from '../core/deste';
 import { karistir, rngOlustur } from '../core/rng';
+import { oduluHesapla } from '../core/puan-oduller';
 
 export type Kimlik = string; // katılımda sunucunun verdiği, cihazda saklanan oyuncu belirteci
 export type Oy = 'OK' | 'NOK';
@@ -204,6 +205,29 @@ const hata = (durum: OdaDurum, kod: Hata['kod'], mesaj: string): Sonuc => ({
   hata: { kod, mesaj },
 });
 
+const onOn = (d: OdaDurum) => d.tur === 'on-on-ama';
+const puanMi = (p: unknown): p is number =>
+  typeof p === 'number' && Number.isInteger(p) && p >= 0 && p <= 10;
+const ort1 = (p: number[]) =>
+  p.length === 0
+    ? null
+    : Math.round((p.reduce((a, b) => a + b, 0) * 10) / p.length) / 10;
+
+// "Sonraki kart"a basabilecek tek kişi: kuran (bağlı ve oyundaysa), değilse oyuncu sırasıyla ilk bağlı oyuncu (KK-68).
+function yetkili(d: OdaDurum): Kimlik | null {
+  const bagli = aktifler(d).filter((p) => p.bagli);
+  return (bagli.find((p) => p.kimlik === d.kurucu) ?? bagli[0])?.kimlik ?? null;
+}
+
+// 10/10 ama: açıklamayı başlatır; kart geçmişe yazılır (puan vermeyen null).
+function acikla(d: OdaDurum, simdi: number) {
+  const puanlar: Record<Kimlik, number | null> = {};
+  for (const p of aktifler(d)) puanlar[p.kimlik] = d.puanlar[p.kimlik] ?? null;
+  d.puanGecmis.push({ kartId: d.sorular[d.no].id, puanlar });
+  d.acik = true;
+  d.sonEtkinlik = simdi;
+}
+
 function bitir(d: OdaDurum, simdi: number) {
   d.asama = 'bitti';
   d.bitis = simdi;
@@ -225,12 +249,12 @@ function ilerle(d: OdaDurum, simdi: number) {
 // Bağlı herkes cevapladıysa beklemeden geçilir (KK-34).
 function belkiIlerle(d: OdaDurum, simdi: number) {
   const bagli = aktifler(d).filter((p) => p.bagli);
-  if (
-    d.asama === 'soru' &&
-    bagli.length > 0 &&
-    bagli.every((p) => d.oylar[p.kimlik])
-  )
-    ilerle(d, simdi);
+  if (d.asama !== 'soru' || bagli.length === 0) return;
+  if (onOn(d)) {
+    // 10/10 ama: herkes puan verince açıklama (0 da puandır); açıklama süresiz bekler.
+    if (!d.acik && bagli.every((p) => d.puanlar[p.kimlik] !== undefined))
+      acikla(d, simdi);
+  } else if (bagli.every((p) => d.oylar[p.kimlik])) ilerle(d, simdi);
 }
 
 export function isle(durum: OdaDurum, olay: Olay, simdi: number): Sonuc {
@@ -269,6 +293,8 @@ export function isle(durum: OdaDurum, olay: Olay, simdi: number): Sonuc {
       d.sonEtkinlik = simdi;
       return { durum: d };
     case 'cevapla':
+      if (onOn(d))
+        return hata(durum, 'gecersiz', 'Bu odada cevap değil puan verilir.');
       if (d.asama === 'bitti') return hata(durum, 'kapali', 'Oyun bitti.');
       if (d.asama === 'lobi')
         return hata(durum, 'yetkisiz', 'Oyun henüz başlamadı.');
@@ -299,16 +325,60 @@ export function isle(durum: OdaDurum, olay: Olay, simdi: number): Sonuc {
       o!.ayrildi = true;
       o!.bagli = false;
       delete d.oylar[o!.kimlik];
+      delete d.puanlar[o!.kimlik];
       if (aktifler(d).length <= 1) bitir(d, simdi);
       else belkiIlerle(d, simdi);
       return { durum: d };
     case 'puanla':
+      if (!onOn(d))
+        return hata(durum, 'gecersiz', 'Bu odada puan değil cevap verilir.');
+      if (d.asama === 'bitti') return hata(durum, 'kapali', 'Oyun bitti.');
+      if (d.asama === 'lobi')
+        return hata(durum, 'yetkisiz', 'Oyun henüz başlamadı.');
+      if (d.acik)
+        return hata(durum, 'gecersiz', 'Açıklama sürerken puan verilemez.');
+      if (!puanMi(olay.puan))
+        return hata(
+          durum,
+          'gecersiz',
+          'Puan 0 ile 10 arasında tam sayı olmalı.',
+        );
+      if (simdi - d.baslangic >= SORU_MS)
+        return hata(durum, 'sure-doldu', 'Süre doldu, puan sayılmadı.');
+      d.puanlar[o!.kimlik] = olay.puan;
+      d.sonEtkinlik = simdi;
+      belkiIlerle(d, simdi);
+      return { durum: d };
     case 'sonraki':
-      // İSKELET (#118 → backend #119): 10/10 ama odası henüz yok.
-      return hata(durum, 'gecersiz', '10/10 ama odası henüz yazılmadı.');
+      if (!onOn(d))
+        return hata(durum, 'gecersiz', 'Bu odada sonraki kart yok.');
+      if (d.asama !== 'soru' || !d.acik)
+        return hata(
+          durum,
+          'gecersiz',
+          'Sonraki kart yalnızca açıklamadan sonra.',
+        );
+      if (yetkili(d) !== o!.kimlik)
+        return hata(
+          durum,
+          'yetkisiz',
+          'Sonraki karta yalnızca yetkili basabilir.',
+        );
+      d.acik = false;
+      d.puanlar = {};
+      d.sonEtkinlik = simdi;
+      if (d.puanGecmis.length >= d.sorular.length) bitir(d, simdi);
+      else {
+        d.no++;
+        d.baslangic = simdi;
+      }
+      return { durum: d };
     case 'zaman':
-      if (d.asama === 'soru' && simdi - d.baslangic >= SORU_MS)
-        ilerle(d, simdi);
+      // 10/10 ama: açıklama süresiz bekler; yalnızca puan toplanırken süre dolunca açıklanır.
+      if (d.asama === 'soru' && simdi - d.baslangic >= SORU_MS) {
+        if (!onOn(d)) ilerle(d, simdi);
+        else if (!d.acik) acikla(d, simdi);
+      }
       return { durum: d };
   }
 }
@@ -320,7 +390,11 @@ export function gorunum(
 ): Gorunum {
   const d = durum;
   const soru = d.asama === 'soru';
-  return {
+  const on = onOn(d);
+  const verenler = aktifler(d).filter((p) =>
+    on ? d.puanlar[p.kimlik] !== undefined : d.oylar[p.kimlik],
+  );
+  const g: Gorunum = {
     tur: d.tur,
     asama: d.asama,
     kod: d.kod,
@@ -329,14 +403,46 @@ export function gorunum(
     baslatAktif: d.asama === 'lobi' && d.oyuncular.length >= 2,
     soruNo: soru ? d.no + 1 : undefined,
     soru: soru ? d.sorular[d.no] : undefined,
-    kalanMs: soru ? Math.max(0, SORU_MS - (simdi - d.baslangic)) : undefined,
-    cevapladi: soru
-      ? aktifler(d)
-          .filter((p) => d.oylar[p.kimlik])
-          .map((p) => p.ad)
-      : [],
+    kalanMs:
+      soru && !(on && d.acik)
+        ? Math.max(0, SORU_MS - (simdi - d.baslangic))
+        : undefined,
+    cevapladi: soru ? verenler.map((p) => p.ad) : [],
     toplam: aktifler(d).length,
-    benimOyum: soru ? (d.oylar[kimlik] ?? null) : undefined,
+  };
+  if (!on)
+    return { ...g, benimOyum: soru ? (d.oylar[kimlik] ?? null) : undefined };
+  // 10/10 ama: başkasının puanı açıklamaya kadar hiçbir alanda yok (KK-66).
+  return {
+    ...g,
+    benimPuanim: soru ? (d.puanlar[kimlik] ?? null) : undefined,
+    aciklama: soru && d.acik ? aciklamaOlustur(d) : undefined,
+    sonrakiGorunur: soru && d.acik && yetkili(d) === kimlik,
+  };
+}
+
+// KK-67: açıklama, her telefonda aynı. Boşlar (puan vermeyenler) ortalamaya ve uçlara girmez.
+function aciklamaOlustur(d: OdaDurum): Aciklama {
+  const kisiler = aktifler(d);
+  const puanlar: Record<string, number | null> = {};
+  for (const p of kisiler) puanlar[p.ad] = d.puanlar[p.kimlik] ?? null;
+  const verilen = kisiler.filter((p) => d.puanlar[p.kimlik] !== undefined);
+  const deger = verilen.map((p) => d.puanlar[p.kimlik]);
+  const en = (puan: number) => ({
+    puan,
+    kisiler: verilen
+      .filter((p) => d.puanlar[p.kimlik] === puan)
+      .map((p) => p.ad),
+  });
+  const dusuk = deger.length ? Math.min(...deger) : 0;
+  const yuksek = deger.length ? Math.max(...deger) : 0;
+  return {
+    ortalama: ort1(deger),
+    enDusuk: deger.length ? en(dusuk) : null,
+    enYuksek: deger.length ? en(yuksek) : null,
+    oybirligi: deger.length >= 2 && dusuk === yuksek,
+    bolundu: deger.length >= 2 && yuksek - dusuk >= 8,
+    puanlar,
   };
 }
 
@@ -422,8 +528,36 @@ export function denemeSiniri(
   return { izin, kayit: { ...eski, [istemci]: izin ? [...son, simdi] : son } };
 }
 
-// KK-69: 10/10 ama finali (yalnızca 'bitti' aşamasında anlamlı). İSKELET (#118 → backend #119).
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-export function onOnFinal(_durum: OdaDurum): OnOnFinal {
-  throw new Error('10/10 ama odası henüz yazılmadı (#119)');
+// KK-69: 10/10 ama finali (yalnızca 'bitti' aşamasında anlamlı). Boşlar ortalamaya girmez; ayrılanlar ödüle girmez.
+export function onOnFinal(durum: OdaDurum): OnOnFinal {
+  const d = durum;
+  const ad = (k: Kimlik) => d.oyuncular.find((p) => p.kimlik === k)?.ad;
+  const kartlar = d.puanGecmis.map((g) => {
+    const puanlar: Record<string, number | null> = {};
+    for (const p of d.oyuncular) puanlar[p.ad] = g.puanlar[p.kimlik] ?? null;
+    const deger = Object.values(puanlar).filter((x): x is number => x !== null);
+    return { kartId: g.kartId, ortalama: ort1(deger), puanlar };
+  });
+  const kisisel: OnOnFinal['kisisel'] = {};
+  for (const p of d.oyuncular) {
+    const verilen = d.puanGecmis.map((g) => g.puanlar[p.kimlik] ?? null);
+    kisisel[p.ad] = {
+      ortalama: ort1(verilen.filter((x): x is number => x !== null)),
+      verilen,
+    };
+  }
+  const gecmis = d.puanGecmis.map((g) => {
+    const puanlar: Record<string, number | undefined> = {};
+    for (const [k, v] of Object.entries(g.puanlar))
+      if (v !== null && ad(k)) puanlar[ad(k)!] = v;
+    return { puanlar };
+  });
+  return {
+    kartlar,
+    oduller: oduluHesapla(
+      aktifler(d).map((p) => p.ad),
+      gecmis,
+    ),
+    kisisel,
+  };
 }

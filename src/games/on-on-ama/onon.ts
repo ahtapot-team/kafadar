@@ -1,6 +1,7 @@
 // 10/10 ama (tek telefon, açık puan): saf, tohumlu, serileştirilebilir durum makinesi (KK-61, KK-22).
 // Date.now, Math.random, ağ ve React yok; isle() girdiyi değiştirmez.
 import type { Deste } from '../../core/deste';
+import { type Oduller, oduluHesapla } from '../../core/puan-oduller';
 import { karistir, rngOlustur } from '../../core/rng';
 
 export const PUAN_MIN = 0;
@@ -51,12 +52,7 @@ export type Ozet = {
   bolundu: boolean; // en yüksek − en düşük ≥ BOLUNDU_FARKI
 };
 
-// Oturum sonu ödülleri (KK-58). Yalnızca hâlâ oyunda olanlar ve açıklanmış kartlardan hesaplanır.
-export type Oduller = {
-  enAcimasiz: string[]; // verdiği puanların ortalaması en düşük olan(lar); herkes eşitse boş
-  melekKalpli: string[]; // ortalaması en yüksek olan(lar); herkes eşitse boş
-  ruhIkizleri: [string, string][]; // ortak kartlarda puan farkının ortalaması en küçük ikili(ler); ikili oyuncu sırasıyla
-};
+export type { Oduller } from '../../core/puan-oduller';
 
 export function yeniOyun(s: OyunSecenekleri): Durum {
   return {
@@ -116,54 +112,8 @@ export function ozet(d: Durum): Ozet {
   };
 }
 
-// Kesirleri tam sayıyla karşılaştırır (ondalık yuvarlama hatası olmasın): a/b ile c/d.
-type Oran = { s: number; n: number }; // toplam, adet
-const kucukMu = (a: Oran, b: Oran) => a.s * b.n < b.s * a.n;
-const esitMi = (a: Oran, b: Oran) => a.s * b.n === b.s * a.n;
-
-// Oran listesinden en küçüğü (ya da en büyüğü) olanların anahtarları.
-function uclar<T>(liste: { k: T; o: Oran }[], enKucuk: boolean): T[] {
-  if (liste.length === 0) return [];
-  let en = liste[0].o;
-  for (const { o } of liste)
-    if (enKucuk ? kucukMu(o, en) : kucukMu(en, o)) en = o;
-  return liste.filter(({ o }) => esitMi(o, en)).map(({ k }) => k);
-}
-
-// Yalnızca hâlâ oyunda olanlar ve açıklanmış kartlardan hesaplanır (KK-58).
-export function oduller(d: Durum): Oduller {
-  const ort: { k: string; o: Oran }[] = [];
-  for (const ad of d.oyuncular) {
-    const p = d.gecmis.map((g) => g.puanlar[ad]).filter((x) => x !== undefined);
-    if (p.length > 0)
-      ort.push({ k: ad, o: { s: p.reduce((a, b) => a + b, 0), n: p.length } });
-  }
-  const hepsiEsit = ort.every(({ o }) => esitMi(o, ort[0].o));
-  const ikizler: { k: [string, string]; o: Oran }[] = [];
-  d.oyuncular.forEach((a, i) =>
-    d.oyuncular.slice(i + 1).forEach((b) => {
-      const ortak = d.gecmis.filter(
-        (g) => g.puanlar[a] !== undefined && g.puanlar[b] !== undefined,
-      );
-      if (ortak.length > 0)
-        ikizler.push({
-          k: [a, b],
-          o: {
-            s: ortak.reduce(
-              (t, g) => t + Math.abs(g.puanlar[a] - g.puanlar[b]),
-              0,
-            ),
-            n: ortak.length,
-          },
-        });
-    }),
-  );
-  return {
-    enAcimasiz: hepsiEsit ? [] : uclar(ort, true),
-    melekKalpli: hepsiEsit ? [] : uclar(ort, false),
-    ruhIkizleri: uclar(ikizler, true),
-  };
-}
+export const oduller = (d: Durum): Oduller =>
+  oduluHesapla(d.oyuncular, d.gecmis);
 
 // Sonraki karta geçer: tur uzunluğu dolduysa oturum biter, deste tükendiyse karıştırma sorulur.
 function ilerle(d: Durum): Durum {
