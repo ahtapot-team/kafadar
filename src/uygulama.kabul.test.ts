@@ -17,6 +17,7 @@ import {
   kabulOdaCik,
   kabulOnonUi,
   kabulOnonUiEkran,
+  kabulOnonOdaUi,
 } from './kabul';
 import { oyunlar } from './games/registry';
 
@@ -560,5 +561,115 @@ describe('10/10 ama: kayıt listesi, arayüz ve altyapı sözleşmesi (KK-55…K
     expect(liste).toMatch(/10\/10 ama \(KK-62\)/);
     expect(liste).toMatch(/parmak/i);
     expect(liste).toMatch(/hareketi azalt/i);
+  });
+});
+
+describe('10/10 ama oda modu: istemci ekranları sözleşmesi (#125, KK-63…KK-69)', () => {
+  // Arayüz test aracı yok (Semih 1C): sözleşme kaynak düzeyinde; davranış önizlemede 3 sekmeyle doğrulanır.
+  const TESTIDLER = [
+    'oda-onon-paket-', // KK-63: kurulumda paket seçimi (oda-onon-paket-arkadas / -gundelik / -sevgili)
+    'oda-onon-kart-metni', // KK-64/KK-67: puan, bekleme ve açıklamada kart metni görünür
+    'oda-onon-puan-', // KK-65: 0–10 tuşları (oda-onon-puan-0 … oda-onon-puan-10)
+    'oda-onon-puanim', // KK-65: puan veren kendi puanını görür
+    'oda-onon-ortalama', // KK-67
+    'oda-onon-en-dusuk',
+    'oda-onon-en-yuksek',
+    'oda-onon-bolundu',
+    'oda-onon-oybirligi',
+    'oda-onon-konfeti',
+    'oda-onon-satir-', // herkesin puanı (oda-onon-satir-<i>, puanSirasi sırasıyla)
+    'oda-onon-sonraki', // KK-68: yalnızca yetkilide
+    'oda-onon-kuran-bekleniyor',
+    'oda-onon-odul-en-acimasiz', // KK-69
+    'oda-onon-odul-melek-kalpli',
+    'oda-onon-odul-ruh-ikizleri',
+    'oda-onon-kisisel',
+    'oda-onon-paylas',
+    'oda-onon-tekrar',
+  ];
+  const oda = () => [...kaynaklar('app'), ...kaynaklar('src/oda-ui')];
+  const birlesik = () =>
+    oda()
+      .map(({ icerik }) => icerik)
+      .join('\n');
+
+  kabulOnonOdaUi('oda ekranları sözleşmedeki testID adlarını kullanır', () => {
+    const kaynak = birlesik();
+    expect(TESTIDLER.filter((t) => !kaynak.includes(t))).toEqual([]);
+  });
+
+  kabulOnonOdaUi(
+    '10/10 ama kayıt listesinde mod seçimi açık (Tek telefon / Oda kur / Odaya katıl, KK-63)',
+    () => {
+      const kayit = dosyaIcerik('src/games/registry.ts');
+      expect(kayit).toMatch(/id:\s*'10-10-ama'[^}]*modSecimi:\s*true/s);
+    },
+  );
+
+  kabulOnonOdaUi(
+    'ekran türü odanın türünden seçilir: odaTuru() oda ekranlarında kullanılır (KK-63)',
+    () => {
+      expect(birlesik()).toMatch(/odaTuru\(/);
+    },
+  );
+
+  kabulOnonOdaUi(
+    'kart metni puan ve açıklama ekranlarında görünür kalır (KK-64, KK-67)',
+    () => {
+      const dosyalar = oda();
+      const puan = dosyalar.filter(({ icerik }) =>
+        icerik.includes('oda-onon-puan-'),
+      );
+      const acik = dosyalar.filter(({ icerik }) =>
+        icerik.includes('oda-onon-ortalama'),
+      );
+      expect(puan.length).toBeGreaterThan(0);
+      expect(acik.length).toBeGreaterThan(0);
+      for (const { f, icerik } of [...puan, ...acik])
+        expect(icerik, f).toMatch(/testID="oda-onon-kart-metni"/);
+    },
+  );
+
+  kabulOnonOdaUi(
+    '"Kuran kişi bekleniyor…" metni ve sonrakiGorunur kullanılır; Sonraki kart yetkisiz görünmez (KK-68)',
+    () => {
+      const kaynak = birlesik();
+      expect(kaynak).toContain('Kuran kişi bekleniyor');
+      expect(kaynak).toMatch(/sonrakiGorunur/);
+    },
+  );
+
+  kabulOnonOdaUi(
+    '"Hareketi azalt" açıkken konfeti/açıklama sade (KK-67)',
+    () => {
+      const konfeti = oda().filter(({ icerik }) =>
+        icerik.includes('oda-onon-konfeti'),
+      );
+      expect(konfeti.length).toBeGreaterThan(0);
+      for (const { f, icerik } of konfeti)
+        expect(icerik, f).toMatch(/azalt|hareketAzalt|reduceMotion/i);
+    },
+  );
+
+  kabulOnonOdaUi(
+    'puan tuşları 0–10 arası sayı üretir ve istemci.puanla çağrılır (KK-65)',
+    () => {
+      const kaynak = birlesik();
+      expect(kaynak).toMatch(/\.puanla\(/);
+      expect(kaynak).toMatch(/\.sonraki\(/);
+    },
+  );
+
+  it('OK mu NOK mu oda ekranları ve tek telefon 10/10 ama bozulmaz: eski testID adları yerinde', () => {
+    const kaynak = birlesik();
+    for (const t of [
+      'oda-oy-ok',
+      'oda-oy-nok',
+      'oda-soru',
+      'final-yuzdeler',
+      'final-tekrar',
+    ])
+      expect(kaynak, t).toContain(t);
+    expect(kaynaklar('src/oyun-ekranlari/on-on-ama').length).toBeGreaterThan(0);
   });
 });
