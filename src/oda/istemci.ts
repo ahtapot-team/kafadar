@@ -85,7 +85,9 @@ export class OdaIstemci {
     return true;
   }
 
-  kur(ad: string, paket: Paket | OnPaket) {
+  // İSKELET (#125 → frontend #121): `oyun` (10/10 ama odası) açılış komutuna henüz konmuyor.
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  kur(ad: string, paket: Paket | OnPaket, _oyun?: OdaTuru) {
     this.sifirla();
     this.ilk = { islem: 'kur', ad, paket };
     this.baglan();
@@ -178,7 +180,8 @@ export class OdaIstemci {
     } else if (m.t === 'gorunum') {
       this.ayarla({ gorunum: m.gorunum, alindi: this.saat() });
     } else if (m.t === 'final') {
-      this.ayarla({ final: m.final });
+      // İSKELET (#121): 10/10 ama finali (OnOnFinal) henüz `onFinal`a ayrılmıyor.
+      this.ayarla({ final: m.final as Final });
     } else if (m.t === 'hata') {
       // Odaya dönülemiyorsa (kapandı/tanımsız) kayıt geçersizdir: temiz başlangıç + hata.
       // Geçici hatada (cok-deneme vb.) kimlik silinmez, "yeniden" durumunda kalınır.

@@ -87,13 +87,24 @@ const bosFinal: OnOnFinal = {
 };
 
 describe('KK-63: oda türü, istemci', () => {
-  it('10/10 ama paketiyle oda kurulur; paket kimliği açılış komutunda gider', () => {
+  it('OK mu NOK mu odası kurulumu değişmez: açılış komutunda oyun alanı yok', () => {
     const t = kurTasima();
-    t.i.kur('Murat', 'onon-sevgili');
+    t.i.kur('Murat', 'arkadas');
     expect(t.acilislar).toEqual([
-      { islem: 'kur', ad: 'Murat', paket: 'onon-sevgili' },
+      { islem: 'kur', ad: 'Murat', paket: 'arkadas' },
     ]);
   });
+
+  kabul(
+    '10/10 ama odası kurulur: oyun türü ve paket açılış komutunda gider (sunucu: ?oyun=on-on-ama&paket=…)',
+    () => {
+      const t = kurTasima();
+      t.i.kur('Murat', 'sevgili', 'on-on-ama');
+      expect(t.acilislar).toEqual([
+        { islem: 'kur', ad: 'Murat', paket: 'sevgili', oyun: 'on-on-ama' },
+      ]);
+    },
+  );
 
   kabul(
     'katılan odanın oyununa girer: ekran türü odanın türünden (kodla, hangi oyundan gelirse gelsin)',
@@ -160,7 +171,7 @@ describe('KK-64/KK-65: puan gönderme', () => {
 describe('KK-67/KK-68: açıklama ve "Sonraki kart"', () => {
   kabul('sonraki() {t:"sonraki"} gönderir', async () => {
     const t = kurTasima();
-    t.i.kur('Murat', 'onon-arkadas');
+    t.i.kur('Murat', 'arkadas', 'on-on-ama');
     t.sun(tamam);
     t.sun(sunGorunum(gor({ sonrakiGorunur: true })));
     await akis();
@@ -196,7 +207,7 @@ describe('KK-69/KK-70: final ve yeniden bağlanma', () => {
       t.i.katil('123456', 'Murat');
       t.sun(tamam);
       t.sun(sunGorunum(gor({ asama: 'bitti' })));
-      t.sun({ t: 'onfinal', final: bosFinal });
+      t.sun({ t: 'final', final: bosFinal });
       await akis();
       expect(t.i.durum.onFinal).toEqual(bosFinal);
       expect(t.i.durum.final).toBeNull();
@@ -220,6 +231,26 @@ describe('KK-69/KK-70: final ve yeniden bağlanma', () => {
     t.tekrarDene();
     expect(t.acilislar.at(-1)).toEqual({ islem: 'don', kod: '123456' });
     expect(t.kimlikler.at(-1)).toBe('kim-1');
+  });
+});
+
+describe('KK-69: OK mu NOK mu odası finali bozulmaz', () => {
+  it('tur ok-mu-nok iken {t:"final"} durum.final\'a yazılır, onFinal null kalır', async () => {
+    const t = kurTasima();
+    t.i.katil('123456', 'Murat');
+    t.sun(tamam);
+    t.sun(sunGorunum(gor({ tur: 'ok-mu-nok', asama: 'bitti' })));
+    const f = {
+      yuzdeler: [],
+      enTartismali: [],
+      oduller: { aykiriRuh: [], ruhIkizleri: [] },
+      kimNeDedi: {},
+      ayniOlan: {},
+    };
+    t.sun({ t: 'final', final: f });
+    await akis();
+    expect(t.i.durum.final).toEqual(f);
+    expect(t.i.durum.onFinal).toBeNull();
   });
 });
 
