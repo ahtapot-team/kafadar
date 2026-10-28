@@ -225,7 +225,7 @@ Tek telefonda, açık oyla oynanır; OK mu NOK mu akışının neredeyse aynıs�
 - [ ] KK-62: Gerçek cihaz kapısı: `docs/GERCEK-CIHAZ-KONTROL.md`'ye 10/10 ama bölümü eklenir ve işaretlenmeden oyun "bitti" sayılmaz.
 
 ### Kapsam dışı (v4)
-- Oda modunda 10/10 ama. Gizli puan. Ondalıklı puan.
+- Oda modunda 10/10 ama (v5'e alındı). Tek telefonda gizli puan. Ondalıklı puan.
 
 ### Kararlar (10/10 ama, pm önerisi — Metehan onayı, 27.10.2026 22:22)
 | Karar | Seçim | Gerekçe |
@@ -233,6 +233,49 @@ Tek telefonda, açık oyla oynanır; OK mu NOK mu akışının neredeyse aynıs�
 | Oynanış | Tek telefon, açık puan (parmakla 0–10) | Videodaki oynanışın aynısı, OK mu NOK mu ile aynı çekirdek |
 | Paketler | Sevgili adayı / Arkadaş / Gündelik hayat | Akımın en çok paylaşılan konuları |
 | İçerik | 3 × 100 kart, taslağı pm yazar | Diğer oyunlarla aynı çıta |
+
+## v5: 10/10 ama oda modu (Murat, 28.10.2026) — ONAYLANDI (Murat, 28.10.2026 05:52)
+Issue'lar: #118 kabul testleri (qa), #119 sunucu ve durum makinesi (backend), #120 tasarım (tasarim), #121 istemci (frontend).
+10/10 ama da OK mu NOK mu gibi birden fazla telefonla oynanır: biri oda kurar, diğerleri 6 haneli kodla katılır. Tek telefon modu değişmeden kalır. Oda altyapısı v2'den gelir: kod, QR, lobi, yeniden bağlanma ve sunucu. Yeni olan iki şey var: telefondan gizli 0–10 puan ve her karttan sonra tüm telefonlarda aynı anda açıklama.
+
+### Akış
+1. **Mod seçimi:** 10/10 ama'da "Tek telefon / Oda kur / Odaya katıl" seçimi vardır (OK mu NOK mu ile aynı ekran). Paketi kuran kişi seçer.
+2. **Lobi:** v2 ile aynı: 6 haneli kod ve QR, 2–12 kişi, "Başlat" yalnızca kuranda.
+3. **Kart:** Kart tüm telefonlarda aynı anda açılır. Herkes kendi telefonundan 0–10 arası gizli puan verir; süre 15 sn. Herkes puan verince süre beklenmez.
+4. **Açıklama:** Tüm telefonlarda aynı anda ortalama, en düşük ve en yüksek puanı verenler, oybirliği konfetisi ya da "Tam bölündünüz" gösterilir. Ardından herkesin puanı görünür. Kuran kişi "Sonraki kart"a basar.
+5. **Final:** 10 kartın sonunda ödüller (En acımasız, Melek kalpli, Ruh ikizleri), kişisel kart ve 9:16 paylaşım görseli gösterilir.
+
+### Kabul kriterleri (10/10 ama oda modu)
+- [ ] KK-63: 10/10 ama'da "Tek telefon / Oda kur / Odaya katıl" seçimi vardır. Tek telefon modu (KK-55…KK-62) değişmeden ve çevrimdışı çalışır. Kod, QR, katılım, lobi, oyuncu sınırı ve hata mesajları OK mu NOK mu odasıyla aynıdır (KK-29…KK-31). Her oda tek bir oyun türündedir. Kodla katılan kişi hangi oyunun ekranından gelirse gelsin odanın oyununa girer.
+- [ ] KK-64: Oyun 10 karttır. Paketi kuran kişi seçer, kart sırasını sunucu belirler. Her kart tüm telefonlarda aynı anda açılır. Ekranda kart metni, 15 sn geri sayım ve 0–10 puan düğmeleri görünür. Süre sunucu saatine göre işler (KK-32).
+- [ ] KK-65: Puan 0–10 arası tam sayıdır. Süre içinde değiştirilebilir, son puan geçerlidir. Süre bittikten sonra gelen puan reddedilir. Puan vermeyen oyuncu o kartta "boş" sayılır ve ortalamaya ya da uçlara girmez. Herkes puan verince süre beklenmeden açıklamaya geçilir. Puan veren kişi "Puanın alındı ✓ · 6/8" ekranını görür: kimin puan verdiği görünür, kaç verdiği görünmez.
+- [ ] KK-66: Açıklamaya kadar hiçbir puan başka bir telefona gönderilmez; ağ trafiğinde de görünmez (KK-35 gibi).
+- [ ] KK-67: Açıklama tüm telefonlarda aynı anda gösterilir:
+  - ortalama (bir ondalık);
+  - en düşük ve en yüksek puanı verenler;
+  - oybirliği konfetisi ve "Tam bölündünüz" (KK-57 kuralları);
+  - ardından herkesin puanı.
+
+  "Hareketi azalt" açıksa sade gösterim kullanılır.
+- [ ] KK-68: Açıklamadan sonra "Sonraki kart" düğmesi yalnızca kuranda görünür; diğerleri "Kuran kişi bekleniyor…" görür. Kuran kişi çıkarsa ya da bağlantısı koparsa düğme sıradaki bağlı oyuncuya geçer ve oyun takılmaz.
+- [ ] KK-69: 10. kartın açıklamasından sonra final tüm telefonlarda gösterilir: ödüller (KK-58 kuralları, boşlar hariç), kişisel kart ve 9:16 paylaşım görseli. Oyundan çıkanlar ödüllere girmez.
+- [ ] KK-70: Yeniden bağlanma, oyuncu belirteci, veri silme ve hız sınırı OK mu NOK mu odasıyla aynıdır (KK-37, KK-39, belirteç kararı). Kopukken süresi biten kartlar "boş" sayılır.
+- [ ] KK-71: Oda mantığı saf ve serileştirilebilir bir durum makinesidir (KK-40). OK mu NOK mu odası bozulmaz; mevcut oda kabul testleri yeşil kalır. Kabul testleri sahte saat ve N sahte istemciyle ağsız çalışır.
+- [ ] KK-72: Gerçek cihaz kapısı: en az 3 telefonla tam bir 10/10 ama odası oynanır. Kontrol listesi `docs/GERCEK-CIHAZ-KONTROL.md`'ye eklenir ve işaretlenmeden oda modu "bitti" sayılmaz.
+
+### Kapsam dışı (v5)
+- Casus kim oda modu. Oda modunda süre ya da kart sayısı ayarı. Seyirci modu.
+
+### Kararlar (10/10 ama oda modu)
+| Karar | Seçim | Gerekçe | Karar veren |
+|---|---|---|---|
+| Kart akışı | Puanlar gizli; her karttan sonra tüm telefonlarda aynı anda açıklama | Oyunun asıl eğlencesi açıklama anı; gizli puan bu anı daha sert yapar | pm önerisi, Murat (28.10.2026, "1b") |
+| Sonraki kart | Kuran kişi basar | "Neden 2 verdin?" tartışmasına zaman kalır | pm önerisi, Murat (28.10.2026, "2a") |
+| Kod, kişi, süre, kart sayısı | OK mu NOK mu odasıyla aynı: 6 hane, 2–12 kişi, 15 sn, 10 kart | Tutarlılık; mevcut altyapı | pm varsayılanı |
+
+### Riskler (v5)
+- Sunucu bugün yalnızca OK/NOK cevabını biliyor. Oyun türü eklenirken OK mu NOK mu odası bozulabilir. Önlem: KK-71, mevcut oda testleri.
+- Kuran kişi telefonu bırakırsa herkes bekler. Bu, Murat'ın seçtiği bilinen bir eksi.
 
 ## Geliştirme ilkesi (Semih, 27.10.2026)
 **Overengineering yok.** En az kodla, en basit çözüm, yalnızca bugünkü ihtiyaç kadar. Yapı genişlemeye açık olacak ama ileriye dönük soyutlama, genel çerçeve ya da "belki lazım olur" kodu yazılmayacak. Yeni bağımlılık yalnızca gerçekten gerekiyorsa eklenir ve PR'da gerekçesi yazılır. Aşağıdaki mimari şartlar bu ilkeye göre en sade haliyle uygulanır. Örneğin oyun kayıt listesi basit bir dizidir, eklenti çatısı değildir.
