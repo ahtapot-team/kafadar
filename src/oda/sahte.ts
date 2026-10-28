@@ -6,16 +6,18 @@ import type { Acilis, Istemci, OdaHata, OnPaket, Paket, Sunucu } from './mesaj';
 import {
   type Kimlik,
   type OdaDurum,
+  type OdaTuru,
   final,
   gorunum,
   isle,
   kodUret,
   odaKur,
+  onOnFinal,
 } from './oda';
 import type { TasimaDinleyici, TasimaUretici } from './tasima';
 
 type KurKatilDon =
-  | { t: 'kur'; ad: string; paket: Paket | OnPaket }
+  | { t: 'kur'; ad: string; paket: Paket | OnPaket; oyun?: OdaTuru }
   | { t: 'katil'; kod: string; ad: string }
   | { t: 'don'; kod: string; kimlik: Kimlik };
 
@@ -97,7 +99,11 @@ export class SahteSunucu {
         gorunum: gorunum(d, b.kimlik, this.simdi),
         simdi: this.simdi,
       });
-      if (d.asama === 'bitti') this.gonder(b, { t: 'final', final: final(d) });
+      if (d.asama === 'bitti')
+        this.gonder(b, {
+          t: 'final',
+          final: d.tur === 'on-on-ama' ? onOnFinal(d) : final(d),
+        });
     }
   }
 
@@ -113,7 +119,7 @@ export class SahteSunucu {
     this.al(
       b,
       a.islem === 'kur'
-        ? { t: 'kur', ad: a.ad, paket: a.paket }
+        ? { t: 'kur', ad: a.ad, paket: a.paket, oyun: a.oyun }
         : a.islem === 'katil'
           ? { t: 'katil', kod: a.kod, ad: a.ad }
           : { t: 'don', kod: a.kod, kimlik: kimlik ?? '' },
@@ -134,6 +140,7 @@ export class SahteSunucu {
         deste: this.desteler[m.paket]!,
         tohum: Math.floor(this.rng() * 1e9),
         simdi: this.simdi,
+        tur: m.oyun,
       });
       this.odalar.set(kod, durum);
       this.girdi(b, kod, kimlik, durum.oyuncular[0].ad);
@@ -161,7 +168,11 @@ export class SahteSunucu {
           ? ({ tip: 'baslat', kimlik: b.kimlik } as const)
           : m.t === 'cevapla'
             ? ({ tip: 'cevapla', kimlik: b.kimlik, oy: m.oy } as const)
-            : ({ tip: 'ayril', kimlik: b.kimlik } as const);
+            : m.t === 'puanla'
+              ? ({ tip: 'puanla', kimlik: b.kimlik, puan: m.puan } as const)
+              : m.t === 'sonraki'
+                ? ({ tip: 'sonraki', kimlik: b.kimlik } as const)
+                : ({ tip: 'ayril', kimlik: b.kimlik } as const);
       this.olay(b.kod, o, b);
     }
   }

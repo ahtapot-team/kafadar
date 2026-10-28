@@ -85,11 +85,12 @@ export class OdaIstemci {
     return true;
   }
 
-  // İSKELET (#125 → frontend #121): `oyun` (10/10 ama odası) açılış komutuna henüz konmuyor.
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  kur(ad: string, paket: Paket | OnPaket, _oyun?: OdaTuru) {
+  // `oyun` yoksa OK mu NOK mu odası (açılış komutunda oyun alanı olmaz); 10/10 ama için 'on-on-ama'.
+  kur(ad: string, paket: Paket | OnPaket, oyun?: OdaTuru) {
     this.sifirla();
-    this.ilk = { islem: 'kur', ad, paket };
+    this.ilk = oyun
+      ? { islem: 'kur', ad, paket, oyun }
+      : { islem: 'kur', ad, paket };
     this.baglan();
   }
 
@@ -107,14 +108,14 @@ export class OdaIstemci {
     this.tasima?.gonder({ t: 'cevapla', oy });
   }
 
-  // İSKELET (#125 → frontend #121): 10/10 ama odası istemci tarafı henüz yok.
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  puanla(_puan: number) {
-    throw new Error('10/10 ama odası istemcisi henüz yazılmadı (#121)');
+  // 10/10 ama odası: 0–10 puan; değiştirilebilir, son gönderilen sunucuda geçerli. Bağlantı yoksa sessizce yok sayılır.
+  puanla(puan: number) {
+    this.tasima?.gonder({ t: 'puanla', puan });
   }
 
+  // "Sonraki kart": yalnızca sonrakiGorunur true olanda anlamlı (sunucu aksi halde 'yetkisiz' döner).
   sonraki() {
-    throw new Error('10/10 ama odası istemcisi henüz yazılmadı (#121)');
+    this.tasima?.gonder({ t: 'sonraki' });
   }
 
   ayril() {
@@ -130,7 +131,11 @@ export class OdaIstemci {
   }
 
   private bitti() {
-    return this.d.final !== null || this.d.gorunum?.asama === 'bitti';
+    return (
+      this.d.final !== null ||
+      this.d.onFinal !== null ||
+      this.d.gorunum?.asama === 'bitti'
+    );
   }
 
   private sifirla() {
@@ -180,8 +185,9 @@ export class OdaIstemci {
     } else if (m.t === 'gorunum') {
       this.ayarla({ gorunum: m.gorunum, alindi: this.saat() });
     } else if (m.t === 'final') {
-      // İSKELET (#121): 10/10 ama finali (OnOnFinal) henüz `onFinal`a ayrılmıyor.
-      this.ayarla({ final: m.final as Final });
+      // 10/10 ama finali (OnOnFinal: `kartlar` alanı var) `onFinal`a, OK mu NOK mu finali `final`a düşer.
+      if ('kartlar' in m.final) this.ayarla({ onFinal: m.final });
+      else this.ayarla({ final: m.final });
     } else if (m.t === 'hata') {
       // Odaya dönülemiyorsa (kapandı/tanımsız) kayıt geçersizdir: temiz başlangıç + hata.
       // Geçici hatada (cok-deneme vb.) kimlik silinmez, "yeniden" durumunda kalınır.
@@ -244,8 +250,7 @@ export function kalanMs(d: IstemciDurumu, simdi: number): number {
 }
 
 // Kodla katılan, hangi oyunun ekranından gelirse gelsin odanın oyununa girer (KK-63): ekran seçimi odanın türünden.
-// İSKELET (#121): gövde henüz yok.
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-export function odaTuru(_d: IstemciDurumu): OdaTuru | null {
-  throw new Error('10/10 ama odası istemcisi henüz yazılmadı (#121)');
+// Görünüm yoksa (odada değil) null; türsüz (eski) görünüm OK mu NOK mu odasıdır.
+export function odaTuru(d: IstemciDurumu): OdaTuru | null {
+  return d.gorunum ? (d.gorunum.tur ?? 'ok-mu-nok') : null;
 }
