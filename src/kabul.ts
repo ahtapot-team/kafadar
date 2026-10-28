@@ -36,7 +36,7 @@ export const BEKLEYEN = {
   odaCik: false, // #73: oyun içinde "Odadan çık?" (frontend #104 kapatır)
   ononMantik: false,
   ononUi: false,
-  ononOda: true, // #118: 10/10 ama oda türü (mantık, backend #119)
+  ononOda: false, // #118: 10/10 ama oda türü (mantık, backend #119)
   ononUiEkran: false,
 };
 
