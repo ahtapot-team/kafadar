@@ -1,8 +1,8 @@
 // Oda istemcisi (saf, React'sız): taşıma üzerinden sunucuyla konuşur; kimliği cihazda saklar;
 // bağlantı kopunca aynı kimlikle geri döner ve "Yeniden bağlanıyor…" durumunu tutar (KK-37).
 import type { Depo } from '../core/kayit';
-import type { Final, Gorunum, Kimlik } from './oda';
-import type { Acilis, OdaHata, Paket, Sunucu } from './mesaj';
+import type { Final, Gorunum, Kimlik, OdaTuru, OnOnFinal } from './oda';
+import type { Acilis, OdaHata, OnPaket, Paket, Sunucu } from './mesaj';
 import type { Tasima, TasimaUretici } from './tasima';
 
 export const ODA_ANAHTARI = 'kafadar:oda';
@@ -17,6 +17,7 @@ export type IstemciDurumu = {
   gorunum: Gorunum | null;
   alindi: number; // gorunum'ün yerel saatle geldiği an (kalan süre hesabı için)
   final: Final | null;
+  onFinal: OnOnFinal | null; // 10/10 ama odası finali
   hata: OdaHata | null;
 };
 
@@ -28,6 +29,7 @@ const BOS: IstemciDurumu = {
   gorunum: null,
   alindi: 0,
   final: null,
+  onFinal: null,
   hata: null,
 };
 
@@ -83,7 +85,7 @@ export class OdaIstemci {
     return true;
   }
 
-  kur(ad: string, paket: Paket) {
+  kur(ad: string, paket: Paket | OnPaket) {
     this.sifirla();
     this.ilk = { islem: 'kur', ad, paket };
     this.baglan();
@@ -101,6 +103,16 @@ export class OdaIstemci {
 
   cevapla(oy: 'OK' | 'NOK') {
     this.tasima?.gonder({ t: 'cevapla', oy });
+  }
+
+  // İSKELET (#125 → frontend #121): 10/10 ama odası istemci tarafı henüz yok.
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  puanla(_puan: number) {
+    throw new Error('10/10 ama odası istemcisi henüz yazılmadı (#121)');
+  }
+
+  sonraki() {
+    throw new Error('10/10 ama odası istemcisi henüz yazılmadı (#121)');
   }
 
   ayril() {
@@ -226,4 +238,11 @@ export class OdaIstemci {
 export function kalanMs(d: IstemciDurumu, simdi: number): number {
   const k = d.gorunum?.kalanMs;
   return k === undefined ? 0 : Math.max(0, k - (simdi - d.alindi));
+}
+
+// Kodla katılan, hangi oyunun ekranından gelirse gelsin odanın oyununa girer (KK-63): ekran seçimi odanın türünden.
+// İSKELET (#121): gövde henüz yok.
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+export function odaTuru(_d: IstemciDurumu): OdaTuru | null {
+  throw new Error('10/10 ama odası istemcisi henüz yazılmadı (#121)');
 }

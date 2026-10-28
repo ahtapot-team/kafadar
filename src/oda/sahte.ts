@@ -2,7 +2,7 @@
 // Gerçek sunucuyla aynı mesaj biçimini (mesaj.ts) konuşur; ağ yoktur.
 import type { Deste } from '../core/deste';
 import type { Rng } from '../core/rng';
-import type { Acilis, Istemci, OdaHata, Paket, Sunucu } from './mesaj';
+import type { Acilis, Istemci, OdaHata, OnPaket, Paket, Sunucu } from './mesaj';
 import {
   type Kimlik,
   type OdaDurum,
@@ -15,7 +15,7 @@ import {
 import type { TasimaDinleyici, TasimaUretici } from './tasima';
 
 type KurKatilDon =
-  | { t: 'kur'; ad: string; paket: Paket }
+  | { t: 'kur'; ad: string; paket: Paket | OnPaket }
   | { t: 'katil'; kod: string; ad: string }
   | { t: 'don'; kod: string; kimlik: Kimlik };
 
@@ -34,7 +34,7 @@ export class SahteSunucu {
   constructor(
     private saat: () => number, // dışarıdan verilir (src/oda saf kalır)
     private rng: Rng,
-    private desteler: Record<Paket, Deste>,
+    private desteler: Partial<Record<Paket | OnPaket, Deste>>,
   ) {}
 
   uret: TasimaUretici = (acilis, d, kimlik) => {
@@ -131,7 +131,7 @@ export class SahteSunucu {
       const { durum, kimlik } = odaKur({
         kod,
         kurucuAd: m.ad,
-        deste: this.desteler[m.paket],
+        deste: this.desteler[m.paket]!,
         tohum: Math.floor(this.rng() * 1e9),
         simdi: this.simdi,
       });

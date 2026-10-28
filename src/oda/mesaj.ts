@@ -1,12 +1,14 @@
 // İstemci ↔ sunucu mesajları (#48 ile kararlaştırıldı). Tek bağlantı, JSON metin çerçeveleri, her mesajda `t`.
 // Tipler oda.ts'ten gelir; sunucu yalnızca kabuktur, kurallar oda.ts'tedir (KK-40).
-import type { Final, Gorunum, Hata, Kimlik, Oy } from './oda';
+import type { Final, Gorunum, Hata, Kimlik, OnOnFinal, Oy } from './oda';
 
 export type Paket = 'arkadas' | 'cift' | 'aile';
+// 10/10 ama oda paketleri (content/onon/<id>.json): paket kimliği odanın oyun türünü belirler (KK-63).
+export type OnPaket = 'onon-arkadas' | 'onon-gundelik' | 'onon-sevgili';
 
 // Bağlanırken adres sorgusuyla gönderilir (?islem=kur&ad=…&paket=…); tarayıcı soketi tek bağlantıda odaya yönlenir.
 export type Acilis =
-  | { islem: 'kur'; ad: string; paket: Paket }
+  | { islem: 'kur'; ad: string; paket: Paket | OnPaket }
   | { islem: 'katil'; kod: string; ad: string }
   | { islem: 'don'; kod: string }; // yeniden bağlanma (KK-37); belirteç adreste değil, ilk mesajda gider
 
@@ -15,6 +17,8 @@ export type Istemci =
   | { t: 'kimlik'; kimlik: Kimlik } // 'don' bağlantısının İLK mesajı: belirteç adrese konmaz (günlüklere sızmasın)
   | { t: 'baslat' }
   | { t: 'cevapla'; oy: Oy }
+  | { t: 'puanla'; puan: number } // yalnızca 10/10 ama odası (0–10 tam sayı)
+  | { t: 'sonraki' } // yalnızca 10/10 ama odası, açıklamadan sonra, yalnızca yetkili
   | { t: 'ayril' };
 
 // 'cok-deneme': kod denemesi hız sınırı (KK-30). 'baglanti': istemci tarafı (sunucuya ulaşılamadı).
@@ -27,4 +31,5 @@ export type Sunucu =
   | { t: 'tamam'; kod: string; kimlik: Kimlik; ad: string } // kur / katil / don başarısı
   | { t: 'hata'; hata: OdaHata }
   | { t: 'gorunum'; gorunum: Gorunum; simdi: number } // simdi = sunucu saati (ms)
-  | { t: 'final'; final: Final };
+  | { t: 'final'; final: Final }
+  | { t: 'onfinal'; final: OnOnFinal }; // 10/10 ama odası finali
