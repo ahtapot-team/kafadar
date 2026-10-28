@@ -234,7 +234,7 @@ Tek telefonda, açık oyla oynanır; OK mu NOK mu akışının neredeyse aynıs�
 | Paketler | Sevgili adayı / Arkadaş / Gündelik hayat | Akımın en çok paylaşılan konuları |
 | İçerik | 3 × 100 kart, taslağı pm yazar | Diğer oyunlarla aynı çıta |
 
-## v5: 10/10 ama oda modu (Murat, 28.10.2026) — ONAY BEKLİYOR
+## v5: 10/10 ama oda modu (Murat, 28.10.2026) — ONAYLANDI (Murat, 28.10.2026 05:52)
 Issue'lar: #118 kabul testleri (qa), #119 sunucu ve durum makinesi (backend), #120 tasarım (tasarim), #121 istemci (frontend).
 10/10 ama da OK mu NOK mu gibi birden fazla telefonla oynanır: biri oda kurar, diğerleri 6 haneli kodla katılır. Tek telefon modu değişmeden kalır. Oda altyapısı v2'den gelir: kod, QR, lobi, yeniden bağlanma ve sunucu. Yeni olan iki şey var: telefondan gizli 0–10 puan ve her karttan sonra tüm telefonlarda aynı anda açıklama.
 
