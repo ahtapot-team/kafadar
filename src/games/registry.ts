@@ -16,6 +16,7 @@ export const oyunlar: Oyun[] = [
     id: '10-10-ama',
     ad: '10/10 ama',
     aktif: true,
+    modSecimi: true, // Tek telefon / Oda kur / Odaya katıl (KK-63)
     kurulum: '/onon/hazirlik',
     ekran: () => import('../oyun-ekranlari/on-on-ama'),
     gecerliMi: ononGecerliMi,

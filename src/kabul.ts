@@ -39,7 +39,7 @@ export const BEKLEYEN = {
   ononOda: false, // #118: 10/10 ama oda türü (mantık, backend #119)
   ononUiEkran: false,
   ononOdaIstemci: false, // #125: 10/10 ama oda istemcisi: mesajlar, durum, türetmeler (frontend #121)
-  ononOdaUi: true, // #125: 10/10 ama oda ekranları (testID sözleşmesi, frontend #121)
+  ononOdaUi: false, // #125: 10/10 ama oda ekranları (testID sözleşmesi, frontend #121)
 };
 
 export const kabul = BEKLEYEN.cekirdek ? it.fails : it;
