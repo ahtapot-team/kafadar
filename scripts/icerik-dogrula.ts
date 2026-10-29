@@ -1,20 +1,30 @@
-// content/decks, content/casus ve content/onon altındaki *.json dosyalarını doğrular; hata varsa 1 ile çıkar.
+// Kayıttaki (src/icerik/kayit.ts) her deste dosyasını doğrular; kayıtsız deste dosyası da hatadır. Hata varsa 1 ile çıkar.
 import { readdirSync, readFileSync } from 'node:fs';
-import { casusDesteHatalari } from '../src/games/casus-kim/deste.ts';
-import { desteHatalari } from '../src/core/deste.ts';
+import { icerikHatalari } from '../src/icerik/dogrula.ts';
+import { paketKaydi } from '../src/icerik/kayit.ts';
 
+const kok = new URL('../content/', import.meta.url);
 let hataVar = false;
-const kontrol = <T>(klasorAdi: string, dogrula: (d: T) => string[]) => {
-  const klasor = new URL(`../content/${klasorAdi}/`, import.meta.url);
-  for (const dosya of readdirSync(klasor).filter((d) => d.endsWith('.json'))) {
-    const deste = JSON.parse(readFileSync(new URL(dosya, klasor), 'utf8')) as T;
-    for (const hata of dogrula(deste)) {
-      console.error(`${klasorAdi}/${dosya}: ${hata}`);
-      hataVar = true;
-    }
-  }
+const hata = (yer: string, mesaj: string) => {
+  console.error(`${yer}: ${mesaj}`);
+  hataVar = true;
 };
-kontrol('decks', desteHatalari);
-kontrol('casus', casusDesteHatalari);
-kontrol('onon', desteHatalari);
+
+for (const p of paketKaydi) {
+  try {
+    const deste = JSON.parse(readFileSync(new URL(p.dosya, kok), 'utf8'));
+    for (const m of icerikHatalari(p.oyun, deste)) hata(p.dosya, m);
+  } catch (e) {
+    hata(p.dosya, `okunamadı: ${(e as Error).message}`);
+  }
+}
+
+const kayitli = new Set<string>(paketKaydi.map((p) => p.dosya));
+for (const klasor of readdirSync(kok))
+  for (const f of readdirSync(new URL(`${klasor}/`, kok)).filter((d) =>
+    d.endsWith('.json'),
+  ))
+    if (!kayitli.has(`${klasor}/${f}`))
+      hata(`${klasor}/${f}`, 'src/icerik/kayit.ts içinde kayıtlı değil');
+
 process.exit(hataVar ? 1 : 0);

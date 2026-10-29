@@ -1,12 +1,14 @@
-import aile from '../content/decks/aile.json';
-import arkadas from '../content/decks/arkadas.json';
-import cift from '../content/decks/cift.json';
 import type { Deste } from './core/deste';
+import { paketler as kayit } from './icerik';
+import type { PaketId } from './icerik/kayit';
 
-export type Paket = 'arkadas' | 'cift' | 'aile';
-export const paketler: { id: Paket; ad: string }[] = [
-  { id: 'arkadas', ad: 'Arkadaş' },
-  { id: 'cift', ad: 'Çift' },
-  { id: 'aile', ad: 'Aile' },
-];
-export const desteler: Record<Paket, Deste> = { arkadas, cift, aile };
+// OK mu NOK mu paketleri: adlar ve desteler içerik kaydından (src/icerik) gelir.
+export type Paket = PaketId<'ok-mu-nok'>;
+const okPaketleri = kayit.filter((p) => p.oyun === 'ok-mu-nok');
+export const paketler = okPaketleri.map((p) => ({
+  id: p.paketId as Paket,
+  ad: p.ad,
+}));
+export const desteler = Object.fromEntries(
+  okPaketleri.map((p) => [p.paketId, p.deste]),
+) as Record<Paket, Deste>;
