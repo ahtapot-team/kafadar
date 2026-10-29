@@ -1,8 +1,18 @@
 // 10/10 ama (tek telefon, açık puan): saf, tohumlu, serileştirilebilir durum makinesi (KK-61, KK-22).
 // Date.now, Math.random, ağ ve React yok; isle() girdiyi değiştirmez.
 import type { Deste } from '../../core/deste';
+import { benzersiz, doluMetinler, nesne, puanMi } from '../../core/dogrula';
+import {
+  type Oturum,
+  type Uzunluk,
+  oturumGecerliMi,
+  oyuncuCikar,
+  oyuncuEkle,
+  sonrakiAdim,
+  yeniOturum,
+  yenidenKaristir,
+} from '../../core/oturum';
 import { type Oduller, oduluHesapla } from '../../core/puan-oduller';
-import { karistir, rngOlustur } from '../../core/rng';
 
 export const PUAN_MIN = 0;
 export const PUAN_MAKS = 10;
@@ -10,16 +20,8 @@ export const BOLUNDU_FARKI = 8; // uçlar arası fark ≥ 8 ve oybirliği değil
 
 // 'puan': puanlar girilir (açıklamaya kadar değiştirilebilir), 'acik': sonuç görünür,
 // 'desteBitti': "Karıştırıp baştan?", 'bitti': oturum sonu.
-export type Durum = {
+export type Durum = Oturum & {
   asama: 'puan' | 'acik' | 'desteBitti' | 'bitti';
-  deste: { deck_id: string; version: number };
-  kartlar: { id: string; text: string }[]; // karışık
-  sira: number;
-  tamamlanan: number; // bitirilen/atlanan kart sayısı
-  uzunluk: 10 | 20 | null;
-  tohum: number;
-  karisim: number;
-  oyuncular: string[];
   puanlar: Record<string, number>; // geçerli kartın puanları (0–10 tam sayı)
   gecmis: { kartId: string; puanlar: Record<string, number> }[]; // açıklanmış kartlar
 };
@@ -37,7 +39,7 @@ export type Olay =
 export type OyunSecenekleri = {
   oyuncular: string[];
   deste: Deste;
-  uzunluk: 10 | 20 | null;
+  uzunluk: Uzunluk;
   tohum: number;
 };
 
@@ -55,28 +57,10 @@ export type Ozet = {
 export type { Oduller } from '../../core/puan-oduller';
 
 export function yeniOyun(s: OyunSecenekleri): Durum {
-  return {
-    asama: 'puan',
-    deste: { deck_id: s.deste.deck_id, version: s.deste.version },
-    kartlar: karistir(s.deste.cards, rngOlustur(s.tohum)),
-    sira: 0,
-    tamamlanan: 0,
-    uzunluk: s.uzunluk,
-    tohum: s.tohum,
-    karisim: 0,
-    oyuncular: [...s.oyuncular],
-    puanlar: {},
-    gecmis: [],
-  };
+  return { asama: 'puan', ...yeniOturum(s), puanlar: {}, gecmis: [] };
 }
 
 export const gecerliKart = (d: Durum) => d.kartlar[d.sira];
-
-const puanMi = (p: unknown): p is number =>
-  typeof p === 'number' &&
-  Number.isInteger(p) &&
-  p >= PUAN_MIN &&
-  p <= PUAN_MAKS;
 
 // Herkes puan verince true (0 da geçerli puandır).
 export const gosterAktif = (d: Durum) =>
@@ -117,12 +101,11 @@ export const oduller = (d: Durum): Oduller =>
 
 // Sonraki karta geçer: tur uzunluğu dolduysa oturum biter, deste tükendiyse karıştırma sorulur.
 function ilerle(d: Durum): Durum {
-  const tamamlanan = d.tamamlanan + 1;
-  const temiz = { ...d, tamamlanan, puanlar: {} };
-  if (d.uzunluk !== null && tamamlanan >= d.uzunluk)
-    return { ...temiz, asama: 'bitti' };
-  if (d.sira + 1 >= d.kartlar.length) return { ...temiz, asama: 'desteBitti' };
-  return { ...temiz, asama: 'puan', sira: d.sira + 1 };
+  const a = sonrakiAdim(d);
+  const temiz = { ...d, tamamlanan: a.tamamlanan, puanlar: {} };
+  if (a.sonuc === 'bitti') return { ...temiz, asama: 'bitti' };
+  if (a.sonuc === 'desteBitti') return { ...temiz, asama: 'desteBitti' };
+  return { ...temiz, asama: 'puan', sira: a.sira };
 }
 
 export function isle(d: Durum, olay: Olay): Durum {
@@ -153,23 +136,15 @@ export function isle(d: Durum, olay: Olay): Durum {
       return { ...d, asama: 'bitti' };
     case 'karistir':
       if (d.asama !== 'desteBitti') return d;
-      return {
-        ...d,
-        asama: 'puan',
-        sira: 0,
-        karisim: d.karisim + 1,
-        kartlar: karistir(d.kartlar, rngOlustur(d.tohum + d.karisim + 1)),
-      };
+      return { ...d, asama: 'puan', ...yenidenKaristir(d) };
     case 'oyuncuEkle': {
-      const ad = olay.ad.trim();
-      return !ad || d.oyuncular.includes(ad)
-        ? d
-        : { ...d, oyuncular: [...d.oyuncular, ad] };
+      const o = oyuncuEkle(d.oyuncular, olay.ad);
+      return o === d.oyuncular ? d : { ...d, oyuncular: o };
     }
     case 'oyuncuCikar':
       return {
         ...d,
-        oyuncular: d.oyuncular.filter((o) => o !== olay.ad),
+        oyuncular: oyuncuCikar(d.oyuncular, olay.ad),
         puanlar: Object.fromEntries(
           Object.entries(d.puanlar).filter(([o]) => o !== olay.ad),
         ),
@@ -177,40 +152,21 @@ export function isle(d: Durum, olay: Olay): Durum {
   }
 }
 
-const nesne = (x: unknown): x is Record<string, unknown> =>
-  typeof x === 'object' && x !== null && !Array.isArray(x);
 const puanlarMi = (x: unknown): x is Record<string, number> =>
   nesne(x) && Object.values(x).every(puanMi);
 
 // Kayıttan okunan durumun şeması (KK-14): sürüm doğru olsa bile alanlar eksik/hatalıysa false döner;
 // çağıran kaydı siler ve yeni oyuna / ana ekrana düşer, arayüz çökmez.
 export function durumGecerliMi(d: unknown): d is Durum {
-  if (!nesne(d)) return false;
-  const { kartlar, sira, oyuncular } = d;
+  if (!nesne(d) || !oturumGecerliMi(d)) return false;
+  const oyuncular = d.oyuncular as string[];
   return (
     ['puan', 'acik', 'desteBitti', 'bitti'].includes(d.asama as string) &&
-    nesne(d.deste) &&
-    typeof d.deste.deck_id === 'string' &&
-    typeof d.deste.version === 'number' &&
-    Array.isArray(kartlar) &&
-    kartlar.length > 0 &&
-    kartlar.every(
-      (k) => nesne(k) && typeof k.id === 'string' && typeof k.text === 'string',
-    ) &&
-    Number.isInteger(sira) &&
-    (sira as number) >= 0 &&
-    (sira as number) < kartlar.length &&
-    Number.isInteger(d.tamamlanan) &&
     (d.tamamlanan as number) >= 0 &&
-    (d.uzunluk === null || d.uzunluk === 10 || d.uzunluk === 20) &&
-    typeof d.tohum === 'number' &&
-    Number.isInteger(d.karisim) &&
-    Array.isArray(oyuncular) &&
-    oyuncular.length > 0 &&
-    oyuncular.every((o) => typeof o === 'string' && o !== '') &&
-    new Set(oyuncular).size === oyuncular.length &&
+    doluMetinler(oyuncular) &&
+    benzersiz(oyuncular) &&
     puanlarMi(d.puanlar) &&
-    Object.keys(d.puanlar).every((o) => (oyuncular as string[]).includes(o)) &&
+    Object.keys(d.puanlar).every((o) => oyuncular.includes(o)) &&
     Array.isArray(d.gecmis) &&
     d.gecmis.every(
       (g) => nesne(g) && typeof g.kartId === 'string' && puanlarMi(g.puanlar),

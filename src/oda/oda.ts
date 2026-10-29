@@ -2,6 +2,7 @@
 // dışarıdan verilir; Date.now, Math.random, ağ ve React kullanılmaz. Sunucu (Durable Object) bu
 // mantığı çalıştıran ince bir kabuktur; her olayda kendi saatini `simdi` olarak verir.
 import type { Deste, Kart } from '../core/deste';
+import { puanMi } from '../core/dogrula';
 import { karistir, rngOlustur } from '../core/rng';
 import { oduluHesapla } from '../core/puan-oduller';
 
@@ -206,8 +207,6 @@ const hata = (durum: OdaDurum, kod: Hata['kod'], mesaj: string): Sonuc => ({
 });
 
 const onOn = (d: OdaDurum) => d.tur === 'on-on-ama';
-const puanMi = (p: unknown): p is number =>
-  typeof p === 'number' && Number.isInteger(p) && p >= 0 && p <= 10;
 const ort1 = (p: number[]) =>
   p.length === 0
     ? null
