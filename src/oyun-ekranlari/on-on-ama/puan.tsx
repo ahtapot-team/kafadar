@@ -6,7 +6,7 @@ import { useDurum } from '../../durum';
 import { bosluk, dokunmaAlani, yaricap } from '../../tema';
 import { titret } from '../../titresim';
 import { Dugme, Ekran, Yazi } from '../../ui';
-import { KartSeridi, UstCubuk } from '../ok-mu-nok/ortak';
+import { KartSeridi, UstCubuk } from '../ortak/ortak';
 import { puanRengi } from './ortak';
 
 type Props = {

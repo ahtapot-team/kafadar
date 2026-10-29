@@ -5,7 +5,7 @@ import { bosluk, dokunmaAlani, yaricap } from '../../tema';
 import { titret } from '../../titresim';
 import { Dugme, Ekran, Yazi } from '../../ui';
 import type { Oy } from '../../games/ok-mu-nok/oyun';
-import { KartSeridi, UstCubuk } from './ortak';
+import { KartSeridi, UstCubuk } from '../ortak/ortak';
 
 type Props = {
   kart: string;

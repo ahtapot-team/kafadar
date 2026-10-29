@@ -26,7 +26,7 @@ import type { OyunEkraniProps } from '../../games/oyun';
 import { bosluk, dokunmaAlani, yaricap } from '../../tema';
 import { titret } from '../../titresim';
 import { Dugme, Ekran, Yazi } from '../../ui';
-import { usePaylas, GizliPaylasim } from '../ok-mu-nok/paylasim';
+import { usePaylas, GizliPaylasim } from '../ortak/paylasim';
 import { Aciklama } from './aciklama';
 import { Cark } from './cark';
 import { Oylama } from './oylama';

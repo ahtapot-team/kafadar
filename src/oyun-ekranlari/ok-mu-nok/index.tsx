@@ -19,14 +19,10 @@ import type { OyunEkraniProps } from '../../games/oyun';
 import { Diyalog, Dugme, Ekran } from '../../ui';
 import { AcikEkrani } from './acik';
 import { BitisEkrani } from './bitis';
-import { KartEkrani } from './kart';
+import { KartEkrani } from '../ortak/kart';
 import { OyEkrani } from './oy';
-import {
-  GizliPaylasim,
-  KartPaylasimi,
-  OdulPaylasimi,
-  usePaylas,
-} from './paylasim';
+import { GizliPaylasim, usePaylas } from '../ortak/paylasim';
+import { KartPaylasimi, OdulPaylasimi } from './paylasim';
 
 export default function OkMuNokEkrani({
   deste,

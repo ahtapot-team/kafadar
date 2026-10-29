@@ -1,10 +1,10 @@
 // Oturum sonu ödülleri (KK-12): Aykırı ruh, Ruh ikizleri, Olay kart.
 import { Platform, View } from 'react-native';
-import { useDurum } from '../../durum';
-import { bosluk, yaricap } from '../../tema';
+import { bosluk } from '../../tema';
 import { Dugme, Ekran, Yazi } from '../../ui';
 import type { Oduller } from '../../games/ok-mu-nok/oyun';
-import { IkonDugme } from './ortak';
+import { IkonDugme } from '../ortak/ortak';
+import { OdulKarti } from '../ortak/odul';
 
 type Props = {
   kartSayisi: number;
@@ -14,45 +14,6 @@ type Props = {
   onAnaMenu: () => void;
   onPaylas: () => void;
 };
-
-function OdulKarti({
-  testID,
-  baslik,
-  renkAdi,
-  satirlar,
-}: {
-  testID: string;
-  baslik: string;
-  renkAdi: 'marka' | 'marka2' | 'yuzey';
-  satirlar: string[];
-}) {
-  const { renk } = useDurum();
-  const koyuYazi = renkAdi !== 'yuzey';
-  const renkYazi = koyuYazi ? renk.kontur : renk.metin;
-  return (
-    <View
-      testID={testID}
-      style={{
-        backgroundColor: renk[renkAdi],
-        borderWidth: 4,
-        borderColor: renk.kontur,
-        borderRadius: yaricap.kart,
-        padding: bosluk.l,
-        gap: bosluk.xs,
-        boxShadow: `5px 5px 0 ${renk.golge}`,
-      }}
-    >
-      <Yazi tur="etiket" style={{ color: renkYazi }}>
-        {baslik}
-      </Yazi>
-      {satirlar.map((s) => (
-        <Yazi key={s} tur="baslik" style={{ color: renkYazi, fontSize: 24 }}>
-          {s}
-        </Yazi>
-      ))}
-    </View>
-  );
-}
 
 export function BitisEkrani({
   kartSayisi,
