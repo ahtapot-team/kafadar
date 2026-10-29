@@ -1,22 +1,8 @@
 // Giriş: yönlendirme, oda kurma ve hız sınırı. Protokol (adres, mesajlar): src/oda/mesaj.ts; kurallar: src/oda/oda.ts.
-import type { Deste } from '../../src/core/deste';
 import { kodGecerliMi, kodUret } from '../../src/oda/oda';
+import { desteBul } from '../../src/icerik';
 import { acilisOku } from '../../src/oda/mesaj';
-import aile from '../../content/decks/aile.json';
-import arkadas from '../../content/decks/arkadas.json';
-import cift from '../../content/decks/cift.json';
-import ononArkadas from '../../content/onon/onon-arkadas.json';
-import ononGundelik from '../../content/onon/onon-gundelik.json';
-import ononSevgili from '../../content/onon/onon-sevgili.json';
 import { type Env, hataSoketi, rastgele } from './ortak';
-
-const DESTELER: Record<string, Deste> = { arkadas, cift, aile };
-// 10/10 ama paketleri (oyun=on-on-ama): paket adı arkadas | gundelik | sevgili
-const ONON_DESTELER: Record<string, Deste> = {
-  arkadas: ononArkadas,
-  gundelik: ononGundelik,
-  sevgili: ononSevgili,
-};
 
 export default {
   async fetch(istek: Request, env: Env): Promise<Response> {
@@ -46,9 +32,7 @@ export default {
           'Çok fazla oda kurdunuz. Biraz bekleyin.',
         );
       const tur = acilis.oyun ?? 'ok-mu-nok';
-      const deste = (tur === 'on-on-ama' ? ONON_DESTELER : DESTELER)[
-        acilis.paket
-      ];
+      const deste = desteBul(tur, acilis.paket);
       if (!deste) return hataSoketi('tanimsiz', 'Bilinmeyen deste.');
       for (let i = 0; i < 5; i++) {
         const kod = kodUret(rastgele);
