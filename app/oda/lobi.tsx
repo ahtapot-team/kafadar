@@ -1,10 +1,19 @@
 import * as Linking from 'expo-linking';
 import { useRouter } from 'expo-router';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { View } from 'react-native';
 import { Qr } from '../../src/baglanti/qr';
 import { useOda } from '../../src/baglanti/baglam';
+import { tanitimGerekli, tanitimGorulduMu } from '../../src/core/tanitim';
+import { depo } from '../../src/depo';
 import { useDurum } from '../../src/durum';
+import { oyunlar } from '../../src/games/registry';
+import { odaTuru } from '../../src/oda/istemci';
+import {
+  TanitimBaglantisi,
+  TanitimKarti,
+  odaOyunId,
+} from '../../src/tanitim-kutusu';
 import { bosluk, yaricap } from '../../src/tema';
 import { YenidenBaglaniyor } from '../../src/oda-ui/yeniden';
 import { Dugme, Ekran, Yazi } from '../../src/ui';
@@ -15,6 +24,21 @@ export default function Lobi() {
   const { renk } = useDurum();
   const { istemci, durum } = useOda();
   const g = durum.gorunum;
+  // Odanın oyunu (kodla katılan hangi oyundan gelirse gelsin): kart bu oyunun kartıdır.
+  const oyunId = odaOyunId(odaTuru(durum));
+  const [ilkKart, setIlkKart] = useState(false);
+  const [kontrolEdildi, setKontrolEdildi] = useState(false);
+
+  // Odaya ilk katılımda kart daha önce görülmediyse lobide bir kez açılır (KK-75); kart açıkken lobi güncellenmeye devam eder,
+  // oyun başlarsa lobi kapanır ve kart da onunla kapanır.
+  useEffect(() => {
+    if (!g || kontrolEdildi) return;
+    setKontrolEdildi(true);
+    tanitimGorulduMu(depo, oyunId).then((goruldu) =>
+      setIlkKart(tanitimGerekli(goruldu, 'lobi')),
+    );
+  }, [g, kontrolEdildi, oyunId]);
+  const kartOyun = oyunlar.find((o) => o.id === oyunId);
 
   useEffect(() => {
     if (g && g.asama !== 'lobi') router.replace('/oda/oyun');
@@ -36,6 +60,42 @@ export default function Lobi() {
 
   return (
     <Ekran>
+      <View
+        style={{
+          flexDirection: 'row',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+        }}
+      >
+        <View
+          style={{
+            paddingHorizontal: bosluk.m,
+            minHeight: 32,
+            justifyContent: 'center',
+            borderRadius: yaricap.cip,
+            borderWidth: 3,
+            borderColor: renk.kontur,
+            backgroundColor: renk.marka2,
+          }}
+        >
+          <Yazi tur="etiket" style={{ color: renk.kontur }}>
+            ODA
+          </Yazi>
+        </View>
+        <TanitimBaglantisi
+          oyunId={oyunId}
+          testID="tanitim-nasil"
+          etiket="Nasıl oynanır?"
+        />
+      </View>
+      {kartOyun && (
+        <TanitimKarti
+          oyun={kartOyun}
+          gorunur={ilkKart}
+          onTamam={() => setIlkKart(false)}
+          onKapat={() => setIlkKart(false)}
+        />
+      )}
       <Yazi tur="etiket" soluk>
         Oda kodu
       </Yazi>

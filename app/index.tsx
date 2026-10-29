@@ -8,7 +8,11 @@ import Animated, {
   useSharedValue,
   withTiming,
 } from 'react-native-reanimated';
+import { tanitimGerekli, tanitimGorulduMu } from '../src/core/tanitim';
+import { depo } from '../src/depo';
+import type { Oyun } from '../src/games/oyun';
 import { oyunlar } from '../src/games/registry';
+import { TanitimKarti } from '../src/tanitim-kutusu';
 import { useDurum } from '../src/durum';
 import {
   dokunmaAlani,
@@ -98,6 +102,11 @@ export default function Ana() {
   const router = useRouter();
   const { yarimOyunVar, oyunuBitir, hazir, oyunuSec } = useDurum();
   const [soruldu, setSoruldu] = useState(false);
+  const [tanitim, setTanitim] = useState<Oyun | null>(null);
+  const gir = (oyun: Oyun) => {
+    oyunuSec(oyun.id);
+    router.push(oyun.modSecimi ? '/mod' : '/oyuncular');
+  };
   return (
     <View style={{ flex: 1 }}>
       <Ekran>
@@ -118,12 +127,27 @@ export default function Ana() {
               key={oyun.id}
               testID={`ana-oyun-${oyun.id}`}
               etiket={oyun.ad}
-              onPress={() => {
-                oyunuSec(oyun.id);
-                router.push(oyun.modSecimi ? '/mod' : '/oyuncular');
+              onPress={async () => {
+                // İlk seçimde (bu telefonda) önce tanıtım kartı; görüldüyse eskisi gibi tek dokunuş (KK-73, KK-78).
+                const goruldu = await tanitimGorulduMu(depo, oyun.id);
+                if (oyun.tanitim && tanitimGerekli(goruldu, 'secim'))
+                  setTanitim(oyun);
+                else gir(oyun);
               }}
             />
           ),
+        )}
+        {tanitim && (
+          <TanitimKarti
+            oyun={tanitim}
+            gorunur
+            onTamam={() => {
+              const o = tanitim;
+              setTanitim(null);
+              gir(o);
+            }}
+            onKapat={() => setTanitim(null)} // geri tuşu: ana ekranda kal, görüldü sayılmaz (KK-74)
+          />
         )}
         <Diyalog
           gorunur={hazir && yarimOyunVar && !soruldu}
