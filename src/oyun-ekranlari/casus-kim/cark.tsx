@@ -10,7 +10,7 @@ import Animated, {
   withTiming,
 } from 'react-native-reanimated';
 import { useDurum } from '../../durum';
-import { bosluk, easing, yaricap } from '../../tema';
+import { bosluk, cizgi, easing, yaricap } from '../../tema';
 import { titret } from '../../titresim';
 import { Dugme, Ekran, Yazi } from '../../ui';
 import { CasusUst, Sticker } from './ortak';
@@ -113,7 +113,7 @@ export function Cark({
                   paddingHorizontal: bosluk.m,
                   paddingVertical: bosluk.xs,
                   borderRadius: yaricap.cip,
-                  borderWidth: 3,
+                  borderWidth: cizgi.ince,
                   borderColor: renk.kontur,
                   backgroundColor: i % 2 === 0 ? renk.marka2 : renk.yuzey,
                 }}
@@ -132,8 +132,8 @@ export function Cark({
               position: 'absolute',
               width: 36,
               height: 36,
-              borderRadius: 18,
-              borderWidth: 4,
+              borderRadius: yaricap.dugme,
+              borderWidth: cizgi.kalin,
               borderColor: renk.kontur,
               backgroundColor: renk.zemin,
             }}

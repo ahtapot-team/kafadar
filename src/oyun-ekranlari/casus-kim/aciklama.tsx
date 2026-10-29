@@ -10,7 +10,7 @@ import Animated, {
   withTiming,
 } from 'react-native-reanimated';
 import { useDurum } from '../../durum';
-import { bosluk, easing, yaricap } from '../../tema';
+import { bosluk, cizgi, easing, yaricap } from '../../tema';
 import { titret } from '../../titresim';
 import { Dugme, Ekran, Yazi } from '../../ui';
 import { CasusUst, OyunuBitir, Sticker } from './ortak';
@@ -62,7 +62,7 @@ export function Aciklama({
           style={[
             {
               backgroundColor: renk.marka2,
-              borderWidth: 4,
+              borderWidth: cizgi.kalin,
               borderColor: renk.kontur,
               borderRadius: yaricap.kart,
               padding: bosluk.xl,

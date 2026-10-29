@@ -13,7 +13,7 @@ import { OdulKarti } from '../oyun-ekranlari/ortak/odul';
 import { ondalik } from '../oyun-ekranlari/on-on-ama/ortak';
 import { BASLIK, OdulPaylasimi } from '../oyun-ekranlari/on-on-ama/paylasim';
 import { useDurum } from '../durum';
-import { bosluk, yaricap } from '../tema';
+import { bosluk, cizgi, yaricap } from '../tema';
 import { Dugme, Ekran, Yazi } from '../ui';
 import { OdaUst } from './ust';
 
@@ -40,7 +40,7 @@ function Cip({ metin, dolgu }: { metin: string; dolgu: string }) {
         paddingHorizontal: bosluk.m,
         paddingVertical: bosluk.xs,
         borderRadius: yaricap.cip,
-        borderWidth: 3,
+        borderWidth: cizgi.ince,
         borderColor: renk.kontur,
         backgroundColor: dolgu,
       }}
@@ -64,7 +64,7 @@ function KisiselKart({ f, ad }: { f: OnOnFinal; ad: string }) {
       testID="oda-onon-kisisel"
       style={{
         backgroundColor: renk.marka,
-        borderWidth: 4,
+        borderWidth: cizgi.kalin,
         borderColor: renk.kontur,
         borderRadius: yaricap.kart,
         padding: bosluk.l,

@@ -3,7 +3,7 @@ import { Pressable, View } from 'react-native';
 import { type IstemciDurumu } from '../oda/istemci';
 import type { Oy } from '../oda/oda';
 import { useDurum } from '../durum';
-import { bosluk, yaricap } from '../tema';
+import { bosluk, cizgi, yaricap } from '../tema';
 import { titret } from '../titresim';
 import { Ekran, Yazi } from '../ui';
 import { useKalan } from './kalan';
@@ -35,7 +35,7 @@ function Dev({
         flex: 1,
         minHeight: 140,
         borderRadius: yaricap.kart,
-        borderWidth: 4,
+        borderWidth: cizgi.kalin,
         borderColor: renk.kontur,
         backgroundColor: secili ? dolgu : renk.yuzey,
         alignItems: 'center',
@@ -99,7 +99,7 @@ export function SoruEkrani({
       <View
         style={{
           height: 8,
-          borderRadius: 99,
+          borderRadius: yaricap.yuvarlak,
           backgroundColor: renk.yuzey,
           overflow: 'hidden',
         }}
@@ -108,7 +108,7 @@ export function SoruEkrani({
           style={{
             height: '100%',
             width: `${Math.min(100, (kalan / 15000) * 100)}%`,
-            borderRadius: 99,
+            borderRadius: yaricap.yuvarlak,
             backgroundColor: renk.marka,
           }}
         />
@@ -116,7 +116,7 @@ export function SoruEkrani({
       <View
         style={{
           backgroundColor: renk.marka,
-          borderWidth: 4,
+          borderWidth: cizgi.kalin,
           borderColor: renk.kontur,
           borderRadius: yaricap.kart,
           padding: bosluk.xl,

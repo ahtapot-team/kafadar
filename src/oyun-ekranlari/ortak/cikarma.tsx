@@ -1,7 +1,7 @@
 // Açıklamada kısa "çıkartma" etiketi (en düşük/en yüksek, oybirliği, bölündünüz): metin dışarıdan verilir.
 import { View } from 'react-native';
 import { useDurum } from '../../durum';
-import { bosluk, yaricap } from '../../tema';
+import { bosluk, cizgi, yaricap } from '../../tema';
 import { Yazi } from '../../ui';
 
 export function Cikarma({
@@ -21,7 +21,7 @@ export function Cikarma({
       testID={testID}
       style={{
         backgroundColor: dolgu,
-        borderWidth: 4,
+        borderWidth: cizgi.kalin,
         borderColor: renk.kontur,
         borderRadius: yaricap.cip,
         paddingHorizontal: bosluk.m,

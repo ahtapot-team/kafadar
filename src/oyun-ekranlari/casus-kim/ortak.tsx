@@ -2,7 +2,7 @@
 import { useState, type ReactNode } from 'react';
 import { Pressable, View } from 'react-native';
 import { useDurum } from '../../durum';
-import { bosluk, dokunmaAlani, yaricap } from '../../tema';
+import { bosluk, cizgi, dokunmaAlani, renkler, yaricap } from '../../tema';
 import { Diyalog, Dugme, Yazi } from '../../ui';
 
 export function CasusUst({ orta, onCik }: { orta: string; onCik: () => void }) {
@@ -15,7 +15,7 @@ export function CasusUst({ orta, onCik }: { orta: string; onCik: () => void }) {
           minHeight: 32,
           justifyContent: 'center',
           borderRadius: yaricap.cip,
-          borderWidth: 3,
+          borderWidth: cizgi.ince,
           borderColor: renk.kontur,
           backgroundColor: renk.marka2,
         }}
@@ -36,7 +36,7 @@ export function CasusUst({ orta, onCik }: { orta: string; onCik: () => void }) {
           width: dokunmaAlani,
           height: dokunmaAlani,
           borderRadius: yaricap.cip,
-          borderWidth: 3,
+          borderWidth: cizgi.ince,
           borderColor: renk.kontur,
           backgroundColor: renk.yuzey,
           alignItems: 'center',
@@ -61,7 +61,7 @@ export function OyunuBitir({ onBitir }: { onBitir: () => void }) {
         onPress={() => setSoruyor(true)}
       />
       <Diyalog gorunur={soruyor} baslik="Oyunu bitir?">
-        <Yazi style={{ color: '#0B0920' }}>
+        <Yazi style={{ color: renkler.koyu.kontur }}>
           Casuslar ve kelime gösterilir, kazanan ilan edilmez.
         </Yazi>
         <Dugme
@@ -97,7 +97,7 @@ export function Sticker({
       style={{
         alignSelf: 'flex-start',
         backgroundColor: renk[renkAdi],
-        borderWidth: 4,
+        borderWidth: cizgi.kalin,
         borderColor: renk.kontur,
         borderRadius: yaricap.dugme,
         paddingHorizontal: bosluk.l,

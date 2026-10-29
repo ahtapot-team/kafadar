@@ -9,7 +9,7 @@ import { useDurum } from './durum';
 import type { Oyun } from './games/oyun';
 import { oyunlar } from './games/registry';
 import type { OdaTuru } from './oda/oda';
-import { bosluk, dokunmaAlani, yaricap } from './tema';
+import { bosluk, cizgi, dokunmaAlani, yaricap } from './tema';
 import { Diyalog, Yazi } from './ui';
 
 export function TanitimKarti({
@@ -114,7 +114,7 @@ export function TanitimBaglantisi({
           gap: bosluk.s,
           paddingHorizontal: bosluk.m,
           borderRadius: yaricap.cip,
-          borderWidth: 3,
+          borderWidth: cizgi.ince,
           borderColor: renk.marka,
           backgroundColor: renk.yuzey,
         }}

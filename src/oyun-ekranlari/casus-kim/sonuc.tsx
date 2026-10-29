@@ -2,7 +2,7 @@
 import { View } from 'react-native';
 import { useDurum } from '../../durum';
 import type { Sonuc } from '../../games/casus-kim/casus';
-import { bosluk, yaricap } from '../../tema';
+import { bosluk, cizgi, yaricap } from '../../tema';
 import { Dugme, Ekran, Yazi } from '../../ui';
 import { PaylasDugmesi } from '../ortak/paylasim';
 import { Sticker } from './ortak';
@@ -42,7 +42,7 @@ export function SonucEkrani({
         paddingHorizontal: bosluk.m,
         paddingVertical: bosluk.xs,
         borderRadius: yaricap.cip,
-        borderWidth: 3,
+        borderWidth: cizgi.ince,
         borderColor: renk.kontur,
         backgroundColor: renk.yuzey,
       }}

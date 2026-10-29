@@ -15,6 +15,7 @@ import { oyunlar } from '../src/games/registry';
 import { TanitimKarti } from '../src/tanitim-kutusu';
 import { useDurum } from '../src/durum';
 import {
+  cizgi,
   dokunmaAlani,
   easing,
   hareket,
@@ -51,9 +52,9 @@ function Logo() {
         {
           alignSelf: 'flex-start',
           backgroundColor: renk.marka,
-          borderWidth: 4,
+          borderWidth: cizgi.kalin,
           borderColor: renk.kontur,
-          borderRadius: 20,
+          borderRadius: yaricap.dugme,
           paddingHorizontal: 16,
           paddingVertical: 8,
           boxShadow: `5px 5px 0 ${renk.golge}`,
@@ -86,7 +87,7 @@ function AyarlarIkonu() {
         width: dokunmaAlani,
         height: dokunmaAlani,
         borderRadius: yaricap.cip,
-        borderWidth: 3,
+        borderWidth: cizgi.ince,
         borderColor: renk.kontur,
         backgroundColor: renk.yuzey,
         alignItems: 'center',

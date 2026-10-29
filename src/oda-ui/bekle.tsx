@@ -2,7 +2,7 @@
 import { View } from 'react-native';
 import { type IstemciDurumu } from '../oda/istemci';
 import { useDurum } from '../durum';
-import { bosluk, yaricap } from '../tema';
+import { bosluk, cizgi, yaricap } from '../tema';
 import { Dugme, Ekran, Yazi } from '../ui';
 import { useKalan } from './kalan';
 import { OdaUst } from './ust';
@@ -33,7 +33,7 @@ export function BeklemeEkrani({
           style={{
             alignSelf: 'flex-start',
             backgroundColor: renk.marka,
-            borderWidth: 4,
+            borderWidth: cizgi.kalin,
             borderColor: renk.kontur,
             borderRadius: yaricap.dugme,
             paddingHorizontal: bosluk.l,
@@ -72,7 +72,7 @@ export function BeklemeEkrani({
                   paddingHorizontal: bosluk.m,
                   paddingVertical: bosluk.xs,
                   borderRadius: yaricap.cip,
-                  borderWidth: 3,
+                  borderWidth: cizgi.ince,
                   borderColor: renk.kontur,
                   backgroundColor: tamam ? renk.yuzey : 'transparent',
                   opacity: tamam ? 1 : 0.5,

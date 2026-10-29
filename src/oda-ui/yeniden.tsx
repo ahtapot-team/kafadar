@@ -1,7 +1,7 @@
 // "Yeniden bağlanıyor…" kartı (KK-37): oda ekranlarında bağlantı kopunca üstte görünür.
 import { View } from 'react-native';
 import { useDurum } from '../durum';
-import { bosluk, yaricap } from '../tema';
+import { bosluk, cizgi, yaricap } from '../tema';
 import { Yazi } from '../ui';
 
 export function YenidenBaglaniyor() {
@@ -18,7 +18,7 @@ export function YenidenBaglaniyor() {
         top: '35%',
         padding: bosluk.xl,
         borderRadius: yaricap.kart,
-        borderWidth: 4,
+        borderWidth: cizgi.kalin,
         borderColor: renk.kontur,
         backgroundColor: renk.marka2,
         gap: bosluk.s,

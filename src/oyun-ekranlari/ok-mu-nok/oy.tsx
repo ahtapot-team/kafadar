@@ -1,7 +1,7 @@
 // Oy girişi (KK-10): telefonu tutan kişi her isme OK / NOK işaretler; herkes işaretlenince "Göster" açılır.
 import { Pressable, View } from 'react-native';
 import { useDurum } from '../../durum';
-import { bosluk, dokunmaAlani, yaricap } from '../../tema';
+import { bosluk, cizgi, dokunmaAlani, yaricap } from '../../tema';
 import { titret } from '../../titresim';
 import { Dugme, Ekran, Yazi } from '../../ui';
 import type { Oy } from '../../games/ok-mu-nok/oyun';
@@ -46,7 +46,7 @@ function OyDugmesi({
         minWidth: 84,
         paddingHorizontal: bosluk.m,
         borderRadius: yaricap.cip,
-        borderWidth: 3,
+        borderWidth: cizgi.ince,
         borderColor: renk.kontur,
         backgroundColor: secili ? dolgu : renk.yuzey,
         alignItems: 'center',

@@ -2,7 +2,7 @@
 import { useState } from 'react';
 import { Pressable, View } from 'react-native';
 import { useDurum } from '../../durum';
-import { bosluk, dokunmaAlani, yaricap } from '../../tema';
+import { bosluk, cizgi, dokunmaAlani, yaricap } from '../../tema';
 import { Dugme, Ekran, Yazi } from '../../ui';
 import { CasusUst, OyunuBitir } from './ortak';
 
@@ -44,7 +44,7 @@ export function Tahmin({
               justifyContent: 'center',
               padding: bosluk.m,
               borderRadius: yaricap.cip,
-              borderWidth: 3,
+              borderWidth: cizgi.ince,
               borderColor: renk.kontur,
               backgroundColor: secili === s ? renk.marka2 : renk.yuzey,
             }}

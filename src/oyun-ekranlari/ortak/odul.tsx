@@ -1,7 +1,7 @@
 // Ödül kartı (oturum sonu): başlık, ödül alan kişi(ler) ve isteğe bağlı alt satır; metin dışarıdan verilir.
 import { View } from 'react-native';
 import { useDurum } from '../../durum';
-import { bosluk, yaricap } from '../../tema';
+import { bosluk, cizgi, yaricap } from '../../tema';
 import { Yazi } from '../../ui';
 
 export function OdulKarti({
@@ -24,7 +24,7 @@ export function OdulKarti({
       testID={testID}
       style={{
         backgroundColor: renk[renkAdi],
-        borderWidth: 4,
+        borderWidth: cizgi.kalin,
         borderColor: renk.kontur,
         borderRadius: yaricap.kart,
         padding: bosluk.l,

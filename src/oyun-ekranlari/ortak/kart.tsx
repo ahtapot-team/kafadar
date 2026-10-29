@@ -9,7 +9,7 @@ import Animated, {
   withTiming,
 } from 'react-native-reanimated';
 import { useDurum } from '../../durum';
-import { bosluk, easing, hareket, yaricap, yazi } from '../../tema';
+import { bosluk, cizgi, easing, hareket, yaricap, yazi } from '../../tema';
 import { titret } from '../../titresim';
 import { Ekran, Yazi } from '../../ui';
 import { UstCubuk } from './ortak';
@@ -96,7 +96,7 @@ export function KartEkrani({
     position: 'absolute' as const,
     inset: 0,
     borderRadius: yaricap.kart,
-    borderWidth: 4,
+    borderWidth: cizgi.kalin,
     borderColor: renk.kontur,
     backfaceVisibility: 'hidden' as const,
     boxShadow: `8px 8px 0 ${renk.golge}`,
@@ -117,7 +117,7 @@ export function KartEkrani({
             position: 'absolute',
             inset: 0,
             borderRadius: yaricap.kart,
-            borderWidth: 4,
+            borderWidth: cizgi.kalin,
             borderColor: renk.kontur,
             backgroundColor: renk.marka2,
             transform: [{ rotate: '5deg' }],
@@ -179,7 +179,7 @@ export function KartEkrani({
             width: aktif ? 72 : 44,
             height: aktif ? 72 : 44,
             borderRadius: yaricap.yuvarlak,
-            borderWidth: 3,
+            borderWidth: cizgi.ince,
             borderColor: renk.kontur,
             backgroundColor: aktif ? renk.metin : renk.yuzey,
             alignItems: 'center' as const,

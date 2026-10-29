@@ -12,7 +12,7 @@ import { YenidenBaglaniyor } from '../../src/oda-ui/yeniden';
 import { odaTuru } from '../../src/oda/istemci';
 import { ayrilanlar } from '../../src/oda/ozet';
 import { useDurum } from '../../src/durum';
-import { bosluk, yaricap } from '../../src/tema';
+import { bosluk, cizgi, yaricap } from '../../src/tema';
 import { Diyalog, Dugme, Ekran, Yazi } from '../../src/ui';
 
 type Gezinme = {
@@ -168,7 +168,7 @@ export default function OdaOyun() {
               right: bosluk.l,
               padding: bosluk.m,
               borderRadius: yaricap.cip,
-              borderWidth: 3,
+              borderWidth: cizgi.ince,
               borderColor: renk.kontur,
               backgroundColor: renk.marka,
             }}
@@ -179,7 +179,7 @@ export default function OdaOyun() {
           </View>
         )}
         <Diyalog gorunur={cikisOnayi} baslik="Odadan çık?">
-          <Yazi style={{ color: '#0B0920' }}>
+          <Yazi style={{ color: renk.kontur }}>
             Odadan ayrılırsın; önceki cevapların finalde kalır, ödüllere
             girmezsin.
           </Yazi>

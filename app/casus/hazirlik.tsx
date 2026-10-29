@@ -5,7 +5,7 @@ import { Pressable, View } from 'react-native';
 import { casusSiniri } from '../../src/oyun-ekranlari/casus-kim/sinir';
 import { useDurum } from '../../src/durum';
 import { TanitimBaglantisi } from '../../src/tanitim-kutusu';
-import { bosluk, dokunmaAlani, yaricap } from '../../src/tema';
+import { bosluk, cizgi, dokunmaAlani, yaricap } from '../../src/tema';
 import { Cip, Dugme, Ekran, GeriCubugu, Yazi } from '../../src/ui';
 import { casusPaketleri } from '../../src/oyun-ekranlari/casus-kim/desteler';
 
@@ -42,7 +42,7 @@ function Adim({
         width: dokunmaAlani,
         height: dokunmaAlani,
         borderRadius: yaricap.cip,
-        borderWidth: 3,
+        borderWidth: cizgi.ince,
         borderColor: renk.kontur,
         backgroundColor: renk.yuzey,
         alignItems: 'center',

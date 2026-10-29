@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react';
 import { AppState, Platform, Pressable, View } from 'react-native';
 import { useDurum } from '../../durum';
-import { bosluk, yaricap } from '../../tema';
+import { bosluk, cizgi, yaricap } from '../../tema';
 import { titret } from '../../titresim';
 import { Yazi } from '../../ui';
 
@@ -36,7 +36,7 @@ function KartGovdesi({ ana, alt }: { ana: string; alt: string }) {
       style={{
         flex: 1,
         backgroundColor: renk.marka2,
-        borderWidth: 4,
+        borderWidth: cizgi.kalin,
         borderColor: renk.kontur,
         borderRadius: yaricap.kart,
         padding: bosluk.xl,
@@ -99,7 +99,7 @@ export function GizliKart({
             style={{
               flex: 1,
               backgroundColor: renk.yuzey,
-              borderWidth: 4,
+              borderWidth: cizgi.kalin,
               borderColor: renk.kontur,
               borderRadius: yaricap.kart,
               alignItems: 'center',
