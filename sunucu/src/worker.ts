@@ -79,7 +79,7 @@ export default {
         'cok-deneme',
         'Çok fazla kod denediniz. Biraz bekleyin.',
       );
-    if (!kodGecerliMi(kod)) return hataSoketi('kapali', 'Oda bulunamadı.');
+    if (kodGecerliMi(kod)) return hataSoketi('kapali', 'Oda bulunamadı.');
     const oda = env.ODA.get(env.ODA.idFromName(kod));
     if (islem === 'katil' && (await oda.varMi())) await sinir.iade(ip);
     const ad = encodeURIComponent(islem === 'katil' ? acilis.ad : '');
