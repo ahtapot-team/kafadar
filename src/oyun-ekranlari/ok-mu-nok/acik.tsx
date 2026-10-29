@@ -1,6 +1,6 @@
 // Açıklama anı (KK-11): çubuklar ~2 sn'de dolar, sayılar birlikte artar; tek azınlıkta sarsıntı.
 import { useEffect, useState } from 'react';
-import { Platform, View } from 'react-native';
+import { View } from 'react-native';
 import Animated, {
   Easing,
   useAnimatedStyle,
@@ -17,7 +17,8 @@ import { Dugme, Ekran, Yazi } from '../../ui';
 import type { Oy, Sonuc } from '../../games/ok-mu-nok/oyun';
 import { useSayi } from '../ortak/anim';
 import { Konfeti } from '../ortak/konfeti';
-import { IkonDugme, KartSeridi } from '../ortak/ortak';
+import { KartSeridi } from '../ortak/ortak';
+import { PaylasDugmesi } from '../ortak/paylasim';
 
 type Props = {
   kart: string;
@@ -230,15 +231,7 @@ export function AcikEkrani({
             onPress={onSonraki}
           />
         </View>
-        {/* Web'de paylaşım menüsü/yakalama yok: düğme yalnızca yerel uygulamada */}
-        {Platform.OS !== 'web' && (
-          <IkonDugme
-            testID="paylas"
-            simge="⇪"
-            etiket="Paylaş"
-            onPress={onPaylas}
-          />
-        )}
+        <PaylasDugmesi testID="paylas" onPress={onPaylas} />
       </View>
       <Dugme testID="bitir" tur="ikincil" etiket="Bitir" onPress={onBitir} />
     </Ekran>

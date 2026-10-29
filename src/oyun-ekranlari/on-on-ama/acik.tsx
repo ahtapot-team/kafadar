@@ -1,7 +1,7 @@
 // Açıklama (KK-57): ortalama (bir ondalık, "5,8"), en düşük / en yüksek, oybirliği konfetisi, "Tam bölündünüz".
 // "Hareketi azalt" (azalt) açıkken konfeti, sayaç ve giriş animasyonu yok: sade gösterim.
 import { useEffect, useState } from 'react';
-import { Platform, View } from 'react-native';
+import { View } from 'react-native';
 import { useReducedMotion } from 'react-native-reanimated';
 import { useDurum } from '../../durum';
 import { bosluk, hareket } from '../../tema';
@@ -11,7 +11,8 @@ import type { Ozet } from '../../games/on-on-ama/onon';
 import { useSayi } from '../ortak/anim';
 import { Konfeti } from '../ortak/konfeti';
 import { Cikarma } from '../ortak/cikarma';
-import { IkonDugme, KartSeridi } from '../ortak/ortak';
+import { KartSeridi } from '../ortak/ortak';
+import { PaylasDugmesi } from '../ortak/paylasim';
 import { ondalik, puanRengi } from './ortak';
 
 type Props = {
@@ -182,15 +183,7 @@ export function AcikEkrani({
             onPress={onSonraki}
           />
         </View>
-        {/* Web'de paylaşım menüsü/yakalama yok: düğme yalnızca yerel uygulamada */}
-        {Platform.OS !== 'web' && (
-          <IkonDugme
-            testID="onon-paylas"
-            simge="⇪"
-            etiket="Paylaş"
-            onPress={onPaylas}
-          />
-        )}
+        <PaylasDugmesi testID="onon-paylas" onPress={onPaylas} />
       </View>
       <Dugme
         testID="onon-bitir"

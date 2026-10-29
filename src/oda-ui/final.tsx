@@ -1,7 +1,11 @@
 // Oda finali (KK-36, KK-38): dağılım → en tartışmalı → ödüller → kim ne dedi → kişisel kart; paylaş, tekrar oyna.
 import { useState } from 'react';
-import { Platform, View } from 'react-native';
-import { usePaylas, GizliPaylasim } from '../oyun-ekranlari/ortak/paylasim';
+import { View } from 'react-native';
+import {
+  GizliPaylasim,
+  PaylasDugmesi,
+  usePaylas,
+} from '../oyun-ekranlari/ortak/paylasim';
 import type { IstemciDurumu } from '../oda/istemci';
 import { SORU_SAYISI, type Final, type Oy } from '../oda/oda';
 import { erkenBitti, kisisel, okYuzde, tartismali } from '../oda/ozet';
@@ -412,15 +416,11 @@ export function FinalEkrani({
         )}
         {son && (
           <View style={{ flexDirection: 'row', gap: bosluk.m }}>
-            {Platform.OS !== 'web' && (
-              <View style={{ flex: 1 }}>
-                <Dugme
-                  testID="final-paylas"
-                  etiket="Paylaş"
-                  onPress={paylas.paylas}
-                />
-              </View>
-            )}
+            <PaylasDugmesi
+              testID="final-paylas"
+              bicim="birincil"
+              onPress={paylas.paylas}
+            />
             <View style={{ flex: 1 }}>
               <Dugme
                 testID="final-tekrar"
@@ -432,15 +432,13 @@ export function FinalEkrani({
           </View>
         )}
       </Ekran>
-      {Platform.OS !== 'web' && (
-        <GizliPaylasim gorunum={paylas.ref}>
-          <PaylasimIcerik
-            f={f}
-            kod={kod}
-            kisi={Object.keys(f.kimNeDedi).length}
-          />
-        </GizliPaylasim>
-      )}
+      <GizliPaylasim gorunum={paylas.ref}>
+        <PaylasimIcerik
+          f={f}
+          kod={kod}
+          kisi={Object.keys(f.kimNeDedi).length}
+        />
+      </GizliPaylasim>
     </>
   );
 }

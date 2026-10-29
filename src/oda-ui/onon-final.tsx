@@ -1,10 +1,14 @@
 // 10/10 ama oda finali (KK-69): ödüller (En acımasız · Melek kalpli · Ruh ikizleri), sonra kişisel kart; paylaş, tekrar oyna.
 // Boşlar ve odadan çıkanlar ödüllere girmez (sunucu hesaplar); kişisel kartta kalırlar.
-import { Platform, View } from 'react-native';
+import { View } from 'react-native';
 import type { IstemciDurumu } from '../oda/istemci';
 import type { OnOnFinal } from '../oda/oda';
 import { onOnKisisel } from '../oda/onon-ozet';
-import { GizliPaylasim, usePaylas } from '../oyun-ekranlari/ortak/paylasim';
+import {
+  GizliPaylasim,
+  PaylasDugmesi,
+  usePaylas,
+} from '../oyun-ekranlari/ortak/paylasim';
 import { OdulKarti } from '../oyun-ekranlari/ortak/odul';
 import { ondalik } from '../oyun-ekranlari/on-on-ama/ortak';
 import { BASLIK, OdulPaylasimi } from '../oyun-ekranlari/on-on-ama/paylasim';
@@ -166,15 +170,11 @@ export function OnFinalEkrani({
         <KisiselKart f={f} ad={ad} />
         <View style={{ flex: 1 }} />
         <View style={{ flexDirection: 'row', gap: bosluk.m }}>
-          {Platform.OS !== 'web' && (
-            <View style={{ flex: 1 }}>
-              <Dugme
-                testID="oda-onon-paylas"
-                etiket="Paylaş"
-                onPress={paylas.paylas}
-              />
-            </View>
-          )}
+          <PaylasDugmesi
+            testID="oda-onon-paylas"
+            bicim="birincil"
+            onPress={paylas.paylas}
+          />
           <View style={{ flex: 1 }}>
             <Dugme
               testID="oda-onon-tekrar"
@@ -191,15 +191,13 @@ export function OnFinalEkrani({
           onPress={onAnaMenu}
         />
       </Ekran>
-      {Platform.OS !== 'web' && (
-        <GizliPaylasim gorunum={paylas.ref} baslik={BASLIK}>
-          <OdulPaylasimi
-            oduller={od}
-            altSatir={altSatir}
-            kartSayisi={f.kartlar.length}
-          />
-        </GizliPaylasim>
-      )}
+      <GizliPaylasim gorunum={paylas.ref} baslik={BASLIK}>
+        <OdulPaylasimi
+          oduller={od}
+          altSatir={altSatir}
+          kartSayisi={f.kartlar.length}
+        />
+      </GizliPaylasim>
     </>
   );
 }

@@ -2,6 +2,7 @@
 import { Text, View } from 'react-native';
 import type { Sonuc } from '../../games/casus-kim/casus';
 import { font, renkler } from '../../tema';
+import { PaylasimAlt } from '../ortak/paylasim';
 
 const r = renkler.koyu;
 
@@ -61,17 +62,7 @@ export function PaylasimIcerik({
       >
         Casus: {sonuc.casuslar.join(', ')} · İpucu: {ipucu}
       </Text>
-      <View style={{ flex: 1 }} />
-      <Text
-        style={{
-          fontFamily: font.kalin,
-          fontSize: 12,
-          color: r.metinSoluk,
-          textAlign: 'center',
-        }}
-      >
-        Kafadar ile oynandı · Casus kim
-      </Text>
+      <PaylasimAlt>Kafadar ile oynandı · Casus kim</PaylasimAlt>
     </>
   );
 }

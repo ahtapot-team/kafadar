@@ -3,6 +3,7 @@
 import { Text, View } from 'react-native';
 import type { Oduller, Ozet } from '../../games/on-on-ama/onon';
 import { font, renkler } from '../../tema';
+import { PaylasimAlt } from '../ortak/paylasim';
 import { ondalik, puanRengi } from './ortak';
 
 const r = renkler.koyu;
@@ -98,17 +99,9 @@ export function KartPaylasimi({
           </Text>
         </View>
       ))}
-      <View style={{ flex: 1 }} />
-      <Text
-        style={{
-          fontFamily: font.kalin,
-          fontSize: 12,
-          color: r.metinSoluk,
-          textAlign: 'center',
-        }}
-      >
+      <PaylasimAlt>
         Kafadar ile oynandı · {sirali.length} kişi · {paket}
-      </Text>
+      </PaylasimAlt>
     </>
   );
 }
@@ -180,17 +173,7 @@ export function OdulPaylasimi({
           </Text>
         </View>
       ))}
-      <View style={{ flex: 1 }} />
-      <Text
-        style={{
-          fontFamily: font.kalin,
-          fontSize: 12,
-          color: r.metinSoluk,
-          textAlign: 'center',
-        }}
-      >
-        Kafadar ile oynandı · {kartSayisi} kart
-      </Text>
+      <PaylasimAlt>Kafadar ile oynandı · {kartSayisi} kart</PaylasimAlt>
     </>
   );
 }

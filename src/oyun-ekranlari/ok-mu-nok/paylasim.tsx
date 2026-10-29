@@ -2,6 +2,7 @@
 import { Text, View } from 'react-native';
 import type { Oduller, Oy } from '../../games/ok-mu-nok/oyun';
 import { font, renkler } from '../../tema';
+import { PaylasimAlt } from '../ortak/paylasim';
 
 const r = renkler.koyu;
 
@@ -94,17 +95,9 @@ export function KartPaylasimi({
       </Text>
       <Satir oy="OK" sayi={ok} toplam={veren.length} />
       <Satir oy="NOK" sayi={veren.length - ok} toplam={veren.length} />
-      <View style={{ flex: 1 }} />
-      <Text
-        style={{
-          fontFamily: font.kalin,
-          fontSize: 12,
-          color: r.metinSoluk,
-          textAlign: 'center',
-        }}
-      >
+      <PaylasimAlt>
         Kafadar ile oynandı · {veren.length} kişi · {paket} destesi
-      </Text>
+      </PaylasimAlt>
     </>
   );
 }
@@ -168,17 +161,7 @@ export function OdulPaylasimi({
           </Text>
         </View>
       ))}
-      <View style={{ flex: 1 }} />
-      <Text
-        style={{
-          fontFamily: font.kalin,
-          fontSize: 12,
-          color: r.metinSoluk,
-          textAlign: 'center',
-        }}
-      >
-        Kafadar ile oynandı · {kartSayisi} kart
-      </Text>
+      <PaylasimAlt>Kafadar ile oynandı · {kartSayisi} kart</PaylasimAlt>
     </>
   );
 }

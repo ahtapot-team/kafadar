@@ -1,9 +1,9 @@
 // Oturum sonu ödülleri (KK-58): En acımasız, Melek kalpli, Ruh ikizleri.
-import { Platform, View } from 'react-native';
+import { View } from 'react-native';
 import { bosluk } from '../../tema';
 import { Dugme, Ekran, Yazi } from '../../ui';
 import type { Oduller } from '../../games/on-on-ama/onon';
-import { IkonDugme } from '../ortak/ortak';
+import { PaylasDugmesi } from '../ortak/paylasim';
 import { OdulKarti } from '../ortak/odul';
 
 type Props = {
@@ -74,14 +74,7 @@ export function BitisEkrani({
             onPress={onTekrar}
           />
         </View>
-        {Platform.OS !== 'web' && (
-          <IkonDugme
-            testID="onon-paylas"
-            simge="⇪"
-            etiket="Paylaş"
-            onPress={onPaylas}
-          />
-        )}
+        <PaylasDugmesi testID="onon-paylas" onPress={onPaylas} />
       </View>
       <Dugme
         testID="onon-ana-menu"
