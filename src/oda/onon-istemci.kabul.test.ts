@@ -1,22 +1,12 @@
 import { describe, expect, it } from 'vitest';
-import type { Depo } from '../core/kayit';
 import { OdaIstemci, odaTuru } from './istemci';
 import type { Acilis, Istemci, Sunucu } from './mesaj';
 import type { Gorunum, OnOnFinal } from './oda';
 import { onOnKisisel, puanSirasi } from './onon-ozet';
 import type { TasimaDinleyici, TasimaUretici } from './tasima';
+import { depoYap, akis } from '../test/yardimci';
 
 // #125 (KK-63, KK-64, KK-65, KK-67, KK-68, KK-69, KK-70 istemci tarafı): ağsız, sahte taşıma, sahte saat.
-const depoYap = (): Depo => {
-  const veri = new Map<string, string>();
-  return {
-    getItem: async (k) => veri.get(k) ?? null,
-    setItem: async (k, v) => void veri.set(k, v),
-    removeItem: async (k) => void veri.delete(k),
-  };
-};
-const akis = () => new Promise((r) => setTimeout(r, 0));
-
 function kurTasima() {
   const gonderilen: Istemci[] = [];
   const acilislar: Acilis[] = [];

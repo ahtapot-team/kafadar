@@ -14,7 +14,9 @@
     "build": "expo export --platform android",
     "build:web": "expo export --platform web",
     "kabul": "vitest run kabul",
-    "sunucu:test": "node sunucu/test/oyun.ts"
+    "sunucu:test": "node sunucu/test/oyun.ts",
+    "kk-harita": "node scripts/kk-harita.ts",
+    "kk-harita:kontrol": "node scripts/kk-harita.ts --kontrol"
   },
   "dependencies": {
     "@expo-google-fonts/bricolage-grotesque": "^0.4.1",

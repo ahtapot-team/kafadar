@@ -14,17 +14,9 @@ import {
   tanitimGorulduMu,
   tanitimiIsaretle,
 } from './tanitim';
+import { depoYap } from '../test/yardimci';
 
 // KK-73, KK-74, KK-75, KK-78: görüldü bilgisi ve gösterim politikası. Sahte depo, ağsız.
-const depoYap = (): Depo & { veri: Map<string, string> } => {
-  const veri = new Map<string, string>();
-  return {
-    veri,
-    getItem: async (k) => veri.get(k) ?? null,
-    setItem: async (k, v) => void veri.set(k, v),
-    removeItem: async (k) => void veri.delete(k),
-  };
-};
 const bozukDepo = (hata: 'oku' | 'yaz'): Depo => ({
   getItem: async () => {
     if (hata === 'oku') throw new Error('depo okunamadı');

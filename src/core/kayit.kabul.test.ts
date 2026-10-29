@@ -18,20 +18,11 @@ import {
   sonuc,
   yeniOyun,
 } from '../games/ok-mu-nok/oyun';
+import { depoYap } from '../test/yardimci';
 
 const kaydet = (depo: Depo, d: Durum, olay: Olay) =>
   isleKaydet(depo, isle, d, olay);
 const oku = (depo: Depo) => oyunOku<Durum>(depo);
-
-const depoYap = (): Depo & { veri: Map<string, string> } => {
-  const veri = new Map<string, string>();
-  return {
-    veri,
-    getItem: async (k) => veri.get(k) ?? null,
-    setItem: async (k, v) => void veri.set(k, v),
-    removeItem: async (k) => void veri.delete(k),
-  };
-};
 
 const deste: Deste = {
   deck_id: 't',

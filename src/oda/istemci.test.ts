@@ -1,21 +1,9 @@
 import { describe, expect, it } from 'vitest';
-import type { Depo } from '../core/kayit';
 import { rngOlustur } from '../core/rng';
 import { desteler } from '../desteler';
 import { ODA_ANAHTARI, OdaIstemci, kalanMs } from './istemci';
 import { SahteSunucu } from './sahte';
-
-const depoYap = (): Depo & { veri: Map<string, string> } => {
-  const veri = new Map<string, string>();
-  return {
-    veri,
-    getItem: async (k) => veri.get(k) ?? null,
-    setItem: async (k, v) => void veri.set(k, v),
-    removeItem: async (k) => void veri.delete(k),
-  };
-};
-
-const akis = () => new Promise((r) => setTimeout(r, 0));
+import { depoYap, akis } from '../test/yardimci';
 
 function kur() {
   const sunucu = new SahteSunucu(() => 1_000_000, rngOlustur(5), desteler);
