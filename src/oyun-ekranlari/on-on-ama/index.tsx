@@ -1,8 +1,6 @@
 // 10/10 ama ekranı: saf durum makinesini (src/games/on-on-ama/onon.ts) ekranlara bağlar ve her olaydan sonra kaydeder (KK-14).
 // Kart tanıtımı (çevirme + 3-2-1), çıkış onayı, oyuncu düzenleme OK mu NOK mu ile aynıdır (yeniden kullanılır).
-import { useCallback, useEffect, useRef, useState } from 'react';
-import { OYUN_ANAHTARI, oyunKaydet, oyunOku } from '../../core/kayit';
-import { depo } from '../../depo';
+import { useState } from 'react';
 import { useDurum } from '../../durum';
 import {
   type Durum,
@@ -18,6 +16,7 @@ import {
 import type { OyunEkraniProps } from '../../games/oyun';
 import { Diyalog, Dugme, Ekran } from '../../ui';
 import { KartEkrani } from '../ortak/kart';
+import { useOyunOturumu } from '../ortak/useOyunOturumu';
 import { GizliPaylasim, usePaylas } from '../ortak/paylasim';
 import { AcikEkrani } from './acik';
 import { BitisEkrani } from './bitis';
@@ -32,8 +31,6 @@ export default function OnOnAmaEkrani({
   onAnaMenu,
 }: OyunEkraniProps) {
   const { oyuncular: ekip, oyunculariAyarla, oyunAyari } = useDurum();
-  const [durum, setDurum] = useState<Durum | null>(null);
-  const ref = useRef<Durum | null>(null);
   const paylasim = usePaylas();
   const [tanitilan, setTanitilan] = useState<number | null>(null); // kart tanıtımı biten kart
 
@@ -41,64 +38,23 @@ export default function OnOnAmaEkrani({
     ononPaketleri.find((p) => p.id === oyunAyari.paket) ?? ononPaketleri[0];
   const uzunluk = (oyunAyari.uzunluk ?? null) as 10 | 20 | null;
 
-  const gonder = useCallback((olay: Olay) => {
-    if (!ref.current) return;
-    const yeni = isle(ref.current, olay);
-    ref.current = yeni;
-    setDurum(yeni);
-    // Biten oyun "yarım oyun" olarak kalmasın (KK-14).
-    (yeni.asama === 'bitti'
-      ? depo.removeItem(OYUN_ANAHTARI)
-      : oyunKaydet(depo, yeni)
-    ).catch(() => {});
-  }, []);
-
-  const baslat = useCallback(
-    (oyuncular: string[]) => {
-      const d = yeniOyun({
-        oyuncular,
-        deste: paket.deste,
-        uzunluk,
-        tohum: Date.now(),
-      });
-      ref.current = d;
-      setTanitilan(null);
-      setDurum(d);
-      oyunKaydet(depo, d).catch(() => {});
+  const yeni = (oyuncular: string[]) =>
+    yeniOyun({ oyuncular, deste: paket.deste, uzunluk, tohum: Date.now() });
+  const { durum, gonder, baslat } = useOyunOturumu<Durum, Olay>({
+    isle,
+    gecerliMi: durumGecerliMi,
+    baslangic: () => (ekip.length >= 2 ? yeni(ekip) : null),
+    onYok: onAnaMenu, // bozuk kayıt silindi, oyuncu listesi yok: ana ekrana dön (#27)
+    onYuklendi: (kayit) => {
+      setTanitilan(kayit.tamamlanan);
+      oyunculariAyarla(kayit.oyuncular);
     },
-    [paket, uzunluk],
-  );
-
-  // Açılışta: kayıtlı yarım oyun varsa devam, yoksa yeni oyun.
-  useEffect(() => {
-    let iptal = false;
-    oyunOku<Durum>(depo, durumGecerliMi).then((kayit) => {
-      if (iptal) return;
-      if (kayit) {
-        ref.current = kayit;
-        setDurum(kayit);
-        setTanitilan(kayit.tamamlanan);
-        oyunculariAyarla(kayit.oyuncular);
-      } else if (ekip.length >= 2) baslat(ekip);
-      else onAnaMenu(); // bozuk kayıt silindi, oyuncu listesi yok: ana ekrana dön (#27)
-    });
-    return () => {
-      iptal = true;
-    };
-    // yalnızca ilk açılışta çalışır
-  }, []);
-
-  // Oyun ortasında oyuncu düzenleme ekranından dönünce listeyi oyuna uygula (KK-6).
-  useEffect(() => {
-    const d = ref.current;
-    if (!d) return;
-    ekip
-      .filter((o) => !d.oyuncular.includes(o))
-      .forEach((ad) => gonder({ tip: 'oyuncuEkle', ad }));
-    d.oyuncular
-      .filter((o) => !ekip.includes(o))
-      .forEach((ad) => gonder({ tip: 'oyuncuCikar', ad }));
-  }, [ekip, gonder]);
+    oyuncular: ekip,
+  });
+  const tekrar = (oyuncular: string[]) => {
+    setTanitilan(null);
+    baslat(yeni(oyuncular));
+  };
 
   if (!durum) return <Ekran>{null}</Ekran>;
 
@@ -196,7 +152,7 @@ export default function OnOnAmaEkrani({
         kartSayisi={durum.gecmis.length}
         oduller={od}
         altSatir={altSatir}
-        onTekrar={() => baslat(durum.oyuncular)}
+        onTekrar={() => tekrar(durum.oyuncular)}
         onAnaMenu={onAnaMenu}
         onPaylas={paylasim.paylas}
       />
