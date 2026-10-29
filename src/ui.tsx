@@ -16,11 +16,13 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useDurum } from './durum';
 import {
   bosluk,
+  cizgi,
   dokunmaAlani,
   dugmeYuksekligi,
   kenarBosluk,
   yaricap,
   yazi,
+  perde,
 } from './tema';
 
 const YAZI_UST_SINIR = 1.6; // sistem yazı büyütmesinde taşmayı önler (KK-18)
@@ -108,7 +110,7 @@ export function Dugme({
       style={{
         minHeight: dugmeYuksekligi,
         borderRadius: yaricap.dugme,
-        borderWidth: 4,
+        borderWidth: cizgi.kalin,
         borderColor: renk.kontur,
         backgroundColor: dolgu,
         justifyContent: 'center',
@@ -156,7 +158,7 @@ export function Cip({
         justifyContent: 'center',
         paddingHorizontal: bosluk.l,
         borderRadius: yaricap.cip,
-        borderWidth: 3,
+        borderWidth: cizgi.ince,
         borderColor: renk.kontur,
         backgroundColor: secili ? renk.marka : renk.yuzey,
       }}
@@ -202,7 +204,7 @@ export function Diyalog({
       <View
         style={{
           flex: 1,
-          backgroundColor: 'rgba(11,9,32,0.7)',
+          backgroundColor: perde,
           justifyContent: 'center',
           padding: kenarBosluk,
         }}
@@ -211,7 +213,7 @@ export function Diyalog({
           accessibilityViewIsModal
           style={{
             backgroundColor: renk.marka,
-            borderWidth: 4,
+            borderWidth: cizgi.kalin,
             borderColor: renk.kontur,
             borderRadius: yaricap.kart,
             padding: bosluk.xl,
@@ -254,7 +256,7 @@ export function GeriCubugu({ testID }: { testID: string }) {
         gap: bosluk.s,
         paddingHorizontal: bosluk.l,
         borderRadius: yaricap.cip,
-        borderWidth: 3,
+        borderWidth: cizgi.ince,
         borderColor: renk.kontur,
         backgroundColor: renk.yuzey,
       }}
@@ -276,7 +278,7 @@ export function Girdi({ style, ...p }: TextInputProps) {
           minHeight: dokunmaAlani,
           paddingHorizontal: bosluk.l,
           borderRadius: yaricap.cip,
-          borderWidth: 3,
+          borderWidth: cizgi.ince,
           borderColor: renk.kontur,
           backgroundColor: renk.yuzey,
           color: renk.metin,

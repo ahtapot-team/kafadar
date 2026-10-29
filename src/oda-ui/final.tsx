@@ -10,12 +10,11 @@ import type { IstemciDurumu } from '../oda/istemci';
 import { SORU_SAYISI, type Final, type Oy } from '../oda/oda';
 import { erkenBitti, kisisel, okYuzde, tartismali } from '../oda/ozet';
 import { useDurum } from '../durum';
-import { bosluk, yaricap } from '../tema';
+import { bosluk, cizgi, font, renkler, yaricap } from '../tema';
 import { Dugme, Ekran, Yazi } from '../ui';
 import { Dagilim } from './dagilim';
 import { kartMetni } from './metin';
 import { OdaUst } from './ust';
-import { font, renkler } from '../tema';
 import { Text } from 'react-native';
 
 function Kart({
@@ -33,7 +32,7 @@ function Kart({
     <View
       style={{
         backgroundColor: renk[renkAdi],
-        borderWidth: 4,
+        borderWidth: cizgi.kalin,
         borderColor: renk.kontur,
         borderRadius: yaricap.kart,
         padding: bosluk.l,
@@ -66,7 +65,7 @@ function Tartismali({ f }: { f: Final }) {
         style={{
           alignSelf: 'flex-start',
           backgroundColor: renk.marka,
-          borderWidth: 4,
+          borderWidth: cizgi.kalin,
           borderColor: renk.kontur,
           borderRadius: yaricap.dugme,
           paddingHorizontal: bosluk.l,
@@ -159,7 +158,7 @@ function KimNeDedi({ f }: { f: Final }) {
                   style={{
                     flex: 1,
                     height: 20,
-                    borderRadius: 4,
+                    borderRadius: yaricap.kucuk,
                     backgroundColor: renkOf(c),
                     borderWidth: 1,
                     borderColor: renk.kontur,
@@ -190,7 +189,7 @@ function KimNeDedi({ f }: { f: Final }) {
               style={{
                 width: 14,
                 height: 14,
-                borderRadius: 3,
+                borderRadius: yaricap.kucuk,
                 backgroundColor: c,
                 borderWidth: 1,
                 borderColor: renk.kontur,
@@ -216,7 +215,7 @@ function Kisisel({ f, ad }: { f: Final; ad: string }) {
         paddingHorizontal: bosluk.m,
         paddingVertical: bosluk.xs,
         borderRadius: yaricap.cip,
-        borderWidth: 3,
+        borderWidth: cizgi.ince,
         borderColor: renk.kontur,
         backgroundColor: renk.marka2,
       }}
@@ -231,7 +230,7 @@ function Kisisel({ f, ad }: { f: Final; ad: string }) {
       testID="final-kisisel"
       style={{
         backgroundColor: renk.marka,
-        borderWidth: 4,
+        borderWidth: cizgi.kalin,
         borderColor: renk.kontur,
         borderRadius: yaricap.kart,
         padding: bosluk.xl,
@@ -289,8 +288,8 @@ function PaylasimIcerik({
             key={y.kartId}
             style={{
               flex: 1,
-              borderRadius: 8,
-              borderWidth: 2,
+              borderRadius: yaricap.kucuk,
+              borderWidth: cizgi.ince,
               borderColor: r.kontur,
               overflow: 'hidden',
             }}
@@ -305,9 +304,9 @@ function PaylasimIcerik({
         <View
           style={{
             backgroundColor: r.marka,
-            borderWidth: 3,
+            borderWidth: cizgi.ince,
             borderColor: r.kontur,
-            borderRadius: 20,
+            borderRadius: yaricap.dugme,
             padding: 14,
             boxShadow: `4px 4px 0 ${r.golge}`,
           }}

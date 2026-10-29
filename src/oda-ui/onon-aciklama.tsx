@@ -8,7 +8,7 @@ import { Konfeti } from '../oyun-ekranlari/ortak/konfeti';
 import { Cikarma } from '../oyun-ekranlari/ortak/cikarma';
 import { ondalik, puanRengi } from '../oyun-ekranlari/on-on-ama/ortak';
 import { useDurum } from '../durum';
-import { bosluk, yaricap } from '../tema';
+import { bosluk, cizgi, yaricap } from '../tema';
 import { Dugme, Ekran, Yazi } from '../ui';
 import { OnKart } from './onon-puan';
 import { OdaUst } from './ust';
@@ -133,8 +133,8 @@ export function OnAciklamaEkrani({
               style={{
                 flex: 1,
                 height: 22,
-                borderRadius: 9,
-                borderWidth: 3,
+                borderRadius: yaricap.kucuk,
+                borderWidth: cizgi.ince,
                 borderColor: renk.kontur,
                 borderStyle: puan === null ? 'dashed' : 'solid',
                 backgroundColor: renk.yuzey,
@@ -175,7 +175,7 @@ export function OnAciklamaEkrani({
           style={{
             minHeight: 58,
             borderRadius: yaricap.dugme,
-            borderWidth: 4,
+            borderWidth: cizgi.kalin,
             borderStyle: 'dashed',
             borderColor: renk.kontur,
             backgroundColor: renk.yuzey,

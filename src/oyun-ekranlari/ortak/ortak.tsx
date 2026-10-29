@@ -1,7 +1,7 @@
 // Oyun ekranlarının ortak parçaları: üst çubuk ve ikon düğmesi.
 import { Pressable, View } from 'react-native';
 import { useDurum } from '../../durum';
-import { bosluk, dokunmaAlani, yaricap } from '../../tema';
+import { bosluk, cizgi, dokunmaAlani, yaricap } from '../../tema';
 import { Yazi } from '../../ui';
 
 export function IkonDugme({
@@ -26,7 +26,7 @@ export function IkonDugme({
         width: dokunmaAlani,
         height: dokunmaAlani,
         borderRadius: yaricap.cip,
-        borderWidth: 3,
+        borderWidth: cizgi.ince,
         borderColor: renk.kontur,
         backgroundColor: renk.yuzey,
         alignItems: 'center',
@@ -90,7 +90,7 @@ export function KartSeridi({
       accessibilityLabel={`Kart: ${metin}`}
       style={{
         backgroundColor: renk.marka,
-        borderWidth: 3,
+        borderWidth: cizgi.ince,
         borderColor: renk.kontur,
         borderRadius: yaricap.cip,
         padding: bosluk.m,

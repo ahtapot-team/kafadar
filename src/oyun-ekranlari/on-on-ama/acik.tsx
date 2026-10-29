@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import { View } from 'react-native';
 import { useReducedMotion } from 'react-native-reanimated';
 import { useDurum } from '../../durum';
-import { bosluk, hareket } from '../../tema';
+import { bosluk, cizgi, hareket, yaricap } from '../../tema';
 import { titret } from '../../titresim';
 import { Dugme, Ekran, Yazi } from '../../ui';
 import type { Ozet } from '../../games/on-on-ama/onon';
@@ -150,8 +150,8 @@ export function AcikEkrani({
               style={{
                 flex: 1,
                 height: 24,
-                borderRadius: 10,
-                borderWidth: 3,
+                borderRadius: yaricap.kucuk,
+                borderWidth: cizgi.ince,
                 borderColor: renk.kontur,
                 backgroundColor: renk.yuzey,
                 overflow: 'hidden',

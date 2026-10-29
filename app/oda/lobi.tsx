@@ -14,7 +14,7 @@ import {
   TanitimKarti,
   odaOyunId,
 } from '../../src/tanitim-kutusu';
-import { bosluk, yaricap } from '../../src/tema';
+import { bosluk, cizgi, yaricap } from '../../src/tema';
 import { YenidenBaglaniyor } from '../../src/oda-ui/yeniden';
 import { Dugme, Ekran, Yazi } from '../../src/ui';
 
@@ -73,7 +73,7 @@ export default function Lobi() {
             minHeight: 32,
             justifyContent: 'center',
             borderRadius: yaricap.cip,
-            borderWidth: 3,
+            borderWidth: cizgi.ince,
             borderColor: renk.kontur,
             backgroundColor: renk.marka2,
           }}
@@ -114,7 +114,7 @@ export default function Lobi() {
               maxHeight: 76,
               marginLeft: i === 3 ? bosluk.m : 0, // 3+3 gruplu gösterim
               borderRadius: yaricap.cip,
-              borderWidth: 3,
+              borderWidth: cizgi.ince,
               borderColor: renk.kontur,
               backgroundColor: renk.marka,
               alignItems: 'center',
@@ -154,7 +154,7 @@ export default function Lobi() {
               paddingHorizontal: bosluk.m,
               paddingVertical: bosluk.xs,
               borderRadius: yaricap.cip,
-              borderWidth: 3,
+              borderWidth: cizgi.ince,
               borderColor: renk.kontur,
               backgroundColor: i === 0 ? renk.marka : renk.yuzey,
               opacity: o.bagli ? 1 : 0.5,

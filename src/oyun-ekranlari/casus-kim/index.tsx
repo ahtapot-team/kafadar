@@ -20,7 +20,7 @@ import {
   yeniOyun,
 } from '../../games/casus-kim/casus';
 import type { OyunEkraniProps } from '../../games/oyun';
-import { bosluk, dokunmaAlani, yaricap } from '../../tema';
+import { bosluk, cizgi, dokunmaAlani, yaricap } from '../../tema';
 import { titret } from '../../titresim';
 import { Dugme, Ekran, Yazi } from '../../ui';
 import { usePaylas, GizliPaylasim } from '../ortak/paylasim';
@@ -138,7 +138,7 @@ export default function CasusEkrani({ onCik, onAnaMenu }: OyunEkraniProps) {
             width: dokunmaAlani,
             height: dokunmaAlani,
             borderRadius: yaricap.cip,
-            borderWidth: 3,
+            borderWidth: cizgi.ince,
             borderColor: renk.kontur,
             backgroundColor: renk.yuzey,
             alignItems: 'center',
@@ -166,7 +166,7 @@ export default function CasusEkrani({ onCik, onAnaMenu }: OyunEkraniProps) {
               style={{
                 alignSelf: 'flex-start',
                 backgroundColor: renk.marka,
-                borderWidth: 4,
+                borderWidth: cizgi.kalin,
                 borderColor: renk.kontur,
                 borderRadius: yaricap.dugme,
                 paddingHorizontal: bosluk.xl,

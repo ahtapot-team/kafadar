@@ -4,7 +4,7 @@ import { View } from 'react-native';
 import { isimDuzelt, isimHatasi } from '../../src/core/oyuncular';
 import { useOda } from '../../src/baglanti/baglam';
 import { useDurum } from '../../src/durum';
-import { bosluk, yaricap } from '../../src/tema';
+import { bosluk, cizgi, yaricap } from '../../src/tema';
 import { Dugme, Ekran, GeriCubugu, Girdi, Yazi } from '../../src/ui';
 
 const HANE = 6; // KK-29: 6 haneli rakam kodu
@@ -44,7 +44,7 @@ export default function OdayaKatil() {
                 height: 76,
                 marginLeft: i === 3 ? bosluk.m : 0, // 3+3 gruplu gösterim
                 borderRadius: yaricap.cip,
-                borderWidth: 3,
+                borderWidth: cizgi.ince,
                 borderColor: i === kod.length ? renk.marka : renk.kontur,
                 alignItems: 'center',
                 justifyContent: 'center',

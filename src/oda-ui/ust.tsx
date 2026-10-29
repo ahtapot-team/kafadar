@@ -1,7 +1,7 @@
 // Oda ekranlarının ortak üst satırı: oda rozeti (marka-2), ortada başlık, sağda süre ya da boşluk.
 import { Pressable, View } from 'react-native';
 import { useDurum } from '../durum';
-import { bosluk, dokunmaAlani, yaricap } from '../tema';
+import { bosluk, cizgi, dokunmaAlani, yaricap } from '../tema';
 import { Yazi } from '../ui';
 
 export function OdaUst({
@@ -26,7 +26,7 @@ export function OdaUst({
           minHeight: 32,
           justifyContent: 'center',
           borderRadius: yaricap.cip,
-          borderWidth: 3,
+          borderWidth: cizgi.ince,
           borderColor: renk.kontur,
           backgroundColor: renk.marka2,
         }}
@@ -55,7 +55,7 @@ export function OdaUst({
             width: dokunmaAlani,
             height: dokunmaAlani,
             borderRadius: yaricap.cip,
-            borderWidth: 3,
+            borderWidth: cizgi.ince,
             borderColor: renk.kontur,
             backgroundColor: renk.yuzey,
             alignItems: 'center',

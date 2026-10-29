@@ -11,7 +11,7 @@ import {
 } from '../src/core/oyuncular';
 import { oyunlar } from '../src/games/registry';
 import { useDurum } from '../src/durum';
-import { bosluk, dokunmaAlani, yaricap } from '../src/tema';
+import { bosluk, cizgi, dokunmaAlani, yaricap } from '../src/tema';
 import { Dugme, Ekran, Yazi, GeriCubugu } from '../src/ui';
 
 // Oyun öncesi: oyuncu listesi kurulur. `?oyunda=1` ile oyun ortasında düzenlenir (KK-6).
@@ -90,7 +90,7 @@ export default function Oyuncular() {
               minHeight: dokunmaAlani,
               paddingHorizontal: bosluk.l,
               borderRadius: yaricap.cip,
-              borderWidth: 3,
+              borderWidth: cizgi.ince,
               borderColor: renk.kontur,
               backgroundColor: renk.yuzey,
               color: renk.metin,

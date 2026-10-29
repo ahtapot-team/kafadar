@@ -33,7 +33,17 @@ export type Tema = keyof typeof renkler;
 export type Renkler = (typeof renkler)[Tema];
 
 export const bosluk = { xs: 4, s: 8, m: 12, l: 16, xl: 24, xxl: 32 };
-export const yaricap = { cip: 12, dugme: 20, kart: 30, yuvarlak: 999 };
+// Çizgi kalınlıkları ve köşe yarıçapları (design/TASARIM-SISTEMI.md "Tema tanımları"): ekranlarda sayı elle yazılmaz.
+export const cizgi = { ince: 3, kalin: 4 };
+export const yaricap = {
+  kucuk: 10,
+  cip: 12,
+  dugme: 20,
+  kart: 30,
+  yuvarlak: 999,
+};
+// Diyalog ve "Oyundan çık?" arka perdesi (iki temada aynı).
+export const perde = 'rgba(11,9,32,0.7)';
 export const kenarBosluk = 22;
 export const dokunmaAlani = 48;
 export const dugmeYuksekligi = 62;
@@ -71,6 +81,14 @@ export const yazi = {
   baslik: { fontFamily: font.kalin, fontSize: 36 },
   dugme: { fontFamily: font.kalin, fontSize: 21 },
   govde: { fontFamily: font.orta, fontSize: 17, lineHeight: 25 },
+  // Kart metni (OK mu NOK mu, 10/10 ama, Casus kim): 36 → 24 küçülür, sistem büyütmesinde ≥16pt.
+  kart: { fontFamily: font.kalin, fontSize: 36, letterSpacing: -0.9 },
+  // Geri sayım, ortalama, oy sayısı gibi büyük sayılar.
+  sayi: {
+    fontFamily: font.kalin,
+    fontSize: 68,
+    fontVariant: ['tabular-nums' as const],
+  },
   etiket: {
     fontFamily: font.kalin,
     fontSize: 14,

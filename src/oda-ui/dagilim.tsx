@@ -12,7 +12,7 @@ import Animated, {
 import type { Final } from '../oda/oda';
 import { okYuzde } from '../oda/ozet';
 import { useDurum } from '../durum';
-import { bosluk, easing, yaricap } from '../tema';
+import { bosluk, cizgi, easing, yaricap } from '../tema';
 import { Yazi } from '../ui';
 import { kartMetni } from './metin';
 
@@ -54,7 +54,7 @@ function Sutun({
             width: '100%',
             height: 240,
             borderRadius: yaricap.cip,
-            borderWidth: 3,
+            borderWidth: cizgi.ince,
             borderColor: secili ? renk.marka : renk.kontur,
             backgroundColor: renk.yuzey,
             overflow: 'hidden',
@@ -89,8 +89,8 @@ function Satir({ y, i }: { y: Y; i: number }) {
         style={{
           flexDirection: 'row',
           height: 18,
-          borderRadius: 9,
-          borderWidth: 3,
+          borderRadius: yaricap.kucuk,
+          borderWidth: cizgi.ince,
           borderColor: renk.kontur,
           overflow: 'hidden',
         }}
@@ -151,7 +151,7 @@ export function Dagilim({
               style={{
                 padding: bosluk.m,
                 borderRadius: yaricap.cip,
-                borderWidth: 3,
+                borderWidth: cizgi.ince,
                 borderColor: renk.kontur,
                 backgroundColor: renk.yuzey,
               }}

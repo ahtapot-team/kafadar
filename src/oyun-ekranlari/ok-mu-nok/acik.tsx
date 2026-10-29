@@ -11,7 +11,7 @@ import Animated, {
   withTiming,
 } from 'react-native-reanimated';
 import { useDurum } from '../../durum';
-import { bosluk, easing, hareket, yaricap } from '../../tema';
+import { bosluk, cizgi, easing, hareket, yaricap } from '../../tema';
 import { titret } from '../../titresim';
 import { Dugme, Ekran, Yazi } from '../../ui';
 import type { Oy, Sonuc } from '../../games/ok-mu-nok/oyun';
@@ -71,7 +71,7 @@ function Cubuk({
         style={{
           height: 28,
           borderRadius: yaricap.cip,
-          borderWidth: 3,
+          borderWidth: cizgi.ince,
           borderColor: renk.kontur,
           backgroundColor: renk.yuzey,
           overflow: 'hidden',
@@ -90,7 +90,7 @@ function Cubuk({
               paddingHorizontal: bosluk.m,
               paddingVertical: bosluk.xs,
               borderRadius: yaricap.cip,
-              borderWidth: 3,
+              borderWidth: cizgi.ince,
               borderColor: renk.kontur,
               backgroundColor: dolgu,
             }}
@@ -190,7 +190,7 @@ export function AcikEkrani({
           style={[
             {
               backgroundColor: renk.marka,
-              borderWidth: 4,
+              borderWidth: cizgi.kalin,
               borderColor: renk.kontur,
               borderRadius: yaricap.dugme,
               paddingHorizontal: bosluk.l,

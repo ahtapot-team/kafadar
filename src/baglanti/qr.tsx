@@ -2,6 +2,7 @@
 import qrcode from 'qrcode-generator';
 import { useMemo } from 'react';
 import { View } from 'react-native';
+import { renkler, yaricap } from '../tema';
 
 export function Qr({
   veri,
@@ -32,7 +33,7 @@ export function Qr({
         height: boyut,
         backgroundColor: '#fff',
         padding: hucre,
-        borderRadius: 8,
+        borderRadius: yaricap.kucuk,
       }}
     >
       {satirlar.map((s, y) => (
@@ -43,7 +44,7 @@ export function Qr({
               style={{
                 width: hucre,
                 height: hucre,
-                backgroundColor: k ? '#0B0920' : '#fff',
+                backgroundColor: k ? renkler.koyu.kontur : renkler.acik.yuzey,
               }}
             />
           ))}

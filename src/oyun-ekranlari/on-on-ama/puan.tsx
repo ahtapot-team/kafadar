@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import { Pressable, View } from 'react-native';
 import { useDurum } from '../../durum';
-import { bosluk, dokunmaAlani, yaricap } from '../../tema';
+import { bosluk, cizgi, dokunmaAlani, yaricap } from '../../tema';
 import { titret } from '../../titresim';
 import { Dugme, Ekran, Yazi } from '../../ui';
 import { KartSeridi, UstCubuk } from '../ortak/ortak';
@@ -80,7 +80,7 @@ export function PuanEkrani({
               paddingLeft: bosluk.m,
               paddingRight: bosluk.s,
               borderRadius: yaricap.cip,
-              borderWidth: 3,
+              borderWidth: cizgi.ince,
               borderColor: sec ? renk.metin : renk.kontur,
               backgroundColor: renk.yuzey,
             }}
@@ -92,8 +92,8 @@ export function PuanEkrani({
               style={{
                 minWidth: 44,
                 height: 36,
-                borderRadius: 10,
-                borderWidth: 3,
+                borderRadius: yaricap.kucuk,
+                borderWidth: cizgi.ince,
                 borderColor: renk.kontur,
                 alignItems: 'center',
                 justifyContent: 'center',
@@ -119,7 +119,7 @@ export function PuanEkrani({
           padding: bosluk.m,
           gap: bosluk.s,
           borderRadius: yaricap.kart,
-          borderWidth: 3,
+          borderWidth: cizgi.ince,
           borderColor: renk.kontur,
           backgroundColor: renk.yuzey,
           boxShadow: `5px 5px 0 ${renk.golge}`,
@@ -145,7 +145,7 @@ export function PuanEkrani({
                   flexGrow: 1,
                   minHeight: dokunmaAlani,
                   borderRadius: yaricap.cip,
-                  borderWidth: 3,
+                  borderWidth: cizgi.ince,
                   borderColor: renk.kontur,
                   backgroundColor: secili ? renk.ok : renk.zemin,
                   alignItems: 'center',

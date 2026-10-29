@@ -4,7 +4,7 @@ import { Pressable, View } from 'react-native';
 import { type IstemciDurumu } from '../oda/istemci';
 import { puanRengi } from '../oyun-ekranlari/on-on-ama/ortak';
 import { useDurum } from '../durum';
-import { bosluk, dokunmaAlani, yaricap } from '../tema';
+import { bosluk, cizgi, dokunmaAlani, yaricap } from '../tema';
 import { titret } from '../titresim';
 import { Dugme, Ekran, Yazi } from '../ui';
 import { useKalan } from './kalan';
@@ -97,7 +97,7 @@ export function OnPuanEkrani({
                 flexGrow: p === 10 ? 1 : 0,
                 minHeight: 56,
                 borderRadius: yaricap.cip,
-                borderWidth: 3,
+                borderWidth: cizgi.ince,
                 borderColor: renk.kontur,
                 backgroundColor: secili ? renk.ok : renk.yuzey,
                 borderBottomWidth: 9,
@@ -155,7 +155,7 @@ export function OnBeklemeEkrani({
           style={{
             alignSelf: 'flex-start',
             backgroundColor: renk.marka,
-            borderWidth: 4,
+            borderWidth: cizgi.kalin,
             borderColor: renk.kontur,
             borderRadius: yaricap.dugme,
             paddingHorizontal: bosluk.l,
@@ -202,7 +202,7 @@ export function OnBeklemeEkrani({
                   paddingHorizontal: bosluk.m,
                   paddingVertical: bosluk.xs,
                   borderRadius: yaricap.cip,
-                  borderWidth: 3,
+                  borderWidth: cizgi.ince,
                   borderColor: renk.kontur,
                   backgroundColor: tamam ? renk.yuzey : 'transparent',
                   opacity: tamam ? 1 : 0.5,
