@@ -2,6 +2,7 @@ import { useRouter } from 'expo-router';
 import { View } from 'react-native';
 import { paketler, type Paket } from '../src/desteler';
 import { useDurum } from '../src/durum';
+import { TanitimBaglantisi } from '../src/tanitim-kutusu';
 import { bosluk } from '../src/tema';
 import { Cip, Dugme, Ekran, Yazi, GeriCubugu } from '../src/ui';
 
@@ -13,7 +14,7 @@ const turler: { id: string; ad: string; deger: 10 | 20 | null }[] = [
 
 export default function PaketSec() {
   const router = useRouter();
-  const { kurulum, kurulumuAyarla, oyunuBaslat } = useDurum();
+  const { kurulum, kurulumuAyarla, oyunuBaslat, oyunId } = useDurum();
   const { paket, tur } = kurulum;
   const setPaket = (p: Paket) => kurulumuAyarla({ ...kurulum, paket: p });
   const setTur = (t: 10 | 20 | null) => kurulumuAyarla({ ...kurulum, tur: t });
@@ -25,7 +26,20 @@ export default function PaketSec() {
 
   return (
     <Ekran>
-      <GeriCubugu testID="geri" />
+      <View
+        style={{
+          flexDirection: 'row',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+        }}
+      >
+        <GeriCubugu testID="geri" />
+        <TanitimBaglantisi
+          oyunId={oyunId ?? ''}
+          testID="tanitim-nasil"
+          etiket="Nasıl oynanır?"
+        />
+      </View>
       <Yazi tur="baslik">Paket ve süre</Yazi>
       <Yazi tur="etiket" soluk>
         Paket

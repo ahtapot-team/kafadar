@@ -9,8 +9,8 @@ import { it } from 'vitest';
 // tanitimMantik = tanıtım kartı görüldü bilgisi, politika, registry metinleri (#132),
 // tanitimUi = tanıtım kartı ve "Nasıl oynanır?" ekranları, testID sözleşmesi (#132).
 export const BEKLEYEN = {
-  tanitimMantik: true,
-  tanitimUi: true,
+  tanitimMantik: false,
+  tanitimUi: false,
 };
 
 export const kabulTanitimMantik = BEKLEYEN.tanitimMantik ? it.fails : it;
