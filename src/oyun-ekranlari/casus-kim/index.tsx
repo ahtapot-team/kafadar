@@ -1,10 +1,8 @@
 // Casus kim ekranı (#81): devir perdesi → basılı tut-gör kart (testID casus-kart, kart.tsx) → "Gördüm" (KK-44…KK-47). Tartışma ve sonrası #82.
 // Kayıt: oyunOku(depo, durumGecerliMi) ile okunur; bozuk kayıt reddedilir, açık kart geri yüklenmez.
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Platform } from 'react-native';
 import { Pressable, View } from 'react-native';
-import { oyunKaydet, oyunOku } from '../../core/kayit';
-import { depo } from '../../depo';
 import { useDurum } from '../../durum';
 import {
   type CasusDurum,
@@ -27,6 +25,7 @@ import { bosluk, dokunmaAlani, yaricap } from '../../tema';
 import { titret } from '../../titresim';
 import { Dugme, Ekran, Yazi } from '../../ui';
 import { usePaylas, GizliPaylasim } from '../ortak/paylasim';
+import { useOyunOturumu } from '../ortak/useOyunOturumu';
 import { Aciklama } from './aciklama';
 import { Cark } from './cark';
 import { Oylama } from './oylama';
@@ -39,23 +38,43 @@ import { GizliKart, useGizli } from './kart';
 
 export default function CasusEkrani({ onCik, onAnaMenu }: OyunEkraniProps) {
   const { renk, oyuncular, oyunAyari, oyunAyariniAyarla } = useDurum();
-  const [durum, setDurum] = useState<CasusDurum | null>(null);
-  const ref = useRef<CasusDurum | null>(null);
   const [gordu, setGordu] = useState(false); // sıradaki oyuncu kartı en az bir kez açtı mı (Gördüm için)
 
   const [carkGoster, setCarkGoster] = useState(false); // son kart görülünce çark (yenilemede tekrar gösterilmez)
   const [simdi, setSimdi] = useState(Date.now());
   const paylas = usePaylas();
 
-  const gonder = useCallback((olay: Olay) => {
-    if (!ref.current) return;
-    const eski = ref.current;
-    const yeni = isle(eski, olay);
-    if (eski.asama === 'rol' && yeni.asama === 'tartisma') setCarkGoster(true);
-    ref.current = yeni;
-    setDurum(yeni);
-    oyunKaydet(depo, yeni).catch(() => {}); // her olaydan sonra kayıt: kimin gördüğü saklanır (KK-47)
-  }, []);
+  // Oturum (olay → kayıt → durum, açılışta devam ya da yeni oyun) ortak hook'ta; Casus kim biten oyunu da kayıtta tutar
+  // (bittiSil: false) ve açık kartı kayıttan geri yüklemez (kayittanYukle, KK-46/KK-47).
+  const yeniCasus = () => {
+    const paket =
+      casusPaketleri.find((p) => p.id === oyunAyari.paket) ?? casusPaketleri[0];
+    const kullanilan = (oyunAyari.kullanilan as string[] | undefined) ?? [];
+    const d = yeniOyun({
+      oyuncular,
+      deste: paket.deste,
+      casusSayisi: oyunAyari.casusSayisi as number | undefined,
+      sureDk: (oyunAyari.sureDk as 3 | 5 | 8 | null | undefined) ?? null,
+      tohum: Date.now(),
+      kullanilan,
+    });
+    oyunAyariniAyarla({
+      ...oyunAyari,
+      kullanilan: [...kullanilan, kelimeKartId(d)],
+    }); // oturumda kelime tekrarı yok (KK-51)
+    return d;
+  };
+  const { durum, gonder, baslat } = useOyunOturumu<CasusDurum, Olay>({
+    isle,
+    gecerliMi: durumGecerliMi,
+    baslangic: yeniCasus,
+    yukle: kayittanYukle,
+    bittiSil: false,
+    onOlay: (eski, yeni) => {
+      if (eski.asama === 'rol' && yeni.asama === 'tartisma')
+        setCarkGoster(true);
+    },
+  });
 
   // Arka plana alınınca açık kart kapanır ve ekran gizlenir (KK-46).
   const gizli = useGizli(() => gonder({ tip: 'arkaPlan' }));
@@ -83,41 +102,6 @@ export default function CasusEkrani({ onCik, onAnaMenu }: OyunEkraniProps) {
       titret('uyari', true);
     oncekiAsama.current = asama;
   }, [asama, durum]);
-
-  // Açılışta: kayıtlı yarım oyun varsa devam (açık kart asla geri yüklenmez), yoksa yeni oyun.
-  useEffect(() => {
-    let iptal = false;
-    oyunOku<CasusDurum>(depo, durumGecerliMi).then((kayit) => {
-      if (iptal) return;
-      let d: CasusDurum;
-      if (kayit) d = kayittanYukle(kayit);
-      else {
-        const paket =
-          casusPaketleri.find((p) => p.id === oyunAyari.paket) ??
-          casusPaketleri[0];
-        const kullanilan = (oyunAyari.kullanilan as string[] | undefined) ?? [];
-        d = yeniOyun({
-          oyuncular,
-          deste: paket.deste,
-          casusSayisi: oyunAyari.casusSayisi as number | undefined,
-          sureDk: (oyunAyari.sureDk as 3 | 5 | 8 | null | undefined) ?? null,
-          tohum: Date.now(),
-          kullanilan,
-        });
-        oyunAyariniAyarla({
-          ...oyunAyari,
-          kullanilan: [...kullanilan, kelimeKartId(d)],
-        }); // oturumda kelime tekrarı yok (KK-51)
-      }
-      ref.current = d;
-      setDurum(d);
-      oyunKaydet(depo, d).catch(() => {});
-    });
-    return () => {
-      iptal = true;
-    };
-    // yalnızca ilk açılışta çalışır
-  }, []);
 
   if (!durum) return <Ekran>{null}</Ekran>;
 
@@ -336,11 +320,9 @@ export default function CasusEkrani({ onCik, onAnaMenu }: OyunEkraniProps) {
       ...oyunAyari,
       kullanilan: [...kullanilan, kelimeKartId(d)],
     });
-    ref.current = d;
-    setDurum(d);
     setGordu(false);
     setCarkGoster(false);
-    oyunKaydet(depo, d).catch(() => {});
+    baslat(d);
   };
   return (
     <>
