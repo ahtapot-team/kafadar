@@ -4,8 +4,16 @@ name: Web önizleme
 on:
   pull_request:
     types: [opened, synchronize, reopened, closed]
+    paths-ignore:
+      - 'docs/**'
+      - 'design/**'
+      - 'content/**/*.md'
   push:
     branches: [main]
+    paths-ignore:
+      - 'docs/**'
+      - 'design/**'
+      - 'content/**/*.md'
 
 permissions:
   contents: write

@@ -4,8 +4,16 @@ name: Önizleme
 
 on:
   pull_request:
+    paths-ignore:
+      - 'docs/**'
+      - 'design/**'
+      - 'content/**/*.md'
   push:
     branches: [main]
+    paths-ignore:
+      - 'docs/**'
+      - 'design/**'
+      - 'content/**/*.md'
 
 permissions:
   contents: read
