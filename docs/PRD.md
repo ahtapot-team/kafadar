@@ -277,7 +277,7 @@ Issue'lar: #118 kabul testleri (qa), #119 sunucu ve durum makinesi (backend), #1
 - Sunucu bugün yalnızca OK/NOK cevabını biliyor. Oyun türü eklenirken OK mu NOK mu odası bozulabilir. Önlem: KK-71, mevcut oda testleri.
 - Kuran kişi telefonu bırakırsa herkes bekler. Bu, Murat'ın seçtiği bilinen bir eksi.
 
-## v6: Oyun tanıtım kartı (Murat, 29.10.2026) — ONAY BEKLİYOR
+## v6: Oyun tanıtım kartı (Murat, 29.10.2026) — ONAYLANDI (Metehan, 29.10.2026 06:57)
 Issue'lar: #130 tasarım (tasarim), #131 kabul testleri (qa), #132 uygulama (frontend; #130 ve #131 bitince başlar).
 Bir oyun o telefonda ilk kez açıldığında oyunu 3–4 satırda anlatan bir kart çıkar. Kart "Tamam" ile kapanır ve o oyun için bir daha kendiliğinden görünmez. Tekrar okumak isteyen için hazırlık ekranlarında ve oda lobisinde "Nasıl oynanır?" bağlantısı vardır.
 
