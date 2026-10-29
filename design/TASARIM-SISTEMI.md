@@ -1,7 +1,8 @@
 # Kafadar — Tasarım sistemi
 
 Yön: **B · Çıkartma** (Semih, 27.10.2026, #2). Referans: `design/2-gorsel-yon/b.html` / `b.png`.
-İlke: az token, az bileşen, yalnızca v1. Yeni bir şey gerekirse önce buraya eklenir.
+İlke: az token, az bileşen. Yeni bir şey gerekirse önce buraya eklenir. Klasör dizini: `design/README.md`.
+Son güncelleme: v6 (#135, 29.10.2026): tema tanımları tablosu ve oyuna göre kurallar eklendi.
 
 ## Renk — anlamı olan renkler
 Kural: **yeşil = OK (onay), kırmızı = NOK (ret)**. Bu iki renk yalnızca oy ve oy sonucu için kullanılır. Oy olmayan her şey (düğme, geri sayım, ilerleme, kart) marka renkleriyle yapılır.
@@ -47,6 +48,34 @@ Tek aile: **Bricolage Grotesque** (uygulamaya paketlenir).
 - Dokunma alanı ≥ 48px; birincil düğme yüksekliği 62px.
 - Kenar boşluğu: yatay 22px, güvenli alanlar (çentik / dinamik ada) eklenir.
 
+## Tema tanımları (`src/tema.ts`)
+Ekranlarda sayı elle yazılmaz; aşağıdaki adlar kullanılır. ★ = yeni (Refactor 9, uygulaması #144). Diğerleri `tema.ts`'te zaten var.
+
+| Ad | Değer | Kullanım | Elle yazılmış değerlerin eşlenmesi |
+|---|---|---|---|
+| `cizgi.ince` ★ | 3 | Çip, oy satırı, tuş, küçük kutu konturu | 2 → 3 (konfeti ve tik dahil) |
+| `cizgi.kalin` ★ | 4 | Kart, düğme, diyalog, sticker konturu | 4 |
+| `yaricap.kucuk` ★ | 10 | Puan rozeti, küçük çubuk, minik kutu | 3, 4, 8, 9, 10, 14 → 10 |
+| `yaricap.cip` | 12 | Çip, sticker | 12 |
+| `yaricap.dugme` | 20 | Düğme, satır, seçim kutusu | 18, 20, 22 → 20 |
+| `yaricap.kart` | 30 | Kart, diyalog | 30 |
+| `yaricap.yuvarlak` | 999 | Hap, halka, daire | 99 → 999 |
+| `perde` ★ | `rgba(11,9,32,0.7)` (iki temada aynı) | Diyalog ve "Oyundan çık?" arka perdesi | `ui.tsx`'teki elle yazılmış değer |
+| `yazi.kart` ★ | 36 → 24 / 800, `letterSpacing -0.9`; sistem büyütmesinde ≥16pt | Kart metni (OK mu NOK mu, 10/10 ama, Casus kim) | Ekranlardaki kart fontSize'ları |
+| `yazi.sayi` ★ | 68 / 800, `tabular-nums` | Geri sayım, ortalama, oy sayısı | Ekranlardaki büyük sayı fontSize'ları |
+
+**Paylaşım görseli (1080×1920) ölçeği:** ekran değeri × **2,77** (1080 / 390), en yakın çift sayıya yuvarlanır. Görsel her zaman koyu temadır (bilerek).
+
+| Ad ★ | Değer | Kullanım |
+|---|---|---|
+| `paylasim.cizgi` | 10 | Kart, sticker, çubuk konturu |
+| `paylasim.golge` | 14 (kart 20) | Ofset gölge |
+| `paylasim.logo` | 96 | "Kafadar!" sticker'ı |
+| `paylasim.kart` | 84 → 64 | Kart metni (uzunluğa göre) |
+| `paylasim.sayi` | 200 | Ortalama, büyük skor |
+| `paylasim.etiket` | 44, `letterSpacing 0.08em` | "10 KARTTA BU ODA" gibi üst etiketler |
+| `paylasim.alt` | 40 / 700, `metin-soluk` | "Kafadar ile oynandı · …" alt satırı |
+
 ## Bileşenler (v1'de yalnızca bunlar)
 1. **Düğme**: birincil (`marka` dolgu), ikincil (`yuzey`), ikon düğme (48–62px kare). Basınca gölge 5→1px ve 3px aşağı-sağa kayar ("sticker'a basma").
 2. **Kart**: `marka` dolgu, 4px kontur, 8px gölge, −3°; arkasında `marka-2` arka kart.
@@ -54,7 +83,18 @@ Tek aile: **Bricolage Grotesque** (uygulamaya paketlenir).
 4. **Oy satırı**: isim + OK / NOK düğmesi (seçilince dolgu `ok`/`nok`, seçilmemişken `yuzey`).
 5. **Sonuç çubuğu**: `yuzey` zemin, `ok`/`nok` dolgu, sayı + ikon + kelime.
 6. **Geri sayım**: 3 halka, aktif olan büyük ve `metin` dolgulu.
-7. **Diyalog**: "Oyundan çık?", "Devam et / Yeni oyun" (kart görünümünde).
+7. **Diyalog**: "Oyundan çık?", "Devam et / Yeni oyun" (kart görünümünde). Tanıtım kartı da bu bileşendir (#130).
+
+## Oyuna göre kurallar
+Genel renk kuralı her oyunda geçerlidir: yeşil ve kırmızı yalnızca anlam taşır, oyun ve marka renkleri nötrdür.
+
+| Oyun / mod | Kural | Kaynak |
+|---|---|---|
+| **OK mu NOK mu** | `ok` = OK, `nok` = NOK; boş oy `yuzey` (kesik çizgi). Eşitlik `marka`. | #2 |
+| **Oda modu** (tüm oyunlar) | Oda rozeti `marka-2` ("ODA" çipi, 2° eğik). Oda kodu **6 hane** (PRD v5). `design/49-oda-modu` ekranlarındaki 4 harfli "ZEPA" eskidir; güncel görünüm `design/120-onon-oda`. Kuranda ★. Bekleme ekranında kimin cevapladığı görünür, ne dediği görünmez. Oda finali: B · Ekolayzer; "hareketi azalt"ta liste. | #49, #120 |
+| **10/10 ama** | Puan bantları: **0–3 `nok`** (sert), **4–6 `marka`** (kararsız), **7–10 `ok`** (cömert). Renk her zaman sayının yanında. Ortalama bir ondalık, Türkçe virgülle ("5,8"). Tuş takımı: tek telefonda 6+5, odada 4 sütun, tuş ≥48px; seçili tuş `ok` dolgu. Ödüller: En acımasız `nok`, Melek kalpli `ok`, Ruh ikizleri `marka-2`. | #107, #120 |
+| **Casus kim** | Oyun rengi nötr `marka-2` (kart). Yeşil yalnızca "grup casusu yakaladı", kırmızı yalnızca "casus kazandı"; casus için ayrı bir "tehlike" rengi yoktur. Normal kart ve casus kartı aynı renk, düzen, yazı boyutu ve titreşimle gösterilir; kartta emoji yok. Kart yalnızca basılı tutulunca görünür, bırakınca 150ms'de kapanır. | #80 (KK-45, KK-52) |
+| **Tanıtım kartı** | Diyalog bileşeni; oyun adı, kişi çipi (`kontur` dolgu, `marka` yazı), metin 16/600, "Tamam" 56px. "Nasıl oynanır?" bağlantısı üst çubuğun sağında, "?" rozetli hap, 48px (A, Metehan). | #130 |
 
 ## Hareket
 | Animasyon | Süre | Easing | Not / titreşim |
