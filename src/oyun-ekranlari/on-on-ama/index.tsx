@@ -17,8 +17,8 @@ import {
 } from '../../games/on-on-ama/onon';
 import type { OyunEkraniProps } from '../../games/oyun';
 import { Diyalog, Dugme, Ekran } from '../../ui';
-import { KartEkrani } from '../ok-mu-nok/kart';
-import { GizliPaylasim, usePaylas } from '../ok-mu-nok/paylasim';
+import { KartEkrani } from '../ortak/kart';
+import { GizliPaylasim, usePaylas } from '../ortak/paylasim';
 import { AcikEkrani } from './acik';
 import { BitisEkrani } from './bitis';
 import { ononPaketleri } from './desteler';

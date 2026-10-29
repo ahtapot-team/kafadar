@@ -15,9 +15,9 @@ import { bosluk, easing, hareket, yaricap } from '../../tema';
 import { titret } from '../../titresim';
 import { Dugme, Ekran, Yazi } from '../../ui';
 import type { Oy, Sonuc } from '../../games/ok-mu-nok/oyun';
-import { useSayi } from './anim';
-import { Konfeti } from './konfeti';
-import { IkonDugme, KartSeridi } from './ortak';
+import { useSayi } from '../ortak/anim';
+import { Konfeti } from '../ortak/konfeti';
+import { IkonDugme, KartSeridi } from '../ortak/ortak';
 
 type Props = {
   kart: string;

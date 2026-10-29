@@ -4,13 +4,14 @@ import { useEffect, useState } from 'react';
 import { Platform, View } from 'react-native';
 import { useReducedMotion } from 'react-native-reanimated';
 import { useDurum } from '../../durum';
-import { bosluk, hareket, yaricap } from '../../tema';
+import { bosluk, hareket } from '../../tema';
 import { titret } from '../../titresim';
 import { Dugme, Ekran, Yazi } from '../../ui';
 import type { Ozet } from '../../games/on-on-ama/onon';
-import { useSayi } from '../ok-mu-nok/anim';
-import { Konfeti } from '../ok-mu-nok/konfeti';
-import { IkonDugme, KartSeridi } from '../ok-mu-nok/ortak';
+import { useSayi } from '../ortak/anim';
+import { Konfeti } from '../ortak/konfeti';
+import { Cikarma } from '../ortak/cikarma';
+import { IkonDugme, KartSeridi } from '../ortak/ortak';
 import { ondalik, puanRengi } from './ortak';
 
 type Props = {
@@ -22,40 +23,6 @@ type Props = {
   onBitir: () => void;
   onPaylas: () => void;
 };
-
-function Cikarma({
-  testID,
-  metin,
-  dolgu,
-  egim,
-}: {
-  testID: string;
-  metin: string;
-  dolgu: string;
-  egim: number;
-}) {
-  const { renk } = useDurum();
-  return (
-    <View
-      testID={testID}
-      style={{
-        backgroundColor: dolgu,
-        borderWidth: 4,
-        borderColor: renk.kontur,
-        borderRadius: yaricap.cip,
-        paddingHorizontal: bosluk.m,
-        paddingVertical: bosluk.s,
-        boxShadow: `4px 4px 0 ${renk.golge}`,
-        transform: [{ rotate: `${egim}deg` }],
-        flexShrink: 1,
-      }}
-    >
-      <Yazi tur="baslik" style={{ color: renk.kontur, fontSize: 20 }}>
-        {metin}
-      </Yazi>
-    </View>
-  );
-}
 
 const verdi = (kisiler: string[], puan: number) =>
   `${kisiler.join(', ')} ${puan} verdi!`;

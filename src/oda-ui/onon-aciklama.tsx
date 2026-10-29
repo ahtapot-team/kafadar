@@ -4,7 +4,8 @@ import { View } from 'react-native';
 import { useReducedMotion } from 'react-native-reanimated';
 import { type IstemciDurumu } from '../oda/istemci';
 import { puanSirasi } from '../oda/onon-ozet';
-import { Konfeti } from '../oyun-ekranlari/ok-mu-nok/konfeti';
+import { Konfeti } from '../oyun-ekranlari/ortak/konfeti';
+import { Cikarma } from '../oyun-ekranlari/ortak/cikarma';
 import { ondalik, puanRengi } from '../oyun-ekranlari/on-on-ama/ortak';
 import { useDurum } from '../durum';
 import { bosluk, yaricap } from '../tema';
@@ -12,40 +13,6 @@ import { Dugme, Ekran, Yazi } from '../ui';
 import { OnKart } from './onon-puan';
 import { OdaUst } from './ust';
 import { YenidenBaglaniyor } from './yeniden';
-
-function Cikarma({
-  testID,
-  metin,
-  dolgu,
-  egim,
-}: {
-  testID: string;
-  metin: string;
-  dolgu: string;
-  egim: number;
-}) {
-  const { renk } = useDurum();
-  return (
-    <View
-      testID={testID}
-      style={{
-        backgroundColor: dolgu,
-        borderWidth: 4,
-        borderColor: renk.kontur,
-        borderRadius: yaricap.cip,
-        paddingHorizontal: bosluk.m,
-        paddingVertical: bosluk.s,
-        boxShadow: `4px 4px 0 ${renk.golge}`,
-        transform: [{ rotate: `${egim}deg` }],
-        flexShrink: 1,
-      }}
-    >
-      <Yazi tur="baslik" style={{ color: renk.kontur, fontSize: 19 }}>
-        {metin}
-      </Yazi>
-    </View>
-  );
-}
 
 const verdi = (kisiler: string[], puan: number) =>
   `${kisiler.join(', ')} ${puan} verdi!`;
