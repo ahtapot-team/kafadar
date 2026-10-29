@@ -10,7 +10,7 @@ import cift from '../../content/decks/cift.json';
 import onon_arkadas from '../../content/onon/onon-arkadas.json';
 import onon_gundelik from '../../content/onon/onon-gundelik.json';
 import onon_sevgili from '../../content/onon/onon-sevgili.json';
-import { type Dosya, type Oyun, paketKaydi } from './kayit';
+import { type Dosya, type KayitPaket, type Oyun, paketKaydi } from './kayit';
 
 const JSONLAR = {
   'decks/arkadas.json': arkadas,
@@ -24,10 +24,12 @@ const JSONLAR = {
   'casus/casus-meslekler.json': casus_meslekler,
 } satisfies Record<Dosya, Deste | CasusDeste>;
 
-export const paketler = paketKaydi.map((k) => ({
-  ...k,
-  deste: JSONLAR[k.dosya],
-}));
+export const paketler = paketKaydi.map(
+  (k): KayitPaket & { deste: Deste | CasusDeste } => ({
+    ...k,
+    deste: JSONLAR[k.dosya],
+  }),
+);
 
 // Oda sunucusu ve tek telefon modu: iki kart oyununun destesi (bilinmeyen paket undefined).
 export function desteBul(
