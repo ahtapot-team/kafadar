@@ -1,7 +1,6 @@
 // Casus kim ekranı (#81): devir perdesi → basılı tut-gör kart (testID casus-kart, kart.tsx) → "Gördüm" (KK-44…KK-47). Tartışma ve sonrası #82.
 // Kayıt: oyunOku(depo, durumGecerliMi) ile okunur; bozuk kayıt reddedilir, açık kart geri yüklenmez.
 import { useEffect, useRef, useState } from 'react';
-import { Platform } from 'react-native';
 import { Pressable, View } from 'react-native';
 import { useDurum } from '../../durum';
 import {
@@ -334,11 +333,9 @@ export default function CasusEkrani({ onCik, onAnaMenu }: OyunEkraniProps) {
         onPaylas={paylas.paylas}
         onAnaMenu={onAnaMenu}
       />
-      {Platform.OS !== 'web' && (
-        <GizliPaylasim gorunum={paylas.ref}>
-          <PaylasimIcerik sonuc={s} ipucu={durum.kartlar.ipucu} />
-        </GizliPaylasim>
-      )}
+      <GizliPaylasim gorunum={paylas.ref}>
+        <PaylasimIcerik sonuc={s} ipucu={durum.kartlar.ipucu} />
+      </GizliPaylasim>
     </>
   );
 }

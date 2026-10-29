@@ -9,9 +9,11 @@ import {
   type ReactNode,
   type RefObject,
 } from 'react';
-import { Text, View } from 'react-native';
+import { Platform, Text, View } from 'react-native';
 import { captureRef } from 'react-native-view-shot';
 import { font, renkler } from '../../tema';
+import { Dugme } from '../../ui';
+import { IkonDugme } from './ortak';
 
 const r = renkler.koyu;
 export const PAYLASIM_GENISLIK = 1080;
@@ -45,6 +47,7 @@ export function GizliPaylasim({
   children: ReactNode;
   baslik?: string;
 }) {
+  if (Platform.OS === 'web') return null; // web'de paylaşım menüsü/yakalama yok
   return (
     <View
       ref={gorunum}
@@ -93,6 +96,53 @@ export function GizliPaylasim({
         </Text>
       </View>
       {children}
+    </View>
+  );
+}
+
+// Paylaşım görselinin alt satırı ("Kafadar ile oynandı · …"): içerikten sonra kalan boşluğu doldurur.
+export function PaylasimAlt({ children }: { children: ReactNode }) {
+  return (
+    <>
+      <View style={{ flex: 1 }} />
+      <Text
+        style={{
+          fontFamily: font.kalin,
+          fontSize: 12,
+          color: r.metinSoluk,
+          textAlign: 'center',
+        }}
+      >
+        {children}
+      </Text>
+    </>
+  );
+}
+
+// "Paylaş" düğmesi: web'de yok (paylaşım menüsü/yakalama yalnızca yerel uygulamada), kontrol tek yerde.
+// 'ikon': yuvarlak ikon düğmesi; 'birincil' / 'ikincil': yazılı düğme (esnek satır hücresi).
+export function PaylasDugmesi({
+  testID,
+  onPress,
+  bicim = 'ikon',
+}: {
+  testID: string;
+  onPress: () => void;
+  bicim?: 'ikon' | 'birincil' | 'ikincil';
+}) {
+  if (Platform.OS === 'web') return null;
+  if (bicim === 'ikon')
+    return (
+      <IkonDugme testID={testID} simge="⇪" etiket="Paylaş" onPress={onPress} />
+    );
+  return (
+    <View style={{ flex: 1 }}>
+      <Dugme
+        testID={testID}
+        tur={bicim === 'ikincil' ? 'ikincil' : 'birincil'}
+        etiket="Paylaş"
+        onPress={onPress}
+      />
     </View>
   );
 }

@@ -132,13 +132,16 @@ describe('#36 cila: v1 sonrası küçük açıklar', () => {
     expect(icerik).not.toMatch(/Unmatched/);
   });
 
-  it("Paylaş düğmesi web'de gizlenir: düğmenin dosyasında Platform.OS denetimi var", () => {
+  it("Paylaş düğmesi web'de gizlenir: denetim tek bileşende (PaylasDugmesi, Platform.OS), düğme yalnızca ondan çizilir (#142)", () => {
+    expect(dosyaIcerik('src/oyun-ekranlari/ortak/paylasim.tsx')).toMatch(
+      /function PaylasDugmesi[\s\S]*Platform\.OS/,
+    );
     const dosyalar = kaynaklar('src/oyun-ekranlari').filter(({ icerik }) =>
       /testID="paylas"/.test(icerik),
     );
     expect(dosyalar.length).toBeGreaterThan(0);
     for (const { f, icerik } of dosyalar) {
-      expect(icerik, f).toMatch(/Platform\.OS/);
+      expect(icerik, f).toMatch(/<PaylasDugmesi/);
     }
   });
 

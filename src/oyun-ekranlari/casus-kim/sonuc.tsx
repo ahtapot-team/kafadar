@@ -1,9 +1,10 @@
 // Sonuç (KK-50, KK-52): yeşil yalnızca "grup casusu yakaladı", kırmızı yalnızca "casus kazandı"; oyun bitirilirse kazanan yok.
-import { Platform, View } from 'react-native';
+import { View } from 'react-native';
 import { useDurum } from '../../durum';
 import type { Sonuc } from '../../games/casus-kim/casus';
 import { bosluk, yaricap } from '../../tema';
 import { Dugme, Ekran, Yazi } from '../../ui';
+import { PaylasDugmesi } from '../ortak/paylasim';
 import { Sticker } from './ortak';
 
 export function SonucEkrani({
@@ -76,16 +77,11 @@ export function SonucEkrani({
             onPress={onTekrar}
           />
         </View>
-        {Platform.OS !== 'web' && (
-          <View style={{ flex: 1 }}>
-            <Dugme
-              testID="casus-paylas"
-              tur="ikincil"
-              etiket="Paylaş"
-              onPress={onPaylas}
-            />
-          </View>
-        )}
+        <PaylasDugmesi
+          testID="casus-paylas"
+          bicim="ikincil"
+          onPress={onPaylas}
+        />
       </View>
       <Dugme
         testID="casus-ana-menu"
