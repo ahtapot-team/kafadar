@@ -4,6 +4,8 @@ import { durumGecerliMi as okGecerliMi } from './ok-mu-nok/oyun';
 import { durumGecerliMi as ononGecerliMi } from './on-on-ama/onon';
 import type { Oyun } from './oyun';
 
+const CASUS_MIN = 3; // oyuncu alt sınırı; tanıtımdaki kişi sayısı da bundan türer
+
 // Yeni oyun: modülünü yazıp buraya bir satır eklemek yeterli.
 export const oyunlar: Oyun[] = [
   {
@@ -11,6 +13,11 @@ export const oyunlar: Oyun[] = [
     modSecimi: true,
     ekran: () => import('../oyun-ekranlari/ok-mu-nok'),
     gecerliMi: okGecerliMi,
+    tanitim: {
+      kisi: '2–12 kişi',
+      metin:
+        'Kartta bir durum çıkar: "İlk buluşmada hesabı bölmek". 3-2-1\'de herkes başparmağıyla OK 👍 ya da NOK 👎 gösterir. Telefonu tutan kişi oyları girer, sonra kimin tek başına kaldığı ortaya çıkar. Oda modunda herkes kendi telefonundan oy verir.',
+    },
   },
   {
     id: '10-10-ama',
@@ -20,14 +27,24 @@ export const oyunlar: Oyun[] = [
     kurulum: '/onon/hazirlik',
     ekran: () => import('../oyun-ekranlari/on-on-ama'),
     gecerliMi: ononGecerliMi,
+    tanitim: {
+      kisi: '2–12 kişi',
+      metin:
+        'Kartta kusursuz biri ve bir "ama" var: "10/10 ama sabah 5\'te kalkıyor". Herkes parmaklarıyla 0–10 arası yeni puanını gösterir, telefonu tutan kişi puanları girer. Ortalama ve en uç puanlar açıklanır. Oda modunda puanlar gizlidir ve her karttan sonra açılır.',
+    },
   },
   {
     id: 'casus-kim',
     ad: 'Casus kim',
     aktif: true,
-    minOyuncu: 3,
+    minOyuncu: CASUS_MIN,
     kurulum: '/casus/hazirlik',
     ekran: () => import('../oyun-ekranlari/casus-kim'),
     gecerliMi: casusGecerliMi,
+    tanitim: {
+      kisi: `${CASUS_MIN}–12 kişi`,
+      metin:
+        'Telefon elden ele dolaşır. Herkes aynı kelimeyi görür, casus ise yalnızca bir ipucu. Sırayla birbirinize kelimeyle ilgili sorular sorun, ama kelimeyi söylemeyin. Sonunda casusu oylayın. Yakalanan casus kelimeyi bilirse yine kazanır.',
+    },
   },
 ];

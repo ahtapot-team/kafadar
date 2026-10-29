@@ -179,18 +179,25 @@ export function Diyalog({
   gorunur,
   baslik,
   children,
+  onKapat,
+  animasyonsuz,
+  baslikTestID,
 }: {
   gorunur: boolean;
   baslik: string;
   children: ReactNode;
+  onKapat?: () => void; // Android geri tuşu; verilmezse geri tuşu pencereyi kapatmaz
+  animasyonsuz?: boolean; // "Hareketi azalt"
+  baslikTestID?: string;
 }) {
   const { renk } = useDurum();
   return (
     <Modal
       transparent
       visible={gorunur}
-      animationType="fade"
+      animationType={animasyonsuz ? 'none' : 'fade'}
       statusBarTranslucent
+      onRequestClose={onKapat}
     >
       <View
         style={{
@@ -213,6 +220,7 @@ export function Diyalog({
           }}
         >
           <Text
+            testID={baslikTestID}
             maxFontSizeMultiplier={YAZI_UST_SINIR}
             accessibilityRole="header"
             style={[yazi.baslik, { color: renk.kontur }]}

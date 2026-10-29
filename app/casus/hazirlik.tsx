@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { Pressable, View } from 'react-native';
 import { casusSiniri } from '../../src/oyun-ekranlari/casus-kim/sinir';
 import { useDurum } from '../../src/durum';
+import { TanitimBaglantisi } from '../../src/tanitim-kutusu';
 import { bosluk, dokunmaAlani, yaricap } from '../../src/tema';
 import { Cip, Dugme, Ekran, GeriCubugu, Yazi } from '../../src/ui';
 import { casusPaketleri } from '../../src/oyun-ekranlari/casus-kim/desteler';
@@ -77,7 +78,20 @@ export default function Hazirlik() {
 
   return (
     <Ekran>
-      <GeriCubugu testID="geri" />
+      <View
+        style={{
+          flexDirection: 'row',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+        }}
+      >
+        <GeriCubugu testID="geri" />
+        <TanitimBaglantisi
+          oyunId="casus-kim"
+          testID="tanitim-nasil"
+          etiket="Nasıl oynanır?"
+        />
+      </View>
       <Yazi tur="baslik">Hazırlık</Yazi>
       <Yazi tur="etiket" soluk>
         Casus kim · {oyuncular.length} oyuncu
