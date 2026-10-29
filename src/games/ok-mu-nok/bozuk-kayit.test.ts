@@ -4,19 +4,9 @@ import {
   OYUN_ANAHTARI,
   oyunKaydet,
   oyunOku,
-  type Depo,
 } from '../../core/kayit';
 import { type Durum, durumGecerliMi, isle, yeniOyun } from './oyun';
-
-const depoYap = (): Depo & { veri: Map<string, string> } => {
-  const veri = new Map<string, string>();
-  return {
-    veri,
-    getItem: async (k) => veri.get(k) ?? null,
-    setItem: async (k, v) => void veri.set(k, v),
-    removeItem: async (k) => void veri.delete(k),
-  };
-};
+import { depoYap } from '../../test/yardimci';
 
 const gecerli = (): Durum =>
   isle(
