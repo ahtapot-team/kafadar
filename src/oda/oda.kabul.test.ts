@@ -1,7 +1,6 @@
-import { describe, expect } from 'vitest';
+import { describe, expect, it } from 'vitest';
 import type { Deste } from '../core/deste';
 import { rngOlustur } from '../core/rng';
-import { kabulOdaGuvenlik, kabulOdaMantik as kabul } from '../kabul';
 import {
   BOSTA_MS,
   type Kimlik,
@@ -98,7 +97,7 @@ const dokuz = (n: number): (Oy | null)[][] =>
   Array.from({ length: SORU_SAYISI }, () => hepsi(n, 'OK'));
 
 describe('KK-29: oda kodu', () => {
-  kabul('kod 6 rakam (000000–999999), çeşitli', () => {
+  it('kod 6 rakam (000000–999999), çeşitli', () => {
     const rng = rngOlustur(7);
     const kodlar = Array.from({ length: 500 }, () => kodUret(rng));
     for (const k of kodlar) {
@@ -107,7 +106,7 @@ describe('KK-29: oda kodu', () => {
     expect(new Set(kodlar).size).toBeGreaterThan(50);
   });
 
-  kabul('kod görünümde, oyun bitince kod kullanılamaz', () => {
+  it('kod görünümde, oyun bitince kod kullanılamaz', () => {
     const o = kur(['Ali', 'Ayşe']);
     expect(gorunum(o.d, o.id[1], T0).kod).toBe('ABCD');
     const { d } = bitirBos(basla(o), T0);
@@ -119,35 +118,32 @@ describe('KK-29: oda kodu', () => {
 });
 
 describe('KK-30: katılım hataları ve isim kuralı', () => {
-  kabul('aynı isim "Ali 2", "Ali 3" olur (kuran dahil)', () => {
+  it('aynı isim "Ali 2", "Ali 3" olur (kuran dahil)', () => {
     const o = kur(['Ali', 'Ali', 'Ali']);
     expect(o.ad).toEqual(['Ali', 'Ali 2', 'Ali 3']);
   });
 
-  kabul(
-    'oda dolu (12), oyun başladı, oda kapalı: Türkçe net hata, durum değişmez',
-    () => {
-      const adlar = Array.from({ length: 12 }, (_, i) => `O${i}`);
-      const dolu = kur(adlar);
-      const s1 = isle(dolu.d, { tip: 'katil', ad: 'Fazla' }, T0);
-      expect(s1.hata?.kod).toBe('dolu');
-      expect(s1.hata?.mesaj).toMatch(/\S{3,}/);
-      expect(s1.durum).toEqual(dolu.d);
+  it('oda dolu (12), oyun başladı, oda kapalı: Türkçe net hata, durum değişmez', () => {
+    const adlar = Array.from({ length: 12 }, (_, i) => `O${i}`);
+    const dolu = kur(adlar);
+    const s1 = isle(dolu.d, { tip: 'katil', ad: 'Fazla' }, T0);
+    expect(s1.hata?.kod).toBe('dolu');
+    expect(s1.hata?.mesaj).toMatch(/\S{3,}/);
+    expect(s1.durum).toEqual(dolu.d);
 
-      const o = kur(['Ali', 'Ayşe']);
-      const basladi = basla(o);
-      const s2 = isle(basladi, { tip: 'katil', ad: 'Can' }, T0 + 1);
-      expect(s2.hata?.kod).toBe('basladi');
-      expect(s2.durum).toEqual(basladi);
+    const o = kur(['Ali', 'Ayşe']);
+    const basladi = basla(o);
+    const s2 = isle(basladi, { tip: 'katil', ad: 'Can' }, T0 + 1);
+    expect(s2.hata?.kod).toBe('basladi');
+    expect(s2.durum).toEqual(basladi);
 
-      const kapali = bitirBos(basladi, T0).d;
-      expect(isle(kapali, { tip: 'katil', ad: 'Can' }, T0 + 1).hata?.kod).toBe(
-        'kapali',
-      );
-    },
-  );
+    const kapali = bitirBos(basladi, T0).d;
+    expect(isle(kapali, { tip: 'katil', ad: 'Can' }, T0 + 1).hata?.kod).toBe(
+      'kapali',
+    );
+  });
 
-  kabul('kod denemelerine hız sınırı: istemci başına, zamanla açılır', () => {
+  it('kod denemelerine hız sınırı: istemci başına, zamanla açılır', () => {
     let kayit: unknown = {};
     const sonuclar: boolean[] = [];
     for (let i = 0; i < 30; i++) {
@@ -164,32 +160,29 @@ describe('KK-30: katılım hataları ve isim kuralı', () => {
 });
 
 describe('KK-31: lobi', () => {
-  kabul(
-    'katılanlar herkeste görünür, kuran dahil; Başlat yalnızca kuranda, ≥2 oyuncuyla açık',
-    () => {
-      const tek = kur(['Ali']);
-      expect(gorunum(tek.d, tek.id[0], T0).baslatGorunur).toBe(true);
-      expect(gorunum(tek.d, tek.id[0], T0).baslatAktif).toBe(false);
-      expect(
-        isle(tek.d, { tip: 'baslat', kimlik: tek.id[0] }, T0).hata?.kod,
-      ).toBe('yetersiz');
+  it('katılanlar herkeste görünür, kuran dahil; Başlat yalnızca kuranda, ≥2 oyuncuyla açık', () => {
+    const tek = kur(['Ali']);
+    expect(gorunum(tek.d, tek.id[0], T0).baslatGorunur).toBe(true);
+    expect(gorunum(tek.d, tek.id[0], T0).baslatAktif).toBe(false);
+    expect(
+      isle(tek.d, { tip: 'baslat', kimlik: tek.id[0] }, T0).hata?.kod,
+    ).toBe('yetersiz');
 
-      const o = kur(['Ali', 'Ayşe', 'Can']);
-      const adlar = o.id.map((k) =>
-        gorunum(o.d, k, T0).oyuncular.map((x) => x.ad),
-      );
-      for (const a of adlar) expect(a).toEqual(['Ali', 'Ayşe', 'Can']);
-      expect(gorunum(o.d, o.id[0], T0)).toMatchObject({
-        baslatGorunur: true,
-        baslatAktif: true,
-      });
-      expect(gorunum(o.d, o.id[1], T0)).toMatchObject({ baslatGorunur: false });
-      expect(isle(o.d, { tip: 'baslat', kimlik: o.id[1] }, T0).hata?.kod).toBe(
-        'yetkisiz',
-      );
-      expect(basla(o).asama).toBe('soru');
-    },
-  );
+    const o = kur(['Ali', 'Ayşe', 'Can']);
+    const adlar = o.id.map((k) =>
+      gorunum(o.d, k, T0).oyuncular.map((x) => x.ad),
+    );
+    for (const a of adlar) expect(a).toEqual(['Ali', 'Ayşe', 'Can']);
+    expect(gorunum(o.d, o.id[0], T0)).toMatchObject({
+      baslatGorunur: true,
+      baslatAktif: true,
+    });
+    expect(gorunum(o.d, o.id[1], T0)).toMatchObject({ baslatGorunur: false });
+    expect(isle(o.d, { tip: 'baslat', kimlik: o.id[1] }, T0).hata?.kod).toBe(
+      'yetkisiz',
+    );
+    expect(basla(o).asama).toBe('soru');
+  });
 });
 
 describe('KK-32: aynı soru, aynı anda, sunucu saati', () => {
@@ -207,21 +200,18 @@ describe('KK-32: aynı soru, aynı anda, sunucu saati', () => {
     return idler;
   };
 
-  kabul(
-    'tüm telefonlarda aynı soru, 10 farklı soru; aynı tohum aynı sıra',
-    () => {
-      const o = kur(['Ali', 'Ayşe', 'Can'], 5);
-      const d = basla(o);
-      const sorular = o.id.map((k) => gorunum(d, k, T0).soru!.id);
-      expect(new Set(sorular).size).toBe(1);
-      const a = sira(kur(['Ali', 'Ayşe', 'Can'], 5));
-      expect(new Set(a).size).toBe(SORU_SAYISI);
-      expect(sira(kur(['Ali', 'Ayşe', 'Can'], 5))).toEqual(a);
-      expect(sira(kur(['Ali', 'Ayşe', 'Can'], 6))).not.toEqual(a);
-    },
-  );
+  it('tüm telefonlarda aynı soru, 10 farklı soru; aynı tohum aynı sıra', () => {
+    const o = kur(['Ali', 'Ayşe', 'Can'], 5);
+    const d = basla(o);
+    const sorular = o.id.map((k) => gorunum(d, k, T0).soru!.id);
+    expect(new Set(sorular).size).toBe(1);
+    const a = sira(kur(['Ali', 'Ayşe', 'Can'], 5));
+    expect(new Set(a).size).toBe(SORU_SAYISI);
+    expect(sira(kur(['Ali', 'Ayşe', 'Can'], 5))).toEqual(a);
+    expect(sira(kur(['Ali', 'Ayşe', 'Can'], 6))).not.toEqual(a);
+  });
 
-  kabul('kalan süre sunucu saatinden hesaplanır, herkes için aynı', () => {
+  it('kalan süre sunucu saatinden hesaplanır, herkes için aynı', () => {
     const o = kur(['Ali', 'Ayşe', 'Can']);
     const d = basla(o);
     for (const k of o.id) {
@@ -233,7 +223,7 @@ describe('KK-32: aynı soru, aynı anda, sunucu saati', () => {
 });
 
 describe('KK-33: cevap değiştirme, geç cevap, cevapsız', () => {
-  kabul('süre içinde son cevap geçerli', () => {
+  it('süre içinde son cevap geçerli', () => {
     const o = kur(['Ali', 'Ayşe', 'Can']);
     let d = basla(o);
     d = cevapla(d, o.id[0], 'OK', T0 + 1_000);
@@ -245,7 +235,7 @@ describe('KK-33: cevap değiştirme, geç cevap, cevapsız', () => {
     expect(f.kimNeDedi['Ali'][0]).toBe('NOK');
   });
 
-  kabul('süre bittikten sonra gelen cevap reddedilir, durum değişmez', () => {
+  it('süre bittikten sonra gelen cevap reddedilir, durum değişmez', () => {
     const o = kur(['Ali', 'Ayşe']);
     const d = basla(o);
     const s = isle(
@@ -259,24 +249,21 @@ describe('KK-33: cevap değiştirme, geç cevap, cevapsız', () => {
 });
 
 describe('KK-34: herkes cevaplayınca geçilir, kim cevapladı görünür', () => {
-  kabul(
-    'son cevapla sonraki soru açılır; sayaç adları gösterir, cevabı değil',
-    () => {
-      const o = kur(['Ali', 'Ayşe', 'Can']);
-      let d = basla(o);
-      d = cevapla(d, o.id[0], 'OK', T0 + 1_000);
-      d = cevapla(d, o.id[1], 'NOK', T0 + 2_000);
-      const g = gorunum(d, o.id[0], T0 + 2_000);
-      expect(g.cevapladi.sort()).toEqual(['Ali', 'Ayşe']);
-      expect(g.toplam).toBe(3);
-      expect(g.soruNo).toBe(1);
-      d = cevapla(d, o.id[2], 'OK', T0 + 3_000);
-      const g2 = gorunum(d, o.id[2], T0 + 3_000);
-      expect(g2.soruNo).toBe(2);
-      expect(g2.kalanMs).toBe(SORU_MS);
-      expect(g2.cevapladi).toEqual([]);
-    },
-  );
+  it('son cevapla sonraki soru açılır; sayaç adları gösterir, cevabı değil', () => {
+    const o = kur(['Ali', 'Ayşe', 'Can']);
+    let d = basla(o);
+    d = cevapla(d, o.id[0], 'OK', T0 + 1_000);
+    d = cevapla(d, o.id[1], 'NOK', T0 + 2_000);
+    const g = gorunum(d, o.id[0], T0 + 2_000);
+    expect(g.cevapladi.sort()).toEqual(['Ali', 'Ayşe']);
+    expect(g.toplam).toBe(3);
+    expect(g.soruNo).toBe(1);
+    d = cevapla(d, o.id[2], 'OK', T0 + 3_000);
+    const g2 = gorunum(d, o.id[2], T0 + 3_000);
+    expect(g2.soruNo).toBe(2);
+    expect(g2.kalanMs).toBe(SORU_MS);
+    expect(g2.cevapladi).toEqual([]);
+  });
 });
 
 describe("KK-35: oylar final'e kadar sızmaz", () => {
@@ -285,18 +272,15 @@ describe("KK-35: oylar final'e kadar sızmaz", () => {
       ? Object.values(x).flatMap(degerler)
       : [x];
 
-  kabul(
-    'başkasının cevabı hiçbir görünüm alanında yok; yalnızca kendi cevabı var',
-    () => {
-      const o = kur(['Ali', 'Ayşe', 'Can']);
-      let d = basla(o);
-      d = cevapla(d, o.id[0], 'NOK', T0 + 1_000);
-      const b = degerler(gorunum(d, o.id[1], T0 + 2_000));
-      expect(b).not.toContain('NOK');
-      expect(b).not.toContain('OK');
-      expect(gorunum(d, o.id[0], T0 + 2_000).benimOyum).toBe('NOK');
-    },
-  );
+  it('başkasının cevabı hiçbir görünüm alanında yok; yalnızca kendi cevabı var', () => {
+    const o = kur(['Ali', 'Ayşe', 'Can']);
+    let d = basla(o);
+    d = cevapla(d, o.id[0], 'NOK', T0 + 1_000);
+    const b = degerler(gorunum(d, o.id[1], T0 + 2_000));
+    expect(b).not.toContain('NOK');
+    expect(b).not.toContain('OK');
+    expect(gorunum(d, o.id[0], T0 + 2_000).benimOyum).toBe('NOK');
+  });
 });
 
 describe('KK-36: final', () => {
@@ -308,38 +292,35 @@ describe('KK-36: final', () => {
     ...Array.from({ length: 6 }, () => hepsi(3, 'OK')),
   ];
 
-  kabul(
-    'yüzdeler (boşlar ayrı), en tartışmalı, ödüller, kim ne dedi, kişisel',
-    () => {
-      const o = kur(['A', 'B', 'C']);
-      const { d } = oyna(o, PLAN);
-      expect(d.asama).toBe('bitti');
-      const f = final(d);
-      expect(f.yuzdeler).toHaveLength(SORU_SAYISI);
-      expect(f.yuzdeler[0]).toMatchObject({ ok: 2, nok: 1, bos: 0 });
-      expect(f.yuzdeler[3]).toMatchObject({ ok: 2, nok: 0, bos: 1 });
-      expect(f.enTartismali.sort()).toEqual(
-        f.yuzdeler
-          .slice(0, 3)
-          .map((y) => y.kartId)
-          .sort(),
-      );
-      expect(f.oduller.aykiriRuh).toEqual(['C']);
-      expect(f.oduller.ruhIkizleri.map((p) => [...p].sort())).toEqual([
-        ['A', 'B'],
-      ]);
-      expect(f.kimNeDedi['C']).toEqual([
-        'NOK',
-        'NOK',
-        'NOK',
-        null,
-        ...hepsi(6, 'OK'),
-      ]);
-      expect(f.ayniOlan).toEqual({ A: 9, B: 10, C: 7 });
-    },
-  );
+  it('yüzdeler (boşlar ayrı), en tartışmalı, ödüller, kim ne dedi, kişisel', () => {
+    const o = kur(['A', 'B', 'C']);
+    const { d } = oyna(o, PLAN);
+    expect(d.asama).toBe('bitti');
+    const f = final(d);
+    expect(f.yuzdeler).toHaveLength(SORU_SAYISI);
+    expect(f.yuzdeler[0]).toMatchObject({ ok: 2, nok: 1, bos: 0 });
+    expect(f.yuzdeler[3]).toMatchObject({ ok: 2, nok: 0, bos: 1 });
+    expect(f.enTartismali.sort()).toEqual(
+      f.yuzdeler
+        .slice(0, 3)
+        .map((y) => y.kartId)
+        .sort(),
+    );
+    expect(f.oduller.aykiriRuh).toEqual(['C']);
+    expect(f.oduller.ruhIkizleri.map((p) => [...p].sort())).toEqual([
+      ['A', 'B'],
+    ]);
+    expect(f.kimNeDedi['C']).toEqual([
+      'NOK',
+      'NOK',
+      'NOK',
+      null,
+      ...hepsi(6, 'OK'),
+    ]);
+    expect(f.ayniOlan).toEqual({ A: 9, B: 10, C: 7 });
+  });
 
-  kabul('2 kişilik odada Aykırı ruh verilmez', () => {
+  it('2 kişilik odada Aykırı ruh verilmez', () => {
     const o = kur(['A', 'B']);
     const plan: (Oy | null)[][] = [['OK', 'NOK'], ...dokuz(2).slice(1)];
     expect(final(oyna(o, plan).d).oduller.aykiriRuh).toEqual([]);
@@ -347,36 +328,33 @@ describe('KK-36: final', () => {
 });
 
 describe('KK-37: kopma ve yeniden bağlanma', () => {
-  kabul(
-    'kopan aynı kimlikle döner, o anki soruya katılır; kopukken biten soru boş',
-    () => {
-      const o = kur(['A', 'B', 'C']);
-      let d = basla(o);
-      d = ok(d, { tip: 'kop', kimlik: o.id[1] }, T0 + 1_000);
-      expect(
-        gorunum(d, o.id[0], T0 + 1_000).oyuncular.find((x) => x.ad === 'B')
-          ?.bagli,
-      ).toBe(false);
-      d = cevapla(d, o.id[0], 'OK', T0 + 2_000);
-      d = cevapla(d, o.id[2], 'OK', T0 + 3_000);
-      const t = T0 + SORU_MS + 1_500;
-      d = ok(d, { tip: 'zaman' }, t);
-      d = ok(d, { tip: 'don', kimlik: o.id[1] }, t);
-      const g = gorunum(d, o.id[1], t);
-      expect(g.asama).toBe('soru');
-      expect(g.soruNo).toBeGreaterThanOrEqual(2);
-      expect(g.kalanMs).toBeGreaterThan(0);
-      expect(g.kalanMs).toBeLessThanOrEqual(SORU_MS);
-      expect(
-        gorunum(d, o.id[0], t).oyuncular.find((x) => x.ad === 'B')?.bagli,
-      ).toBe(true);
-      d = cevapla(d, o.id[1], 'NOK', t + 500);
-      const f = final(bitirBos(d, t + 500).d);
-      expect(f.kimNeDedi['B'][0]).toBeNull();
-    },
-  );
+  it('kopan aynı kimlikle döner, o anki soruya katılır; kopukken biten soru boş', () => {
+    const o = kur(['A', 'B', 'C']);
+    let d = basla(o);
+    d = ok(d, { tip: 'kop', kimlik: o.id[1] }, T0 + 1_000);
+    expect(
+      gorunum(d, o.id[0], T0 + 1_000).oyuncular.find((x) => x.ad === 'B')
+        ?.bagli,
+    ).toBe(false);
+    d = cevapla(d, o.id[0], 'OK', T0 + 2_000);
+    d = cevapla(d, o.id[2], 'OK', T0 + 3_000);
+    const t = T0 + SORU_MS + 1_500;
+    d = ok(d, { tip: 'zaman' }, t);
+    d = ok(d, { tip: 'don', kimlik: o.id[1] }, t);
+    const g = gorunum(d, o.id[1], t);
+    expect(g.asama).toBe('soru');
+    expect(g.soruNo).toBeGreaterThanOrEqual(2);
+    expect(g.kalanMs).toBeGreaterThan(0);
+    expect(g.kalanMs).toBeLessThanOrEqual(SORU_MS);
+    expect(
+      gorunum(d, o.id[0], t).oyuncular.find((x) => x.ad === 'B')?.bagli,
+    ).toBe(true);
+    d = cevapla(d, o.id[1], 'NOK', t + 500);
+    const f = final(bitirBos(d, t + 500).d);
+    expect(f.kimNeDedi['B'][0]).toBeNull();
+  });
 
-  kabul('bilinmeyen kimlik dönemez', () => {
+  it('bilinmeyen kimlik dönemez', () => {
     const o = kur(['A', 'B']);
     expect(
       isle(basla(o), { tip: 'don', kimlik: 'yok-boyle-kimlik' }, T0 + 1).hata
@@ -386,7 +364,7 @@ describe('KK-37: kopma ve yeniden bağlanma', () => {
 });
 
 describe('KK-38: kuran çıkarsa, tek oyuncu kalırsa', () => {
-  kabul('kuran ayrılsa ya da kopsa da oyun kalanlarla sürer ve biter', () => {
+  it('kuran ayrılsa ya da kopsa da oyun kalanlarla sürer ve biter', () => {
     for (const olay of ['ayril', 'kop'] as const) {
       const o = kur(['A', 'B', 'C']);
       let d = basla(o);
@@ -400,29 +378,26 @@ describe('KK-38: kuran çıkarsa, tek oyuncu kalırsa', () => {
     }
   });
 
-  kabul(
-    'tek oyuncu kalırsa oyun biter, o ana kadarki sonuçlar gösterilir',
-    () => {
-      const o = kur(['A', 'B', 'C']);
-      let t = T0;
-      let d = basla(o);
-      for (let soru = 0; soru < 2; soru++) {
-        for (const k of o.id) {
-          t += 100;
-          d = cevapla(d, k, 'OK', t);
-        }
+  it('tek oyuncu kalırsa oyun biter, o ana kadarki sonuçlar gösterilir', () => {
+    const o = kur(['A', 'B', 'C']);
+    let t = T0;
+    let d = basla(o);
+    for (let soru = 0; soru < 2; soru++) {
+      for (const k of o.id) {
+        t += 100;
+        d = cevapla(d, k, 'OK', t);
       }
-      d = ok(d, { tip: 'ayril', kimlik: o.id[1] }, t + 100);
-      expect(d.asama).toBe('soru');
-      d = ok(d, { tip: 'ayril', kimlik: o.id[2] }, t + 200);
-      expect(d.asama).toBe('bitti');
-      expect(final(d).yuzdeler).toHaveLength(2);
-    },
-  );
+    }
+    d = ok(d, { tip: 'ayril', kimlik: o.id[1] }, t + 100);
+    expect(d.asama).toBe('soru');
+    d = ok(d, { tip: 'ayril', kimlik: o.id[2] }, t + 200);
+    expect(d.asama).toBe('bitti');
+    expect(final(d).yuzdeler).toHaveLength(2);
+  });
 });
 
 describe('KK-39: veri saklama', () => {
-  kabul('1 saat boşta kalan oda silinir; etkinlik sayacı sıfırlar', () => {
+  it('1 saat boşta kalan oda silinir; etkinlik sayacı sıfırlar', () => {
     const o = kur(['A', 'B']);
     expect(silinmeli(o.d, T0 + BOSTA_MS - 60_000)).toBe(false);
     expect(silinmeli(o.d, T0 + BOSTA_MS + 60_000)).toBe(true);
@@ -431,7 +406,7 @@ describe('KK-39: veri saklama', () => {
     expect(silinmeli(d, T0 + 3_000_000 + BOSTA_MS + 60_000)).toBe(true);
   });
 
-  kabul('oyun bitince silinir, oyun sürerken silinmez', () => {
+  it('oyun bitince silinir, oyun sürerken silinmez', () => {
     const o = kur(['A', 'B']);
     const d = basla(o);
     expect(silinmeli(d, T0 + 1_000)).toBe(false);
@@ -441,23 +416,20 @@ describe('KK-39: veri saklama', () => {
 });
 
 describe('KK-40: saf, serileştirilebilir, deterministik', () => {
-  kabul(
-    'isle girdiyi değiştirmez; JSON gidiş-dönüşünden sonra aynı davranır',
-    () => {
-      const o = kur(['A', 'B', 'C']);
-      const d = cevapla(basla(o), o.id[0], 'OK', T0 + 1_000);
-      const kopya = structuredClone(d);
-      isle(d, { tip: 'cevapla', kimlik: o.id[1], oy: 'NOK' }, T0 + 2_000);
-      expect(d).toEqual(kopya);
-      const diril = JSON.parse(JSON.stringify(d)) as OdaDurum;
-      expect(diril).toEqual(d);
-      const devam = (x: OdaDurum) =>
-        bitirBos(cevapla(x, o.id[1], 'NOK', T0 + 2_000), T0 + 2_000).d;
-      expect(final(devam(diril))).toEqual(final(devam(d)));
-    },
-  );
+  it('isle girdiyi değiştirmez; JSON gidiş-dönüşünden sonra aynı davranır', () => {
+    const o = kur(['A', 'B', 'C']);
+    const d = cevapla(basla(o), o.id[0], 'OK', T0 + 1_000);
+    const kopya = structuredClone(d);
+    isle(d, { tip: 'cevapla', kimlik: o.id[1], oy: 'NOK' }, T0 + 2_000);
+    expect(d).toEqual(kopya);
+    const diril = JSON.parse(JSON.stringify(d)) as OdaDurum;
+    expect(diril).toEqual(d);
+    const devam = (x: OdaDurum) =>
+      bitirBos(cevapla(x, o.id[1], 'NOK', T0 + 2_000), T0 + 2_000).d;
+    expect(final(devam(diril))).toEqual(final(devam(d)));
+  });
 
-  kabul('aynı olay dizisi aynı sonucu verir', () => {
+  it('aynı olay dizisi aynı sonucu verir', () => {
     const calis = () => final(oyna(kur(['A', 'B', 'C'], 3), dokuz(3)).d);
     expect(calis()).toEqual(calis());
   });
@@ -474,44 +446,38 @@ describe('oyuncu belirteci (güvenlik, #48)', () => {
       simdi: T0,
     });
 
-  kabul(
-    'verilen belirteç aynen kullanılır; aynı tohum + farklı kimlik farklı belirteç',
-    () => {
-      const a = sade(5, 'gizli-aaaaaaaaaaaa');
-      const b = sade(5, 'gizli-bbbbbbbbbbbb');
-      expect(a.kimlik).toBe('gizli-aaaaaaaaaaaa');
-      expect(b.kimlik).toBe('gizli-bbbbbbbbbbbb');
-      const s = isle(
-        a.durum,
-        { tip: 'katil', ad: 'B', kimlik: 'gizli-cccccccccccc' },
-        T0,
-      );
-      expect(s.kimlik).toBe('gizli-cccccccccccc');
-      // verilen belirteçle yapılan olay o oyuncuya işler
-      const basla = ok(s.durum, { tip: 'baslat', kimlik: a.kimlik }, T0);
-      const d = cevapla(basla, 'gizli-cccccccccccc', 'OK', T0 + 1_000);
-      expect(gorunum(d, 'gizli-cccccccccccc', T0 + 1_000).benimOyum).toBe('OK');
-      expect(gorunum(d, a.kimlik, T0 + 1_000).benimOyum).toBeNull();
-    },
-  );
+  it('verilen belirteç aynen kullanılır; aynı tohum + farklı kimlik farklı belirteç', () => {
+    const a = sade(5, 'gizli-aaaaaaaaaaaa');
+    const b = sade(5, 'gizli-bbbbbbbbbbbb');
+    expect(a.kimlik).toBe('gizli-aaaaaaaaaaaa');
+    expect(b.kimlik).toBe('gizli-bbbbbbbbbbbb');
+    const s = isle(
+      a.durum,
+      { tip: 'katil', ad: 'B', kimlik: 'gizli-cccccccccccc' },
+      T0,
+    );
+    expect(s.kimlik).toBe('gizli-cccccccccccc');
+    // verilen belirteçle yapılan olay o oyuncuya işler
+    const basla = ok(s.durum, { tip: 'baslat', kimlik: a.kimlik }, T0);
+    const d = cevapla(basla, 'gizli-cccccccccccc', 'OK', T0 + 1_000);
+    expect(gorunum(d, 'gizli-cccccccccccc', T0 + 1_000).benimOyum).toBe('OK');
+    expect(gorunum(d, a.kimlik, T0 + 1_000).benimOyum).toBeNull();
+  });
 
-  kabulOdaGuvenlik(
-    'var olan bir belirteçle katılma reddedilir ya da yeni belirteç verilir (devralma yok)',
-    () => {
-      const a = sade(5, 'gizli-aaaaaaaaaaaa');
-      const s = isle(
-        a.durum,
-        { tip: 'katil', ad: 'Hileci', kimlik: a.kimlik },
-        T0,
-      );
-      expect(s.hata !== undefined || s.kimlik !== a.kimlik).toBe(true);
-      // ne olursa olsun kurucunun belirteci hâlâ yalnızca kurucuya işler
-      const basla = isle(
-        isle(a.durum, { tip: 'katil', ad: 'B' }, T0).durum,
-        { tip: 'baslat', kimlik: a.kimlik },
-        T0,
-      );
-      expect(basla.hata).toBeUndefined();
-    },
-  );
+  it('var olan bir belirteçle katılma reddedilir ya da yeni belirteç verilir (devralma yok)', () => {
+    const a = sade(5, 'gizli-aaaaaaaaaaaa');
+    const s = isle(
+      a.durum,
+      { tip: 'katil', ad: 'Hileci', kimlik: a.kimlik },
+      T0,
+    );
+    expect(s.hata !== undefined || s.kimlik !== a.kimlik).toBe(true);
+    // ne olursa olsun kurucunun belirteci hâlâ yalnızca kurucuya işler
+    const basla = isle(
+      isle(a.durum, { tip: 'katil', ad: 'B' }, T0).durum,
+      { tip: 'baslat', kimlik: a.kimlik },
+      T0,
+    );
+    expect(basla.hata).toBeUndefined();
+  });
 });

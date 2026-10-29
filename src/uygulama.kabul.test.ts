@@ -1,28 +1,10 @@
 import { readdirSync, readFileSync } from 'node:fs';
 import { describe, expect, it } from 'vitest';
 import { desteHatalari } from './core/deste';
-import {
-  kabul,
-  kabulCila,
-  kabulKk25,
-  kabulKk26,
-  kabulKk27,
-  kabulOda,
-  kabulOdaDeploy,
-  kabulOdaGuvenlik,
-  kabulCasusUi,
-  kabulCasusUiSon,
-  kabulCasusKayitUi,
-  kabulOdaKimlik,
-  kabulOdaCik,
-  kabulOnonUi,
-  kabulOnonUiEkran,
-  kabulOnonOdaUi,
-} from './kabul';
 import { oyunlar } from './games/registry';
 
 describe('KK-1: ana ekran oyun listesi', () => {
-  kabul('OK mu NOK mu ve Casus kim aktif; 10/10 ama "Yakında"', () => {
+  it('OK mu NOK mu ve Casus kim aktif; 10/10 ama "Yakında"', () => {
     const aktiflik = Object.fromEntries(oyunlar.map((o) => [o.id, o.aktif]));
     expect(aktiflik).toEqual({
       'ok-mu-nok': true,
@@ -91,16 +73,13 @@ describe('KK-25: kart metni oy girişinde ve açıklamada görünür kalır', ()
   // Arayüz test aracı yok (Semih 1C): ekranların kart metnini göstermesi kaynak düzeyinde
   // korunur; gerçek görünüm ve boyut (≥16pt) önizlemede ve cihaz listesinde doğrulanır.
   for (const dosya of ['oy', 'acik']) {
-    kabulKk25(
-      `${dosya}.tsx kart metnini testID="kart-metni" ile gösterir`,
-      () => {
-        const icerik = readFileSync(
-          new URL(`./oyun-ekranlari/ok-mu-nok/${dosya}.tsx`, import.meta.url),
-          'utf8',
-        );
-        expect(icerik).toMatch(/testID="kart-metni"/);
-      },
-    );
+    it(`${dosya}.tsx kart metnini testID="kart-metni" ile gösterir`, () => {
+      const icerik = readFileSync(
+        new URL(`./oyun-ekranlari/ok-mu-nok/${dosya}.tsx`, import.meta.url),
+        'utf8',
+      );
+      expect(icerik).toMatch(/testID="kart-metni"/);
+    });
   }
 });
 
@@ -111,12 +90,9 @@ describe('KK-26: oyun dışı ekranlarda Geri, oyun içinde geri yok', () => {
   // Arayüz test aracı yok (Semih 1C): düğmenin varlığı kaynak düzeyinde korunur;
   // "Geri'de bilgiler korunur" ve "Ayarlar'a dönüş" önizlemede tıklanarak doğrulanır.
   for (const ekran of ['oyuncular', 'paket']) {
-    kabulKk26(
-      `${ekran}.tsx görünür bir Geri düğmesi (testID="geri") içerir`,
-      () => {
-        expect(dosyaIcerik(`app/${ekran}.tsx`)).toMatch(/testID="geri"/);
-      },
-    );
+    it(`${ekran}.tsx görünür bir Geri düğmesi (testID="geri") içerir`, () => {
+      expect(dosyaIcerik(`app/${ekran}.tsx`)).toMatch(/testID="geri"/);
+    });
   }
 
   it('ayarlar.tsx Geri düğmesi içerir (zaten var, korunur)', () => {
@@ -147,55 +123,43 @@ describe('KK-27: Ayarlar yalnızca ana ekranda, sağ üstte sabit küçük ikon'
     }
   });
 
-  kabulKk27(
-    'ana ekranda "Ayarlar" metinli büyük düğme yok, adlı ayarlar ikonu var',
-    () => {
-      const ana = dosyaIcerik('app/index.tsx');
-      expect(ana).toMatch(/testID="ayarlar(-ikon)?"/);
-      expect(ana).not.toMatch(/etiket="Ayarlar"/);
-      expect(ana).toMatch(/accessibilityLabel="Ayarlar"/); // ikon ekran okuyucuda adlı
-    },
-  );
+  it('ana ekranda "Ayarlar" metinli büyük düğme yok, adlı ayarlar ikonu var', () => {
+    const ana = dosyaIcerik('app/index.tsx');
+    expect(ana).toMatch(/testID="ayarlar(-ikon)?"/);
+    expect(ana).not.toMatch(/etiket="Ayarlar"/);
+    expect(ana).toMatch(/accessibilityLabel="Ayarlar"/); // ikon ekran okuyucuda adlı
+  });
 });
 
 describe('#36 cila: v1 sonrası küçük açıklar', () => {
   // Arayüz test aracı yok (Semih 1C): kaynak düzeyinde sözleşme; davranışı QA önizlemede doğrular.
-  kabulCila(
-    "bozuk kayıt okuma sırasında reddedilir: durum.tsx oyunOku'ya doğrulayıcı verir",
-    () => {
-      // "Devam et" sorusu yalnızca geçerli kayıtta çıkar (KK-14): oyunOku(depo, doğrulayıcı)
-      expect(dosyaIcerik('src/durum.tsx')).toMatch(
-        /oyunOku(<[^>]+>)?\(\s*depo\s*,/,
-      );
-    },
-  );
+  it("bozuk kayıt okuma sırasında reddedilir: durum.tsx oyunOku'ya doğrulayıcı verir", () => {
+    // "Devam et" sorusu yalnızca geçerli kayıtta çıkar (KK-14): oyunOku(depo, doğrulayıcı)
+    expect(dosyaIcerik('src/durum.tsx')).toMatch(
+      /oyunOku(<[^>]+>)?\(\s*depo\s*,/,
+    );
+  });
 
-  kabulCila('geçersiz adreste Türkçe sade sayfa: app/+not-found.tsx', () => {
+  it('geçersiz adreste Türkçe sade sayfa: app/+not-found.tsx', () => {
     const icerik = dosyaIcerik('app/+not-found.tsx');
     expect(icerik).toMatch(/Sayfa bulunamadı/);
     expect(icerik).toMatch(/testID="ana-ekrana-don"/);
     expect(icerik).not.toMatch(/Unmatched/);
   });
 
-  kabulCila(
-    "Paylaş düğmesi web'de gizlenir: düğmenin dosyasında Platform.OS denetimi var",
-    () => {
-      const dosyalar = kaynaklar('src/oyun-ekranlari').filter(({ icerik }) =>
-        /testID="paylas"/.test(icerik),
-      );
-      expect(dosyalar.length).toBeGreaterThan(0);
-      for (const { f, icerik } of dosyalar) {
-        expect(icerik, f).toMatch(/Platform\.OS/);
-      }
-    },
-  );
+  it("Paylaş düğmesi web'de gizlenir: düğmenin dosyasında Platform.OS denetimi var", () => {
+    const dosyalar = kaynaklar('src/oyun-ekranlari').filter(({ icerik }) =>
+      /testID="paylas"/.test(icerik),
+    );
+    expect(dosyalar.length).toBeGreaterThan(0);
+    for (const { f, icerik } of dosyalar) {
+      expect(icerik, f).toMatch(/Platform\.OS/);
+    }
+  });
 
-  kabulCila(
-    "keep-awake web'de çağrılmaz: app/oyun.tsx koşulsuz useKeepAwake() çağırmaz",
-    () => {
-      expect(dosyaIcerik('app/oyun.tsx')).not.toMatch(/useKeepAwake\(\s*\)/);
-    },
-  );
+  it("keep-awake web'de çağrılmaz: app/oyun.tsx koşulsuz useKeepAwake() çağırmaz", () => {
+    expect(dosyaIcerik('app/oyun.tsx')).not.toMatch(/useKeepAwake\(\s*\)/);
+  });
 });
 
 describe('oda modu: arayüz ve altyapı sözleşmesi (KK-28…KK-40)', () => {
@@ -226,7 +190,7 @@ describe('oda modu: arayüz ve altyapı sözleşmesi (KK-28…KK-40)', () => {
     'final-tekrar',
   ];
 
-  kabulOda('oda ekranları sözleşmedeki testID adlarını kullanır', () => {
+  it('oda ekranları sözleşmedeki testID adlarını kullanır', () => {
     const kaynak = [...kaynaklar('app'), ...kaynaklar('src')]
       .map(({ icerik }) => icerik)
       .join('\n');
@@ -234,22 +198,19 @@ describe('oda modu: arayüz ve altyapı sözleşmesi (KK-28…KK-40)', () => {
     expect(eksik).toEqual([]);
   });
 
-  kabulOdaDeploy(
-    "sunucu main'e merge edilince otomatik dağıtılır (wrangler, push main)",
-    () => {
-      const klasor = new URL('../.github/workflows/', import.meta.url);
-      const akislar = readdirSync(klasor).map((f) =>
-        readFileSync(new URL(f, klasor), 'utf8'),
-      );
-      const dagitim = akislar.filter(
-        (a) => /wrangler/.test(a) && /deploy/.test(a),
-      );
-      expect(dagitim.length).toBeGreaterThan(0);
-      expect(dagitim.some((a) => /branches:\s*\[\s*main\s*\]/.test(a))).toBe(
-        true,
-      );
-    },
-  );
+  it("sunucu main'e merge edilince otomatik dağıtılır (wrangler, push main)", () => {
+    const klasor = new URL('../.github/workflows/', import.meta.url);
+    const akislar = readdirSync(klasor).map((f) =>
+      readFileSync(new URL(f, klasor), 'utf8'),
+    );
+    const dagitim = akislar.filter(
+      (a) => /wrangler/.test(a) && /deploy/.test(a),
+    );
+    expect(dagitim.length).toBeGreaterThan(0);
+    expect(dagitim.some((a) => /branches:\s*\[\s*main\s*\]/.test(a))).toBe(
+      true,
+    );
+  });
 
   it('oda mantığı saf: src/oda içinde Date.now, Math.random, ağ ve React yok (KK-40)', () => {
     const dosyalar = kaynaklar('src/oda');
@@ -298,51 +259,45 @@ describe('oda sunucu kabuğu: belirteç sunucuda, kriptografik üretilir (#48)',
         ),
       }));
 
-  kabulOdaGuvenlik(
-    'katil olayını işleyen sunucu kodu crypto ile ürettiği kimlik verir',
-    () => {
-      const adaylar = ['.', 'sunucu', 'worker', 'src']
-        .flatMap((k) => {
-          try {
-            return tsDosyalari(k);
-          } catch {
-            return [];
-          }
-        })
-        .filter(
-          ({ f }) =>
-            !f.replace(/^\.\//, '').startsWith('src/oda/') &&
-            !f.includes('node_modules'),
-        )
-        .filter(({ icerik }) => /tip:\s*['"]katil['"]/.test(icerik));
-      expect(adaylar.length).toBeGreaterThan(0);
-      for (const { f, icerik } of adaylar) {
-        expect(icerik, f).toMatch(/crypto\.randomUUID\(|getRandomValues\(/);
-        expect(icerik, f).toMatch(/tip:\s*['"]katil['"][^}]*kimlik/s);
-      }
-    },
-  );
+  it('katil olayını işleyen sunucu kodu crypto ile ürettiği kimlik verir', () => {
+    const adaylar = ['.', 'sunucu', 'worker', 'src']
+      .flatMap((k) => {
+        try {
+          return tsDosyalari(k);
+        } catch {
+          return [];
+        }
+      })
+      .filter(
+        ({ f }) =>
+          !f.replace(/^\.\//, '').startsWith('src/oda/') &&
+          !f.includes('node_modules'),
+      )
+      .filter(({ icerik }) => /tip:\s*['"]katil['"]/.test(icerik));
+    expect(adaylar.length).toBeGreaterThan(0);
+    for (const { f, icerik } of adaylar) {
+      expect(icerik, f).toMatch(/crypto\.randomUUID\(|getRandomValues\(/);
+      expect(icerik, f).toMatch(/tip:\s*['"]katil['"][^}]*kimlik/s);
+    }
+  });
 });
 
 describe('oyuncu belirteci adreste değil, ilk WebSocket mesajında (güvenlik)', () => {
   // URL'ler Cloudflare/proxy günlüklerinde saklanır; belirteç gizli kalmalı. Sunucu ve istemci birlikte değişir,
   // bu yüzden tek test ikisini birden ister (son merge edilen bayrağı kapatır).
-  kabulOdaKimlik(
-    'sunucu adresten kimlik okumaz, istemci adrese kimlik koymaz; ilk mesaj {t:"kimlik"}',
-    () => {
-      const sunucu = kaynaklar('sunucu/src')
-        .map(({ icerik }) => icerik)
-        .join('\n');
-      expect(sunucu).not.toMatch(/searchParams\.get\(\s*['"]kimlik['"]\s*\)/);
-      expect(sunucu).toMatch(/['"]kimlik['"]/);
-      expect(sunucu).toMatch(/t\s*===?\s*['"]kimlik['"]|t:\s*['"]kimlik['"]/);
-      const mesaj = dosyaIcerik('src/oda/mesaj.ts');
-      expect(mesaj).not.toMatch(/islem:\s*['"]don['"][^}]*kimlik/);
-      expect(mesaj).toMatch(/t:\s*['"]kimlik['"]/);
-      const ws = dosyaIcerik('src/baglanti/ws.ts');
-      expect(ws).toMatch(/t:\s*['"]kimlik['"]/);
-    },
-  );
+  it('sunucu adresten kimlik okumaz, istemci adrese kimlik koymaz; ilk mesaj {t:"kimlik"}', () => {
+    const sunucu = kaynaklar('sunucu/src')
+      .map(({ icerik }) => icerik)
+      .join('\n');
+    expect(sunucu).not.toMatch(/searchParams\.get\(\s*['"]kimlik['"]\s*\)/);
+    expect(sunucu).toMatch(/['"]kimlik['"]/);
+    expect(sunucu).toMatch(/t\s*===?\s*['"]kimlik['"]|t:\s*['"]kimlik['"]/);
+    const mesaj = dosyaIcerik('src/oda/mesaj.ts');
+    expect(mesaj).not.toMatch(/islem:\s*['"]don['"][^}]*kimlik/);
+    expect(mesaj).toMatch(/t:\s*['"]kimlik['"]/);
+    const ws = dosyaIcerik('src/baglanti/ws.ts');
+    expect(ws).toMatch(/t:\s*['"]kimlik['"]/);
+  });
 });
 
 describe('Casus kim: kayıt listesi, arayüz ve altyapı sözleşmesi (KK-42…KK-54)', () => {
@@ -369,49 +324,41 @@ describe('Casus kim: kayıt listesi, arayüz ve altyapı sözleşmesi (KK-42…K
     'casus-paylas',
   ];
 
-  kabulCasusUi('casus-kim kayıt listesinde aktif, ekranı var (KK-42)', () => {
+  it('casus-kim kayıt listesinde aktif, ekranı var (KK-42)', () => {
     const kayit = dosyaIcerik('src/games/registry.ts');
     expect(kayit).not.toMatch(/id:\s*'casus-kim'[^}]*aktif:\s*false/);
     expect(kayit).toMatch(/casus-kim/);
     expect(kayit).toMatch(/ekran/);
   });
 
-  kabulCasusKayitUi(
-    'Casus ekranı kayıttan okurken durumGecerliMi kullanır (KK-14)',
-    () => {
-      const dosyalar = [...kaynaklar('app'), ...kaynaklar('src')].filter(
-        ({ icerik }) => icerik.includes('casus-kart'),
-      );
-      expect(dosyalar.length).toBeGreaterThan(0);
-      expect(
-        dosyalar.some(({ icerik }) =>
-          /oyunOku[^;]*durumGecerliMi/s.test(icerik),
-        ),
-      ).toBe(true);
-    },
-  );
+  it('Casus ekranı kayıttan okurken durumGecerliMi kullanır (KK-14)', () => {
+    const dosyalar = [...kaynaklar('app'), ...kaynaklar('src')].filter(
+      ({ icerik }) => icerik.includes('casus-kart'),
+    );
+    expect(dosyalar.length).toBeGreaterThan(0);
+    expect(
+      dosyalar.some(({ icerik }) => /oyunOku[^;]*durumGecerliMi/s.test(icerik)),
+    ).toBe(true);
+  });
 
-  kabulCasusUiSon('ekranlar sözleşmedeki testID adlarını kullanır', () => {
+  it('ekranlar sözleşmedeki testID adlarını kullanır', () => {
     const kaynak = [...kaynaklar('app'), ...kaynaklar('src')]
       .map(({ icerik }) => icerik)
       .join('\n');
     expect(TESTIDLER.filter((t) => !kaynak.includes(t))).toEqual([]);
   });
 
-  kabulCasusUi(
-    'rol kartı arka plana alınınca kapanır (AppState ya da visibilitychange)',
-    () => {
-      const kartDosyalari = [...kaynaklar('app'), ...kaynaklar('src')].filter(
-        ({ icerik }) => icerik.includes('casus-kart'),
-      );
-      expect(kartDosyalari.length).toBeGreaterThan(0);
-      expect(
-        kartDosyalari.some(({ icerik }) =>
-          /AppState|visibilitychange/.test(icerik),
-        ),
-      ).toBe(true);
-    },
-  );
+  it('rol kartı arka plana alınınca kapanır (AppState ya da visibilitychange)', () => {
+    const kartDosyalari = [...kaynaklar('app'), ...kaynaklar('src')].filter(
+      ({ icerik }) => icerik.includes('casus-kart'),
+    );
+    expect(kartDosyalari.length).toBeGreaterThan(0);
+    expect(
+      kartDosyalari.some(({ icerik }) =>
+        /AppState|visibilitychange/.test(icerik),
+      ),
+    ).toBe(true);
+  });
 
   it('Casus kim mantığı saf: src/games/casus-kim içinde Date.now, Math.random, ağ ve React yok (KK-53)', () => {
     const dosyalar = kaynaklar('src/games/casus-kim');
@@ -442,27 +389,24 @@ describe('oda modu: oyun içinde odadan çık (#73, KK-38)', () => {
   const oda = () =>
     [...kaynaklar('app/oda'), ...kaynaklar('src/oda-ui')].map((k) => k.icerik);
 
-  kabulOdaCik('oda ekranları çıkış ikonu ve onay testID adlarını taşır', () => {
+  it('oda ekranları çıkış ikonu ve onay testID adlarını taşır', () => {
     const kaynak = oda().join('\n');
     for (const t of ['oda-cik', 'cikis-onay-evet', 'cikis-onay-hayir'])
       expect(kaynak, t).toContain(t);
     expect(kaynak).toContain('oda-ayrildi'); // diğer telefonlarda "X ayrıldı"
   });
 
-  kabulOdaCik('geri tuşu/hareketi ve ikon "Odadan çık?" onayını açar', () => {
+  it('geri tuşu/hareketi ve ikon "Odadan çık?" onayını açar', () => {
     const kaynak = oda().join('\n');
     expect(kaynak).toContain('Odadan çık?');
     expect(kaynak).toMatch(/beforeRemove|BackHandler|popstate/);
   });
 
-  kabulOdaCik(
-    'çıkış onayı "Oyuna dön" seçeneğiyle oyuna geri dönüş sunar (onaysız çıkış yok)',
-    () => {
-      const kaynak = oda().join('\n');
-      expect(kaynak).toContain('Oyuna dön');
-      expect(kaynak).toMatch(/leave|ayril|ayrıl/i);
-    },
-  );
+  it('çıkış onayı "Oyuna dön" seçeneğiyle oyuna geri dönüş sunar (onaysız çıkış yok)', () => {
+    const kaynak = oda().join('\n');
+    expect(kaynak).toContain('Oyuna dön');
+    expect(kaynak).toMatch(/leave|ayril|ayrıl/i);
+  });
 });
 
 describe('10/10 ama: kayıt listesi, arayüz ve altyapı sözleşmesi (KK-55…KK-62)', () => {
@@ -489,14 +433,14 @@ describe('10/10 ama: kayıt listesi, arayüz ve altyapı sözleşmesi (KK-55…K
   ];
   const ekranlar = () => kaynaklar('src/oyun-ekranlari/on-on-ama');
 
-  kabulOnonUi('10/10 ama kayıt listesinde aktif ve ekranı var (KK-55)', () => {
+  it('10/10 ama kayıt listesinde aktif ve ekranı var (KK-55)', () => {
     const kayit = dosyaIcerik('src/games/registry.ts');
     expect(kayit).toMatch(/id:\s*'10-10-ama'/);
     expect(kayit).not.toMatch(/id:\s*'10-10-ama'[^}]*aktif:\s*false/);
     expect(kayit).toMatch(/oyun-ekranlari\/on-on-ama/);
   });
 
-  kabulOnonUi('ekranlar sözleşmedeki testID adlarını kullanır', () => {
+  it('ekranlar sözleşmedeki testID adlarını kullanır', () => {
     const kaynak = ekranlar()
       .map(({ icerik }) => icerik)
       .join('\n');
@@ -504,34 +448,26 @@ describe('10/10 ama: kayıt listesi, arayüz ve altyapı sözleşmesi (KK-55…K
     expect(TESTIDLER.filter((t) => !kaynak.includes(t))).toEqual([]);
   });
 
-  kabulOnonUiEkran(
-    'kart metni puan girişinde ve açıklamada görünür kalır (KK-59)',
-    () => {
-      const dosyalar = ekranlar();
-      const puan = dosyalar.filter(({ icerik }) =>
-        icerik.includes('onon-puan-'),
-      );
-      const acik = dosyalar.filter(({ icerik }) =>
-        icerik.includes('onon-ortalama'),
-      );
-      expect(puan.length).toBeGreaterThan(0);
-      expect(acik.length).toBeGreaterThan(0);
-      for (const { f, icerik } of [...puan, ...acik])
-        expect(icerik, f).toMatch(/testID="onon-kart-metni"/);
-    },
-  );
+  it('kart metni puan girişinde ve açıklamada görünür kalır (KK-59)', () => {
+    const dosyalar = ekranlar();
+    const puan = dosyalar.filter(({ icerik }) => icerik.includes('onon-puan-'));
+    const acik = dosyalar.filter(({ icerik }) =>
+      icerik.includes('onon-ortalama'),
+    );
+    expect(puan.length).toBeGreaterThan(0);
+    expect(acik.length).toBeGreaterThan(0);
+    for (const { f, icerik } of [...puan, ...acik])
+      expect(icerik, f).toMatch(/testID="onon-kart-metni"/);
+  });
 
-  kabulOnonUiEkran(
-    '"Hareketi azalt" açıkken konfeti/açıklama animasyonu sade (KK-57)',
-    () => {
-      const kaynak = ekranlar()
-        .map(({ icerik }) => icerik)
-        .join('\n');
-      expect(kaynak).toMatch(/azalt|hareketAzalt|reduceMotion/i);
-    },
-  );
+  it('"Hareketi azalt" açıkken konfeti/açıklama animasyonu sade (KK-57)', () => {
+    const kaynak = ekranlar()
+      .map(({ icerik }) => icerik)
+      .join('\n');
+    expect(kaynak).toMatch(/azalt|hareketAzalt|reduceMotion/i);
+  });
 
-  kabulOnonUi('ekran kayıttan okurken durumGecerliMi kullanır (KK-14)', () => {
+  it('ekran kayıttan okurken durumGecerliMi kullanır (KK-14)', () => {
     const kayit = dosyaIcerik('src/games/registry.ts');
     expect(kayit).toMatch(/on-on-ama\/onon['"]/);
     expect(kayit).toMatch(
@@ -595,72 +531,54 @@ describe('10/10 ama oda modu: istemci ekranları sözleşmesi (#125, KK-63…KK-
       .map(({ icerik }) => icerik)
       .join('\n');
 
-  kabulOnonOdaUi('oda ekranları sözleşmedeki testID adlarını kullanır', () => {
+  it('oda ekranları sözleşmedeki testID adlarını kullanır', () => {
     const kaynak = birlesik();
     expect(TESTIDLER.filter((t) => !kaynak.includes(t))).toEqual([]);
   });
 
-  kabulOnonOdaUi(
-    '10/10 ama kayıt listesinde mod seçimi açık (Tek telefon / Oda kur / Odaya katıl, KK-63)',
-    () => {
-      const kayit = dosyaIcerik('src/games/registry.ts');
-      expect(kayit).toMatch(/id:\s*'10-10-ama'[^}]*modSecimi:\s*true/s);
-    },
-  );
+  it('10/10 ama kayıt listesinde mod seçimi açık (Tek telefon / Oda kur / Odaya katıl, KK-63)', () => {
+    const kayit = dosyaIcerik('src/games/registry.ts');
+    expect(kayit).toMatch(/id:\s*'10-10-ama'[^}]*modSecimi:\s*true/s);
+  });
 
-  kabulOnonOdaUi(
-    'ekran türü odanın türünden seçilir: odaTuru() oda ekranlarında kullanılır (KK-63)',
-    () => {
-      expect(birlesik()).toMatch(/odaTuru\(/);
-    },
-  );
+  it('ekran türü odanın türünden seçilir: odaTuru() oda ekranlarında kullanılır (KK-63)', () => {
+    expect(birlesik()).toMatch(/odaTuru\(/);
+  });
 
-  kabulOnonOdaUi(
-    'kart metni puan ve açıklama ekranlarında görünür kalır (KK-64, KK-67)',
-    () => {
-      const dosyalar = oda();
-      const puan = dosyalar.filter(({ icerik }) =>
-        icerik.includes('oda-onon-puan-'),
-      );
-      const acik = dosyalar.filter(({ icerik }) =>
-        icerik.includes('oda-onon-ortalama'),
-      );
-      expect(puan.length).toBeGreaterThan(0);
-      expect(acik.length).toBeGreaterThan(0);
-      for (const { f, icerik } of [...puan, ...acik])
-        expect(icerik, f).toMatch(/testID="oda-onon-kart-metni"/);
-    },
-  );
+  it('kart metni puan ve açıklama ekranlarında görünür kalır (KK-64, KK-67)', () => {
+    const dosyalar = oda();
+    const puan = dosyalar.filter(({ icerik }) =>
+      icerik.includes('oda-onon-puan-'),
+    );
+    const acik = dosyalar.filter(({ icerik }) =>
+      icerik.includes('oda-onon-ortalama'),
+    );
+    expect(puan.length).toBeGreaterThan(0);
+    expect(acik.length).toBeGreaterThan(0);
+    for (const { f, icerik } of [...puan, ...acik])
+      expect(icerik, f).toMatch(/testID="oda-onon-kart-metni"/);
+  });
 
-  kabulOnonOdaUi(
-    '"Kuran kişi bekleniyor…" metni ve sonrakiGorunur kullanılır; Sonraki kart yetkisiz görünmez (KK-68)',
-    () => {
-      const kaynak = birlesik();
-      expect(kaynak).toContain('Kuran kişi bekleniyor');
-      expect(kaynak).toMatch(/sonrakiGorunur/);
-    },
-  );
+  it('"Kuran kişi bekleniyor…" metni ve sonrakiGorunur kullanılır; Sonraki kart yetkisiz görünmez (KK-68)', () => {
+    const kaynak = birlesik();
+    expect(kaynak).toContain('Kuran kişi bekleniyor');
+    expect(kaynak).toMatch(/sonrakiGorunur/);
+  });
 
-  kabulOnonOdaUi(
-    '"Hareketi azalt" açıkken konfeti/açıklama sade (KK-67)',
-    () => {
-      const konfeti = oda().filter(({ icerik }) =>
-        icerik.includes('oda-onon-konfeti'),
-      );
-      expect(konfeti.length).toBeGreaterThan(0);
-      for (const { f, icerik } of konfeti)
-        expect(icerik, f).toMatch(/azalt|hareketAzalt|reduceMotion/i);
-    },
-  );
+  it('"Hareketi azalt" açıkken konfeti/açıklama sade (KK-67)', () => {
+    const konfeti = oda().filter(({ icerik }) =>
+      icerik.includes('oda-onon-konfeti'),
+    );
+    expect(konfeti.length).toBeGreaterThan(0);
+    for (const { f, icerik } of konfeti)
+      expect(icerik, f).toMatch(/azalt|hareketAzalt|reduceMotion/i);
+  });
 
-  kabulOnonOdaUi(
-    'puan tuşları 0–10 arası sayı üretir ve istemci.puanla çağrılır (KK-65)',
-    () => {
-      const kaynak = birlesik();
-      expect(kaynak).toMatch(/\.puanla\(/);
-      expect(kaynak).toMatch(/\.sonraki\(/);
-    },
-  );
+  it('puan tuşları 0–10 arası sayı üretir ve istemci.puanla çağrılır (KK-65)', () => {
+    const kaynak = birlesik();
+    expect(kaynak).toMatch(/\.puanla\(/);
+    expect(kaynak).toMatch(/\.sonraki\(/);
+  });
 
   it('OK mu NOK mu oda ekranları ve tek telefon 10/10 ama bozulmaz: eski testID adları yerinde', () => {
     const kaynak = birlesik();

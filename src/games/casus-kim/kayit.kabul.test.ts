@@ -1,5 +1,4 @@
-import { describe, expect } from 'vitest';
-import { kabulCasusKayit as kabul } from '../../kabul';
+import { describe, expect, it } from 'vitest';
 import * as casus from './casus';
 import {
   type CasusDeste,
@@ -87,31 +86,28 @@ const bozma: Record<string, (d: Record<string, unknown>) => void> = {
 };
 
 describe('KK-14/KK-47: Casus kim kayıt doğrulaması', () => {
-  kabul('durumGecerliMi export edilir', () => {
+  it('durumGecerliMi export edilir', () => {
     expect(dogrula).toBeTypeOf('function');
   });
 
-  kabul(
-    'her aşamadaki geçerli durum (JSON gidiş-dönüşü dahil) kabul edilir',
-    () => {
-      for (const [ad, d] of Object.entries(asamalar())) {
-        expect(dogrula!(d), ad).toBe(true);
-        expect(dogrula!(JSON.parse(JSON.stringify(d))), `${ad} (JSON)`).toBe(
-          true,
-        );
-      }
-      const dolu = casus.kayittanYukle(asamalar().rol);
-      expect(dogrula!(dolu)).toBe(true);
-      expect(siradaki(dolu)).toBe(siradaki(asamalar().rol));
-    },
-  );
+  it('her aşamadaki geçerli durum (JSON gidiş-dönüşü dahil) kabul edilir', () => {
+    for (const [ad, d] of Object.entries(asamalar())) {
+      expect(dogrula!(d), ad).toBe(true);
+      expect(dogrula!(JSON.parse(JSON.stringify(d))), `${ad} (JSON)`).toBe(
+        true,
+      );
+    }
+    const dolu = casus.kayittanYukle(asamalar().rol);
+    expect(dogrula!(dolu)).toBe(true);
+    expect(siradaki(dolu)).toBe(siradaki(asamalar().rol));
+  });
 
-  kabul('çöp değerler çökmeden reddedilir', () => {
+  it('çöp değerler çökmeden reddedilir', () => {
     for (const x of [null, undefined, 42, 'x', true, [], {}, [1, 2], () => 1])
       expect(dogrula!(x), String(x)).toBe(false);
   });
 
-  kabul('bozuk alanlar reddedilir, çökme yok', () => {
+  it('bozuk alanlar reddedilir, çökme yok', () => {
     const temel = asamalar();
     for (const [ad, bozucu] of Object.entries(bozma)) {
       for (const asama of ['rol', 'oylama', 'sonuc']) {

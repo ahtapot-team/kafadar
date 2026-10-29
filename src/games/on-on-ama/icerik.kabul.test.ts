@@ -1,6 +1,5 @@
 import { existsSync, readFileSync } from 'node:fs';
 import { describe, expect, it } from 'vitest';
-import { kabulOnonMantik } from '../../kabul';
 
 // KK-60: 3 paket × ≥100 kart, her kart "10/10 ama" içerir, tekrarsız (tr), ≤140 karakter, boş yok.
 // Taslak md biçimi (docs/desteler/onon-*.md): "N. kart metni". JSON (content/onon/<deck_id>.json) md ile aynı içerik.
@@ -51,24 +50,20 @@ describe('KK-60: JSON desteler (content/onon/<deck_id>.json, md ile aynı)', () 
     cards: { id: string; text: string }[];
   };
   for (const deste of PAKETLER) {
-    kabulOnonMantik(
-      `${deste}.json: şema, md ile aynı metinler ve sıra, kimlikler benzersiz`,
-      () => {
-        const yol = `content/onon/${deste}.json`;
-        expect(
-          existsSync(new URL(`../../../${yol}`, import.meta.url)),
-          yol,
-        ).toBe(true);
-        const j = JSON.parse(oku(yol)) as Deste;
-        expect(j.deck_id).toBe(deste);
-        expect(j.lang).toBe('tr');
-        expect(j.version).toBeGreaterThanOrEqual(1);
-        expect(j.cards.map((c) => c.text)).toEqual(
-          kartlar(deste).map((x) => x.metin),
-        );
-        expect(new Set(j.cards.map((c) => c.id)).size).toBe(j.cards.length);
-        expect(j.cards.every((c) => c.id && c.text.length <= 140)).toBe(true);
-      },
-    );
+    it(`${deste}.json: şema, md ile aynı metinler ve sıra, kimlikler benzersiz`, () => {
+      const yol = `content/onon/${deste}.json`;
+      expect(existsSync(new URL(`../../../${yol}`, import.meta.url)), yol).toBe(
+        true,
+      );
+      const j = JSON.parse(oku(yol)) as Deste;
+      expect(j.deck_id).toBe(deste);
+      expect(j.lang).toBe('tr');
+      expect(j.version).toBeGreaterThanOrEqual(1);
+      expect(j.cards.map((c) => c.text)).toEqual(
+        kartlar(deste).map((x) => x.metin),
+      );
+      expect(new Set(j.cards.map((c) => c.id)).size).toBe(j.cards.length);
+      expect(j.cards.every((c) => c.id && c.text.length <= 140)).toBe(true);
+    });
   }
 });
