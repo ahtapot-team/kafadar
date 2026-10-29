@@ -12,6 +12,12 @@ export type OyunEkraniProps = {
   onAnaMenu: () => void; // oyunu bitirip ana ekrana döner
 };
 
+// Tanıtım kartı (PRD v6, KK-73…KK-77): metin oyunun kayıt satırından gelir; yeni oyun kendi tanıtımını kendi satırıyla ekler.
+export type Tanitim = {
+  kisi: string; // ör. "2–12 kişi"
+  metin: string; // 3–4 satır (PRD v6 tanıtım metinleri tablosu)
+};
+
 export type Oyun = {
   id: string;
   ad: string;
@@ -23,4 +29,5 @@ export type Oyun = {
   kurulum?: string; // oyuncular ekranından sonraki ayar ekranı (varsayılan '/paket')
   // Kayıtlı yarım oyunun bu oyuna ait geçerli durum olup olmadığı (bozuk kayıt reddedilir, KK-14).
   gecerliMi?: (durum: unknown) => boolean;
+  tanitim?: Tanitim; // aktif her oyunda bulunur (KK-77)
 };

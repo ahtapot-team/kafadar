@@ -40,6 +40,8 @@ export const BEKLEYEN = {
   ononUiEkran: false,
   ononOdaIstemci: false, // #125: 10/10 ama oda istemcisi: mesajlar, durum, türetmeler (frontend #121)
   ononOdaUi: false, // #125: 10/10 ama oda ekranları (testID sözleşmesi, frontend #121)
+  tanitimMantik: true, // #131: görüldü bilgisi, politika, registry metinleri (frontend #132)
+  tanitimUi: true, // #131: kart ve "Nasıl oynanır?" ekranları (testID sözleşmesi, frontend #132)
 };
 
 export const kabul = BEKLEYEN.cekirdek ? it.fails : it;
@@ -65,3 +67,5 @@ export const kabulOnonUi = BEKLEYEN.ononUi ? it.fails : it;
 export const kabulOnonOda = BEKLEYEN.ononOda ? it.fails : it;
 export const kabulOnonOdaIstemci = BEKLEYEN.ononOdaIstemci ? it.fails : it;
 export const kabulOnonOdaUi = BEKLEYEN.ononOdaUi ? it.fails : it;
+export const kabulTanitimMantik = BEKLEYEN.tanitimMantik ? it.fails : it;
+export const kabulTanitimUi = BEKLEYEN.tanitimUi ? it.fails : it;
