@@ -113,3 +113,21 @@ En az 3 telefon (karışık iOS/Android), aynı Wi-Fi ve en az bir telefonda mob
 
 **Sonuç:** ☐ geçti  İmza: ______
 
+## Tanıtım kartı (KK-73…KK-78)
+
+1 iOS ve 1 Android cihaz; uygulamayı yeni kurulmuş gibi (verisi temiz) aç. Cihaz: ______  Sürüm: ______  Tarih: ______  Kim: ______
+
+| # | KK | Kontrol | iOS | Android |
+|---|---|---|---|---|
+| 1 | KK-73 | Üç oyundan her birine ilk dokunuşta, sonraki ekrandan önce kart açılıyor (oyun adı, kişi sayısı, metin, Tamam); metin PRD tablosuyla aynı | | |
+| 2 | KK-74 | Tamam'a bas: kart kapanıyor, akış devam ediyor; uygulamayı tamamen kapat-aç: aynı oyuna girişte kart açılmıyor; öteki oyunların kartı hâlâ açılıyor | | |
+| 3 | KK-74 | Kart açıkken geri tuşu / geri hareketi: ana ekrana dönülüyor; aynı oyuna tekrar girince kart yine açılıyor (görülmüş sayılmadı) | | |
+| 4 | KK-74 | Kartın dışına (karartılmış alana) dokun: kart kapanmıyor | | |
+| 5 | KK-75 | İkinci telefondan odaya kodla katıl (kartı hiç görmemiş): lobide kart bir kez açılıyor; kart açıkken kurucu yeni oyuncu katılınca lobi listesi arkada güncelleniyor; kurucu Başlat'a basınca kart kapanıp oyun başlıyor; odayı kuran kartı oyunu seçerken görmüş | | |
+| 6 | KK-76 | "Nasıl oynanır?" bağlantısı: OK mu NOK mu paket/süre ekranında, Casus kim ayarlarında, 10/10 ama hazırlığında, oda lobisinde; aynı kartı açıyor, Tamam ile kapanıyor | | |
+| 7 | KK-77 | VoiceOver / TalkBack: kartın başlığı ve metni okunuyor; Tamam düğmesine rahat basılıyor (≥48px) | | |
+| 8 | KK-77 | Koyu ve açık temada kart okunaklı; "Hareketi azalt" açıkken kart animasyonsuz açılıyor | | |
+| 9 | KK-78 | Kart görüldükten sonra ana ekrandan oyuna giriş tek dokunuş; yarım kalan oyunda "Devam et" tanıtım göstermiyor | | |
+
+**Sonuç:** ☐ iOS geçti  ☐ Android geçti  İmza: ______
+
