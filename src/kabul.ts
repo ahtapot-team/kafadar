@@ -3,69 +3,15 @@ import { it } from 'vitest';
 // true: o alan henüz yazılmadı, kabul testleri kırmızı olmalı (it.fails, CI kırılmaz).
 // İlgili iş bitince geliştirici false yapar; bayrak açıkken "geçen" test CI'ı kırar
 // (yani test gerçekten bir şey denemiyor demektir).
-// cekirdek = #6 (oyuncular, kayıt, registry), oyun = #7 (OK mu NOK mu durum makinesi),
-// kk25 = kart metni oy girişi ve açıklamada görünür kalır (#7 ekranları),
-// kk26 = oyun dışı ekranlarda Geri düğmesi, kk27 = Ayarlar sağ üst ikon (#37),
-// cila = v1 sonrası küçük açıklar (#36),
-// oda = çok telefonlu oda modu: arayüz testID + wrangler deploy (#48, frontend),
-// odaKimlik = belirteç adreste değil ilk WS mesajında (#48, sunucu + istemci),
-// odaDeploy = sunucunun main'e merge'de wrangler ile dağıtımı (#48),
-// odaGuvenlik = belirteç çakışma koruması + sunucu kabuğunun crypto belirteci (#48),
-// casusKayit = Casus kim kayıt şema doğrulayıcısı durumGecerliMi (#93),
-// casusKayitUi = Casus ekranı kayıttan okurken durumGecerliMi kullanır (frontend #81),
-// casusMantik = Casus kim saf durum makinesi + JSON desteler (#78), casusUi = ekranlar ve kayıt listesi (#80…#82),
-// ononMantik = 10/10 ama saf durum makinesi + JSON desteler (#106), ononUi = ekranlar ve kayıt listesi (#108),
-// odaMantik = oda mantığı (saf durum makinesi, KK-29…KK-40, #47).
+// KURAL: işi kapatan PR bayrağı ve sarmalayıcıyı SİLER, testleri düz `it`e çevirir (docs/KABUL-TESTLERI.md).
+// Yeni özellikte QA (bayrak + sarmalayıcı) ekler; iş sürerken yalnızca açık işlerin bayrakları burada durur.
+//
+// tanitimMantik = tanıtım kartı görüldü bilgisi, politika, registry metinleri (#132),
+// tanitimUi = tanıtım kartı ve "Nasıl oynanır?" ekranları, testID sözleşmesi (#132).
 export const BEKLEYEN = {
-  cekirdek: false,
-  oyun: false,
-  kk25: false,
-  kk26: false,
-  kk27: false,
-  cila: false,
-  oda: false,
-  odaMantik: false,
-  odaGuvenlik: false,
-  odaDeploy: false,
-  odaKimlik: false,
-  casusMantik: false,
-  casusUi: false,
-  casusUiSon: false, // #82: tüm Casus kim ekranlarının testID sözleşmesi
-  casusKayit: false,
-  casusKayitUi: false,
-  odaCik: false, // #73: oyun içinde "Odadan çık?" (frontend #104 kapatır)
-  ononMantik: false,
-  ononUi: false,
-  ononOda: false, // #118: 10/10 ama oda türü (mantık, backend #119)
-  ononUiEkran: false,
-  ononOdaIstemci: false, // #125: 10/10 ama oda istemcisi: mesajlar, durum, türetmeler (frontend #121)
-  ononOdaUi: false, // #125: 10/10 ama oda ekranları (testID sözleşmesi, frontend #121)
-  tanitimMantik: true, // #131: görüldü bilgisi, politika, registry metinleri (frontend #132)
-  tanitimUi: true, // #131: kart ve "Nasıl oynanır?" ekranları (testID sözleşmesi, frontend #132)
+  tanitimMantik: true,
+  tanitimUi: true,
 };
 
-export const kabul = BEKLEYEN.cekirdek ? it.fails : it;
-export const kabulOyun = BEKLEYEN.oyun ? it.fails : it;
-export const kabulKk25 = BEKLEYEN.kk25 ? it.fails : it;
-export const kabulKk26 = BEKLEYEN.kk26 ? it.fails : it;
-export const kabulKk27 = BEKLEYEN.kk27 ? it.fails : it;
-export const kabulCila = BEKLEYEN.cila ? it.fails : it;
-export const kabulOda = BEKLEYEN.oda ? it.fails : it;
-export const kabulOdaMantik = BEKLEYEN.odaMantik ? it.fails : it;
-export const kabulOdaGuvenlik = BEKLEYEN.odaGuvenlik ? it.fails : it;
-export const kabulOdaDeploy = BEKLEYEN.odaDeploy ? it.fails : it;
-export const kabulOdaKimlik = BEKLEYEN.odaKimlik ? it.fails : it;
-export const kabulCasusMantik = BEKLEYEN.casusMantik ? it.fails : it;
-export const kabulCasusUi = BEKLEYEN.casusUi ? it.fails : it;
-export const kabulCasusUiSon = BEKLEYEN.casusUiSon ? it.fails : it;
-export const kabulCasusKayit = BEKLEYEN.casusKayit ? it.fails : it;
-export const kabulOdaCik = BEKLEYEN.odaCik ? it.fails : it;
-export const kabulCasusKayitUi = BEKLEYEN.casusKayitUi ? it.fails : it;
-export const kabulOnonMantik = BEKLEYEN.ononMantik ? it.fails : it;
-export const kabulOnonUiEkran = BEKLEYEN.ononUiEkran ? it.fails : it;
-export const kabulOnonUi = BEKLEYEN.ononUi ? it.fails : it;
-export const kabulOnonOda = BEKLEYEN.ononOda ? it.fails : it;
-export const kabulOnonOdaIstemci = BEKLEYEN.ononOdaIstemci ? it.fails : it;
-export const kabulOnonOdaUi = BEKLEYEN.ononOdaUi ? it.fails : it;
 export const kabulTanitimMantik = BEKLEYEN.tanitimMantik ? it.fails : it;
 export const kabulTanitimUi = BEKLEYEN.tanitimUi ? it.fails : it;

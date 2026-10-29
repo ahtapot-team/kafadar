@@ -1,6 +1,5 @@
 import { describe, expect, it } from 'vitest';
 import type { Depo } from '../core/kayit';
-import { kabulOnonOdaIstemci as kabul } from '../kabul';
 import { OdaIstemci, odaTuru } from './istemci';
 import type { Acilis, Istemci, Sunucu } from './mesaj';
 import type { Gorunum, OnOnFinal } from './oda';
@@ -95,56 +94,47 @@ describe('KK-63: oda türü, istemci', () => {
     ]);
   });
 
-  kabul(
-    '10/10 ama odası kurulur: oyun türü ve paket açılış komutunda gider (sunucu: ?oyun=on-on-ama&paket=…)',
-    () => {
-      const t = kurTasima();
-      t.i.kur('Murat', 'sevgili', 'on-on-ama');
-      expect(t.acilislar).toEqual([
-        { islem: 'kur', ad: 'Murat', paket: 'sevgili', oyun: 'on-on-ama' },
-      ]);
-    },
-  );
+  it('10/10 ama odası kurulur: oyun türü ve paket açılış komutunda gider (sunucu: ?oyun=on-on-ama&paket=…)', () => {
+    const t = kurTasima();
+    t.i.kur('Murat', 'sevgili', 'on-on-ama');
+    expect(t.acilislar).toEqual([
+      { islem: 'kur', ad: 'Murat', paket: 'sevgili', oyun: 'on-on-ama' },
+    ]);
+  });
 
-  kabul(
-    'katılan odanın oyununa girer: ekran türü odanın türünden (kodla, hangi oyundan gelirse gelsin)',
-    async () => {
-      const t = kurTasima();
-      expect(odaTuru(t.i.durum)).toBeNull(); // henüz odada değil
-      t.i.katil('123456', 'Ayşe');
-      t.sun(tamam);
-      t.sun(sunGorunum(gor({ tur: 'on-on-ama' })));
-      await akis();
-      expect(odaTuru(t.i.durum)).toBe('on-on-ama');
-      t.sun(sunGorunum(gor({ tur: 'ok-mu-nok' })));
-      expect(odaTuru(t.i.durum)).toBe('ok-mu-nok');
-      t.sun(sunGorunum(gor({ tur: undefined }))); // türsüz (eski) görünüm OK mu NOK odasıdır
-      expect(odaTuru(t.i.durum)).toBe('ok-mu-nok');
-    },
-  );
+  it('katılan odanın oyununa girer: ekran türü odanın türünden (kodla, hangi oyundan gelirse gelsin)', async () => {
+    const t = kurTasima();
+    expect(odaTuru(t.i.durum)).toBeNull(); // henüz odada değil
+    t.i.katil('123456', 'Ayşe');
+    t.sun(tamam);
+    t.sun(sunGorunum(gor({ tur: 'on-on-ama' })));
+    await akis();
+    expect(odaTuru(t.i.durum)).toBe('on-on-ama');
+    t.sun(sunGorunum(gor({ tur: 'ok-mu-nok' })));
+    expect(odaTuru(t.i.durum)).toBe('ok-mu-nok');
+    t.sun(sunGorunum(gor({ tur: undefined }))); // türsüz (eski) görünüm OK mu NOK odasıdır
+    expect(odaTuru(t.i.durum)).toBe('ok-mu-nok');
+  });
 });
 
 describe('KK-64/KK-65: puan gönderme', () => {
-  kabul(
-    'puanla(n) {t:"puanla", puan:n} gönderir; değiştirince yenisi gider (son puan sunucuda geçerli)',
-    async () => {
-      const t = kurTasima();
-      t.i.katil('123456', 'Murat');
-      t.sun(tamam);
-      t.sun(sunGorunum(gor()));
-      await akis();
-      t.i.puanla(7);
-      t.i.puanla(3);
-      t.i.puanla(0); // 0 geçerli puandır
-      expect(t.gonderilen).toEqual([
-        { t: 'puanla', puan: 7 },
-        { t: 'puanla', puan: 3 },
-        { t: 'puanla', puan: 0 },
-      ]);
-    },
-  );
+  it('puanla(n) {t:"puanla", puan:n} gönderir; değiştirince yenisi gider (son puan sunucuda geçerli)', async () => {
+    const t = kurTasima();
+    t.i.katil('123456', 'Murat');
+    t.sun(tamam);
+    t.sun(sunGorunum(gor()));
+    await akis();
+    t.i.puanla(7);
+    t.i.puanla(3);
+    t.i.puanla(0); // 0 geçerli puandır
+    expect(t.gonderilen).toEqual([
+      { t: 'puanla', puan: 7 },
+      { t: 'puanla', puan: 3 },
+      { t: 'puanla', puan: 0 },
+    ]);
+  });
 
-  kabul('bağlantı yokken puanla çökmez ve bir şey göndermez', () => {
+  it('bağlantı yokken puanla çökmez ve bir şey göndermez', () => {
     const t = kurTasima();
     expect(() => t.i.puanla(5)).not.toThrow();
     expect(t.gonderilen).toEqual([]);
@@ -169,7 +159,7 @@ describe('KK-64/KK-65: puan gönderme', () => {
 });
 
 describe('KK-67/KK-68: açıklama ve "Sonraki kart"', () => {
-  kabul('sonraki() {t:"sonraki"} gönderir', async () => {
+  it('sonraki() {t:"sonraki"} gönderir', async () => {
     const t = kurTasima();
     t.i.kur('Murat', 'arkadas', 'on-on-ama');
     t.sun(tamam);
@@ -200,25 +190,22 @@ describe('KK-67/KK-68: açıklama ve "Sonraki kart"', () => {
 });
 
 describe('KK-69/KK-70: final ve yeniden bağlanma', () => {
-  kabul(
-    'onfinal mesajı durumda saklanır; final gösterilirken yeniden bağlanılmaz',
-    async () => {
-      const t = kurTasima();
-      t.i.katil('123456', 'Murat');
-      t.sun(tamam);
-      t.sun(sunGorunum(gor({ asama: 'bitti' })));
-      t.sun({ t: 'final', final: bosFinal });
-      await akis();
-      expect(t.i.durum.onFinal).toEqual(bosFinal);
-      expect(t.i.durum.final).toBeNull();
-      const once = t.acilislar.length;
-      t.kopar();
-      expect(t.i.durum.baglanti).toBe('kapali');
-      expect(t.bekleyenSayisi()).toBe(0);
-      t.i.onPlana();
-      expect(t.acilislar.length).toBe(once);
-    },
-  );
+  it('onfinal mesajı durumda saklanır; final gösterilirken yeniden bağlanılmaz', async () => {
+    const t = kurTasima();
+    t.i.katil('123456', 'Murat');
+    t.sun(tamam);
+    t.sun(sunGorunum(gor({ asama: 'bitti' })));
+    t.sun({ t: 'final', final: bosFinal });
+    await akis();
+    expect(t.i.durum.onFinal).toEqual(bosFinal);
+    expect(t.i.durum.final).toBeNull();
+    const once = t.acilislar.length;
+    t.kopar();
+    expect(t.i.durum.baglanti).toBe('kapali');
+    expect(t.bekleyenSayisi()).toBe(0);
+    t.i.onPlana();
+    expect(t.acilislar.length).toBe(once);
+  });
 
   it('oyun ortasında kopma: "yeniden" durumu, aynı kimlikle geri dönüş (KK-37 10/10 ama odasında da)', async () => {
     const t = kurTasima();
@@ -270,35 +257,32 @@ describe('KK-69: kişisel kart türetmeleri (onOnKisisel)', () => {
     },
   };
 
-  kabul(
-    'ortalama, odaya göre fark (odanın tüm puanlarının ortalaması), uçlar ve boş sayısı',
-    () => {
-      // oda: 51 puan / 9 puan = 5,67
-      expect(onOnKisisel(final, 'Deniz')).toMatchObject({
-        ortalama: 8,
-        odaFarki: 2.3,
-        enYuksek: 10,
-        enDusuk: 6,
-        bos: 1,
-      });
-      expect(onOnKisisel(final, 'Mert')).toMatchObject({
-        ortalama: 6,
-        odaFarki: 0.3,
-        enYuksek: 6,
-        enDusuk: 6,
-        bos: 1,
-      });
-      expect(onOnKisisel(final, 'Ayşe')).toMatchObject({
-        ortalama: 3,
-        odaFarki: -2.7,
-        enYuksek: 4,
-        enDusuk: 2,
-        bos: 1,
-      });
-    },
-  );
+  it('ortalama, odaya göre fark (odanın tüm puanlarının ortalaması), uçlar ve boş sayısı', () => {
+    // oda: 51 puan / 9 puan = 5,67
+    expect(onOnKisisel(final, 'Deniz')).toMatchObject({
+      ortalama: 8,
+      odaFarki: 2.3,
+      enYuksek: 10,
+      enDusuk: 6,
+      bos: 1,
+    });
+    expect(onOnKisisel(final, 'Mert')).toMatchObject({
+      ortalama: 6,
+      odaFarki: 0.3,
+      enYuksek: 6,
+      enDusuk: 6,
+      bos: 1,
+    });
+    expect(onOnKisisel(final, 'Ayşe')).toMatchObject({
+      ortalama: 3,
+      odaFarki: -2.7,
+      enYuksek: 4,
+      enDusuk: 2,
+      bos: 1,
+    });
+  });
 
-  kabul('hiç puan vermeyen: ortalama/fark/uçlar null, hepsi boş', () => {
+  it('hiç puan vermeyen: ortalama/fark/uçlar null, hepsi boş', () => {
     expect(onOnKisisel(final, 'Can')).toEqual({
       ortalama: null,
       odaFarki: null,
@@ -309,7 +293,7 @@ describe('KK-69: kişisel kart türetmeleri (onOnKisisel)', () => {
     });
   });
 
-  kabul('ruh ikizi: ikizlerden diğeri; ikizi olmayan null', () => {
+  it('ruh ikizi: ikizlerden diğeri; ikizi olmayan null', () => {
     expect(onOnKisisel(final, 'Deniz').ikiz).toBe('Mert');
     expect(onOnKisisel(final, 'Mert').ikiz).toBe('Deniz');
     expect(onOnKisisel(final, 'Ayşe').ikiz).toBeNull();
@@ -317,7 +301,7 @@ describe('KK-69: kişisel kart türetmeleri (onOnKisisel)', () => {
 });
 
 describe('KK-67: açıklama çubuk sırası (puanSirasi)', () => {
-  kabul('puan azalan, eşitlikte oyuncu sırası, boş en sonda', () => {
+  it('puan azalan, eşitlikte oyuncu sırası, boş en sonda', () => {
     const a = {
       ortalama: 5.8,
       enDusuk: { puan: 2, kisiler: ['Ali'] },

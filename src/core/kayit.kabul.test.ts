@@ -1,6 +1,5 @@
-import { describe, expect } from 'vitest';
+import { describe, expect, it } from 'vitest';
 import type { Deste } from './deste';
-import { kabul, kabulOyun } from '../kabul';
 import {
   type Depo,
   EKIP_ANAHTARI,
@@ -50,13 +49,13 @@ const yeni = () =>
   });
 
 describe('KK-5: son oyuncu listesi', () => {
-  kabul('kaydedilir ve geri gelir (Türkçe karakter, emoji)', async () => {
+  it('kaydedilir ve geri gelir (Türkçe karakter, emoji)', async () => {
     const depo = depoYap();
     await sonEkipKaydet(depo, ['Ali', 'Şükrü', '👍']);
     expect(await sonEkipOku(depo)).toEqual(['Ali', 'Şükrü', '👍']);
   });
 
-  kabul('kayıt yoksa ya da bozuksa boş liste, çökmez', async () => {
+  it('kayıt yoksa ya da bozuksa boş liste, çökmez', async () => {
     const depo = depoYap();
     expect(await sonEkipOku(depo)).toEqual([]);
     depo.veri.set(EKIP_ANAHTARI, '{bozuk');
@@ -65,11 +64,11 @@ describe('KK-5: son oyuncu listesi', () => {
 });
 
 describe('KK-14: oturum kaydı ve devam etme', () => {
-  kabul('kayıt yoksa devam edilecek oyun yoktur', async () => {
+  it('kayıt yoksa devam edilecek oyun yoktur', async () => {
     expect(await oku(depoYap())).toBeNull();
   });
 
-  kabulOyun('her oydan ve her karttan sonra kaydedilir', async () => {
+  it('her oydan ve her karttan sonra kaydedilir', async () => {
     const depo = depoYap();
     let d = yeni();
     d = await kaydet(depo, d, {
@@ -92,7 +91,7 @@ describe('KK-14: oturum kaydı ve devam etme', () => {
     expect(await oku(depo)).toEqual(d);
   });
 
-  kabulOyun('kapanıp açılınca kalınan yerden aynı oyun sürer', async () => {
+  it('kapanıp açılınca kalınan yerden aynı oyun sürer', async () => {
     const depo = depoYap();
     let d = yeni();
     for (const oyuncu of ['Ali', 'Ayşe', 'Can']) {
@@ -108,25 +107,22 @@ describe('KK-14: oturum kaydı ve devam etme', () => {
     );
   });
 
-  kabul(
-    'okunamayan ya da eski sürümlü kayıtta çökmez, kayıt silinir',
-    async () => {
-      const bozuklar = [
-        'bozuk{',
-        '42',
-        '{}',
-        JSON.stringify({ surum: KAYIT_SURUMU - 1, durum: {} }),
-      ];
-      for (const bozuk of bozuklar) {
-        const depo = depoYap();
-        depo.veri.set(OYUN_ANAHTARI, bozuk);
-        expect(await oku(depo)).toBeNull();
-        expect(await depo.getItem(OYUN_ANAHTARI)).toBeNull();
-      }
-    },
-  );
+  it('okunamayan ya da eski sürümlü kayıtta çökmez, kayıt silinir', async () => {
+    const bozuklar = [
+      'bozuk{',
+      '42',
+      '{}',
+      JSON.stringify({ surum: KAYIT_SURUMU - 1, durum: {} }),
+    ];
+    for (const bozuk of bozuklar) {
+      const depo = depoYap();
+      depo.veri.set(OYUN_ANAHTARI, bozuk);
+      expect(await oku(depo)).toBeNull();
+      expect(await depo.getItem(OYUN_ANAHTARI)).toBeNull();
+    }
+  });
 
-  kabulOyun('kayıt sürümlüdür', async () => {
+  it('kayıt sürümlüdür', async () => {
     const depo = depoYap();
     await kaydet(depo, yeni(), { tip: 'bitir' });
     const ham = JSON.parse((await depo.getItem(OYUN_ANAHTARI)) ?? '{}');

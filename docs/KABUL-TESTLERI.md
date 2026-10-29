@@ -1,8 +1,7 @@
 # Kabul testleri: KK → test eşlemesi (#5)
 
 Çalıştırma: `npm run kabul` (CI'da ayrı adım). `npm test` yalnızca birim testleri koşar.
-Bekleyen testler `src/kabul.ts` içindeki `BEKLEYEN` bayraklarıyla (`cekirdek` = #6, `oyun` = #7) `it.fails` olarak işaretlidir (kırmızı = beklenen, CI kırılmaz).
-**Geliştirici testleri yeşile çevirince `BEKLEYEN = false` yapar.** Bayrak açıkken geçen test CI'ı kırar. Kabul testlerini silmek, atlamak ya da gevşetmek yasaktır.
+Bekleyen (henüz yazılmamış işe ait) testler `src/kabul.ts` içindeki `BEKLEYEN` bayraklarıyla `it.fails` olarak işaretlidir (kırmızı = beklenen, CI kırılmaz). **İşi bitiren geliştirici bayrağı `false` yapar; işi kapatan PR bayrağı ve sarmalayıcıyı siler, testler düz `it` olur (bayrak sonsuza kadar kalmaz).** Bayrak açıkken geçen test CI'ı kırar. Kabul testlerini silmek, atlamak ya da gevşetmek yasak.
 
 ## Arayüz sözleşmesi (imzalar iskelet dosyalarda)
 - `src/core/oyuncular.ts`: isim ve oyuncu sayısı kuralları (KK-3, KK-4)
