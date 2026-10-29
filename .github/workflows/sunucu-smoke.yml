@@ -1,0 +1,50 @@
+# Sunucu smoke testi: sunucuya (ya da oda mantığına) dokunan PR'da wrangler dev ile gerçek sunucu çalışır,
+# sunucu/test/oyun.ts (OK mu NOK mu) ve onon.ts (10/10 ama) uçtan uca koşar. Kırık sunucuda kırmızı olur.
+name: Sunucu smoke
+
+on:
+  pull_request:
+    paths:
+      - 'sunucu/**'
+      - 'src/oda/**'
+      - 'src/core/**'
+      - 'content/**/*.json'
+      - '.github/workflows/sunucu-smoke.yml'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: sunucu-smoke-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
+
+      - name: Sunucuyu başlat (wrangler dev)
+        working-directory: sunucu
+        run: |
+          npx --yes wrangler@4.154.0 dev --port 8787 --ip 127.0.0.1 > "$RUNNER_TEMP/wrangler.log" 2>&1 &
+          for i in $(seq 1 60); do curl -s -o /dev/null http://127.0.0.1:8787/ && exit 0; sleep 2; done
+          cat "$RUNNER_TEMP/wrangler.log"; exit 1
+
+      - name: OK mu NOK mu odası (4 istemci)
+        run: node sunucu/test/oyun.ts http://127.0.0.1:8787 4
+
+      - name: 10/10 ama odası (4 istemci)
+        run: node sunucu/test/onon.ts http://127.0.0.1:8787 4
+
+      - name: Sunucu günlüğü (hata olursa)
+        if: failure()
+        run: cat "$RUNNER_TEMP/wrangler.log" || true
