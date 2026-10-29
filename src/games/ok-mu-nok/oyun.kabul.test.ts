@@ -1,6 +1,5 @@
-import { describe, expect } from 'vitest';
+import { describe, expect, it } from 'vitest';
 import type { Deste } from '../../core/deste';
-import { kabulOyun as kabul } from '../../kabul';
 import {
   type Durum,
   type Oduller,
@@ -76,7 +75,7 @@ function sira(d: Durum, n: number) {
 }
 
 describe('KK-6: oyun ortasında oyuncu ekle/çıkar', () => {
-  kabul('sonradan katılan oyuncu yalnızca katıldığı kartlardan sayılır', () => {
+  it('sonradan katılan oyuncu yalnızca katıldığı kartlardan sayılır', () => {
     let d = yeni();
     const k1 = gecerliKart(d).id;
     d = oyVeGoster(d, { Ali: 'NOK', Ayşe: 'OK', Can: 'OK' });
@@ -93,7 +92,7 @@ describe('KK-6: oyun ortasında oyuncu ekle/çıkar', () => {
     expect(o.olayKart).toEqual([k1]); // k1: 2-1; Deniz'li kartlar 3-1
   });
 
-  kabul('çıkarılan oyuncunun oyu beklenmez; ödüller çökmez', () => {
+  it('çıkarılan oyuncunun oyu beklenmez; ödüller çökmez', () => {
     let d = yeni();
     d = sonraki(oyVeGoster(d, { Ali: 'NOK', Ayşe: 'OK', Can: 'OK' }));
     d = oyVeGoster(d, { Ali: 'NOK', Ayşe: 'OK', Can: 'OK' });
@@ -108,7 +107,7 @@ describe('KK-6: oyun ortasında oyuncu ekle/çıkar', () => {
 });
 
 describe('KK-7: tur uzunluğu', () => {
-  kabul('10 kartlık turda 10. karttan sonra oturum biter', () => {
+  it('10 kartlık turda 10. karttan sonra oturum biter', () => {
     let d = yeni({ uzunluk: 10 });
     for (let i = 1; i <= 10; i++) {
       d = sonraki(oyVeGoster(d, HEPSI_OK));
@@ -116,7 +115,7 @@ describe('KK-7: tur uzunluğu', () => {
     }
   });
 
-  kabul('sınırsız turda deste bitene kadar devam eder', () => {
+  it('sınırsız turda deste bitene kadar devam eder', () => {
     let d = yeni({ uzunluk: null, deste: deste(30) });
     for (let i = 1; i <= 30; i++) {
       d = sonraki(oyVeGoster(d, HEPSI_OK));
@@ -124,7 +123,7 @@ describe('KK-7: tur uzunluğu', () => {
     }
   });
 
-  kabul('Bitir her an oturumu bitirir', () => {
+  it('Bitir her an oturumu bitirir', () => {
     expect(isle(yeni(), { tip: 'bitir' }).asama).toBe('bitti');
     expect(isle(oyVeGoster(yeni(), HEPSI_OK), { tip: 'bitir' }).asama).toBe(
       'bitti',
@@ -133,7 +132,7 @@ describe('KK-7: tur uzunluğu', () => {
 });
 
 describe('KK-8: kart tekrarı', () => {
-  kabul('aynı kart tekrar gelmez, deste bitince karıştırma sorulur', () => {
+  it('aynı kart tekrar gelmez, deste bitince karıştırma sorulur', () => {
     let d = yeni({ deste: deste(5) });
     const gorulen: string[] = [];
     for (let i = 0; i < 5; i++) {
@@ -147,7 +146,7 @@ describe('KK-8: kart tekrarı', () => {
     expect(gecerliKart(d).id).toMatch(/^k\d$/);
   });
 
-  kabul('Atla da kartı tüketir, atlanan kart geri gelmez', () => {
+  it('Atla da kartı tüketir, atlanan kart geri gelmez', () => {
     let d = yeni({ deste: deste(5) });
     const gorulen: string[] = [];
     for (let i = 0; i < 5; i++) {
@@ -160,7 +159,7 @@ describe('KK-8: kart tekrarı', () => {
 });
 
 describe('KK-10: oy girişi', () => {
-  kabul('herkes oy vermeden Göster pasiftir ve basılsa da açmaz', () => {
+  it('herkes oy vermeden Göster pasiftir ve basılsa da açmaz', () => {
     let d = yeni();
     expect(gosterAktif(d)).toBe(false);
     d = oyla(d, { Ali: 'OK', Ayşe: 'NOK' });
@@ -171,7 +170,7 @@ describe('KK-10: oy girişi', () => {
     expect(goster(d).asama).toBe('acik');
   });
 
-  kabul('oy açıklamadan önce değiştirilebilir, sonra değiştirilemez', () => {
+  it('oy açıklamadan önce değiştirilebilir, sonra değiştirilemez', () => {
     let d = oyla(yeni(), { Ali: 'OK' });
     d = oyla(d, { Ali: 'NOK', Ayşe: 'OK', Can: 'OK' });
     d = goster(d);
@@ -179,30 +178,27 @@ describe('KK-10: oy girişi', () => {
     expect(oyla(d, { Ali: 'OK' })).toEqual(d);
   });
 
-  kabul(
-    'aynı oyuncuda 300 ms içindeki tekrar dokunuş tek işlem sayılır',
-    () => {
-      const ol = (oyuncu: string, oy: Oy, t: number): Olay => ({
-        tip: 'oyla',
-        oyuncu,
-        oy,
-        t,
-      });
-      const bitir = (d: Durum) =>
-        sonuc(
-          goster(
-            isle(isle(d, ol('Ayşe', 'OK', 20_000)), ol('Can', 'OK', 30_000)),
-          ),
-        );
-      let d = isle(yeni(), ol('Ali', 'OK', 10_000));
-      d = isle(d, ol('Ali', 'NOK', 10_100)); // yok sayılır
-      expect(bitir(d).tip).toBe('oybirligi');
-      d = isle(d, ol('Ali', 'NOK', 11_000)); // yeterince sonra: geçerli
-      expect(bitir(d).tip).toBe('tekAzinlik');
-    },
-  );
+  it('aynı oyuncuda 300 ms içindeki tekrar dokunuş tek işlem sayılır', () => {
+    const ol = (oyuncu: string, oy: Oy, t: number): Olay => ({
+      tip: 'oyla',
+      oyuncu,
+      oy,
+      t,
+    });
+    const bitir = (d: Durum) =>
+      sonuc(
+        goster(
+          isle(isle(d, ol('Ayşe', 'OK', 20_000)), ol('Can', 'OK', 30_000)),
+        ),
+      );
+    let d = isle(yeni(), ol('Ali', 'OK', 10_000));
+    d = isle(d, ol('Ali', 'NOK', 10_100)); // yok sayılır
+    expect(bitir(d).tip).toBe('oybirligi');
+    d = isle(d, ol('Ali', 'NOK', 11_000)); // yeterince sonra: geçerli
+    expect(bitir(d).tip).toBe('tekAzinlik');
+  });
 
-  kabul("Göster'e iki kez basmak sonucu iki kez açmaz", () => {
+  it("Göster'e iki kez basmak sonucu iki kez açmaz", () => {
     const d = oyVeGoster(yeni(), { Ali: 'NOK', Ayşe: 'OK', Can: 'OK' });
     expect(goster(d)).toEqual(d);
     expect(sonraki(sonraki(d)).asama).toBe('oy'); // çift "Sonraki" de tek kart ilerletir
@@ -213,7 +209,7 @@ describe('KK-10: oy girişi', () => {
 });
 
 describe('KK-11: açıklama metinleri', () => {
-  kabul('tek azınlıkta "<isim> tek başına <oy>!"', () => {
+  it('tek azınlıkta "<isim> tek başına <oy>!"', () => {
     const a = oyVeGoster(yeni(), { Ali: 'NOK', Ayşe: 'OK', Can: 'OK' });
     expect(sonuc(a)).toEqual({
       tip: 'tekAzinlik',
@@ -226,13 +222,13 @@ describe('KK-11: açıklama metinleri', () => {
     });
   });
 
-  kabul('oybirliğinde tip oybirligi (konfeti)', () => {
+  it('oybirliğinde tip oybirligi (konfeti)', () => {
     expect(sonuc(oyVeGoster(yeni(), HEPSI_OK)).tip).toBe('oybirligi');
     const hepNok = { Ali: 'NOK', Ayşe: 'NOK', Can: 'NOK' } as Oylar;
     expect(sonuc(oyVeGoster(yeni(), hepNok)).tip).toBe('oybirligi');
   });
 
-  kabul('eşitlikte "Tam ikiye bölündünüz"', () => {
+  it('eşitlikte "Tam ikiye bölündünüz"', () => {
     const d = yeni({ oyuncular: ['Ali', 'Ayşe', 'Can', 'Deniz'] });
     const s = sonuc(
       oyVeGoster(d, { Ali: 'OK', Ayşe: 'OK', Can: 'NOK', Deniz: 'NOK' }),
@@ -242,7 +238,7 @@ describe('KK-11: açıklama metinleri', () => {
 });
 
 describe('KK-12: oturum sonu ödülleri', () => {
-  kabul('Aykırı ruh, Ruh ikizleri ve Olay kart', () => {
+  it('Aykırı ruh, Ruh ikizleri ve Olay kart', () => {
     const { d, idler } = oyna(yeni(), [
       { Ali: 'NOK', Ayşe: 'OK', Can: 'OK' },
       { Ali: 'NOK', Ayşe: 'OK', Can: 'OK' },
@@ -254,7 +250,7 @@ describe('KK-12: oturum sonu ödülleri', () => {
     expect(o.olayKart).toEqual([...idler].sort()); // üç kart de 2-1: eşitlikte hepsi
   });
 
-  kabul('Olay kart en dengeli bölünen kart; oybirliği azınlık sayılmaz', () => {
+  it('Olay kart en dengeli bölünen kart; oybirliği azınlık sayılmaz', () => {
     const d = yeni({ oyuncular: ['Ali', 'Ayşe', 'Can', 'Deniz'] });
     const { d: son, idler } = oyna(d, [
       { Ali: 'OK', Ayşe: 'OK', Can: 'OK', Deniz: 'OK' },
@@ -266,7 +262,7 @@ describe('KK-12: oturum sonu ödülleri', () => {
     expect(o.aykiriRuh).toEqual(['Deniz']);
   });
 
-  kabul('Aykırı ruhta eşitlik: tüm kazananlar gösterilir', () => {
+  it('Aykırı ruhta eşitlik: tüm kazananlar gösterilir', () => {
     const { d } = oyna(yeni(), [
       { Ali: 'NOK', Ayşe: 'OK', Can: 'OK' },
       { Ali: 'OK', Ayşe: 'NOK', Can: 'OK' },
@@ -274,7 +270,7 @@ describe('KK-12: oturum sonu ödülleri', () => {
     expect(norm(oduller(d)).aykiriRuh).toEqual(['Ali', 'Ayşe']);
   });
 
-  kabul('2 kişilik oyunda Aykırı ruh verilmez', () => {
+  it('2 kişilik oyunda Aykırı ruh verilmez', () => {
     const { d } = oyna(yeni({ oyuncular: ['Ali', 'Ayşe'] }), [
       { Ali: 'OK', Ayşe: 'NOK' },
       { Ali: 'OK', Ayşe: 'OK' },
@@ -284,31 +280,28 @@ describe('KK-12: oturum sonu ödülleri', () => {
 });
 
 describe('KK-22: saf, serileştirilebilir, tohumlu durum makinesi', () => {
-  kabul('aynı tohum aynı kart sırasını verir, farklı tohum farklısını', () => {
+  it('aynı tohum aynı kart sırasını verir, farklı tohum farklısını', () => {
     const a = sira(yeni({ tohum: 7 }), 20);
     expect(sira(yeni({ tohum: 7 }), 20)).toEqual(a);
     expect(sira(yeni({ tohum: 8 }), 20)).not.toEqual(a);
     expect(new Set(a).size).toBe(20);
   });
 
-  kabul(
-    'isle girdiyi değiştirmez; JSON gidiş-dönüşünden sonra aynı davranır',
-    () => {
-      const d = oyla(yeni({ tohum: 3 }), { Ali: 'NOK', Ayşe: 'OK', Can: 'OK' });
-      const kopya = structuredClone(d);
-      goster(d);
-      expect(d).toEqual(kopya);
-      const diril = JSON.parse(JSON.stringify(d)) as Durum;
-      expect(diril).toEqual(d);
-      expect(sonuc(goster(diril))).toEqual(sonuc(goster(d)));
-      const ilerle = (x: Durum) => sonraki(goster(x));
-      expect(sira(ilerle(diril), 5)).toEqual(sira(ilerle(d), 5));
-    },
-  );
+  it('isle girdiyi değiştirmez; JSON gidiş-dönüşünden sonra aynı davranır', () => {
+    const d = oyla(yeni({ tohum: 3 }), { Ali: 'NOK', Ayşe: 'OK', Can: 'OK' });
+    const kopya = structuredClone(d);
+    goster(d);
+    expect(d).toEqual(kopya);
+    const diril = JSON.parse(JSON.stringify(d)) as Durum;
+    expect(diril).toEqual(d);
+    expect(sonuc(goster(diril))).toEqual(sonuc(goster(d)));
+    const ilerle = (x: Durum) => sonraki(goster(x));
+    expect(sira(ilerle(diril), 5)).toEqual(sira(ilerle(d), 5));
+  });
 });
 
 describe('KK-25: geçerli kart oy girişi ve açıklamada aynı kalır', () => {
-  kabul('kart, sonraki gelene dek değişmez ve her aşamada erişilebilir', () => {
+  it('kart, sonraki gelene dek değişmez ve her aşamada erişilebilir', () => {
     const d = yeni();
     const kart = gecerliKart(d);
     const oylandi = oyla(d, { Ali: 'OK', Ayşe: 'NOK' });

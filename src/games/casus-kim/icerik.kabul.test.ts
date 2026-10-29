@@ -1,6 +1,5 @@
 import { readFileSync } from 'node:fs';
 import { describe, expect, it } from 'vitest';
-import { kabulCasusMantik } from '../../kabul';
 import type { CasusDeste } from './casus';
 
 // KK-51: içerik testi. Taslak md biçimi: "N. kelime — ipucu" (## Kelimeler) ve "N. soru" (## Örnek sorular).
@@ -65,7 +64,7 @@ describe("KK-51: Casus kim içeriği (md taslağı, 100'lük paketler: Murat)", 
 // Deste şeması (JSON, backend #78): content/casus/<deck_id>.json md ile aynı kelime ve ipuçlarını taşır.
 describe('KK-51: Casus kim desteleri JSON şemasıyla yüklenir', () => {
   for (const deste of PAKETLER) {
-    kabulCasusMantik(`${deste}.json şemaya uyar ve md ile aynıdır`, () => {
+    it(`${deste}.json şemaya uyar ve md ile aynıdır`, () => {
       const json = JSON.parse(oku(`content/casus/${deste}.json`)) as CasusDeste;
       expect(json.deck_id).toBe(deste);
       expect(Number.isInteger(json.version)).toBe(true);
