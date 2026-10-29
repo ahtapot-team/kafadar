@@ -277,6 +277,47 @@ Issue'lar: #118 kabul testleri (qa), #119 sunucu ve durum makinesi (backend), #1
 - Sunucu bugün yalnızca OK/NOK cevabını biliyor. Oyun türü eklenirken OK mu NOK mu odası bozulabilir. Önlem: KK-71, mevcut oda testleri.
 - Kuran kişi telefonu bırakırsa herkes bekler. Bu, Murat'ın seçtiği bilinen bir eksi.
 
+## v6: Oyun tanıtım kartı (Murat, 29.10.2026) — ONAY BEKLİYOR
+Issue'lar: #130 tasarım (tasarim), #131 kabul testleri (qa), #132 uygulama (frontend; #130 ve #131 bitince başlar).
+Bir oyun o telefonda ilk kez açıldığında oyunu 3–4 satırda anlatan bir kart çıkar. Kart "Tamam" ile kapanır ve o oyun için bir daha kendiliğinden görünmez. Tekrar okumak isteyen için hazırlık ekranlarında ve oda lobisinde "Nasıl oynanır?" bağlantısı vardır.
+
+### Akış
+1. **İlk dokunuş:** Ana ekranda oyun seçilince, sonraki ekrana geçmeden önce o oyunun tanıtım kartı açılır. Kartta oyun adı, kişi sayısı, kısa metin ve "Tamam" bulunur.
+2. **Tamam:** Kart kapanır ve akış normal devam eder. O oyunun kartı bu telefonda bir daha kendiliğinden açılmaz.
+3. **Odaya katılım:** Odaya kodla ilk kez katılan kişi o oyunun kartını daha önce görmediyse kart lobide bir kez açılır.
+4. **Nasıl oynanır?:** Hazırlık ekranlarında ve oda lobisinde bulunan küçük bağlantı aynı kartı açar.
+
+### Kabul kriterleri (tanıtım kartı)
+- [ ] KK-73: Bir oyun o telefonda ilk kez seçildiğinde, ana ekrandan sonraki ekrana geçmeden önce o oyunun tanıtım kartı açılır. Kartta oyun adı, kişi sayısı, aşağıdaki tablodaki metin ve "Tamam" düğmesi vardır. "Tamam"a basınca kart kapanır ve oyunun normal akışı devam eder.
+- [ ] KK-74: "Tamam"a basıldıktan sonra o oyunun kartı o telefonda bir daha kendiliğinden açılmaz; uygulama kapatılıp açılsa da açılmaz. Her oyun ayrı tutulur. Bilgi yalnızca telefonda saklanır, sunucuya gitmez. Kart geri tuşuyla kapatılırsa ana ekrana dönülür ve kart görülmüş sayılmaz. Kartın dışına dokunmak kartı kapatmaz.
+- [ ] KK-75: Odaya kodla katılan kişi o oyunun kartını daha önce görmediyse kart lobide bir kez açılır. Kart açıkken de lobi güncellenmeye devam eder ve oyun başlarsa kart kapanır. Odayı kuran kişi kartı oyunu seçerken görür.
+- [ ] KK-76: Şu ekranlarda küçük bir "Nasıl oynanır?" bağlantısı vardır ve aynı kartı açar:
+  - OK mu NOK mu paket ve süre ekranı;
+  - Casus kim ayarları;
+  - 10/10 ama hazırlığı;
+  - oda lobisi.
+
+  Bu bağlantıyla açılan kart da "Tamam" ile kapanır.
+- [ ] KK-77: Ekran okuyucu kartın başlığını ve metnini okur. "Tamam" düğmesinin dokunma alanı en az 48px'tir. Kart koyu ve açık temada çalışır; "Hareketi azalt" açıksa animasyon kullanılmaz. Metin oyunun kayıt satırından (registry) gelir; yeni bir oyun tanıtımını kendi kayıt satırıyla ekler (KK-2).
+- [ ] KK-78: Kart bir kez görüldükten sonra ana ekrandan oyuna giriş eskisi gibi tek dokunuştur. Yarım kalan oyunda "Devam et" tanıtım göstermez. Mevcut kabul testleri yeşil kalır.
+
+### Tanıtım metinleri (taslak: pm)
+| Oyun | Kişi | Metin |
+|---|---|---|
+| OK mu NOK mu | 2–12 kişi | Kartta bir durum çıkar: "İlk buluşmada hesabı bölmek". 3-2-1'de herkes başparmağıyla OK 👍 ya da NOK 👎 gösterir. Telefonu tutan kişi oyları girer, sonra kimin tek başına kaldığı ortaya çıkar. Oda modunda herkes kendi telefonundan oy verir. |
+| Casus kim | 3–12 kişi | Telefon elden ele dolaşır. Herkes aynı kelimeyi görür, casus ise yalnızca bir ipucu. Sırayla birbirinize kelimeyle ilgili sorular sorun, ama kelimeyi söylemeyin. Sonunda casusu oylayın. Yakalanan casus kelimeyi bilirse yine kazanır. |
+| 10/10 ama | 2–12 kişi | Kartta kusursuz biri ve bir "ama" var: "10/10 ama sabah 5'te kalkıyor". Herkes parmaklarıyla 0–10 arası yeni puanını gösterir, telefonu tutan kişi puanları girer. Ortalama ve en uç puanlar açıklanır. Oda modunda puanlar gizlidir ve her karttan sonra açılır. |
+
+### Kapsam dışı (v6)
+- Adım adım etkileşimli eğitim. Video. Ayarlardan "tanıtımları sıfırla" seçeneği.
+
+### Kararlar (tanıtım kartı)
+| Karar | Seçim | Gerekçe | Karar veren |
+|---|---|---|---|
+| Görünüm | Oyuna ilk dokunuşta açılan kısa kart (3–4 satır + "Tamam"), tam ekran tanıtım değil | Parti oyununda herkes hemen başlamak ister | pm önerisi, Murat (29.10.2026, "1A") |
+| Tekrar okuma | Hazırlık ekranlarında ve oda lobisinde "Nasıl oynanır?" bağlantısı | Yeni gelen arkadaşa anlatmak için | pm önerisi, Murat (29.10.2026, "2a") |
+| Saklama | Her oyun ayrı, telefon başına bir kez, yalnızca telefonda | Hesap yok (KK-39 ilkesi) | pm varsayılanı |
+
 ## Geliştirme ilkesi (Semih, 27.10.2026)
 **Overengineering yok.** En az kodla, en basit çözüm, yalnızca bugünkü ihtiyaç kadar. Yapı genişlemeye açık olacak ama ileriye dönük soyutlama, genel çerçeve ya da "belki lazım olur" kodu yazılmayacak. Yeni bağımlılık yalnızca gerçekten gerekiyorsa eklenir ve PR'da gerekçesi yazılır. Aşağıdaki mimari şartlar bu ilkeye göre en sade haliyle uygulanır. Örneğin oyun kayıt listesi basit bir dizidir, eklenti çatısı değildir.
 
