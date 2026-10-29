@@ -330,7 +330,9 @@ describe('oyuncu belirteci adreste değil, ilk WebSocket mesajında (güvenlik)'
   kabulOdaKimlik(
     'sunucu adresten kimlik okumaz, istemci adrese kimlik koymaz; ilk mesaj {t:"kimlik"}',
     () => {
-      const sunucu = dosyaIcerik('sunucu/src/index.ts');
+      const sunucu = kaynaklar('sunucu/src')
+        .map(({ icerik }) => icerik)
+        .join('\n');
       expect(sunucu).not.toMatch(/searchParams\.get\(\s*['"]kimlik['"]\s*\)/);
       expect(sunucu).toMatch(/['"]kimlik['"]/);
       expect(sunucu).toMatch(/t\s*===?\s*['"]kimlik['"]|t:\s*['"]kimlik['"]/);

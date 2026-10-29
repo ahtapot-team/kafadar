@@ -1,11 +1,22 @@
-// İstemci ↔ sunucu mesajları (#48 ile kararlaştırıldı). Tek bağlantı, JSON metin çerçeveleri, her mesajda `t`.
-// Tipler oda.ts'ten gelir; sunucu yalnızca kabuktur, kurallar oda.ts'tedir (KK-40).
+// İstemci ↔ sunucu protokolü: TEK KAYNAK (#48, #137). Tek bağlantı, JSON metin çerçeveleri, her mesajda `t`.
+// Tipler oda.ts'ten gelir; sunucu yalnızca kabuktur, kurallar oda.ts'tedir (KK-40). Sunucu bu dosyadaki
+// ayrıştırıcıları kullanır (acilisOku, mesajiOlayaCevir, kimlikMesaji): elle if-else ayrıştırma yok.
+//
+// Bağlanma (adres sorgusu): ?islem=kur&ad=Ali&paket=arkadas|cift|aile                      (OK mu NOK mu)
+//                           ?islem=kur&ad=Ali&oyun=on-on-ama&paket=arkadas|gundelik|sevgili (10/10 ama)
+//                           ?islem=katil&kod=123456&ad=Ali
+//                           ?islem=don&kod=123456  → İLK istemci mesajı {t:'kimlik', kimlik}; belirteç adreste/günlükte
+//                             görünmesin diye adreste yok, 10 sn içinde gelmezse soket kapanır.
+// Sunucu → istemci: tamam | hata | gorunum | final (aşağıdaki `Sunucu`). Bağlanma hatasında hata çerçevesi gelir ve
+// soket kapanır; oyun içi hatada soket açık kalır. Soket olmayan istek 426, bilinmeyen işlem 400 döner.
+// İstemci → sunucu: baslat | ayril | cevapla (OK mu NOK mu) | puanla, sonraki (10/10 ama; sonraki yalnızca yetkili).
 import type {
   Final,
   Gorunum,
   Hata,
   Kimlik,
   OdaTuru,
+  Olay,
   OnOnFinal,
   Oy,
 } from './oda';
@@ -40,3 +51,48 @@ export type Sunucu =
   | { t: 'hata'; hata: OdaHata }
   | { t: 'gorunum'; gorunum: Gorunum; simdi: number } // simdi = sunucu saati (ms)
   | { t: 'final'; final: Final | OnOnFinal }; // 10/10 ama odasında OnOnFinal (görünümün `tur`'una bakılır)
+
+// Bağlanma adresini (sorgu) okur; bilinmeyen işlem null (sunucu 400 döner). `paket` burada yalnızca okunur,
+// geçerli olup olmadığına sunucu içerik kaydından bakar.
+export function acilisOku(q: URLSearchParams): Acilis | null {
+  const islem = q.get('islem');
+  const ad = q.get('ad') ?? '';
+  const kod = (q.get('kod') ?? '').toUpperCase();
+  if (islem === 'kur')
+    return {
+      islem,
+      ad,
+      paket: (q.get('paket') ?? 'arkadas') as Paket | OnPaket,
+      oyun: q.get('oyun') === 'on-on-ama' ? 'on-on-ama' : 'ok-mu-nok',
+    };
+  if (islem === 'katil') return { islem, kod, ad };
+  if (islem === 'don') return { islem, kod };
+  return null;
+}
+
+// Doğrulanmış oyuncunun istemci mesajını oda olayına çevirir; tanınmayan ya da bozuk mesaj null.
+export function mesajiOlayaCevir(m: unknown, kimlik: Kimlik): Olay | null {
+  const x = (m ?? {}) as { t?: unknown; oy?: unknown; puan?: unknown };
+  switch (x.t) {
+    case 'baslat':
+    case 'ayril':
+    case 'sonraki':
+      return { tip: x.t, kimlik };
+    case 'cevapla':
+      return x.oy === 'OK' || x.oy === 'NOK'
+        ? { tip: 'cevapla', kimlik, oy: x.oy }
+        : null;
+    case 'puanla':
+      return typeof x.puan === 'number'
+        ? { tip: 'puanla', kimlik, puan: x.puan }
+        : null;
+    default:
+      return null;
+  }
+}
+
+// 'don' bağlantısının ilk mesajı: {t:'kimlik', kimlik}; başka her şey null.
+export function kimlikMesaji(m: unknown): Kimlik | null {
+  const x = (m ?? {}) as { t?: unknown; kimlik?: unknown };
+  return x.t === 'kimlik' && typeof x.kimlik === 'string' ? x.kimlik : null;
+}
