@@ -1,6 +1,5 @@
 import { readFileSync, readdirSync } from 'node:fs';
 import { describe, expect, it } from 'vitest';
-import { kabulTanitimUi as kabul } from './kabul';
 
 // PRD v6 (#131 → frontend #132): tanıtım kartı ekran sözleşmesi, kaynak düzeyinde (arayüz test aracı yok, Semih 1C).
 // Davranış (kart açılışı, geri tuşu, dışarı dokunma, lobide güncelleme) önizlemede ve gerçek cihazda doğrulanır.
@@ -22,97 +21,79 @@ const kartDosyalari = () =>
   tum().filter(({ icerik }) => icerik.includes('tanitim-kart'));
 
 describe('KK-73/KK-77: tanıtım kartı bileşeni', () => {
-  kabul(
-    'kart testID adlarını taşır: tanitim-kart, -baslik, -kisi, -metin, -tamam',
-    () => {
-      const kart = kartDosyalari();
-      expect(kart.length).toBeGreaterThan(0);
-      const kaynak = kart.map((k) => k.icerik).join('\n');
-      for (const t of [
-        'tanitim-kart',
-        'tanitim-baslik',
-        'tanitim-kisi',
-        'tanitim-metin',
-        'tanitim-tamam',
-      ])
-        expect(kaynak, t).toContain(t);
-    },
-  );
+  it('kart testID adlarını taşır: tanitim-kart, -baslik, -kisi, -metin, -tamam', () => {
+    const kart = kartDosyalari();
+    expect(kart.length).toBeGreaterThan(0);
+    const kaynak = kart.map((k) => k.icerik).join('\n');
+    for (const t of [
+      'tanitim-kart',
+      'tanitim-baslik',
+      'tanitim-kisi',
+      'tanitim-metin',
+      'tanitim-tamam',
+    ])
+      expect(kaynak, t).toContain(t);
+  });
 
-  kabul(
-    'oyun adı, kişi sayısı ve metin kayıt satırından (oyun.tanitim) okunur; bileşende oyun adı/metni sabit yazılmaz (KK-2/KK-77)',
-    () => {
-      const kart = kartDosyalari();
-      expect(kart.length).toBeGreaterThan(0);
-      for (const { f, icerik } of kart) {
-        expect(icerik, f).toMatch(/\.tanitim\b|tanitim\.(kisi|metin)|tanitim:/);
-        expect(icerik, f).not.toMatch(/Casus kim|OK mu NOK mu|10\/10 ama/);
-      }
-    },
-  );
+  it('oyun adı, kişi sayısı ve metin kayıt satırından (oyun.tanitim) okunur; bileşende oyun adı/metni sabit yazılmaz (KK-2/KK-77)', () => {
+    const kart = kartDosyalari();
+    expect(kart.length).toBeGreaterThan(0);
+    for (const { f, icerik } of kart) {
+      expect(icerik, f).toMatch(/\.tanitim\b|tanitim\.(kisi|metin)|tanitim:/);
+      expect(icerik, f).not.toMatch(/Casus kim|OK mu NOK mu|10\/10 ama/);
+    }
+  });
 
-  kabul(
-    '"Tamam" düğmesi en az 48px (dokunmaAlani) ve ekran okuyucu için erişilebilirlik özellikleri var',
-    () => {
-      expect(kartDosyalari().length).toBeGreaterThan(0);
-      for (const { f, icerik } of kartDosyalari()) {
-        expect(icerik, f).toMatch(/dokunmaAlani|minHeight:\s*(4[89]|[5-9]\d)/);
-        expect(icerik, f).toMatch(
-          /accessibilityRole|accessibilityLabel|accessible/,
-        );
-      }
-    },
-  );
+  it('"Tamam" düğmesi en az 48px (dokunmaAlani) ve ekran okuyucu için erişilebilirlik özellikleri var', () => {
+    expect(kartDosyalari().length).toBeGreaterThan(0);
+    for (const { f, icerik } of kartDosyalari()) {
+      expect(icerik, f).toMatch(/dokunmaAlani|minHeight:\s*(4[89]|[5-9]\d)/);
+      expect(icerik, f).toMatch(
+        /accessibilityRole|accessibilityLabel|accessible/,
+      );
+    }
+  });
 
-  kabul('"Hareketi azalt" açıkken animasyon kullanılmaz (KK-77)', () => {
+  it('"Hareketi azalt" açıkken animasyon kullanılmaz (KK-77)', () => {
     expect(kartDosyalari().length).toBeGreaterThan(0);
     for (const { f, icerik } of kartDosyalari())
       expect(icerik, f).toMatch(/azalt|hareketAzalt|reduceMotion/i);
   });
 
-  kabul(
-    'görüldü yalnızca "Tamam"da işaretlenir: tanitimiIsaretle tek yerde çağrılır (geri tuşu görüldü saymaz, KK-74)',
-    () => {
-      const cagrilar = tum()
-        .filter(({ f }) => f !== 'src/core/tanitim.ts')
-        .flatMap(({ f, icerik }) =>
-          [...icerik.matchAll(/tanitimiIsaretle\(/g)].map(() => f),
-        );
-      expect(cagrilar.length).toBeGreaterThan(0);
-      const kartIci = cagrilar.filter((f) =>
-        kartDosyalari().some((k) => k.f === f),
+  it('görüldü yalnızca "Tamam"da işaretlenir: tanitimiIsaretle tek yerde çağrılır (geri tuşu görüldü saymaz, KK-74)', () => {
+    const cagrilar = tum()
+      .filter(({ f }) => f !== 'src/core/tanitim.ts')
+      .flatMap(({ f, icerik }) =>
+        [...icerik.matchAll(/tanitimiIsaretle\(/g)].map(() => f),
       );
-      expect(
-        kartIci.length,
-        'işaretleme kart bileşeninde, "Tamam" işleyicisinde olmalı',
-      ).toBe(cagrilar.length);
-      expect(cagrilar.length).toBe(1);
-    },
-  );
+    expect(cagrilar.length).toBeGreaterThan(0);
+    const kartIci = cagrilar.filter((f) =>
+      kartDosyalari().some((k) => k.f === f),
+    );
+    expect(
+      kartIci.length,
+      'işaretleme kart bileşeninde, "Tamam" işleyicisinde olmalı',
+    ).toBe(cagrilar.length);
+    expect(cagrilar.length).toBe(1);
+  });
 });
 
 describe('KK-73/KK-75/KK-78: kartın açıldığı yerler', () => {
-  kabul(
-    'ana ekrandan oyun seçimi: tanitimGerekli(…, "secim") kullanılır; "Devam et" yolu tanıtım çağırmaz',
-    () => {
-      const ana = dosya('app/index.tsx');
-      const ayri = tum().filter(({ icerik }) =>
-        /tanitimGerekli\([^)]*'secim'/.test(icerik),
-      );
-      expect(ayri.length).toBeGreaterThan(0);
-      expect(ana).toMatch(/devam-et/);
-      expect(ana).not.toMatch(/tanitimGerekli\([^)]*'devam'/);
-    },
-  );
+  it('ana ekrandan oyun seçimi: tanitimGerekli(…, "secim") kullanılır; "Devam et" yolu tanıtım çağırmaz', () => {
+    const ana = dosya('app/index.tsx');
+    const ayri = tum().filter(({ icerik }) =>
+      /tanitimGerekli\([^)]*'secim'/.test(icerik),
+    );
+    expect(ayri.length).toBeGreaterThan(0);
+    expect(ana).toMatch(/devam-et/);
+    expect(ana).not.toMatch(/tanitimGerekli\([^)]*'devam'/);
+  });
 
-  kabul(
-    'oda lobisi: odaya kodla ilk katılımda tanitimGerekli(…, "lobi") kullanılır; kart açıkken lobi güncellenir (kart modal ya da katman, lobi ağacı değişmez)',
-    () => {
-      const lobi = dosya('app/oda/lobi.tsx');
-      expect(lobi).toMatch(/tanitimGerekli\([^)]*'lobi'/);
-      expect(lobi).toMatch(/lobi-baslat/);
-    },
-  );
+  it('oda lobisi: odaya kodla ilk katılımda tanitimGerekli(…, "lobi") kullanılır; kart açıkken lobi güncellenir (kart modal ya da katman, lobi ağacı değişmez)', () => {
+    const lobi = dosya('app/oda/lobi.tsx');
+    expect(lobi).toMatch(/tanitimGerekli\([^)]*'lobi'/);
+    expect(lobi).toMatch(/lobi-baslat/);
+  });
 });
 
 describe('KK-76: "Nasıl oynanır?" bağlantısı', () => {
@@ -123,22 +104,16 @@ describe('KK-76: "Nasıl oynanır?" bağlantısı', () => {
     ['app/oda/lobi.tsx', 'oda lobisi'],
   ] as const;
   for (const [yol, ad] of YERLER)
-    kabul(
-      `${ad} (${yol}): testID="tanitim-nasil" ve "Nasıl oynanır?" metni`,
-      () => {
-        const icerik = dosya(yol);
-        expect(icerik).toContain('tanitim-nasil');
-        expect(icerik).toContain('Nasıl oynanır?');
-      },
-    );
+    it(`${ad} (${yol}): testID="tanitim-nasil" ve "Nasıl oynanır?" metni`, () => {
+      const icerik = dosya(yol);
+      expect(icerik).toContain('tanitim-nasil');
+      expect(icerik).toContain('Nasıl oynanır?');
+    });
 
-  kabul(
-    'bağlantı aynı kartı açar: kart bileşeni dışarıdan açılabilir (görüldü bilgisinden bağımsız)',
-    () => {
-      const bagli = YERLER.map(([yol]) => dosya(yol));
-      expect(bagli.every((i) => /tanitim/i.test(i))).toBe(true);
-    },
-  );
+  it('bağlantı aynı kartı açar: kart bileşeni dışarıdan açılabilir (görüldü bilgisinden bağımsız)', () => {
+    const bagli = YERLER.map(([yol]) => dosya(yol));
+    expect(bagli.every((i) => /tanitim/i.test(i))).toBe(true);
+  });
 });
 
 describe('KK-78: mevcut akışlar bozulmaz', () => {
