@@ -1,6 +1,7 @@
 // Casus kim (tek telefon, elden ele): saf, tohumlu, serileştirilebilir durum makinesi (KK-53).
 // Saat olaylarla (`t`, ms) gelir; Date.now, Math.random, ağ ve React yok. Rol dağıtımında gizlilik önceliklidir:
 // kart(d) yalnızca SIRADAKİ oyuncunun kartını, yalnızca "Ben X'im" sonrası ve "Gördüm"e kadar verir (KK-44, KK-46).
+import { benzersiz, doluMetinler, nesne } from '../../core/dogrula';
 import { karistir, rngOlustur } from '../../core/rng';
 
 export type CasusKart = { id: string; kelime: string; ipucu: string };
@@ -257,31 +258,25 @@ export function sonuc(durum: CasusDurum): Sonuc {
   };
 }
 
-const nesne = (x: unknown): x is Record<string, unknown> =>
-  typeof x === 'object' && x !== null && !Array.isArray(x);
-const metinler = (x: unknown): x is string[] =>
-  Array.isArray(x) && x.every((s) => typeof s === 'string' && s !== '');
-const benzersiz = (a: string[]) => new Set(a).size === a.length;
-
 // Kayıttan okunan bilinmeyen veri geçerli bir CasusDurum mu (KK-14, KK-47)? Bozuk kayıt arayüzü çökertmez,
 // rol sızdırmaz: tutarsız her şey (olmayan oyuncu, taşan sıra, açık kart rol dışında…) reddedilir.
 export function durumGecerliMi(d: unknown): d is CasusDurum {
   if (!nesne(d)) return false;
   const asamalar = ['rol', 'tartisma', 'oylama', 'aciklama', 'tahmin', 'sonuc'];
   if (!asamalar.includes(d.asama as string)) return false;
-  if (!metinler(d.oyuncular) || !benzersiz(d.oyuncular)) return false;
+  if (!doluMetinler(d.oyuncular) || !benzersiz(d.oyuncular)) return false;
   const o = d.oyuncular;
   if (o.length < 1 || o.length > 12) return false;
   const oyuncuMu = (s: unknown) => typeof s === 'string' && o.includes(s);
 
-  if (!metinler(d.casuslar) || !benzersiz(d.casuslar)) return false;
+  if (!doluMetinler(d.casuslar) || !benzersiz(d.casuslar)) return false;
   if (d.casuslar.length < 1 || d.casuslar.length > casusSiniri(o.length))
     return false;
   if (!d.casuslar.every(oyuncuMu)) return false;
 
   const k = d.kartlar;
-  if (!nesne(k) || !metinler([k.id, k.kelime, k.ipucu])) return false;
-  if (!metinler(d.siklar) || !benzersiz(d.siklar)) return false;
+  if (!nesne(k) || !doluMetinler([k.id, k.kelime, k.ipucu])) return false;
+  if (!doluMetinler(d.siklar) || !benzersiz(d.siklar)) return false;
   if (d.siklar.length > 6 || !d.siklar.includes(k.kelime as string))
     return false;
 
@@ -309,7 +304,7 @@ export function durumGecerliMi(d: unknown): d is CasusDurum {
     return false;
 
   if (d.tur !== 1 && d.tur !== 2) return false;
-  if (!metinler(d.adaylar) || !benzersiz(d.adaylar)) return false;
+  if (!doluMetinler(d.adaylar) || !benzersiz(d.adaylar)) return false;
   if (!d.adaylar.every(oyuncuMu)) return false;
   if (d.asama === 'oylama' && d.adaylar.length < 2) return false;
   if (!nesne(d.oylar)) return false;
