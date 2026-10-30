@@ -205,7 +205,7 @@ export function AcilisEkrani({
           >
             <View
               style={{
-                ...StyleSheet.absoluteFillObject,
+                ...StyleSheet.absoluteFill,
                 backgroundColor: renk.marka2,
                 borderWidth: cizgi.kalin,
                 borderColor: renk.kontur,
