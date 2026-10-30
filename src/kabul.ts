@@ -4,4 +4,4 @@
 // KURAL: işi kapatan PR bayrağı ve sarmalayıcıyı SİLER, testleri düz `it`e çevirir (docs/MIMARI.md).
 // Yeni özellikte QA şöyle ekler:
 //   import { it } from 'vitest';  BEKLEYEN = { ozellik: true };  export const kabulOzellik = BEKLEYEN.ozellik ? it.fails : it;
-export const BEKLEYEN = { belge: true };
+export const BEKLEYEN = {};

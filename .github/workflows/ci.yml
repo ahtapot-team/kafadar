@@ -62,6 +62,9 @@ jobs:
       - name: KK haritası güncel ve her KK'nin testi/cihaz maddesi var
         run: npm run kk-harita:kontrol --if-present
 
+      - name: Belge (CLAUDE.md / MIMARI.md kodla uyumlu)
+        run: npm run belge:kontrol
+
       - name: Build
         run: npm run build --if-present
 

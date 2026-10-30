@@ -1,6 +1,6 @@
 # Kafadar — Mimari
 
-Son güncelleme: 2026-10-30 — #164
+Son güncelleme: 2026-10-30 — #165
 
 Kısa rehber için `CLAUDE.md`. Bu belge katmanları, veri akışını, oda protokolünü, testleri ve kuralları anlatır.
 
@@ -36,7 +36,7 @@ Kısa rehber için `CLAUDE.md`. Bu belge katmanları, veri akışını, oda prot
 
 ## Oda sunucusu (`sunucu/`)
 
-- Dosyalar: `worker` (giriş, yönlendirme), `oda-do` (oda Durable Object), `sinir-do` (hız sınırı), `ortak`. `src/index.ts` yeniden dışa aktarım ve Cloudflare giriş noktasıdır.
+- Dosyalar: `worker` (giriş, yönlendirme), `oda-do` (oda Durable Object), `sinir-do` (hız sınırı), `ortak`. `sunucu/src/index.ts` yeniden dışa aktarım ve Cloudflare giriş noktasıdır.
 - Durable Object'ler SQLite, hibernation WebSocket ve alarm kullanır. Oda türleri: `ok-mu-nok`, `on-on-ama`. Wrangler sürümü `sunucu/package.json`'da sabit ve izoledir.
 - Oda kodu 6 haneli; kimlik sunucuda `crypto.randomUUID` ile üretilir; iç `x-ic-kimlik` başlığı dışarıya sızmaz. `Sinir` DO: `kur:<ip>` dakikada 5, yalnızca başarısız denemeler sayılır.
 - Canlı: `wss://kafadar-oda.kafadar.workers.dev/ws`. Yerelde: `cd sunucu && npx wrangler dev --port 8787`, sonra `npm run sunucu:test -- http://127.0.0.1:8787 12`.
@@ -67,7 +67,7 @@ Kısa rehber için `CLAUDE.md`. Bu belge katmanları, veri akışını, oda prot
 
 ## CI / önizleme / sunucu iş akışları
 
-- `ci.yml` (PR + `main`): biçim → lint → tip → gitleaks → test → build → diff ≤800 satır.
+- `ci.yml` (PR + `main`): biçim → lint → tip → gitleaks → test → kabul → kk-harita:kontrol → belge → build → diff ≤800 satır.
 - `onizleme.yml`: PR başına EAS Update kanalı, `main`'de `main` kanalı (`docs/**`, `design/**`, `content/**/*.md` yok sayılır).
 - `web-onizleme.yml`: gh-pages'e web önizleme (PR açılış/güncelleme/kapanış).
 - `sunucu.yml`: `main`'e push'ta (`sunucu/**`, `src/oda/**`, `src/core/**`) wrangler deploy; secret'lar `CLOUDFLARE_API_TOKEN`, `CLOUDFLARE_ACCOUNT_ID`.

@@ -16,6 +16,7 @@
     "kabul": "vitest run kabul",
     "sunucu:test": "node sunucu/test/oyun.ts",
     "kk-harita": "node scripts/kk-harita.ts",
+    "belge:kontrol": "node scripts/belge-kontrol.ts",
     "kk-harita:kontrol": "node scripts/kk-harita.ts --kontrol"
   },
   "dependencies": {
