@@ -13,7 +13,8 @@ Kurallar ve token'lar: [`TASARIM-SISTEMI.md`](TASARIM-SISTEMI.md). Her klasör b
 | `130-tanitim-karti/` | #130 | Tanıtım kartı, "Nasıl oynanır?" | ✅ Geçerli (A) | Bağlantı üst sağda (A, Metehan). 9 numaralı ekran (B) yalnızca karşılaştırma içindir. |
 | `171-kategoriler/` | #171 | Ana ekran kategori çipleri, oyun kartı rozeti (v7) | ⚠️ Kısmen eski | Çip biçimi geçerli (A · Sade liste, Metehan). Kategori çipleri ve tür rozeti v7.1'de kalktı → `183-kisi-filtresi/`. B · Sticker raf `arsiv/`'de. |
 | `183-kisi-filtresi/` | #183 | Kişi çipleri, rozetsiz oyun kartı, boş liste (`ana.html`); ⓘ Nasıl oynanır (`b.html`) (v7.1) | ✅ Geçerli (B) | Ana ekranda varyant yok. ⓘ: B · Yazılı (Semih): oyun öncesi "ⓘ Nasıl oynanır" hapı, oyun içinde kısa ⓘ. A · Yalın `arsiv/`'de. |
-| `arsiv/` | — | Elenen seçenekler | 🗄 Arşiv | Referans alınmaz. `arsiv/2-gorsel-yon/`: A · Neon Gece, C · Gece Dergisi. `arsiv/171-kategoriler/`: B · Sticker raf. `arsiv/183-kisi-filtresi/`: A · Yalın ⓘ. |
+| `190-acilis/` | #190 | Açılış ekranı: logo, yükleme yüzdesi, söz (v8) | ✅ Geçerli (B) | B · Renkli çıkartma (Semih). `0` numaralı ekran sistem açılış görseli önerisidir. A · Sade ortalı `arsiv/`'de. |
+| `arsiv/` | — | Elenen seçenekler | 🗄 Arşiv | Referans alınmaz. `arsiv/2-gorsel-yon/`: A · Neon Gece, C · Gece Dergisi. `arsiv/171-kategoriler/`: B · Sticker raf. `arsiv/183-kisi-filtresi/`: A · Yalın ⓘ. `arsiv/190-acilis/`: A · Sade ortalı. |
 
 **Yeni tasarım eklerken:**
 - Klasör adı `<issue-no>-<kisa-ad>/` olur.
