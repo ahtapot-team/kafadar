@@ -1,9 +1,8 @@
-// #198/#199: v8 açılış ekranı telefonda (native) çöküyordu; web'de görünmez. Kaynak sözleşmesi testleri.
+// #198/#199/#202: v8 açılış ekranı telefonda (native) çöküyordu; web'de görünmez. Kaynak sözleşmesi testleri.
 // Sözleşme:
 //   1) withTiming/withSpring/withDecay/withDelay/withSequence/withRepeat geri çağrısı UI thread'inde çalışır;
 //      içinde JS fonksiyonu yalnızca runOnJS(fn)(…) ya da scheduleOnRN(fn, …) ile çağrılır.
-//   2) app/_layout.tsx <Yigin />'ı yazı tipi hazır (ya da hatalı) olunca render eder (aksi halde ekranlar sistem fontunda kalır);
-//      açılış aşamasına (asama) bağlı değildir ve açılış ekranı üstüne biner.
+//   2) (#202) app/_layout.tsx <Yigin />'ı yalnızca yazı tipi hazırken (fontHazir || fontHatasi) çizer, açılış aşamasına (asama) bağlı değil; açılış ekranı üstüne biner.
 import { describe, expect, it } from 'vitest';
 import { dosyaIcerik, kaynaklar } from './test/yardimci';
 
@@ -74,16 +73,35 @@ describe('#198: animasyon geri çağrılarında JS fonksiyonu runOnJS/scheduleOn
   });
 });
 
-describe('#198: _layout yığını yazı tipi hazır olunca render eder', () => {
-  it('K6: <Yigin /> yalnızca yazı tipi hazır/hatalı koşuluna bağlıdır, açılış aşamasına değil', () => {
+describe('#198 K6 (#202): yığın yalnızca yazı tipi hazırken render edilir', () => {
+  // Yigin'in koşulu: `{koşul && <Yigin />}` ya da `{koşul ? <Yigin /> : null}`.
+  const yiginKosulu = (l: string) =>
+    l.match(/\{\s*([^{}]*?)\s*&&\s*<Yigin\s*\/>\s*\}/)?.[1] ??
+    l.match(/\{\s*([^{}?]*?)\s*\?\s*<Yigin\s*\/>\s*:\s*null\s*\}/)?.[1];
+  // Koşuldaki tek değişkenin tanımı (ör. `const fontTamam = fontHazir || !!fontHatasi`).
+  const coz = (l: string, k: string) => {
+    const ad = k.match(/^!?\(?\s*([A-Za-z_$][\w$]*)\s*\)?$/)?.[1];
+    const tanim = ad && l.match(new RegExp(`const\\s+${ad}\\s*=\\s*([^;]+);`));
+    return tanim ? `${k} ${tanim[1]}` : k;
+  };
+
+  it('K1: <Yigin /> yazı tipi hazır (fontHazir || fontHatasi) olmadan çizilmez', () => {
     const l = dosyaIcerik('app/_layout.tsx');
-    expect(l).toMatch(
-      /\(fontHazir\s*\|\|\s*!!fontHatasi\)\s*&&\s*<Yigin\s*\/>/,
-    );
-    expect(l).not.toMatch(/asama\s*!==\s*'acilis'/);
+    const k = yiginKosulu(l);
+    expect(k, 'Yigin koşullu render edilmeli').toBeDefined();
+    const tam = coz(l, k as string);
+    expect(tam).toMatch(/fontHazir/);
+    expect(tam).toMatch(/fontHatasi/);
   });
 
-  it('K2: açılış ekranı yığından sonra (üstte) render edilir', () => {
+  it('K1: Yigin koşulu açılış aşamasına (asama) bağlı değil', () => {
+    const l = dosyaIcerik('app/_layout.tsx');
+    const k = yiginKosulu(l);
+    expect(k, 'Yigin koşullu render edilmeli').toBeDefined();
+    expect(coz(l, k as string)).not.toMatch(/asama/);
+  });
+
+  it('K1: açılış ekranı yığından sonra (üstte) render edilir', () => {
     const l = dosyaIcerik('app/_layout.tsx');
     expect(l.indexOf('<Yigin')).toBeGreaterThan(0);
     expect(l.indexOf('<AcilisEkrani')).toBeGreaterThan(l.lastIndexOf('<Yigin'));
