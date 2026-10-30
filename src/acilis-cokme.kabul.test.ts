@@ -2,7 +2,8 @@
 // Sözleşme:
 //   1) withTiming/withSpring/withDecay/withDelay/withSequence/withRepeat geri çağrısı UI thread'inde çalışır;
 //      içinde JS fonksiyonu yalnızca runOnJS(fn)(…) ya da scheduleOnRN(fn, …) ile çağrılır.
-//   2) app/_layout.tsx <Yigin />'ı her aşamada (açılış dahil) koşulsuz render eder; açılış ekranı üstüne biner.
+//   2) app/_layout.tsx <Yigin />'ı yazı tipi hazır (ya da hatalı) olunca render eder (aksi halde ekranlar sistem fontunda kalır);
+//      açılış aşamasına (asama) bağlı değildir ve açılış ekranı üstüne biner.
 import { describe, expect, it } from 'vitest';
 import { dosyaIcerik, kaynaklar } from './test/yardimci';
 
@@ -73,12 +74,12 @@ describe('#198: animasyon geri çağrılarında JS fonksiyonu runOnJS/scheduleOn
   });
 });
 
-describe('#198: _layout açılışta da yığını render eder', () => {
-  it('K2: <Yigin /> koşulsuz render edilir', () => {
+describe('#198: _layout yığını yazı tipi hazır olunca render eder', () => {
+  it('K6: <Yigin /> yalnızca yazı tipi hazır/hatalı koşuluna bağlıdır, açılış aşamasına değil', () => {
     const l = dosyaIcerik('app/_layout.tsx');
-    expect(l).toMatch(/<Yigin\s*\/>/);
-    expect(l).not.toMatch(/&&\s*<Yigin\s*\/>/);
-    expect(l).not.toMatch(/\?\s*<Yigin\s*\/>/);
+    expect(l).toMatch(
+      /\(fontHazir\s*\|\|\s*!!fontHatasi\)\s*&&\s*<Yigin\s*\/>/,
+    );
     expect(l).not.toMatch(/asama\s*!==\s*'acilis'/);
   });
 

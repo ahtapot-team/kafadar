@@ -42,7 +42,7 @@ export default function Layout() {
     <SafeAreaProvider>
       <DurumSaglayici depo={depo}>
         <OdaSaglayici depo={depo}>
-          <Yigin />
+          {(fontHazir || !!fontHatasi) && <Yigin />}
           {asama !== 'bitti' && (
             <AcilisEkrani
               fontHazir={fontHazir || !!fontHatasi}
