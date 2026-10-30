@@ -7,17 +7,57 @@
 //   KK-102: app/index.tsx'te "Bir oyun seç, telefonu ele ver." yok; logo ile çip satırı arasında yerine yazı gelmez.
 //   KK-105: CLAUDE.md ve docs/MIMARI.md kişi çiplerini "Tümü · 1 kişi · 2 kişi · 3+ kişi" olarak anlatır.
 import { describe, expect, it } from 'vitest';
+import { BEKLEYEN } from './kabul';
 import { dosyaIcerik } from './test/yardimci';
 
+// #209 (iOS, KK-101): opaklıkla gizlemek yetmez; Text yazı tipi yokken mount edilirse iOS fontu sonradan uygulamaz.
+// SÖZLEŞME: src/acilis/ekran.tsx'te acilis-ad, acilis-soz, acilis-soz-oyun `{fontHazir && (…)}` / `{fontHazir ? (…) : null}`
+//   bloğunun İÇİNDE (fontHazir=false iken ağaçta yok) ya da `if (!fontHazir) return …` ile erken çıkıştan sonra çizilir.
+const kabulFont = BEKLEYEN.fontMount ? it.fails : it;
+
+// `bas` indeksindeki `{`nin eşleşen `}` indeksi.
+const kapanis = (s: string, bas: number) => {
+  let d = 0;
+  for (let i = bas; i < s.length; i++) {
+    if (s[i] === '{') d++;
+    else if (s[i] === '}' && --d === 0) return i;
+  }
+  return s.length;
+};
+
+// testID, fontHazir koşullu bir JSX bloğunun içinde mi?
+const fontKosullu = (kaynak: string, testID: string) => {
+  const i = kaynak.indexOf(`testID="${testID}"`);
+  if (i < 0) return false;
+  const erken = kaynak.search(/if\s*\(\s*!fontHazir\s*\)\s*return/);
+  if (erken >= 0 && erken < i) return true;
+  for (const m of kaynak.matchAll(/\{\s*fontHazir\s*(?:&&|\?)/g)) {
+    const bas = m.index ?? 0;
+    if (bas < i && i < kapanis(kaynak, bas)) return true;
+  }
+  return false;
+};
+
 describe('KK-101: açılış logosu yazı tipi hazır olmadan çizilmez', () => {
-  it('KK-101: açılıştaki "Kafadar" (acilis-ad) fontHazir koşuluna bağlı', () => {
-    const e = dosyaIcerik('src/acilis/ekran.tsx');
-    const i = e.indexOf('testID="acilis-ad"');
-    expect(i).toBeGreaterThan(-1);
-    const oncesi = e.slice(Math.max(0, i - 1800), i);
-    expect(oncesi).toMatch(
-      /fontHazir\s*(&&|\?)|opacity:\s*fontHazir|fontHazir\s*\?\s*1\s*:\s*0/,
-    );
+  kabulFont(
+    'KK-101: acilis-ad, söz ve oyun adı fontHazir=false iken ağaçta yok (opaklıkla gizleme yetmez, #209)',
+    () => {
+      const e = dosyaIcerik('src/acilis/ekran.tsx');
+      for (const id of ['acilis-ad', 'acilis-soz', 'acilis-soz-oyun'])
+        expect(fontKosullu(e, id), id).toBe(true);
+    },
+  );
+
+  it('KK-101: denetleyici doğru çalışır (koşullu mount geçer, opacity yakalanır)', () => {
+    const mount = '<V>{fontHazir && (<Y testID="a">x</Y>)}</V>';
+    const tern = '<V>{fontHazir ? (<Y testID="a">x</Y>) : null}</V>';
+    const opak =
+      '<V style={{ opacity: fontHazir ? 1 : 0 }}><Y testID="a">x</Y></V>';
+    const disinda = '<V>{fontHazir && (<Y>y</Y>)}<Y testID="a">x</Y></V>';
+    expect(fontKosullu(mount, 'a')).toBe(true);
+    expect(fontKosullu(tern, 'a')).toBe(true);
+    expect(fontKosullu(opak, 'a')).toBe(false);
+    expect(fontKosullu(disinda, 'a')).toBe(false);
   });
 
   it('KK-101: açılış ve ana ekran logosu aynı yazı tipi tokenını kullanır (baslikXl: Bricolage 800)', () => {
