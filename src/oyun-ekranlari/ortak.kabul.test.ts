@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { kaynaklar } from '../test/yardimci';
 
-// Refactor #138 (docs/REFACTOR.md): ortak ekran parçaları `src/oyun-ekranlari/ortak/` altında; hiçbir oyun klasörü
+// Refactor #138 (docs/MIMARI.md): ortak ekran parçaları `src/oyun-ekranlari/ortak/` altında; hiçbir oyun klasörü
 // başka bir oyun klasöründen import etmez, hiçbir yer ok-mu-nok'un ortak parçalarını (artık ortak/'ta) kullanmaz.
 const OYUNLAR = ['ok-mu-nok', 'on-on-ama', 'casus-kim'];
 const importlar = (icerik: string) =>
