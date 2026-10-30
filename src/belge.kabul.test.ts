@@ -56,13 +56,13 @@ const kopya = () => {
 };
 
 describe('#165 belge:kontrol', () => {
-  it('KK-1: main üzerindeki belgeler kontrolü geçer (çıkış 0)', () => {
+  it('BK-1: main üzerindeki belgeler kontrolü geçer (çıkış 0)', () => {
     const r = calistir(kokDizin);
     expect(r.cikti).not.toMatch(/Cannot find module|ERR_MODULE_NOT_FOUND/);
     expect(r.kod).toBe(0);
   });
 
-  it('KK-2: 121 satırlık CLAUDE.md satır sınırı mesajıyla kırılır', () => {
+  it('BK-2: 121 satırlık CLAUDE.md satır sınırı mesajıyla kırılır', () => {
     const d = kopya();
     const yol = join(d, 'CLAUDE.md');
     const satir = readFileSync(yol, 'utf8').split('\n').length;
@@ -73,7 +73,7 @@ describe('#165 belge:kontrol', () => {
     expect(r.cikti).toContain('120');
   });
 
-  it('KK-3: belgede geçmeyen registry oyunu oyun adıyla kırılır', () => {
+  it('BK-3: belgede geçmeyen registry oyunu oyun adıyla kırılır', () => {
     const d = kopya();
     const yol = join(d, 'src/games/registry.ts');
     const kaynak = readFileSync(yol, 'utf8').replace(
@@ -86,7 +86,7 @@ describe('#165 belge:kontrol', () => {
     expect(r.cikti).toContain('yeni-oyun-xyz');
   });
 
-  it('KK-4: belgede geçmeyen package.json betiği adıyla kırılır', () => {
+  it('BK-4: belgede geçmeyen package.json betiği adıyla kırılır', () => {
     const d = kopya();
     const yol = join(d, 'package.json');
     const p = JSON.parse(readFileSync(yol, 'utf8'));
@@ -97,7 +97,7 @@ describe('#165 belge:kontrol', () => {
     expect(r.cikti).toContain('yeni-betik-xyz');
   });
 
-  it('KK-5: belgede olmayan yol (src/yok.ts) yolla birlikte kırılır', () => {
+  it('BK-5: belgede olmayan yol (src/yok.ts) yolla birlikte kırılır', () => {
     const d = kopya();
     appendFileSync(join(d, 'docs/MIMARI.md'), '\nBkz. `src/yok.ts`\n');
     const r = calistir(d);
@@ -105,7 +105,7 @@ describe('#165 belge:kontrol', () => {
     expect(r.cikti).toContain('src/yok.ts');
   });
 
-  it('KK-6: CI "belge" adımı belge:kontrol çalıştırır, yeni bağımlılık yok, belgede listeli', () => {
+  it('BK-6: CI "belge" adımı belge:kontrol çalıştırır, yeni bağımlılık yok, belgede listeli', () => {
     const ci = dosyaIcerik('.github/workflows/ci.yml');
     expect(ci).toMatch(/name:\s*Belge/i);
     expect(ci).toContain('npm run belge:kontrol');
