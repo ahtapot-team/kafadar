@@ -4,7 +4,6 @@
 //      içinde JS fonksiyonu yalnızca runOnJS(fn)(…) ya da scheduleOnRN(fn, …) ile çağrılır.
 //   2) (#202) app/_layout.tsx <Yigin />'ı yalnızca yazı tipi hazırken (fontHazir || fontHatasi) çizer, açılış aşamasına (asama) bağlı değil; açılış ekranı üstüne biner.
 import { describe, expect, it } from 'vitest';
-import { kabulCokme } from './kabul';
 import { dosyaIcerik, kaynaklar } from './test/yardimci';
 
 const ANIMASYON = /\bwith(?:Timing|Spring|Decay|Delay|Sequence|Repeat)\s*\(/g;
@@ -86,19 +85,16 @@ describe('#198 K6 (#202): yığın yalnızca yazı tipi hazırken render edilir'
     return tanim ? `${k} ${tanim[1]}` : k;
   };
 
-  kabulCokme(
-    'K1: <Yigin /> yazı tipi hazır (fontHazir || fontHatasi) olmadan çizilmez',
-    () => {
-      const l = dosyaIcerik('app/_layout.tsx');
-      const k = yiginKosulu(l);
-      expect(k, 'Yigin koşullu render edilmeli').toBeDefined();
-      const tam = coz(l, k as string);
-      expect(tam).toMatch(/fontHazir/);
-      expect(tam).toMatch(/fontHatasi/);
-    },
-  );
+  it('K1: <Yigin /> yazı tipi hazır (fontHazir || fontHatasi) olmadan çizilmez', () => {
+    const l = dosyaIcerik('app/_layout.tsx');
+    const k = yiginKosulu(l);
+    expect(k, 'Yigin koşullu render edilmeli').toBeDefined();
+    const tam = coz(l, k as string);
+    expect(tam).toMatch(/fontHazir/);
+    expect(tam).toMatch(/fontHatasi/);
+  });
 
-  kabulCokme('K1: Yigin koşulu açılış aşamasına (asama) bağlı değil', () => {
+  it('K1: Yigin koşulu açılış aşamasına (asama) bağlı değil', () => {
     const l = dosyaIcerik('app/_layout.tsx');
     const k = yiginKosulu(l);
     expect(k, 'Yigin koşullu render edilmeli').toBeDefined();
