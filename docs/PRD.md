@@ -455,7 +455,7 @@ Uygulama açılırken boş ekran yerine "Kafadar" adı, yüzdeli bir yükleme ç
 | Oyun adı | Oyuna ait sözün altında yazar | Söz oyunu da tanıtır | pm varsayılanı |
 | Kayan ayarlar düğmesi | Kafadar'ın kodunda yok; büyük ihtimalle Expo Go'nun geliştirici düğmesi, ekran görüntüsü bekleniyor | Bizimse ayrı issue açılır | açık (Semih, msg 743) |
 
-## v8.1: Açılış logosu, sade ana ekran ve kişi çipleri (Semih, 30.10.2026) — ONAY BEKLİYOR
+## v8.1: Açılış logosu, sade ana ekran ve kişi çipleri (Semih, 30.10.2026) — ONAYLANDI (Semih, 30.10.2026, msg 809)
 Issue'lar: #205 kabul testleri (qa), #206 uygulama (frontend; #205 bitince başlar). Tasarım adımı yok: yeni ekran yok, yalnızca metin ve kural değişiyor.
 Semih'in üç isteği (Telegram 805, 807):
 1. Açılıştaki "Kafadar" yazısı ana ekrandakiyle aynı yazı tipinde olsun.
