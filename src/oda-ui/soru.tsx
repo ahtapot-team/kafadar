@@ -89,29 +89,35 @@ export function SoruEkrani({
   const sn = Math.ceil(kalan / 1000);
   return (
     <Ekran>
-      <OdaUst
-        kod={g.kod}
-        orta={`Soru ${g.soruNo} / 10`}
-        sag={String(sn)}
-        sagTestID="oda-geri-sayim"
-        onCik={onCik}
-      />
+      <OdaUst kod={g.kod} orta={`Soru ${g.soruNo} / 10`} onCik={onCik} />
       <View
-        style={{
-          height: 8,
-          borderRadius: yaricap.yuvarlak,
-          backgroundColor: renk.yuzey,
-          overflow: 'hidden',
-        }}
+        style={{ flexDirection: 'row', alignItems: 'center', gap: bosluk.m }}
       >
         <View
           style={{
-            height: '100%',
-            width: `${Math.min(100, (kalan / 15000) * 100)}%`,
+            flex: 1,
+            height: 8,
             borderRadius: yaricap.yuvarlak,
-            backgroundColor: renk.marka,
+            backgroundColor: renk.yuzey,
+            overflow: 'hidden',
           }}
-        />
+        >
+          <View
+            style={{
+              height: '100%',
+              width: `${Math.min(100, (kalan / 15000) * 100)}%`,
+              borderRadius: yaricap.yuvarlak,
+              backgroundColor: renk.marka,
+            }}
+          />
+        </View>
+        <Yazi
+          testID="oda-geri-sayim"
+          tur="etiket"
+          style={{ minWidth: 40, textAlign: 'right' }}
+        >
+          {String(sn)}
+        </Yazi>
       </View>
       <View
         style={{
