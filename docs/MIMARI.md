@@ -1,6 +1,6 @@
 # Kafadar — Mimari
 
-Son güncelleme: 2026-10-30 — #185
+Son güncelleme: 2026-10-30 — #192
 
 Kısa rehber için `CLAUDE.md`. Bu belge katmanları, veri akışını, oda protokolünü, testleri ve kuralları anlatır.
 
@@ -24,10 +24,14 @@ Kısa rehber için `CLAUDE.md`. Bu belge katmanları, veri akışını, oda prot
 - **Tek telefon modu:** `app/` rotası → `src/oyun-ekranlari/<oyun>/` ekranı → `durum.tsx` bağlamı → `src/games/<oyun>` saf `isle(durum, olay)`. Durum `depo.ts` ile kalıcı saklanır; `core/oturum` ve `core/dogrula` yüklemede geçerliliği denetler.
 - **Oda modu:** ekran (`oda-ui`) → `baglanti` (WebSocket) → `oda/istemci.ts` → sunucu (`worker` → `oda-do`) → `oda.ts` kuralları `isle(durum, olay, simdi)` → her bağlantıya `gorunum(durum, kimlik, simdi)` gider. Sunucu yalnızca kabuktur; kurallar `src/oda/oda.ts`'tedir.
 
+## Açılış ekranı
+
+Açılış ekranı `app/_layout.tsx`'te yazı tipi ve ayarlar okunurken görünür (`src/acilis/ekran.tsx`); ana ekran onu bilmez, uygulama içinde dönünce yeniden çıkmaz. Yüzde = süre (en az 3 sn) ve hazırlığın küçüğü, yalnızca ileri gider; dokunmak süreyi atlar, hazırlık beklenir (`src/core/acilis.ts`). Söz her açılışta `src/core/soz.ts` ile seçilir; sözler `content/acilis/sozler.json` dosyasındadır (ürün: oyuna göre veya `genel`, ≥10 söz, ≤140 karakter) ve `npm run icerik` (`src/icerik/soz.ts`) denetler. Sistem açılış görseli `app.json` `splash` + `assets/splash.png`.
+
 ## Yeni oyun nasıl eklenir
 
 1. `src/games/<oyun>/` altında saf modülü yaz (`oyun.ts` arayüzü: `durumGecerliMi` dahil).
-2. `src/games/registry.ts` içindeki `oyunlar` dizisine bir kayıt ekle (`id`, `ad`, `aktif`, `tanitim: {kisi, metin}`, gerekirse `kurulum`, `modSecimi`, `minOyuncu`, `ekran`).
+2. `src/games/registry.ts` içindeki `oyunlar` dizisine bir kayıt ekle (`id`, `ad`, `emoji` (açılış ekranı rozeti), `aktif`, `tanitim: {kisi, metin}`, gerekirse `kurulum`, `modSecimi`, `minOyuncu`, `ekran`).
 3. Ekranları `src/oyun-ekranlari/<oyun>/` altına, kurulum rotasını `app/<oyun>/` altına koy (ince sarmalayıcı).
 4. Desteler: `content/` JSON + `src/icerik/kayit.ts` kaydı, ardından `npm run icerik`.
 5. Oda modu gerekiyorsa `src/oda/oda.ts` oda türüne ekle (`mesaj.ts` protokolünü bozmadan).

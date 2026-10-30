@@ -1,6 +1,6 @@
 # Kafadar
 
-Son güncelleme: 2026-10-30 — #185
+Son güncelleme: 2026-10-30 — #192
 
 Kafadar, arkadaş/çift/aile için mobil parti oyunları uygulamasıdır (OK mu NOK mu, 10/10 ama, Casus kim). Tek telefonda ya da oda koduyla çok telefonda oynanır. Ayrıntı: `docs/MIMARI.md`.
 
@@ -32,6 +32,7 @@ Expo SDK 58, expo-router, TypeScript, Vitest, Cloudflare Workers + Durable Objec
 - `src/oyun-ekranlari/` — oyun ekranları; ortak parçalar `ortak/`.
 - `src/oda/` — oda kuralları ve protokol (`oda.ts`, `mesaj.ts`, `istemci.ts`).
 - `src/oda-ui/` — oda modu ekran parçaları. `src/baglanti/` — WebSocket bağlamı ve QR.
+- `src/acilis/ekran.tsx` — açılış ekranı (`app/_layout.tsx` gösterir; en az 3 sn, dokununca geçer; kurallar `src/core/acilis.ts`, `soz.ts`). Sözler: `content/acilis/sozler.json` (`npm run icerik` denetler).
 - `src/icerik/` — içerik kaydı ve doğrulama. `src/test/yardimci.ts` — test yardımcıları.
 - `src/tema.ts`, `ui.tsx`, `depo.ts`, `durum.tsx`, `desteler.ts`, `titresim.ts`, `uygulama-geri.ts` — kök yardımcılar. `src/games/kategori.ts`: ana ekran kişi sayısı çipleri (kural saf fonksiyon). `tanitim-kutusu.tsx`: tanıtım kartı ve ⓘ `BilgiDugmesi`.
 - `content/decks`, `content/casus`, `content/onon` — deste JSON'ları. `docs/desteler/` — taslak md'ler.

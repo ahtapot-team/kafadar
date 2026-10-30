@@ -8,9 +8,8 @@
 //         her aktif oyunda ve 'genel'de en az 10 söz · biçim bozuksa (dizi yok, id yok…) hata, atmaz
 //   scripts/icerik-dogrula.ts → bu dosyayı `sozHatalari` ile denetler (hata varsa 1 ile çıkar)
 import { readFileSync } from 'node:fs';
-import { describe, expect } from 'vitest';
+import { describe, expect, it } from 'vitest';
 import { oyunlar } from '../games/registry';
-import { kabulAcilis } from '../kabul';
 
 type Soz = { id: string; text: string; oyun: string };
 type Dosya = { version: number; lang: string; sozler: Soz[] };
@@ -45,12 +44,12 @@ const boz = (f: (d: Dosya) => void) => {
 };
 
 describe('KK-98: söz dosyası denetimi (saf fonksiyon)', () => {
-  kabulAcilis('KK-98: geçerli dosya hatasız', async () => {
+  it('KK-98: geçerli dosya hatasız', async () => {
     const { sozHatalari } = await yukle();
     expect(sozHatalari(taban(), AKTIF)).toEqual([]);
   });
 
-  kabulAcilis('KK-98: boş (yalnız boşluk) söz reddedilir', async () => {
+  it('KK-98: boş (yalnız boşluk) söz reddedilir', async () => {
     const { sozHatalari } = await yukle();
     expect(
       sozHatalari(
@@ -66,7 +65,7 @@ describe('KK-98: söz dosyası denetimi (saf fonksiyon)', () => {
     ).toBeGreaterThan(0);
   });
 
-  kabulAcilis('KK-98: 140 karakter geçerli, 141 reddedilir', async () => {
+  it('KK-98: 140 karakter geçerli, 141 reddedilir', async () => {
     const { sozHatalari } = await yukle();
     expect(
       sozHatalari(
@@ -82,29 +81,26 @@ describe('KK-98: söz dosyası denetimi (saf fonksiyon)', () => {
     ).toBeGreaterThan(0);
   });
 
-  kabulAcilis(
-    'KK-98: tekrar eden söz reddedilir (büyük/küçük harf ve baştaki/sondaki boşluk fark etmez)',
-    async () => {
-      const { sozHatalari } = await yukle();
-      expect(
-        sozHatalari(
-          boz((d) => (d.sozler[1].text = d.sozler[0].text)),
-          AKTIF,
-        ).length,
-      ).toBeGreaterThan(0);
-      expect(
-        sozHatalari(
-          boz(
-            (d) =>
-              (d.sozler[1].text = ` ${d.sozler[0].text.toLocaleUpperCase('tr')} `),
-          ),
-          AKTIF,
-        ).length,
-      ).toBeGreaterThan(0);
-    },
-  );
+  it('KK-98: tekrar eden söz reddedilir (büyük/küçük harf ve baştaki/sondaki boşluk fark etmez)', async () => {
+    const { sozHatalari } = await yukle();
+    expect(
+      sozHatalari(
+        boz((d) => (d.sozler[1].text = d.sozler[0].text)),
+        AKTIF,
+      ).length,
+    ).toBeGreaterThan(0);
+    expect(
+      sozHatalari(
+        boz(
+          (d) =>
+            (d.sozler[1].text = ` ${d.sozler[0].text.toLocaleUpperCase('tr')} `),
+        ),
+        AKTIF,
+      ).length,
+    ).toBeGreaterThan(0);
+  });
 
-  kabulAcilis('KK-98: tekrar eden id reddedilir', async () => {
+  it('KK-98: tekrar eden id reddedilir', async () => {
     const { sozHatalari } = await yukle();
     expect(
       sozHatalari(
@@ -114,7 +110,7 @@ describe('KK-98: söz dosyası denetimi (saf fonksiyon)', () => {
     ).toBeGreaterThan(0);
   });
 
-  kabulAcilis('KK-98: bilinmeyen oyun kimliği reddedilir', async () => {
+  it('KK-98: bilinmeyen oyun kimliği reddedilir', async () => {
     const { sozHatalari } = await yukle();
     expect(
       sozHatalari(
@@ -124,25 +120,22 @@ describe('KK-98: söz dosyası denetimi (saf fonksiyon)', () => {
     ).toBeGreaterThan(0);
   });
 
-  kabulAcilis(
-    "KK-98: bir aktif oyunda ya da genelde 10'dan az söz reddedilir",
-    async () => {
-      const { sozHatalari } = await yukle();
-      for (const oyun of [...AKTIF, 'genel'])
-        expect(
-          sozHatalari(
-            boz((d) => {
-              const i = d.sozler.findIndex((s) => s.oyun === oyun);
-              d.sozler.splice(i, 1);
-            }),
-            AKTIF,
-          ).length,
-          oyun,
-        ).toBeGreaterThan(0);
-    },
-  );
+  it("KK-98: bir aktif oyunda ya da genelde 10'dan az söz reddedilir", async () => {
+    const { sozHatalari } = await yukle();
+    for (const oyun of [...AKTIF, 'genel'])
+      expect(
+        sozHatalari(
+          boz((d) => {
+            const i = d.sozler.findIndex((s) => s.oyun === oyun);
+            d.sozler.splice(i, 1);
+          }),
+          AKTIF,
+        ).length,
+        oyun,
+      ).toBeGreaterThan(0);
+  });
 
-  kabulAcilis('KK-98: biçimi bozuk dosya atmadan hata döndürür', async () => {
+  it('KK-98: biçimi bozuk dosya atmadan hata döndürür', async () => {
     const { sozHatalari } = await yukle();
     for (const bozuk of [null, {}, { sozler: 'x' }, { sozler: [{}] }])
       expect(sozHatalari(bozuk, AKTIF).length).toBeGreaterThan(0);
@@ -150,33 +143,27 @@ describe('KK-98: söz dosyası denetimi (saf fonksiyon)', () => {
 });
 
 describe('KK-98: gerçek söz dosyası ve npm run icerik', () => {
-  kabulAcilis(
-    'KK-98: content/acilis/sozler.json geçerli; her aktif oyunda ve genelde en az 10 söz',
-    async () => {
-      const { sozHatalari } = await yukle();
-      const d = JSON.parse(oku('content/acilis/sozler.json')) as Dosya;
-      expect(d.lang).toBe('tr');
-      expect(Number.isInteger(d.version)).toBe(true);
-      const aktif = oyunlar.filter((o) => o.aktif).map((o) => o.id);
-      expect(sozHatalari(d, aktif)).toEqual([]);
-      for (const oyun of [...aktif, 'genel'])
-        expect(
-          d.sozler.filter((s) => s.oyun === oyun).length,
-          oyun,
-        ).toBeGreaterThanOrEqual(10);
-    },
-  );
+  it('KK-98: content/acilis/sozler.json geçerli; her aktif oyunda ve genelde en az 10 söz', async () => {
+    const { sozHatalari } = await yukle();
+    const d = JSON.parse(oku('content/acilis/sozler.json')) as Dosya;
+    expect(d.lang).toBe('tr');
+    expect(Number.isInteger(d.version)).toBe(true);
+    const aktif = oyunlar.filter((o) => o.aktif).map((o) => o.id);
+    expect(sozHatalari(d, aktif)).toEqual([]);
+    for (const oyun of [...aktif, 'genel'])
+      expect(
+        d.sozler.filter((s) => s.oyun === oyun).length,
+        oyun,
+      ).toBeGreaterThanOrEqual(10);
+  });
 
-  kabulAcilis(
-    'KK-98: scripts/icerik-dogrula.ts söz dosyasını sozHatalari ile denetler ve hatada 1 ile çıkar',
-    () => {
-      const betik = oku('scripts/icerik-dogrula.ts');
-      expect(betik).toContain('acilis/sozler.json');
-      expect(betik).toContain('sozHatalari');
-      expect(betik).toMatch(/process\.exit\(hataVar \? 1 : 0\)/);
-      expect(oku('package.json')).toContain(
-        '"icerik": "node scripts/icerik-dogrula.ts"',
-      );
-    },
-  );
+  it('KK-98: scripts/icerik-dogrula.ts söz dosyasını sozHatalari ile denetler ve hatada 1 ile çıkar', () => {
+    const betik = oku('scripts/icerik-dogrula.ts');
+    expect(betik).toContain('acilis/sozler.json');
+    expect(betik).toContain('sozHatalari');
+    expect(betik).toMatch(/process\.exit\(hataVar \? 1 : 0\)/);
+    expect(oku('package.json')).toContain(
+      '"icerik": "node scripts/icerik-dogrula.ts"',
+    );
+  });
 });

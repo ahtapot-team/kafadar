@@ -2,6 +2,7 @@
 import { readdirSync, readFileSync } from 'node:fs';
 import { icerikHatalari } from '../src/icerik/dogrula.ts';
 import { paketKaydi } from '../src/icerik/kayit.ts';
+import { sozHatalari } from '../src/icerik/soz.ts';
 
 const kok = new URL('../content/', import.meta.url);
 let hataVar = false;
@@ -19,7 +20,20 @@ for (const p of paketKaydi) {
   }
 }
 
+// Açılış sözleri (KK-98). Aktif oyun kimlikleri src/games/registry.ts ile aynı olmalı (kabul testi karşılaştırır).
+const AKTIF_OYUNLAR = ['ok-mu-nok', '10-10-ama', 'casus-kim'];
+try {
+  const soz = JSON.parse(
+    readFileSync(new URL('acilis/sozler.json', kok), 'utf8'),
+  );
+  for (const m of sozHatalari(soz, AKTIF_OYUNLAR))
+    hata('acilis/sozler.json', m);
+} catch (e) {
+  hata('acilis/sozler.json', `okunamadı: ${(e as Error).message}`);
+}
+
 const kayitli = new Set<string>(paketKaydi.map((p) => p.dosya));
+kayitli.add('acilis/sozler.json');
 for (const klasor of readdirSync(kok))
   for (const f of readdirSync(new URL(`${klasor}/`, kok)).filter((d) =>
     d.endsWith('.json'),

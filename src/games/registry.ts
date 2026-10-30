@@ -22,6 +22,7 @@ export const oyunlar: Oyun[] = [
   {
     id: '10-10-ama',
     ad: '10/10 ama',
+    emoji: '🔟',
     aktif: true,
     modSecimi: true, // Tek telefon / Oda kur / Odaya katıl (KK-63)
     kurulum: '/onon/hazirlik',
@@ -36,6 +37,7 @@ export const oyunlar: Oyun[] = [
   {
     id: 'casus-kim',
     ad: 'Casus kim',
+    emoji: '🕵️',
     aktif: true,
     minOyuncu: CASUS_MIN,
     kurulum: '/casus/hazirlik',

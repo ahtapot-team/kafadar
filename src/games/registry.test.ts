@@ -10,6 +10,7 @@ describe('registry', () => {
     const sahte: Oyun = {
       id: 'sahte',
       ad: 'Sahte',
+      emoji: '🧪',
       aktif: true,
     };
     expect([...oyunlar, sahte].map((o) => o.id)).toContain('sahte');
