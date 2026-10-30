@@ -40,7 +40,7 @@ export function OdaUst({
       <Yazi
         tur="etiket"
         soluk
-        numberOfLines={1}
+        numberOfLines={sag == null ? 1 : undefined}
         style={{ flex: 1, textAlign: 'center' }}
       >
         {orta}
