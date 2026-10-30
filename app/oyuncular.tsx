@@ -1,6 +1,6 @@
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { useState } from 'react';
-import { Pressable, TextInput, View } from 'react-native';
+import { Platform, Pressable, TextInput, View } from 'react-native';
 import {
   baslayabilir,
   ekleyebilir,
@@ -11,6 +11,7 @@ import {
 } from '../src/core/oyuncular';
 import { oyunlar } from '../src/games/registry';
 import { useDurum } from '../src/durum';
+import { uygulamaGeri } from '../src/uygulama-geri';
 import { bosluk, cizgi, dokunmaAlani, yaricap } from '../src/tema';
 import { Dugme, Ekran, Yazi, GeriCubugu } from '../src/ui';
 
@@ -38,8 +39,10 @@ export default function Oyuncular() {
       oyunculariAyarla(taslakli);
       setAd('');
     }
-    if (oyunda) router.back();
-    else router.push((oyun?.kurulum ?? '/paket') as '/paket');
+    if (oyunda) {
+      if (Platform.OS === 'web') uygulamaGeri.isaretle();
+      router.back();
+    } else router.push((oyun?.kurulum ?? '/paket') as '/paket');
   };
 
   return (

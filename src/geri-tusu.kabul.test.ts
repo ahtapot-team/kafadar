@@ -3,10 +3,7 @@
 // Test adları bilerek "KK-" önekiyle başlamaz (PRD KK haritasıyla çakışır, #168); #45-n = issue kriteri n.
 import { readFileSync } from 'node:fs';
 import { describe, expect, it } from 'vitest';
-import { BEKLEYEN } from './kabul';
 import { kaynaklar } from './test/yardimci';
-
-const kabulGeri = BEKLEYEN.geriTusu ? it.fails : it;
 
 const oku = (yol: string) =>
   readFileSync(new URL(`../${yol}`, import.meta.url), 'utf8');
@@ -22,25 +19,22 @@ const popstateGovde = () => {
 };
 
 describe('#45: oyun içi Oyuncular → Tamam çıkış penceresi açmaz (web)', () => {
-  kabulGeri(
-    '#45-1: Tamam ile dönüş (router.back) popstate\'te "Oyundan çık?" açmaz',
-    () => {
-      // Çözüm ya Tamam'da router.back() kullanmamaktır ya da popstate işleyicisi
-      // uygulamanın kendi gezinmesini (izinli dışında bir koşulla) yok sayar.
-      const oyuncular = oku('app/oyuncular.tsx');
-      const bitti = oyuncular.slice(
-        oyuncular.indexOf('const bitti'),
-        oyuncular.indexOf('return (', oyuncular.indexOf('const bitti')),
-      );
-      const backKullaniyor = /router\.back\(\)/.test(bitti);
-      const govde = popstateGovde();
-      const korumalar = [...govde.matchAll(/if \(([^)]*)\) return/g)].map((m) =>
-        m[1].trim(),
-      );
-      const ekKoruma = korumalar.some((k) => k !== 'izinli.current');
-      expect(!backKullaniyor || ekKoruma).toBe(true);
-    },
-  );
+  it('#45-1: Tamam ile dönüş (router.back) popstate\'te "Oyundan çık?" açmaz', () => {
+    // Çözüm ya Tamam'da router.back() kullanmamaktır ya da popstate işleyicisi
+    // uygulamanın kendi gezinmesini (izinli dışında bir koşulla) yok sayar.
+    const oyuncular = oku('app/oyuncular.tsx');
+    const bitti = oyuncular.slice(
+      oyuncular.indexOf('const bitti'),
+      oyuncular.indexOf('return (', oyuncular.indexOf('const bitti')),
+    );
+    const backKullaniyor = /router\.back\(\)/.test(bitti);
+    const govde = popstateGovde();
+    const korumalar = [...govde.matchAll(/if \(([^)]*)\) return/g)].map((m) =>
+      m[1].trim(),
+    );
+    const ekKoruma = korumalar.some((k) => k !== 'izinli.current');
+    expect(!backKullaniyor || ekKoruma).toBe(true);
+  });
 
   it('#45-1b: oyundan çıkış yolları (Çık, ana menü) hâlâ izinli bayrağıyla onaysız çalışır', () => {
     const k = oku('app/oyun.tsx');
