@@ -11,6 +11,7 @@ Kurallar ve token'lar: [`TASARIM-SISTEMI.md`](TASARIM-SISTEMI.md). Her klasör b
 | `107-on-on-ama/` | #107 | 10/10 ama (tek telefon) | ✅ Geçerli | Yalnızca OK mu NOK mu'dan farklı ekranlar. |
 | `120-onon-oda/` | #120 | 10/10 ama oda modu | ✅ Geçerli | Yalnızca farklar; kod 6 hane. |
 | `130-tanitim-karti/` | #130 | Tanıtım kartı, "Nasıl oynanır?" | ✅ Geçerli (A) | Bağlantı üst sağda (A, Metehan). 9 numaralı ekran (B) yalnızca karşılaştırma içindir. |
+| `171-kategoriler/` | #171 | Ana ekran kategori çipleri, oyun kartı rozeti (v7) | ⏳ Seçim bekliyor | A "Sade liste", B "Sticker raf". Seçilmeyen seçim sonrası `arsiv/`'e taşınır. |
 | `arsiv/` | — | Elenen seçenekler | 🗄 Arşiv | Referans alınmaz. `arsiv/2-gorsel-yon/`: A · Neon Gece, C · Gece Dergisi. |
 
 **Yeni tasarım eklerken:**
