@@ -66,7 +66,7 @@ Tarih: 30.10.2026 · Hazırlayan: pm · İsteyen: Metehan (Telegram 849) · Issu
 
 **Rakamlar:**
 
-- **Fiyat:** En düşük App Store kademesi (0,99 $) Türkiye'de 16,99 TL. Kasım 2025 güncellemesiyle 10,99 TL'den yükseldi; Apple kurlara göre yeniden güncelleyebilir [19].
+- **Fiyat:** Apple, Türkiye App Store fiyatlarını 17 Kasım 2025'te güncelledi [19]. Haberlerde en düşük kademenin (0,99 $) 10,99 TL'den 16,99 TL'ye çıktığı yazıyor, ancak bu rakamı kaynakla doğrulayamadık (**tahmin**). Kesin değer mağazaya çıkarken App Store Connect fiyat tablosundan alınmalı; Apple bu tabloyu kura göre yeniden güncelleyebilir.
 - **Reklam geliri:** Ödüllü reklamda 1.000 gösterim başına gelir (eCPM) dünyada 8–18 $. Ara reklamda 2,5–5 $, bannerda 0,2–0,8 $ [5]. Türkiye'ye özel veri bulamadık; genelde bu ortalamaların belirgin altında.
 - **Ödeme duvarı:** Tüm kategorilerde ortalama; deneme süresinden ödemeye geçiş, kesin ödeme duvarında ~%10,7, freemium'da ~%2,1 [20].
 - **Oyun kategorisi:** Oyunlar ayda 10 bin $ gelire diğer kategorilerden daha hızlı ulaşıyor [20].
