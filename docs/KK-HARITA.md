@@ -78,17 +78,20 @@ PRD'deki her kabul kriteri için "KK-nn" ifadesi geçen test dosyaları ve gerç
 | KK-72 | Gerçek cihaz kapısı: en az 3 telefonla tam bir 10/10 ama odası oynanır. Kontrol listesi `d | — | cihaz |
 | KK-77 | Ekran okuyucu kartın başlığını ve metnini okur. "Tamam" düğmesinin dokunma alanı en az 48p | `games/tanitim.kabul.test.ts`, `tanitim-ui.kabul.test.ts` | cihaz |
 | KK-85 | Çiplerin dokunma alanı en az 48px'tir. Ekran okuyucu seçili çipi "seçili" diye okur. Çiple | `games/kategori.kabul.test.ts` | — |
-| KK-87 | Ana ekranda oyun listesinin üstünde yatay ve tek seçimli bir çip satırı vardır. Sıra şudur | `games/kategori.kabul.test.ts` | — |
-| KK-88 | Bir çipe dokunulunca listede yalnızca kişi aralığı çipin aralığıyla kesişen oyunlar kalır  | `games/kategori.kabul.test.ts` | — |
-| KK-89 | Oyun kartında tür rozeti yoktur; yalnızca kişi sayısı görünür (ör. "2–12 kişi") ve tanıtım | `games/kategori.kabul.test.ts` | — |
+| KK-89 | Oyun kartında tür rozeti yoktur; yalnızca kişi sayısı görünür (ör. "2–12 kişi") ve tanıtım | `games/kategori.kabul.test.ts`, `v81.kabul.test.ts` | — |
 | KK-90 | Oyun tanıtım kartı hiçbir zaman kendiliğinden açılmaz: oyunu ilk seçerken de, odaya kodla  | `nasil-oynanir.kabul.test.ts` | — |
-| KK-91 | Oyun seçildikten sonraki her ekranın sağ üstünde küçük bir ⓘ düğmesi vardır: mod seçimi, o | `nasil-oynanir.kabul.test.ts` | — |
+| KK-91 | Oyun seçildikten sonraki her ekranın sağ üstünde küçük bir ⓘ düğmesi vardır: mod seçimi, o | `nasil-oynanir.kabul.test.ts`, `v81.kabul.test.ts` | — |
 | KK-92 | ⓘ düğmesinin dokunma alanı en az 48px'tir. Ekran okuyucu düğmeyi "Nasıl oynanır" diye okur | `nasil-oynanir.kabul.test.ts` | — |
 | KK-93 | Oyun akışları değişmez: mod seçimi, "Devam et" ve oda modu eskisi gibi çalışır. Mevcut kab | `games/kategori.kabul.test.ts`, `tanitim-ui.kabul.test.ts` | — |
-| KK-94 | Uygulama her açıldığında (web'de sayfa yenilendiğinde de) önce açılış ekranı görünür. Ekra | `acilis.kabul.test.ts` | — |
-| KK-95 | Yüzde yalnızca ileri gider. Hazırlık (yazı tipleri ve kayıtlı ayarlar) bitmeden %100 olmaz | `acilis.kabul.test.ts` | — |
-| KK-96 | Ekrana dokunmak kalan bekleme süresini atlar. Hazırlık bittiyse hemen geçer, bitmediyse ha | `acilis.kabul.test.ts` | — |
-| KK-97 | Söz her açılışta bütün sözler arasından rastgele seçilir. Oyuna ait sözün altında oyunun a | `acilis.kabul.test.ts` | — |
-| KK-98 | Sözler `content/` altında tek bir JSON dosyasındadır; yeni söz eklemek kod değişikliği ger | `acilis.kabul.test.ts`, `icerik/soz.kabul.test.ts` | — |
-| KK-99 | Ekran okuyucu yüzdeyi ve sözü okur. Açılış ekranı koyu ve açık temada çalışır; stil değerl | `acilis.kabul.test.ts` | — |
-| KK-100 | Mevcut akışlar değişmez: "Devam et", oda davet bağlantısıyla katılım ve ayarlar eskisi gib | `acilis.kabul.test.ts` | — |
+| KK-94 | Uygulama her açıldığında (web'de sayfa yenilendiğinde de) önce açılış ekranı görünür. Ekra | `acilis.kabul.test.ts`, `v81.kabul.test.ts` | — |
+| KK-95 | Yüzde yalnızca ileri gider. Hazırlık (yazı tipleri ve kayıtlı ayarlar) bitmeden %100 olmaz | `acilis.kabul.test.ts`, `v81.kabul.test.ts` | — |
+| KK-96 | Ekrana dokunmak kalan bekleme süresini atlar. Hazırlık bittiyse hemen geçer, bitmediyse ha | `acilis.kabul.test.ts`, `v81.kabul.test.ts` | — |
+| KK-97 | Söz her açılışta bütün sözler arasından rastgele seçilir. Oyuna ait sözün altında oyunun a | `acilis.kabul.test.ts`, `v81.kabul.test.ts` | — |
+| KK-98 | Sözler `content/` altında tek bir JSON dosyasındadır; yeni söz eklemek kod değişikliği ger | `acilis.kabul.test.ts`, `icerik/soz.kabul.test.ts`, `v81.kabul.test.ts` | — |
+| KK-99 | Ekran okuyucu yüzdeyi ve sözü okur. Açılış ekranı koyu ve açık temada çalışır; stil değerl | `acilis.kabul.test.ts`, `v81.kabul.test.ts` | — |
+| KK-100 | Mevcut akışlar değişmez: "Devam et", oda davet bağlantısıyla katılım ve ayarlar eskisi gib | `acilis.kabul.test.ts`, `v81.kabul.test.ts` | — |
+| KK-101 | Açılış ekranındaki "Kafadar" yazısı, ana ekrandaki "Kafadar" logosuyla aynı yazı tipinde v | `v81.kabul.test.ts` | — |
+| KK-102 | Ana ekranda "Bir oyun seç, telefonu ele ver." yazısı yoktur ve yerine başka bir yazı gelme | `v81.kabul.test.ts` | — |
+| KK-103 | Ana ekranda oyun listesinin üstünde yatay, tek seçimli bir çip satırı vardır. Sıra şudur:  | `games/kategori.kabul.test.ts`, `v81.kabul.test.ts` | — |
+| KK-104 | Bir çipe dokunulunca listede yalnızca kişi aralığı çipin aralığıyla kesişen oyunlar kalır  | `games/kategori.kabul.test.ts`, `v81.kabul.test.ts` | — |
+| KK-105 | Diğer akışlar değişmez: açılış ekranı (KK-94…KK-100), oyun kartındaki kişi sayısı (KK-89)  | `v81.kabul.test.ts` | — |
