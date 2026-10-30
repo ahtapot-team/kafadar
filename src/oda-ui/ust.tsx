@@ -1,6 +1,7 @@
 // Oda ekranlarının ortak üst satırı: oda rozeti (marka-2), ortada başlık, sağda süre ya da boşluk.
 import { Pressable, View } from 'react-native';
 import { useDurum } from '../durum';
+import { useBilgiYuvasi } from '../tanitim-kutusu';
 import { bosluk, cizgi, dokunmaAlani, yaricap } from '../tema';
 import { Yazi } from '../ui';
 
@@ -18,8 +19,9 @@ export function OdaUst({
   onCik?: () => void; // oyun içi çıkış ikonu: "Odadan çık?" (#73)
 }) {
   const { renk } = useDurum();
+  const bilgi = useBilgiYuvasi();
   return (
-    <View style={{ flexDirection: 'row', alignItems: 'center', gap: bosluk.m }}>
+    <View style={{ flexDirection: 'row', alignItems: 'center', gap: bosluk.s }}>
       <View
         style={{
           paddingHorizontal: bosluk.m,
@@ -35,16 +37,24 @@ export function OdaUst({
           {kod}
         </Yazi>
       </View>
-      <Yazi tur="etiket" soluk style={{ flex: 1, textAlign: 'center' }}>
+      <Yazi
+        tur="etiket"
+        soluk
+        numberOfLines={sag == null ? 1 : undefined}
+        style={{ flex: 1, textAlign: 'center' }}
+      >
         {orta}
       </Yazi>
-      <Yazi
-        testID={sagTestID}
-        tur="etiket"
-        style={{ minWidth: 40, textAlign: 'right' }}
-      >
-        {sag ?? ''}
-      </Yazi>
+      {sag != null && (
+        <Yazi
+          testID={sagTestID}
+          tur="etiket"
+          style={{ minWidth: 40, textAlign: 'right' }}
+        >
+          {sag}
+        </Yazi>
+      )}
+      {bilgi}
       {onCik && (
         <Pressable
           testID="oda-cik"

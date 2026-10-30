@@ -11,6 +11,7 @@ import {
 } from '../src/core/oyuncular';
 import { oyunlar } from '../src/games/registry';
 import { useDurum } from '../src/durum';
+import { BilgiDugmesi } from '../src/tanitim-kutusu';
 import { uygulamaGeri } from '../src/uygulama-geri';
 import { bosluk, cizgi, dokunmaAlani, yaricap } from '../src/tema';
 import { Dugme, Ekran, Yazi, GeriCubugu } from '../src/ui';
@@ -47,7 +48,16 @@ export default function Oyuncular() {
 
   return (
     <Ekran>
-      {!oyunda && <GeriCubugu testID="geri" />}
+      <View
+        style={{
+          flexDirection: 'row',
+          alignItems: 'center',
+          justifyContent: oyunda ? 'flex-end' : 'space-between',
+        }}
+      >
+        {!oyunda && <GeriCubugu testID="geri" />}
+        <BilgiDugmesi oyunId={oyunId ?? ''} />
+      </View>
       <Yazi tur="baslik">Oyuncular</Yazi>
       <Yazi soluk>{oyuncular.length} / 12 kişi</Yazi>
       {oyuncular.map((o, i) => (

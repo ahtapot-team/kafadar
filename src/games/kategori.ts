@@ -1,55 +1,36 @@
-// Oyun kategorileri (PRD v7, KK-79…KK-86): çip eşleşme/görünürlük kuralı ve kart metinleri. Saf mantık, React yok.
-import type { Oyun, OyunTuru } from './oyun';
+// Oyun kategorileri (PRD v7.1, KK-79…KK-89): kişi sayısı çipleri ve eşleşme kuralı. Saf mantık, React yok.
+import type { Oyun } from './oyun';
 
-export type CipId = 'tumu' | '2-kisi' | 'kalabalik' | 'cift' | 'aile' | 'quiz';
+export type CipId = 'tumu' | '2-kisi' | '3-5-kisi' | '6-uzeri-kisi';
 
-export const CIPLER: CipId[] = [
-  'tumu',
-  '2-kisi',
-  'kalabalik',
-  'cift',
-  'aile',
-  'quiz',
-];
+// Dört çip her zaman görünür (KK-82).
+export const CIPLER: CipId[] = ['tumu', '2-kisi', '3-5-kisi', '6-uzeri-kisi'];
 
 export const CIP_ETIKETI: Record<CipId, string> = {
   tumu: 'Tümü',
   '2-kisi': '2 kişi',
-  kalabalik: 'Kalabalık',
-  cift: 'Çift',
-  aile: 'Aile',
-  quiz: 'Quiz',
+  '3-5-kisi': '3–5 kişi',
+  '6-uzeri-kisi': '6+ kişi',
 };
 
-type Kayit = Pick<Oyun, 'minOyuncu' | 'tur' | 'ortam'>;
+export const BOS_LISTE_METNI = 'Bu kişi sayısına uygun oyun henüz yok.';
+
+type Kayit = Pick<Oyun, 'minOyuncu'>;
 
 const UST_SINIR = 12; // genel oyuncu üst sınırı (yeni kişi alanı yok)
-const KALABALIK = 6;
 
+const ARALIK: Record<Exclude<CipId, 'tumu'>, [number, number]> = {
+  '2-kisi': [2, 2],
+  '3-5-kisi': [3, 5],
+  '6-uzeri-kisi': [6, UST_SINIR],
+};
+
+// Oyunun kişi aralığı [minOyuncu ?? 2, 12] çipin aralığıyla kesişiyorsa eşleşir.
 export function cipEslesir(cip: CipId, oyun: Kayit): boolean {
-  switch (cip) {
-    case 'tumu':
-      return true;
-    case '2-kisi':
-      return (oyun.minOyuncu ?? 2) <= 2;
-    case 'kalabalik':
-      return UST_SINIR >= KALABALIK;
-    case 'cift':
-    case 'aile':
-      return !!oyun.ortam?.includes(cip);
-    case 'quiz':
-      return oyun.tur === 'quiz';
-  }
-}
-
-// Yalnızca listeyi gerçekten daraltan çipler (KK-82); hiçbiri daraltmıyorsa satır gösterilmez.
-export function gorunenCipler(oyunlar: Kayit[]): CipId[] {
-  const daraltan = CIPLER.filter((c) => {
-    if (c === 'tumu') return false;
-    const n = oyunlar.filter((o) => cipEslesir(c, o)).length;
-    return n >= 1 && n < oyunlar.length;
-  });
-  return daraltan.length ? ['tumu', ...daraltan] : [];
+  if (cip === 'tumu') return true;
+  const [alt, ust] = ARALIK[cip];
+  const min = Math.max(oyun.minOyuncu ?? 2, 2);
+  return min <= ust && UST_SINIR >= alt;
 }
 
 export function filtrele<T extends Kayit>(oyunlar: T[], cip: CipId): T[] {
@@ -61,14 +42,5 @@ export function cipSec(secili: CipId, dokunulan: CipId): CipId {
   return dokunulan === secili ? 'tumu' : dokunulan;
 }
 
-const TUR_ETIKETI: Record<OyunTuru, string> = {
-  oylama: 'Oylama',
-  puanlama: 'Puanlama',
-  'gizli-rol': 'Gizli rol',
-  quiz: 'Quiz',
-};
-
-export const turEtiketi = (tur: OyunTuru): string => TUR_ETIKETI[tur];
-
-export const kisiMetni = (oyun: Pick<Oyun, 'minOyuncu'>): string =>
-  `${oyun.minOyuncu ?? 2}–${UST_SINIR} kişi`;
+export const kisiMetni = (oyun: Kayit): string =>
+  `${Math.max(oyun.minOyuncu ?? 2, 2)}–${UST_SINIR} kişi`;

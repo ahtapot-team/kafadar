@@ -179,7 +179,9 @@ export function Cip({
         ...kat,
         minHeight: dokunmaAlani,
         justifyContent: 'center',
-        paddingHorizontal: bosluk.l,
+        alignItems: 'center',
+        flexGrow: kategori ? 1 : 0, // kişi çipleri satırı doldurur
+        paddingHorizontal: kategori ? bosluk.s : bosluk.l,
         borderRadius: yaricap.cip,
         borderWidth: cizgi.ince,
         borderColor: renk.kontur,

@@ -21,6 +21,7 @@ import {
 } from '../../games/casus-kim/casus';
 import type { OyunEkraniProps } from '../../games/oyun';
 import { bosluk, cizgi, dokunmaAlani, yaricap } from '../../tema';
+import { useBilgiYuvasi } from '../../tanitim-kutusu';
 import { titret } from '../../titresim';
 import { Dugme, Ekran, Yazi } from '../../ui';
 import { usePaylas, GizliPaylasim } from '../ortak/paylasim';
@@ -102,6 +103,7 @@ export default function CasusEkrani({ onCik, onAnaMenu }: OyunEkraniProps) {
     oncekiAsama.current = asama;
   }, [asama, durum]);
 
+  const bilgi = useBilgiYuvasi();
   if (!durum) return <Ekran>{null}</Ekran>;
 
   // Ekran gizli (uygulama değiştirici / arka plan): içerik yok, yalnızca marka.
@@ -129,6 +131,7 @@ export default function CasusEkrani({ onCik, onAnaMenu }: OyunEkraniProps) {
         <Yazi tur="etiket" soluk>
           {durum.sira} / {durum.oyuncular.length} gördü
         </Yazi>
+        {bilgi}
         <Pressable
           testID="cik"
           accessibilityRole="button"

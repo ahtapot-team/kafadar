@@ -4,6 +4,4 @@ export const okMuNok: Oyun = {
   id: 'ok-mu-nok',
   ad: 'OK mu NOK mu',
   aktif: true,
-  tur: 'oylama',
-  ortam: ['cift', 'aile'],
 };

@@ -8,20 +8,17 @@ import Animated, {
   useSharedValue,
   withTiming,
 } from 'react-native-reanimated';
-import { tanitimGerekli, tanitimGorulduMu } from '../src/core/tanitim';
-import { depo } from '../src/depo';
 import {
+  BOS_LISTE_METNI,
   CIP_ETIKETI,
+  CIPLER,
   cipSec,
   filtrele,
-  gorunenCipler,
   kisiMetni,
-  turEtiketi,
   type CipId,
 } from '../src/games/kategori';
 import type { Oyun } from '../src/games/oyun';
 import { oyunlar } from '../src/games/registry';
-import { TanitimKarti } from '../src/tanitim-kutusu';
 import { useDurum } from '../src/durum';
 import {
   bosluk,
@@ -109,41 +106,22 @@ function AyarlarIkonu() {
   );
 }
 
-// Oyun kartının ikinci satırı: tür rozeti + kişi sayısı (KK-84).
+// Oyun kartının ikinci satırı: kişi sayısı (KK-84).
 function KartAlt({ oyun }: { oyun: Oyun }) {
   const { renk } = useDurum();
   return (
-    <View style={{ flexDirection: 'row', alignItems: 'center', gap: bosluk.m }}>
-      <View
-        style={{
-          backgroundColor: renk.kontur,
-          borderRadius: yaricap.kucuk,
-          paddingHorizontal: bosluk.s,
-          paddingVertical: bosluk.xs,
-        }}
-      >
-        <Yazi
-          tur="etiket"
-          testID={`oyun-tur-${oyun.id}`}
-          style={{ color: renk.marka }}
-        >
-          {turEtiketi(oyun.tur)}
-        </Yazi>
-      </View>
-      <Yazi testID={`oyun-kisi-${oyun.id}`} style={{ color: renk.kontur }}>
-        👥 {kisiMetni(oyun)}
-      </Yazi>
-    </View>
+    <Yazi testID={`oyun-kisi-${oyun.id}`} style={{ color: renk.kontur }}>
+      👥 {kisiMetni(oyun)}
+    </Yazi>
   );
 }
 
 export default function Ana() {
   const router = useRouter();
-  const { yarimOyunVar, oyunuBitir, hazir, oyunuSec } = useDurum();
+  const { yarimOyunVar, oyunuBitir, hazir, oyunuSec, renk } = useDurum();
   const [soruldu, setSoruldu] = useState(false);
-  const [tanitim, setTanitim] = useState<Oyun | null>(null);
   const [cip, setCip] = useState<CipId>('tumu'); // seçim kalıcı değil (KK-81)
-  const cipler = gorunenCipler(oyunlar);
+  const liste = filtrele(oyunlar, cip);
   const gir = (oyun: Oyun) => {
     oyunuSec(oyun.id);
     router.push(oyun.modSecimi ? '/mod' : '/oyuncular');
@@ -153,31 +131,46 @@ export default function Ana() {
       <Ekran>
         <Logo />
         <Yazi soluk>Bir oyun seç, telefonu ele ver.</Yazi>
-        {cipler.length > 0 && (
-          <ScrollView
-            testID="kategori-cipleri"
-            horizontal
-            showsHorizontalScrollIndicator={false}
-            style={{ flexGrow: 0, marginHorizontal: -kenarBosluk }}
-            contentContainerStyle={{
-              paddingHorizontal: kenarBosluk,
-              paddingBottom: bosluk.s,
-              gap: bosluk.s,
+        <ScrollView
+          testID="kategori-cipleri"
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          style={{ flexGrow: 0, marginHorizontal: -kenarBosluk }}
+          contentContainerStyle={{
+            paddingHorizontal: kenarBosluk,
+            paddingBottom: bosluk.s,
+            gap: bosluk.s,
+            flexGrow: 1,
+          }}
+        >
+          {CIPLER.map((c) => (
+            <Cip
+              key={c}
+              kategori
+              testID={`cip-${c}`}
+              etiket={CIP_ETIKETI[c]}
+              secili={cip === c}
+              onPress={() => setCip(cipSec(cip, c))}
+            />
+          ))}
+        </ScrollView>
+        {liste.length === 0 && (
+          <View
+            testID="kategori-bos"
+            style={{
+              borderWidth: cizgi.ince,
+              borderStyle: 'dashed',
+              borderColor: renk.metin,
+              borderRadius: yaricap.kart,
+              padding: bosluk.xl,
             }}
           >
-            {cipler.map((c) => (
-              <Cip
-                key={c}
-                kategori
-                testID={`cip-${c}`}
-                etiket={CIP_ETIKETI[c]}
-                secili={cip === c}
-                onPress={() => setCip(cipSec(cip, c))}
-              />
-            ))}
-          </ScrollView>
+            <Yazi soluk style={{ textAlign: 'center' }}>
+              {BOS_LISTE_METNI}
+            </Yazi>
+          </View>
         )}
-        {filtrele(oyunlar, cip).map((oyun) =>
+        {liste.map((oyun) =>
           !oyun.aktif ? (
             <Dugme
               key={oyun.id}
@@ -192,29 +185,11 @@ export default function Ana() {
               key={oyun.id}
               testID={`ana-oyun-${oyun.id}`}
               etiket={oyun.ad}
-              erisilebilirEtiket={`${oyun.ad}, ${turEtiketi(oyun.tur)}, ${kisiMetni(oyun)}`}
+              erisilebilirEtiket={`${oyun.ad}, ${kisiMetni(oyun)}`}
               ek={<KartAlt oyun={oyun} />}
-              onPress={async () => {
-                // İlk seçimde (bu telefonda) önce tanıtım kartı; görüldüyse eskisi gibi tek dokunuş (KK-73, KK-78).
-                const goruldu = await tanitimGorulduMu(depo, oyun.id);
-                if (oyun.tanitim && tanitimGerekli(goruldu, 'secim'))
-                  setTanitim(oyun);
-                else gir(oyun);
-              }}
+              onPress={() => gir(oyun)}
             />
           ),
-        )}
-        {tanitim && (
-          <TanitimKarti
-            oyun={tanitim}
-            gorunur
-            onTamam={() => {
-              const o = tanitim;
-              setTanitim(null);
-              gir(o);
-            }}
-            onKapat={() => setTanitim(null)} // geri tuşu: ana ekranda kal, görüldü sayılmaz (KK-74)
-          />
         )}
         <Diyalog
           gorunur={hazir && yarimOyunVar && !soruldu}

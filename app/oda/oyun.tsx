@@ -12,6 +12,7 @@ import { YenidenBaglaniyor } from '../../src/oda-ui/yeniden';
 import { odaTuru } from '../../src/oda/istemci';
 import { ayrilanlar } from '../../src/oda/ozet';
 import { useDurum } from '../../src/durum';
+import { BilgiDugmesi, BilgiYuvasi, odaOyunId } from '../../src/tanitim-kutusu';
 import { bosluk, cizgi, yaricap } from '../../src/tema';
 import { Diyalog, Dugme, Ekran, Yazi } from '../../src/ui';
 
@@ -36,6 +37,7 @@ export default function OdaOyun() {
   const g = durum.gorunum;
   const onon = odaTuru(durum) === 'on-on-ama'; // ekran odanın oyunundan seçilir (KK-63)
   const bitti = g?.asama === 'bitti';
+  const bilgi = <BilgiDugmesi oyunId={odaOyunId(odaTuru(durum))} kisa />;
 
   // Android geri tuşu / iOS geri hareketi: oyun sürerken "Odadan çık?" sorar; final'de sormadan ayrılır (#73).
   useEffect(
@@ -116,7 +118,7 @@ export default function OdaOyun() {
   if (g.asama === 'soru') {
     const cevapladi = g.benimOyum != null && degistirNo !== g.soruNo;
     return (
-      <>
+      <BilgiYuvasi.Provider value={bilgi}>
         {onon ? (
           g.aciklama ? (
             <OnAciklamaEkrani
@@ -191,7 +193,7 @@ export default function OdaOyun() {
             onPress={() => setCikisOnayi(false)}
           />
         </Diyalog>
-      </>
+      </BilgiYuvasi.Provider>
     );
   }
 
@@ -201,17 +203,21 @@ export default function OdaOyun() {
     istemci.ayril();
     router.replace(hedef);
   };
-  return onon ? (
-    <OnFinalEkrani
-      durum={durum}
-      onTekrar={() => cik('/mod')}
-      onAnaMenu={() => cik('/')}
-    />
-  ) : (
-    <FinalEkrani
-      durum={durum}
-      onTekrar={() => cik('/mod')}
-      onAnaMenu={() => cik('/')}
-    />
+  return (
+    <BilgiYuvasi.Provider value={bilgi}>
+      {onon ? (
+        <OnFinalEkrani
+          durum={durum}
+          onTekrar={() => cik('/mod')}
+          onAnaMenu={() => cik('/')}
+        />
+      ) : (
+        <FinalEkrani
+          durum={durum}
+          onTekrar={() => cik('/mod')}
+          onAnaMenu={() => cik('/')}
+        />
+      )}
+    </BilgiYuvasi.Provider>
   );
 }

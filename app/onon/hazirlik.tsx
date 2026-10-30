@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { View } from 'react-native';
 import { useDurum } from '../../src/durum';
 import { ononPaketleri } from '../../src/oyun-ekranlari/on-on-ama/desteler';
-import { TanitimBaglantisi } from '../../src/tanitim-kutusu';
+import { BilgiDugmesi } from '../../src/tanitim-kutusu';
 import { bosluk } from '../../src/tema';
 import { Cip, Dugme, Ekran, GeriCubugu, Yazi } from '../../src/ui';
 
@@ -36,11 +36,7 @@ export default function OnOnHazirlik() {
         }}
       >
         <GeriCubugu testID="geri" />
-        <TanitimBaglantisi
-          oyunId="10-10-ama"
-          testID="tanitim-nasil"
-          etiket="Nasıl oynanır?"
-        />
+        <BilgiDugmesi oyunId="10-10-ama" />
       </View>
       <Yazi tur="baslik">Paket ve süre</Yazi>
       <Yazi tur="etiket" soluk>

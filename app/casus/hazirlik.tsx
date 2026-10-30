@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { Pressable, View } from 'react-native';
 import { casusSiniri } from '../../src/oyun-ekranlari/casus-kim/sinir';
 import { useDurum } from '../../src/durum';
-import { TanitimBaglantisi } from '../../src/tanitim-kutusu';
+import { BilgiDugmesi } from '../../src/tanitim-kutusu';
 import { bosluk, cizgi, dokunmaAlani, yaricap } from '../../src/tema';
 import { Cip, Dugme, Ekran, GeriCubugu, Yazi } from '../../src/ui';
 import { casusPaketleri } from '../../src/oyun-ekranlari/casus-kim/desteler';
@@ -86,11 +86,7 @@ export default function Hazirlik() {
         }}
       >
         <GeriCubugu testID="geri" />
-        <TanitimBaglantisi
-          oyunId="casus-kim"
-          testID="tanitim-nasil"
-          etiket="Nasıl oynanır?"
-        />
+        <BilgiDugmesi oyunId="casus-kim" />
       </View>
       <Yazi tur="baslik">Hazırlık</Yazi>
       <Yazi tur="etiket" soluk>

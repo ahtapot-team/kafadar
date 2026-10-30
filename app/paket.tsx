@@ -2,7 +2,7 @@ import { useRouter } from 'expo-router';
 import { View } from 'react-native';
 import { paketler, type Paket } from '../src/desteler';
 import { useDurum } from '../src/durum';
-import { TanitimBaglantisi } from '../src/tanitim-kutusu';
+import { BilgiDugmesi } from '../src/tanitim-kutusu';
 import { bosluk } from '../src/tema';
 import { Cip, Dugme, Ekran, Yazi, GeriCubugu } from '../src/ui';
 
@@ -34,11 +34,7 @@ export default function PaketSec() {
         }}
       >
         <GeriCubugu testID="geri" />
-        <TanitimBaglantisi
-          oyunId={oyunId ?? ''}
-          testID="tanitim-nasil"
-          etiket="Nasıl oynanır?"
-        />
+        <BilgiDugmesi oyunId={oyunId ?? ''} />
       </View>
       <Yazi tur="baslik">Paket ve süre</Yazi>
       <Yazi tur="etiket" soluk>

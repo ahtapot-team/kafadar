@@ -1,5 +1,6 @@
 // Oyun ekranlarının ortak parçaları: üst çubuk ve ikon düğmesi.
 import { Pressable, View } from 'react-native';
+import { useBilgiYuvasi } from '../../tanitim-kutusu';
 import { useDurum } from '../../durum';
 import { bosluk, cizgi, dokunmaAlani, yaricap } from '../../tema';
 import { Yazi } from '../../ui';
@@ -48,6 +49,7 @@ export function UstCubuk({
   onCik: () => void;
 }) {
   const { renk } = useDurum();
+  const bilgi = useBilgiYuvasi();
   return (
     <View style={{ flexDirection: 'row', alignItems: 'center', gap: bosluk.m }}>
       <IkonDugme testID="cik" simge="✕" etiket="Oyundan çık" onPress={onCik} />
@@ -68,9 +70,9 @@ export function UstCubuk({
             {sag}
           </Yazi>
         </View>
-      ) : (
-        <View style={{ width: dokunmaAlani }} />
-      )}
+      ) : null}
+      {bilgi}
+      {!sag && !bilgi && <View style={{ width: dokunmaAlani }} />}
     </View>
   );
 }
