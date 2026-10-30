@@ -1,6 +1,6 @@
 # Kafadar
 
-Son güncelleme: 2026-10-30 — #164
+Son güncelleme: 2026-10-30 — #165
 
 Kafadar, arkadaş/çift/aile için mobil parti oyunları uygulamasıdır (OK mu NOK mu, 10/10 ama, Casus kim). Tek telefonda ya da oda koduyla çok telefonda oynanır. Ayrıntı: `docs/MIMARI.md`.
 
@@ -21,21 +21,22 @@ Expo SDK 58, expo-router, TypeScript, Vitest, Cloudflare Workers + Durable Objec
 | `npm run icerik`                                  | `node scripts/icerik-dogrula.ts`         |
 | `npm run build` / `npm run build:web`             | `expo export --platform android` / `web` |
 | `npm run kk-harita` / `npm run kk-harita:kontrol` | KK haritasını üret / doğrula             |
+| `npm run belge:kontrol`                           | belgeler kodla uyumlu mu (≤120 satır)    |
 | `npm run sunucu:test`                             | `node sunucu/test/oyun.ts` (oda smoke)   |
 
 ## Klasörler
 
 - `app/` — yalnızca ince expo-router sarmalayıcıları (`index`, `oyun`, `oyuncular`, `paket`, `mod`, `ayarlar`, `casus/`, `onon/`, `oda/`).
 - `src/core/` — saf ortak mantık (deste, doğrula, oturum, oyuncular, rng, saat, tanıtım…).
-- `src/games/` — oyun kuralları (`ok-mu-nok`, `on-on-ama`, `casus-kim`) + `registry.ts`.
+- `src/games/` — oyun kuralları (`ok-mu-nok`, `on-on-ama` (oyun id'si `10-10-ama`), `casus-kim`) + `registry.ts`.
 - `src/oyun-ekranlari/` — oyun ekranları; ortak parçalar `ortak/`.
 - `src/oda/` — oda kuralları ve protokol (`oda.ts`, `mesaj.ts`, `istemci.ts`).
 - `src/oda-ui/` — oda modu ekran parçaları. `src/baglanti/` — WebSocket bağlamı ve QR.
 - `src/icerik/` — içerik kaydı ve doğrulama. `src/test/yardimci.ts` — test yardımcıları.
 - `src/tema.ts`, `ui.tsx`, `depo.ts`, `durum.tsx`, `desteler.ts`, `titresim.ts` — kök yardımcılar.
 - `content/decks`, `content/casus`, `content/onon` — deste JSON'ları. `docs/desteler/` — taslak md'ler.
-- `sunucu/` — Cloudflare Worker (`src/{worker,oda-do,sinir-do,ortak}.ts`, `test/`).
-- `scripts/` — `icerik-dogrula.ts`, `kk-harita.ts`. `design/` — tasarımlar. `docs/` — PRD, MIMARI, KK haritası.
+- `sunucu/` — Cloudflare Worker (`sunucu/src/{worker,oda-do,sinir-do,ortak}.ts`, `test/`).
+- `scripts/` — `icerik-dogrula.ts`, `kk-harita.ts`, `belge-kontrol.ts`. `design/` — tasarımlar. `docs/` — PRD, MIMARI, KK haritası.
 - `web/` — `404.html`, `geri-yukle.html`. `public/` — `index.html`. `.github/workflows/` — CI, önizleme, sunucu.
 
 ## Yayın
