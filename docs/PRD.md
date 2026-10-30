@@ -398,8 +398,8 @@ Kullanıcı gözüyle sadeleştirme. Kullanıcı için asıl soru "kaç kişiyiz
 Oyunun kişi aralığı (`minOyuncu` … genel üst sınır 12) çipin aralığıyla kesişiyorsa oyun listede kalır. Bugün bütün oyunlar 12 kişiye kadar oynandığı için listeyi daraltan tek çip "2 kişi"dir; diğer çipler yeni oyunlarla anlam kazanır.
 
 ### Kabul kriterleri (kişi filtresi ve ⓘ)
-- [ ] KK-87: Ana ekranda oyun listesinin üstünde yatay ve tek seçimli bir çip satırı vardır. Sıra şudur: Tümü · 2 kişi · 3–5 kişi · 6+ kişi. Dört çip de her zaman görünür. Uygulama açılınca "Tümü" seçilidir ve seçim uygulama kapanınca hatırlanmaz. Seçili çipe ya da "Tümü"ne dokunmak filtreyi kaldırır.
-- [ ] KK-88: Bir çipe dokunulunca listede yalnızca kişi aralığı çipin aralığıyla kesişen oyunlar kalır ("Çip kuralları" tablosu) ve sıraları değişmez. "Yakında" durumundaki oyunlar da aynı kurala uyar. Eşleşme kuralı saf bir fonksiyondur ve ekransız test edilir. Hiçbir oyun eşleşmezse listede "Bu kişi sayısına uygun oyun henüz yok." yazar.
+- ~~KK-87~~ (v8.1 ile değişti → KK-103): Ana ekranda oyun listesinin üstünde yatay ve tek seçimli bir çip satırı vardır. Sıra şudur: Tümü · 2 kişi · 3–5 kişi · 6+ kişi. Dört çip de her zaman görünür. Uygulama açılınca "Tümü" seçilidir ve seçim uygulama kapanınca hatırlanmaz. Seçili çipe ya da "Tümü"ne dokunmak filtreyi kaldırır.
+- ~~KK-88~~ (v8.1 ile değişti → KK-104): Bir çipe dokunulunca listede yalnızca kişi aralığı çipin aralığıyla kesişen oyunlar kalır ("Çip kuralları" tablosu) ve sıraları değişmez. "Yakında" durumundaki oyunlar da aynı kurala uyar. Eşleşme kuralı saf bir fonksiyondur ve ekransız test edilir. Hiçbir oyun eşleşmezse listede "Bu kişi sayısına uygun oyun henüz yok." yazar.
 - [ ] KK-89: Oyun kartında tür rozeti yoktur; yalnızca kişi sayısı görünür (ör. "2–12 kişi") ve tanıtım kartında yazanla aynıdır. Kayıt satırında `tur` ve `ortam` alanları yoktur. Çift, Aile, Kalabalık ve Quiz çipleri kaldırılmıştır. Yeni oyun yine tek bir kayıt satırıyla eklenir (KK-2); kişi aralığı `minOyuncu`dan ve genel üst sınırdan okunur.
 - [ ] KK-90: Oyun tanıtım kartı hiçbir zaman kendiliğinden açılmaz: oyunu ilk seçerken de, odaya kodla katılırken de açılmaz. Ana ekrandan oyuna giriş tek dokunuştur. "Kart görüldü" bilgisi artık tutulmaz.
 - [ ] KK-91: Oyun seçildikten sonraki her ekranın sağ üstünde küçük bir ⓘ düğmesi vardır: mod seçimi, oyuncular, hazırlık ekranları, oda lobisi, oyun ekranları ve sonuç. Ana ekranda ⓘ yoktur. Düğmeye dokununca o oyunun tanıtım kartı açılır; "Tamam" ile kapanır ve kullanıcı aynı ekranda kalır. Kart açıkken oyun durmaz; oda modunda diğer oyuncular devam eder. Eski "Nasıl oynanır?" yazı bağlantıları kaldırılmıştır.
@@ -454,6 +454,53 @@ Uygulama açılırken boş ekran yerine "Kafadar" adı, yüzdeli bir yükleme ç
 | Yüzde | Hazırlık ve 3 sn'lik süreden yavaş olanı izler | %100 gerçekten hazır demektir | pm varsayılanı |
 | Oyun adı | Oyuna ait sözün altında yazar | Söz oyunu da tanıtır | pm varsayılanı |
 | Kayan ayarlar düğmesi | Kafadar'ın kodunda yok; büyük ihtimalle Expo Go'nun geliştirici düğmesi, ekran görüntüsü bekleniyor | Bizimse ayrı issue açılır | açık (Semih, msg 743) |
+
+## v8.1: Açılış logosu, sade ana ekran ve kişi çipleri (Semih, 30.10.2026) — ONAY BEKLİYOR
+Issue'lar: #205 kabul testleri (qa), #206 uygulama (frontend; #205 bitince başlar). Tasarım adımı yok: yeni ekran yok, yalnızca metin ve kural değişiyor.
+Semih'in üç isteği (Telegram 805, 807):
+1. Açılıştaki "Kafadar" yazısı ana ekrandakiyle aynı yazı tipinde olsun.
+2. "Bir oyun seç, telefonu ele ver." yazısı kalksın.
+3. Kişi çipleri anlamlı ve birbiriyle tutarlı olsun; bazısı rakamla, bazısı yazıyla olmasın.
+
+1 kişilik oyunlar yakında eklenecek. "1 kişi" çipi bugün boş liste gösterir ve bu bilerek böyle bırakılır.
+
+### Akış
+1. Uygulama açılır. Açılış ekranındaki "Kafadar" yazısı, ana ekrandaki logoyla aynı yazı tipinde görünür.
+2. Ana ekranda logonun altında alt yazı yoktur. Hemen Tümü · 1 kişi · 2 kişi · 3+ kişi çipleri gelir ve "Tümü" seçilidir.
+3. Kullanıcı kişi sayısına uyan çipe dokunur ve listede o kişi sayısıyla oynanabilen oyunlar kalır. Eşleşen oyun yoksa "Bu kişi sayısına uygun oyun henüz yok." yazar.
+
+### Çip kuralları
+| Çip | Kişi aralığı | Bugün listede kalan |
+|---|---|---|
+| Tümü | hepsi | 3 oyun |
+| 1 kişi | 1 | yok ("Bu kişi sayısına uygun oyun henüz yok.") |
+| 2 kişi | 2 | OK mu NOK mu, 10/10 ama |
+| 3+ kişi | 3–12 | 3 oyun |
+
+Oyunun kişi aralığı `minOyuncu` (varsayılan 2) ile genel üst sınır 12 arasındadır. Bu aralık çipin aralığıyla kesişiyorsa oyun listede kalır. `minOyuncu` artık 2'ye yuvarlanmaz; 1 kişilik bir oyun eklenince kendiliğinden "1 kişi" çipinde görünür.
+
+### Kabul kriterleri (v8.1)
+- [ ] KK-101: Açılış ekranındaki "Kafadar" yazısı, ana ekrandaki "Kafadar" logosuyla aynı yazı tipinde ve aynı kalınlıkta görünür. Bu hem telefonda (Expo Go) hem web'de geçerlidir. Logo, yazı tipi hazır olmadan çizilmez. Yazı tipi yüklenemezse iki ekran da sistem yazı tipiyle açılır ve açılış ekranı takılı kalmaz (KK-96).
+- [ ] KK-102: Ana ekranda "Bir oyun seç, telefonu ele ver." yazısı yoktur ve yerine başka bir yazı gelmez.
+- [ ] KK-103: Ana ekranda oyun listesinin üstünde yatay, tek seçimli bir çip satırı vardır. Sıra şudur: Tümü · 1 kişi · 2 kişi · 3+ kişi. Kişi çiplerinin hepsi aynı biçimdedir: rakam, ardından "kişi". Dört çip de her zaman görünür; eşleşen oyun olmasa da görünür. Uygulama açılınca "Tümü" seçilidir ve seçim uygulama kapanınca hatırlanmaz. Seçili çipe ya da "Tümü"ne dokunmak filtreyi kaldırır.
+- [ ] KK-104: Bir çipe dokunulunca listede yalnızca kişi aralığı çipin aralığıyla kesişen oyunlar kalır ("Çip kuralları" tablosu) ve sıraları değişmez.
+  - "Yakında" durumundaki oyunlar da aynı kurala uyar.
+  - `minOyuncu` 1 olan bir oyun "1 kişi" çipinde görünür ve kartında "1–12 kişi" yazar.
+  - Bugünkü oyunlarla "1 kişi" seçilince listede "Bu kişi sayısına uygun oyun henüz yok." yazar.
+  - Eşleşme kuralı saf bir fonksiyondur ve ekransız test edilir.
+- [ ] KK-105: Diğer akışlar değişmez: açılış ekranı (KK-94…KK-100), oyun kartındaki kişi sayısı (KK-89) ve ⓘ (KK-91) eskisi gibi çalışır. Mevcut kabul testleri yeşil kalır; değişen kriterlerin testleri güncellenir. `CLAUDE.md` ve `docs/MIMARI.md` kişi çiplerini doğru anlatır.
+
+### Kapsam dışı (v8.1)
+- 1 kişilik oyunun kendisi ve oyuncular ekranının 1 kişiye inmesi. Bunlar ilk 1 kişilik oyunla birlikte ayrı bir işte yapılır.
+- Ana ekrana yeni bir alt yazı ya da açıklama eklemek.
+
+### Kararlar (v8.1)
+| Karar | Seçim | Gerekçe | Karar veren |
+|---|---|---|---|
+| Kişi çipleri | Tümü · 1 kişi · 2 kişi · 3+ kişi; "6+ kişi" ve "3–5 kişi" kalkar | Hepsi aynı biçimde (rakam + kişi). 1 kişilik oyunlar yakında gelecek, boş liste sorun değil. | Semih (30.10.2026, msg 805, 807) |
+| Son çip | "2+" yerine "3+ kişi" | "2 kişi" çipi zaten var. "2+" iki kişilik oyunları iki çipte birden gösterirdi. | pm varsayılanı (Semih itiraz ederse "2+ kişi" olur) |
+| Açılış logosu | Yazı tipi hazır olunca çizilir | Hata: logo yazı tipinden önce çiziliyordu ve telefonda sistem fontunda kalıyordu. | Semih (30.10.2026, msg 805) |
+| Tasarım adımı | Yok | Yeni ekran yok; metin ve kural değişikliği | pm varsayılanı |
 
 ## Geliştirme ilkesi (Semih, 27.10.2026)
 **Overengineering yok.** En az kodla, en basit çözüm, yalnızca bugünkü ihtiyaç kadar. Yapı genişlemeye açık olacak ama ileriye dönük soyutlama, genel çerçeve ya da "belki lazım olur" kodu yazılmayacak. Yeni bağımlılık yalnızca gerçekten gerekiyorsa eklenir ve PR'da gerekçesi yazılır. Aşağıdaki mimari şartlar bu ilkeye göre en sade haliyle uygulanır. Örneğin oyun kayıt listesi basit bir dizidir, eklenti çatısı değildir.
