@@ -1,6 +1,6 @@
 import { useRouter } from 'expo-router';
 import { useEffect, useState } from 'react';
-import { AccessibilityInfo, Pressable, View } from 'react-native';
+import { AccessibilityInfo, Pressable, ScrollView, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import Animated, {
   Easing,
@@ -10,11 +10,21 @@ import Animated, {
 } from 'react-native-reanimated';
 import { tanitimGerekli, tanitimGorulduMu } from '../src/core/tanitim';
 import { depo } from '../src/depo';
+import {
+  CIP_ETIKETI,
+  cipSec,
+  filtrele,
+  gorunenCipler,
+  kisiMetni,
+  turEtiketi,
+  type CipId,
+} from '../src/games/kategori';
 import type { Oyun } from '../src/games/oyun';
 import { oyunlar } from '../src/games/registry';
 import { TanitimKarti } from '../src/tanitim-kutusu';
 import { useDurum } from '../src/durum';
 import {
+  bosluk,
   cizgi,
   dokunmaAlani,
   easing,
@@ -22,7 +32,7 @@ import {
   kenarBosluk,
   yaricap,
 } from '../src/tema';
-import { Diyalog, Dugme, Ekran, Yazi } from '../src/ui';
+import { Cip, Diyalog, Dugme, Ekran, Yazi } from '../src/ui';
 
 // Logo açılışı ≤1 sn (KK-1). "Hareketi azalt" açıksa yalnızca kısa solma.
 function Logo() {
@@ -99,11 +109,41 @@ function AyarlarIkonu() {
   );
 }
 
+// Oyun kartının ikinci satırı: tür rozeti + kişi sayısı (KK-84).
+function KartAlt({ oyun }: { oyun: Oyun }) {
+  const { renk } = useDurum();
+  return (
+    <View style={{ flexDirection: 'row', alignItems: 'center', gap: bosluk.m }}>
+      <View
+        style={{
+          backgroundColor: renk.kontur,
+          borderRadius: yaricap.kucuk,
+          paddingHorizontal: bosluk.s,
+          paddingVertical: bosluk.xs,
+        }}
+      >
+        <Yazi
+          tur="etiket"
+          testID={`oyun-tur-${oyun.id}`}
+          style={{ color: renk.marka }}
+        >
+          {turEtiketi(oyun.tur)}
+        </Yazi>
+      </View>
+      <Yazi testID={`oyun-kisi-${oyun.id}`} style={{ color: renk.kontur }}>
+        👥 {kisiMetni(oyun)}
+      </Yazi>
+    </View>
+  );
+}
+
 export default function Ana() {
   const router = useRouter();
   const { yarimOyunVar, oyunuBitir, hazir, oyunuSec } = useDurum();
   const [soruldu, setSoruldu] = useState(false);
   const [tanitim, setTanitim] = useState<Oyun | null>(null);
+  const [cip, setCip] = useState<CipId>('tumu'); // seçim kalıcı değil (KK-81)
+  const cipler = gorunenCipler(oyunlar);
   const gir = (oyun: Oyun) => {
     oyunuSec(oyun.id);
     router.push(oyun.modSecimi ? '/mod' : '/oyuncular');
@@ -113,7 +153,31 @@ export default function Ana() {
       <Ekran>
         <Logo />
         <Yazi soluk>Bir oyun seç, telefonu ele ver.</Yazi>
-        {oyunlar.map((oyun) =>
+        {cipler.length > 0 && (
+          <ScrollView
+            testID="kategori-cipleri"
+            horizontal
+            showsHorizontalScrollIndicator={false}
+            style={{ flexGrow: 0, marginHorizontal: -kenarBosluk }}
+            contentContainerStyle={{
+              paddingHorizontal: kenarBosluk,
+              paddingBottom: bosluk.s,
+              gap: bosluk.s,
+            }}
+          >
+            {cipler.map((c) => (
+              <Cip
+                key={c}
+                kategori
+                testID={`cip-${c}`}
+                etiket={CIP_ETIKETI[c]}
+                secili={cip === c}
+                onPress={() => setCip(cipSec(cip, c))}
+              />
+            ))}
+          </ScrollView>
+        )}
+        {filtrele(oyunlar, cip).map((oyun) =>
           !oyun.aktif ? (
             <Dugme
               key={oyun.id}
@@ -128,6 +192,8 @@ export default function Ana() {
               key={oyun.id}
               testID={`ana-oyun-${oyun.id}`}
               etiket={oyun.ad}
+              erisilebilirEtiket={`${oyun.ad}, ${turEtiketi(oyun.tur)}, ${kisiMetni(oyun)}`}
+              ek={<KartAlt oyun={oyun} />}
               onPress={async () => {
                 // İlk seçimde (bu telefonda) önce tanıtım kartı; görüldüyse eskisi gibi tek dokunuş (KK-73, KK-78).
                 const goruldu = await tanitimGorulduMu(depo, oyun.id);

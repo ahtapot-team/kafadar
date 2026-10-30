@@ -1,6 +1,6 @@
 # Kafadar — Mimari
 
-Son güncelleme: 2026-10-30 — #165
+Son güncelleme: 2026-10-30 — #173
 
 Kısa rehber için `CLAUDE.md`. Bu belge katmanları, veri akışını, oda protokolünü, testleri ve kuralları anlatır.
 
@@ -27,12 +27,13 @@ Kısa rehber için `CLAUDE.md`. Bu belge katmanları, veri akışını, oda prot
 ## Yeni oyun nasıl eklenir
 
 1. `src/games/<oyun>/` altında saf modülü yaz (`oyun.ts` arayüzü: `durumGecerliMi` dahil).
-2. `src/games/registry.ts` içindeki `oyunlar` dizisine bir kayıt ekle (`id`, `tanitim: {kisi, metin}`, gerekirse `kurulum`, `modSecimi`, `minOyuncu`, `ekran`).
+2. `src/games/registry.ts` içindeki `oyunlar` dizisine bir kayıt ekle (`id`, `tur` (oylama | puanlama | gizli-rol | quiz), `ortam` (cift | aile, yoksa arkadaş grubu), `tanitim: {kisi, metin}`, gerekirse `kurulum`, `modSecimi`, `minOyuncu`, `ekran`).
 3. Ekranları `src/oyun-ekranlari/<oyun>/` altına, kurulum rotasını `app/<oyun>/` altına koy (ince sarmalayıcı).
 4. Desteler: `content/` JSON + `src/icerik/kayit.ts` kaydı, ardından `npm run icerik`.
 5. Oda modu gerekiyorsa `src/oda/oda.ts` oda türüne ekle (`mesaj.ts` protokolünü bozmadan).
 6. Kabul testlerini (`*.kabul.test.ts`) ve KK eşlemesini ekle; `npm run kk-harita`.
-7. Oyun listesi değiştiği için `CLAUDE.md` / bu belge aynı PR'da güncellenir.
+7. `tur` kartta rozet, `ortam` ana ekranın Çift / Aile çiplerini besler; kuralları `src/games/kategori.ts`'te (kişi aralığı `minOyuncu` + genel üst sınır 12, yeni kişi alanı yok).
+8. Oyun listesi değiştiği için `CLAUDE.md` / bu belge aynı PR'da güncellenir.
 
 ## Oda sunucusu (`sunucu/`)
 

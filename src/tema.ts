@@ -89,6 +89,8 @@ export const yazi = {
     fontSize: 68,
     fontVariant: ['tabular-nums' as const],
   },
+  // Ana ekran kategori çipi (#171).
+  cip: { fontFamily: font.kalin, fontSize: 16 },
   etiket: {
     fontFamily: font.kalin,
     fontSize: 14,

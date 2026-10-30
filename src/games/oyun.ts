@@ -18,10 +18,16 @@ export type Tanitim = {
   metin: string; // 3–4 satır (PRD v6 tanıtım metinleri tablosu)
 };
 
+// Kategori etiketleri (PRD v7, KK-79…KK-86): tür kartta rozet olur; ortam Çift / Aile çiplerini besler.
+export type OyunTuru = 'oylama' | 'puanlama' | 'gizli-rol' | 'quiz';
+export type OyunOrtami = 'cift' | 'aile';
+
 export type Oyun = {
   id: string;
   ad: string;
   aktif: boolean;
+  tur: OyunTuru;
+  ortam?: OyunOrtami[]; // yoksa yalnızca arkadaş grubu sayılır (Çift / Aile çipine girmez)
   // Ekran tembel yüklenir: mantık testleri (node) React Native'e dokunmaz.
   ekran?: () => Promise<{ default: ComponentType<OyunEkraniProps> }>;
   modSecimi?: boolean; // ana ekrandan sonra "Tek telefon / Oda" seçimi var mı (yalnızca OK mu NOK mu)
