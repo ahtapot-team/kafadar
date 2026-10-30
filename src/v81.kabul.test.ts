@@ -45,6 +45,8 @@ describe('KK-101: açılış logosu yazı tipi hazır olmadan çizilmez', () => 
       const e = dosyaIcerik('src/acilis/ekran.tsx');
       for (const id of ['acilis-ad', 'acilis-soz', 'acilis-soz-oyun'])
         expect(fontKosullu(e, id), id).toBe(true);
+      // Platformdan bağımsız (iOS ve Android): Platform.OS'a bağlı çözüm kabul edilmez.
+      expect(e).not.toMatch(/Platform\.(OS|select)/);
     },
   );
 
