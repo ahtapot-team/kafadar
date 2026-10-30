@@ -318,7 +318,7 @@ Bir oyun o telefonda ilk kez açıldığında oyunu 3–4 satırda anlatan bir k
 | Tekrar okuma | Hazırlık ekranlarında ve oda lobisinde "Nasıl oynanır?" bağlantısı | Yeni gelen arkadaşa anlatmak için | pm önerisi, Murat (29.10.2026, "2a") |
 | Saklama | Her oyun ayrı, telefon başına bir kez, yalnızca telefonda | Hesap yok (KK-39 ilkesi) | pm varsayılanı |
 
-## v7: Oyun kategorileri (Semih, 30.10.2026) — ONAY BEKLİYOR
+## v7: Oyun kategorileri (Semih, 30.10.2026) — ONAYLANDI (Semih, 30.10.2026 14:30)
 Issue'lar: #171 tasarım (tasarim), #172 kabul testleri (qa), #173 uygulama (frontend; #171 ve #172 bitince başlar).
 Yeni oyunlar geldikçe (çift oyunları, quiz gecesi, kalabalık oyunları…) kullanıcı "kiminle, kaç kişi oynuyoruz?" sorusuna göre oyun bulabilmeli. Bunun için her oyun kendi kayıt satırında etiketlenir ve ana ekranın üstüne tek seçimli filtre çipleri gelir. Bugün 3 oyun var; çipler yeni oyun eklendikçe kendiliğinden çoğalır.
 
