@@ -21,6 +21,7 @@ export type Tanitim = {
 export type Oyun = {
   id: string;
   ad: string;
+  emoji: string; // açılış ekranı rozeti (#192)
   aktif: boolean;
   // Ekran tembel yüklenir: mantık testleri (node) React Native'e dokunmaz.
   ekran?: () => Promise<{ default: ComponentType<OyunEkraniProps> }>;
