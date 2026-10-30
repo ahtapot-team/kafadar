@@ -85,6 +85,7 @@ export function Dugme({
   pasif,
   testID,
   erisilebilirEtiket,
+  ek,
 }: {
   etiket: string;
   onPress: () => void;
@@ -92,6 +93,7 @@ export function Dugme({
   pasif?: boolean;
   testID?: string;
   erisilebilirEtiket?: string;
+  ek?: ReactNode; // etiketin altında ikinci satır (ana ekran oyun kartı: tür rozeti + kişi sayısı); varsa sola hizalanır
 }) {
   const { renk } = useDurum();
   const [basili, setBasili] = useState(false);
@@ -114,8 +116,10 @@ export function Dugme({
         borderColor: renk.kontur,
         backgroundColor: dolgu,
         justifyContent: 'center',
-        alignItems: 'center',
+        alignItems: ek ? 'flex-start' : 'center',
         paddingHorizontal: bosluk.xl,
+        paddingVertical: ek ? bosluk.m : 0,
+        gap: bosluk.s,
         opacity: pasif ? 0.45 : 1,
         boxShadow: basili
           ? `1px 1px 0 ${renk.golge}`
@@ -129,23 +133,39 @@ export function Dugme({
       >
         {etiket}
       </Text>
+      {ek}
     </Pressable>
   );
 }
 
 // Seçilebilir çip (paket, tur uzunluğu): seçiliyken marka dolgulu.
+// `kategori`: ana ekran filtre çipi (#171): seçiliyken marka2 dolgu, ✓ ön eki, gölge; basınca gölge küçülür.
 export function Cip({
   etiket,
   secili,
   onPress,
   testID,
+  kategori,
 }: {
   etiket: string;
   secili?: boolean;
   onPress?: () => void;
   testID?: string;
+  kategori?: boolean;
 }) {
   const { renk } = useDurum();
+  const [basili, setBasili] = useState(false);
+  const kat = kategori
+    ? {
+        boxShadow: secili
+          ? basili
+            ? `1px 1px 0 ${renk.golge}`
+            : `5px 5px 0 ${renk.golge}`
+          : undefined,
+        transform:
+          secili && basili ? [{ translateX: 3 }, { translateY: 3 }] : [],
+      }
+    : null;
   return (
     <Pressable
       testID={testID}
@@ -153,23 +173,31 @@ export function Cip({
       accessibilityLabel={etiket}
       accessibilityState={{ selected: !!secili }}
       onPress={onPress}
+      onPressIn={() => setBasili(true)}
+      onPressOut={() => setBasili(false)}
       style={{
+        ...kat,
         minHeight: dokunmaAlani,
         justifyContent: 'center',
         paddingHorizontal: bosluk.l,
         borderRadius: yaricap.cip,
         borderWidth: cizgi.ince,
         borderColor: renk.kontur,
-        backgroundColor: secili ? renk.marka : renk.yuzey,
+        backgroundColor: secili
+          ? kategori
+            ? renk.marka2
+            : renk.marka
+          : renk.yuzey,
       }}
     >
       <Text
         maxFontSizeMultiplier={YAZI_UST_SINIR}
         style={[
-          yazi.dugme,
-          { fontSize: 17, color: secili ? renk.kontur : renk.metin },
+          kategori ? yazi.cip : [yazi.dugme, { fontSize: 17 }],
+          { color: secili ? renk.kontur : renk.metin },
         ]}
       >
+        {kategori && secili ? '✓ ' : ''}
         {etiket}
       </Text>
     </Pressable>

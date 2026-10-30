@@ -1,6 +1,6 @@
 # Kafadar
 
-Son güncelleme: 2026-10-30 — #165
+Son güncelleme: 2026-10-30 — #173
 
 Kafadar, arkadaş/çift/aile için mobil parti oyunları uygulamasıdır (OK mu NOK mu, 10/10 ama, Casus kim). Tek telefonda ya da oda koduyla çok telefonda oynanır. Ayrıntı: `docs/MIMARI.md`.
 
@@ -28,12 +28,12 @@ Expo SDK 58, expo-router, TypeScript, Vitest, Cloudflare Workers + Durable Objec
 
 - `app/` — yalnızca ince expo-router sarmalayıcıları (`index`, `oyun`, `oyuncular`, `paket`, `mod`, `ayarlar`, `casus/`, `onon/`, `oda/`).
 - `src/core/` — saf ortak mantık (deste, doğrula, oturum, oyuncular, rng, saat, tanıtım…).
-- `src/games/` — oyun kuralları (`ok-mu-nok`, `on-on-ama` (oyun id'si `10-10-ama`), `casus-kim`) + `registry.ts`.
+- `src/games/` — oyun kuralları (`ok-mu-nok`, `on-on-ama` (oyun id'si `10-10-ama`), `casus-kim`) + `registry.ts`. Yeni oyun: modül + registry satırı; satırda `tur` (oylama | puanlama | gizli-rol | quiz) ve `ortam` (cift | aile) etiketleri kategori çiplerini ve kart rozetini besler (ayrıntı: MIMARI "Yeni oyun nasıl eklenir").
 - `src/oyun-ekranlari/` — oyun ekranları; ortak parçalar `ortak/`.
 - `src/oda/` — oda kuralları ve protokol (`oda.ts`, `mesaj.ts`, `istemci.ts`).
 - `src/oda-ui/` — oda modu ekran parçaları. `src/baglanti/` — WebSocket bağlamı ve QR.
 - `src/icerik/` — içerik kaydı ve doğrulama. `src/test/yardimci.ts` — test yardımcıları.
-- `src/tema.ts`, `ui.tsx`, `depo.ts`, `durum.tsx`, `desteler.ts`, `titresim.ts` — kök yardımcılar.
+- `src/tema.ts`, `ui.tsx`, `depo.ts`, `durum.tsx`, `desteler.ts`, `titresim.ts`, `uygulama-geri.ts` — kök yardımcılar. `src/games/kategori.ts`: ana ekran kategori çipleri (kural saf fonksiyon).
 - `content/decks`, `content/casus`, `content/onon` — deste JSON'ları. `docs/desteler/` — taslak md'ler.
 - `sunucu/` — Cloudflare Worker (`sunucu/src/{worker,oda-do,sinir-do,ortak}.ts`, `test/`).
 - `scripts/` — `icerik-dogrula.ts`, `kk-harita.ts`, `belge-kontrol.ts`. `design/` — tasarımlar. `docs/` — PRD, MIMARI, KK haritası.

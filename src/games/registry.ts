@@ -23,6 +23,8 @@ export const oyunlar: Oyun[] = [
     id: '10-10-ama',
     ad: '10/10 ama',
     aktif: true,
+    tur: 'puanlama',
+    ortam: ['cift'],
     modSecimi: true, // Tek telefon / Oda kur / Odaya katıl (KK-63)
     kurulum: '/onon/hazirlik',
     ekran: () => import('../oyun-ekranlari/on-on-ama'),
@@ -37,6 +39,8 @@ export const oyunlar: Oyun[] = [
     id: 'casus-kim',
     ad: 'Casus kim',
     aktif: true,
+    tur: 'gizli-rol',
+    ortam: ['aile'],
     minOyuncu: CASUS_MIN,
     kurulum: '/casus/hazirlik',
     ekran: () => import('../oyun-ekranlari/casus-kim'),
