@@ -373,6 +373,46 @@ Hiçbir etiketi olmayan oyunlar arkadaş grubu için sayılır, bu yüzden ayrı
 | Etkisiz çipler | Listeyi daraltmayan çip gizlenir | Boş ya da her şeyi gösteren filtre kafa karıştırır | pm varsayılanı |
 | Seçimi hatırlama | Hatırlanmaz | Sade | pm varsayılanı |
 
+## v8: İlk açılış karşılaması (Metehan, 30.10.2026) — ONAY BEKLİYOR
+Issue'lar: #179 tasarım (tasarim), #180 kabul testleri (qa), #181 uygulama (frontend; #179 ve #180 bitince başlar).
+Uygulama bir cihazda ilk kez açıldığında, 3 kaydırmalı ekranla Kafadar'ın ne olduğunu ve nasıl oynandığını anlatır. Oyun kuralları burada anlatılmaz; onları her oyunun tanıtım kartı (v6) anlatıyor. Karşılama "Atla" ya da "Başlayalım" ile kapanır ve bir daha kendiliğinden açılmaz. Tekrar görmek isteyen Ayarlar'daki "Nasıl oynanır?" satırını kullanır.
+
+### Akış
+1. **İlk açılış:** Ana ekrandan önce karşılamanın 1. ekranı açılır.
+2. **Geçiş:** Kullanıcı yana kaydırır ya da "İleri"ye basar. Sayfa noktaları hangi ekranda olduğunu gösterir. "Atla" her ekranda görünür.
+3. **Bitiş:** 3. ekrandaki "Başlayalım" ya da herhangi bir ekrandaki "Atla" ana ekrana götürür.
+4. **Oda linki ya da QR ile ilk kez gelen kişi:** önce aynı 3 ekranı görür, sonra ana ekrana değil, kodu dolu katılma ekranına geçer.
+5. **Tekrar izleme:** Ayarlar → "Nasıl oynanır?" karşılamayı açar. Kapanınca Ayarlar'a dönülür.
+
+### Ekran metinleri (taslak: pm)
+| Ekran | Başlık | Metin | Düğme |
+|---|---|---|---|
+| 1 | Kafadar'a hoş geldin | Arkadaşlarla, sevgiliyle ya da aileyle oynanan parti oyunları. Hesap yok, kurulum yok; hemen başla. | İleri |
+| 2 | Tek telefon yeter | Telefon elden ele dolaşır. İsterseniz oda kodu ya da QR ile herkes kendi telefonundan katılır. | İleri |
+| 3 | Oyununu seç | Aktif oyunların adları kayıttan gelir (bugün: OK mu NOK mu, 10/10 ama, Casus kim). Her oyunun nasıl oynandığı, oyunu ilk açtığında kısaca anlatılır. | Başlayalım |
+
+### Kabul kriterleri (ilk açılış karşılaması)
+- [ ] KK-87: Uygulama o cihazda ilk kez açıldığında, ana ekrandan önce 3 ekranlık karşılama açılır. Ekranlar yana kaydırılarak ya da "İleri" ile geçilir. Sayfa noktaları kaçıncı ekranda olunduğunu gösterir. 3. ekranda "İleri" yerine "Başlayalım" vardır ve ana ekranı açar.
+- [ ] KK-88: Her ekranda "Atla" görünür ve ana ekranı açar. "Atla" ya da "Başlayalım"dan sonra karşılama o cihazda bir daha kendiliğinden açılmaz; uygulama kapatılıp açılsa da açılmaz. Bu bilgi yalnızca cihazda saklanır, sunucuya gitmez. Karşılama "Atla" ya da "Başlayalım" olmadan kapanırsa (ör. uygulama kapatılırsa) görülmüş sayılmaz. Uygulamayı daha önce kullanmış kişiler de karşılamayı bir kez görür.
+- [ ] KK-89: Oda linki ya da QR ile (`/oda/<kod>`) ilk kez gelen kişi önce aynı 3 ekranı görür. "Atla" ya da "Başlayalım"dan sonra kodu dolu katılma ekranına geçer; oda kodu kaybolmaz. Karşılamayı daha önce görmüş kişi linkle doğrudan katılma ekranına gider.
+- [ ] KK-90: Ayarlar ekranında "Nasıl oynanır?" satırı vardır ve karşılamayı 1. ekrandan açar. Bu yolla açılan karşılama "Atla" ya da "Başlayalım" ile kapanınca Ayarlar'a dönülür.
+- [ ] KK-91: Başlıklar ve metinler yukarıdaki tablodaki gibidir. 3. ekrandaki oyun adları kayıttan (registry) gelir; yeni bir oyun eklenince karşılamada elle değişiklik gerekmez (KK-2).
+- [ ] KK-92: Ekran okuyucu her ekranın başlığını ve metnini okur. "Atla", "İleri" ve "Başlayalım" düğmelerinin dokunma alanı en az 48px'tir. Karşılama koyu ve açık temada, telefonda ve web'de çalışır. "Hareketi azalt" açıksa kaydırma animasyonu kullanılmaz. Stil değerleri `src/tema.ts` token'larından gelir.
+- [ ] KK-93: Karşılama görüldükten sonra açılış eskisi gibidir: ana ekran doğrudan açılır, "Devam et", oyun tanıtım kartları (KK-73…KK-78) ve kategori çipleri değişmez. Mevcut kabul testleri yeşil kalır.
+
+### Kapsam dışı (v8)
+- Oyun kuralları, adım adım etkileşimli eğitim, video.
+- İsim ya da oyuncu kurulumu, bildirim izni, dil seçimi.
+- Web karşılama sayfası (tanıtım sitesi) ve açılış logosu (splash); splash store hazırlığında ele alınır.
+
+### Kararlar (ilk açılış karşılaması)
+| Karar | Seçim | Gerekçe | Karar veren |
+|---|---|---|---|
+| Tür | Uygulama içinde ilk açılış karşılaması (web tanıtım sayfası ya da splash değil) | Yeni kullanıcı uygulamayı tanısın (pm önerisi web sayfasıydı) | Metehan (30.10.2026, "B") |
+| Ekran sayısı | 3 kaydırmalı ekran | Tek ekrandan daha çok anlatır | Metehan (30.10.2026, "B") |
+| Oda linkiyle gelen | Önce 3 ekranı görür, sonra kodu dolu katılma ekranına geçer | Herkes uygulamayı aynı şekilde tanısın; "Atla" bekletmeyi kısaltır (pm önerisi atlamaktı) | Metehan (30.10.2026, "Önce 3 ekranı görsün") |
+| Varsayılanlar | Yalnızca ilk açılışta; "Atla" her ekranda; Ayarlar'dan tekrar açılır; web'de de çalışır; oyun kuralları yok; eski kullanıcılar da bir kez görür | Sade, oyun tanıtım kartıyla çakışmaz | pm varsayılanı |
+
 ## Geliştirme ilkesi (Semih, 27.10.2026)
 **Overengineering yok.** En az kodla, en basit çözüm, yalnızca bugünkü ihtiyaç kadar. Yapı genişlemeye açık olacak ama ileriye dönük soyutlama, genel çerçeve ya da "belki lazım olur" kodu yazılmayacak. Yeni bağımlılık yalnızca gerçekten gerekiyorsa eklenir ve PR'da gerekçesi yazılır. Aşağıdaki mimari şartlar bu ilkeye göre en sade haliyle uygulanır. Örneğin oyun kayıt listesi basit bir dizidir, eklenti çatısı değildir.
 
