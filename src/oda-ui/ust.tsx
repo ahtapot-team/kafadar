@@ -21,7 +21,7 @@ export function OdaUst({
   const { renk } = useDurum();
   const bilgi = useBilgiYuvasi();
   return (
-    <View style={{ flexDirection: 'row', alignItems: 'center', gap: bosluk.m }}>
+    <View style={{ flexDirection: 'row', alignItems: 'center', gap: bosluk.s }}>
       <View
         style={{
           paddingHorizontal: bosluk.m,
@@ -37,16 +37,23 @@ export function OdaUst({
           {kod}
         </Yazi>
       </View>
-      <Yazi tur="etiket" soluk style={{ flex: 1, textAlign: 'center' }}>
+      <Yazi
+        tur="etiket"
+        soluk
+        numberOfLines={1}
+        style={{ flex: 1, textAlign: 'center' }}
+      >
         {orta}
       </Yazi>
-      <Yazi
-        testID={sagTestID}
-        tur="etiket"
-        style={{ minWidth: 40, textAlign: 'right' }}
-      >
-        {sag ?? ''}
-      </Yazi>
+      {sag != null && (
+        <Yazi
+          testID={sagTestID}
+          tur="etiket"
+          style={{ minWidth: 40, textAlign: 'right' }}
+        >
+          {sag}
+        </Yazi>
+      )}
       {bilgi}
       {onCik && (
         <Pressable
