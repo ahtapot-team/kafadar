@@ -18,7 +18,7 @@ PRD'deki her kabul kriteri için "KK-nn" ifadesi geçen test dosyaları ve gerç
 | KK-12 | Oturum sonunda Aykırı ruh (en çok azınlıkta kalan), Ruh ikizleri (en çok aynı oyu veren ik | `games/ok-mu-nok/oyun.kabul.test.ts` | — |
 | KK-13 | "Paylaş" 1080×1920 boyutunda, logo ve oyun adı içeren bir sonuç görseli üretir ve sistem p | — | cihaz |
 | KK-25 | Kart metni geri sayımdan sonra kaybolmaz. Kart küçülüp ekranın üstüne yapışır, oy girişi v | `games/ok-mu-nok/kart.test.ts`, `games/ok-mu-nok/oyun.kabul.test.ts`, `uygulama.kabul.test.ts` | — |
-| KK-26 | Oyun dışı her ekranda (Oyuncular, Paket/Süre, Ayarlar) görünür bir "Geri" düğmesi vardır v | `uygulama.kabul.test.ts` | — |
+| KK-26 | Oyun dışı her ekranda (Oyuncular, Paket/Süre, Ayarlar) görünür bir "Geri" düğmesi vardır v | `geri-tusu.kabul.test.ts`, `uygulama.kabul.test.ts` | — |
 | KK-27 | Ana ekranda büyük bir "Ayarlar" düğmesi yoktur. Ayarlar, ana ekranın sağ üstünde küçük ve  | `uygulama.kabul.test.ts` | — |
 | KK-14 | Her oydan ve her karttan sonra oyun kaydedilir. Uygulama kapatılıp açılınca "Devam et / Ye | `core/kayit.kabul.test.ts`, `games/casus-kim/kayit.kabul.test.ts`, `games/casus-kim/ui.kabul.test.ts`, `games/on-on-ama/onon.kabul.test.ts`, `games/on-on-ama/ui.kabul.test.ts`, `uygulama.kabul.test.ts` | cihaz |
 | KK-15 | Oyun içindeyken Android geri tuşu ve iOS kaydırarak geri hareketi "Oyundan çık?" onayı ist | `uygulama.kabul.test.ts` | cihaz |

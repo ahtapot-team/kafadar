@@ -5,6 +5,7 @@ import { lazy, Suspense, useEffect, useMemo, useRef, useState } from 'react';
 import { oyunlar } from '../src/games/registry';
 import { desteler } from '../src/desteler';
 import { useDurum } from '../src/durum';
+import { uygulamaGeri } from '../src/uygulama-geri';
 import { Diyalog, Dugme } from '../src/ui';
 
 type Gezinme = {
@@ -58,6 +59,8 @@ export default function Oyun() {
     window.history.pushState(null, '', window.location.href);
     const geriGeldi = () => {
       if (izinli.current) return;
+      // Uygulamanın kendi geri dönüşü (Oyuncular → Tamam): onay açma.
+      if (uygulamaGeri.aktif) return;
       window.history.pushState(null, '', window.location.href);
       setCikisOnayi(true);
     };
