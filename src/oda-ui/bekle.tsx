@@ -22,12 +22,10 @@ export function BeklemeEkrani({
   const sn = Math.ceil(useKalan(durum) / 1000);
   return (
     <Ekran>
-      <OdaUst
-        kod={g.kod}
-        orta={`Soru ${g.soruNo} / 10`}
-        sag={String(sn)}
-        onCik={onCik}
-      />
+      <OdaUst kod={g.kod} orta={`Soru ${g.soruNo} / 10`} onCik={onCik} />
+      <Yazi tur="etiket" style={{ alignSelf: 'flex-end' }}>
+        {String(sn)}
+      </Yazi>
       <View style={{ flex: 1, justifyContent: 'center', gap: bosluk.l }}>
         <View
           style={{
