@@ -130,7 +130,6 @@ export default function Ana() {
     <View style={{ flex: 1 }}>
       <Ekran>
         <Logo />
-        <Yazi soluk>Bir oyun seç, telefonu ele ver.</Yazi>
         <ScrollView
           testID="kategori-cipleri"
           horizontal

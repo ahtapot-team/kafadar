@@ -134,7 +134,11 @@ export function AcilisEkrani({
           }
         >
           <Animated.View
-            style={[{ alignSelf: 'center' }, logoStil]}
+            // Yazı tipi hazır olana kadar logo görünmez (sistem fontuyla çizilip sonradan değişmesin).
+            style={[
+              { alignSelf: 'center', opacity: fontHazir ? 1 : 0 },
+              logoStil,
+            ]}
             onLayout={(e) => {
               const { y, height: h } = e.nativeEvent.layout;
               logoOrta.current = y + h / 2;
