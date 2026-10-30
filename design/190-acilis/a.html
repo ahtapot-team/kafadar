@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kafadar — açılış ekranı</title>
+<!-- #190 (PRD v8, KK-94…KK-99) · Açılış ekranı. a.html ve b.html yalnız VARYANT satırında ayrılır.
+     A "Sade ortalı": logo ortada, ince çubuk + yüzde, söz altta düz yazı. B "Renkli çıkartma": logo arka çıkartmalı, oyun emojileri, kalın çubuk, söz çıkartma kartta.
+     Logo iki varyantta da ekranın tam ortasındadır: sistem açılış görseliyle aynı yer (sıçramasız geçiş).
+     Kullanım: ?tema=koyu|acik&boy=375x667. Tek dış kaynak: Google Fonts (yoksa system-ui). -->
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&display=swap" rel="stylesheet">
+<style>
+  :root { --kontur: #0B0920; --golge: #7C6CFF; --marka: #FFD23F; --marka-2: #5B8CFF; --w: 375px; --h: 667px; }
+  [data-tema="koyu"] { --zemin: #16123F; --yuzey: #2B2570; --metin: #FFF8E7; --soluk: #B9B3E8; }
+  [data-tema="acik"] { --zemin: #FFF8E7; --yuzey: #FFFFFF; --metin: #16123F; --soluk: #5B5585; }
+  * { box-sizing: border-box; }
+  body { margin: 0; padding: 32px 24px; background: #DCD9E8; font-family: 'Bricolage Grotesque', system-ui, sans-serif; }
+  h1 { margin: 0 0 24px; font-size: 22px; color: #2a2640; text-align: center; }
+  #ekranlar { display: flex; flex-wrap: wrap; gap: 36px 28px; justify-content: center; }
+  figure { margin: 0; } figcaption { font-size: 14px; font-weight: 700; color: #4a4566; margin-bottom: 8px; max-width: var(--w); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .ekran { position: relative; width: var(--w); height: var(--h); overflow: hidden; border-radius: 28px; background: var(--zemin); color: var(--metin);
+    box-shadow: 0 16px 40px rgba(20,16,50,.22); }
+  .ekran.sistem { background: #16123F; }
+  .etiket { font-size: 14px; font-weight: 800; letter-spacing: 1.1px; text-transform: uppercase; }
+
+  /* Logo: ana ekrandaki sticker'ın aynısı, ekranın tam ortasında (splash ile aynı yer) */
+  .logo-yer { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); }
+  .logo { position: relative; background: var(--marka); color: var(--kontur); border: 4px solid var(--kontur); border-radius: 20px; padding: 4px 16px 8px;
+    box-shadow: 5px 5px 0 var(--golge); transform: rotate(-4deg); font-size: 48px; font-weight: 800; letter-spacing: -0.03em; line-height: 1; white-space: nowrap; }
+  .logo-arka { position: absolute; inset: 0; background: var(--marka-2); border: 4px solid var(--kontur); border-radius: 20px; transform: translate(14px, 12px) rotate(4deg); }
+  .logo-yer.yukari { top: 230px; }
+
+  /* A · ince çubuk + yüzde aynı satırda */
+  .yukleme { position: absolute; left: 50%; top: calc(50% + 64px); transform: translateX(-50%); width: 240px; display: flex; align-items: center; gap: 12px; }
+  .cubuk { flex: 1; height: 16px; border-radius: 999px; border: 3px solid var(--kontur); background: var(--yuzey); overflow: hidden; }
+  .cubuk i { display: block; height: 100%; background: var(--marka); border-right: 3px solid var(--kontur); }
+  .cubuk i.bos { border-right: 0; }
+  .yuzde { width: 58px; font-size: 21px; font-weight: 800; font-variant-numeric: tabular-nums; }
+
+  /* Söz + ipucu: altta */
+  .alt { position: absolute; left: 22px; right: 22px; bottom: 22px; display: flex; flex-direction: column; align-items: center; gap: 24px; }
+  .alt.sik { gap: 16px; }
+  .soz { margin: 0; max-width: 310px; text-align: center; font-size: 17px; line-height: 25px; font-weight: 500; }
+  .oyun { display: block; margin-top: 8px; font-size: 16px; font-weight: 800; color: var(--soluk); }
+  .ipucu { color: var(--soluk); }
+
+  /* B · çıkartmalar */
+  .emoji { position: absolute; width: 48px; height: 48px; border-radius: 50%; border: 3px solid var(--kontur); background: var(--yuzey); display: grid; place-items: center;
+    font-size: 24px; box-shadow: 3px 3px 0 var(--golge); }
+  .yukleme.kalin { top: 320px; width: auto; left: 22px; right: 22px; transform: none; display: block; }
+  .yukleme.kalin .cubuk { height: 24px; border-width: 4px; box-shadow: 5px 5px 0 var(--golge); overflow: visible; position: relative; }
+  .yukleme.kalin .cubuk i { border-radius: 999px 0 0 999px; }
+  .yukleme.kalin .cubuk i.dolu { border-radius: 999px; border-right: 0; }
+  .balon { position: absolute; bottom: calc(100% + 10px); transform: translateX(-50%); background: var(--kontur); color: var(--marka); border-radius: 10px; padding: 3px 9px 4px;
+    font-size: 16px; font-weight: 800; font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .balon::after { content: ''; position: absolute; left: 50%; top: 100%; margin-left: -6px; border: 6px solid transparent; border-top-color: var(--kontur); }
+  .kart { position: relative; width: 100%; background: var(--yuzey); border: 4px solid var(--kontur); border-radius: 20px; box-shadow: 5px 5px 0 var(--golge);
+    padding: 24px 18px 18px; transform: rotate(-1.5deg); }
+  .kart .soz { max-width: none; text-align: left; }
+  .tirnak { position: absolute; left: 14px; top: -20px; width: 40px; height: 40px; border-radius: 50%; background: var(--marka); color: var(--kontur); border: 3px solid var(--kontur);
+    display: grid; place-items: center; font-size: 34px; font-weight: 800; line-height: 1; padding-top: 14px; }
+  .rozet { display: inline-flex; align-items: center; gap: 6px; margin-top: 12px; background: var(--kontur); color: var(--marka); border-radius: 12px; padding: 6px 10px; font-size: 16px; font-weight: 800; }
+
+  /* Sistem görseli notu ve ölçü paneli */
+  .isaret { position: absolute; font-size: 12px; font-weight: 800; color: var(--kontur); background: #fff; border: 2px dashed var(--marka-2); border-radius: 8px; padding: 3px 7px; }
+  .olcu { padding: 26px 22px; display: flex; flex-direction: column; gap: 10px; }
+  .olcu h3 { margin: 0; font-size: 14px; font-weight: 800; letter-spacing: 1.1px; text-transform: uppercase; color: var(--soluk); }
+  .olcu ul { margin: 0; padding-left: 18px; font-size: 12.5px; line-height: 1.36; font-weight: 500; }
+  .olcu code { font-family: ui-monospace, Menlo, monospace; font-size: 11.5px; font-weight: 600; }
+</style>
+</head>
+<body>
+<h1 id="baslik">Kafadar — açılış ekranı</h1>
+<div id="ekranlar"></div>
+
+<script>
+  const VARYANT = 'a';
+  const p = new URLSearchParams(location.search);
+  const tema = p.get('tema') === 'acik' ? 'acik' : 'koyu';
+  const [w, h] = (p.get('boy') || '375x667').split('x').map(Number);
+  document.documentElement.dataset.tema = tema;
+  document.documentElement.style.setProperty('--w', w + 'px');
+  document.documentElement.style.setProperty('--h', h + 'px');
+  const AD = VARYANT === 'a' ? 'A “Sade ortalı”' : 'B “Renkli çıkartma”';
+  document.getElementById('baslik').textContent = `Kafadar — açılış ekranı · ${AD} · ${tema === 'koyu' ? 'Koyu' : 'Açık'} · ${w}×${h}`;
+
+  // Sözler docs/desteler/acilis.md taslağından; 140'lık söz deneme metnidir (taslakta en uzunu 116).
+  const sozler = {
+    genel: { soz: 'Bir elin nesi var, iki elin sesi var. Altı elin ise kahkahası.', oyun: null },
+    casus: { soz: 'Koyunlar ömrünü kurttan korkarak geçirir. Halbuki sonunda onu yiyen çobandır.', oyun: 'Casus kim' },
+    ok: { soz: 'Herkes OK, sen NOK mu? Yanan odada kahvesini yudumlayan köpek gibi gülümse: “This is fine.”', oyun: 'OK mu NOK mu' },
+    uzun: { soz: 'Koyunlar en az 50 koyun yüzünü iki yıldan uzun hatırlayabiliyor. Sürüye karışmak sandığın kadar kolay değil casus, yanlış anda meleme sakın.', oyun: 'Casus kim' },
+  };
+  const EMOJI = { 'OK mu NOK mu': '👍', '10/10 ama': '🔟', 'Casus kim': '🕵️' };
+
+  const logo = (arka) => arka
+    ? '<div class="logo-yer yukari"><span class="logo-arka"></span><div class="logo">Kafadar</div></div>'
+    : '<div class="logo-yer"><div class="logo">Kafadar</div></div>';
+  const ipucu = '<div class="etiket ipucu">Geçmek için dokun</div>';
+  const dolgu = (y) => `<i class="${y === 0 ? 'bos' : y === 100 ? 'dolu' : ''}" style="width:${y}%"></i>`;
+
+  const ekranA = (y, s) => `<section class="ekran" role="progressbar" aria-valuenow="${y}" aria-label="Yükleniyor">
+      ${logo(false)}
+      <div class="yukleme"><div class="cubuk">${dolgu(y)}</div><span class="yuzde">%${y}</span></div>
+      <div class="alt">
+        <p class="soz">${s.soz}${s.oyun ? `<span class="oyun">— ${s.oyun}</span>` : ''}</p>
+        ${ipucu}
+      </div>
+    </section>`;
+
+  // B: logonun çevresinde üç oyunun emojisi (çıkartma), kalın çubuk + yüzde balonu, söz çıkartma kartta.
+  const ekranB = (y, s) => `<section class="ekran" role="progressbar" aria-valuenow="${y}" aria-label="Yükleniyor">
+      <span class="emoji" style="left:40px;top:112px;transform:rotate(-12deg)">👍</span>
+      <span class="emoji" style="left:164px;top:86px;transform:rotate(6deg)">🕵️</span>
+      <span class="emoji" style="right:40px;top:108px;transform:rotate(10deg)">🔟</span>
+      ${logo(true)}
+      <div class="yukleme kalin"><div class="cubuk">${dolgu(y)}<span class="balon" style="left:${Math.min(Math.max(y, 9), 91)}%">%${y}</span></div></div>
+      <div class="alt sik">
+        <div class="kart"><span class="tirnak" aria-hidden="true">“</span><p class="soz">${s.soz}</p>
+          ${s.oyun ? `<span class="rozet">${EMOJI[s.oyun]} ${s.oyun}</span>` : ''}</div>
+        ${ipucu}
+      </div>
+    </section>`;
+
+  const ekran = VARYANT === 'a' ? ekranA : ekranB;
+
+  const sistem = `<section class="ekran sistem">
+      <div class="logo-yer"><div class="logo" style="--marka:#FFD23F;--kontur:#0B0920;--golge:#7C6CFF">Kafadar</div></div>
+      <div class="isaret" style="left:22px;top:34px">app.json splash: zemin #16123F + logo</div>
+      ${tema === 'acik' ? '<div class="isaret" style="left:22px;right:22px;bottom:22px">Açık temada da sistem görseli koyudur; ayarlar okununca 280 ms solarak açık açılış ekranına geçer.</div>'
+        : `<div class="isaret" style="left:22px;right:22px;bottom:22px">${VARYANT === 'a' ? 'Logo açılış ekranında da aynı yerde: geçişte sıçrama yok.' : 'İlk karede logo burada; sonra yukarı süzülür, emojiler peşinden gelir.'}</div>`}
+    </section>`;
+
+  const olcuA = `
+      <li>Çubuk: yükseklik <code>bosluk.l</code> 16, <code>cizgi.ince</code> <code>kontur</code>, <code>yaricap.yuvarlak</code>, boş <code>yuzey</code>, dolu <code>marka</code>. Satır logo genişliğinde (240), logonun 64 altında.</li>
+      <li>Yüzde: <code>yazi.dugme</code> 21, <code>metin</code>, sabit genişlik 58 ve eşit genişlikli rakam: sayı artarken çubuk oynamaz.</li>
+      <li>Söz: <code>yazi.govde</code> <code>metin</code>, ortalı, en çok 310 genişlik. Oyun adı altında “— Casus kim”, <code>yazi.cip</code> <code>metinSoluk</code>.</li>`;
+  const olcuB = `
+      <li>Logo arkasında <code>marka2</code> çıkartma (“logo yüzü”, +4°). Çevresinde oyun emojileri: 48'lik <code>yuzey</code> daire, <code>cizgi.ince</code>, 3px <code>golge</code>.</li>
+      <li>Çubuk: tam genişlik, yükseklik <code>bosluk.xl</code> 24, <code>cizgi.kalin</code>, 5px <code>golge</code>, dolu <code>marka</code>. Yüzde dolgunun ucundaki balonda: <code>kontur</code> zemin, <code>marka</code> <code>yazi.cip</code>.</li>
+      <li>Söz kartı: <code>yuzey</code>, <code>cizgi.kalin</code>, <code>yaricap.dugme</code>, 5px <code>golge</code>, −1.5°. Sol üstte <code>marka</code> tırnak. Oyun sözünde altta rozet “🕵️ Casus kim” (<code>kontur</code> zemin, <code>marka</code> yazı); genel sözde rozet yok.</li>
+      <li>Oyun emojisi (👍 / 🔟 / 🕵️) yeni bir alan: kayıt satırına <code>emoji</code> eklenir.</li>`;
+  const olcu = `<section class="ekran olcu">
+      <h3>${AD}</h3>
+      <ul>
+        <li>Logo: ana ekrandaki çıkartma (<code>marka</code>, <code>cizgi.kalin</code>, <code>yaricap.dugme</code>, <code>yazi.baslikXl</code>, −4°), ${VARYANT === 'a' ? 'ekranın <b>tam ortasında</b> (sistem görseliyle aynı yer).' : 'ilk karede tam ortada (sistem görseliyle aynı yer), sonra söze yer açmak için 230 hizasına süzülür.'}</li>
+        ${VARYANT === 'a' ? olcuA : olcuB}
+        <li>İpucu “Geçmek için dokun”: <code>yazi.etiket</code> <code>metinSoluk</code>, en altta. Bütün ekran dokunulabilir.</li>
+      </ul>
+      <h3>Hareket</h3>
+      <ul>
+        <li>Çubuk ve yüzde birlikte, yalnız ileri: <code>easing.cubuk</code>. Söz ilk karede hazır, kaymaz.</li>
+        ${VARYANT === 'b' ? '<li>Logo yerine oturunca arka çıkartma ve emojiler sırayla girer: <code>hareket.sticker</code> 300 ms, <code>easing.yay</code>, 80 ms arayla.</li>' : ''}
+        <li>Ana ekrana geçiş: <code>hareket.ekranGecisi</code> 280 ms solma. Hareketi azalt: <code>azaltilmisSolma</code> 150 ms, ${VARYANT === 'b' ? 'logo ve çıkartmalar yerinde belirir' : 'başka hareket yok'}.</li>
+      </ul>
+      <h3>Erişilebilirlik</h3>
+      <ul>
+        <li>Ekran okuyucu: “Yükleniyor, yüzde 60” ve ardından söz (oyun adıyla). Yeni token yok.</li>
+        <li>Büyük yazıda söz yukarı doğru uzar; ${VARYANT === 'a' ? 'logo' : 'logo ve çubuk'} ancak söze yer kalmazsa yukarı kayar.</li>
+      </ul>
+    </section>`;
+
+  const kap = document.getElementById('ekranlar');
+  const ekle = (ad, html) => { const f = document.createElement('figure'), c = document.createElement('figcaption'); c.textContent = ad; f.append(c); f.insertAdjacentHTML('beforeend', html); kap.append(f); };
+  ekle('0 · Sistem açılış görseli (öneri)', sistem);
+  ekle('1 · %0: genel söz, oyun adı yok', ekran(0, sozler.genel));
+  ekle('2 · %60: oyun sözü, altında oyun adı', ekran(60, sozler.casus));
+  ekle('3 · %100: geçişten hemen önce', ekran(100, sozler.ok));
+  ekle('4 · En uzun söz (140 karakter, deneme)', ekran(42, sozler.uzun));
+  ekle('5 · Ölçüler ve kurallar', olcu);
+</script>
+</body>
+</html>
