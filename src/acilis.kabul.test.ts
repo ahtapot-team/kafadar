@@ -4,7 +4,9 @@
 // SÖZLEŞME (frontend için):
 //   src/core/acilis.ts   → MIN_SURE_MS = 3000 · acilisOlustur(saat: Saat) döndürür { durum(): { yuzde: number (0–100 tam sayı); gecti: boolean },
 //                           hazirlikOrani(oran: 0–1): void, hazirlikBitti(): void (yazı tipi hatasında da çağrılır), dokun(): void }
-//   src/core/soz.ts      → sozSec(sozler: Soz[], rng: Rng): Soz · sozAltYazisi(soz, oyunAdlari: Record<string,string>): string | null  ("— Casus kim" ya da null)
+//   src/core/soz.ts      → sozSec(sozler: Soz[], rng: Rng): Soz · sozAltYazisi(soz, oyunlar: Record<string, { ad: string; emoji: string }>): string | null
+//                           rozet metni "🕵️ Casus kim" (emoji + boşluk + ad; tasarım B, #190); genel sözde null
+//   src/games/registry.ts → her oyun kaydına `emoji` alanı: ok-mu-nok 👍 · 10-10-ama 🔟 · casus-kim 🕵️ (src/games/oyun.ts Oyun tipine `emoji: string`)
 //                           Soz = { id: string; text: string; oyun: string }  (oyun: oyun kimliği ya da 'genel')
 //   src/acilis/ekran.tsx → AcilisEkrani; testID: acilis-ekran, acilis-ad ("Kafadar"), acilis-cubuk (progressbar), acilis-yuzde ("%42"), acilis-soz, acilis-soz-oyun
 //   app/_layout.tsx      → AcilisEkrani'ni gösterir (yazı tipi yüklenirken `return null` yok); app/index.tsx (ana ekran) onu içe aktarmaz.
@@ -25,7 +27,10 @@ type Acilis = {
 type Soz = { id: string; text: string; oyun: string };
 type SozModulu = {
   sozSec(sozler: Soz[], rng: () => number): Soz;
-  sozAltYazisi(soz: Soz, oyunAdlari: Record<string, string>): string | null;
+  sozAltYazisi(
+    soz: Soz,
+    oyunlar: Record<string, { ad: string; emoji: string }>,
+  ): string | null;
 };
 
 // Dinamik yüklenir: modül sözleşmeye uymasa da tip denetimi kırılmaz.
@@ -245,17 +250,33 @@ describe('KK-97: söz seçimi saf fonksiyon (src/core/rng ile)', () => {
   );
 
   kabulAcilis(
-    'KK-97: oyuna ait sözün altında oyun adı yazar, genel sözde yazmaz',
+    'KK-97: oyuna ait sözün altında "emoji + oyun adı" rozeti yazar, genel sözde yazmaz',
     async () => {
       const { sozAltYazisi } = await yukleSoz();
-      const adlar = {
-        'ok-mu-nok': 'OK mu NOK mu',
-        '10-10-ama': '10/10 ama',
-        'casus-kim': 'Casus kim',
+      const oyunlar = {
+        'ok-mu-nok': { ad: 'OK mu NOK mu', emoji: '👍' },
+        '10-10-ama': { ad: '10/10 ama', emoji: '🔟' },
+        'casus-kim': { ad: 'Casus kim', emoji: '🕵️' },
       };
-      expect(sozAltYazisi(sozler[1], adlar)).toBe('— Casus kim');
-      expect(sozAltYazisi(sozler[3], adlar)).toBe('— 10/10 ama');
-      expect(sozAltYazisi(sozler[2], adlar)).toBeNull();
+      expect(sozAltYazisi(sozler[1], oyunlar)).toBe('🕵️ Casus kim');
+      expect(sozAltYazisi(sozler[3], oyunlar)).toBe('🔟 10/10 ama');
+      expect(sozAltYazisi(sozler[0], oyunlar)).toBe('👍 OK mu NOK mu');
+      expect(sozAltYazisi(sozler[2], oyunlar)).toBeNull();
+    },
+  );
+
+  kabulAcilis(
+    'KK-97: her oyun kaydında emoji alanı var (ok-mu-nok 👍, 10-10-ama 🔟, casus-kim 🕵️)',
+    async () => {
+      const { oyunlar } = await import('./games/registry');
+      const emoji = Object.fromEntries(
+        oyunlar.map((o) => [o.id, (o as { emoji?: string }).emoji]),
+      );
+      expect(emoji).toEqual({
+        'ok-mu-nok': '👍',
+        '10-10-ama': '🔟',
+        'casus-kim': '🕵️',
+      });
     },
   );
 
