@@ -1,6 +1,6 @@
 # Kafadar — Mimari
 
-Son güncelleme: 2026-10-30 — #206 (v8.1: çipler, açılış logosu)
+Son güncelleme: 2026-10-30 — #210 (açılış yazıları yazı tipi hazır olunca mount)
 
 Kısa rehber için `CLAUDE.md`. Bu belge katmanları, veri akışını, oda protokolünü, testleri ve kuralları anlatır.
 
@@ -26,7 +26,7 @@ Kısa rehber için `CLAUDE.md`. Bu belge katmanları, veri akışını, oda prot
 
 ## Açılış ekranı
 
-Açılış ekranı `app/_layout.tsx`'te yazı tipi ve ayarlar okunurken görünür (`src/acilis/ekran.tsx`); gezgin (`Yigin`) yazı tipi hazır olunca (açılış sürerken) bağlanır — önce bağlanırsa ekranlar sistem fontunda kalır —, açılış ekranı üstüne bindirilir ve %100'de solarak kalkar (bitişi JS zamanlayıcısı bildirir; UI thread geri çağrısından JS çağrılmaz, native'de çöker); ana ekran onu bilmez, uygulama içinde dönünce yeniden çıkmaz. Yüzde = süre (en az 3 sn) ve hazırlığın küçüğü, yalnızca ileri gider; dokunmak süreyi atlar, hazırlık beklenir (`src/core/acilis.ts`). Söz her açılışta `src/core/soz.ts` ile seçilir; sözler `content/acilis/sozler.json` dosyasındadır (ürün: oyuna göre veya `genel`, ≥10 söz, ≤140 karakter) ve `npm run icerik` (`src/icerik/soz.ts`) denetler. Sistem açılış görseli `app.json` `splash` + `assets/splash.png`.
+Açılış ekranı `app/_layout.tsx`'te yazı tipi ve ayarlar okunurken görünür (`src/acilis/ekran.tsx`); gezgin (`Yigin`) yazı tipi hazır olunca (açılış sürerken) bağlanır — önce bağlanırsa ekranlar sistem fontunda kalır —, açılış ekranı üstüne bindirilir ve %100'de solarak kalkar (bitişi JS zamanlayıcısı bildirir; UI thread geri çağrısından JS çağrılmaz, native'de çöker); ana ekran onu bilmez, uygulama içinde dönünce yeniden çıkmaz. Yüzde = süre (en az 3 sn) ve hazırlığın küçüğü, yalnızca ileri gider; dokunmak süreyi atlar, hazırlık beklenir (`src/core/acilis.ts`). Açılıştaki Kafadar logosu, söz ve oyun adı yazı tipi hazır olunca mount edilir (opaklıkla gizleme yetmez: iOS, yazı tipi yokken mount edilen Text'e fontu sonradan uygulamaz); çözüm platformdan bağımsızdır. Söz her açılışta `src/core/soz.ts` ile seçilir; sözler `content/acilis/sozler.json` dosyasındadır (ürün: oyuna göre veya `genel`, ≥10 söz, ≤140 karakter) ve `npm run icerik` (`src/icerik/soz.ts`) denetler. Sistem açılış görseli `app.json` `splash` + `assets/splash.png`.
 
 ## Yeni oyun nasıl eklenir
 
