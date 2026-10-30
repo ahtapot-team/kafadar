@@ -1,6 +1,6 @@
 # Kafadar — Mimari
 
-Son güncelleme: 2026-10-30 — #173
+Son güncelleme: 2026-10-30 — #185
 
 Kısa rehber için `CLAUDE.md`. Bu belge katmanları, veri akışını, oda protokolünü, testleri ve kuralları anlatır.
 
@@ -8,7 +8,7 @@ Kısa rehber için `CLAUDE.md`. Bu belge katmanları, veri akışını, oda prot
 
 | Katman | Klasör | Görev |
 | --- | --- | --- |
-| core | `src/core/` | Saf ortak mantık: `deste`, `dogrula`, `kayit`, `oturum`, `oyuncular`, `puan-oduller`, `rng`, `saat`, `tanitim` |
+| core | `src/core/` | Saf ortak mantık: `deste`, `dogrula`, `kayit`, `oturum`, `oyuncular`, `puan-oduller`, `rng`, `saat` |
 | games | `src/games/` | Oyun kuralları (saf durum makineleri) + `registry.ts` |
 | oyun-ekranlari | `src/oyun-ekranlari/` | Tek telefon oyun ekranları; ortak parçalar `ortak/` |
 | oda | `src/oda/` | Oda kuralları (`oda.ts`), protokol (`mesaj.ts`), istemci (`istemci.ts`), özetler (`ozet.ts`, `onon-ozet.ts`), `sahte.ts`, `tasima.ts` |
@@ -27,12 +27,12 @@ Kısa rehber için `CLAUDE.md`. Bu belge katmanları, veri akışını, oda prot
 ## Yeni oyun nasıl eklenir
 
 1. `src/games/<oyun>/` altında saf modülü yaz (`oyun.ts` arayüzü: `durumGecerliMi` dahil).
-2. `src/games/registry.ts` içindeki `oyunlar` dizisine bir kayıt ekle (`id`, `tur` (oylama | puanlama | gizli-rol | quiz), `ortam` (cift | aile, yoksa arkadaş grubu), `tanitim: {kisi, metin}`, gerekirse `kurulum`, `modSecimi`, `minOyuncu`, `ekran`).
+2. `src/games/registry.ts` içindeki `oyunlar` dizisine bir kayıt ekle (`id`, `ad`, `aktif`, `tanitim: {kisi, metin}`, gerekirse `kurulum`, `modSecimi`, `minOyuncu`, `ekran`).
 3. Ekranları `src/oyun-ekranlari/<oyun>/` altına, kurulum rotasını `app/<oyun>/` altına koy (ince sarmalayıcı).
 4. Desteler: `content/` JSON + `src/icerik/kayit.ts` kaydı, ardından `npm run icerik`.
 5. Oda modu gerekiyorsa `src/oda/oda.ts` oda türüne ekle (`mesaj.ts` protokolünü bozmadan).
 6. Kabul testlerini (`*.kabul.test.ts`) ve KK eşlemesini ekle; `npm run kk-harita`.
-7. `tur` kartta rozet, `ortam` ana ekranın Çift / Aile çiplerini besler; kuralları `src/games/kategori.ts`'te (kişi aralığı `minOyuncu` + genel üst sınır 12, yeni kişi alanı yok).
+7. Ana ekran kişi çipleri (Tümü · 2 kişi · 3–5 kişi · 6+ kişi) oyunun kişi aralığından (`minOyuncu` ?? 2 … genel üst sınır 12) türer; yeni alan gerekmez. Kural `src/games/kategori.ts`'te.
 8. Oyun listesi değiştiği için `CLAUDE.md` / bu belge aynı PR'da güncellenir.
 
 ## Oda sunucusu (`sunucu/`)
@@ -60,8 +60,8 @@ Kısa rehber için `CLAUDE.md`. Bu belge katmanları, veri akışını, oda prot
 - **Birim vs kabul:** `npm test` birim testleri koşar; `*.kabul.test.ts` dosyaları `npm run kabul` ile ayrı CI adımında çalışır.
 - **BEKLEYEN şablonu:** `src/kabul.ts` içinde `BEKLEYEN.ozellik` bayrağı testi `it.fails` yapar (`kabulOzellik = BEKLEYEN.ozellik ? it.fails : it`). İşi kapatan PR bayrağı ve sarmalayıcıyı siler, testi düz `it`e çevirir. Bayrak açıkken test geçerse CI kırılır. Kabul testleri silinmez, atlanmaz, gevşetilmez.
 - **Kaynak sözleşme testleri:** `src/test/yardimci.ts` — `kaynaklar(klasor)`, `dosyaIcerik(yol)`, `depoYap` (sahte depo), `akis` (promise boşaltır). UI test aracı kullanılmaz (Semih'in 1C kararı); ekranlar testID ve kaynak içeriğiyle doğrulanır.
-- **testID kuralı:** testID'ler sözleşmedir, yeniden adlandırma kabul testini kırar. Tek telefon: `ana-oyun-*`, `ayarlar`, `devam-et`, `yeni-oyun`, `oyuncu-*`, `basla`, `paket-*`, `tur-*`, `kart-metni`, `geri-sayim`, `oy-<i>-ok|nok` (`<i>` 0 tabanlı oyuncu sırası), `goster`, `cubuk-*`, `sonuc-metni`, `sonraki`, `atla`, `bitir`, `karistir-*`, `odul-*`, `paylas`, `tekrar-oyna`, `ana-menu`, `cikis-onay-*`, `ayar-*`; 10/10 ama `onon-*`; oda `oda-onon-*`; tanıtım `tanitim-*`.
-- **Oyun sözleşmeleri:** Casus kim (`src/games/casus-kim/casus.ts`) olayları `benim`, `goruldu`, `arkaPlan`, `tartismayiBitir`, `zaman`, `oyla`, `oylamayiBitir`, `devam`, `tahmin`, `oyunuBitir`. 10/10 ama (`onon.ts`) olayları `puan`, `goster`, `sonraki`, `atla`, `bitir`, `karistir`, `oyuncuEkle`, `oyuncuCikar`; puan 0–10 tam sayı, `bolundu` = max−min ≥ 8, `oybirligi` = hepsi aynı. Oda istemcisi: `istemci.kur(ad, paket, oyun?)`, `puanla`, `sonraki`, `durum.onFinal`, `odaTuru(durum)`; türetmeler `onOnKisisel`, `puanSirasi`. Tanıtım: `core/tanitim.ts` (`tanitimGorulduMu`, `tanitimiIsaretle`, `tanitimGerekli`).
+- **testID kuralı:** testID'ler sözleşmedir, yeniden adlandırma kabul testini kırar. Tek telefon: `ana-oyun-*`, `ayarlar`, `devam-et`, `yeni-oyun`, `oyuncu-*`, `basla`, `paket-*`, `tur-*`, `kart-metni`, `geri-sayim`, `oy-<i>-ok|nok` (`<i>` 0 tabanlı oyuncu sırası), `goster`, `cubuk-*`, `sonuc-metni`, `sonraki`, `atla`, `bitir`, `karistir-*`, `odul-*`, `paylas`, `tekrar-oyna`, `ana-menu`, `cikis-onay-*`, `ayar-*`; 10/10 ama `onon-*`; oda `oda-onon-*`; tanıtım `tanitim-*`; ⓘ düğmesi `nasil-oynanir`; boş liste `kategori-bos`.
+- **Oyun sözleşmeleri:** Casus kim (`src/games/casus-kim/casus.ts`) olayları `benim`, `goruldu`, `arkaPlan`, `tartismayiBitir`, `zaman`, `oyla`, `oylamayiBitir`, `devam`, `tahmin`, `oyunuBitir`. 10/10 ama (`onon.ts`) olayları `puan`, `goster`, `sonraki`, `atla`, `bitir`, `karistir`, `oyuncuEkle`, `oyuncuCikar`; puan 0–10 tam sayı, `bolundu` = max−min ≥ 8, `oybirligi` = hepsi aynı. Oda istemcisi: `istemci.kur(ad, paket, oyun?)`, `puanla`, `sonraki`, `durum.onFinal`, `odaTuru(durum)`; türetmeler `onOnKisisel`, `puanSirasi`. Tanıtım kartı kendiliğinden açılmaz: oyun seçildikten sonraki her ekranda ortak `BilgiDugmesi` (`tanitim-kutusu.tsx`, ⓘ) açar; hazırlık ekranlarında yazılı hap, oyun/sonuçta kısa ⓘ (üst çubuklara `BilgiYuvasi` bağlamıyla gelir); "görüldü" bilgisi tutulmaz.
 - **KK haritası:** `npm run kk-harita` `docs/KK-HARITA.md`'yi üretir, CI `kk-harita:kontrol` çalıştırır. Yeni KK için test adında "KK-nn" geçer ya da madde `docs/GERCEK-CIHAZ-KONTROL.md`'ye girer.
 - **Sunucu smoke:** `sunucu-smoke.yml` — `node sunucu/test/oyun.ts <url> 4` ve `onon.ts`.
 - **Gerçek cihaz:** `docs/GERCEK-CIHAZ-KONTROL.md`. **Önizleme tıklama kuralı:** önizlemede ilgili akış elle bir kez denenir.

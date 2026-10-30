@@ -6,6 +6,7 @@ import { oyunlar } from '../src/games/registry';
 import { desteler } from '../src/desteler';
 import { useDurum } from '../src/durum';
 import { uygulamaGeri } from '../src/uygulama-geri';
+import { BilgiDugmesi, BilgiYuvasi } from '../src/tanitim-kutusu';
 import { Diyalog, Dugme } from '../src/ui';
 
 type Gezinme = {
@@ -78,7 +79,7 @@ export default function Oyun() {
   };
 
   return (
-    <>
+    <BilgiYuvasi.Provider value={<BilgiDugmesi oyunId={oyun?.id ?? ''} kisa />}>
       <Suspense fallback={null}>
         {OyunEkrani && (
           <OyunEkrani
@@ -105,6 +106,6 @@ export default function Oyun() {
           }}
         />
       </Diyalog>
-    </>
+    </BilgiYuvasi.Provider>
   );
 }

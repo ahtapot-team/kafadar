@@ -2,11 +2,13 @@
 import { useState, type ReactNode } from 'react';
 import { Pressable, View } from 'react-native';
 import { useDurum } from '../../durum';
+import { useBilgiYuvasi } from '../../tanitim-kutusu';
 import { bosluk, cizgi, dokunmaAlani, renkler, yaricap } from '../../tema';
 import { Diyalog, Dugme, Yazi } from '../../ui';
 
 export function CasusUst({ orta, onCik }: { orta: string; onCik: () => void }) {
   const { renk } = useDurum();
+  const bilgi = useBilgiYuvasi();
   return (
     <View style={{ flexDirection: 'row', alignItems: 'center', gap: bosluk.m }}>
       <View
@@ -27,6 +29,7 @@ export function CasusUst({ orta, onCik }: { orta: string; onCik: () => void }) {
       <Yazi tur="etiket" soluk style={{ flex: 1, textAlign: 'center' }}>
         {orta}
       </Yazi>
+      {bilgi}
       <Pressable
         testID="cik"
         accessibilityRole="button"

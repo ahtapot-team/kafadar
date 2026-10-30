@@ -1,10 +1,8 @@
-// Oyun tanıtım kartı (PRD v6, KK-73…KK-77): mevcut Diyalog; ad, kişi sayısı ve metin oyunun kayıt satırından gelir.
-// "Tamam" görüldü işaretler ve kapatır; geri tuşu işaretlemeden kapatır (onKapat); kartın dışına dokunmak kapatmaz.
-import { useState } from 'react';
+// Oyun tanıtım kartı (PRD v6/v7.1): mevcut Diyalog; ad, kişi sayısı ve metin oyunun kayıt satırından gelir.
+// "Tamam" ve geri tuşu kapatır; kartın dışına dokunmak kapatmaz. Yalnızca BilgiDugmesi açar.
+import { createContext, useContext, useState, type ReactNode } from 'react';
 import { Pressable, View } from 'react-native';
 import { useReducedMotion } from 'react-native-reanimated';
-import { tanitimiIsaretle } from './core/tanitim';
-import { depo } from './depo';
 import { useDurum } from './durum';
 import type { Oyun } from './games/oyun';
 import { oyunlar } from './games/registry';
@@ -26,10 +24,6 @@ export function TanitimKarti({
   const { renk } = useDurum();
   const azalt = useReducedMotion();
   if (!oyun.tanitim) return null;
-  const tamam = async () => {
-    await tanitimiIsaretle(depo, oyun.id);
-    onTamam();
-  };
   return (
     <Diyalog
       gorunur={gorunur}
@@ -69,7 +63,7 @@ export function TanitimKarti({
         testID="tanitim-tamam"
         accessibilityRole="button"
         accessibilityLabel="Tamam"
-        onPress={tamam}
+        onPress={onTamam}
         style={{
           minHeight: dokunmaAlani,
           borderRadius: yaricap.dugme,
@@ -86,15 +80,14 @@ export function TanitimKarti({
   );
 }
 
-// "Nasıl oynanır?" (KK-76): üst çubuğun sağında "?" rozetli 48px hap; aynı kartı açar ve "Tamam"la kapanır.
-export function TanitimBaglantisi({
+// ⓘ "Nasıl oynanır" (KK-91, KK-92): tek ortak düğme. Hazırlık ekranlarında yazılı hap, oyun ve sonuçta kısa 48px ⓘ (kisa).
+// Dokununca kart açılır, ekran değişmez; "Tamam" ya da geri kapatır. Kart kendiliğinden açılmaz (KK-90).
+export function BilgiDugmesi({
   oyunId,
-  testID,
-  etiket,
+  kisa,
 }: {
   oyunId: string;
-  testID: string;
-  etiket: string;
+  kisa?: boolean;
 }) {
   const { renk } = useDurum();
   const [acik, setAcik] = useState(false);
@@ -103,37 +96,49 @@ export function TanitimBaglantisi({
   return (
     <>
       <Pressable
-        testID={testID}
+        testID="nasil-oynanir"
         accessibilityRole="button"
-        accessibilityLabel={etiket}
+        accessibilityLabel="Nasıl oynanır"
         onPress={() => setAcik(true)}
-        style={{
+        style={({ pressed }) => ({
           minHeight: dokunmaAlani,
+          minWidth: dokunmaAlani,
           flexDirection: 'row',
           alignItems: 'center',
-          gap: bosluk.s,
-          paddingHorizontal: bosluk.m,
-          borderRadius: yaricap.cip,
-          borderWidth: cizgi.ince,
-          borderColor: renk.marka,
-          backgroundColor: renk.yuzey,
-        }}
+          justifyContent: 'center',
+          opacity: pressed ? 0.6 : 1,
+          ...(kisa
+            ? {}
+            : {
+                gap: bosluk.s,
+                paddingLeft: 9,
+                paddingRight: bosluk.m + 2,
+                borderRadius: yaricap.cip,
+                borderWidth: cizgi.ince,
+                borderColor: renk.kontur,
+                backgroundColor: renk.yuzey,
+              }),
+        })}
       >
-        <View
-          style={{
-            width: 24,
-            height: 24,
-            borderRadius: yaricap.yuvarlak,
-            backgroundColor: renk.marka,
-            alignItems: 'center',
-            justifyContent: 'center',
-          }}
-        >
-          <Yazi tur="etiket" style={{ color: renk.kontur }}>
-            ?
-          </Yazi>
-        </View>
-        <Yazi tur="etiket">{etiket}</Yazi>
+        {kisa ? (
+          <Yazi tur="dugme">ⓘ</Yazi>
+        ) : (
+          <View
+            style={{
+              width: 24,
+              height: 24,
+              borderRadius: yaricap.yuvarlak,
+              backgroundColor: renk.marka,
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}
+          >
+            <Yazi tur="cip" style={{ color: renk.kontur }}>
+              i
+            </Yazi>
+          </View>
+        )}
+        {!kisa && <Yazi tur="etiket">Nasıl oynanır</Yazi>}
       </Pressable>
       <TanitimKarti
         oyun={oyun}
@@ -148,3 +153,7 @@ export function TanitimBaglantisi({
 // Odanın oyunundan kayıt satırı kimliği (kodla katılan hangi oyundan gelirse gelsin odanın oyununun kartı açılır).
 export const odaOyunId = (tur: OdaTuru | null) =>
   tur === 'on-on-ama' ? '10-10-ama' : 'ok-mu-nok';
+
+// Oyun çerçevesi kısa ⓘ'yi üretir (BilgiDugmesi kisa); üst çubuklar onu ✕'in soluna koyar.
+export const BilgiYuvasi = createContext<ReactNode>(null);
+export const useBilgiYuvasi = () => useContext(BilgiYuvasi);

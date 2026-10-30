@@ -11,7 +11,6 @@ describe('registry', () => {
       id: 'sahte',
       ad: 'Sahte',
       aktif: true,
-      tur: 'oylama',
     };
     expect([...oyunlar, sahte].map((o) => o.id)).toContain('sahte');
   });

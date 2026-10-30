@@ -1,6 +1,7 @@
 // Oda ekranlarının ortak üst satırı: oda rozeti (marka-2), ortada başlık, sağda süre ya da boşluk.
 import { Pressable, View } from 'react-native';
 import { useDurum } from '../durum';
+import { useBilgiYuvasi } from '../tanitim-kutusu';
 import { bosluk, cizgi, dokunmaAlani, yaricap } from '../tema';
 import { Yazi } from '../ui';
 
@@ -18,6 +19,7 @@ export function OdaUst({
   onCik?: () => void; // oyun içi çıkış ikonu: "Odadan çık?" (#73)
 }) {
   const { renk } = useDurum();
+  const bilgi = useBilgiYuvasi();
   return (
     <View style={{ flexDirection: 'row', alignItems: 'center', gap: bosluk.m }}>
       <View
@@ -45,6 +47,7 @@ export function OdaUst({
       >
         {sag ?? ''}
       </Yazi>
+      {bilgi}
       {onCik && (
         <Pressable
           testID="oda-cik"

@@ -1,12 +1,25 @@
 import { useRouter } from 'expo-router';
+import { View } from 'react-native';
+import { useDurum } from '../src/durum';
+import { BilgiDugmesi } from '../src/tanitim-kutusu';
 import { Dugme, Ekran, GeriCubugu, Yazi } from '../src/ui';
 
 // OK mu NOK mu mod seçimi (KK-28). Tek telefon modu değişmeden çevrimdışı çalışır.
 export default function Mod() {
   const router = useRouter();
+  const { oyunId } = useDurum();
   return (
     <Ekran>
-      <GeriCubugu testID="geri" />
+      <View
+        style={{
+          flexDirection: 'row',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+        }}
+      >
+        <GeriCubugu testID="geri" />
+        <BilgiDugmesi oyunId={oyunId ?? ''} />
+      </View>
       <Yazi tur="baslik">Nasıl oynuyoruz?</Yazi>
       <Dugme
         testID="mod-tek-telefon"

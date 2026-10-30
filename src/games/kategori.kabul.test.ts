@@ -9,11 +9,7 @@
 // Ana ekran testID'leri: kategori-cipleri, cip-<id>, oyun-kisi-<oyunId>, kategori-bos (boş liste metni).
 import { readFileSync } from 'node:fs';
 import { describe, expect, it } from 'vitest';
-import { BEKLEYEN } from '../kabul';
 import { oyunlar } from './registry';
-
-// Kırmızı-önce: v7.1 uygulaması gelene dek bu testler it.fails ile beklenir; işi kapatan PR bayrağı ve bu satırı siler.
-const kabulV71 = BEKLEYEN.v71 ? it.fails : it;
 
 type Cip = 'tumu' | '2-kisi' | '3-5-kisi' | '6-uzeri-kisi';
 type Kayit = { id: string; ad: string; aktif: boolean; minOyuncu?: number };
@@ -47,7 +43,7 @@ const ids = (l: Kayit[]) => l.map((o) => o.id);
 const bugun = [oyun('ok-mu-nok'), oyun('10-10-ama'), oyun('casus-kim', 3)];
 
 describe('KK-87: kişi çipleri satırı', () => {
-  kabulV71('KK-87: çip sırası Tümü · 2 kişi · 3–5 kişi · 6+ kişi', async () => {
+  it('KK-87: çip sırası Tümü · 2 kişi · 3–5 kişi · 6+ kişi', async () => {
     const { CIPLER, CIP_ETIKETI } = await yukle();
     expect(CIPLER).toEqual(['tumu', '2-kisi', '3-5-kisi', '6-uzeri-kisi']);
     expect(CIPLER.map((c) => CIP_ETIKETI[c])).toEqual([
@@ -58,17 +54,14 @@ describe('KK-87: kişi çipleri satırı', () => {
     ]);
   });
 
-  kabulV71(
-    'KK-87: dört çip de her zaman görünür (gorunenCipler yok, satır koşulsuz)',
-    async () => {
-      const kat = (await yukle()) as unknown as Record<string, unknown>;
-      expect(kat.gorunenCipler).toBeUndefined();
-      const k = oku('app/index.tsx');
-      expect(k).not.toContain('gorunenCipler');
-      expect(k).toContain('CIPLER');
-      expect(k).toContain('kategori-cipleri');
-    },
-  );
+  it('KK-87: dört çip de her zaman görünür (gorunenCipler yok, satır koşulsuz)', async () => {
+    const kat = (await yukle()) as unknown as Record<string, unknown>;
+    expect(kat.gorunenCipler).toBeUndefined();
+    const k = oku('app/index.tsx');
+    expect(k).not.toContain('gorunenCipler');
+    expect(k).toContain('CIPLER');
+    expect(k).toContain('kategori-cipleri');
+  });
 
   it('KK-87: çip satırı oyun listesinin üstünde, ilk seçim Tümü, seçim kalıcı değil', () => {
     const k = oku('app/index.tsx');
@@ -91,94 +84,69 @@ describe('KK-87: kişi çipleri satırı', () => {
 });
 
 describe('KK-88: kişi aralığı kesişimi ve filtre', () => {
-  kabulV71(
-    'KK-88: eşleşme = oyunun [minOyuncu ?? 2, 12] aralığı çipin aralığıyla kesişir',
-    async () => {
-      const { cipEslesir } = await yukle();
-      const ok = oyun('ok'); // 2–12
-      const casus = oyun('c', 3); // 3–12
-      expect(bugun.every((o) => cipEslesir('tumu', o))).toBe(true);
-      expect(cipEslesir('2-kisi', ok)).toBe(true);
-      expect(cipEslesir('2-kisi', oyun('x', 1))).toBe(true); // 1 → en az 2 sayılır
-      expect(cipEslesir('2-kisi', oyun('x', 2))).toBe(true);
-      expect(cipEslesir('2-kisi', casus)).toBe(false);
-      expect(cipEslesir('3-5-kisi', ok)).toBe(true);
-      expect(cipEslesir('3-5-kisi', casus)).toBe(true);
-      expect(cipEslesir('3-5-kisi', oyun('x', 5))).toBe(true); // 5–12 ∩ 3–5 = {5}
-      expect(cipEslesir('3-5-kisi', oyun('x', 6))).toBe(false); // 6–12 ∩ 3–5 = ∅
-      expect(cipEslesir('6-uzeri-kisi', ok)).toBe(true);
-      expect(cipEslesir('6-uzeri-kisi', casus)).toBe(true);
-      expect(cipEslesir('6-uzeri-kisi', oyun('x', 12))).toBe(true);
-    },
-  );
+  it('KK-88: eşleşme = oyunun [minOyuncu ?? 2, 12] aralığı çipin aralığıyla kesişir', async () => {
+    const { cipEslesir } = await yukle();
+    const ok = oyun('ok'); // 2–12
+    const casus = oyun('c', 3); // 3–12
+    expect(bugun.every((o) => cipEslesir('tumu', o))).toBe(true);
+    expect(cipEslesir('2-kisi', ok)).toBe(true);
+    expect(cipEslesir('2-kisi', oyun('x', 1))).toBe(true); // 1 → en az 2 sayılır
+    expect(cipEslesir('2-kisi', oyun('x', 2))).toBe(true);
+    expect(cipEslesir('2-kisi', casus)).toBe(false);
+    expect(cipEslesir('3-5-kisi', ok)).toBe(true);
+    expect(cipEslesir('3-5-kisi', casus)).toBe(true);
+    expect(cipEslesir('3-5-kisi', oyun('x', 5))).toBe(true); // 5–12 ∩ 3–5 = {5}
+    expect(cipEslesir('3-5-kisi', oyun('x', 6))).toBe(false); // 6–12 ∩ 3–5 = ∅
+    expect(cipEslesir('6-uzeri-kisi', ok)).toBe(true);
+    expect(cipEslesir('6-uzeri-kisi', casus)).toBe(true);
+    expect(cipEslesir('6-uzeri-kisi', oyun('x', 12))).toBe(true);
+  });
 
-  kabulV71(
-    'KK-88: filtre yalnızca eşleşenleri bırakır, sıra değişmez (bugün 2 kişi → OK mu NOK mu, 10/10 ama)',
-    async () => {
-      const { filtrele } = await yukle();
-      expect(ids(filtrele(bugun, 'tumu'))).toEqual(ids(bugun));
-      expect(ids(filtrele(bugun, '2-kisi'))).toEqual([
-        'ok-mu-nok',
-        '10-10-ama',
-      ]);
-      expect(ids(filtrele(bugun, '3-5-kisi'))).toEqual(ids(bugun));
-      expect(ids(filtrele(bugun, '6-uzeri-kisi'))).toEqual(ids(bugun));
-      const karisik = [oyun('a', 6), oyun('b'), oyun('c', 4), oyun('d', 2)];
-      expect(ids(filtrele(karisik, '3-5-kisi'))).toEqual(['b', 'c', 'd']);
-      expect(ids(filtrele(karisik, '2-kisi'))).toEqual(['b', 'd']);
-    },
-  );
+  it('KK-88: filtre yalnızca eşleşenleri bırakır, sıra değişmez (bugün 2 kişi → OK mu NOK mu, 10/10 ama)', async () => {
+    const { filtrele } = await yukle();
+    expect(ids(filtrele(bugun, 'tumu'))).toEqual(ids(bugun));
+    expect(ids(filtrele(bugun, '2-kisi'))).toEqual(['ok-mu-nok', '10-10-ama']);
+    expect(ids(filtrele(bugun, '3-5-kisi'))).toEqual(ids(bugun));
+    expect(ids(filtrele(bugun, '6-uzeri-kisi'))).toEqual(ids(bugun));
+    const karisik = [oyun('a', 6), oyun('b'), oyun('c', 4), oyun('d', 2)];
+    expect(ids(filtrele(karisik, '3-5-kisi'))).toEqual(['b', 'c', 'd']);
+    expect(ids(filtrele(karisik, '2-kisi'))).toEqual(['b', 'd']);
+  });
 
-  kabulV71(
-    'KK-88: "Yakında" (aktif değil) oyunlar aynı kurala uyar',
-    async () => {
-      const { filtrele } = await yukle();
-      const liste = [oyun('a'), oyun('yakinda-uc', 3, false), oyun('b')];
-      expect(ids(filtrele(liste, '2-kisi'))).toEqual(['a', 'b']);
-      expect(ids(filtrele(liste, '3-5-kisi'))).toEqual([
-        'a',
-        'yakinda-uc',
-        'b',
-      ]);
-    },
-  );
+  it('KK-88: "Yakında" (aktif değil) oyunlar aynı kurala uyar', async () => {
+    const { filtrele } = await yukle();
+    const liste = [oyun('a'), oyun('yakinda-uc', 3, false), oyun('b')];
+    expect(ids(filtrele(liste, '2-kisi'))).toEqual(['a', 'b']);
+    expect(ids(filtrele(liste, '3-5-kisi'))).toEqual(['a', 'yakinda-uc', 'b']);
+  });
 
-  kabulV71(
-    'KK-88: gerçek kayıt listesiyle "2 kişi" Casus kim\'i eler, diğer çipler hepsini bırakır',
-    async () => {
-      const { filtrele } = await yukle();
-      const liste = oyunlar as unknown as Kayit[];
-      expect(ids(filtrele(liste, '2-kisi'))).not.toContain('casus-kim');
-      expect(ids(filtrele(liste, '2-kisi'))).toContain('ok-mu-nok');
-      expect(filtrele(liste, '3-5-kisi')).toHaveLength(liste.length);
-      expect(filtrele(liste, '6-uzeri-kisi')).toHaveLength(liste.length);
-    },
-  );
+  it('KK-88: gerçek kayıt listesiyle "2 kişi" Casus kim\'i eler, diğer çipler hepsini bırakır', async () => {
+    const { filtrele } = await yukle();
+    const liste = oyunlar as unknown as Kayit[];
+    expect(ids(filtrele(liste, '2-kisi'))).not.toContain('casus-kim');
+    expect(ids(filtrele(liste, '2-kisi'))).toContain('ok-mu-nok');
+    expect(filtrele(liste, '3-5-kisi')).toHaveLength(liste.length);
+    expect(filtrele(liste, '6-uzeri-kisi')).toHaveLength(liste.length);
+  });
 
-  kabulV71(
-    'KK-88: hiçbir oyun eşleşmezse metin "Bu kişi sayısına uygun oyun henüz yok."',
-    async () => {
-      const { filtrele, BOS_LISTE_METNI } = await yukle();
-      expect(BOS_LISTE_METNI).toBe('Bu kişi sayısına uygun oyun henüz yok.');
-      expect(filtrele([oyun('a', 6)], '2-kisi')).toEqual([]);
-      expect(filtrele([], '3-5-kisi')).toEqual([]);
-    },
-  );
+  it('KK-88: hiçbir oyun eşleşmezse metin "Bu kişi sayısına uygun oyun henüz yok."', async () => {
+    const { filtrele, BOS_LISTE_METNI } = await yukle();
+    expect(BOS_LISTE_METNI).toBe('Bu kişi sayısına uygun oyun henüz yok.');
+    expect(filtrele([oyun('a', 6)], '2-kisi')).toEqual([]);
+    expect(filtrele([], '3-5-kisi')).toEqual([]);
+  });
 
-  kabulV71(
-    'KK-88: ana ekran listeyi filtrele() ile çizer, çipe dokunmayı cipSec() ile çözer, boş listede kategori-bos gösterir',
-    () => {
-      const k = oku('app/index.tsx');
-      expect(k).toMatch(/filtrele\(\s*oyunlar/);
-      expect(k).toMatch(/cipSec\(/);
-      expect(k).toContain('BOS_LISTE_METNI');
-      expect(k).toContain('kategori-bos');
-    },
-  );
+  it('KK-88: ana ekran listeyi filtrele() ile çizer, çipe dokunmayı cipSec() ile çözer, boş listede kategori-bos gösterir', () => {
+    const k = oku('app/index.tsx');
+    expect(k).toMatch(/filtrele\(\s*oyunlar/);
+    expect(k).toMatch(/cipSec\(/);
+    expect(k).toContain('BOS_LISTE_METNI');
+    expect(k).toContain('kategori-bos');
+  });
 });
 
 describe('KK-89: kartta yalnızca kişi sayısı; tür ve ortam yok', () => {
-  kabulV71('KK-89: kayıt satırlarında `tur` ve `ortam` alanları yoktur', () => {
+  it('KK-89: kayıt satırlarında `tur` ve `ortam` alanları yoktur', () => {
     for (const o of oyunlar) {
       const anahtarlar = Object.keys(o);
       expect(anahtarlar, `${o.id}: tur`).not.toContain('tur');
@@ -186,38 +154,29 @@ describe('KK-89: kartta yalnızca kişi sayısı; tür ve ortam yok', () => {
     }
   });
 
-  kabulV71(
-    'KK-89: Oyun sözleşmesinde (oyun.ts) `tur`/`ortam` alanı ve OyunTuru tipi kalmaz',
-    () => {
-      const t = oku('src/games/oyun.ts');
-      expect(t).not.toMatch(/^\s*tur\??:/m);
-      expect(t).not.toMatch(/^\s*ortam\??:/m);
-      expect(t).not.toContain('OyunTuru');
-      expect(t).not.toContain('OyunOrtami');
-    },
-  );
+  it('KK-89: Oyun sözleşmesinde (oyun.ts) `tur`/`ortam` alanı ve OyunTuru tipi kalmaz', () => {
+    const t = oku('src/games/oyun.ts');
+    expect(t).not.toMatch(/^\s*tur\??:/m);
+    expect(t).not.toMatch(/^\s*ortam\??:/m);
+    expect(t).not.toContain('OyunTuru');
+    expect(t).not.toContain('OyunOrtami');
+  });
 
-  kabulV71(
-    'KK-89: kategori.ts tür etiketi ve Çift/Aile/Kalabalık/Quiz çiplerini taşımaz',
-    async () => {
-      const kat = (await yukle()) as unknown as Record<string, unknown>;
-      expect(kat.turEtiketi).toBeUndefined();
-      const kaynak = oku('src/games/kategori.ts');
-      for (const eski of ["'cift'", "'aile'", "'kalabalik'", "'quiz'"])
-        expect(kaynak, eski).not.toContain(eski);
-    },
-  );
+  it('KK-89: kategori.ts tür etiketi ve Çift/Aile/Kalabalık/Quiz çiplerini taşımaz', async () => {
+    const kat = (await yukle()) as unknown as Record<string, unknown>;
+    expect(kat.turEtiketi).toBeUndefined();
+    const kaynak = oku('src/games/kategori.ts');
+    for (const eski of ["'cift'", "'aile'", "'kalabalik'", "'quiz'"])
+      expect(kaynak, eski).not.toContain(eski);
+  });
 
-  kabulV71(
-    'KK-89: ana ekran kartında tür rozeti yok (oyun-tur-<id>), yalnızca oyun-kisi-<id>',
-    () => {
-      const k = oku('app/index.tsx');
-      expect(k).not.toContain('oyun-tur-');
-      expect(k).not.toContain('turEtiketi');
-      expect(k).toContain('oyun-kisi-');
-      expect(k).toMatch(/kisiMetni\(/);
-    },
-  );
+  it('KK-89: ana ekran kartında tür rozeti yok (oyun-tur-<id>), yalnızca oyun-kisi-<id>', () => {
+    const k = oku('app/index.tsx');
+    expect(k).not.toContain('oyun-tur-');
+    expect(k).not.toContain('turEtiketi');
+    expect(k).toContain('oyun-kisi-');
+    expect(k).toMatch(/kisiMetni\(/);
+  });
 
   it('KK-89: kişi sayısı tanıtım kartında yazanla aynıdır', async () => {
     const { kisiMetni } = await yukle();
@@ -284,20 +243,17 @@ describe('KK-93: akışlar ve belgeler', () => {
       expect(k, t).toContain(t);
   });
 
-  kabulV71(
-    'KK-93: CLAUDE.md ve MIMARI.md "yeni oyun ekleme" adımlarında `tur`/`ortam` geçmez',
-    () => {
-      const mimari = oku('docs/MIMARI.md');
-      const bas = mimari.indexOf('## Yeni oyun nasıl eklenir');
-      expect(bas).toBeGreaterThan(-1);
-      const sonraki = mimari.indexOf('\n## ', bas + 5);
-      const bolum = mimari.slice(bas, sonraki < 0 ? undefined : sonraki);
-      const yasak = /`tur`|`ortam`|\btur\/ortam\b|\bortam\b/;
-      expect(bolum).not.toMatch(yasak);
-      const claude = oku('CLAUDE.md');
-      const satir = claude.split('\n').filter((s) => s.includes('src/games/'));
-      expect(satir.join('\n')).not.toMatch(yasak);
-      expect(claude).not.toMatch(/`tur`|`ortam`/);
-    },
-  );
+  it('KK-93: CLAUDE.md ve MIMARI.md "yeni oyun ekleme" adımlarında `tur`/`ortam` geçmez', () => {
+    const mimari = oku('docs/MIMARI.md');
+    const bas = mimari.indexOf('## Yeni oyun nasıl eklenir');
+    expect(bas).toBeGreaterThan(-1);
+    const sonraki = mimari.indexOf('\n## ', bas + 5);
+    const bolum = mimari.slice(bas, sonraki < 0 ? undefined : sonraki);
+    const yasak = /`tur`|`ortam`|\btur\/ortam\b|\bortam\b/;
+    expect(bolum).not.toMatch(yasak);
+    const claude = oku('CLAUDE.md');
+    const satir = claude.split('\n').filter((s) => s.includes('src/games/'));
+    expect(satir.join('\n')).not.toMatch(yasak);
+    expect(claude).not.toMatch(/`tur`|`ortam`/);
+  });
 });
