@@ -4,7 +4,6 @@
 //      içinde JS fonksiyonu yalnızca runOnJS(fn)(…) ya da scheduleOnRN(fn, …) ile çağrılır.
 //   2) app/_layout.tsx <Yigin />'ı her aşamada (açılış dahil) koşulsuz render eder; açılış ekranı üstüne biner.
 import { describe, expect, it } from 'vitest';
-import { kabulCokme } from './kabul';
 import { dosyaIcerik, kaynaklar } from './test/yardimci';
 
 const ANIMASYON = /\bwith(?:Timing|Spring|Decay|Delay|Sequence|Repeat)\s*\(/g;
@@ -41,16 +40,13 @@ const ihlaller = (kaynak: string) => {
 };
 
 describe('#198: animasyon geri çağrılarında JS fonksiyonu runOnJS/scheduleOnRN ile çağrılır', () => {
-  kabulCokme(
-    'K1: src/acilis geri çağrısı onBitti()yi doğrudan çağırmaz',
-    () => {
-      const ekran = dosyaIcerik('src/acilis/ekran.tsx');
-      expect(ekran).toMatch(ANIMASYON);
-      expect(ihlaller(ekran)).toEqual([]);
-    },
-  );
+  it('K1: src/acilis geri çağrısı onBitti()yi doğrudan çağırmaz', () => {
+    const ekran = dosyaIcerik('src/acilis/ekran.tsx');
+    expect(ekran).toMatch(ANIMASYON);
+    expect(ihlaller(ekran)).toEqual([]);
+  });
 
-  kabulCokme('K1: app ve src kaynaklarında korumasız geri çağrı yok', () => {
+  it('K1: app ve src kaynaklarında korumasız geri çağrı yok', () => {
     const kotu = [...kaynaklar('app'), ...kaynaklar('src')]
       .map(({ f, icerik }) => ({ f, c: ihlaller(icerik) }))
       .filter((x) => x.c.length > 0);
@@ -78,7 +74,7 @@ describe('#198: animasyon geri çağrılarında JS fonksiyonu runOnJS/scheduleOn
 });
 
 describe('#198: _layout açılışta da yığını render eder', () => {
-  kabulCokme('K2: <Yigin /> koşulsuz render edilir', () => {
+  it('K2: <Yigin /> koşulsuz render edilir', () => {
     const l = dosyaIcerik('app/_layout.tsx');
     expect(l).toMatch(/<Yigin\s*\/>/);
     expect(l).not.toMatch(/&&\s*<Yigin\s*\/>/);
