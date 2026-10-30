@@ -377,7 +377,7 @@ Hiçbir etiketi olmayan oyunlar arkadaş grubu için sayılır, bu yüzden ayrı
 | Etkisiz çipler | Listeyi daraltmayan çip gizlenir | Boş ya da her şeyi gösteren filtre kafa karıştırır | pm varsayılanı |
 | Seçimi hatırlama | Hatırlanmaz | Sade | pm varsayılanı |
 
-## v7.1: Kişi filtresi ve ⓘ Nasıl oynanır (Semih, 30.10.2026) — ONAY BEKLİYOR
+## v7.1: Kişi filtresi ve ⓘ Nasıl oynanır (Semih, 30.10.2026) — ONAYLANDI (Semih, 30.10.2026)
 Issue'lar: #183 tasarım (tasarim), #184 kabul testleri (qa), #185 uygulama (frontend; #183 ve #184 bitince başlar).
 Kullanıcı gözüyle sadeleştirme. Kullanıcı için asıl soru "kaç kişiyiz?". "2 kişi" ile "Çift" birbirine karıştırılıyordu. "Oylama/Puanlama" gibi türler kullanıcıya bir şey söylemiyordu. Sevgili/arkadaş seçimi zaten oyunun içinde, pakette yapılıyor. Bu yüzden ana ekran yalnızca kişi sayısına göre süzer. Oyun kuralları da artık kendiliğinden açılmaz; isteyen sağ üstteki ⓘ'ye dokunup bakar.
 
@@ -419,6 +419,7 @@ Oyunun kişi aralığı (`minOyuncu` … genel üst sınır 12) çipin aralığ�
 | Nasıl oynanır | Kendiliğinden açılmaz; oyun içindeki her ekranda sağ üstte ⓘ | İsteyen bakar, kimse bekletilmez | Semih (30.10.2026, msg 703; yer: "evet") |
 | Eşleşme | Kişi aralığı kesişirse listede kalır | Kart kişi sayısını zaten gösteriyor; kimse gereksiz yere elenmez | pm varsayılanı |
 | Kullanılmayan veri | `tur`, `ortam` ve "görüldü" saklaması silinir | Geliştirme ilkesi: kullanılmayan kod kalmaz | pm varsayılanı |
+| Belgeler | İş sonunda md dosyaları güncellenir: TASARIM-SISTEMI (tasarim), KK-HARITA (qa), CLAUDE.md ve MIMARI (frontend) | Belgeler kodla uyumlu kalır | Semih (30.10.2026, msg 718) |
 
 ## Geliştirme ilkesi (Semih, 27.10.2026)
 **Overengineering yok.** En az kodla, en basit çözüm, yalnızca bugünkü ihtiyaç kadar. Yapı genişlemeye açık olacak ama ileriye dönük soyutlama, genel çerçeve ya da "belki lazım olur" kodu yazılmayacak. Yeni bağımlılık yalnızca gerçekten gerekiyorsa eklenir ve PR'da gerekçesi yazılır. Aşağıdaki mimari şartlar bu ilkeye göre en sade haliyle uygulanır. Örneğin oyun kayıt listesi basit bir dizidir, eklenti çatısı değildir.
