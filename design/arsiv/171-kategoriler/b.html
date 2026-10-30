@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kafadar — kategoriler B</title>
+<!-- #171 (PRD v7, KK-81…KK-85) · Varyant B "Sticker raf": hap çipler, seçili çip sticker gibi eğik; oyun kartı yüzey renginde, tür ikonu karosu ve köşede eğik tür sticker'ı.
+     Etiketler PRD v7 tablosundan. Kullanım: ?tema=koyu|acik&boy=375x667. Tek dış kaynak: Google Fonts (yoksa system-ui). -->
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&display=swap" rel="stylesheet">
+<style>
+  :root { --kontur: #0B0920; --golge: #7C6CFF; --marka: #FFD23F; --marka-2: #5B8CFF; --w: 375px; --h: 667px; }
+  [data-tema="koyu"] { --zemin: #16123F; --yuzey: #2B2570; --metin: #FFF8E7; --soluk: #B9B3E8; }
+  [data-tema="acik"] { --zemin: #FFF8E7; --yuzey: #FFFFFF; --metin: #16123F; --soluk: #5B5585; }
+  * { box-sizing: border-box; }
+  body { margin: 0; padding: 32px 24px; background: #DCD9E8; font-family: 'Bricolage Grotesque', system-ui, sans-serif; }
+  h1 { margin: 0 0 24px; font-size: 22px; color: #2a2640; text-align: center; }
+  #ekranlar { display: flex; flex-wrap: wrap; gap: 36px 28px; justify-content: center; }
+  figure { margin: 0; } figcaption { font-size: 14px; font-weight: 700; color: #4a4566; margin-bottom: 8px; max-width: var(--w); }
+  .ekran { position: relative; width: var(--w); height: var(--h); overflow: hidden; border-radius: 28px; background: var(--zemin); color: var(--metin);
+    display: flex; flex-direction: column; gap: 16px; padding: 34px 22px 22px; box-shadow: 0 16px 40px rgba(20,16,50,.22); }
+  .logo { align-self: flex-start; background: var(--marka); color: var(--kontur); border: 4px solid var(--kontur); border-radius: 20px; padding: 4px 16px 8px;
+    box-shadow: 5px 5px 0 var(--golge); transform: rotate(-4deg); font-size: 48px; font-weight: 800; letter-spacing: -0.03em; line-height: 1; margin-top: 6px; }
+  .ayar { position: absolute; top: 34px; right: 22px; width: 48px; height: 48px; border-radius: 12px; border: 3px solid var(--kontur); background: var(--yuzey); display: grid; place-items: center; font-size: 20px; }
+  .alt { margin: 0; font-size: 17px; font-weight: 500; line-height: 1.45; color: var(--soluk); }
+  /* Çip satırı: hap çipler, yatay kaydırılır, sağ kenara taşar */
+  .cipler { display: flex; align-items: center; gap: 8px; margin: 0 -22px; padding: 4px 22px 8px; overflow: hidden; flex: none; }
+  .cip { flex: none; display: inline-flex; align-items: center; gap: 6px; height: 48px; padding: 0 12px; border-radius: 999px; border: 3px solid var(--kontur);
+    background: var(--yuzey); color: var(--metin); font-size: 14px; font-weight: 800; letter-spacing: 1.1px; text-transform: uppercase; white-space: nowrap; }
+  .cip.sec { background: var(--marka); color: var(--kontur); border-width: 4px; box-shadow: 5px 5px 0 var(--golge); transform: rotate(-2deg); }
+  .cip.bas { box-shadow: 1px 1px 0 var(--golge); transform: translate(3px, 3px) rotate(-2deg); }
+  /* Oyun kartı: yüzey, tür ikonu karosu, köşede eğik tür sticker'ı */
+  .liste { display: flex; flex-direction: column; gap: 22px; padding-top: 8px; }
+  .kart { position: relative; display: flex; align-items: center; gap: 14px; background: var(--yuzey); color: var(--metin); border: 4px solid var(--kontur); border-radius: 20px;
+    padding: 18px 16px 14px 14px; box-shadow: 5px 5px 0 var(--golge); }
+  .karo { flex: none; width: 52px; height: 52px; border-radius: 12px; border: 3px solid var(--kontur); background: var(--marka); display: grid; place-items: center; font-size: 26px; }
+  .govde { flex: 1; display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+  .kart .ad { font-size: 21px; font-weight: 800; line-height: 1.15; }
+  .kisi { font-size: 17px; font-weight: 500; color: var(--soluk); }
+  .ok { flex: none; width: 12px; height: 12px; border-top: 3px solid var(--soluk); border-right: 3px solid var(--soluk); transform: rotate(45deg); margin-right: 4px; }
+  .tur { position: absolute; top: -14px; right: 16px; transform: rotate(4deg); background: var(--kontur); color: var(--marka); border: 3px solid var(--kontur); border-radius: 12px;
+    padding: 3px 9px 2px; font-size: 14px; font-weight: 800; letter-spacing: 1.1px; text-transform: uppercase; box-shadow: 3px 3px 0 var(--golge); }
+  /* Ölçü paneli */
+  .olcu { gap: 12px; }
+  .olcu h3 { margin: 0; font-size: 14px; font-weight: 800; letter-spacing: 1.1px; text-transform: uppercase; color: var(--soluk); }
+  .satir { display: flex; align-items: flex-start; gap: 14px; flex-wrap: wrap; }
+  .not { font-size: 12px; font-weight: 700; color: var(--soluk); margin-top: 6px; }
+  .olcu ul { margin: 0; padding-left: 18px; font-size: 13.5px; line-height: 1.42; font-weight: 500; }
+  .olcu code { font-family: ui-monospace, Menlo, monospace; font-size: 12px; font-weight: 600; }
+  .yeni { background: var(--marka); color: var(--kontur); border-radius: 6px; padding: 0 5px; font-weight: 800; font-size: 11px; }
+</style>
+</head>
+<body>
+<h1 id="baslik">Kafadar — kategoriler B</h1>
+<div id="ekranlar"></div>
+
+<template data-ad="Ölçüler ve durumlar (KK-85)">
+  <section class="ekran olcu">
+    <h3>Çip</h3>
+    <div class="satir">
+      <div><span class="cip">Aile</span><div class="not">seçili değil</div></div>
+      <div><span class="cip sec">✓ Çift</span><div class="not">seçili</div></div>
+      <div><span class="cip sec bas">✓ Çift</span><div class="not">basılı</div></div>
+    </div>
+    <ul>
+      <li>Yükseklik <code>dokunmaAlani</code> 48 · köşe <code>yaricap.yuvarlak</code> · kontur <code>cizgi.ince</code> 3 (seçili <code>cizgi.kalin</code> 4)</li>
+      <li>Yazı <code>yazi.etiket</code> (14, büyük harf) · iç boşluk <code>bosluk.m</code> 12 (bugünkü 4 çip sığar) · aralık <code>bosluk.s</code> · sağa taşar ve kayar</li>
+      <li>Seçili: <code>marka</code> dolgu, ✓, 5px <code>golge</code>, −2° eğim. Basınca gölge 5→1px.</li>
+      <li>Ekran okuyucu: “Çift, seçili, düğme”</li>
+    </ul>
+    <h3>Oyun kartı</h3>
+    <div class="liste" style="padding-top: 10px"><div class="kart"><div class="karo">🕵️</div><div class="govde"><div class="ad">Casus kim</div><div class="kisi">👥 3–12 kişi</div></div><div class="ok"></div><span class="tur">Gizli rol</span></div></div>
+    <ul>
+      <li><code>yuzey</code> dolgu, <code>cizgi.kalin</code>, <code>yaricap.dugme</code>, 5px <code>golge</code></li>
+      <li>Tür karosu <span class="yeni">YENİ</span> <code>ikonKaro</code> = 52, <code>marka</code> dolgu: 👍 Oylama · 🔟 Puanlama · 🕵️ Gizli rol · ❓ Quiz</li>
+      <li>Tür sticker'ı <code>yazi.etiket</code>, <code>kontur</code> dolgu, +4° · kişi <code>yazi.govde</code> <code>metinSoluk</code></li>
+    </ul>
+  </section>
+</template>
+
+<script>
+  const p = new URLSearchParams(location.search);
+  const tema = p.get('tema') === 'acik' ? 'acik' : 'koyu';
+  const [w, h] = (p.get('boy') || '375x667').split('x').map(Number);
+  document.documentElement.dataset.tema = tema;
+  document.documentElement.style.setProperty('--w', w + 'px');
+  document.documentElement.style.setProperty('--h', h + 'px');
+  document.getElementById('baslik').textContent = `Kafadar — kategoriler · B “Sticker raf” · ${tema === 'koyu' ? 'Koyu' : 'Açık'} · ${w}×${h}`;
+  // PRD v7 etiket tablosu (kayıt sırası korunur, KK-83)
+  const ikon = { Oylama: '👍', Puanlama: '🔟', 'Gizli rol': '🕵️', Quiz: '❓' };
+  const oyunlar = [
+    { ad: 'OK mu NOK mu', tur: 'Oylama', ortam: ['cift', 'aile'], min: 2 },
+    { ad: '10/10 ama', tur: 'Puanlama', ortam: ['cift'], min: 2 },
+    { ad: 'Casus kim', tur: 'Gizli rol', ortam: ['aile'], min: 3 },
+  ];
+  // Bugün görünen çipler (KK-82): Kalabalık ve Quiz listeyi daraltmadığı için gizli
+  const cipler = [['tumu', 'Tümü'], ['iki', '2 kişi'], ['cift', 'Çift'], ['aile', 'Aile']];
+  const eslesir = (o, c) => c === 'tumu' || (c === 'iki' ? o.min <= 2 : o.ortam.includes(c));
+  const ekran = (secili) => `<section class="ekran">
+      <div class="logo">Kafadar</div><div class="ayar" aria-label="Ayarlar">⚙️</div>
+      <p class="alt">Bir oyun seç, telefonu ele ver.</p>
+      <div class="cipler" role="toolbar">${cipler.map(([k, ad]) => `<span class="cip${k === secili ? ' sec' : ''}" role="button" aria-pressed="${k === secili}">${k === secili ? '✓ ' : ''}${ad}</span>`).join('')}</div>
+      <div class="liste">${oyunlar.filter(o => eslesir(o, secili)).map(o => `<div class="kart" role="button"><div class="karo">${ikon[o.tur]}</div><div class="govde"><div class="ad">${o.ad}</div><div class="kisi">👥 ${o.min}–12 kişi</div></div><div class="ok"></div><span class="tur">${o.tur}</span></div>`).join('')}</div>
+    </section>`;
+  const kap = document.getElementById('ekranlar');
+  const ekle = (ad, html) => { const f = document.createElement('figure'), c = document.createElement('figcaption'); c.textContent = ad; f.append(c); f.insertAdjacentHTML('beforeend', html); kap.append(f); };
+  ekle('1 · Açılış: “Tümü” seçili (KK-81, KK-84)', ekran('tumu'));
+  ekle('2 · “Çift” seçili: 2 oyun kalır, sıra aynı (KK-83)', ekran('cift'));
+  document.querySelectorAll('template[data-ad]').forEach(t => {
+    const f = document.createElement('figure'), c = document.createElement('figcaption');
+    c.textContent = '3 · ' + t.dataset.ad; f.append(c, t.content.cloneNode(true)); kap.append(f);
+  });
+</script>
+</body>
+</html>
