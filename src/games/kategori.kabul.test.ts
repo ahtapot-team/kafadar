@@ -281,15 +281,38 @@ describe('KK-84: oyun kartında tür rozeti ve kişi sayısı', () => {
 });
 
 describe('KK-85: çip erişilebilirliği ve tema', () => {
-  it('Q21/KK-85: çipler ortak Cip bileşeniyle (seçili durumu + ≥48px) çizilir', () => {
+  it('Q21/KK-85: çipler bir çip bileşeniyle çizilir (seçili durumu + ≥48px), ana ekranda testID cip-<id>', () => {
     const k = oku('app/index.tsx');
-    expect(k).toMatch(/<Cip\b/);
+    expect(k).toMatch(/<(Cip|KategoriCip)\b/);
     expect(k).toMatch(/testID=\{`cip-\$\{/);
     expect(k).toMatch(/secili=\{/);
     const ui = oku('src/ui.tsx');
-    const cip = ui.slice(ui.indexOf('export function Cip'));
+    const ad = /<(Cip|KategoriCip)\b/.exec(k)?.[1] ?? 'Cip';
+    const cip = ui.slice(ui.indexOf(`export function ${ad}`));
     expect(cip).toContain('accessibilityState={{ selected');
     expect(cip).toContain('minHeight: dokunmaAlani');
+  });
+
+  it('Q25/KK-85: tasarım #171 (A) — yeni token yazi.cip Bricolage 800, 16', () => {
+    const t = oku('src/tema.ts');
+    const bas = t.indexOf('export const yazi');
+    const govde = t.slice(bas, t.indexOf('};', bas));
+    expect(govde).toMatch(/cip:\s*\{[^}]*fontFamily:\s*font\.kalin/);
+    expect(govde).toMatch(/cip:\s*\{[^}]*fontSize:\s*16\b/);
+  });
+
+  it('Q26/KK-85: tasarım #171 (A) — seçili çip marka2 dolgu, "✓ " ön eki, yazi.cip; ekran okuyucu etiketi ✓ içermez', () => {
+    const k = oku('app/index.tsx');
+    const ui = oku('src/ui.tsx');
+    const ad = /<(Cip|KategoriCip)\b/.exec(k)?.[1] ?? 'Cip';
+    const bas = ui.indexOf(`export function ${ad}`);
+    expect(bas).toBeGreaterThan(-1);
+    const sonraki = ui.indexOf('\nexport ', bas + 10);
+    const cip = ui.slice(bas, sonraki < 0 ? undefined : sonraki);
+    expect(cip).toContain('renk.marka2');
+    expect(cip).toContain('yazi.cip');
+    expect(cip).toMatch(/['"`]✓ ?['"`]|✓ /);
+    expect(cip).toMatch(/accessibilityLabel=\{etiket\}/);
   });
 
   it("Q22/KK-85: çip satırı stil değerlerini tema token'larından alır (sabit renk yok)", () => {

@@ -63,6 +63,7 @@ Ekranlarda sayı elle yazılmaz; aşağıdaki adlar kullanılır. ★ = yeni (Re
 | `perde` ★ | `rgba(11,9,32,0.7)` (iki temada aynı) | Diyalog ve "Oyundan çık?" arka perdesi | `ui.tsx`'teki elle yazılmış değer |
 | `yazi.kart` ★ | 36 → 24 / 800, `letterSpacing -0.9`; sistem büyütmesinde ≥16pt | Kart metni (OK mu NOK mu, 10/10 ama, Casus kim) | Ekranlardaki kart fontSize'ları |
 | `yazi.sayi` ★ | 68 / 800, `tabular-nums` | Geri sayım, ortalama, oy sayısı | Ekranlardaki büyük sayı fontSize'ları |
+| `yazi.cip` ★ (#171) | 16 / 800 | Ana ekran kategori çipi | — (uygulaması #173) |
 
 **Paylaşım görseli (1080×1920) ölçeği:** ekran değeri × **2,77** (1080 / 390), en yakın çift sayıya yuvarlanır. Görsel her zaman koyu temadır (bilerek).
 
@@ -84,6 +85,8 @@ Ekranlarda sayı elle yazılmaz; aşağıdaki adlar kullanılır. ★ = yeni (Re
 5. **Sonuç çubuğu**: `yuzey` zemin, `ok`/`nok` dolgu, sayı + ikon + kelime.
 6. **Geri sayım**: 3 halka, aktif olan büyük ve `metin` dolgulu.
 7. **Diyalog**: "Oyundan çık?", "Devam et / Yeni oyun" (kart görünümünde). Tanıtım kartı da bu bileşendir (#130).
+8. **Kategori çipi** (#171, A · Metehan): ana ekranda oyun listesinin üstünde tek satır, yatay kayar (solda `kenarBosluk`, sağa taşar). Yükseklik `dokunmaAlani` 48, `cizgi.ince`, `yaricap.cip`, iç boşluk `bosluk.l`, aralık `bosluk.s`, yazı `yazi.cip`. Seçili değil: `yuzey` dolgu, `metin` yazı. Seçili: `marka-2` dolgu, `kontur` yazı, "✓ " ön eki, 5px `golge`. Basınca düğme gibi gölge 5→1px. Ekran okuyucu: "Çift, seçili, düğme".
+9. **Oyun düğmesi (ana ekran)**: birincil düğme, iki satır. Üstte oyun adı (`yazi.dugme`); altta tür rozeti (`yazi.etiket`, `kontur` dolgu, `marka` yazı, `yaricap.kucuk`) ve "👥 2–12 kişi" (`yazi.govde`). Rozet ve kişi sayısı oyunun kayıt satırından gelir (#171).
 
 ## Oyuna göre kurallar
 Genel renk kuralı her oyunda geçerlidir: yeşil ve kırmızı yalnızca anlam taşır, oyun ve marka renkleri nötrdür.
