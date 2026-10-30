@@ -318,6 +318,61 @@ Bir oyun o telefonda ilk kez açıldığında oyunu 3–4 satırda anlatan bir k
 | Tekrar okuma | Hazırlık ekranlarında ve oda lobisinde "Nasıl oynanır?" bağlantısı | Yeni gelen arkadaşa anlatmak için | pm önerisi, Murat (29.10.2026, "2a") |
 | Saklama | Her oyun ayrı, telefon başına bir kez, yalnızca telefonda | Hesap yok (KK-39 ilkesi) | pm varsayılanı |
 
+## v7: Oyun kategorileri (Semih, 30.10.2026) — ONAY BEKLİYOR
+Issue'lar: #171 tasarım (tasarim), #172 kabul testleri (qa), #173 uygulama (frontend; #171 ve #172 bitince başlar).
+Yeni oyunlar geldikçe (çift oyunları, quiz gecesi, kalabalık oyunları…) kullanıcı "kiminle, kaç kişi oynuyoruz?" sorusuna göre oyun bulabilmeli. Bunun için her oyun kendi kayıt satırında etiketlenir ve ana ekranın üstüne tek seçimli filtre çipleri gelir. Bugün 3 oyun var; çipler yeni oyun eklendikçe kendiliğinden çoğalır.
+
+Araştırma özeti (pm): Parti uygulamaları oyunları çoğunlukla "kiminle" sorusuna göre (Çift / Arkadaş / Aile) ve Quiz başlığı altında gruplar. Jackbox ise kategori kullanmaz, her oyunda kişi sayısını gösterir. BoardGameGeek oyunlara tek bir kategori yerine birden çok etiket verir. Aynı oyun birden çok ortama uyduğu için burada da etiket mantığı seçildi.
+
+### Akış
+1. Ana ekran açılır. Oyun listesinin üstünde yatay bir çip satırı vardır ve "Tümü" seçilidir.
+2. Kullanıcı bir çipe dokunur (ör. "Çift"). Listede yalnızca o etiketi taşıyan oyunlar kalır. Seçili çipe ya da "Tümü"ne dokunmak filtreyi kaldırır.
+3. Her oyun kartında tür rozeti ve kişi sayısı görünür.
+4. Oyuna dokunduktan sonraki akış (tanıtım kartı, mod seçimi, oyuncular) değişmez.
+
+### Etiketler (bugünkü oyunlar)
+| Oyun | Tür | Ortam | Kişi |
+|---|---|---|---|
+| OK mu NOK mu | Oylama | Çift, Aile | 2–12 |
+| 10/10 ama | Puanlama | Çift | 2–12 |
+| Casus kim | Gizli rol | Aile | 3–12 |
+
+Hiçbir etiketi olmayan oyunlar arkadaş grubu için sayılır, bu yüzden ayrı bir "Arkadaş" etiketi yoktur. "Aile" etiketi, içeriğin aileyle oynanmaya uygun olduğunu da söyler.
+
+### Çip kuralları
+| Çip | Eşleşen oyun |
+|---|---|
+| Tümü | hepsi |
+| 2 kişi | `minOyuncu` ≤ 2 |
+| Kalabalık | 6 ya da daha fazla kişiyle oynanabilen oyun (bugün üst sınır hepsinde 12) |
+| Çift | ortamında Çift olan |
+| Aile | ortamında Aile olan |
+| Quiz | türü Quiz olan |
+
+### Kabul kriterleri (oyun kategorileri)
+- [ ] KK-79: Her aktif oyunun kayıt satırında bir `tur` alanı bulunur: oylama, puanlama, gizli-rol ya da quiz. İsteğe bağlı bir `ortam` listesi de bulunabilir: cift, aile. Kişi aralığı mevcut `minOyuncu` ve genel üst sınırdan (12) okunur; yeni bir kişi alanı eklenmez. `tur` alanı olmayan bir aktif oyun testi kırmızı yapar. Yeni oyun yine tek bir kayıt satırıyla eklenir (KK-2).
+- [ ] KK-80: Bugünkü 3 oyunun etiketleri yukarıdaki tablodaki gibidir.
+- [ ] KK-81: Ana ekranda oyun listesinin üstünde yatay ve tek seçimli bir çip satırı vardır. Çiplerin sırası: Tümü · 2 kişi · Kalabalık · Çift · Aile · Quiz. Uygulama açılınca "Tümü" seçilidir. Seçim uygulama kapanınca hatırlanmaz.
+- [ ] KK-82: Bir çip ancak listeyi gerçekten daraltıyorsa görünür: en az bir oyun eşleşir ama oyunların tamamı eşleşmez. Bugünkü verilerle görünen çipler şunlardır: Tümü · 2 kişi · Çift · Aile. Kalabalık gizlidir çünkü bütün oyunlar eşleşir; Quiz gizlidir çünkü hiçbir oyun eşleşmez. Görünecek çip kalmazsa çip satırı hiç gösterilmez.
+- [ ] KK-83: Bir çipe dokunulunca listede yalnızca eşleşen oyunlar kalır ve sıraları değişmez (eşleşme için "Çip kuralları" tablosuna bakın). Seçili çipe ya da "Tümü"ne dokunmak filtreyi kaldırır. "Yakında" durumundaki oyunlar da aynı kurala uyar. Eşleşme kuralı saf bir fonksiyondur ve ekransız test edilir.
+- [ ] KK-84: Her oyun kartında tür rozeti (Oylama / Puanlama / Gizli rol / Quiz) ve kişi sayısı (ör. "2–12 kişi") görünür. Kişi sayısı tanıtım kartında yazanla aynıdır (KK-73).
+- [ ] KK-85: Çiplerin dokunma alanı en az 48px'tir. Ekran okuyucu seçili çipi "seçili" diye okur. Çipler koyu ve açık temada çalışır. Stil değerleri `src/tema.ts` token'larından gelir.
+- [ ] KK-86: Oyuna dokunduktan sonraki akış değişmez: tanıtım kartı (KK-73…KK-78), mod seçimi ve "Devam et" eskisi gibi çalışır. Mevcut kabul testleri yeşil kalır. `CLAUDE.md` ve `docs/MIMARI.md`'deki "yeni oyun ekleme" adımları `tur` ve `ortam` alanlarını anlatır.
+
+### Kapsam dışı (v7)
+- İçerik ya da yaş seviyesi alanı ve +18 içerik ("+18 yok, 12+" kararı geçerli).
+- Çoklu çip seçimi, arama, kategori rafları (oyun sayısı artınca ayrıca karar verilir), seçimin hatırlanması.
+- Yeni oyun eklemek (bu iş yalnızca altyapıyı kurar).
+
+### Kararlar (oyun kategorileri)
+| Karar | Seçim | Gerekçe | Karar veren |
+|---|---|---|---|
+| Gruplama | Kayıt satırında etiketler ve ana ekranda filtre çipleri (karma) | Bir oyun birden çok ortama uyar. Oyun sayısı artınca veri değişmeden raflı görünüme geçilebilir. | pm önerisi, Semih (30.10.2026, "1C") |
+| İçerik seviyesi | Ayrı bir alan eklenmez; aileye uygunluk "Aile" etiketiyle gösterilir | Store yaş sınırını uygulamanın tamamına verir, "+18 yok" kararı geçerli. (Semih önce "2A" ile içerik seviyesi istemişti; pm bu store bilgisini ekleyince seçim değişti.) | pm önerisi, Semih (30.10.2026, "1A") |
+| Çip davranışı | Tek seçim + "Tümü" | En sade çözüm (Geliştirme ilkesi) | pm önerisi, Semih (30.10.2026, "2A") |
+| Etkisiz çipler | Listeyi daraltmayan çip gizlenir | Boş ya da her şeyi gösteren filtre kafa karıştırır | pm varsayılanı |
+| Seçimi hatırlama | Hatırlanmaz | Sade | pm varsayılanı |
+
 ## Geliştirme ilkesi (Semih, 27.10.2026)
 **Overengineering yok.** En az kodla, en basit çözüm, yalnızca bugünkü ihtiyaç kadar. Yapı genişlemeye açık olacak ama ileriye dönük soyutlama, genel çerçeve ya da "belki lazım olur" kodu yazılmayacak. Yeni bağımlılık yalnızca gerçekten gerekiyorsa eklenir ve PR'da gerekçesi yazılır. Aşağıdaki mimari şartlar bu ilkeye göre en sade haliyle uygulanır. Örneğin oyun kayıt listesi basit bir dizidir, eklenti çatısı değildir.
 
