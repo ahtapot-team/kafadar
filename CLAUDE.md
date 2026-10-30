@@ -1,0 +1,68 @@
+# Kafadar
+
+Son güncelleme: 2026-10-30 — #164
+
+Kafadar, arkadaş/çift/aile için mobil parti oyunları uygulamasıdır (OK mu NOK mu, 10/10 ama, Casus kim). Tek telefonda ya da oda koduyla çok telefonda oynanır. Ayrıntı: `docs/MIMARI.md`.
+
+## Teknoloji
+
+Expo SDK 58, expo-router, TypeScript, Vitest, Cloudflare Workers + Durable Objects (oda sunucusu), EAS Update (Expo Go), GitHub Pages (web önizleme).
+
+## Komutlar
+
+| Komut                                             | Ne yapar                                 |
+| ------------------------------------------------- | ---------------------------------------- |
+| `npm start`                                       | `expo start`                             |
+| `npm run lint`                                    | `eslint .`                               |
+| `npm run format` / `npm run format:check`         | prettier yaz / kontrol                   |
+| `npm run typecheck`                               | `tsc --noEmit && tsc --noEmit -p sunucu` |
+| `npm test`                                        | birim testler (`*.kabul.test.ts` hariç)  |
+| `npm run kabul`                                   | kabul testleri (`vitest run kabul`)      |
+| `npm run icerik`                                  | `node scripts/icerik-dogrula.ts`         |
+| `npm run build` / `npm run build:web`             | `expo export --platform android` / `web` |
+| `npm run kk-harita` / `npm run kk-harita:kontrol` | KK haritasını üret / doğrula             |
+| `npm run sunucu:test`                             | `node sunucu/test/oyun.ts` (oda smoke)   |
+
+## Klasörler
+
+- `app/` — yalnızca ince expo-router sarmalayıcıları (`index`, `oyun`, `oyuncular`, `paket`, `mod`, `ayarlar`, `casus/`, `onon/`, `oda/`).
+- `src/core/` — saf ortak mantık (deste, doğrula, oturum, oyuncular, rng, saat, tanıtım…).
+- `src/games/` — oyun kuralları (`ok-mu-nok`, `on-on-ama`, `casus-kim`) + `registry.ts`.
+- `src/oyun-ekranlari/` — oyun ekranları; ortak parçalar `ortak/`.
+- `src/oda/` — oda kuralları ve protokol (`oda.ts`, `mesaj.ts`, `istemci.ts`).
+- `src/oda-ui/` — oda modu ekran parçaları. `src/baglanti/` — WebSocket bağlamı ve QR.
+- `src/icerik/` — içerik kaydı ve doğrulama. `src/test/yardimci.ts` — test yardımcıları.
+- `src/tema.ts`, `ui.tsx`, `depo.ts`, `durum.tsx`, `desteler.ts`, `titresim.ts` — kök yardımcılar.
+- `content/decks`, `content/casus`, `content/onon` — deste JSON'ları. `docs/desteler/` — taslak md'ler.
+- `sunucu/` — Cloudflare Worker (`src/{worker,oda-do,sinir-do,ortak}.ts`, `test/`).
+- `scripts/` — `icerik-dogrula.ts`, `kk-harita.ts`. `design/` — tasarımlar. `docs/` — PRD, MIMARI, KK haritası.
+- `web/` — `404.html`, `geri-yukle.html`. `public/` — `index.html`. `.github/workflows/` — CI, önizleme, sunucu.
+
+## Yayın
+
+- Expo Go kalıcı link: `exp://u.expo.dev/4172ae7b-3cdd-4faf-b89b-c8c1266ebe56?channel-name=main&runtime-version=exposdk%3A58.0.0` (`main`'e push'ta `onizleme.yml` günceller; PR başına ayrı kanal).
+- Web önizleme: https://ahtapot-team.github.io/kafadar/ (`web-onizleme.yml`).
+- Oda sunucusu: `wss://kafadar-oda.kafadar.workers.dev/ws` (`sunucu.yml`, `main`'e push). Uygulama adresi `EXPO_PUBLIC_ODA_SUNUCU` ile verilir.
+- Web çıktısı: `expo export --platform web --clear`. Worktree'lerde Metro önbelleği bayatlayabilir; `--clear` kullan.
+
+## Bağlantılar
+
+`docs/MIMARI.md` · `docs/PRD.md` · `docs/KK-HARITA.md` · `design/TASARIM-SISTEMI.md` · `docs/GERCEK-CIHAZ-KONTROL.md`
+
+## Güncelleme kuralı
+
+Yapıyı, teknolojiyi, komutları, klasörleri, oyun listesini, oda protokolünü veya yayın akışını değiştiren her PR, aynı PR'da `CLAUDE.md` ve/veya `docs/MIMARI.md`'yi günceller (ve "Son güncelleme" satırını yeniler). QA incelemede bunu kontrol eder. Çabuk eskiyen bilgi (kart/test sayısı) yazılmaz.
+
+## Kurallar özeti
+
+- Backend: `src/oda` ve `src/core` saftır; ayrıntı `docs/MIMARI.md` "Değişmez kurallar".
+- Frontend: stil değerleri `src/tema.ts` token'larından gelir; `yazi.kart` ve `yazi.sayi` token'ları bilerek durur (#163), silme.
+
+## Sık hatalar / tuzaklar
+
+- `gh` ve `git push/pull/fetch` komutlarını zincirleme (`&&`, `;`, `|`).
+- İçerik (`content/**`) değişince `npm run icerik` çalıştır.
+- Kabul testleri kaynak dosyaları yol/regex ile okur; dosya taşımadan önce `*.kabul.test.ts` kontrol et. testID yeniden adlandırmak kabul testini kırar.
+- Biten işte BEKLEYEN (`it.fails`) bayrağı silinmezse CI kırılır.
+- Web'de geri tuşu `beforeRemove` tetiklemez; popstate koruması kullanılır (#45).
+- Playwright `innerText` CSS büyük harfini uygular; `toLocaleLowerCase('tr')` ile karşılaştır.
