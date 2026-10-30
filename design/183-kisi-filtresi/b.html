@@ -1,0 +1,205 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kafadar — ⓘ Nasıl oynanır</title>
+<!-- #183 (PRD v7.1, KK-90…KK-92) · ⓘ düğmesi. Seçilen: B (Semih). A (yalın) arsiv/183-kisi-filtresi/a.html; iki dosya yalnız VARYANT satırında ayrılır.
+     A "Yalın ⓘ": her ekranda 48'lik ikon düğme. B "Yazılı ⓘ": oyun öncesi ekranlarda "ⓘ Nasıl oynanır" hapı, oyun içinde yalın ⓘ.
+     Kullanım: ?tema=koyu|acik&boy=375x667. Tek dış kaynak: Google Fonts (yoksa system-ui). -->
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&display=swap" rel="stylesheet">
+<style>
+  :root { --kontur: #0B0920; --golge: #7C6CFF; --marka: #FFD23F; --marka-2: #5B8CFF; --ok: #3DDC84; --nok: #FF5A4E; --w: 375px; --h: 667px; }
+  [data-tema="koyu"] { --zemin: #16123F; --yuzey: #2B2570; --metin: #FFF8E7; --soluk: #B9B3E8; }
+  [data-tema="acik"] { --zemin: #FFF8E7; --yuzey: #FFFFFF; --metin: #16123F; --soluk: #5B5585; }
+  * { box-sizing: border-box; }
+  body { margin: 0; padding: 32px 24px; background: #DCD9E8; font-family: 'Bricolage Grotesque', system-ui, sans-serif; }
+  h1 { margin: 0 0 24px; font-size: 22px; color: #2a2640; text-align: center; }
+  #ekranlar { display: flex; flex-wrap: wrap; gap: 36px 28px; justify-content: center; }
+  figure { margin: 0; } figcaption { font-size: 14px; font-weight: 700; color: #4a4566; margin-bottom: 8px; max-width: var(--w); }
+  .ekran { position: relative; width: var(--w); height: var(--h); overflow: hidden; border-radius: 28px; background: var(--zemin); color: var(--metin);
+    display: flex; flex-direction: column; gap: 16px; padding: 34px 22px 22px; box-shadow: 0 16px 40px rgba(20,16,50,.22); }
+  .bosluk { flex: 1; }
+  /* Ortak parçalar (bugünkü uygulama) */
+  .ust { display: flex; align-items: center; gap: 12px; min-height: 48px; }
+  .ust.ara { justify-content: space-between; }
+  .orta { flex: 1; text-align: center; }
+  .etiket { font-size: 14px; font-weight: 800; letter-spacing: 1.1px; text-transform: uppercase; line-height: 1.2; }
+  .soluk { color: var(--soluk); }
+  .baslik { font-size: 36px; font-weight: 800; letter-spacing: -0.02em; line-height: 1.05; }
+  .ikon { flex: none; width: 48px; height: 48px; border-radius: 12px; border: 3px solid var(--kontur); background: var(--yuzey); color: var(--metin); display: grid; place-items: center; font-size: 18px; font-weight: 800; }
+  .geri { display: inline-flex; align-items: center; gap: 8px; height: 48px; padding: 0 16px; border-radius: 12px; border: 3px solid var(--kontur); background: var(--yuzey); }
+  .rozet { display: inline-flex; align-items: center; min-height: 32px; padding: 0 12px; border-radius: 12px; border: 3px solid var(--kontur); background: var(--marka-2); color: var(--kontur); }
+  .secenekler { display: flex; flex-wrap: wrap; gap: 12px; }
+  .secenek { display: inline-flex; align-items: center; min-height: 48px; padding: 0 16px; border-radius: 12px; border: 3px solid var(--kontur); background: var(--yuzey); font-size: 17px; font-weight: 700; }
+  .secenek.sec { background: var(--marka); color: var(--kontur); }
+  .dugme { flex: none; display: grid; place-items: center; height: 62px; border-radius: 20px; border: 4px solid var(--kontur); background: var(--marka); color: var(--kontur);
+    font-size: 21px; font-weight: 800; box-shadow: 5px 5px 0 var(--golge); }
+  .dugme.ikincil { background: var(--yuzey); color: var(--metin); }
+  /* ⓘ düğmesi (YENİ, KK-91/92) */
+  .bilgi { flex: none; display: inline-flex; align-items: center; justify-content: center; gap: 8px; width: 48px; height: 48px; border-radius: 12px;
+    border: 3px solid var(--kontur); background: var(--yuzey); color: var(--metin); font-size: 16px; font-weight: 800; white-space: nowrap; }
+  .bilgi i { flex: none; width: 24px; height: 24px; border-radius: 50%; background: var(--marka); color: var(--kontur); display: grid; place-items: center;
+    font-style: normal; font-size: 16px; font-weight: 800; line-height: 1; padding-bottom: 1px; }
+  .bilgi.uzun { width: auto; padding: 0 14px 0 9px; }
+  .bilgi.bas { opacity: .6; }
+  /* Lobi */
+  .kod { display: flex; gap: 8px; }
+  .kod span { flex: 1; height: 58px; border-radius: 12px; border: 3px solid var(--kontur); background: var(--marka); color: var(--kontur); display: grid; place-items: center; font-size: 34px; font-weight: 800; }
+  .qr-satir { display: flex; gap: 16px; align-items: center; }
+  .qr { flex: none; width: 92px; height: 92px; border-radius: 12px; border: 3px solid var(--kontur); background: #fff; padding: 8px; display: grid; grid-template-columns: repeat(7, 1fr); gap: 2px; }
+  .qr b { background: var(--kontur); border-radius: 1px; } .qr b.y { background: transparent; }
+  .oyuncular { display: flex; flex-wrap: wrap; gap: 8px; }
+  .oyuncu { padding: 4px 12px; border-radius: 12px; border: 3px solid var(--kontur); background: var(--yuzey); font-size: 17px; font-weight: 700; }
+  .oyuncu.kuran { background: var(--marka); color: var(--kontur); }
+  /* Tek telefon kart ekranı */
+  .kartalan { position: relative; height: 352px; margin: 8px 0; flex: none; }
+  .kartalan .arka { position: absolute; inset: 0; border-radius: 30px; border: 4px solid var(--kontur); background: var(--marka-2); transform: rotate(5deg); }
+  .kartalan .on { position: absolute; inset: 0; border-radius: 30px; border: 4px solid var(--kontur); background: var(--marka); color: var(--kontur); padding: 24px;
+    display: flex; flex-direction: column; justify-content: space-between; }
+  .kart-ust { display: flex; justify-content: space-between; align-items: center; gap: 8px; }
+  .kara { background: var(--kontur); color: var(--marka); border-radius: 12px; padding: 4px 12px; }
+  .tasindi { outline: 3px dashed var(--marka-2); outline-offset: 4px; border-radius: 6px; }
+  .sayac { display: flex; justify-content: center; align-items: center; gap: 16px; }
+  .sayac span { width: 44px; height: 44px; border-radius: 50%; border: 3px solid var(--kontur); background: var(--yuzey); display: grid; place-items: center; font-size: 17px; font-weight: 800; color: var(--soluk); }
+  .sayac span.aktif { width: 72px; height: 72px; background: var(--metin); color: var(--zemin); font-size: 30px; }
+  /* Oda soru ekranı */
+  .ilerleme { display: flex; align-items: center; gap: 12px; }
+  .cubuk { flex: 1; height: 8px; border-radius: 999px; background: var(--yuzey); overflow: hidden; }
+  .cubuk b { display: block; height: 100%; width: 72%; border-radius: 999px; background: var(--marka); }
+  .sn { min-width: 28px; text-align: right; }
+  .soru { background: var(--marka); color: var(--kontur); border: 4px solid var(--kontur); border-radius: 30px; padding: 24px; display: flex; flex-direction: column; gap: 12px; box-shadow: 8px 8px 0 var(--golge); }
+  .soru .metin { font-size: 28px; font-weight: 800; line-height: 1.1; letter-spacing: -0.02em; }
+  .oylar { display: flex; gap: 16px; }
+  .oylar span { flex: 1; height: 120px; border-radius: 30px; border: 4px solid var(--kontur); color: var(--kontur); display: grid; place-items: center; font-size: 28px; font-weight: 800; box-shadow: 5px 5px 0 var(--golge); }
+  /* Tanıtım kartı (#130 Diyalog) */
+  .perde { position: absolute; inset: 0; background: rgba(11,9,32,.7); display: flex; align-items: center; padding: 22px; }
+  .diyalog { width: 100%; background: var(--marka); color: var(--kontur); border: 4px solid var(--kontur); border-radius: 30px; padding: 22px; box-shadow: 8px 8px 0 var(--golge);
+    display: flex; flex-direction: column; gap: 14px; }
+  .diyalog h3 { margin: 0; font-size: 32px; font-weight: 800; letter-spacing: -0.03em; line-height: 1; }
+  .diyalog p { margin: 0; font-size: 16px; font-weight: 600; line-height: 1.42; }
+  .diyalog .tamam { display: grid; place-items: center; height: 56px; border-radius: 18px; background: var(--kontur); color: var(--marka); font-weight: 800; font-size: 19px; }
+  .isaret { position: absolute; z-index: 2; background: var(--marka-2); color: var(--kontur); border: 3px solid var(--kontur); border-radius: 12px; padding: 4px 10px; font-size: 12px; font-weight: 800; }
+  /* Ölçü paneli */
+  .olcu { gap: 12px; }
+  .olcu h3 { margin: 0; font-size: 14px; font-weight: 800; letter-spacing: 1.1px; text-transform: uppercase; color: var(--soluk); }
+  .satir { display: flex; align-items: flex-start; gap: 14px; flex-wrap: wrap; }
+  .not { font-size: 12px; font-weight: 700; color: var(--soluk); margin-top: 6px; }
+  .olcu ul { margin: 0; padding-left: 18px; font-size: 13px; line-height: 1.4; font-weight: 500; }
+  .olcu code { font-family: ui-monospace, Menlo, monospace; font-size: 11.5px; font-weight: 600; }
+</style>
+</head>
+<body>
+<h1 id="baslik">Kafadar — ⓘ</h1>
+<div id="ekranlar"></div>
+
+<script>
+  const VARYANT = 'b';
+  const p = new URLSearchParams(location.search);
+  const tema = p.get('tema') === 'acik' ? 'acik' : 'koyu';
+  const [w, h] = (p.get('boy') || '375x667').split('x').map(Number);
+  document.documentElement.dataset.tema = tema;
+  document.documentElement.style.setProperty('--w', w + 'px');
+  document.documentElement.style.setProperty('--h', h + 'px');
+  const AD = VARYANT === 'a' ? 'A “Yalın ⓘ”' : 'B “Yazılı ⓘ”';
+  document.getElementById('baslik').textContent = `Kafadar — ⓘ Nasıl oynanır · ${AD} · ${tema === 'koyu' ? 'Koyu' : 'Açık'} · ${w}×${h}`;
+
+  // ⓘ: tek ortak bileşen. B'de oyun öncesi ekranlarda (mod, oyuncular, hazırlık, lobi) yazılı biçim.
+  const bilgi = (oyunOncesi, ek = '') => VARYANT === 'b' && oyunOncesi
+    ? `<span class="bilgi uzun ${ek}" role="button" aria-label="Nasıl oynanır"><i>i</i>Nasıl oynanır</span>`
+    : `<span class="bilgi ${ek}" role="button" aria-label="Nasıl oynanır"><i>i</i></span>`;
+
+  const hazirlik = `<section class="ekran">
+      <div class="ust ara"><span class="geri"><span>←</span><span class="etiket">Geri</span></span>${bilgi(true)}</div>
+      <div class="baslik">Paket ve süre</div>
+      <div class="etiket soluk">Paket</div>
+      <div class="secenekler"><span class="secenek sec">Arkadaş</span><span class="secenek">Çift</span><span class="secenek">Aile</span></div>
+      <div class="etiket soluk">Tur uzunluğu</div>
+      <div class="secenekler"><span class="secenek">10 kart</span><span class="secenek sec">20 kart</span><span class="secenek">Sınırsız</span></div>
+      <div class="bosluk"></div>
+      <div class="dugme">Başla</div>
+    </section>`;
+
+  const qr = Array.from({ length: 49 }, (_, i) => { const r = Math.floor(i / 7), c = i % 7;
+    const kose = (r < 2 && c < 2) || (r < 2 && c > 4) || (r > 4 && c < 2); return `<b class="${kose || (r * 3 + c * 5) % 4 === 0 ? '' : 'y'}"></b>`; }).join('');
+  const lobi = `<section class="ekran">
+      <div class="ust ara"><span class="rozet etiket">Oda</span>${bilgi(true)}</div>
+      <div class="etiket soluk">Oda kodu</div>
+      <div class="kod">${'482913'.split('').map(h => `<span>${h}</span>`).join('')}</div>
+      <div class="qr-satir"><div class="qr">${qr}</div><div class="soluk" style="font-size:17px;font-weight:500;line-height:1.45">Kameranla okut ya da kodu söyle.</div></div>
+      <div class="etiket soluk">3 kişi odada · en az 2, en çok 12</div>
+      <div class="oyuncular"><span class="oyuncu kuran">Ayşe (sen) ★</span><span class="oyuncu">Mert</span><span class="oyuncu">Zeynep</span></div>
+      <div class="bosluk"></div>
+      <div class="dugme">Başlat · 3 kişi</div>
+      <div class="dugme ikincil">Odadan ayrıl</div>
+    </section>`;
+
+  const kart = `<section class="ekran">
+      <div class="ust"><span class="ikon" aria-label="Oyundan çık">✕</span><span class="orta etiket soluk">Kart 3 / 20</span>${bilgi(false)}</div>
+      <div class="kartalan"><div class="arka"></div><div class="on">
+        <div class="kart-ust"><span class="kara etiket">Durum</span><span class="etiket tasindi">Arkadaş</span></div>
+        <div class="baslik">Grubun doğum günü hediyesine katılmamak</div>
+        <div class="etiket">Sence OK mu NOK mu?</div>
+      </div></div>
+      <div class="sayac"><span>3</span><span class="aktif">2</span><span>1</span></div>
+      <div class="etiket soluk" style="text-align:center">Sayınca herkes aynı anda gösterir</div>
+    </section>`;
+
+  const odaSoru = (perde = '') => `<section class="ekran">
+      <div class="ust"><span class="rozet etiket">482913</span><span class="orta etiket soluk">Soru 3 / 10</span><span class="ikon" aria-label="Odadan çık" style="margin-right:-4px">✕</span>${bilgi(false)}</div>
+      <div class="ilerleme"><div class="cubuk"><b></b></div><span class="sn etiket ${perde ? '' : 'tasindi'}">11</span></div>
+      <div class="soru"><span class="etiket">Durum</span><div class="metin">Sevgilinin telefonunu gizlice karıştırmak</div></div>
+      <div class="bosluk"></div>
+      <div class="oylar"><span style="background:var(--ok)">👍 OK</span><span style="background:var(--nok)">👎 NOK</span></div>
+      ${perde}
+    </section>`;
+
+  const tanitim = odaSoru(`<div class="perde"><div class="diyalog" role="dialog" aria-label="OK mu NOK mu nasıl oynanır">
+      <h3>OK mu NOK mu</h3><span class="kara etiket" style="align-self:flex-start">2–12 kişi</span>
+      <p>Ekranda bir durum çıkar. Herkes kendi telefonundan OK 👍 ya da NOK 👎 der. Süre bitince oylar açılır, kimin tek başına kaldığı ortaya çıkar.</p>
+      <div class="tamam" role="button">Tamam</div></div></div>
+      <div class="isaret" style="left:22px;top:92px">⏱ süre akmaya devam eder</div>`);
+
+  const olcuA = `
+      <div class="satir">
+        <div>${bilgi(false)}<div class="not">normal</div></div>
+        <div>${bilgi(false, 'bas')}<div class="not">basılı</div></div>
+        <div><span class="ikon">✕</span><div class="not">yanındaki ✕</div></div>
+      </div>
+      <ul>
+        <li><code>dokunmaAlani</code> 48×48 · <code>yaricap.cip</code> · <code>cizgi.ince</code> <code>kontur</code> · zemin <code>yuzey</code>: ✕ ve ⚙ ile aynı aile</li>
+        <li>İçte 24'lük <code>marka</code> daire, “i” <code>yazi.cip</code> <code>kontur</code> (bugünkü “?” dairesinin aynısı). Basılı: opaklık 0.6.</li>
+      </ul>`;
+  const olcuB = `
+      <div class="satir">
+        <div>${bilgi(true)}<div class="not">oyun öncesi: mod, oyuncular, hazırlık, lobi</div></div>
+        <div>${bilgi(false)}<div class="not">oyun içi, sonuç</div></div>
+      </div>
+      <ul>
+        <li>Yükseklik <code>dokunmaAlani</code> 48 · <code>yaricap.cip</code> · <code>cizgi.ince</code> <code>kontur</code> · zemin <code>yuzey</code></li>
+        <li>24'lük <code>marka</code> daire + “Nasıl oynanır” <code>yazi.cip</code>; iç boşluk sol 9 / sağ <code>bosluk.m</code> + 2, aralık <code>bosluk.s</code>. Kısa biçim 48×48 (A ile aynı).</li>
+      </ul>`;
+  const olcu = `<section class="ekran olcu">
+      <h3>ⓘ düğmesi</h3>${VARYANT === 'a' ? olcuA : olcuB}
+      <ul>
+        <li>Ekran okuyucu: “Nasıl oynanır, düğme”. Dokununca o oyunun tanıtım kartı; “Tamam” → aynı ekran. Yeni token yok.</li>
+      </ul>
+      <h3>Yerleşim</h3>
+      <ul>
+        <li>Tek ortak bileşen, üst satırın sağında. Sağda ✕ varsa hemen soluna (aralık <code>bosluk.s</code>), yoksa köşeye.</li>
+        <li>Yer açmak için iki taşınma (mavi kesik çizgi): paket adı üst çubuktan kartın üst satırına; oda süresi ilerleme çubuğunun sağına (testID aynı).</li>
+        <li>Ana ekranda ⓘ yok. Eski “Nasıl oynanır?” bağlantıları ve kendiliğinden açılma kalkar (KK-90).</li>
+      </ul>
+    </section>`;
+
+  const kap = document.getElementById('ekranlar');
+  const ekle = (ad, html) => { const f = document.createElement('figure'), c = document.createElement('figcaption'); c.textContent = ad; f.append(c); f.insertAdjacentHTML('beforeend', html); kap.append(f); };
+  ekle('1 · Hazırlık: OK mu NOK mu, paket ve süre', hazirlik);
+  ekle('2 · Oda lobisi (kart artık kendiliğinden açılmaz)', lobi);
+  ekle(VARYANT === 'a' ? '3 · Oyun, tek telefon: ✕ solda, ⓘ sağ köşede' : '3 · Oyun içi: B de kısa biçime (yalın ⓘ) döner', kart);
+  ekle('4 · Oyun, oda: ⓘ ✕’in solunda', odaSoru());
+  ekle('5 · ⓘ’ye dokununca: tanıtım kartı, oyun durmaz (KK-91)', tanitim);
+  ekle('6 · Ölçüler ve kurallar (KK-92)', olcu);
+</script>
+</body>
+</html>

@@ -63,7 +63,7 @@ Ekranlarda sayı elle yazılmaz; aşağıdaki adlar kullanılır. ★ = yeni (Re
 | `perde` ★ | `rgba(11,9,32,0.7)` (iki temada aynı) | Diyalog ve "Oyundan çık?" arka perdesi | `ui.tsx`'teki elle yazılmış değer |
 | `yazi.kart` ★ | 36 → 24 / 800, `letterSpacing -0.9`; sistem büyütmesinde ≥16pt | Kart metni (OK mu NOK mu, 10/10 ama, Casus kim) | Ekranlardaki kart fontSize'ları |
 | `yazi.sayi` ★ | 68 / 800, `tabular-nums` | Geri sayım, ortalama, oy sayısı | Ekranlardaki büyük sayı fontSize'ları |
-| `yazi.cip` ★ (#171) | 16 / 800 | Ana ekran kategori çipi | — (uygulaması #173) |
+| `yazi.cip` ★ (#171) | 16 / 800 | Ana ekran kişi çipi, ⓘ düğmesindeki "i" ve "Nasıl oynanır" yazısı (#183) | — (uygulaması #173) |
 
 **Paylaşım görseli (1080×1920) ölçeği:** ekran değeri × **2,77** (1080 / 390), en yakın çift sayıya yuvarlanır. Görsel her zaman koyu temadır (bilerek).
 
@@ -85,8 +85,9 @@ Ekranlarda sayı elle yazılmaz; aşağıdaki adlar kullanılır. ★ = yeni (Re
 5. **Sonuç çubuğu**: `yuzey` zemin, `ok`/`nok` dolgu, sayı + ikon + kelime.
 6. **Geri sayım**: 3 halka, aktif olan büyük ve `metin` dolgulu.
 7. **Diyalog**: "Oyundan çık?", "Devam et / Yeni oyun" (kart görünümünde). Tanıtım kartı da bu bileşendir (#130).
-8. **Kategori çipi** (#171, A · Metehan): ana ekranda oyun listesinin üstünde tek satır, yatay kayar (solda `kenarBosluk`, sağa taşar). Yükseklik `dokunmaAlani` 48, `cizgi.ince`, `yaricap.cip`, iç boşluk `bosluk.l`, aralık `bosluk.s`, yazı `yazi.cip`. Seçili değil: `yuzey` dolgu, `metin` yazı. Seçili: `marka-2` dolgu, `kontur` yazı, "✓ " ön eki, 5px `golge`. Basınca düğme gibi gölge 5→1px. Ekran okuyucu: "Çift, seçili, düğme".
-9. **Oyun düğmesi (ana ekran)**: birincil düğme, iki satır. Üstte oyun adı (`yazi.dugme`); altta tür rozeti (`yazi.etiket`, `kontur` dolgu, `marka` yazı, `yaricap.kucuk`) ve "👥 2–12 kişi" (`yazi.govde`). Rozet ve kişi sayısı oyunun kayıt satırından gelir (#171).
+8. **Kişi çipi** (#171 A biçimi, #183 içeriği): ana ekranda oyun listesinin üstünde tek satır: Tümü · 2 kişi · 3–5 kişi · 6+ kişi, dördü hep görünür. Çipler satırı doldurur (`flexGrow: 1`), 375 genişlikte tek satıra sığar; 360'tan dar ekranda satır yatay kayar. Yükseklik `dokunmaAlani` 48, `cizgi.ince`, `yaricap.cip`, iç boşluk `bosluk.s`, aralık `bosluk.s`, yazı `yazi.cip`. Seçili değil: `yuzey` dolgu, `metin` yazı. Seçili: `marka-2` dolgu, `kontur` yazı, "✓ " ön eki, 5px `golge`. Basınca düğme gibi gölge 5→1px. Ekran okuyucu: "2 kişi, seçili, düğme". Hiç oyun kalmazsa listede kesik çizgili kutu (`cizgi.ince` `soluk`, `yaricap.dugme`) içinde `yazi.govde` `soluk`: "Bu kişi sayısına uygun oyun henüz yok." Görünüm: `design/183-kisi-filtresi/ana.html`.
+9. **Oyun düğmesi (ana ekran)**: birincil düğme, iki satır. Üstte oyun adı (`yazi.dugme`), altta "👥 2–12 kişi" (`yazi.govde`). Kişi sayısı kayıt satırından (`minOyuncu`–12) gelir ve tanıtım kartındakiyle aynıdır. Tür rozeti yoktur (#183, PRD v7.1).
+10. **ⓘ Nasıl oynanır** (#183, B · Yazılı, Semih): tek ortak bileşen, iki biçim. **Yazılı biçim** oyun öncesi ekranlarda (mod, oyuncular, paket/hazırlık, oda lobisi): yükseklik 48 (`dokunmaAlani`), genişlik içeriğe göre; 24'lük `marka` daire + "Nasıl oynanır" (`yazi.cip`, `metin`), aralık `bosluk.s`, iç boşluk sol 9 / sağ 14. **Kısa biçim** oyun içi ve sonuç ekranlarında: 48×48, yalnız daire (üst çubukta yazıya yer yok). İkisinde de `yaricap.cip`, `cizgi.ince` `kontur`, `yuzey` dolgu; dairede `yazi.cip` `kontur` "i". Basılı: opaklık 0.6. Ekran okuyucu: "Nasıl oynanır, düğme". Oyun seçildikten sonraki her ekranın üst satırının sağında durur: sağda ✕ varsa hemen solunda (aralık `bosluk.s`), yoksa köşede. Ana ekranda yoktur. Yer açmak için tek telefon kart ekranında paket adı kartın üst satırına, oda soru ekranında kalan süre ilerleme çubuğunun sağına iner (testID `oda-geri-sayim` aynı). Görünüm: `design/183-kisi-filtresi/b.html`.
 
 ## Oyuna göre kurallar
 Genel renk kuralı her oyunda geçerlidir: yeşil ve kırmızı yalnızca anlam taşır, oyun ve marka renkleri nötrdür.
@@ -97,7 +98,7 @@ Genel renk kuralı her oyunda geçerlidir: yeşil ve kırmızı yalnızca anlam 
 | **Oda modu** (tüm oyunlar) | Oda rozeti `marka-2` ("ODA" çipi, 2° eğik). Oda kodu **6 hane** (PRD v5). `design/49-oda-modu` ekranlarındaki 4 harfli "ZEPA" eskidir; güncel görünüm `design/120-onon-oda`. Kuranda ★. Bekleme ekranında kimin cevapladığı görünür, ne dediği görünmez. Oda finali: B · Ekolayzer; "hareketi azalt"ta liste. | #49, #120 |
 | **10/10 ama** | Puan bantları: **0–3 `nok`** (sert), **4–6 `marka`** (kararsız), **7–10 `ok`** (cömert). Renk her zaman sayının yanında. Ortalama bir ondalık, Türkçe virgülle ("5,8"). Tuş takımı: tek telefonda 6+5, odada 4 sütun, tuş ≥48px; seçili tuş `ok` dolgu. Ödüller: En acımasız `nok`, Melek kalpli `ok`, Ruh ikizleri `marka-2`. | #107, #120 |
 | **Casus kim** | Oyun rengi nötr `marka-2` (kart). Yeşil yalnızca "grup casusu yakaladı", kırmızı yalnızca "casus kazandı"; casus için ayrı bir "tehlike" rengi yoktur. Normal kart ve casus kartı aynı renk, düzen, yazı boyutu ve titreşimle gösterilir; kartta emoji yok. Kart yalnızca basılı tutulunca görünür, bırakınca 150ms'de kapanır. | #80 (KK-45, KK-52) |
-| **Tanıtım kartı** | Diyalog bileşeni; oyun adı, kişi çipi (`kontur` dolgu, `marka` yazı), metin 16/600, "Tamam" 56px. "Nasıl oynanır?" bağlantısı üst çubuğun sağında, "?" rozetli hap, 48px (A, Metehan). | #130 |
+| **Tanıtım kartı** | Diyalog bileşeni; oyun adı, kişi çipi (`kontur` dolgu, `marka` yazı), metin 16/600, "Tamam" 56px. Kendiliğinden açılmaz; yalnızca ⓘ düğmesiyle açılır (Bileşenler 10). "Tamam" aynı ekrana döner, oyun durmaz. Eski "Nasıl oynanır?" bağlantısı kalktı. | #130, #183 |
 
 ## Hareket
 | Animasyon | Süre | Easing | Not / titreşim |
