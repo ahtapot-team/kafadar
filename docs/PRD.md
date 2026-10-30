@@ -421,6 +421,40 @@ Oyunun kişi aralığı (`minOyuncu` … genel üst sınır 12) çipin aralığ�
 | Kullanılmayan veri | `tur`, `ortam` ve "görüldü" saklaması silinir | Geliştirme ilkesi: kullanılmayan kod kalmaz | pm varsayılanı |
 | Belgeler | İş sonunda md dosyaları güncellenir: TASARIM-SISTEMI (tasarim), KK-HARITA (qa), CLAUDE.md ve MIMARI (frontend) | Belgeler kodla uyumlu kalır | Semih (30.10.2026, msg 718) |
 
+## v8: Açılış ekranı ve eğlenceli sözler (Semih, 30.10.2026) — ONAYLANDI (Semih, 30.10.2026)
+Issue'lar: #190 tasarım (tasarim), #191 kabul testleri (qa), #192 uygulama (frontend; #190 ve #191 bitince başlar).
+Uygulama açılırken boş ekran yerine "Kafadar" adı, yüzdeli bir yükleme çubuğu ve her açılışta değişen eğlenceli bir söz görünür. Sözler oyunlarla ilgilidir: bilgi, atasözü, meme ve dizi/film replikleri. Örneğin Casus kim için: "Koyunlar ömrünü kurttan korkarak geçirir. Halbuki sonunda onu yiyen çobandır." Rafa kalkan 3 ekranlı karşılamanın yerine, Metehan'ın açılış sayfası isteği (Telegram 689) bu hafif biçimde karşılanır.
+
+### Akış
+1. Kullanıcı uygulamayı açar. Telefonun sistem açılış görselinden hemen sonra Kafadar açılış ekranı gelir.
+2. Ekranın ortasında "Kafadar" yazar. Altında yükleme çubuğu ve yüzde ("%0" → "%100"), en altta rastgele bir söz vardır. Söz bir oyuna aitse altında oyunun adı yazar ("— Casus kim").
+3. Hazırlık bitince ve en az 3 saniye dolunca uygulama kendiliğinden geçer: ana ekrana ya da açılan bağlantının ekranına (ör. oda daveti). Acelesi olan ekrana dokunup beklemeyi atlar.
+
+### Kabul kriterleri (açılış ekranı)
+- [ ] KK-94: Uygulama her açıldığında (web'de sayfa yenilendiğinde de) önce açılış ekranı görünür. Ekranda "Kafadar" adı, yükleme çubuğu, yüzde ("%42" biçiminde) ve bir söz bulunur. Uygulama içinde ana ekrana dönüldüğünde açılış ekranı yeniden görünmez.
+- [ ] KK-95: Yüzde yalnızca ileri gider. Hazırlık (yazı tipleri ve kayıtlı ayarlar) bitmeden %100 olmaz. Hazırlık erken bitse de açılış ekranı en az 3 saniye görünür. %100 olunca uygulama kendiliğinden ana ekrana ya da açılan bağlantının ekranına (ör. oda daveti) geçer.
+- [ ] KK-96: Ekrana dokunmak kalan bekleme süresini atlar. Hazırlık bittiyse hemen geçer, bitmediyse hazırlık biter bitmez geçer. Yazı tipi yüklenemezse sistem yazı tipiyle devam edilir; açılış ekranı hiçbir hatada takılı kalmaz.
+- [ ] KK-97: Söz her açılışta bütün sözler arasından rastgele seçilir. Oyuna ait sözün altında oyunun adı yazar, genel sözlerde yazmaz. Seçim saf bir fonksiyondur, `src/core/rng` ile yapılır ve ekransız test edilir.
+- [ ] KK-98: Sözler `content/` altında tek bir JSON dosyasındadır; yeni söz eklemek kod değişikliği gerektirmez. `npm run icerik` her sözü denetler: boş olmamalı, en fazla 140 karakter olmalı, tekrar etmemeli ve oyun kimliği kayıtta bulunmalı (ya da "genel" olmalı). İlk sürümde her aktif oyunun en az 10, genelin en az 10 sözü vardır; taslak `docs/desteler/acilis.md`.
+- [ ] KK-99: Ekran okuyucu yüzdeyi ve sözü okur. Açılış ekranı koyu ve açık temada çalışır; stil değerleri `src/tema.ts` token'larından gelir. Yeni bağımlılık yoktur.
+- [ ] KK-100: Mevcut akışlar değişmez: "Devam et", oda davet bağlantısıyla katılım ve ayarlar eskisi gibi çalışır, mevcut kabul testleri yeşil kalır. `CLAUDE.md` ve `docs/MIMARI.md` açılış ekranını ve söz dosyasını anlatır.
+
+### Kapsam dışı (v8)
+- Sözü paylaşma, beğenme ya da kişiye göre seçme.
+- Aynı sözün art arda gelmesini engelleme (düz rastgele; 40 sözde tekrar şansı düşük).
+- Sözleri internetten çekme. Sözler uygulamanın içindedir ve internetsiz çalışır.
+- Animasyonlu maskot ya da ses.
+- 3 ekranlı ilk açılış karşılaması (rafta, Semih 30.10.2026).
+
+### Kararlar (açılış ekranı)
+| Karar | Seçim | Gerekçe | Karar veren |
+|---|---|---|---|
+| Süre | En az 3 sn; dokununca geçer | Söz okunur, acelesi olan bekletilmez | Semih (30.10.2026, msg 745: "A") |
+| Sözler | pm internetten derler: her oyuna 10 + 10 genel; mizah, meme, replik; aile dostu, argo yok | Semih "bunları sana bırakıyorum" (msg 743) | pm |
+| Yüzde | Hazırlık ve 3 sn'lik süreden yavaş olanı izler | %100 gerçekten hazır demektir | pm varsayılanı |
+| Oyun adı | Oyuna ait sözün altında yazar | Söz oyunu da tanıtır | pm varsayılanı |
+| Kayan ayarlar düğmesi | Kafadar'ın kodunda yok; büyük ihtimalle Expo Go'nun geliştirici düğmesi, ekran görüntüsü bekleniyor | Bizimse ayrı issue açılır | açık (Semih, msg 743) |
+
 ## Geliştirme ilkesi (Semih, 27.10.2026)
 **Overengineering yok.** En az kodla, en basit çözüm, yalnızca bugünkü ihtiyaç kadar. Yapı genişlemeye açık olacak ama ileriye dönük soyutlama, genel çerçeve ya da "belki lazım olur" kodu yazılmayacak. Yeni bağımlılık yalnızca gerçekten gerekiyorsa eklenir ve PR'da gerekçesi yazılır. Aşağıdaki mimari şartlar bu ilkeye göre en sade haliyle uygulanır. Örneğin oyun kayıt listesi basit bir dizidir, eklenti çatısı değildir.
 
