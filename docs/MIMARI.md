@@ -1,6 +1,6 @@
 # Kafadar — Mimari
 
-Son güncelleme: 2026-10-30 — #192 (sade açılış)
+Son güncelleme: 2026-10-30 — #198 (açılış çökme düzeltmesi)
 
 Kısa rehber için `CLAUDE.md`. Bu belge katmanları, veri akışını, oda protokolünü, testleri ve kuralları anlatır.
 
@@ -26,7 +26,7 @@ Kısa rehber için `CLAUDE.md`. Bu belge katmanları, veri akışını, oda prot
 
 ## Açılış ekranı
 
-Açılış ekranı `app/_layout.tsx`'te yazı tipi ve ayarlar okunurken görünür (`src/acilis/ekran.tsx`); ana ekran onu bilmez, uygulama içinde dönünce yeniden çıkmaz. Yüzde = süre (en az 3 sn) ve hazırlığın küçüğü, yalnızca ileri gider; dokunmak süreyi atlar, hazırlık beklenir (`src/core/acilis.ts`). Söz her açılışta `src/core/soz.ts` ile seçilir; sözler `content/acilis/sozler.json` dosyasındadır (ürün: oyuna göre veya `genel`, ≥10 söz, ≤140 karakter) ve `npm run icerik` (`src/icerik/soz.ts`) denetler. Sistem açılış görseli `app.json` `splash` + `assets/splash.png`.
+Açılış ekranı `app/_layout.tsx`'te yazı tipi ve ayarlar okunurken görünür (`src/acilis/ekran.tsx`); gezgin (`Yigin`) açılış sırasında da bağlıdır, açılış ekranı üstüne bindirilir ve %100'de solarak kalkar (bitişi JS zamanlayıcısı bildirir; UI thread geri çağrısından JS çağrılmaz, native'de çöker); ana ekran onu bilmez, uygulama içinde dönünce yeniden çıkmaz. Yüzde = süre (en az 3 sn) ve hazırlığın küçüğü, yalnızca ileri gider; dokunmak süreyi atlar, hazırlık beklenir (`src/core/acilis.ts`). Söz her açılışta `src/core/soz.ts` ile seçilir; sözler `content/acilis/sozler.json` dosyasındadır (ürün: oyuna göre veya `genel`, ≥10 söz, ≤140 karakter) ve `npm run icerik` (`src/icerik/soz.ts`) denetler. Sistem açılış görseli `app.json` `splash` + `assets/splash.png`.
 
 ## Yeni oyun nasıl eklenir
 

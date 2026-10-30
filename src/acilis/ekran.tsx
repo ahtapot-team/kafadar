@@ -50,7 +50,7 @@ export function AcilisEkrani({
   const [yuzde, setYuzde] = useState(0);
   const [cubukGenislik, setCubukGenislik] = useState(0);
   const [ofset, setOfset] = useState<number | null>(null);
-  const ustY = useRef(0);
+  const logoOrta = useRef(0);
   useEffect(() => {
     let iptal = false;
     AccessibilityInfo.isReduceMotionEnabled().then((a) => {
@@ -78,13 +78,13 @@ export function AcilisEkrani({
   useEffect(() => {
     if (!gecti) return;
     onGec();
-    solma.value = withTiming(
-      0,
-      { duration: hareket.ekranGecisi, easing: Easing.linear },
-      (bitti) => {
-        if (bitti) onBitti();
-      },
-    );
+    solma.value = withTiming(0, {
+      duration: hareket.ekranGecisi,
+      easing: Easing.linear,
+    });
+    // UI thread geri çağrısından JS fonksiyonu çağırmak native'de çöker; bitişi JS zamanlayıcısı bildirir.
+    const t = setTimeout(onBitti, hareket.ekranGecisi);
+    return () => clearTimeout(t);
   }, [gecti, onGec, onBitti, solma]);
   const solmaStil = useAnimatedStyle(() => ({ opacity: solma.value }));
   // Logo ilk karede ekranın ortasındadır (sistem açılış görseliyle aynı yer), sonra yerine süzülür.
@@ -122,22 +122,22 @@ export function AcilisEkrani({
         accessibilityHint="Geçmek için dokun"
         style={{
           flex: 1,
+          justifyContent: 'center',
           paddingTop: ek.top,
-          paddingBottom: ek.bottom + bosluk.l,
+          paddingBottom: ek.bottom + height * 0.16,
           paddingHorizontal: kenarBosluk,
         }}
       >
         <View
-          style={{ flex: 1, justifyContent: 'center' }}
-          onLayout={(e) => {
-            ustY.current = e.nativeEvent.layout.y;
-          }}
+          onLayout={(e) =>
+            setOfset(height / 2 - (e.nativeEvent.layout.y + logoOrta.current))
+          }
         >
           <Animated.View
             style={[{ alignSelf: 'center' }, logoStil]}
             onLayout={(e) => {
               const { y, height: h } = e.nativeEvent.layout;
-              setOfset(height / 2 - (ek.top + ustY.current + y + h / 2));
+              logoOrta.current = y + h / 2;
             }}
           >
             <View
@@ -238,6 +238,7 @@ export function AcilisEkrani({
             borderRadius: yaricap.dugme,
             padding: bosluk.l,
             paddingTop: bosluk.xl,
+            marginTop: bosluk.xxl,
             boxShadow: `5px 5px 0 ${renk.golge}`,
             transform: [{ rotate: '-1.5deg' }],
           }}
