@@ -7,13 +7,11 @@
 //   KK-102: app/index.tsx'te "Bir oyun seç, telefonu ele ver." yok; logo ile çip satırı arasında yerine yazı gelmez.
 //   KK-105: CLAUDE.md ve docs/MIMARI.md kişi çiplerini "Tümü · 1 kişi · 2 kişi · 3+ kişi" olarak anlatır.
 import { describe, expect, it } from 'vitest';
-import { BEKLEYEN } from './kabul';
 import { dosyaIcerik } from './test/yardimci';
 
 // #209 (iOS, KK-101): opaklıkla gizlemek yetmez; Text yazı tipi yokken mount edilirse iOS fontu sonradan uygulamaz.
 // SÖZLEŞME: src/acilis/ekran.tsx'te acilis-ad, acilis-soz, acilis-soz-oyun `{fontHazir && (…)}` / `{fontHazir ? (…) : null}`
 //   bloğunun İÇİNDE (fontHazir=false iken ağaçta yok) ya da `if (!fontHazir) return …` ile erken çıkıştan sonra çizilir.
-const kabulFont = BEKLEYEN.fontMount ? it.fails : it;
 
 // `bas` indeksindeki `{`nin eşleşen `}` indeksi.
 const kapanis = (s: string, bas: number) => {
@@ -39,16 +37,13 @@ const fontKosullu = (kaynak: string, testID: string) => {
 };
 
 describe('KK-101: açılış logosu yazı tipi hazır olmadan çizilmez', () => {
-  kabulFont(
-    'KK-101: acilis-ad, söz ve oyun adı fontHazir=false iken ağaçta yok (opaklıkla gizleme yetmez, #209)',
-    () => {
-      const e = dosyaIcerik('src/acilis/ekran.tsx');
-      for (const id of ['acilis-ad', 'acilis-soz', 'acilis-soz-oyun'])
-        expect(fontKosullu(e, id), id).toBe(true);
-      // Platformdan bağımsız (iOS ve Android): Platform.OS'a bağlı çözüm kabul edilmez.
-      expect(e).not.toMatch(/Platform\.(OS|select)/);
-    },
-  );
+  it('KK-101: acilis-ad, söz ve oyun adı fontHazir=false iken ağaçta yok (opaklıkla gizleme yetmez, #209)', () => {
+    const e = dosyaIcerik('src/acilis/ekran.tsx');
+    for (const id of ['acilis-ad', 'acilis-soz', 'acilis-soz-oyun'])
+      expect(fontKosullu(e, id), id).toBe(true);
+    // Platformdan bağımsız (iOS ve Android): Platform.OS'a bağlı çözüm kabul edilmez.
+    expect(e).not.toMatch(/Platform\.(OS|select)/);
+  });
 
   it('KK-101: denetleyici doğru çalışır (koşullu mount geçer, opacity yakalanır)', () => {
     const mount = '<V>{fontHazir && (<Y testID="a">x</Y>)}</V>';

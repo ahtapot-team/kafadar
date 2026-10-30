@@ -134,50 +134,51 @@ export function AcilisEkrani({
           }
         >
           <Animated.View
-            // Yazı tipi hazır olana kadar logo görünmez (sistem fontuyla çizilip sonradan değişmesin).
-            style={[
-              { alignSelf: 'center', opacity: fontHazir ? 1 : 0 },
-              logoStil,
-            ]}
+            style={[{ alignSelf: 'center' }, logoStil]}
             onLayout={(e) => {
               const { y, height: h } = e.nativeEvent.layout;
               logoOrta.current = y + h / 2;
             }}
           >
-            <View
-              style={{
-                ...StyleSheet.absoluteFill,
-                backgroundColor: renk.marka2,
-                borderWidth: cizgi.kalin,
-                borderColor: renk.kontur,
-                borderRadius: yaricap.dugme,
-                transform: [
-                  { rotate: '4deg' },
-                  { translateX: 6 },
-                  { translateY: 10 },
-                ],
-              }}
-            />
-            <View
-              style={{
-                backgroundColor: renk.marka,
-                borderWidth: cizgi.kalin,
-                borderColor: renk.kontur,
-                borderRadius: yaricap.dugme,
-                paddingHorizontal: bosluk.l,
-                paddingVertical: bosluk.s,
-                boxShadow: `5px 5px 0 ${renk.golge}`,
-                transform: [{ rotate: '-4deg' }],
-              }}
-            >
-              <Yazi
-                tur="baslikXl"
-                testID="acilis-ad"
-                style={{ color: renk.kontur }}
-              >
-                Kafadar
-              </Yazi>
-            </View>
+            {/* Yazı tipi hazır olunca mount edilir: iOS, yazı tipi yokken mount edilen Text'e fontu sonradan uygulamaz. */}
+            {fontHazir && (
+              <>
+                <View
+                  style={{
+                    ...StyleSheet.absoluteFill,
+                    backgroundColor: renk.marka2,
+                    borderWidth: cizgi.kalin,
+                    borderColor: renk.kontur,
+                    borderRadius: yaricap.dugme,
+                    transform: [
+                      { rotate: '4deg' },
+                      { translateX: 6 },
+                      { translateY: 10 },
+                    ],
+                  }}
+                />
+                <View
+                  style={{
+                    backgroundColor: renk.marka,
+                    borderWidth: cizgi.kalin,
+                    borderColor: renk.kontur,
+                    borderRadius: yaricap.dugme,
+                    paddingHorizontal: bosluk.l,
+                    paddingVertical: bosluk.s,
+                    boxShadow: `5px 5px 0 ${renk.golge}`,
+                    transform: [{ rotate: '-4deg' }],
+                  }}
+                >
+                  <Yazi
+                    tur="baslikXl"
+                    testID="acilis-ad"
+                    style={{ color: renk.kontur }}
+                  >
+                    Kafadar
+                  </Yazi>
+                </View>
+              </>
+            )}
           </Animated.View>
           <View style={{ marginTop: bosluk.xl }}>
             <View
@@ -234,53 +235,55 @@ export function AcilisEkrani({
             </View>
           </View>
         </View>
-        <View
-          style={{
-            backgroundColor: renk.yuzey,
-            borderWidth: cizgi.kalin,
-            borderColor: renk.kontur,
-            borderRadius: yaricap.dugme,
-            padding: bosluk.l,
-            paddingTop: bosluk.xl,
-            marginTop: bosluk.xxl,
-            boxShadow: `5px 5px 0 ${renk.golge}`,
-            transform: [{ rotate: '-1.5deg' }],
-          }}
-        >
-          <Yazi
-            tur="baslikXl"
+        {fontHazir && (
+          <View
             style={{
-              position: 'absolute',
-              top: -bosluk.m,
-              left: bosluk.m,
-              color: renk.marka,
-              lineHeight: 64,
+              backgroundColor: renk.yuzey,
+              borderWidth: cizgi.kalin,
+              borderColor: renk.kontur,
+              borderRadius: yaricap.dugme,
+              padding: bosluk.l,
+              paddingTop: bosluk.xl,
+              marginTop: bosluk.xxl,
+              boxShadow: `5px 5px 0 ${renk.golge}`,
+              transform: [{ rotate: '-1.5deg' }],
             }}
           >
-            “
-          </Yazi>
-          <Yazi testID="acilis-soz">{soz.text}</Yazi>
-          {rozet && (
-            <View
+            <Yazi
+              tur="baslikXl"
               style={{
-                alignSelf: 'flex-start',
-                marginTop: bosluk.m,
-                backgroundColor: renk.kontur,
-                borderRadius: yaricap.kucuk,
-                paddingHorizontal: bosluk.m,
-                paddingVertical: bosluk.xs,
+                position: 'absolute',
+                top: -bosluk.m,
+                left: bosluk.m,
+                color: renk.marka,
+                lineHeight: 64,
               }}
             >
-              <Yazi
-                tur="cip"
-                testID="acilis-soz-oyun"
-                style={{ color: renk.marka }}
+              “
+            </Yazi>
+            <Yazi testID="acilis-soz">{soz.text}</Yazi>
+            {rozet && (
+              <View
+                style={{
+                  alignSelf: 'flex-start',
+                  marginTop: bosluk.m,
+                  backgroundColor: renk.kontur,
+                  borderRadius: yaricap.kucuk,
+                  paddingHorizontal: bosluk.m,
+                  paddingVertical: bosluk.xs,
+                }}
               >
-                {rozet}
-              </Yazi>
-            </View>
-          )}
-        </View>
+                <Yazi
+                  tur="cip"
+                  testID="acilis-soz-oyun"
+                  style={{ color: renk.marka }}
+                >
+                  {rozet}
+                </Yazi>
+              </View>
+            )}
+          </View>
+        )}
       </Pressable>
     </Animated.View>
   );
