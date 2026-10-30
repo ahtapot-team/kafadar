@@ -1,26 +1,13 @@
-import { readFileSync, readdirSync } from 'node:fs';
 import { describe, expect, it } from 'vitest';
+import { dosyaIcerik as dosya, kaynaklar } from './test/yardimci';
 
-// PRD v6 (#131 → frontend #132): tanıtım kartı ekran sözleşmesi, kaynak düzeyinde (arayüz test aracı yok, Semih 1C).
-// Davranış (kart açılışı, geri tuşu, dışarı dokunma, lobide güncelleme) önizlemede ve gerçek cihazda doğrulanır.
-const kaynaklar = (klasor: string) =>
-  readdirSync(new URL(`../${klasor}`, import.meta.url), { recursive: true })
-    .map(String)
-    .filter((f) => /\.tsx?$/.test(f) && !f.includes('.test.'))
-    .map((f) => ({
-      f: `${klasor}/${f}`,
-      icerik: readFileSync(
-        new URL(`../${klasor}/${f}`, import.meta.url),
-        'utf8',
-      ),
-    }));
+// Tanıtım kartı bileşeni sözleşmesi (KK-77, değişmez) ve akışların korunması (KK-93), kaynak düzeyinde
+// (arayüz test aracı yok, Semih 1C). Kartın ⓘ ile açılması ve kendiliğinden açılmaması: nasil-oynanir.kabul.test.ts.
 const tum = () => [...kaynaklar('app'), ...kaynaklar('src')];
-const dosya = (yol: string) =>
-  readFileSync(new URL(`../${yol}`, import.meta.url), 'utf8');
 const kartDosyalari = () =>
   tum().filter(({ icerik }) => icerik.includes('tanitim-kart'));
 
-describe('KK-73/KK-77: tanıtım kartı bileşeni', () => {
+describe('KK-77: tanıtım kartı bileşeni', () => {
   it('kart testID adlarını taşır: tanitim-kart, -baslik, -kisi, -metin, -tamam', () => {
     const kart = kartDosyalari();
     expect(kart.length).toBeGreaterThan(0);
@@ -35,7 +22,7 @@ describe('KK-73/KK-77: tanıtım kartı bileşeni', () => {
       expect(kaynak, t).toContain(t);
   });
 
-  it('oyun adı, kişi sayısı ve metin kayıt satırından (oyun.tanitim) okunur; bileşende oyun adı/metni sabit yazılmaz (KK-2/KK-77)', () => {
+  it('oyun adı, kişi sayısı ve metin kayıt satırından (oyun.tanitim) okunur; bileşende oyun adı/metni sabit yazılmaz (KK-2)', () => {
     const kart = kartDosyalari();
     expect(kart.length).toBeGreaterThan(0);
     for (const { f, icerik } of kart) {
@@ -54,69 +41,14 @@ describe('KK-73/KK-77: tanıtım kartı bileşeni', () => {
     }
   });
 
-  it('"Hareketi azalt" açıkken animasyon kullanılmaz (KK-77)', () => {
+  it('"Hareketi azalt" açıkken animasyon kullanılmaz', () => {
     expect(kartDosyalari().length).toBeGreaterThan(0);
     for (const { f, icerik } of kartDosyalari())
       expect(icerik, f).toMatch(/azalt|hareketAzalt|reduceMotion/i);
   });
-
-  it('görüldü yalnızca "Tamam"da işaretlenir: tanitimiIsaretle tek yerde çağrılır (geri tuşu görüldü saymaz, KK-74)', () => {
-    const cagrilar = tum()
-      .filter(({ f }) => f !== 'src/core/tanitim.ts')
-      .flatMap(({ f, icerik }) =>
-        [...icerik.matchAll(/tanitimiIsaretle\(/g)].map(() => f),
-      );
-    expect(cagrilar.length).toBeGreaterThan(0);
-    const kartIci = cagrilar.filter((f) =>
-      kartDosyalari().some((k) => k.f === f),
-    );
-    expect(
-      kartIci.length,
-      'işaretleme kart bileşeninde, "Tamam" işleyicisinde olmalı',
-    ).toBe(cagrilar.length);
-    expect(cagrilar.length).toBe(1);
-  });
 });
 
-describe('KK-73/KK-75/KK-78: kartın açıldığı yerler', () => {
-  it('ana ekrandan oyun seçimi: tanitimGerekli(…, "secim") kullanılır; "Devam et" yolu tanıtım çağırmaz', () => {
-    const ana = dosya('app/index.tsx');
-    const ayri = tum().filter(({ icerik }) =>
-      /tanitimGerekli\([^)]*'secim'/.test(icerik),
-    );
-    expect(ayri.length).toBeGreaterThan(0);
-    expect(ana).toMatch(/devam-et/);
-    expect(ana).not.toMatch(/tanitimGerekli\([^)]*'devam'/);
-  });
-
-  it('oda lobisi: odaya kodla ilk katılımda tanitimGerekli(…, "lobi") kullanılır; kart açıkken lobi güncellenir (kart modal ya da katman, lobi ağacı değişmez)', () => {
-    const lobi = dosya('app/oda/lobi.tsx');
-    expect(lobi).toMatch(/tanitimGerekli\([^)]*'lobi'/);
-    expect(lobi).toMatch(/lobi-baslat/);
-  });
-});
-
-describe('KK-76: "Nasıl oynanır?" bağlantısı', () => {
-  const YERLER = [
-    ['app/paket.tsx', 'OK mu NOK mu paket ve süre ekranı'],
-    ['app/casus/hazirlik.tsx', 'Casus kim ayarları'],
-    ['app/onon/hazirlik.tsx', '10/10 ama hazırlığı'],
-    ['app/oda/lobi.tsx', 'oda lobisi'],
-  ] as const;
-  for (const [yol, ad] of YERLER)
-    it(`${ad} (${yol}): testID="tanitim-nasil" ve "Nasıl oynanır?" metni`, () => {
-      const icerik = dosya(yol);
-      expect(icerik).toContain('tanitim-nasil');
-      expect(icerik).toContain('Nasıl oynanır?');
-    });
-
-  it('bağlantı aynı kartı açar: kart bileşeni dışarıdan açılabilir (görüldü bilgisinden bağımsız)', () => {
-    const bagli = YERLER.map(([yol]) => dosya(yol));
-    expect(bagli.every((i) => /tanitim/i.test(i))).toBe(true);
-  });
-});
-
-describe('KK-78: mevcut akışlar bozulmaz', () => {
+describe('KK-93: mevcut akışlar bozulmaz', () => {
   it('çekirdek ve oda mantığı oyun tanıtımına bağlanmaz (KK-2)', () => {
     for (const k of ['src/core', 'src/oda'])
       for (const { f, icerik } of kaynaklar(k).filter(
@@ -131,5 +63,9 @@ describe('KK-78: mevcut akışlar bozulmaz', () => {
     const ana = dosya('app/index.tsx');
     expect(ana).toMatch(/ana-oyun-/);
     expect(ana).toMatch(/devam-et/);
+  });
+
+  it('oda lobisi güncellenmeye ve oyun başlatmaya devam eder (lobi-baslat)', () => {
+    expect(dosya('app/oda/lobi.tsx')).toMatch(/lobi-baslat/);
   });
 });

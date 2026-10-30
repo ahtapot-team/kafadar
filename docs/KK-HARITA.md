@@ -76,17 +76,12 @@ PRD'deki her kabul kriteri için "KK-nn" ifadesi geçen test dosyaları ve gerç
 | KK-70 | Yeniden bağlanma, oyuncu belirteci, veri silme ve hız sınırı OK mu NOK mu odasıyla aynıdır | `oda/onon-istemci.kabul.test.ts`, `oda/onon-oda.kabul.test.ts` | cihaz |
 | KK-71 | Oda mantığı saf ve serileştirilebilir bir durum makinesidir (KK-40). OK mu NOK mu odası bo | `oda/onon-oda.kabul.test.ts` | — |
 | KK-72 | Gerçek cihaz kapısı: en az 3 telefonla tam bir 10/10 ama odası oynanır. Kontrol listesi `d | — | cihaz |
-| KK-73 | Bir oyun o telefonda ilk kez seçildiğinde, ana ekrandan sonraki ekrana geçmeden önce o oyu | `core/tanitim.kabul.test.ts`, `games/kategori.kabul.test.ts`, `tanitim-ui.kabul.test.ts` | cihaz |
-| KK-74 | "Tamam"a basıldıktan sonra o oyunun kartı o telefonda bir daha kendiliğinden açılmaz; uygu | `core/tanitim.kabul.test.ts`, `tanitim-ui.kabul.test.ts` | cihaz |
-| KK-75 | Odaya kodla katılan kişi o oyunun kartını daha önce görmediyse kart lobide bir kez açılır. | `core/tanitim.kabul.test.ts`, `tanitim-ui.kabul.test.ts` | cihaz |
-| KK-76 | Şu ekranlarda küçük bir "Nasıl oynanır?" bağlantısı vardır ve aynı kartı açar: | `tanitim-ui.kabul.test.ts` | cihaz |
 | KK-77 | Ekran okuyucu kartın başlığını ve metnini okur. "Tamam" düğmesinin dokunma alanı en az 48p | `games/tanitim.kabul.test.ts`, `tanitim-ui.kabul.test.ts` | cihaz |
-| KK-78 | Kart bir kez görüldükten sonra ana ekrandan oyuna giriş eskisi gibi tek dokunuştur. Yarım  | `core/tanitim.kabul.test.ts`, `tanitim-ui.kabul.test.ts` | cihaz |
-| KK-79 | Her aktif oyunun kayıt satırında bir `tur` alanı bulunur: oylama, puanlama, gizli-rol ya d | `games/kategori.kabul.test.ts` | — |
-| KK-80 | Bugünkü 3 oyunun etiketleri yukarıdaki tablodaki gibidir. | `games/kategori.kabul.test.ts` | — |
-| KK-81 | Ana ekranda oyun listesinin üstünde yatay ve tek seçimli bir çip satırı vardır. Çiplerin s | `games/kategori.kabul.test.ts` | — |
-| KK-82 | Bir çip ancak listeyi gerçekten daraltıyorsa görünür: en az bir oyun eşleşir ama oyunların | `games/kategori.kabul.test.ts` | — |
-| KK-83 | Bir çipe dokunulunca listede yalnızca eşleşen oyunlar kalır ve sıraları değişmez (eşleşme  | `games/kategori.kabul.test.ts` | — |
-| KK-84 | Her oyun kartında tür rozeti (Oylama / Puanlama / Gizli rol / Quiz) ve kişi sayısı (ör. "2 | `games/kategori.kabul.test.ts` | — |
 | KK-85 | Çiplerin dokunma alanı en az 48px'tir. Ekran okuyucu seçili çipi "seçili" diye okur. Çiple | `games/kategori.kabul.test.ts` | — |
-| KK-86 | Oyuna dokunduktan sonraki akış değişmez: tanıtım kartı (KK-73…KK-78), mod seçimi ve "Devam | `games/kategori.kabul.test.ts` | — |
+| KK-87 | Ana ekranda oyun listesinin üstünde yatay ve tek seçimli bir çip satırı vardır. Sıra şudur | `games/kategori.kabul.test.ts` | — |
+| KK-88 | Bir çipe dokunulunca listede yalnızca kişi aralığı çipin aralığıyla kesişen oyunlar kalır  | `games/kategori.kabul.test.ts` | — |
+| KK-89 | Oyun kartında tür rozeti yoktur; yalnızca kişi sayısı görünür (ör. "2–12 kişi") ve tanıtım | `games/kategori.kabul.test.ts` | — |
+| KK-90 | Oyun tanıtım kartı hiçbir zaman kendiliğinden açılmaz: oyunu ilk seçerken de, odaya kodla  | `nasil-oynanir.kabul.test.ts` | — |
+| KK-91 | Oyun seçildikten sonraki her ekranın sağ üstünde küçük bir ⓘ düğmesi vardır: mod seçimi, o | `nasil-oynanir.kabul.test.ts` | — |
+| KK-92 | ⓘ düğmesinin dokunma alanı en az 48px'tir. Ekran okuyucu düğmeyi "Nasıl oynanır" diye okur | `nasil-oynanir.kabul.test.ts` | — |
+| KK-93 | Oyun akışları değişmez: mod seçimi, "Devam et" ve oda modu eskisi gibi çalışır. Mevcut kab | `games/kategori.kabul.test.ts`, `tanitim-ui.kabul.test.ts` | — |
