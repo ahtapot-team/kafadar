@@ -30,40 +30,8 @@ const SOZLER = sozDosyasi.sozler as Soz[];
 const OYUN_BILGI = Object.fromEntries(
   oyunlar.map((o) => [o.id, { ad: o.ad, emoji: o.emoji }]),
 );
-const EMOJI = 48;
 const BALON = 64;
-const ADIM_MS = 80;
 const SURME_MS = 300;
-// Girişte yerine oturan öğe: sıra, gecikmeyi belirler; "Hareketi azalt" açıksa yerinde 150 ms solar.
-function Giris({
-  sira,
-  azalt,
-  baslangic,
-  children,
-  style,
-}: {
-  sira: number;
-  azalt: boolean;
-  baslangic: number;
-  children: React.ReactNode;
-  style?: object;
-}) {
-  const v = useSharedValue(0);
-  useEffect(() => {
-    v.value = withDelay(
-      azalt ? 0 : baslangic + sira * ADIM_MS,
-      withTiming(1, {
-        duration: azalt ? hareket.azaltilmisSolma : hareket.sticker,
-        easing: azalt ? Easing.linear : Easing.bezier(...easing.yay),
-      }),
-    );
-  }, [v, azalt, baslangic, sira]);
-  const stil = useAnimatedStyle(() => ({
-    opacity: Math.min(1, v.value * 2),
-    transform: azalt ? [] : [{ scale: 0.6 + 0.4 * v.value }],
-  }));
-  return <Animated.View style={[style, stil]}>{children}</Animated.View>;
-}
 export function AcilisEkrani({
   fontHazir,
   onGec,
@@ -140,10 +108,6 @@ export function AcilisEkrani({
     Math.max(cubukGenislik * (yuzde / 100) - BALON / 2, 0),
     Math.max(cubukGenislik - BALON, 0),
   );
-  const girisBas = azalt ? 0 : 150 + SURME_MS;
-  const emojiler = ['ok-mu-nok', 'casus-kim', '10-10-ama'].map(
-    (id) => OYUN_BILGI[id]?.emoji,
-  );
   return (
     <Animated.View
       testID="acilis-ekran"
@@ -169,33 +133,6 @@ export function AcilisEkrani({
             ustY.current = e.nativeEvent.layout.y;
           }}
         >
-          <View
-            style={{ flexDirection: 'row', justifyContent: 'space-between' }}
-          >
-            {emojiler.map((e, i) => (
-              <Giris
-                key={i}
-                sira={i + 1}
-                azalt={azalt}
-                baslangic={girisBas}
-                style={{
-                  marginTop: i === 1 ? 0 : bosluk.xl,
-                  marginBottom: bosluk.l,
-                  width: EMOJI,
-                  height: EMOJI,
-                  borderRadius: EMOJI / 2,
-                  backgroundColor: renk.yuzey,
-                  borderWidth: cizgi.ince,
-                  borderColor: renk.kontur,
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  boxShadow: `3px 3px 0 ${renk.golge}`,
-                }}
-              >
-                <Yazi style={{ fontSize: 22, lineHeight: 28 }}>{e}</Yazi>
-              </Giris>
-            ))}
-          </View>
           <Animated.View
             style={[{ alignSelf: 'center' }, logoStil]}
             onLayout={(e) => {
@@ -339,13 +276,6 @@ export function AcilisEkrani({
             </View>
           )}
         </View>
-        <Yazi
-          tur="etiket"
-          soluk
-          style={{ textAlign: 'center', marginTop: bosluk.l }}
-        >
-          Geçmek için dokun
-        </Yazi>
       </Pressable>
     </Animated.View>
   );

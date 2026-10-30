@@ -1,6 +1,6 @@
 # Kafadar — Mimari
 
-Son güncelleme: 2026-10-30 — #192
+Son güncelleme: 2026-10-30 — #192 (sade açılış)
 
 Kısa rehber için `CLAUDE.md`. Bu belge katmanları, veri akışını, oda protokolünü, testleri ve kuralları anlatır.
 
