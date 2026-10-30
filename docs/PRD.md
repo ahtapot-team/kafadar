@@ -278,6 +278,8 @@ Issue'lar: #118 kabul testleri (qa), #119 sunucu ve durum makinesi (backend), #1
 - Kuran kişi telefonu bırakırsa herkes bekler. Bu, Murat'ın seçtiği bilinen bir eksi.
 
 ## v6: Oyun tanıtım kartı (Murat, 29.10.2026) — ONAYLANDI (Metehan, 29.10.2026 06:57)
+> v7.1 ile değişti: kart artık kendiliğinden açılmaz, yalnızca ⓘ ile açılır (Semih, 30.10.2026).
+
 Issue'lar: #130 tasarım (tasarim), #131 kabul testleri (qa), #132 uygulama (frontend; #130 ve #131 bitince başlar).
 Bir oyun o telefonda ilk kez açıldığında oyunu 3–4 satırda anlatan bir kart çıkar. Kart "Tamam" ile kapanır ve o oyun için bir daha kendiliğinden görünmez. Tekrar okumak isteyen için hazırlık ekranlarında ve oda lobisinde "Nasıl oynanır?" bağlantısı vardır.
 
@@ -288,10 +290,10 @@ Bir oyun o telefonda ilk kez açıldığında oyunu 3–4 satırda anlatan bir k
 4. **Nasıl oynanır?:** Hazırlık ekranlarında ve oda lobisinde bulunan küçük bağlantı aynı kartı açar.
 
 ### Kabul kriterleri (tanıtım kartı)
-- [ ] KK-73: Bir oyun o telefonda ilk kez seçildiğinde, ana ekrandan sonraki ekrana geçmeden önce o oyunun tanıtım kartı açılır. Kartta oyun adı, kişi sayısı, aşağıdaki tablodaki metin ve "Tamam" düğmesi vardır. "Tamam"a basınca kart kapanır ve oyunun normal akışı devam eder.
-- [ ] KK-74: "Tamam"a basıldıktan sonra o oyunun kartı o telefonda bir daha kendiliğinden açılmaz; uygulama kapatılıp açılsa da açılmaz. Her oyun ayrı tutulur. Bilgi yalnızca telefonda saklanır, sunucuya gitmez. Kart geri tuşuyla kapatılırsa ana ekrana dönülür ve kart görülmüş sayılmaz. Kartın dışına dokunmak kartı kapatmaz.
-- [ ] KK-75: Odaya kodla katılan kişi o oyunun kartını daha önce görmediyse kart lobide bir kez açılır. Kart açıkken de lobi güncellenmeye devam eder ve oyun başlarsa kart kapanır. Odayı kuran kişi kartı oyunu seçerken görür.
-- [ ] KK-76: Şu ekranlarda küçük bir "Nasıl oynanır?" bağlantısı vardır ve aynı kartı açar:
+- ~~KK-73~~ (v7.1 ile değişti → KK-90): Bir oyun o telefonda ilk kez seçildiğinde, ana ekrandan sonraki ekrana geçmeden önce o oyunun tanıtım kartı açılır. Kartta oyun adı, kişi sayısı, aşağıdaki tablodaki metin ve "Tamam" düğmesi vardır. "Tamam"a basınca kart kapanır ve oyunun normal akışı devam eder.
+- ~~KK-74~~ (v7.1 ile değişti → KK-90): "Tamam"a basıldıktan sonra o oyunun kartı o telefonda bir daha kendiliğinden açılmaz; uygulama kapatılıp açılsa da açılmaz. Her oyun ayrı tutulur. Bilgi yalnızca telefonda saklanır, sunucuya gitmez. Kart geri tuşuyla kapatılırsa ana ekrana dönülür ve kart görülmüş sayılmaz. Kartın dışına dokunmak kartı kapatmaz.
+- ~~KK-75~~ (v7.1 ile değişti → KK-90): Odaya kodla katılan kişi o oyunun kartını daha önce görmediyse kart lobide bir kez açılır. Kart açıkken de lobi güncellenmeye devam eder ve oyun başlarsa kart kapanır. Odayı kuran kişi kartı oyunu seçerken görür.
+- ~~KK-76~~ (v7.1 ile değişti → KK-91): Şu ekranlarda küçük bir "Nasıl oynanır?" bağlantısı vardır ve aynı kartı açar:
   - OK mu NOK mu paket ve süre ekranı;
   - Casus kim ayarları;
   - 10/10 ama hazırlığı;
@@ -299,7 +301,7 @@ Bir oyun o telefonda ilk kez açıldığında oyunu 3–4 satırda anlatan bir k
 
   Bu bağlantıyla açılan kart da "Tamam" ile kapanır.
 - [ ] KK-77: Ekran okuyucu kartın başlığını ve metnini okur. "Tamam" düğmesinin dokunma alanı en az 48px'tir. Kart koyu ve açık temada çalışır; "Hareketi azalt" açıksa animasyon kullanılmaz. Metin oyunun kayıt satırından (registry) gelir; yeni bir oyun tanıtımını kendi kayıt satırıyla ekler (KK-2).
-- [ ] KK-78: Kart bir kez görüldükten sonra ana ekrandan oyuna giriş eskisi gibi tek dokunuştur. Yarım kalan oyunda "Devam et" tanıtım göstermez. Mevcut kabul testleri yeşil kalır.
+- ~~KK-78~~ (v7.1 ile değişti → KK-90): Kart bir kez görüldükten sonra ana ekrandan oyuna giriş eskisi gibi tek dokunuştur. Yarım kalan oyunda "Devam et" tanıtım göstermez. Mevcut kabul testleri yeşil kalır.
 
 ### Tanıtım metinleri (taslak: pm)
 | Oyun | Kişi | Metin |
@@ -319,6 +321,8 @@ Bir oyun o telefonda ilk kez açıldığında oyunu 3–4 satırda anlatan bir k
 | Saklama | Her oyun ayrı, telefon başına bir kez, yalnızca telefonda | Hesap yok (KK-39 ilkesi) | pm varsayılanı |
 
 ## v7: Oyun kategorileri (Semih, 30.10.2026) — ONAYLANDI (Semih, 30.10.2026 14:30)
+> v7.1 ile değişti: çipler kişi sayısına göre (Tümü · 2 kişi · 3–5 kişi · 6+ kişi); tür ve ortam etiketleri kalktı.
+
 Issue'lar: #171 tasarım (tasarim), #172 kabul testleri (qa), #173 uygulama (frontend; #171 ve #172 bitince başlar).
 Yeni oyunlar geldikçe (çift oyunları, quiz gecesi, kalabalık oyunları…) kullanıcı "kiminle, kaç kişi oynuyoruz?" sorusuna göre oyun bulabilmeli. Bunun için her oyun kendi kayıt satırında etiketlenir ve ana ekranın üstüne tek seçimli filtre çipleri gelir. Bugün 3 oyun var; çipler yeni oyun eklendikçe kendiliğinden çoğalır.
 
@@ -350,14 +354,14 @@ Hiçbir etiketi olmayan oyunlar arkadaş grubu için sayılır, bu yüzden ayrı
 | Quiz | türü Quiz olan |
 
 ### Kabul kriterleri (oyun kategorileri)
-- [ ] KK-79: Her aktif oyunun kayıt satırında bir `tur` alanı bulunur: oylama, puanlama, gizli-rol ya da quiz. İsteğe bağlı bir `ortam` listesi de bulunabilir: cift, aile. Kişi aralığı mevcut `minOyuncu` ve genel üst sınırdan (12) okunur; yeni bir kişi alanı eklenmez. `tur` alanı olmayan bir aktif oyun testi kırmızı yapar. Yeni oyun yine tek bir kayıt satırıyla eklenir (KK-2).
-- [ ] KK-80: Bugünkü 3 oyunun etiketleri yukarıdaki tablodaki gibidir.
-- [ ] KK-81: Ana ekranda oyun listesinin üstünde yatay ve tek seçimli bir çip satırı vardır. Çiplerin sırası: Tümü · 2 kişi · Kalabalık · Çift · Aile · Quiz. Uygulama açılınca "Tümü" seçilidir. Seçim uygulama kapanınca hatırlanmaz.
-- [ ] KK-82: Bir çip ancak listeyi gerçekten daraltıyorsa görünür: en az bir oyun eşleşir ama oyunların tamamı eşleşmez. Bugünkü verilerle görünen çipler şunlardır: Tümü · 2 kişi · Çift · Aile. Kalabalık gizlidir çünkü bütün oyunlar eşleşir; Quiz gizlidir çünkü hiçbir oyun eşleşmez. Görünecek çip kalmazsa çip satırı hiç gösterilmez.
-- [ ] KK-83: Bir çipe dokunulunca listede yalnızca eşleşen oyunlar kalır ve sıraları değişmez (eşleşme için "Çip kuralları" tablosuna bakın). Seçili çipe ya da "Tümü"ne dokunmak filtreyi kaldırır. "Yakında" durumundaki oyunlar da aynı kurala uyar. Eşleşme kuralı saf bir fonksiyondur ve ekransız test edilir.
-- [ ] KK-84: Her oyun kartında tür rozeti (Oylama / Puanlama / Gizli rol / Quiz) ve kişi sayısı (ör. "2–12 kişi") görünür. Kişi sayısı tanıtım kartında yazanla aynıdır (KK-73).
+- ~~KK-79~~ (v7.1 ile değişti → KK-89): Her aktif oyunun kayıt satırında bir `tur` alanı bulunur: oylama, puanlama, gizli-rol ya da quiz. İsteğe bağlı bir `ortam` listesi de bulunabilir: cift, aile. Kişi aralığı mevcut `minOyuncu` ve genel üst sınırdan (12) okunur; yeni bir kişi alanı eklenmez. `tur` alanı olmayan bir aktif oyun testi kırmızı yapar. Yeni oyun yine tek bir kayıt satırıyla eklenir (KK-2).
+- ~~KK-80~~ (v7.1 ile değişti → KK-89): Bugünkü 3 oyunun etiketleri yukarıdaki tablodaki gibidir.
+- ~~KK-81~~ (v7.1 ile değişti → KK-87): Ana ekranda oyun listesinin üstünde yatay ve tek seçimli bir çip satırı vardır. Çiplerin sırası: Tümü · 2 kişi · Kalabalık · Çift · Aile · Quiz. Uygulama açılınca "Tümü" seçilidir. Seçim uygulama kapanınca hatırlanmaz.
+- ~~KK-82~~ (v7.1 ile değişti → KK-87): Bir çip ancak listeyi gerçekten daraltıyorsa görünür: en az bir oyun eşleşir ama oyunların tamamı eşleşmez. Bugünkü verilerle görünen çipler şunlardır: Tümü · 2 kişi · Çift · Aile. Kalabalık gizlidir çünkü bütün oyunlar eşleşir; Quiz gizlidir çünkü hiçbir oyun eşleşmez. Görünecek çip kalmazsa çip satırı hiç gösterilmez.
+- ~~KK-83~~ (v7.1 ile değişti → KK-88): Bir çipe dokunulunca listede yalnızca eşleşen oyunlar kalır ve sıraları değişmez (eşleşme için "Çip kuralları" tablosuna bakın). Seçili çipe ya da "Tümü"ne dokunmak filtreyi kaldırır. "Yakında" durumundaki oyunlar da aynı kurala uyar. Eşleşme kuralı saf bir fonksiyondur ve ekransız test edilir.
+- ~~KK-84~~ (v7.1 ile değişti → KK-89): Her oyun kartında tür rozeti (Oylama / Puanlama / Gizli rol / Quiz) ve kişi sayısı (ör. "2–12 kişi") görünür. Kişi sayısı tanıtım kartında yazanla aynıdır (KK-73).
 - [ ] KK-85: Çiplerin dokunma alanı en az 48px'tir. Ekran okuyucu seçili çipi "seçili" diye okur. Çipler koyu ve açık temada çalışır. Stil değerleri `src/tema.ts` token'larından gelir.
-- [ ] KK-86: Oyuna dokunduktan sonraki akış değişmez: tanıtım kartı (KK-73…KK-78), mod seçimi ve "Devam et" eskisi gibi çalışır. Mevcut kabul testleri yeşil kalır. `CLAUDE.md` ve `docs/MIMARI.md`'deki "yeni oyun ekleme" adımları `tur` ve `ortam` alanlarını anlatır.
+- ~~KK-86~~ (v7.1 ile değişti → KK-93): Oyuna dokunduktan sonraki akış değişmez: tanıtım kartı (KK-73…KK-78), mod seçimi ve "Devam et" eskisi gibi çalışır. Mevcut kabul testleri yeşil kalır. `CLAUDE.md` ve `docs/MIMARI.md`'deki "yeni oyun ekleme" adımları `tur` ve `ortam` alanlarını anlatır.
 
 ### Kapsam dışı (v7)
 - İçerik ya da yaş seviyesi alanı ve +18 içerik ("+18 yok, 12+" kararı geçerli).
@@ -372,6 +376,49 @@ Hiçbir etiketi olmayan oyunlar arkadaş grubu için sayılır, bu yüzden ayrı
 | Çip davranışı | Tek seçim + "Tümü" | En sade çözüm (Geliştirme ilkesi) | pm önerisi, Semih (30.10.2026, "2A") |
 | Etkisiz çipler | Listeyi daraltmayan çip gizlenir | Boş ya da her şeyi gösteren filtre kafa karıştırır | pm varsayılanı |
 | Seçimi hatırlama | Hatırlanmaz | Sade | pm varsayılanı |
+
+## v7.1: Kişi filtresi ve ⓘ Nasıl oynanır (Semih, 30.10.2026) — ONAY BEKLİYOR
+Issue'lar: #183 tasarım (tasarim), #184 kabul testleri (qa), #185 uygulama (frontend; #183 ve #184 bitince başlar).
+Kullanıcı gözüyle sadeleştirme. Kullanıcı için asıl soru "kaç kişiyiz?". "2 kişi" ile "Çift" birbirine karıştırılıyordu. "Oylama/Puanlama" gibi türler kullanıcıya bir şey söylemiyordu. Sevgili/arkadaş seçimi zaten oyunun içinde, pakette yapılıyor. Bu yüzden ana ekran yalnızca kişi sayısına göre süzer. Oyun kuralları da artık kendiliğinden açılmaz; isteyen sağ üstteki ⓘ'ye dokunup bakar.
+
+### Akış
+1. Ana ekran açılır. Oyun listesinin üstünde Tümü · 2 kişi · 3–5 kişi · 6+ kişi çipleri vardır ve "Tümü" seçilidir.
+2. Kullanıcı kişi sayısına uyan çipe dokunur; listede o kişi sayısıyla oynanabilen oyunlar kalır. Her kartta kişi sayısı yazar ("2–12 kişi").
+3. Oyuna dokunur ve doğrudan oyunun ilk ekranına geçer; kural kartı kendiliğinden açılmaz.
+4. Oyunun içindeki her ekranda sağ üstte ⓘ vardır; dokununca o oyunun tanıtım kartı açılır, "Tamam" ile kapanır.
+
+### Çip kuralları
+| Çip | Kişi aralığı | Bugün listede kalan |
+|---|---|---|
+| Tümü | hepsi | 3 oyun |
+| 2 kişi | 2 | OK mu NOK mu, 10/10 ama |
+| 3–5 kişi | 3–5 | 3 oyun |
+| 6+ kişi | 6 ve üstü | 3 oyun |
+
+Oyunun kişi aralığı (`minOyuncu` … genel üst sınır 12) çipin aralığıyla kesişiyorsa oyun listede kalır. Bugün bütün oyunlar 12 kişiye kadar oynandığı için listeyi daraltan tek çip "2 kişi"dir; diğer çipler yeni oyunlarla anlam kazanır.
+
+### Kabul kriterleri (kişi filtresi ve ⓘ)
+- [ ] KK-87: Ana ekranda oyun listesinin üstünde yatay ve tek seçimli bir çip satırı vardır. Sıra şudur: Tümü · 2 kişi · 3–5 kişi · 6+ kişi. Dört çip de her zaman görünür. Uygulama açılınca "Tümü" seçilidir ve seçim uygulama kapanınca hatırlanmaz. Seçili çipe ya da "Tümü"ne dokunmak filtreyi kaldırır.
+- [ ] KK-88: Bir çipe dokunulunca listede yalnızca kişi aralığı çipin aralığıyla kesişen oyunlar kalır ("Çip kuralları" tablosu) ve sıraları değişmez. "Yakında" durumundaki oyunlar da aynı kurala uyar. Eşleşme kuralı saf bir fonksiyondur ve ekransız test edilir. Hiçbir oyun eşleşmezse listede "Bu kişi sayısına uygun oyun henüz yok." yazar.
+- [ ] KK-89: Oyun kartında tür rozeti yoktur; yalnızca kişi sayısı görünür (ör. "2–12 kişi") ve tanıtım kartında yazanla aynıdır. Kayıt satırında `tur` ve `ortam` alanları yoktur. Çift, Aile, Kalabalık ve Quiz çipleri kaldırılmıştır. Yeni oyun yine tek bir kayıt satırıyla eklenir (KK-2); kişi aralığı `minOyuncu`dan ve genel üst sınırdan okunur.
+- [ ] KK-90: Oyun tanıtım kartı hiçbir zaman kendiliğinden açılmaz: oyunu ilk seçerken de, odaya kodla katılırken de açılmaz. Ana ekrandan oyuna giriş tek dokunuştur. "Kart görüldü" bilgisi artık tutulmaz.
+- [ ] KK-91: Oyun seçildikten sonraki her ekranın sağ üstünde küçük bir ⓘ düğmesi vardır: mod seçimi, oyuncular, hazırlık ekranları, oda lobisi, oyun ekranları ve sonuç. Ana ekranda ⓘ yoktur. Düğmeye dokununca o oyunun tanıtım kartı açılır; "Tamam" ile kapanır ve kullanıcı aynı ekranda kalır. Kart açıkken oyun durmaz; oda modunda diğer oyuncular devam eder. Eski "Nasıl oynanır?" yazı bağlantıları kaldırılmıştır.
+- [ ] KK-92: ⓘ düğmesinin dokunma alanı en az 48px'tir. Ekran okuyucu düğmeyi "Nasıl oynanır" diye okur. Düğme koyu ve açık temada çalışır, stil değerleri `src/tema.ts` token'larından gelir. Tüm ekranlarda aynı ortak bileşen kullanılır.
+- [ ] KK-93: Oyun akışları değişmez: mod seçimi, "Devam et" ve oda modu eskisi gibi çalışır. Mevcut kabul testleri yeşil kalır; değişen kriterlerin testleri güncellenir. `CLAUDE.md` ve `docs/MIMARI.md`'deki "yeni oyun ekleme" adımlarında `tur`/`ortam` geçmez.
+
+### Kapsam dışı (v7.1)
+- Oyuna özel üst kişi sınırı alanı (bugün tüm oyunlarda 12; farklı sınırlı bir oyun gelince eklenir).
+- "Kaç kişisiniz?" sayacı, seçimin hatırlanması, birden çok çip seçimi.
+- İlk açılış karşılaması (v8 taslağı rafa kalktı, Semih 30.10.2026; Metehan itiraz ederse yeniden açılır).
+
+### Kararlar (kişi filtresi ve ⓘ)
+| Karar | Seçim | Gerekçe | Karar veren |
+|---|---|---|---|
+| Filtre ekseni | Yalnızca kişi sayısı; Çift/Aile ve tür çipleri kalkar | Kullanıcı için önemli olan kaç kişiyle oynayacağı; sevgili/arkadaş seçimi pakette zaten var | Semih (30.10.2026, msg 714) |
+| Filtre biçimi | Tümü · 2 kişi · 3–5 kişi · 6+ kişi çipleri, hep görünür | Tek dokunuş; sayaçtan hızlı | pm önerisi, Semih (30.10.2026, "A") |
+| Nasıl oynanır | Kendiliğinden açılmaz; oyun içindeki her ekranda sağ üstte ⓘ | İsteyen bakar, kimse bekletilmez | Semih (30.10.2026, msg 703; yer: "evet") |
+| Eşleşme | Kişi aralığı kesişirse listede kalır | Kart kişi sayısını zaten gösteriyor; kimse gereksiz yere elenmez | pm varsayılanı |
+| Kullanılmayan veri | `tur`, `ortam` ve "görüldü" saklaması silinir | Geliştirme ilkesi: kullanılmayan kod kalmaz | pm varsayılanı |
 
 ## Geliştirme ilkesi (Semih, 27.10.2026)
 **Overengineering yok.** En az kodla, en basit çözüm, yalnızca bugünkü ihtiyaç kadar. Yapı genişlemeye açık olacak ama ileriye dönük soyutlama, genel çerçeve ya da "belki lazım olur" kodu yazılmayacak. Yeni bağımlılık yalnızca gerçekten gerekiyorsa eklenir ve PR'da gerekçesi yazılır. Aşağıdaki mimari şartlar bu ilkeye göre en sade haliyle uygulanır. Örneğin oyun kayıt listesi basit bir dizidir, eklenti çatısı değildir.
