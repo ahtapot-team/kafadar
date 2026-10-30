@@ -12,7 +12,6 @@
 // Ana ekran testID'leri: kategori-cipleri, cip-<id>, oyun-kisi-<oyunId>, kategori-bos (boş liste metni).
 import { readFileSync } from 'node:fs';
 import { describe, expect, it } from 'vitest';
-import { kabulV81 } from '../kabul';
 import { oyunlar } from './registry';
 
 type Cip = 'tumu' | '1-kisi' | '2-kisi' | '3-uzeri-kisi';
@@ -47,7 +46,7 @@ const ids = (l: Kayit[]) => l.map((o) => o.id);
 const bugun = [oyun('ok-mu-nok'), oyun('10-10-ama'), oyun('casus-kim', 3)];
 
 describe('KK-103: kişi çipleri satırı', () => {
-  kabulV81('KK-103: çip sırası Tümü · 1 kişi · 2 kişi · 3+ kişi', async () => {
+  it('KK-103: çip sırası Tümü · 1 kişi · 2 kişi · 3+ kişi', async () => {
     const { CIPLER, CIP_ETIKETI } = await yukle();
     expect(CIPLER).toEqual(['tumu', '1-kisi', '2-kisi', '3-uzeri-kisi']);
     expect(CIPLER.map((c) => CIP_ETIKETI[c])).toEqual([
@@ -58,14 +57,11 @@ describe('KK-103: kişi çipleri satırı', () => {
     ]);
   });
 
-  kabulV81(
-    'KK-103: kişi çiplerinin hepsi aynı biçimde: rakam, ardından "kişi"',
-    async () => {
-      const { CIPLER, CIP_ETIKETI } = await yukle();
-      for (const c of CIPLER.filter((x) => x !== 'tumu'))
-        expect(CIP_ETIKETI[c], c).toMatch(/^\d+\+? kişi$/);
-    },
-  );
+  it('KK-103: kişi çiplerinin hepsi aynı biçimde: rakam, ardından "kişi"', async () => {
+    const { CIPLER, CIP_ETIKETI } = await yukle();
+    for (const c of CIPLER.filter((x) => x !== 'tumu'))
+      expect(CIP_ETIKETI[c], c).toMatch(/^\d+\+? kişi$/);
+  });
 
   it('KK-103: dört çip de her zaman görünür (gorunenCipler yok, satır koşulsuz)', async () => {
     const kat = (await yukle()) as unknown as Record<string, unknown>;
@@ -97,95 +93,74 @@ describe('KK-103: kişi çipleri satırı', () => {
 });
 
 describe('KK-104: kişi aralığı kesişimi ve filtre', () => {
-  kabulV81(
-    'KK-104: eşleşme = oyunun [minOyuncu ?? 2, 12] aralığı çipin aralığıyla kesişir (1 / 2 / 3–12)',
-    async () => {
-      const { cipEslesir } = await yukle();
-      const ok = oyun('ok'); // 2–12
-      const casus = oyun('c', 3); // 3–12
-      const bir = oyun('bir', 1); // 1–12
-      expect(bugun.every((o) => cipEslesir('tumu', o))).toBe(true);
-      expect(cipEslesir('1-kisi', bir)).toBe(true);
-      expect(cipEslesir('1-kisi', ok)).toBe(false);
-      expect(cipEslesir('1-kisi', casus)).toBe(false);
-      expect(cipEslesir('2-kisi', bir)).toBe(true); // 1–12 ∩ {2}
-      expect(cipEslesir('2-kisi', ok)).toBe(true);
-      expect(cipEslesir('2-kisi', oyun('x', 2))).toBe(true);
-      expect(cipEslesir('2-kisi', casus)).toBe(false);
-      expect(cipEslesir('3-uzeri-kisi', bir)).toBe(true);
-      expect(cipEslesir('3-uzeri-kisi', ok)).toBe(true);
-      expect(cipEslesir('3-uzeri-kisi', casus)).toBe(true);
-      expect(cipEslesir('3-uzeri-kisi', oyun('x', 12))).toBe(true);
-    },
-  );
+  it('KK-104: eşleşme = oyunun [minOyuncu ?? 2, 12] aralığı çipin aralığıyla kesişir (1 / 2 / 3–12)', async () => {
+    const { cipEslesir } = await yukle();
+    const ok = oyun('ok'); // 2–12
+    const casus = oyun('c', 3); // 3–12
+    const bir = oyun('bir', 1); // 1–12
+    expect(bugun.every((o) => cipEslesir('tumu', o))).toBe(true);
+    expect(cipEslesir('1-kisi', bir)).toBe(true);
+    expect(cipEslesir('1-kisi', ok)).toBe(false);
+    expect(cipEslesir('1-kisi', casus)).toBe(false);
+    expect(cipEslesir('2-kisi', bir)).toBe(true); // 1–12 ∩ {2}
+    expect(cipEslesir('2-kisi', ok)).toBe(true);
+    expect(cipEslesir('2-kisi', oyun('x', 2))).toBe(true);
+    expect(cipEslesir('2-kisi', casus)).toBe(false);
+    expect(cipEslesir('3-uzeri-kisi', bir)).toBe(true);
+    expect(cipEslesir('3-uzeri-kisi', ok)).toBe(true);
+    expect(cipEslesir('3-uzeri-kisi', casus)).toBe(true);
+    expect(cipEslesir('3-uzeri-kisi', oyun('x', 12))).toBe(true);
+  });
 
-  kabulV81(
-    'KK-104: filtre yalnızca eşleşenleri bırakır, sıra değişmez (bugün 2 kişi → OK mu NOK mu, 10/10 ama; 1 kişi → boş)',
-    async () => {
-      const { filtrele } = await yukle();
-      expect(ids(filtrele(bugun, 'tumu'))).toEqual(ids(bugun));
-      expect(ids(filtrele(bugun, '1-kisi'))).toEqual([]);
-      expect(ids(filtrele(bugun, '2-kisi'))).toEqual([
-        'ok-mu-nok',
-        '10-10-ama',
-      ]);
-      expect(ids(filtrele(bugun, '3-uzeri-kisi'))).toEqual(ids(bugun));
-      const karisik = [oyun('a', 1), oyun('b'), oyun('c', 4), oyun('d', 2)];
-      expect(ids(filtrele(karisik, '1-kisi'))).toEqual(['a']);
-      expect(ids(filtrele(karisik, '2-kisi'))).toEqual(['a', 'b', 'd']);
-      expect(ids(filtrele(karisik, '3-uzeri-kisi'))).toEqual(ids(karisik));
-    },
-  );
+  it('KK-104: filtre yalnızca eşleşenleri bırakır, sıra değişmez (bugün 2 kişi → OK mu NOK mu, 10/10 ama; 1 kişi → boş)', async () => {
+    const { filtrele } = await yukle();
+    expect(ids(filtrele(bugun, 'tumu'))).toEqual(ids(bugun));
+    expect(ids(filtrele(bugun, '1-kisi'))).toEqual([]);
+    expect(ids(filtrele(bugun, '2-kisi'))).toEqual(['ok-mu-nok', '10-10-ama']);
+    expect(ids(filtrele(bugun, '3-uzeri-kisi'))).toEqual(ids(bugun));
+    const karisik = [oyun('a', 1), oyun('b'), oyun('c', 4), oyun('d', 2)];
+    expect(ids(filtrele(karisik, '1-kisi'))).toEqual(['a']);
+    expect(ids(filtrele(karisik, '2-kisi'))).toEqual(['a', 'b', 'd']);
+    expect(ids(filtrele(karisik, '3-uzeri-kisi'))).toEqual(ids(karisik));
+  });
 
-  kabulV81(
-    'KK-104: minOyuncu 1 olan oyun "1 kişi" çipinde görünür ve kartında "1–12 kişi" yazar',
-    async () => {
-      const { filtrele, kisiMetni } = await yukle();
-      const bir = oyun('bir', 1);
-      expect(ids(filtrele([oyun('a'), bir], '1-kisi'))).toEqual(['bir']);
-      expect(kisiMetni(bir)).toBe('1–12 kişi');
-      expect(kisiMetni(oyun('a'))).toBe('2–12 kişi');
-      expect(kisiMetni(oyun('c', 3))).toBe('3–12 kişi');
-    },
-  );
+  it('KK-104: minOyuncu 1 olan oyun "1 kişi" çipinde görünür ve kartında "1–12 kişi" yazar', async () => {
+    const { filtrele, kisiMetni } = await yukle();
+    const bir = oyun('bir', 1);
+    expect(ids(filtrele([oyun('a'), bir], '1-kisi'))).toEqual(['bir']);
+    expect(kisiMetni(bir)).toBe('1–12 kişi');
+    expect(kisiMetni(oyun('a'))).toBe('2–12 kişi');
+    expect(kisiMetni(oyun('c', 3))).toBe('3–12 kişi');
+  });
 
-  kabulV81(
-    'KK-104: "Yakında" (aktif değil) oyunlar aynı kurala uyar',
-    async () => {
-      const { filtrele } = await yukle();
-      const liste = [oyun('a'), oyun('yakinda-uc', 3, false), oyun('b')];
-      expect(ids(filtrele(liste, '2-kisi'))).toEqual(['a', 'b']);
-      expect(ids(filtrele(liste, '3-uzeri-kisi'))).toEqual([
-        'a',
-        'yakinda-uc',
-        'b',
-      ]);
-      expect(ids(filtrele([oyun('y1', 1, false)], '1-kisi'))).toEqual(['y1']);
-    },
-  );
+  it('KK-104: "Yakında" (aktif değil) oyunlar aynı kurala uyar', async () => {
+    const { filtrele } = await yukle();
+    const liste = [oyun('a'), oyun('yakinda-uc', 3, false), oyun('b')];
+    expect(ids(filtrele(liste, '2-kisi'))).toEqual(['a', 'b']);
+    expect(ids(filtrele(liste, '3-uzeri-kisi'))).toEqual([
+      'a',
+      'yakinda-uc',
+      'b',
+    ]);
+    expect(ids(filtrele([oyun('y1', 1, false)], '1-kisi'))).toEqual(['y1']);
+  });
 
-  kabulV81(
-    'KK-104: gerçek kayıt listesiyle "1 kişi" boş, "2 kişi" Casus kim\'i eler, "3+ kişi" hepsini bırakır',
-    async () => {
-      const { filtrele } = await yukle();
-      const liste = oyunlar as unknown as Kayit[];
-      expect(filtrele(liste, '1-kisi')).toEqual([]);
-      expect(ids(filtrele(liste, '2-kisi'))).not.toContain('casus-kim');
-      expect(ids(filtrele(liste, '2-kisi'))).toContain('ok-mu-nok');
-      expect(filtrele(liste, '3-uzeri-kisi')).toHaveLength(liste.length);
-    },
-  );
+  it('KK-104: gerçek kayıt listesiyle "1 kişi" boş, "2 kişi" Casus kim\'i eler, "3+ kişi" hepsini bırakır', async () => {
+    const { filtrele } = await yukle();
+    const liste = oyunlar as unknown as Kayit[];
+    expect(filtrele(liste, '1-kisi')).toEqual([]);
+    expect(ids(filtrele(liste, '2-kisi'))).not.toContain('casus-kim');
+    expect(ids(filtrele(liste, '2-kisi'))).toContain('ok-mu-nok');
+    expect(filtrele(liste, '3-uzeri-kisi')).toHaveLength(liste.length);
+  });
 
-  kabulV81(
-    'KK-104: hiçbir oyun eşleşmezse metin "Bu kişi sayısına uygun oyun henüz yok."',
-    async () => {
-      const { filtrele, BOS_LISTE_METNI } = await yukle();
-      expect(BOS_LISTE_METNI).toBe('Bu kişi sayısına uygun oyun henüz yok.');
-      expect(filtrele([oyun('a', 6)], '2-kisi')).toEqual([]);
-      expect(filtrele([oyun('a')], '1-kisi')).toEqual([]);
-      expect(filtrele([], '3-uzeri-kisi')).toEqual([]);
-    },
-  );
+  it('KK-104: hiçbir oyun eşleşmezse metin "Bu kişi sayısına uygun oyun henüz yok."', async () => {
+    const { filtrele, BOS_LISTE_METNI } = await yukle();
+    expect(BOS_LISTE_METNI).toBe('Bu kişi sayısına uygun oyun henüz yok.');
+    expect(filtrele([oyun('a', 6)], '2-kisi')).toEqual([]);
+    expect(filtrele([oyun('a')], '1-kisi')).toEqual([]);
+    expect(filtrele([], '3-uzeri-kisi')).toEqual([]);
+  });
 
   it('KK-104: ana ekran listeyi filtrele() ile çizer, çipe dokunmayı cipSec() ile çözer, boş listede kategori-bos gösterir', () => {
     const k = oku('app/index.tsx');

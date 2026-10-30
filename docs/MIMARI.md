@@ -1,6 +1,6 @@
 # Kafadar — Mimari
 
-Son güncelleme: 2026-10-30 — #198 (yazı tipi sırası)
+Son güncelleme: 2026-10-30 — #206 (v8.1: çipler, açılış logosu)
 
 Kısa rehber için `CLAUDE.md`. Bu belge katmanları, veri akışını, oda protokolünü, testleri ve kuralları anlatır.
 
@@ -36,7 +36,7 @@ Açılış ekranı `app/_layout.tsx`'te yazı tipi ve ayarlar okunurken görün�
 4. Desteler: `content/` JSON + `src/icerik/kayit.ts` kaydı, ardından `npm run icerik`.
 5. Oda modu gerekiyorsa `src/oda/oda.ts` oda türüne ekle (`mesaj.ts` protokolünü bozmadan).
 6. Kabul testlerini (`*.kabul.test.ts`) ve KK eşlemesini ekle; `npm run kk-harita`.
-7. Ana ekran kişi çipleri (Tümü · 2 kişi · 3–5 kişi · 6+ kişi) oyunun kişi aralığından (`minOyuncu` ?? 2 … genel üst sınır 12) türer; yeni alan gerekmez. Kural `src/games/kategori.ts`'te.
+7. Ana ekran kişi çipleri (Tümü · 1 kişi · 2 kişi · 3+ kişi; aralıklar 1 · 2 · 3–12) oyunun kişi aralığından (`minOyuncu` ?? 2 … genel üst sınır 12) türer; yeni alan gerekmez. Kural `src/games/kategori.ts`'te.
 8. Oyun listesi değiştiği için `CLAUDE.md` / bu belge aynı PR'da güncellenir.
 
 ## Oda sunucusu (`sunucu/`)

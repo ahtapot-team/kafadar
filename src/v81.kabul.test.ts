@@ -7,22 +7,18 @@
 //   KK-102: app/index.tsx'te "Bir oyun seç, telefonu ele ver." yok; logo ile çip satırı arasında yerine yazı gelmez.
 //   KK-105: CLAUDE.md ve docs/MIMARI.md kişi çiplerini "Tümü · 1 kişi · 2 kişi · 3+ kişi" olarak anlatır.
 import { describe, expect, it } from 'vitest';
-import { kabulV81 } from './kabul';
 import { dosyaIcerik } from './test/yardimci';
 
 describe('KK-101: açılış logosu yazı tipi hazır olmadan çizilmez', () => {
-  kabulV81(
-    'KK-101: açılıştaki "Kafadar" (acilis-ad) fontHazir koşuluna bağlı',
-    () => {
-      const e = dosyaIcerik('src/acilis/ekran.tsx');
-      const i = e.indexOf('testID="acilis-ad"');
-      expect(i).toBeGreaterThan(-1);
-      const oncesi = e.slice(Math.max(0, i - 1800), i);
-      expect(oncesi).toMatch(
-        /fontHazir\s*(&&|\?)|opacity:\s*fontHazir|fontHazir\s*\?\s*1\s*:\s*0/,
-      );
-    },
-  );
+  it('KK-101: açılıştaki "Kafadar" (acilis-ad) fontHazir koşuluna bağlı', () => {
+    const e = dosyaIcerik('src/acilis/ekran.tsx');
+    const i = e.indexOf('testID="acilis-ad"');
+    expect(i).toBeGreaterThan(-1);
+    const oncesi = e.slice(Math.max(0, i - 1800), i);
+    expect(oncesi).toMatch(
+      /fontHazir\s*(&&|\?)|opacity:\s*fontHazir|fontHazir\s*\?\s*1\s*:\s*0/,
+    );
+  });
 
   it('KK-101: açılış ve ana ekran logosu aynı yazı tipi tokenını kullanır (baslikXl: Bricolage 800)', () => {
     const e = dosyaIcerik('src/acilis/ekran.tsx');
@@ -41,37 +37,31 @@ describe('KK-101: açılış logosu yazı tipi hazır olmadan çizilmez', () => 
 });
 
 describe('KK-102: ana ekranda alt yazı yok', () => {
-  kabulV81('KK-102: "Bir oyun seç, telefonu ele ver." kaynakta geçmez', () => {
+  it('KK-102: "Bir oyun seç, telefonu ele ver." kaynakta geçmez', () => {
     expect(dosyaIcerik('app/index.tsx')).not.toMatch(/Bir oyun seç/);
   });
 
-  kabulV81(
-    'KK-102: logo ile çip satırı arasında başka yazı gelmez (<Yazi> yok)',
-    () => {
-      const k = dosyaIcerik('app/index.tsx');
-      const logo = k.indexOf('<Logo />');
-      const cipler = k.indexOf('testID="kategori-cipleri"');
-      expect(logo).toBeGreaterThan(-1);
-      expect(cipler).toBeGreaterThan(logo);
-      expect(k.slice(logo, cipler)).not.toMatch(/<Yazi\b|<Text\b/);
-    },
-  );
+  it('KK-102: logo ile çip satırı arasında başka yazı gelmez (<Yazi> yok)', () => {
+    const k = dosyaIcerik('app/index.tsx');
+    const logo = k.indexOf('<Logo />');
+    const cipler = k.indexOf('testID="kategori-cipleri"');
+    expect(logo).toBeGreaterThan(-1);
+    expect(cipler).toBeGreaterThan(logo);
+    expect(k.slice(logo, cipler)).not.toMatch(/<Yazi\b|<Text\b/);
+  });
 });
 
 describe('KK-105: diğer akışlar ve belgeler', () => {
-  kabulV81(
-    'KK-105: CLAUDE.md ve MIMARI.md çipleri "Tümü · 1 kişi · 2 kişi · 3+ kişi" diye anlatır, eski çip adları kalmaz',
-    () => {
-      const mimari = dosyaIcerik('docs/MIMARI.md');
-      const claude = dosyaIcerik('CLAUDE.md');
-      expect(mimari).toContain('Tümü · 1 kişi · 2 kişi · 3+ kişi');
-      for (const [ad, d] of [
-        ['MIMARI', mimari],
-        ['CLAUDE', claude],
-      ])
-        expect(d, ad).not.toMatch(/3–5 kişi|6\+ kişi/);
-    },
-  );
+  it('KK-105: CLAUDE.md ve MIMARI.md çipleri "Tümü · 1 kişi · 2 kişi · 3+ kişi" diye anlatır, eski çip adları kalmaz', () => {
+    const mimari = dosyaIcerik('docs/MIMARI.md');
+    const claude = dosyaIcerik('CLAUDE.md');
+    expect(mimari).toContain('Tümü · 1 kişi · 2 kişi · 3+ kişi');
+    for (const [ad, d] of [
+      ['MIMARI', mimari],
+      ['CLAUDE', claude],
+    ])
+      expect(d, ad).not.toMatch(/3–5 kişi|6\+ kişi/);
+  });
 
   it('KK-105: açılış (KK-94…100), kart kişi sayısı (KK-89) ve ⓘ (KK-91) testleri yerinde (silinmedi)', () => {
     for (const d of [
