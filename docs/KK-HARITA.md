@@ -85,3 +85,10 @@ PRD'deki her kabul kriteri için "KK-nn" ifadesi geçen test dosyaları ve gerç
 | KK-91 | Oyun seçildikten sonraki her ekranın sağ üstünde küçük bir ⓘ düğmesi vardır: mod seçimi, o | `nasil-oynanir.kabul.test.ts` | — |
 | KK-92 | ⓘ düğmesinin dokunma alanı en az 48px'tir. Ekran okuyucu düğmeyi "Nasıl oynanır" diye okur | `nasil-oynanir.kabul.test.ts` | — |
 | KK-93 | Oyun akışları değişmez: mod seçimi, "Devam et" ve oda modu eskisi gibi çalışır. Mevcut kab | `games/kategori.kabul.test.ts`, `tanitim-ui.kabul.test.ts` | — |
+| KK-94 | Uygulama her açıldığında (web'de sayfa yenilendiğinde de) önce açılış ekranı görünür. Ekra | `acilis.kabul.test.ts` | — |
+| KK-95 | Yüzde yalnızca ileri gider. Hazırlık (yazı tipleri ve kayıtlı ayarlar) bitmeden %100 olmaz | `acilis.kabul.test.ts` | — |
+| KK-96 | Ekrana dokunmak kalan bekleme süresini atlar. Hazırlık bittiyse hemen geçer, bitmediyse ha | `acilis.kabul.test.ts` | — |
+| KK-97 | Söz her açılışta bütün sözler arasından rastgele seçilir. Oyuna ait sözün altında oyunun a | `acilis.kabul.test.ts` | — |
+| KK-98 | Sözler `content/` altında tek bir JSON dosyasındadır; yeni söz eklemek kod değişikliği ger | `acilis.kabul.test.ts`, `icerik/soz.kabul.test.ts` | — |
+| KK-99 | Ekran okuyucu yüzdeyi ve sözü okur. Açılış ekranı koyu ve açık temada çalışır; stil değerl | `acilis.kabul.test.ts` | — |
+| KK-100 | Mevcut akışlar değişmez: "Devam et", oda davet bağlantısıyla katılım ve ayarlar eskisi gib | `acilis.kabul.test.ts` | — |
