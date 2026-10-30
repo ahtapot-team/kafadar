@@ -421,7 +421,7 @@ Oyunun kişi aralığı (`minOyuncu` … genel üst sınır 12) çipin aralığ�
 | Kullanılmayan veri | `tur`, `ortam` ve "görüldü" saklaması silinir | Geliştirme ilkesi: kullanılmayan kod kalmaz | pm varsayılanı |
 | Belgeler | İş sonunda md dosyaları güncellenir: TASARIM-SISTEMI (tasarim), KK-HARITA (qa), CLAUDE.md ve MIMARI (frontend) | Belgeler kodla uyumlu kalır | Semih (30.10.2026, msg 718) |
 
-## v8: Açılış ekranı ve eğlenceli sözler (Semih, 30.10.2026) — ONAY BEKLİYOR
+## v8: Açılış ekranı ve eğlenceli sözler (Semih, 30.10.2026) — ONAYLANDI (Semih, 30.10.2026)
 Issue'lar: #190 tasarım (tasarim), #191 kabul testleri (qa), #192 uygulama (frontend; #190 ve #191 bitince başlar).
 Uygulama açılırken boş ekran yerine "Kafadar" adı, yüzdeli bir yükleme çubuğu ve her açılışta değişen eğlenceli bir söz görünür. Sözler oyunlarla ilgilidir: bilgi, atasözü, meme ve dizi/film replikleri. Örneğin Casus kim için: "Koyunlar ömrünü kurttan korkarak geçirir. Halbuki sonunda onu yiyen çobandır." Rafa kalkan 3 ekranlı karşılamanın yerine, Metehan'ın açılış sayfası isteği (Telegram 689) bu hafif biçimde karşılanır.
 
