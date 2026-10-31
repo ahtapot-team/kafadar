@@ -113,7 +113,7 @@ PRD'deki her kabul kriteri için "KK-nn" ifadesi geçen test dosyaları ve gerç
 | KK-127 | Ana ekranda oyunlar 2 sütunlu bir ızgarada ikon olarak görünür. Liste görünümü kalkar. | `games/ana-ekran-v11.kabul.test.ts`, `games/gorsel-veri.kabul.test.ts`, `quiz-night.kabul.test.ts` | cihaz |
 | KK-128 | Kişi çipleri ekranın altındaki sabit bir dock'tadır ve üstünde "Kaç kişisiniz?" yazar. Bu, | `games/ana-ekran-v11.kabul.test.ts`, `games/kategori.kabul.test.ts` | cihaz |
 | KK-129 | Ana ekranın üstünde tek bir kart vardır: | `games/ana-ekran-v11.kabul.test.ts`, `games/gorsel-veri.kabul.test.ts` | cihaz |
-| KK-130 | İkona basılı tutmak (yaklaşık yarım saniye) o oyunun tanıtım kartını açar. Kart "Tamam" il | `games/ana-ekran-v11.kabul.test.ts` | cihaz |
+| KK-130 | İkona basılı tutmak (yaklaşık yarım saniye) o oyunun tanıtım kartını açar. Kart "Tamam" il | `games/ana-ekran-v11.kabul.test.ts`, `nasil-oynanir.kabul.test.ts` | cihaz |
 | KK-131 | Paket ekranında her paket büyük bir karttır. Bu, KK-122'deki "bir emoji" maddesinin yerini | `games/quiz-night/kategori.kabul.test.ts`, `games/quiz-night/paket-v11.kabul.test.ts` | cihaz |
 | KK-132 | Her Quiz Night paketinde zorunlu bir `gorsel` alanı vardır ve bu alan uygulamadaki bir gör | `games/gorsel-veri.kabul.test.ts`, `games/quiz-night/paket-v11.kabul.test.ts`, `icerik/quiz-kategori.kabul.test.ts`, `icerik/quiz.kabul.test.ts` | cihaz |
 | KK-133 | Görseller: | `games/gorsel-veri.kabul.test.ts` | cihaz |

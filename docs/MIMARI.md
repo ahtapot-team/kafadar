@@ -1,6 +1,6 @@
 # Kafadar — Mimari
 
-Son güncelleme: 2026-10-31 — #294 (görsel: kayıt/paket `gorsel`, ustKartSec)
+Son güncelleme: 2026-10-31 — #295 (ana ekran ikon ızgarası, dock, üst kart)
 
 Kısa rehber için `CLAUDE.md`. Bu belge katmanları, veri akışını, oda protokolünü, testleri ve kuralları anlatır.
 
@@ -36,7 +36,7 @@ Açılış ekranı `app/_layout.tsx`'te yazı tipi ve ayarlar okunurken görün�
 4. Desteler: `content/` JSON + `src/icerik/kayit.ts` kaydı, ardından `npm run icerik`.
 5. Oda modu gerekiyorsa `src/oda/oda.ts` oda türüne ekle (`mesaj.ts` protokolünü bozmadan).
 6. Kabul testlerini (`*.kabul.test.ts`) ve KK eşlemesini ekle; `npm run kk-harita`.
-7. Ana ekran kişi çipleri (Tümü · 1 kişi · 2 kişi · 3+ kişi; aralıklar 1 · 2 · 3–12) oyunun kişi aralığından (`minOyuncu` ?? 2 … genel üst sınır 12) türer; yeni alan gerekmez. Kural `src/games/kategori.ts`'te.
+7. Ana ekran kişi çipleri (Tümü · 1 kişi · 2 kişi · 3+ kişi; aralıklar 1 · 2 · 3–12) oyunun kişi aralığından (`minOyuncu` ?? 2 … genel üst sınır 12) türer; yeni alan gerekmez. Kural `src/games/kategori.ts`'te. Ana ekran (v11, #295): `app/index.tsx` 2 sütunlu ikon ızgarası (`filtrele` çıktısı; ikon = token zemin + `assets/gorsel/desen/<oyun>.webp` + taşan nesne `gorsel`; yol→kaynak `src/gorsel.ts`), üstte `ustKartSec` kartı ("Oyna" ikonla aynı `gir`; son oynanan `kafadar.sonOynanan` anahtarıyla telefonda), altta sabit dock ("Kaç kişisiniz?" + çipler), ikona uzun basma (0,5 sn) `TanitimKarti`, ekran okuyucu eylemi "Nasıl oynanır" (`kartEtiketi`); ana ekranda emoji ve ⓘ yok, basma ölçeği "Hareketi azalt"ta kapalı; yeni oyun = `gorsel` + `src/gorsel.ts` satırları (nesne, desen, zemin).
 8. Oyun listesi değiştiği için `CLAUDE.md` / bu belge aynı PR'da güncellenir.
 
 ## Oda sunucusu (`sunucu/`)

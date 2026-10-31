@@ -6,6 +6,7 @@ const ortak = {
   marka2: '#5B8CFF',
   ok: '#3DDC84',
   nok: '#FF5A4E',
+  gece: '#2B2570', // Quiz Night ikon zemini; iki temada aynı
 };
 
 export const renkler = {
@@ -17,6 +18,7 @@ export const renkler = {
     metinSoluk: '#B9B3E8',
     okMetin: '#3DDC84',
     nokMetin: '#FF5A4E',
+    dock: 'rgba(43,37,112,0.9)',
   },
   acik: {
     ...ortak,
@@ -26,6 +28,7 @@ export const renkler = {
     metinSoluk: '#5B5585',
     okMetin: '#0F8A4B',
     nokMetin: '#D63A2F',
+    dock: 'rgba(255,255,255,0.92)',
   },
 };
 

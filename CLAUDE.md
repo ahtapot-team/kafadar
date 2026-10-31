@@ -1,6 +1,6 @@
 # Kafadar
 
-Son güncelleme: 2026-10-31 — #294 (görsel: kayıt/paket `gorsel`, ustKartSec)
+Son güncelleme: 2026-10-31 — #295 (ana ekran ikon ızgarası, dock, üst kart)
 
 Kafadar, arkadaş/çift/aile için mobil parti oyunları uygulamasıdır (OK mu NOK mu, 10/10 ama, Casus kim). Tek telefonda ya da oda koduyla çok telefonda oynanır. Ayrıntı: `docs/MIMARI.md`.
 
@@ -34,7 +34,7 @@ Expo SDK 58, expo-router, TypeScript, Vitest, Cloudflare Workers + Durable Objec
 - `src/oda-ui/` — oda modu ekran parçaları. `src/baglanti/` — WebSocket bağlamı ve QR.
 - `src/acilis/ekran.tsx` — açılış ekranı (`app/_layout.tsx` gezgin (`Yigin`) yazı tipi hazır olunca bağlanır, açılış ekranı üstüne biner; en az 3 sn, dokununca geçer; kurallar `src/core/acilis.ts`, `soz.ts`). Sözler: `content/acilis/sozler.json` (`npm run icerik` denetler).
 - `src/icerik/` — içerik kaydı ve doğrulama. `src/test/yardimci.ts` — test yardımcıları.
-- `src/tema.ts`, `ui.tsx`, `depo.ts`, `durum.tsx`, `desteler.ts`, `titresim.ts`, `uygulama-geri.ts` — kök yardımcılar. `src/games/kategori.ts`: ana ekran kişi sayısı çipleri (kural saf fonksiyon). `tanitim-kutusu.tsx`: tanıtım kartı ve ⓘ `BilgiDugmesi`.
+- `src/tema.ts`, `ui.tsx`, `depo.ts`, `durum.tsx`, `desteler.ts`, `titresim.ts`, `uygulama-geri.ts` — kök yardımcılar. `src/games/kategori.ts`: ana ekran kişi sayısı çipleri (kural saf fonksiyon). `gorsel.ts`: oyun görsel/desen/zemin haritası (yeni oyunda satır ekle; ana ekran ikon ızgarası, dock ve üst kart `app/index.tsx`'te). `tanitim-kutusu.tsx`: tanıtım kartı ve ⓘ `BilgiDugmesi`.
 - `content/decks`, `content/casus`, `content/onon` — deste JSON'ları; `content/quiz` — Quiz Night paketleri (`kategori` zorunlu: `dizi-film`, `muzik`, `spor`; `ask-i-memnu`, `hababam-sinifi`, `prison-break`, `galatasaray`, `fenerbahce`, `besiktas`, `manifest`; zorunlu `gorsel` (`assets/gorsel/*.webp`, emoji yok); yeni paket: JSON + `gorsel` dosyası + `src/oyun-ekranlari/quiz/paketler.ts` + `sunucu/src/quiz-paketler.ts` listeleri; taslaklar `docs/quiz/`; `src/icerik/quiz.ts` denetler). `docs/desteler/` — taslak md'ler.
 - `sunucu/` — Cloudflare Worker (`sunucu/src/{worker,oda-do,sinir-do,ortak,quiz-paketler}.ts`, `test/`).
 - `scripts/` — `icerik-dogrula.ts`, `kk-harita.ts`, `belge-kontrol.ts`. `design/` — tasarımlar. `docs/` — PRD, MIMARI, KK haritası.
