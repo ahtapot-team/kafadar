@@ -56,8 +56,8 @@ describe('Quiz Night durum makinesi', () => {
     expect(durumGecerliMi(d)).toBe(true);
     expect(dogruSayilari(d)).toEqual([10, 0]);
     expect(turSonucu(d)).toEqual([
-      { ad: 'Ali', dogru: 10, sira: 1 },
-      { ad: 'Ece', dogru: 0, sira: 2 },
+      { ad: 'Ali', dogru: 10, katsayi: 20, sira: 1 },
+      { ad: 'Ece', dogru: 0, katsayi: 0, sira: 2 },
     ]);
   });
 

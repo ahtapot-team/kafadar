@@ -61,17 +61,34 @@ export function unvanSec(unvanlar: readonly string[], p: number): string {
   return unvanlar[basamak];
 }
 
-// Doğru sayısına göre azalan; eşit doğru aynı sıra, eşitlerde girdi sırası korunur (KK-112).
-export function siralama(
-  oyuncular: readonly { ad: string; dogru: number }[],
-): { ad: string; dogru: number; sira: number }[] {
+// Beraberlik katsayısı: kolay 1, orta 2, zor 3 (KK-114).
+export const zorlukKatsayisi = (z: Zorluk): number =>
+  z === 'kolay' ? 1 : z === 'orta' ? 2 : 3;
+
+// Yalnız doğru cevaplanan soruların katsayıları toplanır; `puan` değişmez.
+export const katsayiliToplam = (
+  sorular: readonly { zorluk: Zorluk }[],
+  dogruMu: readonly boolean[],
+): number =>
+  sorular.reduce(
+    (t, s, i) => t + (dogruMu[i] ? zorlukKatsayisi(s.zorluk) : 0),
+    0,
+  );
+
+// Önce doğru sayısı, eşitse katsayı (verilmezse 0) azalan; ikisi de eşitse aynı sıra, girdi sırası korunur (KK-112, KK-114).
+export function siralama<T extends { dogru: number; katsayi?: number }>(
+  oyuncular: readonly T[],
+): (T & { sira: number })[] {
+  const kat = (o: T) => o.katsayi ?? 0;
   const sirali = oyuncular
-    .map((o, i) => ({ ...o, i }))
-    .sort((a, b) => b.dogru - a.dogru || a.i - b.i);
+    .map((o, i) => ({ o, i }))
+    .sort((a, b) => b.o.dogru - a.o.dogru || kat(b.o) - kat(a.o) || a.i - b.i);
   let sira = 0;
-  return sirali.map(({ ad, dogru }, k) => {
-    if (k === 0 || sirali[k - 1].dogru !== dogru) sira = k + 1;
-    return { ad, dogru, sira };
+  return sirali.map(({ o }, k) => {
+    const onceki = sirali[k - 1]?.o;
+    if (!onceki || onceki.dogru !== o.dogru || kat(onceki) !== kat(o))
+      sira = k + 1;
+    return { ...o, sira };
   });
 }
 
@@ -129,8 +146,22 @@ export const dogruSayilari = (d: Durum): number[] =>
     puan(c.map((sik, k) => sik !== null && sik === d.sorular[k]?.dogru)),
   );
 
-export const turSonucu = (d: Durum) =>
-  siralama(d.oyuncular.map((ad, i) => ({ ad, dogru: dogruSayilari(d)[i] })));
+// Sonuç her oyuncu için doğru sayısını ve katsayılı toplamı taşır; `sira` 1 olanlar birincidir.
+export const turSonucu = (d: Durum) => {
+  const dogrular = dogruSayilari(d);
+  return siralama(
+    d.oyuncular.map((ad, i) => ({
+      ad,
+      dogru: dogrular[i],
+      katsayi: katsayiliToplam(
+        d.sorular,
+        d.cevaplar[i].map(
+          (sik, k) => sik !== null && sik === d.sorular[k]?.dogru,
+        ),
+      ),
+    })),
+  );
+};
 
 export function durumGecerliMi(x: unknown): x is Durum {
   const d = x as Durum | null;
