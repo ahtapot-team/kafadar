@@ -22,9 +22,6 @@
 //       grup: kupa true (🏆), adlar = TÜM birincilerin adı (girdi sırası), puan/unvan birincinin; ortalama YOK.
 //       tek: kupa false, adlar = [oyuncunun adı], puan/unvan kendi sonucu. Kartta soru/cevap alanı yoktur (yalnız bu 5 anahtar).
 import { describe, expect, it } from 'vitest';
-import { BEKLEYEN } from '../../kabul';
-
-const kabulQuiz = BEKLEYEN.quizArayuz ? it.fails : it;
 
 type Arayuz = {
   MODLAR: { id: string; etiket: string }[];
@@ -48,62 +45,53 @@ const yukle = async () =>
 const SIKLAR = [0, 1, 2, 3];
 
 describe('KK-107: mod seçimi', () => {
-  kabulQuiz(
-    "KK-107: dört mod tanımlıdır; Faz 1'de yalnızca Tek başına ve Tek telefonda grup görünür",
-    async () => {
-      const { MODLAR, gorunenModlar } = await yukle();
-      expect(MODLAR.map((m) => m.etiket)).toEqual([
-        'Tek başına',
-        'Tek telefonda grup',
-        'Oda kur',
-        'Odaya katıl',
-      ]);
-      expect(gorunenModlar().map((m) => m.id)).toEqual(['tek', 'grup']);
-      expect(gorunenModlar(false).map((m) => m.id)).toEqual(['tek', 'grup']);
-      expect(gorunenModlar(true).map((m) => m.id)).toEqual([
-        'tek',
-        'grup',
-        'oda-kur',
-        'oda-katil',
-      ]);
-    },
-  );
+  it("KK-107: dört mod tanımlıdır; Faz 1'de yalnızca Tek başına ve Tek telefonda grup görünür", async () => {
+    const { MODLAR, gorunenModlar } = await yukle();
+    expect(MODLAR.map((m) => m.etiket)).toEqual([
+      'Tek başına',
+      'Tek telefonda grup',
+      'Oda kur',
+      'Odaya katıl',
+    ]);
+    expect(gorunenModlar().map((m) => m.id)).toEqual(['tek', 'grup']);
+    expect(gorunenModlar(false).map((m) => m.id)).toEqual(['tek', 'grup']);
+    expect(gorunenModlar(true).map((m) => m.id)).toEqual([
+      'tek',
+      'grup',
+      'oda-kur',
+      'oda-katil',
+    ]);
+  });
 });
 
 describe('KK-108: paket kartı ve Türk / Yabancı süzgeci', () => {
-  kabulQuiz(
-    'KK-108: başlık düz metin "Ne kadar <ad> fanısın?", etiketler ve not',
-    async () => {
-      const { paketBasligi, kokenEtiketi, PAKET_NOTU } = await yukle();
-      expect(paketBasligi('Kurtlar Vadisi')).toBe(
-        'Ne kadar Kurtlar Vadisi fanısın?',
-      );
-      expect(paketBasligi('X')).toBe('Ne kadar X fanısın?');
-      expect(kokenEtiketi('tr')).toBe('Türk');
-      expect(kokenEtiketi('yabanci')).toBe('Yabancı');
-      expect(PAKET_NOTU).toBe('Resmî değildir · Spoiler içerir');
-    },
-  );
+  it('KK-108: başlık düz metin "Ne kadar <ad> fanısın?", etiketler ve not', async () => {
+    const { paketBasligi, kokenEtiketi, PAKET_NOTU } = await yukle();
+    expect(paketBasligi('Kurtlar Vadisi')).toBe(
+      'Ne kadar Kurtlar Vadisi fanısın?',
+    );
+    expect(paketBasligi('X')).toBe('Ne kadar X fanısın?');
+    expect(kokenEtiketi('tr')).toBe('Türk');
+    expect(kokenEtiketi('yabanci')).toBe('Yabancı');
+    expect(PAKET_NOTU).toBe('Resmî değildir · Spoiler içerir');
+  });
 
-  kabulQuiz(
-    "KK-108: çipler Tümü · Türk · Yabancı; süzgeç koken'e göre, sıra korunur; Tümü hepsini verir",
-    async () => {
-      const { KOKEN_CIPLERI, paketSuz } = await yukle();
-      expect(KOKEN_CIPLERI).toEqual(['tumu', 'tr', 'yabanci']);
-      const p = [
-        { id: 'a', koken: 'tr' as const },
-        { id: 'b', koken: 'yabanci' as const },
-        { id: 'c', koken: 'tr' as const },
-      ];
-      expect(paketSuz(p, 'tumu').map((x) => x.id)).toEqual(['a', 'b', 'c']);
-      expect(paketSuz(p, 'tr').map((x) => x.id)).toEqual(['a', 'c']);
-      expect(paketSuz(p, 'yabanci').map((x) => x.id)).toEqual(['b']);
-    },
-  );
+  it("KK-108: çipler Tümü · Türk · Yabancı; süzgeç koken'e göre, sıra korunur; Tümü hepsini verir", async () => {
+    const { KOKEN_CIPLERI, paketSuz } = await yukle();
+    expect(KOKEN_CIPLERI).toEqual(['tumu', 'tr', 'yabanci']);
+    const p = [
+      { id: 'a', koken: 'tr' as const },
+      { id: 'b', koken: 'yabanci' as const },
+      { id: 'c', koken: 'tr' as const },
+    ];
+    expect(paketSuz(p, 'tumu').map((x) => x.id)).toEqual(['a', 'b', 'c']);
+    expect(paketSuz(p, 'tr').map((x) => x.id)).toEqual(['a', 'c']);
+    expect(paketSuz(p, 'yabanci').map((x) => x.id)).toEqual(['b']);
+  });
 });
 
 describe('KK-110: soru ekranı (tek başına)', () => {
-  kabulQuiz('KK-110: "3/10" ilerleme ve zorluk yazıyla', async () => {
+  it('KK-110: "3/10" ilerleme ve zorluk yazıyla', async () => {
     const { ilerlemeMetni, zorlukEtiketi } = await yukle();
     expect(ilerlemeMetni(0)).toBe('1/10');
     expect(ilerlemeMetni(2)).toBe('3/10');
@@ -114,55 +102,46 @@ describe('KK-110: soru ekranı (tek başına)', () => {
     expect(zorlukEtiketi('zor')).toBe('Zor');
   });
 
-  kabulQuiz(
-    'KK-110: doğru şık ok, yanlış seçilen nok, diğerleri nötr; cevap öncesi hepsi nötr',
-    async () => {
-      const { sikRengi } = await yukle();
-      for (const d of SIKLAR) {
-        expect(SIKLAR.map((s) => sikRengi(s, d, null))).toEqual(
-          Array(4).fill('notr'),
-        );
-        expect(SIKLAR.map((s) => sikRengi(s, d, d))).toEqual(
-          SIKLAR.map((s) => (s === d ? 'ok' : 'notr')),
-        );
-      }
-      const yanlis = SIKLAR.map((s) => sikRengi(s, 1, 3)); // doğru 1, seçilen 3
-      expect(yanlis).toEqual(['notr', 'ok', 'notr', 'nok']);
-    },
-  );
+  it('KK-110: doğru şık ok, yanlış seçilen nok, diğerleri nötr; cevap öncesi hepsi nötr', async () => {
+    const { sikRengi } = await yukle();
+    for (const d of SIKLAR) {
+      expect(SIKLAR.map((s) => sikRengi(s, d, null))).toEqual(
+        Array(4).fill('notr'),
+      );
+      expect(SIKLAR.map((s) => sikRengi(s, d, d))).toEqual(
+        SIKLAR.map((s) => (s === d ? 'ok' : 'notr')),
+      );
+    }
+    const yanlis = SIKLAR.map((s) => sikRengi(s, 1, 3)); // doğru 1, seçilen 3
+    expect(yanlis).toEqual(['notr', 'ok', 'notr', 'nok']);
+  });
 
-  kabulQuiz(
-    'KK-110: ilk cevap kilitlenir, değiştirilemez; ~1,5 sn sonra sıradaki soru',
-    async () => {
-      const { cevapKilitle, SONRAKI_BEKLEME_MS } = await yukle();
-      expect(cevapKilitle(null, 2)).toBe(2);
-      expect(cevapKilitle(2, 0)).toBe(2);
-      expect(cevapKilitle(0, 3)).toBe(0); // 0 da kilitli sayılır (falsy tuzağı)
-      expect(SONRAKI_BEKLEME_MS).toBeGreaterThanOrEqual(1000);
-      expect(SONRAKI_BEKLEME_MS).toBeLessThanOrEqual(2000);
-    },
-  );
+  it('KK-110: ilk cevap kilitlenir, değiştirilemez; ~1,5 sn sonra sıradaki soru', async () => {
+    const { cevapKilitle, SONRAKI_BEKLEME_MS } = await yukle();
+    expect(cevapKilitle(null, 2)).toBe(2);
+    expect(cevapKilitle(2, 0)).toBe(2);
+    expect(cevapKilitle(0, 3)).toBe(0); // 0 da kilitli sayılır (falsy tuzağı)
+    expect(SONRAKI_BEKLEME_MS).toBeGreaterThanOrEqual(1000);
+    expect(SONRAKI_BEKLEME_MS).toBeLessThanOrEqual(2000);
+  });
 });
 
 describe('KK-112: grup modunda doğru cevap "Cevabı göster"e kadar belli olmaz', () => {
-  kabulQuiz(
-    'KK-112: gösterilmeden hiçbir şık farklı görünmez; gösterilince yalnızca doğru ok',
-    async () => {
-      const { grupSikRengi } = await yukle();
-      for (const d of SIKLAR) {
-        expect(SIKLAR.map((s) => grupSikRengi(s, d, false))).toEqual(
-          Array(4).fill('notr'),
-        );
-        expect(SIKLAR.map((s) => grupSikRengi(s, d, true))).toEqual(
-          SIKLAR.map((s) => (s === d ? 'ok' : 'notr')),
-        );
-      }
-    },
-  );
+  it('KK-112: gösterilmeden hiçbir şık farklı görünmez; gösterilince yalnızca doğru ok', async () => {
+    const { grupSikRengi } = await yukle();
+    for (const d of SIKLAR) {
+      expect(SIKLAR.map((s) => grupSikRengi(s, d, false))).toEqual(
+        Array(4).fill('notr'),
+      );
+      expect(SIKLAR.map((s) => grupSikRengi(s, d, true))).toEqual(
+        SIKLAR.map((s) => (s === d ? 'ok' : 'notr')),
+      );
+    }
+  });
 });
 
 describe('KK-111: sonuç ekranı puan metni', () => {
-  kabulQuiz('KK-111: büyük puan "8/10" biçiminde', async () => {
+  it('KK-111: büyük puan "8/10" biçiminde', async () => {
     const { sonucMetni } = await yukle();
     expect(sonucMetni(8)).toBe('8/10');
     expect(sonucMetni(0)).toBe('0/10');
@@ -198,26 +177,23 @@ describe('KK-111/KK-112: birinci öne çıkar, paylaşım kartı birinciyi göst
   const kz = async () => (await yukle()) as unknown as Kazanan;
   const UN = ['Çaylak', 'Meraklı', 'Uzman', 'Efsane'];
 
-  kabulQuiz(
-    'KK-112: her oyuncunun unvanı görünür; birinci işaretlenir',
-    async () => {
-      const { sonucSatirlari } = await kz();
-      const s = sonucSatirlari(
-        [
-          { ad: 'Ece', dogru: 8, sira: 1 },
-          { ad: 'Ali', dogru: 5, sira: 2 },
-          { ad: 'Can', dogru: 2, sira: 3 },
-        ],
-        UN,
-      );
-      expect(s.map((x) => x.ad)).toEqual(['Ece', 'Ali', 'Can']);
-      expect(s.map((x) => x.puan)).toEqual(['8/10', '5/10', '2/10']);
-      expect(s.map((x) => x.unvan)).toEqual(['Uzman', 'Meraklı', 'Çaylak']);
-      expect(s.map((x) => x.birinci)).toEqual([true, false, false]);
-    },
-  );
+  it('KK-112: her oyuncunun unvanı görünür; birinci işaretlenir', async () => {
+    const { sonucSatirlari } = await kz();
+    const s = sonucSatirlari(
+      [
+        { ad: 'Ece', dogru: 8, sira: 1 },
+        { ad: 'Ali', dogru: 5, sira: 2 },
+        { ad: 'Can', dogru: 2, sira: 3 },
+      ],
+      UN,
+    );
+    expect(s.map((x) => x.ad)).toEqual(['Ece', 'Ali', 'Can']);
+    expect(s.map((x) => x.puan)).toEqual(['8/10', '5/10', '2/10']);
+    expect(s.map((x) => x.unvan)).toEqual(['Uzman', 'Meraklı', 'Çaylak']);
+    expect(s.map((x) => x.birinci)).toEqual([true, false, false]);
+  });
 
-  kabulQuiz('KK-112: ortak birincilikte hepsi birinci', async () => {
+  it('KK-112: ortak birincilikte hepsi birinci', async () => {
     const { sonucSatirlari } = await kz();
     const s = sonucSatirlari(
       [
@@ -230,66 +206,57 @@ describe('KK-111/KK-112: birinci öne çıkar, paylaşım kartı birinciyi göst
     expect(s.map((x) => x.birinci)).toEqual([true, true, false]);
   });
 
-  kabulQuiz(
-    'KK-111: grup kartı birinciyi gösterir (🏆, ad, puan, unvan, paket)',
-    async () => {
-      const { paylasimKarti } = await kz();
-      const k = paylasimKarti({
-        mod: 'grup',
-        paket: 'Hababam Sınıfı',
-        sonuc: [
-          { ad: 'Ece', dogru: 10, sira: 1 },
-          { ad: 'Ali', dogru: 5, sira: 2 },
-        ],
-        unvanlar: UN,
-      });
-      expect(k).toEqual({
-        paket: 'Hababam Sınıfı',
-        kupa: true,
-        adlar: ['Ece'],
-        puan: '10/10',
-        unvan: 'Efsane',
-      });
-    },
-  );
+  it('KK-111: grup kartı birinciyi gösterir (🏆, ad, puan, unvan, paket)', async () => {
+    const { paylasimKarti } = await kz();
+    const k = paylasimKarti({
+      mod: 'grup',
+      paket: 'Hababam Sınıfı',
+      sonuc: [
+        { ad: 'Ece', dogru: 10, sira: 1 },
+        { ad: 'Ali', dogru: 5, sira: 2 },
+      ],
+      unvanlar: UN,
+    });
+    expect(k).toEqual({
+      paket: 'Hababam Sınıfı',
+      kupa: true,
+      adlar: ['Ece'],
+      puan: '10/10',
+      unvan: 'Efsane',
+    });
+  });
 
-  kabulQuiz(
-    'KK-111: grupta ortak birincilikte hepsinin adı yazar; ortalama yok',
-    async () => {
-      const { paylasimKarti } = await kz();
-      const k = paylasimKarti({
-        mod: 'grup',
-        paket: 'P',
-        sonuc: [
-          { ad: 'Ece', dogru: 7, sira: 1 },
-          { ad: 'Ali', dogru: 7, sira: 1 },
-          { ad: 'Can', dogru: 1, sira: 3 },
-        ],
-        unvanlar: UN,
-      });
-      expect(k.adlar).toEqual(['Ece', 'Ali']);
-      expect(k.puan).toBe('7/10'); // ortalama (5/10) değil, birincinin puanı
-      expect(k.unvan).toBe('Uzman');
-    },
-  );
+  it('KK-111: grupta ortak birincilikte hepsinin adı yazar; ortalama yok', async () => {
+    const { paylasimKarti } = await kz();
+    const k = paylasimKarti({
+      mod: 'grup',
+      paket: 'P',
+      sonuc: [
+        { ad: 'Ece', dogru: 7, sira: 1 },
+        { ad: 'Ali', dogru: 7, sira: 1 },
+        { ad: 'Can', dogru: 1, sira: 3 },
+      ],
+      unvanlar: UN,
+    });
+    expect(k.adlar).toEqual(['Ece', 'Ali']);
+    expect(k.puan).toBe('7/10'); // ortalama (5/10) değil, birincinin puanı
+    expect(k.unvan).toBe('Uzman');
+  });
 
-  kabulQuiz(
-    'KK-111: tek başına kartı oyuncunun kendi sonucu (kupa yok), soru/cevap yok',
-    async () => {
-      const { paylasimKarti } = await kz();
-      const k = paylasimKarti({
-        mod: 'tek',
-        paket: 'Prison Break',
-        sonuc: [{ ad: 'Sen', dogru: 8, sira: 1 }],
-        unvanlar: UN,
-      });
-      expect(k.kupa).toBe(false);
-      expect(k.adlar).toEqual(['Sen']);
-      expect(k.puan).toBe('8/10');
-      expect(k.unvan).toBe('Uzman');
-      expect(Object.keys(k).sort()).toEqual(
-        ['adlar', 'kupa', 'paket', 'puan', 'unvan'].sort(),
-      );
-    },
-  );
+  it('KK-111: tek başına kartı oyuncunun kendi sonucu (kupa yok), soru/cevap yok', async () => {
+    const { paylasimKarti } = await kz();
+    const k = paylasimKarti({
+      mod: 'tek',
+      paket: 'Prison Break',
+      sonuc: [{ ad: 'Sen', dogru: 8, sira: 1 }],
+      unvanlar: UN,
+    });
+    expect(k.kupa).toBe(false);
+    expect(k.adlar).toEqual(['Sen']);
+    expect(k.puan).toBe('8/10');
+    expect(k.unvan).toBe('Uzman');
+    expect(Object.keys(k).sort()).toEqual(
+      ['adlar', 'kupa', 'paket', 'puan', 'unvan'].sort(),
+    );
+  });
 });
