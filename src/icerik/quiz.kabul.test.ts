@@ -11,9 +11,6 @@
 //       ağdan DENETLENMEZ (CI çevrimdışı çalışır)
 import { existsSync, readdirSync, readFileSync } from 'node:fs';
 import { describe, expect, it } from 'vitest';
-import { BEKLEYEN } from '../kabul';
-
-const kabulIcerik = BEKLEYEN.quizIcerik ? it.fails : it;
 
 type Zorluk = 'kolay' | 'orta' | 'zor';
 type Soru = {
@@ -292,18 +289,15 @@ describe('KK-117: Faz 1 içerik kümesi', () => {
         ) as Paket,
     );
 
-  kabulIcerik(
-    'KK-117: en az 3 paket; en az biri tr, en az biri yabanci; hepsi geçerli',
-    async () => {
-      const { quizHatalari } = await yukle();
-      const paketler = oku();
-      expect(paketler.length).toBeGreaterThanOrEqual(3);
-      expect(paketler.some((p) => p.koken === 'tr')).toBe(true);
-      expect(paketler.some((p) => p.koken === 'yabanci')).toBe(true);
-      for (const p of paketler) expect(quizHatalari(p)).toEqual([]);
-      expect(new Set(paketler.map((p) => p.id)).size).toBe(paketler.length);
-    },
-  );
+  it('KK-117: en az 3 paket; en az biri tr, en az biri yabanci; hepsi geçerli', async () => {
+    const { quizHatalari } = await yukle();
+    const paketler = oku();
+    expect(paketler.length).toBeGreaterThanOrEqual(3);
+    expect(paketler.some((p) => p.koken === 'tr')).toBe(true);
+    expect(paketler.some((p) => p.koken === 'yabanci')).toBe(true);
+    for (const p of paketler) expect(quizHatalari(p)).toEqual([]);
+    expect(new Set(paketler.map((p) => p.id)).size).toBe(paketler.length);
+  });
 
   // Bayraksız: paket eklenirken (bölünmüş PR'lar) her adımda geçerli kalır; klasör henüz yoksa boş sayılır.
   it('KK-117: örnek/test paketi content/quiz altında yok (uygulamada görünmesin)', () => {
