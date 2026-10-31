@@ -42,6 +42,11 @@ for (const f of quizDosyalari) {
   try {
     const paket = JSON.parse(readFileSync(new URL(f, quizKlasoru), 'utf8'));
     for (const m of quizHatalari(paket)) hata(`quiz/${f}`, m);
+    if (
+      typeof paket.gorsel === 'string' &&
+      !existsSync(new URL(`../${paket.gorsel}`, kok))
+    )
+      hata(`quiz/${f}`, `gorsel dosyası yok: ${paket.gorsel}`);
   } catch (e) {
     hata(`quiz/${f}`, `okunamadı: ${(e as Error).message}`);
   }

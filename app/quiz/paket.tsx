@@ -106,7 +106,7 @@ export default function QuizPaketSec() {
               justifyContent: 'center',
             }}
           >
-            <Yazi tur="baslik">{p.emoji}</Yazi>
+            {/* paket görseli: frontend işi */}
           </View>
           <View style={{ flex: 1, gap: 2 }}>
             <Yazi tur="dugme">{paketBasligi(p)}</Yazi>
