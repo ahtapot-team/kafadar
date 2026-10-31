@@ -59,7 +59,7 @@ export default function QuizPaketSec() {
         <GeriCubugu testID="geri" />
         <BilgiDugmesi oyunId={oyunId ?? ''} />
       </View>
-      <Yazi tur="baslik">Hangi dizi?</Yazi>
+      <Yazi tur="baslik">Neyin fanısın?</Yazi>
       {cipler.length > 0 && (
         <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: bosluk.m }}>
           {cipler.map((c) => (
