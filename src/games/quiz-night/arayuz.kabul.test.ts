@@ -15,6 +15,12 @@
 //   SONRAKI_BEKLEME_MS ∈ [1000, 2000] (≈1,5 sn) · SOLO_TITRESIM: yanlış cevapta titreşim (telefonda doğrulanır)
 //   grupSikRengi(sik, dogru, gosterildi: boolean): 'ok' | 'notr'   gosterildi=false → doğru dahil hepsi 'notr' (ipucu yok)
 //   sonucMetni(puan, toplam = 10) = '8/10'
+// KAZANAN (issue #243; PRD KK-111/KK-112, Semih msg 925) — sonuc = quiz.ts `turSonucu` çıktısı { ad, dogru, sira }[]:
+//   sonucSatirlari(sonuc, unvanlar): { ad, puan: '8/10', unvan, sira, birinci: boolean }[]  sıra korunur; birinci = (sira === 1);
+//       HER oyuncunun unvanı vardır (unvanSec); ortak birincilikte birden çok satır birinci olur.
+//   paylasimKarti({ mod: 'tek'|'grup', paket: string, sonuc, unvanlar }): { paket, kupa: boolean, adlar: string[], puan, unvan }
+//       grup: kupa true (🏆), adlar = TÜM birincilerin adı (girdi sırası), puan/unvan birincinin; ortalama YOK.
+//       tek: kupa false, adlar = [oyuncunun adı], puan/unvan kendi sonucu. Kartta soru/cevap alanı yoktur (yalnız bu 5 anahtar).
 import { describe, expect, it } from 'vitest';
 import { BEKLEYEN } from '../../kabul';
 
@@ -162,4 +168,128 @@ describe('KK-111: sonuç ekranı puan metni', () => {
     expect(sonucMetni(0)).toBe('0/10');
     expect(sonucMetni(10, 10)).toBe('10/10');
   });
+});
+
+describe('KK-111/KK-112: birinci öne çıkar, paylaşım kartı birinciyi gösterir', () => {
+  type Kazanan = {
+    sonucSatirlari(
+      sonuc: { ad: string; dogru: number; sira: number }[],
+      unvanlar: string[],
+    ): {
+      ad: string;
+      puan: string;
+      unvan: string;
+      sira: number;
+      birinci: boolean;
+    }[];
+    paylasimKarti(g: {
+      mod: 'tek' | 'grup';
+      paket: string;
+      sonuc: { ad: string; dogru: number; sira: number }[];
+      unvanlar: string[];
+    }): {
+      paket: string;
+      kupa: boolean;
+      adlar: string[];
+      puan: string;
+      unvan: string;
+    };
+  };
+  const kz = async () => (await yukle()) as unknown as Kazanan;
+  const UN = ['Çaylak', 'Meraklı', 'Uzman', 'Efsane'];
+
+  kabulQuiz(
+    'KK-112: her oyuncunun unvanı görünür; birinci işaretlenir',
+    async () => {
+      const { sonucSatirlari } = await kz();
+      const s = sonucSatirlari(
+        [
+          { ad: 'Ece', dogru: 8, sira: 1 },
+          { ad: 'Ali', dogru: 5, sira: 2 },
+          { ad: 'Can', dogru: 2, sira: 3 },
+        ],
+        UN,
+      );
+      expect(s.map((x) => x.ad)).toEqual(['Ece', 'Ali', 'Can']);
+      expect(s.map((x) => x.puan)).toEqual(['8/10', '5/10', '2/10']);
+      expect(s.map((x) => x.unvan)).toEqual(['Uzman', 'Meraklı', 'Çaylak']);
+      expect(s.map((x) => x.birinci)).toEqual([true, false, false]);
+    },
+  );
+
+  kabulQuiz('KK-112: ortak birincilikte hepsi birinci', async () => {
+    const { sonucSatirlari } = await kz();
+    const s = sonucSatirlari(
+      [
+        { ad: 'A', dogru: 7, sira: 1 },
+        { ad: 'B', dogru: 7, sira: 1 },
+        { ad: 'C', dogru: 3, sira: 3 },
+      ],
+      UN,
+    );
+    expect(s.map((x) => x.birinci)).toEqual([true, true, false]);
+  });
+
+  kabulQuiz(
+    'KK-111: grup kartı birinciyi gösterir (🏆, ad, puan, unvan, paket)',
+    async () => {
+      const { paylasimKarti } = await kz();
+      const k = paylasimKarti({
+        mod: 'grup',
+        paket: 'Hababam Sınıfı',
+        sonuc: [
+          { ad: 'Ece', dogru: 10, sira: 1 },
+          { ad: 'Ali', dogru: 5, sira: 2 },
+        ],
+        unvanlar: UN,
+      });
+      expect(k).toEqual({
+        paket: 'Hababam Sınıfı',
+        kupa: true,
+        adlar: ['Ece'],
+        puan: '10/10',
+        unvan: 'Efsane',
+      });
+    },
+  );
+
+  kabulQuiz(
+    'KK-111: grupta ortak birincilikte hepsinin adı yazar; ortalama yok',
+    async () => {
+      const { paylasimKarti } = await kz();
+      const k = paylasimKarti({
+        mod: 'grup',
+        paket: 'P',
+        sonuc: [
+          { ad: 'Ece', dogru: 7, sira: 1 },
+          { ad: 'Ali', dogru: 7, sira: 1 },
+          { ad: 'Can', dogru: 1, sira: 3 },
+        ],
+        unvanlar: UN,
+      });
+      expect(k.adlar).toEqual(['Ece', 'Ali']);
+      expect(k.puan).toBe('7/10'); // ortalama (5/10) değil, birincinin puanı
+      expect(k.unvan).toBe('Uzman');
+    },
+  );
+
+  kabulQuiz(
+    'KK-111: tek başına kartı oyuncunun kendi sonucu (kupa yok), soru/cevap yok',
+    async () => {
+      const { paylasimKarti } = await kz();
+      const k = paylasimKarti({
+        mod: 'tek',
+        paket: 'Prison Break',
+        sonuc: [{ ad: 'Sen', dogru: 8, sira: 1 }],
+        unvanlar: UN,
+      });
+      expect(k.kupa).toBe(false);
+      expect(k.adlar).toEqual(['Sen']);
+      expect(k.puan).toBe('8/10');
+      expect(k.unvan).toBe('Uzman');
+      expect(Object.keys(k).sort()).toEqual(
+        ['adlar', 'kupa', 'paket', 'puan', 'unvan'].sort(),
+      );
+    },
+  );
 });
