@@ -20,14 +20,18 @@ import { Dugme, Ekran, Yazi, GeriCubugu } from '../src/ui';
 export default function Oyuncular() {
   const router = useRouter();
   const { oyunda } = useLocalSearchParams<{ oyunda?: string }>();
-  const { renk, oyuncular, oyunculariAyarla, gecenEkip, oyunId } = useDurum();
+  const { renk, oyuncular, oyunculariAyarla, gecenEkip, oyunId, oyunAyari } =
+    useDurum();
   const oyun = oyunlar.find((o) => o.id === oyunId);
   const [ad, setAd] = useState('');
   const hata = ad ? isimHatasi(ad) : null;
   // Girdide yazılı isim "Devam"da otomatik eklenir; düğme buna göre açılır (#26).
   const taslakli = taslakEkle(oyuncular, ad);
   const taslakVar = taslakli.length > oyuncular.length;
-  const durum = baslayabilir(taslakli, oyun?.minOyuncu);
+  const durum = baslayabilir(
+    taslakli,
+    oyunId === 'quiz-night' && oyunAyari.mod === 'grup' ? 2 : oyun?.minOyuncu, // grup modu en az 2 kişi
+  );
 
   const ekle = () => {
     if (!taslakVar) return;
