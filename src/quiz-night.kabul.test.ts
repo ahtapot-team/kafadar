@@ -69,7 +69,7 @@ describe('KK-124: marka — uygulama adı ve mağaza metinlerinde hiçbir paketi
     'Fenerbahçe',
     'Beşiktaş',
     'Manifest',
-    'Emircan İğrek',
+    'Emir Can İğrek',
     'BLOK3',
     'Mabel Matiz',
     'Kurtlar Vadisi',
