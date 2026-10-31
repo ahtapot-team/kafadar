@@ -1,6 +1,6 @@
 # Kafadar
 
-Son güncelleme: 2026-10-30 — #210 (açılış yazıları yazı tipi hazır olunca mount)
+Son güncelleme: 2026-10-31 — #223 (Quiz Night saf modül ve içerik şeması)
 
 Kafadar, arkadaş/çift/aile için mobil parti oyunları uygulamasıdır (OK mu NOK mu, 10/10 ama, Casus kim). Tek telefonda ya da oda koduyla çok telefonda oynanır. Ayrıntı: `docs/MIMARI.md`.
 
@@ -28,14 +28,14 @@ Expo SDK 58, expo-router, TypeScript, Vitest, Cloudflare Workers + Durable Objec
 
 - `app/` — yalnızca ince expo-router sarmalayıcıları (`index`, `oyun`, `oyuncular`, `paket`, `mod`, `ayarlar`, `casus/`, `onon/`, `oda/`).
 - `src/core/` — saf ortak mantık (deste, doğrula, oturum, oyuncular, rng, saat…).
-- `src/games/` — oyun kuralları (`ok-mu-nok`, `on-on-ama` (oyun id'si `10-10-ama`), `casus-kim`) + `registry.ts`. Yeni oyun: modül + registry satırı (kişi çipleri `minOyuncu`'dan türer; ayrıntı: MIMARI "Yeni oyun nasıl eklenir").
+- `src/games/` — oyun kuralları (`ok-mu-nok`, `on-on-ama` (oyun id'si `10-10-ama`), `casus-kim`, `quiz-night`: Quiz Night, ayrıntı MIMARI) + `registry.ts`. Yeni oyun: modül + registry satırı (kişi çipleri `minOyuncu`'dan türer; ayrıntı: MIMARI "Yeni oyun nasıl eklenir").
 - `src/oyun-ekranlari/` — oyun ekranları; ortak parçalar `ortak/`.
 - `src/oda/` — oda kuralları ve protokol (`oda.ts`, `mesaj.ts`, `istemci.ts`).
 - `src/oda-ui/` — oda modu ekran parçaları. `src/baglanti/` — WebSocket bağlamı ve QR.
 - `src/acilis/ekran.tsx` — açılış ekranı (`app/_layout.tsx` gezgin (`Yigin`) yazı tipi hazır olunca bağlanır, açılış ekranı üstüne biner; en az 3 sn, dokununca geçer; kurallar `src/core/acilis.ts`, `soz.ts`). Sözler: `content/acilis/sozler.json` (`npm run icerik` denetler).
 - `src/icerik/` — içerik kaydı ve doğrulama. `src/test/yardimci.ts` — test yardımcıları.
 - `src/tema.ts`, `ui.tsx`, `depo.ts`, `durum.tsx`, `desteler.ts`, `titresim.ts`, `uygulama-geri.ts` — kök yardımcılar. `src/games/kategori.ts`: ana ekran kişi sayısı çipleri (kural saf fonksiyon). `tanitim-kutusu.tsx`: tanıtım kartı ve ⓘ `BilgiDugmesi`.
-- `content/decks`, `content/casus`, `content/onon` — deste JSON'ları. `docs/desteler/` — taslak md'ler.
+- `content/decks`, `content/casus`, `content/onon` — deste JSON'ları; `content/quiz` — Quiz Night paketleri (`src/icerik/quiz.ts` denetler). `docs/desteler/` — taslak md'ler.
 - `sunucu/` — Cloudflare Worker (`sunucu/src/{worker,oda-do,sinir-do,ortak}.ts`, `test/`).
 - `scripts/` — `icerik-dogrula.ts`, `kk-harita.ts`, `belge-kontrol.ts`. `design/` — tasarımlar. `docs/` — PRD, MIMARI, KK haritası.
 - `web/` — `404.html`, `geri-yukle.html`. `public/` — `index.html`. `.github/workflows/` — CI, önizleme, sunucu.
