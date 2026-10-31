@@ -13,8 +13,6 @@
 import { readdirSync, readFileSync } from 'node:fs';
 import { describe, expect, it } from 'vitest';
 
-// KK-120/KK-125 içerik bitti: düz `it` (#267).
-const kabulIcerik = it;
 const kabulSema = it;
 
 type Dosya = Record<string, unknown>;
@@ -200,49 +198,40 @@ describe('KK-125: ilk içerik (Spor 3, Müzik 4; her pakette 24 soru 8/8/8 ve 4 
     },
   );
 
-  kabulIcerik(
-    'KK-125: Müzik: Manifest, Emir Can İğrek, BLOK3, Mabel Matiz paketleri var',
-    async () => {
-      for (const ad of ['Manifest', 'Emir Can İğrek', 'BLOK3', 'Mabel Matiz'])
-        expect(var_('muzik', ad), ad).toBeDefined();
-      expect(
-        paketleri().filter((p) => p.kategori === 'muzik').length,
-      ).toBeGreaterThanOrEqual(4);
-    },
-  );
+  it('KK-125: Müzik: Manifest, Emir Can İğrek, BLOK3, Mabel Matiz paketleri var', async () => {
+    for (const ad of ['Manifest', 'Emir Can İğrek', 'BLOK3', 'Mabel Matiz'])
+      expect(var_('muzik', ad), ad).toBeDefined();
+    expect(
+      paketleri().filter((p) => p.kategori === 'muzik').length,
+    ).toBeGreaterThanOrEqual(4);
+  });
 
-  kabulIcerik(
-    'KK-125: müzik ve spor paketlerinde tam 24 soru (8 kolay, 8 orta, 8 zor) ve 4 unvan',
-    async () => {
-      const ps = paketleri().filter(
-        (p) => p.kategori === 'muzik' || p.kategori === 'spor',
-      );
-      expect(ps.length).toBeGreaterThanOrEqual(7);
-      for (const p of ps) {
-        const s = p.sorular as { zorluk: string }[];
-        expect(s.length, String(p.id)).toBe(24);
-        for (const z of ['kolay', 'orta', 'zor'])
-          expect(
-            s.filter((x) => x.zorluk === z).length,
-            `${String(p.id)} ${z}`,
-          ).toBe(8);
-        expect((p.unvanlar as unknown[]).length, String(p.id)).toBe(4);
-      }
-    },
-  );
+  it('KK-125: müzik ve spor paketlerinde tam 24 soru (8 kolay, 8 orta, 8 zor) ve 4 unvan', async () => {
+    const ps = paketleri().filter(
+      (p) => p.kategori === 'muzik' || p.kategori === 'spor',
+    );
+    expect(ps.length).toBeGreaterThanOrEqual(7);
+    for (const p of ps) {
+      const s = p.sorular as { zorluk: string }[];
+      expect(s.length, String(p.id)).toBe(24);
+      for (const z of ['kolay', 'orta', 'zor'])
+        expect(
+          s.filter((x) => x.zorluk === z).length,
+          `${String(p.id)} ${z}`,
+        ).toBe(8);
+      expect((p.unvanlar as unknown[]).length, String(p.id)).toBe(4);
+    }
+  });
 
-  kabulIcerik(
-    'KK-125: paket emojileri tasarımdaki gibi (Spor ⚽; Manifest 💃, İğrek 🎸, BLOK3 🎤, Mabel Matiz 🎶)',
-    async () => {
-      for (const ad of ['Galatasaray', 'Fenerbahçe', 'Beşiktaş'])
-        expect(var_('spor', ad)?.emoji, ad).toBe('⚽');
-      const m: [string, string][] = [
-        ['Manifest', '💃'],
-        ['İğrek', '🎸'],
-        ['BLOK3', '🎤'],
-        ['Mabel Matiz', '🎶'],
-      ];
-      for (const [ad, e] of m) expect(var_('muzik', ad)?.emoji, ad).toBe(e);
-    },
-  );
+  it('KK-125: paket emojileri tasarımdaki gibi (Spor ⚽; Manifest 💃, İğrek 🎸, BLOK3 🎤, Mabel Matiz 🎶)', async () => {
+    for (const ad of ['Galatasaray', 'Fenerbahçe', 'Beşiktaş'])
+      expect(var_('spor', ad)?.emoji, ad).toBe('⚽');
+    const m: [string, string][] = [
+      ['Manifest', '💃'],
+      ['İğrek', '🎸'],
+      ['BLOK3', '🎤'],
+      ['Mabel Matiz', '🎶'],
+    ];
+    for (const [ad, e] of m) expect(var_('muzik', ad)?.emoji, ad).toBe(e);
+  });
 });

@@ -7,6 +7,10 @@ import prisonBreak from '../../content/quiz/prison-break.json';
 import galatasaray from '../../content/quiz/galatasaray.json';
 import fenerbahce from '../../content/quiz/fenerbahce.json';
 import besiktas from '../../content/quiz/besiktas.json';
+import manifest from '../../content/quiz/manifest.json';
+import emirCanIgrek from '../../content/quiz/emir-can-igrek.json';
+import blok3 from '../../content/quiz/blok3.json';
+import mabelMatiz from '../../content/quiz/mabel-matiz.json';
 
 const PAKETLER = [
   askIMemnu,
@@ -15,6 +19,10 @@ const PAKETLER = [
   galatasaray,
   fenerbahce,
   besiktas,
+  manifest,
+  emirCanIgrek,
+  blok3,
+  mabelMatiz,
 ].map((j) => uygulamaPaketi(j));
 
 export function quizPaketiBul(id: string): QuizPaketi | undefined {
