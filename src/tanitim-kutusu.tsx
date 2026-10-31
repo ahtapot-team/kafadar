@@ -152,7 +152,11 @@ export function BilgiDugmesi({
 
 // Odanın oyunundan kayıt satırı kimliği (kodla katılan hangi oyundan gelirse gelsin odanın oyununun kartı açılır).
 export const odaOyunId = (tur: OdaTuru | null) =>
-  tur === 'on-on-ama' ? '10-10-ama' : 'ok-mu-nok';
+  tur === 'on-on-ama'
+    ? '10-10-ama'
+    : tur === 'quiz-night'
+      ? 'quiz-night'
+      : 'ok-mu-nok';
 
 // Oyun çerçevesi kısa ⓘ'yi üretir (BilgiDugmesi kisa); üst çubuklar onu ✕'in soluna koyar.
 export const BilgiYuvasi = createContext<ReactNode>(null);

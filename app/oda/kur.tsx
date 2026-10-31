@@ -5,6 +5,7 @@ import { isimDuzelt, isimHatasi } from '../../src/core/oyuncular';
 import { paketler, type Paket } from '../../src/desteler';
 import { useOda } from '../../src/baglanti/baglam';
 import type { OnPaket } from '../../src/oda/mesaj';
+import { quizPaketleri } from '../../src/oyun-ekranlari/quiz/paketler';
 import { ononPaketleri } from '../../src/oyun-ekranlari/on-on-ama/desteler';
 import { useDurum } from '../../src/durum';
 import { bosluk } from '../../src/tema';
@@ -17,6 +18,8 @@ export default function OdaKur() {
   const [ad, setAd] = useState('');
   const { oyunId } = useDurum();
   const onon = oyunId === '10-10-ama'; // 10/10 ama odası: kendi paketleri (KK-63)
+  const quiz = oyunId === 'quiz-night'; // Quiz Night odası: kendi paketleri (KK-113)
+  const [quizPaketId, setQuizPaketId] = useState(quizPaketleri[0].id);
   const [paket, setPaket] = useState<Paket>('arkadas');
   const [onPaket, setOnPaket] = useState<OnPaket>('sevgili');
   const hata = ad ? isimHatasi(ad) : null;
@@ -46,25 +49,35 @@ export default function OdaKur() {
         Paket
       </Yazi>
       <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: bosluk.m }}>
-        {onon
-          ? ononPaketleri.map((p) => (
+        {quiz
+          ? quizPaketleri.map((p) => (
               <Cip
                 key={p.id}
-                testID={`oda-onon-paket-${p.id}`}
+                testID={`oda-quiz-paket-${p.id}`}
                 etiket={p.ad}
-                secili={onPaket === p.id}
-                onPress={() => setOnPaket(p.id as OnPaket)}
+                secili={quizPaketId === p.id}
+                onPress={() => setQuizPaketId(p.id)}
               />
             ))
-          : paketler.map((p) => (
-              <Cip
-                key={p.id}
-                testID={`kur-paket-${p.id}`}
-                etiket={p.ad}
-                secili={paket === p.id}
-                onPress={() => setPaket(p.id)}
-              />
-            ))}
+          : onon
+            ? ononPaketleri.map((p) => (
+                <Cip
+                  key={p.id}
+                  testID={`oda-onon-paket-${p.id}`}
+                  etiket={p.ad}
+                  secili={onPaket === p.id}
+                  onPress={() => setOnPaket(p.id as OnPaket)}
+                />
+              ))
+            : paketler.map((p) => (
+                <Cip
+                  key={p.id}
+                  testID={`kur-paket-${p.id}`}
+                  etiket={p.ad}
+                  secili={paket === p.id}
+                  onPress={() => setPaket(p.id)}
+                />
+              ))}
       </View>
       {durum.hata && <Yazi testID="kur-hata">{durum.hata.mesaj}</Yazi>}
       <Dugme
@@ -72,9 +85,11 @@ export default function OdaKur() {
         etiket={bekliyor ? 'Oda kuruluyor…' : 'Oda kur'}
         pasif={!isimDuzelt(ad) || !!hata || bekliyor}
         onPress={() =>
-          onon
-            ? istemci.kur(isimDuzelt(ad), onPaket, 'on-on-ama')
-            : istemci.kur(isimDuzelt(ad), paket)
+          quiz
+            ? istemci.kur(isimDuzelt(ad), quizPaketId, 'quiz-night')
+            : onon
+              ? istemci.kur(isimDuzelt(ad), onPaket, 'on-on-ama')
+              : istemci.kur(isimDuzelt(ad), paket)
         }
       />
     </Ekran>

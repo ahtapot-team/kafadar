@@ -2,7 +2,4 @@
 // true: o alan henüz yazılmadı, kabul testleri kırmızı olmalı (it.fails, CI kırılmaz).
 // KURAL: işi kapatan PR bayrağı ve sarmalayıcıyı SİLER, testleri düz `it`e çevirir (docs/MIMARI.md).
 // Quiz Night Faz 1 (#221–#226): her bayrağı ilgili işi bitiren PR siler.
-// Quiz Night Faz 2 (#252): #254 (oda ekranları) `quizOdaEkran`ı siler.
-export const BEKLEYEN: Record<string, boolean> = {
-  quizOdaEkran: true,
-};
+export const BEKLEYEN: Record<string, boolean> = {};
