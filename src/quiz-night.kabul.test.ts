@@ -12,7 +12,7 @@ import { oyunlar } from './games/registry';
 import { BEKLEYEN } from './kabul';
 import { dosyaIcerik } from './test/yardimci';
 
-const kabulQuiz = BEKLEYEN.quiz ? it.fails : it;
+const kabulQuiz = BEKLEYEN.quizKayit ? it.fails : it;
 const quiz = () => oyunlar.find((o) => o.id === 'quiz-night');
 
 describe('KK-106: ana ekranda Quiz Night kartı', () => {

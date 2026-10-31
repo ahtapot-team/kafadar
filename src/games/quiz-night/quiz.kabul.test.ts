@@ -13,7 +13,7 @@
 import { describe, expect, it } from 'vitest';
 import { BEKLEYEN } from '../../kabul';
 
-const kabulQuiz = BEKLEYEN.quiz ? it.fails : it;
+const kabulQuiz = BEKLEYEN.quizModul ? it.fails : it;
 
 type Zorluk = 'kolay' | 'orta' | 'zor';
 type Soru = {
