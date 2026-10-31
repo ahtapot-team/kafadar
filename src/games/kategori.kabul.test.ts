@@ -145,10 +145,10 @@ describe('KK-104: kişi aralığı kesişimi ve filtre', () => {
     expect(ids(filtrele([oyun('y1', 1, false)], '1-kisi'))).toEqual(['y1']);
   });
 
-  it('KK-104: gerçek kayıt listesiyle "1 kişi" boş, "2 kişi" Casus kim\'i eler, "3+ kişi" hepsini bırakır', async () => {
+  it('KK-104: gerçek kayıt listesiyle "1 kişi" yalnız Quiz Night, "2 kişi" Casus kim\'i eler, "3+ kişi" hepsini bırakır', async () => {
     const { filtrele } = await yukle();
     const liste = oyunlar as unknown as Kayit[];
-    expect(filtrele(liste, '1-kisi')).toEqual([]);
+    expect(ids(filtrele(liste, '1-kisi'))).toEqual(['quiz-night']);
     expect(ids(filtrele(liste, '2-kisi'))).not.toContain('casus-kim');
     expect(ids(filtrele(liste, '2-kisi'))).toContain('ok-mu-nok');
     expect(filtrele(liste, '3-uzeri-kisi')).toHaveLength(liste.length);
