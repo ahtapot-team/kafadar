@@ -7,6 +7,8 @@ import { FinalEkrani } from '../../src/oda-ui/final';
 import { OnAciklamaEkrani } from '../../src/oda-ui/onon-aciklama';
 import { OnFinalEkrani } from '../../src/oda-ui/onon-final';
 import { OnBeklemeEkrani, OnPuanEkrani } from '../../src/oda-ui/onon-puan';
+import { QuizOdaFinal } from '../../src/oda-ui/quiz-final';
+import { QuizOdaSoru } from '../../src/oda-ui/quiz-soru';
 import { SoruEkrani } from '../../src/oda-ui/soru';
 import { YenidenBaglaniyor } from '../../src/oda-ui/yeniden';
 import { odaTuru } from '../../src/oda/istemci';
@@ -36,6 +38,7 @@ export default function OdaOyun() {
   const onceki = useRef<string[]>([]);
   const g = durum.gorunum;
   const onon = odaTuru(durum) === 'on-on-ama'; // ekran odanın oyunundan seçilir (KK-63)
+  const quiz = odaTuru(durum) === 'quiz-night'; // Quiz Night odası (KK-113)
   const bitti = g?.asama === 'bitti';
   const bilgi = <BilgiDugmesi oyunId={odaOyunId(odaTuru(durum))} kisa />;
 
@@ -119,7 +122,14 @@ export default function OdaOyun() {
     const cevapladi = g.benimOyum != null && degistirNo !== g.soruNo;
     return (
       <BilgiYuvasi.Provider value={bilgi}>
-        {onon ? (
+        {quiz ? (
+          <QuizOdaSoru
+            durum={durum}
+            onSec={(sik) => istemci.cevaplaSik(sik)}
+            onSonraki={() => istemci.sonraki()}
+            onCik={() => setCikisOnayi(true)}
+          />
+        ) : onon ? (
           g.aciklama ? (
             <OnAciklamaEkrani
               durum={durum}
@@ -205,7 +215,13 @@ export default function OdaOyun() {
   };
   return (
     <BilgiYuvasi.Provider value={bilgi}>
-      {onon ? (
+      {quiz ? (
+        <QuizOdaFinal
+          durum={durum}
+          onTekrar={() => cik('/mod')}
+          onAnaMenu={() => cik('/')}
+        />
+      ) : onon ? (
         <OnFinalEkrani
           durum={durum}
           onTekrar={() => cik('/mod')}

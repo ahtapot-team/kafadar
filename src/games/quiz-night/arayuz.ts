@@ -9,8 +9,8 @@ export const MODLAR: { id: ModId; etiket: string }[] = [
   { id: 'oda-katil', etiket: 'Odaya katıl' },
 ];
 
-// Faz 1'de oda seçenekleri gizli (KK-107); oda açılınca dört mod görünür.
-export const gorunenModlar = (odaAcik = false) =>
+// Faz 2'de oda seçenekleri varsayılan olarak görünür (KK-107); `false` yalnız tek telefon modlarını verir.
+export const gorunenModlar = (odaAcik = true) =>
   odaAcik ? MODLAR : MODLAR.filter((m) => m.id === 'tek' || m.id === 'grup');
 
 export const paketBasligi = (ad: string) => `Ne kadar ${ad} fanısın?`;
@@ -103,3 +103,30 @@ export function paylasimKarti(g: {
     unvan: ilk.unvan,
   };
 }
+
+// Oda (Faz 2, KK-113): sunucu saatine göre ince sayaç; son 5 sn'de titrer, kırmızı yok.
+export const QUIZ_ODA_SURE_MS = 20_000;
+export const odaSayac = (kalanMs: number) => {
+  const k = Math.min(QUIZ_ODA_SURE_MS, Math.max(0, kalanMs));
+  return {
+    oran: k / QUIZ_ODA_SURE_MS,
+    saniye: Math.ceil(k / 1000),
+    titret: k > 0 && k <= 5000,
+  };
+};
+
+// Açıklamadan önce (dogru null) yalnız kendi şıkkım kilitli; sonra doğru yeşil, yanlış seçtiğim kırmızı.
+export const odaSikRengi = (
+  sik: number,
+  dogru: number | null,
+  benim: number | null,
+): SikRengi | 'kilitli' =>
+  dogru === null
+    ? sik === benim
+      ? 'kilitli'
+      : 'notr'
+    : sik === dogru
+      ? 'ok'
+      : sik === benim
+        ? 'nok'
+        : 'notr';

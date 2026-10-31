@@ -95,7 +95,7 @@ export class OdaIstemci {
   }
 
   // `oyun` yoksa OK mu NOK mu odası (açılış komutunda oyun alanı olmaz); 10/10 ama için 'on-on-ama'.
-  kur(ad: string, paket: Paket | OnPaket, oyun?: OdaTuru) {
+  kur(ad: string, paket: Paket | OnPaket | string, oyun?: OdaTuru) {
     this.sifirla();
     this.ilk = oyun
       ? { islem: 'kur', ad, paket, oyun }
@@ -115,6 +115,11 @@ export class OdaIstemci {
 
   cevapla(oy: 'OK' | 'NOK') {
     this.tasima?.gonder({ t: 'cevapla', oy });
+  }
+
+  // Quiz Night odası: şık 0–3, kilitli (ikinci cevap sunucuda 'gecersiz').
+  cevaplaSik(sik: number) {
+    this.tasima?.gonder({ t: 'cevapla', sik });
   }
 
   // 10/10 ama odası: 0–10 puan; değiştirilebilir, son gönderilen sunucuda geçerli. Bağlantı yoksa sessizce yok sayılır.

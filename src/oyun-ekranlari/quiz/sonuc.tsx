@@ -48,24 +48,49 @@ function Kart({ k }: { k: ReturnType<typeof paylasimKarti> }) {
   );
 }
 
+type Sonuc = ReturnType<typeof turSonucu>;
+type Veri = {
+  ad: string;
+  unvanlar: string[];
+  sonuc: Sonuc;
+  kisi: number; // 1 = tek başına
+  dogruMu?: boolean[]; // yalnız tek başına
+  ust?: string; // oda: üst satırın başındaki oda kodu
+};
 type Props = { durum: Durum } & Record<
   'onCik' | 'onTekrar' | 'onBaskaPaket' | 'onAnaMenu',
   () => void
 >;
 
-export function QuizSonuc({
-  durum,
+export function QuizSonuc({ durum, onBaskaPaket, ...o }: Props) {
+  const paket = quizPaketi(durum.paket);
+  const v: Veri = {
+    ad: paket.ad,
+    unvanlar: paket.unvanlar,
+    sonuc: turSonucu(durum),
+    kisi: durum.oyuncular.length,
+    dogruMu: durum.cevaplar[0].map((sik, k) => sik === durum.sorular[k].dogru),
+  };
+  return <QuizSonucGorunum v={v} onBaskaPaket={onBaskaPaket} {...o} />;
+}
+
+// Tek telefon (grup / tek) ve oda sonucu aynı görünümü paylaşır (KK-111, KK-113).
+export function QuizSonucGorunum({
+  v,
   onCik,
   onTekrar,
   onBaskaPaket,
   onAnaMenu,
-}: Props) {
+}: Omit<Props, 'durum' | 'onBaskaPaket'> & {
+  v: Veri;
+  onBaskaPaket?: () => void;
+}) {
   const { renk } = useDurum();
   const bilgi = useBilgiYuvasi();
   const paylas = usePaylas();
-  const paket = quizPaketi(durum.paket);
-  const grup = durum.oyuncular.length > 1;
-  const sonuc = turSonucu(durum);
+  const paket = { ad: v.ad, unvanlar: v.unvanlar };
+  const grup = v.kisi > 1;
+  const sonuc = v.sonuc;
   const satirlar = sonucSatirlari(sonuc, paket.unvanlar);
   const birinciler = satirlar.filter((s) => s.birinci);
   const kart = paylasimKarti({
@@ -74,9 +99,7 @@ export function QuizSonuc({
     sonuc,
     unvanlar: paket.unvanlar,
   });
-  const dogruMu = durum.cevaplar[0].map(
-    (sik, k) => sik === durum.sorular[k].dogru,
-  );
+  const dogruMu = v.dogruMu ?? [];
   return (
     <Ekran>
       <View
@@ -90,7 +113,7 @@ export function QuizSonuc({
         />
         <Yazi tur="etiket" soluk style={{ flex: 1, textAlign: 'center' }}>
           {paket.ad} ·{' '}
-          {grup ? `Grup · ${durum.oyuncular.length} kişi` : 'Tek başına'}
+          {grup ? `${v.ust ?? 'Grup'} · ${v.kisi} kişi` : 'Tek başına'}
         </Yazi>
         {bilgi}
       </View>
@@ -181,16 +204,18 @@ export function QuizSonuc({
             ['quiz-tekrar', 'Tekrar', onTekrar],
             ['quiz-baska-paket', 'Başka paket', onBaskaPaket],
           ] as const
-        ).map(([id, etiket, onPress]) => (
-          <View key={id} style={{ flex: 1 }}>
-            <Dugme
-              testID={id}
-              tur="ikincil"
-              etiket={etiket}
-              onPress={onPress}
-            />
-          </View>
-        ))}
+        )
+          .filter(([, , f]) => f)
+          .map(([id, etiket, onPress]) => (
+            <View key={id} style={{ flex: 1 }}>
+              <Dugme
+                testID={id}
+                tur="ikincil"
+                etiket={etiket}
+                onPress={onPress!}
+              />
+            </View>
+          ))}
       </View>
       <Dugme tur="ikincil" etiket="Ana ekran" onPress={onAnaMenu} />
       <GizliPaylasim gorunum={paylas.ref} baslik="Quiz Night">

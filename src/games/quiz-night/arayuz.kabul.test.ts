@@ -22,7 +22,6 @@
 //       grup: kupa true (🏆), adlar = TÜM birincilerin adı (girdi sırası), puan/unvan birincinin; ortalama YOK.
 //       tek: kupa false, adlar = [oyuncunun adı], puan/unvan kendi sonucu. Kartta soru/cevap alanı yoktur (yalnız bu 5 anahtar).
 import { describe, expect, it } from 'vitest';
-import { BEKLEYEN } from '../../kabul';
 
 type Arayuz = {
   MODLAR: { id: string; etiket: string }[];
@@ -64,18 +63,15 @@ describe('KK-107: mod seçimi', () => {
   });
 
   // Faz 2 (#252/#254): oda seçenekleri artık varsayılan olarak görünür.
-  (BEKLEYEN.quizOdaEkran ? it.fails : it)(
-    'KK-107: Faz 2: varsayılan olarak dört mod görünür (Oda kur, Odaya katıl dahil)',
-    async () => {
-      const { gorunenModlar } = await yukle();
-      expect(gorunenModlar().map((m) => m.id)).toEqual([
-        'tek',
-        'grup',
-        'oda-kur',
-        'oda-katil',
-      ]);
-    },
-  );
+  it('KK-107: Faz 2: varsayılan olarak dört mod görünür (Oda kur, Odaya katıl dahil)', async () => {
+    const { gorunenModlar } = await yukle();
+    expect(gorunenModlar().map((m) => m.id)).toEqual([
+      'tek',
+      'grup',
+      'oda-kur',
+      'oda-katil',
+    ]);
+  });
 });
 
 describe('KK-108: paket kartı ve Türk / Yabancı süzgeci', () => {

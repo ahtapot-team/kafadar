@@ -18,7 +18,6 @@
 //     oncekiOku(depo, paketId): Promise<string[]>   kayıt yok / bozuk / dizi değil → []; paketler birbirinden ayrı
 //     Tur bitince (sonuç aşamasına geçerken) oncekiKaydet; yeni tur/Tekrar'da oncekiOku → turSec(havuz, tohum, onceki).
 import { describe, expect, it } from 'vitest';
-import { BEKLEYEN } from '../../kabul';
 import type { Depo } from '../../core/kayit';
 import { depoYap, dosyaIcerik, kaynaklar } from '../../test/yardimci';
 
@@ -77,14 +76,11 @@ describe('KK-107…KK-112: ekranlar sözleşmedeki testID adlarını kullanır',
     expect(ekranKaynagi()).toMatch(/gorunenModlar/);
   });
 
-  (BEKLEYEN.quizOdaEkran ? it.fails : it)(
-    "KK-107: Faz 2: oda seçeneklerinin testID'leri ekranlarda vardır (quiz-mod-oda-kur, quiz-mod-oda-katil)",
-    () => {
-      const k = ekranKaynagi();
-      expect(k).toMatch(/quiz-mod-oda-kur/);
-      expect(k).toMatch(/quiz-mod-oda-katil/);
-    },
-  );
+  it("KK-107: Faz 2: oda seçeneklerinin testID'leri ekranlarda vardır (quiz-mod-oda-kur, quiz-mod-oda-katil)", () => {
+    const k = ekranKaynagi();
+    expect(k).toMatch(/quiz-mod-oda-kur/);
+    expect(k).toMatch(/quiz-mod-oda-katil/);
+  });
 });
 
 describe('KK-107…KK-112: ekranlar saf kuralları kullanır', () => {
