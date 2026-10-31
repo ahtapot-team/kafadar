@@ -1,0 +1,746 @@
+{
+  "id": "besiktas",
+  "ad": "Beşiktaş",
+  "baslik": "Ne kadar Beşiktaşlısın?",
+  "emoji": "⚽",
+  "kategori": "spor",
+  "unvanlar": [
+    "Kartal yavrusu: Şeref Stadı'nda ilk antrenmanına çıktın",
+    "Metin-Ali-Feyyaz'ı tribünden alkışlayan sıkı taraftar",
+    "91–92'nin yenilmez kadrosunda yerin hazır",
+    "Baba Hakkı'nın varisi, kartalların en büyüğü"
+  ],
+  "sorular": [
+    {
+      "id": "besiktas-01",
+      "metin": "Beşiktaş Jimnastik Kulübü hangi yıl kuruldu?",
+      "secenekler": ["1899", "1903", "1908", "1913"],
+      "dogru": 1,
+      "zorluk": "kolay",
+      "tur": "dunya",
+      "kaynaklar": [
+        {
+          "ad": "Vikipedi: Beşiktaş JK",
+          "url": "https://tr.wikipedia.org/wiki/Beşiktaş_JK"
+        },
+        {
+          "ad": "Wikipedia (EN): Beşiktaş J.K.",
+          "url": "https://en.wikipedia.org/wiki/Beşiktaş_J.K."
+        },
+        {
+          "ad": "Kürê Ansiklopedi: Beşiktaş Jimnastik Kulübü (Erkek Futbol Takımı)",
+          "url": "https://kureansiklopedi.com/tr/detay/besiktas-jimnastik-kulubu-erkek-futbol-takimi"
+        },
+        {
+          "ad": "Habertürk: Beşiktaş hangi yılda kuruldu? Beşiktaş'ın tarihçesi nedir?",
+          "url": "https://www.haberturk.com/besiktas-hangi-yilda-kuruldu-besiktas-in-tarihcesi-nedir-3696647"
+        },
+        {
+          "ad": "UEFA: What makes round of 16 debutants Beşiktaş special?",
+          "url": "https://www.uefa.com/uefachampionsleague/news/newsid=2449686.html"
+        }
+      ],
+      "uyum": 1.0
+    },
+    {
+      "id": "besiktas-02",
+      "metin": "Beşiktaş'ın geleneksel forma renkleri hangileridir?",
+      "secenekler": ["Siyah-beyaz", "Bordo-mavi", "Yeşil-beyaz", "Mor-beyaz"],
+      "dogru": 0,
+      "zorluk": "kolay",
+      "tur": "dunya",
+      "kaynaklar": [
+        {
+          "ad": "Vikipedi: Beşiktaş JK",
+          "url": "https://tr.wikipedia.org/wiki/Beşiktaş_JK"
+        },
+        {
+          "ad": "Wikipedia (EN): Beşiktaş J.K.",
+          "url": "https://en.wikipedia.org/wiki/Beşiktaş_J.K."
+        },
+        {
+          "ad": "Kürê Ansiklopedi: Beşiktaş Jimnastik Kulübü (Erkek Futbol Takımı)",
+          "url": "https://kureansiklopedi.com/tr/detay/besiktas-jimnastik-kulubu-erkek-futbol-takimi"
+        },
+        {
+          "ad": "TFF Tamsaha: Turkcell Süper Kupa 2017 dergisi, Beşiktaş tarihçesi",
+          "url": "https://www.tff.org/Resources/Tamsaha/Turkcell-Super-Kupa-2017/files/assets/basic-html/page-20-21.html"
+        }
+      ],
+      "uyum": 1.0
+    },
+    {
+      "id": "besiktas-03",
+      "metin": "Beşiktaş'ın en bilinen lakabı hangisidir?",
+      "secenekler": ["Timsahlar", "Martılar", "Kara Kartallar", "Fırtınalar"],
+      "dogru": 2,
+      "zorluk": "kolay",
+      "tur": "dunya",
+      "kaynaklar": [
+        {
+          "ad": "Vikipedi: Beşiktaş JK",
+          "url": "https://tr.wikipedia.org/wiki/Beşiktaş_JK"
+        },
+        {
+          "ad": "Wikipedia (EN): Beşiktaş J.K.",
+          "url": "https://en.wikipedia.org/wiki/Beşiktaş_J.K."
+        },
+        {
+          "ad": "Habertürk: Beşiktaş hangi yılda kuruldu? Beşiktaş'ın tarihçesi nedir?",
+          "url": "https://www.haberturk.com/besiktas-hangi-yilda-kuruldu-besiktas-in-tarihcesi-nedir-3696647"
+        },
+        {
+          "ad": "CNN Türk: Beşiktaş ve Fenerbahçe'nin lakabının anlamı",
+          "url": "https://www.cnnturk.com/spor/futbol/besiktas-ve-fenerbahcenin-lakabinin-anlami-601414"
+        },
+        {
+          "ad": "TFF Tamsaha: Turkcell Süper Kupa 2017 dergisi, Beşiktaş tarihçesi",
+          "url": "https://www.tff.org/Resources/Tamsaha/Turkcell-Super-Kupa-2017/files/assets/basic-html/page-20-21.html"
+        }
+      ],
+      "uyum": 1.0
+    },
+    {
+      "id": "besiktas-04",
+      "metin": "Beşiktaş'ın 2013'te yıkılan tarihî stadının adı neydi?",
+      "secenekler": [
+        "Atatürk Olimpiyat Stadı",
+        "19 Mayıs Stadı",
+        "Taksim Stadı",
+        "İnönü Stadı"
+      ],
+      "dogru": 3,
+      "zorluk": "kolay",
+      "tur": "dunya",
+      "kaynaklar": [
+        {
+          "ad": "Vikipedi: BJK İnönü Stadyumu",
+          "url": "https://tr.wikipedia.org/wiki/BJK_İnönü_Stadyumu"
+        },
+        {
+          "ad": "Wikipedia (EN): BJK İnönü Stadium",
+          "url": "https://en.wikipedia.org/wiki/BJK_İnönü_Stadium"
+        },
+        {
+          "ad": "CNN Türk: Karakartal'ın yuvasının hikâyesi",
+          "url": "https://cnnturk.com/spor/vodafon-arena-aciliyor-535318"
+        },
+        {
+          "ad": "Timeturk: İnönü'ye veda vakti: 66 yıllık son tango",
+          "url": "https://www.timeturk.com/tr/2013/05/10/inonu-ye-veda-vakti-66-yillik-son-tango.html"
+        }
+      ],
+      "uyum": 1.0
+    },
+    {
+      "id": "besiktas-05",
+      "metin": "Beşiktaş'ın Boğaz kıyısındaki stadyumu hangi tarihî sarayın hemen yanındadır?",
+      "secenekler": [
+        "Dolmabahçe Sarayı",
+        "Topkapı Sarayı",
+        "Beylerbeyi Sarayı",
+        "Küçüksu Kasrı"
+      ],
+      "dogru": 0,
+      "zorluk": "kolay",
+      "tur": "dunya",
+      "kaynaklar": [
+        {
+          "ad": "Vikipedi: BJK İnönü Stadyumu",
+          "url": "https://tr.wikipedia.org/wiki/BJK_İnönü_Stadyumu"
+        },
+        {
+          "ad": "Wikipedia (EN): BJK İnönü Stadium",
+          "url": "https://en.wikipedia.org/wiki/BJK_İnönü_Stadium"
+        },
+        {
+          "ad": "Hürriyet: İnönü'den tiyatro çıktı",
+          "url": "https://www.hurriyet.com.tr/gundem/inonuden-tiyatro-cikti-19767890"
+        },
+        {
+          "ad": "Onedio: Dolmabahçe Has Ahırları'ndan Beşiktaş'ın efsane stadyumuna İnönü'nün ilginç hikayesi",
+          "url": "https://onedio.com/haber/dolmabahce-has-ahirlari-ndan-besiktas-in-efsane-stadyumuna-inonu-nun-ilginc-hikayesi-1257023"
+        },
+        {
+          "ad": "istanbul.com: Beşiktaş stadyumu",
+          "url": "https://istanbul.com/tr/blog/besiktas-vodafone-park"
+        }
+      ],
+      "uyum": 1.0
+    },
+    {
+      "id": "besiktas-06",
+      "metin": "BJK kısaltmasındaki \"J\" harfi neyin baş harfidir?",
+      "secenekler": ["Jokey", "Jüri", "Jimnastik", "Jübile"],
+      "dogru": 2,
+      "zorluk": "kolay",
+      "tur": "dunya",
+      "kaynaklar": [
+        {
+          "ad": "Vikipedi: Beşiktaş JK",
+          "url": "https://tr.wikipedia.org/wiki/Beşiktaş_JK"
+        },
+        {
+          "ad": "Wikipedia (EN): Beşiktaş J.K.",
+          "url": "https://en.wikipedia.org/wiki/Beşiktaş_J.K."
+        },
+        {
+          "ad": "Kürê Ansiklopedi: Beşiktaş Jimnastik Kulübü (Erkek Futbol Takımı)",
+          "url": "https://kureansiklopedi.com/tr/detay/besiktas-jimnastik-kulubu-erkek-futbol-takimi"
+        },
+        {
+          "ad": "TFF Tamsaha: Turkcell Süper Kupa 2017 dergisi, Beşiktaş tarihçesi",
+          "url": "https://www.tff.org/Resources/Tamsaha/Turkcell-Super-Kupa-2017/files/assets/basic-html/page-20-21.html"
+        }
+      ],
+      "uyum": 1.0
+    },
+    {
+      "id": "besiktas-07",
+      "metin": "Trivela vuruşlarıyla Beşiktaş taraftarının gönlünü kazanan Ricardo Quaresma hangi ülkenin oyuncusudur?",
+      "secenekler": ["Brezilya", "İspanya", "Arjantin", "Portekiz"],
+      "dogru": 3,
+      "zorluk": "kolay",
+      "tur": "dunya",
+      "kaynaklar": [
+        {
+          "ad": "Vikipedi: Ricardo Quaresma",
+          "url": "https://tr.wikipedia.org/wiki/Ricardo_Quaresma"
+        },
+        {
+          "ad": "Wikipedia (EN): Ricardo Quaresma",
+          "url": "https://en.wikipedia.org/wiki/Ricardo_Quaresma"
+        },
+        {
+          "ad": "Goal Türkiye: Gölgede ve güneşte trivela",
+          "url": "https://www.goal.com/tr/haber/yorum-goelgede-ve-gueneste-trivela/1tk9eo5h6f42m1uxzgblz30m5c"
+        },
+        {
+          "ad": "Fanatik: Ricardo Quaresma haberleri",
+          "url": "https://www.fanatik.com.tr/haberleri/ricardo-quaresma"
+        }
+      ],
+      "uyum": 1.0
+    },
+    {
+      "id": "besiktas-08",
+      "metin": "İnönü Stadı'nın yerine yapılan yeni stadyum hangi yıl açıldı?",
+      "secenekler": ["2014", "2016", "2018", "2020"],
+      "dogru": 1,
+      "zorluk": "kolay",
+      "tur": "dunya",
+      "kaynaklar": [
+        {
+          "ad": "Wikipedia (EN): Beşiktaş J.K.",
+          "url": "https://en.wikipedia.org/wiki/Beşiktaş_J.K."
+        },
+        {
+          "ad": "Kürê Ansiklopedi: Beşiktaş Jimnastik Kulübü (Erkek Futbol Takımı)",
+          "url": "https://kureansiklopedi.com/tr/detay/besiktas-jimnastik-kulubu-erkek-futbol-takimi"
+        },
+        {
+          "ad": "StadiumDB: New stadium opened in style",
+          "url": "https://stadiumdb.com/news/2016/04/new_stadium_vodafone_arena_opened_in_style"
+        },
+        {
+          "ad": "Cumhuriyet: Kartal yuvaya galibiyetle döndü",
+          "url": "https://www.cumhuriyet.com.tr/haber/kartal-yuvaya-galibiyetle-dondu-513892"
+        }
+      ],
+      "uyum": 1.0
+    },
+    {
+      "id": "besiktas-09",
+      "metin": "Süper Lig'i yenilgisiz şampiyon olarak bitiren tek takım Beşiktaş, bunu hangi sezonda başardı?",
+      "secenekler": ["1985–86", "1989–90", "1991–92", "2002–03"],
+      "dogru": 2,
+      "zorluk": "orta",
+      "tur": "dunya",
+      "kaynaklar": [
+        {
+          "ad": "Wikipedia (EN): Beşiktaş J.K.",
+          "url": "https://en.wikipedia.org/wiki/Beşiktaş_J.K."
+        },
+        {
+          "ad": "Kürê Ansiklopedi: Beşiktaş Jimnastik Kulübü (Erkek Futbol Takımı)",
+          "url": "https://kureansiklopedi.com/tr/detay/besiktas-jimnastik-kulubu-erkek-futbol-takimi"
+        },
+        {
+          "ad": "TFF Tamsaha: Sayı 190",
+          "url": "https://www.tff.org/Resources/Tamsaha/190/12-13/"
+        },
+        {
+          "ad": "Cumhuriyet: Beşiktaş'ın 64 yıllık Süper Lig macerası",
+          "url": "https://www.cumhuriyet.com.tr/spor/besiktasin-64-yillik-super-lig-macerasi-1965822"
+        },
+        {
+          "ad": "UEFA: What makes round of 16 debutants Beşiktaş special?",
+          "url": "https://www.uefa.com/uefachampionsleague/news/newsid=2449686.html"
+        }
+      ],
+      "uyum": 1.0
+    },
+    {
+      "id": "besiktas-10",
+      "metin": "Metin-Ali-Feyyaz döneminde Beşiktaş'a üst üste üç lig şampiyonluğu yaşatan teknik direktör kimdir?",
+      "secenekler": [
+        "John Toshack",
+        "Gordon Milne",
+        "Christoph Daum",
+        "Bernd Schuster"
+      ],
+      "dogru": 1,
+      "zorluk": "orta",
+      "tur": "dunya",
+      "kaynaklar": [
+        {
+          "ad": "Wikipedia (EN): Beşiktaş J.K.",
+          "url": "https://en.wikipedia.org/wiki/Beşiktaş_J.K."
+        },
+        {
+          "ad": "UEFA: What makes round of 16 debutants Beşiktaş special?",
+          "url": "https://www.uefa.com/uefachampionsleague/news/newsid=2449686.html"
+        },
+        {
+          "ad": "TFF Tamsaha: Sayı 190",
+          "url": "https://www.tff.org/Resources/Tamsaha/190/12-13/"
+        },
+        {
+          "ad": "Cumhuriyet: Beşiktaş'ın 64 yıllık Süper Lig macerası",
+          "url": "https://www.cumhuriyet.com.tr/spor/besiktasin-64-yillik-super-lig-macerasi-1965822"
+        }
+      ],
+      "uyum": 1.0
+    },
+    {
+      "id": "besiktas-11",
+      "metin": "Beşiktaş'ı kulübün 100. yılında, 2002–03 sezonunda şampiyon yapan teknik direktör kimdir?",
+      "secenekler": [
+        "Mircea Lucescu",
+        "Jean Tigana",
+        "Vicente del Bosque",
+        "Christoph Daum"
+      ],
+      "dogru": 0,
+      "zorluk": "orta",
+      "tur": "dunya",
+      "kaynaklar": [
+        {
+          "ad": "Wikipedia (EN): Beşiktaş J.K.",
+          "url": "https://en.wikipedia.org/wiki/Beşiktaş_J.K."
+        },
+        {
+          "ad": "Goal Türkiye: Şimdi neredeler? Beşiktaş'ın 100. yıl şampiyon kadrosu",
+          "url": "https://www.goal.com/tr/galeri-listesi/simdi-neredeler-besiktasin-100-yil-sampiyon-kadrosu/ooo8osdtw7ri17mt7j3z0ivae"
+        },
+        {
+          "ad": "Habertürk: TFF ve kulüplerden Lucescu için başsağlığı mesajı",
+          "url": "https://www.haberturk.com/tff-ve-kuluplerden-lucescu-icin-bassagligi-mesaji-3875576-spor"
+        },
+        {
+          "ad": "BirGün: Beşiktaş 123'üncü yılını kutluyor",
+          "url": "https://www.birgun.net/haber/besiktas-123-uncu-yilini-kutluyor-697069"
+        }
+      ],
+      "uyum": 1.0
+    },
+    {
+      "id": "besiktas-12",
+      "metin": "Efsane \"Metin-Ali-Feyyaz\" üçlüsündeki \"Ali\" kimdir?",
+      "secenekler": [
+        "Ali Kemal Denizci",
+        "Ali Eren Beşerler",
+        "Ali Tandoğan",
+        "Ali Gültiken"
+      ],
+      "dogru": 3,
+      "zorluk": "orta",
+      "tur": "dunya",
+      "kaynaklar": [
+        {
+          "ad": "Wikipedia (EN): Metin-Ali-Feyyaz",
+          "url": "https://en.wikipedia.org/wiki/Metin-Ali-Feyyaz"
+        },
+        {
+          "ad": "Diken: Metin-Ali-Feyyaz haberi",
+          "url": "https://www.diken.com.tr/?p=297370"
+        },
+        {
+          "ad": "TGRT Haber: Kim Milyoner Olmak İster'de 300 bin TL'lik Metin-Ali-Feyyaz ve Beşiktaş sorusu",
+          "url": "https://www.tgrthaber.com/aktuel/kim-milyoner-olmak-isterde-300-bin-tllik-metin-ali-feyyaz-ve-besiktas-sorusu-3222354"
+        },
+        {
+          "ad": "Milli Gazete: Beşiktaş'ın efsanesi Metin Tekin kimdir?",
+          "url": "https://www.milligazete.com.tr/besiktasin-efsanesi-metin-tekin-kimdir-sari-firtina-lakabini-neden-aldi-hangi-mevkide-oynadi-kac-kupa-kazandi-a-milli-takimda-kac-kez-forma-giydi"
+        }
+      ],
+      "uyum": 1.0
+    },
+    {
+      "id": "besiktas-13",
+      "metin": "Beşiktaş efsanesi Hakkı Yeten taraftarlar arasında hangi lakapla anılır?",
+      "secenekler": ["Kral", "Usta", "Paşa", "Baba"],
+      "dogru": 3,
+      "zorluk": "orta",
+      "tur": "dunya",
+      "kaynaklar": [
+        {
+          "ad": "Wikipedia (EN): Hakkı Yeten",
+          "url": "https://en.wikipedia.org/wiki/Hakkı_Yeten"
+        },
+        {
+          "ad": "beIN Sports: Beşiktaş'ın efsanesi: Baba Hakkı",
+          "url": "https://beinsports.com.tr/haber/besiktasin-efsanesi-baba-hakki"
+        },
+        {
+          "ad": "GZT: Hakkı Yeten'i \"Baba Hakkı\" yapan 5 epik hikaye",
+          "url": "https://www.gzt.com/spor/hakki-yeteni-baba-hakki-yapan-5-epik-hikaye-3493045"
+        },
+        {
+          "ad": "NTV: Hakkı Kaptan'ın büyük aşkı: Beşiktaş'tı",
+          "url": "https://www.ntv.com.tr/galeri/spor/hakki-kaptanin-buyuk-aski-besiktasti,TjbMML-p5keMhxRyK1vBIA"
+        }
+      ],
+      "uyum": 1.0
+    },
+    {
+      "id": "besiktas-14",
+      "metin": "2017–18 Şampiyonlar Ligi son 16 turunda Beşiktaş'ı eleyen takım hangisidir?",
+      "secenekler": ["Real Madrid", "Barcelona", "Bayern Münih", "Juventus"],
+      "dogru": 2,
+      "zorluk": "orta",
+      "tur": "dunya",
+      "kaynaklar": [
+        {
+          "ad": "Wikipedia (EN): Beşiktaş J.K.",
+          "url": "https://en.wikipedia.org/wiki/Beşiktaş_J.K."
+        },
+        {
+          "ad": "Takvim: Kartal'dan buruk veda",
+          "url": "https://www.takvim.com.tr/spor/2018/03/14/kartaldan-buruk-veda"
+        },
+        {
+          "ad": "Bloomberg HT: Beşiktaş'ın Şampiyonlar Ligi'ndeki rakibi Bayern Münih",
+          "url": "https://www.bloomberght.com/besiktas-in-sampiyonlar-ligi-ndeki-rakibi-b-munih-2077584"
+        },
+        {
+          "ad": "A Spor: Beşiktaş Şampiyonlar Ligi'ne rekorlarla veda etti",
+          "url": "https://www.aspor.com.tr/galeri/besiktas/besiktas-sampiyonlar-ligine-rekorlarla-veda-etti"
+        }
+      ],
+      "uyum": 1.0
+    },
+    {
+      "id": "besiktas-15",
+      "metin": "Beşiktaş, 2016–17 Avrupa Ligi çeyrek finalinde penaltılarla hangi takıma elendi?",
+      "secenekler": ["Lyon", "Ajax", "Manchester United", "Celta Vigo"],
+      "dogru": 0,
+      "zorluk": "orta",
+      "tur": "dunya",
+      "kaynaklar": [
+        {
+          "ad": "Wikipedia (EN): Beşiktaş J.K.",
+          "url": "https://en.wikipedia.org/wiki/Beşiktaş_J.K."
+        },
+        {
+          "ad": "Fanatik: (ÖZET) Beşiktaş-Lyon maç sonucu: 6-7",
+          "url": "https://www.fanatik.com.tr/besiktas/ozet-besiktas-lyon-mac-sonucu-6-7-1288320"
+        },
+        {
+          "ad": "Habertürk: Beşiktaş'ın UEFA Avrupa Ligi serüveni",
+          "url": "https://www.haberturk.com/spor/besiktas-in-uefa-avrupa-ligi-seruveni-3912807"
+        },
+        {
+          "ad": "Yeni Ankara: Beşiktaş'ın UEFA Kupası ve Avrupa Ligi'ndeki yarım asırlık serüveni",
+          "url": "https://www.yeniankara.com.tr/futbol/besiktasin-uefa-kupasi-ve-avrupa-ligindeki-yarim-asirlik-seruveni-179002"
+        }
+      ],
+      "uyum": 1.0
+    },
+    {
+      "id": "besiktas-16",
+      "metin": "Beşiktaş, 1989'da ligde 10–0'lık tarihî galibiyetini hangi takıma karşı aldı?",
+      "secenekler": [
+        "Sarıyer",
+        "Adana Demirspor",
+        "Zonguldakspor",
+        "Karşıyaka"
+      ],
+      "dogru": 1,
+      "zorluk": "orta",
+      "tur": "dunya",
+      "kaynaklar": [
+        {
+          "ad": "Wikipedia (EN): Beşiktaş J.K. 10–0 Adana Demirspor",
+          "url": "https://en.wikipedia.org/wiki/Beşiktaş_J.K._10–0_Adana_Demirspor"
+        },
+        {
+          "ad": "UEFA: What makes round of 16 debutants Beşiktaş special?",
+          "url": "https://www.uefa.com/uefachampionsleague/news/newsid=2449686.html"
+        },
+        {
+          "ad": "Fanatik: Şanlı Beşiktaş 118 yaşında",
+          "url": "https://www.fanatik.com.tr/sanli-besiktas-118-yasinda-2205398"
+        },
+        {
+          "ad": "Diken: Metin-Ali-Feyyaz haberi",
+          "url": "https://www.diken.com.tr/?p=297370"
+        },
+        {
+          "ad": "TGRT Haber: Kim Milyoner Olmak İster'de 300 bin TL'lik Metin-Ali-Feyyaz ve Beşiktaş sorusu",
+          "url": "https://www.tgrthaber.com/aktuel/kim-milyoner-olmak-isterde-300-bin-tllik-metin-ali-feyyaz-ve-besiktas-sorusu-3222354"
+        }
+      ],
+      "uyum": 1.0
+    },
+    {
+      "id": "besiktas-17",
+      "metin": "Beşiktaş, kuruluş yıllarında hangi adla faaliyete başladı?",
+      "secenekler": [
+        "Serencebey Jimnastik Kulübü",
+        "Ihlamur Jimnastik Kulübü",
+        "Bereket Jimnastik Kulübü",
+        "Akaretler Jimnastik Kulübü"
+      ],
+      "dogru": 2,
+      "zorluk": "zor",
+      "tur": "dunya",
+      "kaynaklar": [
+        {
+          "ad": "Vikipedi: Beşiktaş JK",
+          "url": "https://tr.wikipedia.org/wiki/Beşiktaş_JK"
+        },
+        {
+          "ad": "Wikipedia (EN): Beşiktaş J.K.",
+          "url": "https://en.wikipedia.org/wiki/Beşiktaş_J.K."
+        },
+        {
+          "ad": "Habertürk: Beşiktaş hangi yılda kuruldu? Beşiktaş'ın tarihçesi nedir?",
+          "url": "https://www.haberturk.com/besiktas-hangi-yilda-kuruldu-besiktas-in-tarihcesi-nedir-3696647"
+        },
+        {
+          "ad": "TFF Tamsaha: Turkcell Süper Kupa 2017 dergisi, Beşiktaş tarihçesi",
+          "url": "https://www.tff.org/Resources/Tamsaha/Turkcell-Super-Kupa-2017/files/assets/basic-html/page-20-21.html"
+        },
+        {
+          "ad": "Fanatik: Şanlı Beşiktaş 118 yaşında",
+          "url": "https://www.fanatik.com.tr/sanli-besiktas-118-yasinda-2205398"
+        },
+        {
+          "ad": "BirGün: Beşiktaş 123'üncü yılını kutluyor",
+          "url": "https://www.birgun.net/haber/besiktas-123-uncu-yilini-kutluyor-697069"
+        }
+      ],
+      "uyum": 1.0
+    },
+    {
+      "id": "besiktas-18",
+      "metin": "Beşiktaş'ta futbol şubesi hangi yıl faaliyete başladı?",
+      "secenekler": ["1905", "1911", "1919", "1923"],
+      "dogru": 1,
+      "zorluk": "zor",
+      "tur": "dunya",
+      "kaynaklar": [
+        {
+          "ad": "Wikipedia (EN): Beşiktaş J.K.",
+          "url": "https://en.wikipedia.org/wiki/Beşiktaş_J.K."
+        },
+        {
+          "ad": "Vikipedi: Beşiktaş JK",
+          "url": "https://tr.wikipedia.org/wiki/Beşiktaş_JK"
+        },
+        {
+          "ad": "Kürê Ansiklopedi: Beşiktaş Jimnastik Kulübü (Erkek Futbol Takımı)",
+          "url": "https://kureansiklopedi.com/tr/detay/besiktas-jimnastik-kulubu-erkek-futbol-takimi"
+        },
+        {
+          "ad": "TFF Tamsaha: Turkcell Süper Kupa 2017 dergisi, Beşiktaş tarihçesi",
+          "url": "https://www.tff.org/Resources/Tamsaha/Turkcell-Super-Kupa-2017/files/assets/basic-html/page-20-21.html"
+        }
+      ],
+      "uyum": 1.0
+    },
+    {
+      "id": "besiktas-19",
+      "metin": "Beşiktaş'ın ünlü lakabının tribünden ilk kez yükseldiği kabul edilen 1941 maçında rakip kimdi?",
+      "secenekler": ["Vefa", "Beykoz", "Süleymaniye", "Kasımpaşa"],
+      "dogru": 2,
+      "zorluk": "zor",
+      "tur": "dunya",
+      "kaynaklar": [
+        {
+          "ad": "Vikipedi: Beşiktaş JK",
+          "url": "https://tr.wikipedia.org/wiki/Beşiktaş_JK"
+        },
+        {
+          "ad": "Habertürk: Beşiktaş hangi yılda kuruldu? Beşiktaş'ın tarihçesi nedir?",
+          "url": "https://www.haberturk.com/besiktas-hangi-yilda-kuruldu-besiktas-in-tarihcesi-nedir-3696647"
+        },
+        {
+          "ad": "CNN Türk: Beşiktaş ve Fenerbahçe'nin lakabının anlamı",
+          "url": "https://www.cnnturk.com/spor/futbol/besiktas-ve-fenerbahcenin-lakabinin-anlami-601414"
+        },
+        {
+          "ad": "TFF Tamsaha: Turkcell Süper Kupa 2017 dergisi, Beşiktaş tarihçesi",
+          "url": "https://www.tff.org/Resources/Tamsaha/Turkcell-Super-Kupa-2017/files/assets/basic-html/page-20-21.html"
+        },
+        {
+          "ad": "Fanatik: Beşiktaş, Galatasaray, Fenerbahçe'nin simgeleri nereden geliyor?",
+          "url": "https://fanatik.com.tr/besiktas-galatasaray-fenerbahce-nin-simgeleri-nereden-geliyor-haber-fotograf-1259488"
+        }
+      ],
+      "uyum": 1.0
+    },
+    {
+      "id": "besiktas-20",
+      "metin": "Beşiktaş'ın tarihî İnönü Stadı hangi yıl açıldı?",
+      "secenekler": ["1932", "1936", "1941", "1947"],
+      "dogru": 3,
+      "zorluk": "zor",
+      "tur": "dunya",
+      "kaynaklar": [
+        {
+          "ad": "Vikipedi: BJK İnönü Stadyumu",
+          "url": "https://tr.wikipedia.org/wiki/BJK_İnönü_Stadyumu"
+        },
+        {
+          "ad": "Wikipedia (EN): BJK İnönü Stadium",
+          "url": "https://en.wikipedia.org/wiki/BJK_İnönü_Stadium"
+        },
+        {
+          "ad": "Fanatik: 1930'dan bugüne İnönü",
+          "url": "https://www.fanatik.com.tr/besiktas/1930dan-bugune-inonu-299704"
+        },
+        {
+          "ad": "Timeturk: İnönü'ye veda vakti: 66 yıllık son tango",
+          "url": "https://www.timeturk.com/tr/2013/05/10/inonu-ye-veda-vakti-66-yillik-son-tango.html"
+        },
+        {
+          "ad": "istanbul.com: Beşiktaş stadyumu",
+          "url": "https://istanbul.com/tr/blog/besiktas-vodafone-park"
+        }
+      ],
+      "uyum": 1.0
+    },
+    {
+      "id": "besiktas-21",
+      "metin": "İnönü Stadı'nın açılış maçında Beşiktaş'ın rakibi olan İsveç takımı hangisiydi?",
+      "secenekler": ["AIK", "Malmö FF", "IFK Göteborg", "Djurgården"],
+      "dogru": 0,
+      "zorluk": "zor",
+      "tur": "dunya",
+      "kaynaklar": [
+        {
+          "ad": "Vikipedi: BJK İnönü Stadyumu",
+          "url": "https://tr.wikipedia.org/wiki/BJK_İnönü_Stadyumu"
+        },
+        {
+          "ad": "Wikipedia (EN): BJK İnönü Stadium",
+          "url": "https://en.wikipedia.org/wiki/BJK_İnönü_Stadium"
+        },
+        {
+          "ad": "Fanatik: 1930'dan bugüne İnönü",
+          "url": "https://www.fanatik.com.tr/besiktas/1930dan-bugune-inonu-299704"
+        },
+        {
+          "ad": "Timeturk: İnönü'ye veda vakti: 66 yıllık son tango",
+          "url": "https://www.timeturk.com/tr/2013/05/10/inonu-ye-veda-vakti-66-yillik-son-tango.html"
+        },
+        {
+          "ad": "CNN Türk: Karakartal'ın yuvasının hikâyesi",
+          "url": "https://cnnturk.com/spor/vodafon-arena-aciliyor-535318"
+        }
+      ],
+      "uyum": 1.0
+    },
+    {
+      "id": "besiktas-22",
+      "metin": "1986–87 Avrupa Şampiyon Kulüpler Kupası çeyrek finalinde Beşiktaş'ı eleyen takım hangisidir?",
+      "secenekler": ["Dinamo Kiev", "Porto", "Real Madrid", "Kızılyıldız"],
+      "dogru": 0,
+      "zorluk": "zor",
+      "tur": "dunya",
+      "kaynaklar": [
+        {
+          "ad": "Wikipedia (EN): Beşiktaş J.K.",
+          "url": "https://en.wikipedia.org/wiki/Beşiktaş_J.K."
+        },
+        {
+          "ad": "UEFA: What makes round of 16 debutants Beşiktaş special?",
+          "url": "https://www.uefa.com/uefachampionsleague/news/newsid=2449686.html"
+        },
+        {
+          "ad": "Fanatik: Beşiktaş, Avrupa kupalarında 186. maçına çıkıyor",
+          "url": "https://fanatik.com.tr/besiktas-avrupa-kupalarinda-186-macina-cikiyor-1254477"
+        },
+        {
+          "ad": "beIN Sports: İşte Beşiktaş'ın Şampiyonlar Ligi karnesi",
+          "url": "https://beinsports.com.tr/fotogaleri/iste-besiktasin-sampiyonlar-ligi-karnesi/22"
+        },
+        {
+          "ad": "Eigenrankings: European Cup 1986-87",
+          "url": "https://www.eigenrankings.com/Season/European_Cup/1986-87.html"
+        }
+      ],
+      "uyum": 1.0
+    },
+    {
+      "id": "besiktas-23",
+      "metin": "İnönü'nün yerine yapılan yeni stattaki ilk resmî maçında Beşiktaş hangi takımı 3–2 yendi?",
+      "secenekler": ["Kayserispor", "Antalyaspor", "Konyaspor", "Bursaspor"],
+      "dogru": 3,
+      "zorluk": "zor",
+      "tur": "dunya",
+      "kaynaklar": [
+        {
+          "ad": "Wikipedia (EN): Beşiktaş J.K.",
+          "url": "https://en.wikipedia.org/wiki/Beşiktaş_J.K."
+        },
+        {
+          "ad": "StadiumDB: New stadium opened in style",
+          "url": "https://stadiumdb.com/news/2016/04/new_stadium_vodafone_arena_opened_in_style"
+        },
+        {
+          "ad": "Cumhuriyet: Kartal yuvaya galibiyetle döndü",
+          "url": "https://www.cumhuriyet.com.tr/haber/kartal-yuvaya-galibiyetle-dondu-513892"
+        },
+        {
+          "ad": "Karar: Beşiktaş yeni stadındaki ilk maçında Bursaspor'u 3-2 mağlup etti",
+          "url": "https://www.karar.com/besiktas-vodafone-arenadaki-ilk-macinda-bursasporu-3-2-maglup-etti-88342"
+        }
+      ],
+      "uyum": 1.0
+    },
+    {
+      "id": "besiktas-24",
+      "metin": "2017–18 Şampiyonlar Ligi grubunu namağlup lider bitiren Beşiktaş kaç puan topladı?",
+      "secenekler": ["12", "14", "15", "16"],
+      "dogru": 1,
+      "zorluk": "zor",
+      "tur": "dunya",
+      "kaynaklar": [
+        {
+          "ad": "Wikipedia (EN): Beşiktaş J.K.",
+          "url": "https://en.wikipedia.org/wiki/Beşiktaş_J.K."
+        },
+        {
+          "ad": "Kürê Ansiklopedi: Beşiktaş Jimnastik Kulübü (Erkek Futbol Takımı)",
+          "url": "https://kureansiklopedi.com/tr/detay/besiktas-jimnastik-kulubu-erkek-futbol-takimi"
+        },
+        {
+          "ad": "BirGün: Beşiktaş 123'üncü yılını kutluyor",
+          "url": "https://www.birgun.net/haber/besiktas-123-uncu-yilini-kutluyor-697069"
+        },
+        {
+          "ad": "Takvim: Kartal'dan buruk veda",
+          "url": "https://www.takvim.com.tr/spor/2018/03/14/kartaldan-buruk-veda"
+        },
+        {
+          "ad": "A Spor: Beşiktaş Şampiyonlar Ligi'ne rekorlarla veda etti",
+          "url": "https://www.aspor.com.tr/galeri/besiktas/besiktas-sampiyonlar-ligine-rekorlarla-veda-etti"
+        }
+      ],
+      "uyum": 1.0
+    }
+  ]
+}
