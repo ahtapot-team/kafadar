@@ -77,7 +77,7 @@ PRD'deki her kabul kriteri için "KK-nn" ifadesi geçen test dosyaları ve gerç
 | KK-71 | Oda mantığı saf ve serileştirilebilir bir durum makinesidir (KK-40). OK mu NOK mu odası bo | `oda/onon-oda.kabul.test.ts` | — |
 | KK-72 | Gerçek cihaz kapısı: en az 3 telefonla tam bir 10/10 ama odası oynanır. Kontrol listesi `d | — | cihaz |
 | KK-77 | Ekran okuyucu kartın başlığını ve metnini okur. "Tamam" düğmesinin dokunma alanı en az 48p | `games/tanitim.kabul.test.ts`, `tanitim-ui.kabul.test.ts` | cihaz |
-| KK-85 | Çiplerin dokunma alanı en az 48px'tir. Ekran okuyucu seçili çipi "seçili" diye okur. Çiple | `games/kategori.kabul.test.ts` | — |
+| KK-85 | Çiplerin dokunma alanı en az 48px'tir. Ekran okuyucu seçili çipi "seçili" diye okur. Çiple | `games/kategori.kabul.test.ts`, `games/quiz-night/kategori.kabul.test.ts` | — |
 | KK-89 | Oyun kartında tür rozeti yoktur; yalnızca kişi sayısı görünür (ör. "2–12 kişi") ve tanıtım | `games/kategori.kabul.test.ts`, `v81.kabul.test.ts` | — |
 | KK-90 | Oyun tanıtım kartı hiçbir zaman kendiliğinden açılmaz: oyunu ilk seçerken de, odaya kodla  | `nasil-oynanir.kabul.test.ts` | — |
 | KK-91 | Oyun seçildikten sonraki her ekranın sağ üstünde küçük bir ⓘ düğmesi vardır: mod seçimi, o | `nasil-oynanir.kabul.test.ts`, `quiz-night.kabul.test.ts`, `v81.kabul.test.ts` | — |
@@ -97,14 +97,19 @@ PRD'deki her kabul kriteri için "KK-nn" ifadesi geçen test dosyaları ve gerç
 | KK-105 | Diğer akışlar değişmez: açılış ekranı (KK-94…KK-100), oyun kartındaki kişi sayısı (KK-89)  | `v81.kabul.test.ts` | — |
 | KK-106 | Ana ekranda 🧠 Quiz Night kartı vardır ve kartta "1–12 kişi" yazar. Kart "Tümü", "1 kişi", | `quiz-night.kabul.test.ts` | cihaz |
 | KK-107 | Quiz Night'ta "Tek başına · Tek telefonda grup · Oda kur · Odaya katıl" seçimi vardır. | `games/quiz-night/arayuz.kabul.test.ts`, `games/quiz-night/ui.kabul.test.ts` | cihaz |
-| KK-108 | Paket seçimindeki her kartta şunlar bulunur: düz metin başlık "Ne kadar <ad> fanısın?", bi | `games/quiz-night/arayuz.kabul.test.ts`, `games/quiz-night/ui.kabul.test.ts` | cihaz |
 | KK-109 | Bir tur 10 sorudur ve sorular paketin havuzundan tekrarsız seçilir: 3 kolay, 4 orta, 3 zor | `games/quiz-night/quiz.kabul.test.ts`, `games/quiz-night/ui.kabul.test.ts` | cihaz |
 | KK-110 | Soru ekranında şunlar bulunur: üstte "3/10", soru metni, zorluk (kolay / orta / zor, renkl | `games/quiz-night/arayuz.kabul.test.ts`, `games/quiz-night/ui.kabul.test.ts` | cihaz |
 | KK-111 | Sonuç ekranında büyük puan ("8/10") ve unvan gösterilir. Unvan basamakları 0–3, 4–6, 7–9 v | `games/quiz-night/arayuz.kabul.test.ts`, `games/quiz-night/oda-ui.kabul.test.ts`, `games/quiz-night/quiz.kabul.test.ts`, `games/quiz-night/ui.kabul.test.ts`, `oda/quiz-oda.kabul.test.ts` | cihaz |
 | KK-112 | Tek telefonda grup modu şöyle işler: | `games/quiz-night/arayuz.kabul.test.ts`, `games/quiz-night/quiz.kabul.test.ts`, `games/quiz-night/ui.kabul.test.ts` | cihaz |
 | KK-114 | Puan, doğru cevap sayısıdır. Yanlış cevap puan düşürmez ve hız bonusu yoktur. Unvan bu pua | `games/quiz-night/oda-ui.kabul.test.ts`, `games/quiz-night/quiz.kabul.test.ts`, `oda/quiz-oda.kabul.test.ts` | — |
-| KK-115 | İçerik `content/quiz/<paket>.json` dosyalarındadır ve `npm run icerik` (CI'da da) şunları  | `icerik/quiz.kabul.test.ts` | — |
+| KK-115 | İçerik `content/quiz/<paket>.json` dosyalarındadır ve `npm run icerik` (CI'da da) şunları  | `icerik/quiz-kategori.kabul.test.ts`, `icerik/quiz.kabul.test.ts` | — |
 | KK-116 | İçerik kuralları (insan incelemesi, makineyle denetlenemez): | — | cihaz |
 | KK-117 | Faz 1 en az 3 paketle çıkar, en az biri Türk ve en az biri yabancı yapım olur. Testlerdeki | `icerik/quiz.kabul.test.ts` | cihaz |
-| KK-118 | Uygulamanın adında, `app.json`'da ve mağaza metinlerinde paketlerin dizi ya da film adı ge | `quiz-night.kabul.test.ts` | cihaz |
 | KK-119 | Diğer oyunlar ve akışlar değişmez. Mevcut kabul testleri yeşil kalır. KK-104'teki "1 kişi  | `games/kategori.kabul.test.ts`, `quiz-night.kabul.test.ts` | — |
+| KK-120 | Her Quiz Night paketinde `kategori` alanı vardır: `dizi-film`, `muzik` ya da `spor`. `npm  | `icerik/quiz-kategori.kabul.test.ts`, `icerik/quiz.kabul.test.ts` | — |
+| KK-121 | Paket seçiminde yatay ve tek seçimli bir kategori çip satırı vardır. Sıra şudur: Tümü · Di | `games/quiz-night/arayuz.kabul.test.ts`, `games/quiz-night/kategori.kabul.test.ts`, `games/quiz-night/ui.kabul.test.ts` | cihaz |
+| KK-122 | Paket kartında düz metin başlık, bir emoji ve not bulunur. | `games/quiz-night/arayuz.kabul.test.ts`, `games/quiz-night/kategori.kabul.test.ts`, `games/quiz-night/ui.kabul.test.ts` | cihaz |
+| KK-123 | Müzik ve Spor içerik kuralları (insan incelemesi). KK-116'nın kaynak, uyum ve şık kurallar | — | cihaz |
+| KK-124 | Uygulamanın adında, ikonunda, `app.json`'daki metinlerde ve mağaza metinlerinde hiçbir pak | `quiz-night.kabul.test.ts` | cihaz |
+| KK-125 | İlk içerik şudur: Spor'da 3 paket (Galatasaray, Fenerbahçe, Beşiktaş), Müzik'te 4 paket (M | `icerik/quiz-kategori.kabul.test.ts` | cihaz |
+| KK-126 | Diğer oyunlar ve akışlar değişmez. Mevcut kabul testleri yeşil kalır. KK-108 testleri KK-1 | `games/quiz-night/kategori.kabul.test.ts` | — |
