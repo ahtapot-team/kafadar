@@ -5,10 +5,9 @@
 //   saha çizgisi) kategoriden gelir: quiz-paket-desen-<kategori>. Kulüp rengi, arma, logo yok. Kategori çipleri KK-121 gibi.
 //   Emoji yok (ne `p.emoji` ne karakter). Yazılar ≥12 px, tema token'ları, dokunma ≥48.
 import { describe, expect, it } from 'vitest';
-import { BEKLEYEN } from '../../kabul';
 import { dosyaIcerik } from '../../test/yardimci';
 
-const kabulP = BEKLEYEN.paketEkranV11 ? it.fails : it;
+const kabulP = it;
 const kod = (t: string) =>
   t
     .replace(/\/\*[\s\S]*?\*\//g, '')
