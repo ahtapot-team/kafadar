@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kafadar — #290 Quiz Night örneği B (Three.js)</title>
+<!-- #290 örnek (Semih, msg 1061): görseli kendimiz çiziyoruz. B = Three.js: gerçek 3D sahne (ışık, gölge, malzeme), PNG'ye çevrilir.
+     Kompozisyon A (quiz-a.html) ile aynı: gece zemini üstünde yanan ampul, içinde soru işareti biçimli tel, ampul -12° eğik.
+     Three.js yalnızca bu tasarım dosyasında, cdnjs'ten sabit sürümle (0.160.0) yüklenir; uygulamaya girmez.
+     Sahne bir kez 1024 px render edilir, her boyuttaki <canvas>'a kopyalanır (tek WebGL bağlamı, düşük RAM). -->
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&display=swap" rel="stylesheet">
+<style>
+  :root { --kontur: #0B0920; --golge: #7C6CFF; --marka: #FFD23F; --marka-2: #5B8CFF; --krem: #FFF8E7;
+    --zemin: #16123F; --yuzey: #2B2570; --metin: #FFF8E7; --soluk: #B9B3E8; }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--zemin); font-family: 'Bricolage Grotesque', system-ui, sans-serif; color: var(--metin); }
+  .cerceve { width: 390px; margin: 0 auto; padding: 22px 20px 30px; zoom: 2; }
+  .baslik { display: flex; align-items: center; gap: 10px; }
+  .yontem { padding: 3px 10px 5px; border-radius: 12px; border: 3px solid var(--kontur); background: var(--marka); color: var(--kontur);
+    box-shadow: 4px 4px 0 var(--golge); font-size: 18px; font-weight: 800; transform: rotate(-3deg); }
+  .baslik b { font-size: 18px; font-weight: 800; } .baslik small { display: block; font-size: 12px; font-weight: 700; color: var(--soluk); }
+  .etiket { margin: 24px 0 10px; font-size: 12px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; color: var(--soluk); }
+  .satir { display: flex; align-items: flex-end; gap: 28px; }
+  .uyg { display: flex; flex-direction: column; align-items: center; text-align: center; }
+  .uyg b { margin-top: 12px; font-size: 17px; font-weight: 800; line-height: 1.1; }
+  .uyg small { margin-top: 3px; font-size: 13px; font-weight: 700; color: var(--soluk); }
+  /* Logo zemini (2. turdaki Quiz Night gecesi, aynen) */
+  .ikon { position: relative; width: 138px; height: 138px; border-radius: 38px; border: 4px solid var(--kontur); box-shadow: 6px 6px 0 var(--golge);
+    background: var(--c); overflow: hidden; display: grid; place-items: center; flex: none; }
+  .ikon::before, .kart::before { content: ''; position: absolute; inset: 0; border-radius: inherit; background: var(--desen); }
+  .ikon::after, .kart::after { content: ''; position: absolute; inset: 0; border-radius: inherit; background: linear-gradient(160deg, rgba(255,255,255,.38), rgba(255,255,255,0) 44%); }
+  .ikon.kucuk { width: 62px; height: 62px; border-radius: 18px; border-width: 3px; box-shadow: none; }
+  .ikon.buyuk { width: 300px; height: 300px; border-radius: 80px; border-width: 5px; box-shadow: 8px 8px 0 var(--golge); }
+  .z-quiz { --c: var(--yuzey); --desen: radial-gradient(circle at 30% 19%, var(--yuzey) 0 11px, transparent 12px), radial-gradient(circle at 23% 24%, var(--marka) 0 14px, transparent 15px),
+    radial-gradient(circle at 78% 18%, var(--krem) 0 2.5px, transparent 3.5px), radial-gradient(circle at 86% 46%, var(--krem) 0 2px, transparent 3px),
+    radial-gradient(circle at 14% 72%, var(--krem) 0 2px, transparent 3px), radial-gradient(circle at 64% 84%, var(--marka) 0 2.5px, transparent 3.5px); }
+  .ikon.buyuk.z-quiz { --desen: radial-gradient(circle at 30% 19%, var(--yuzey) 0 24px, transparent 25px), radial-gradient(circle at 23% 24%, var(--marka) 0 30px, transparent 31px),
+    radial-gradient(circle at 78% 18%, var(--krem) 0 5px, transparent 6px), radial-gradient(circle at 86% 46%, var(--krem) 0 4px, transparent 5px),
+    radial-gradient(circle at 14% 72%, var(--krem) 0 4px, transparent 5px), radial-gradient(circle at 64% 84%, var(--marka) 0 5px, transparent 6px); }
+  .gorsel { position: relative; z-index: 1; display: block; }
+  .ikon .gorsel { width: 100px; height: 100px; } .ikon.kucuk .gorsel { width: 46px; height: 46px; } .ikon.buyuk .gorsel { width: 230px; height: 230px; }
+  /* Büyük paket kartı (2. tur paket b ile aynı ölçü) */
+  .kart { position: relative; min-height: 108px; padding: 22px 128px 16px 16px; border-radius: 24px; border: 4px solid var(--kontur); box-shadow: 6px 6px 0 var(--golge);
+    background: var(--c); color: var(--metin); margin-top: 34px; }
+  .kart > * { position: relative; z-index: 1; }
+  .kart b { display: block; font-size: 18px; font-weight: 800; line-height: 1.15; }
+  .kart .meta { margin-top: 6px; font-size: 12px; font-weight: 700; line-height: 1.5; color: var(--soluk); }
+  .rozet { display: inline-flex; align-items: center; height: 22px; padding: 0 7px; margin-right: 7px; border-radius: 10px; border: 2px solid var(--kontur);
+    background: var(--zemin); color: var(--metin); font-size: 12px; font-weight: 800; vertical-align: 1px; }
+  .kart .nw { white-space: nowrap; }
+  .kart.z-quiz { --desen: radial-gradient(circle at 64.6% 70%, var(--yuzey) 0 7px, transparent 8px), radial-gradient(circle at 62% 74%, var(--marka) 0 9px, transparent 10px),
+    radial-gradient(circle at 48% 16%, var(--krem) 0 2px, transparent 3px), radial-gradient(circle at 56% 88%, var(--krem) 0 2px, transparent 3px), radial-gradient(circle at 96% 86%, var(--marka) 0 2.5px, transparent 3.5px); }
+  .kart .gorsel { position: absolute; right: 0; top: -34px; width: 128px; height: 128px; z-index: 2; }
+  .not { margin-top: 26px; font-size: 12px; font-weight: 700; line-height: 1.45; color: var(--soluk); }
+  /* B: hale CSS (A ile aynı ölçü), nesne Three.js ile bir kez render edilip her boyuta kopyalanır */
+  .gorsel::before { content: ''; position: absolute; inset: 0; background: radial-gradient(circle closest-side at 50% 40%, rgba(255,210,63,.55), rgba(255,210,63,.18) 55%, rgba(255,210,63,0)); }
+  .gorsel canvas { position: relative; width: 100%; height: 100%; display: block; }
+</style>
+</head>
+<body>
+<div class="cerceve">
+  <div class="baslik"><span class="yontem">B</span><div><b>Three.js · Quiz Night</b><small>Gerçek 3D render: ışık, gölge, malzeme</small></div></div>
+
+  <div class="etiket">Ana ekran ikonu</div>
+  <div class="satir">
+    <div class="uyg"><div class="ikon z-quiz"><span class="gorsel"><canvas data-boy="100"></canvas></span></div><b>Quiz Night</b><small>1–12 kişi</small></div>
+    <div class="uyg"><div class="ikon kucuk z-quiz"><span class="gorsel"><canvas data-boy="46"></canvas></span></div><small>Widget boyu</small></div>
+  </div>
+
+  <div class="etiket">Büyük paket kartı</div>
+  <div class="kart z-quiz"><b>Quiz Night</b>
+    <div class="meta"><span class="rozet">1–12 kişi</span><span class="nw">Bilgi yarışması</span> · <span class="nw">Tek başına ya da takımla</span></div>
+    <span class="gorsel"><canvas data-boy="128"></canvas></span>
+  </div>
+
+  <div class="etiket">Yakın plan</div>
+  <div class="ikon buyuk z-quiz"><span class="gorsel"><canvas data-boy="230"></canvas></span></div>
+
+  <p class="not" id="not">Three.js sahnesi: cam, metal duy ve kor tel ayrı malzemeler; ışık ve gölge hesaplanır. PNG olarak dışa aktarılır, uygulamaya resim olarak girer.</p>
+</div>
+<script type="module">
+import * as THREE from 'https://cdnjs.cloudflare.com/ajax/libs/three.js/0.160.0/three.module.min.js';
+
+// Koordinatlar A'daki SVG ile aynı: viewBox 0..100, 1 birim = 0.1 dünya birimi. Grup pivotu SVG (50,55).
+const q = (x, y, z = 0) => new THREE.Vector3((x - 50) / 10, (55 - y) / 10, z);
+const BOY = 1024, ZOOM = 2;
+
+try {
+  const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true, preserveDrawingBuffer: true });
+  renderer.setPixelRatio(1); renderer.setSize(BOY, BOY, false);
+  renderer.shadowMap.enabled = true; renderer.shadowMap.type = THREE.PCFShadowMap;
+
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(2 * Math.atan(5 / 20) * 180 / Math.PI, 1, 1, 60);
+  camera.position.set(0, 0, 20); camera.lookAt(0, 0, 0);
+
+  // Ortam yansıması: koyu gece kutusu + üç ışık paneli (beyaz, sarı, mor)
+  const env = new THREE.Scene();
+  env.add(new THREE.Mesh(new THREE.SphereGeometry(30, 32, 16), new THREE.MeshBasicMaterial({ color: 0x1B1650, side: THREE.BackSide })));
+  const panel = (w, h, renk, guc, x, y, z) => {
+    const m = new THREE.Mesh(new THREE.PlaneGeometry(w, h), new THREE.MeshBasicMaterial({ color: new THREE.Color(renk).multiplyScalar(guc), side: THREE.DoubleSide }));
+    m.position.set(x, y, z); m.lookAt(0, 0, 0); env.add(m);
+  };
+  panel(10, 7, 0xFFFFFF, 3, -9, 10, 9);
+  panel(6, 12, 0xFFD23F, 1.6, 12, 1, 4);
+  panel(16, 5, 0x7C6CFF, 2, 0, -12, 5);
+  panel(3, 12, 0xFFFFFF, 2.5, 10, 6, -8);
+  const pmrem = new THREE.PMREMGenerator(renderer);
+  scene.environment = pmrem.fromScene(env, 0.03).texture;
+
+  // Işıklar: anahtar, mor kenar ışığı, gölge ışığı (önden, hafif sol üstten)
+  scene.add(new THREE.HemisphereLight(0xFFF8E7, 0x7C6CFF, 0.6));
+  const anahtar = new THREE.DirectionalLight(0xFFFFFF, 2.2); anahtar.position.set(-4, 6, 6); scene.add(anahtar);
+  const kenar = new THREE.DirectionalLight(0x7C6CFF, 2.5); kenar.position.set(6, -2, -3); scene.add(kenar);
+  const golgeIsik = new THREE.DirectionalLight(0xFFFFFF, 0.35); golgeIsik.position.set(-0.7, 1.8, 10); golgeIsik.castShadow = true;
+  Object.assign(golgeIsik.shadow.camera, { left: -6, right: 6, top: 6, bottom: -6, near: 1, far: 30 });
+  golgeIsik.shadow.mapSize.set(1024, 1024); golgeIsik.shadow.radius = 7; golgeIsik.shadow.bias = -0.002;
+  scene.add(golgeIsik);
+  const zemin = new THREE.Mesh(new THREE.PlaneGeometry(30, 30), new THREE.ShadowMaterial({ color: 0x0B0920, opacity: 0.45 }));
+  zemin.position.z = -2.9; zemin.receiveShadow = true; scene.add(zemin);
+
+  const grup = new THREE.Group();
+  grup.position.set(0, -0.5, 0);
+  grup.rotation.set(0.15, 0, 12 * Math.PI / 180);
+  scene.add(grup);
+
+  // Cam: A'daki yol döndürülerek (lathe) — boyun eğrisi + küre
+  const yol = [];
+  const b = new THREE.CubicBezierCurve(new THREE.Vector2(1.15, -0.95), new THREE.Vector2(1.15, -0.2), new THREE.Vector2(2.6, 0.35), new THREE.Vector2(2.6, 1.7));
+  b.getPoints(24).forEach(p => yol.push(p));
+  for (let i = 1; i <= 32; i++) { const t = i / 32 * Math.PI / 2; yol.push(new THREE.Vector2(Math.max(2.6 * Math.cos(t), 0.001), 1.7 + 2.6 * Math.sin(t))); }
+  const camGeo = new THREE.LatheGeometry(yol, 96);
+  // İç ışık: aynı biçim, derinlikte basık; sarı, kendinden ışıklı
+  const ic = new THREE.Mesh(camGeo, new THREE.MeshStandardMaterial({ color: 0xFFD23F, emissive: 0xFFB21E, emissiveIntensity: 0.42, roughness: 0.55 }));
+  ic.scale.set(1, 1, 0.55); ic.castShadow = true; grup.add(ic);
+  // Cam kabuk: yalnızca yansıma ve parlama ekler (siyah gövde, toplamalı karışım)
+  const kabuk = new THREE.Mesh(camGeo, new THREE.MeshPhysicalMaterial({ color: 0x000000, roughness: 0.06, clearcoat: 1, clearcoatRoughness: 0.04,
+    envMapIntensity: 1.4, transparent: true, blending: THREE.AdditiveBlending, depthWrite: false }));
+  kabuk.renderOrder = 2; grup.add(kabuk);
+
+  // Soru işareti teli: A'daki eğri, iç ışığın yüzeyine yaslanır
+  const yuzeyZ = (v) => { const dx = v.x, dy = v.y - 1.7, r2 = dx * dx + dy * dy; return 0.55 * Math.sqrt(Math.max(0, 6.76 - r2)) + 0.32; };
+  const yasla = (x, y) => { const v = q(x, y); v.z = yuzeyZ(v); return v; };
+  const tel = new THREE.CurvePath();
+  tel.add(new THREE.CubicBezierCurve3(yasla(41, 32.5), yasla(41, 23), yasla(59, 23), yasla(59, 32.5)));
+  tel.add(new THREE.CubicBezierCurve3(yasla(59, 32.5), yasla(59, 40), yasla(50, 39.5), yasla(50, 48)));
+  const telMat = new THREE.MeshStandardMaterial({ color: 0xB04A06, emissive: 0xFF6A00, emissiveIntensity: 0.12, roughness: 0.3, metalness: 0.1 });
+  const r = 0.3;
+  [new THREE.TubeGeometry(tel, 120, r, 20), new THREE.SphereGeometry(r, 20, 12).translate(...yasla(41, 32.5).toArray()),
+   new THREE.SphereGeometry(r, 20, 12).translate(...yasla(50, 48).toArray()), new THREE.SphereGeometry(0.36, 24, 16).translate(...yasla(50, 56).toArray())]
+    .forEach(g => { const m = new THREE.Mesh(g, telMat); m.castShadow = true; grup.add(m); });
+
+  // Duy: 3 diş (lathe profili) + koyu uç
+  const dis = [[66.7, 3.2, 1.3], [73.3, 3.1, 1.24], [79.7, 3.0, 1.16]];
+  const duyYol = [];
+  for (let y = 84.2; y >= 63; y -= 0.15) {
+    let rr = 1.02;
+    for (const [c, h, rp] of dis) { const u = (y - c) / h; if (Math.abs(u) < 1) rr = Math.max(rr, 1.02 + (rp - 1.02) * Math.sqrt(1 - u * u)); }
+    duyYol.push(new THREE.Vector2(rr, (55 - y) / 10));
+  }
+  const duy = new THREE.Mesh(new THREE.LatheGeometry(duyYol, 96), new THREE.MeshStandardMaterial({ color: 0xD9D4F7, metalness: 1, roughness: 0.28 }));
+  duy.castShadow = true; grup.add(duy);
+  const ucYol = [[0.72, 84.1], [0.7, 85.5], [0.62, 88], [0.48, 90.2], [0.28, 91.3], [0.001, 91.6]].map(([x, y]) => new THREE.Vector2(x, (55 - y) / 10));
+  const uc = new THREE.Mesh(new THREE.LatheGeometry(ucYol, 64), new THREE.MeshStandardMaterial({ color: 0x221D4A, metalness: 0.4, roughness: 0.4, side: THREE.DoubleSide }));
+  uc.castShadow = true; grup.add(uc);
+
+  renderer.render(scene, camera);
+
+  // Tek render → her boyuttaki tuvale kopya (2x keskin)
+  document.querySelectorAll('canvas[data-boy]').forEach(c => {
+    const n = Math.round(+c.dataset.boy * ZOOM); c.width = n; c.height = n;
+    const ctx = c.getContext('2d'); ctx.imageSmoothingQuality = 'high'; ctx.drawImage(renderer.domElement, 0, 0, n, n);
+  });
+  pmrem.dispose();
+} catch (e) {
+  document.getElementById('not').textContent = 'WebGL açılamadı: ' + e.message;
+}
+</script>
+</body>
+</html>
