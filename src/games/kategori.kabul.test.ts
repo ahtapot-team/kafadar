@@ -112,7 +112,7 @@ describe('KK-104: kişi aralığı kesişimi ve filtre', () => {
     expect(cipEslesir('3-uzeri-kisi', oyun('x', 12))).toBe(true);
   });
 
-  it('KK-104: filtre yalnızca eşleşenleri bırakır, sıra değişmez (bugün 2 kişi → OK mu NOK mu, 10/10 ama; 1 kişi → boş)', async () => {
+  it('KK-104: filtre yalnızca eşleşenleri bırakır, sıra değişmez (sabit örnek liste: 2 kişi → OK mu NOK mu, 10/10 ama; 1 kişi → boş; gerçek kayıt: quiz-night.kabul.test.ts KK-119)', async () => {
     const { filtrele } = await yukle();
     expect(ids(filtrele(bugun, 'tumu'))).toEqual(ids(bugun));
     expect(ids(filtrele(bugun, '1-kisi'))).toEqual([]);
