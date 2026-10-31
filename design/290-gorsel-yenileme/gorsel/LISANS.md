@@ -31,3 +31,6 @@ Tek nesneyi görmek için `sahne.html?nesne=spor`; set kontrolü için `sahne.ht
 | `blok3.png` | Mikrofon | BLOK3 paketi |
 | `mabel-matiz.png` | Bağlı iki nota | Mabel Matiz paketi |
 | `spor.png` | Kupa (kulüp rengi yok) | Spor paketleri |
+
+## Uygulama kopyaları
+`assets/gorsel/<ad>.webp`: yukarıdaki PNG'ler `cwebp -q 90 -alpha_q 100 -m 6` ile çevrilir (her dosya ≤50 KB, toplam ≤1 MB; uygulamayla gelir, ağdan inmez). `set.png` yalnız tasarım kontrolüdür, uygulamaya girmez.
