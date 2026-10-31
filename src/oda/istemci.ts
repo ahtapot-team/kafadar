@@ -1,7 +1,14 @@
 // Oda istemcisi (saf, React'sız): taşıma üzerinden sunucuyla konuşur; kimliği cihazda saklar;
 // bağlantı kopunca aynı kimlikle geri döner ve "Yeniden bağlanıyor…" durumunu tutar (KK-37).
 import type { Depo } from '../core/kayit';
-import type { Final, Gorunum, Kimlik, OdaTuru, OnOnFinal } from './oda';
+import type {
+  Final,
+  Gorunum,
+  Kimlik,
+  OdaTuru,
+  OnOnFinal,
+  QuizFinal,
+} from './oda';
 import type { Acilis, OdaHata, OnPaket, Paket, Sunucu } from './mesaj';
 import type { Tasima, TasimaUretici } from './tasima';
 
@@ -18,6 +25,7 @@ export type IstemciDurumu = {
   alindi: number; // gorunum'ün yerel saatle geldiği an (kalan süre hesabı için)
   final: Final | null;
   onFinal: OnOnFinal | null; // 10/10 ama odası finali
+  quizFinal: QuizFinal | null; // Quiz Night odası finali
   hata: OdaHata | null;
 };
 
@@ -29,6 +37,7 @@ const BOS: IstemciDurumu = {
   gorunum: null,
   alindi: 0,
   final: null,
+  quizFinal: null,
   onFinal: null,
   hata: null,
 };
@@ -185,8 +194,9 @@ export class OdaIstemci {
     } else if (m.t === 'gorunum') {
       this.ayarla({ gorunum: m.gorunum, alindi: this.saat() });
     } else if (m.t === 'final') {
-      // 10/10 ama finali (OnOnFinal: `kartlar` alanı var) `onFinal`a, OK mu NOK mu finali `final`a düşer.
+      // 10/10 ama finali (`kartlar` var) `onFinal`a, Quiz Night finali (`siralama` var) `quizFinal`a, OK mu NOK mu finali `final`a düşer.
       if ('kartlar' in m.final) this.ayarla({ onFinal: m.final });
+      else if ('siralama' in m.final) this.ayarla({ quizFinal: m.final });
       else this.ayarla({ final: m.final });
     } else if (m.t === 'hata') {
       // Odaya dönülemiyorsa (kapandı/tanımsız) kayıt geçersizdir: temiz başlangıç + hata.

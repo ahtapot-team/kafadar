@@ -1,5 +1,5 @@
 # Sunucu smoke testi: sunucuya (ya da oda mantığına) dokunan PR'da wrangler dev ile gerçek sunucu çalışır,
-# sunucu/test/oyun.ts (OK mu NOK mu) ve onon.ts (10/10 ama) uçtan uca koşar. Kırık sunucuda kırmızı olur.
+# sunucu/test/oyun.ts (OK mu NOK mu), onon.ts (10/10 ama) ve quiz.ts (Quiz Night) uçtan uca koşar. Kırık sunucuda kırmızı olur.
 name: Sunucu smoke
 
 on:
@@ -44,6 +44,9 @@ jobs:
 
       - name: 10/10 ama odası (4 istemci)
         run: node sunucu/test/onon.ts http://127.0.0.1:8787 4
+
+      - name: Quiz Night odası (3 istemci)
+        run: node sunucu/test/quiz.ts http://127.0.0.1:8787 3
 
       - name: Sunucu günlüğü (hata olursa)
         if: failure()

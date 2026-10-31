@@ -4,12 +4,13 @@
 //
 // Bağlanma (adres sorgusu): ?islem=kur&ad=Ali&paket=arkadas|cift|aile                      (OK mu NOK mu)
 //                           ?islem=kur&ad=Ali&oyun=on-on-ama&paket=arkadas|gundelik|sevgili (10/10 ama)
+//                           ?islem=kur&ad=Ali&oyun=quiz-night&paket=<content/quiz paket id'si> (Quiz Night)
 //                           ?islem=katil&kod=123456&ad=Ali
 //                           ?islem=don&kod=123456  → İLK istemci mesajı {t:'kimlik', kimlik}; belirteç adreste/günlükte
 //                             görünmesin diye adreste yok, 10 sn içinde gelmezse soket kapanır.
 // Sunucu → istemci: tamam | hata | gorunum | final (aşağıdaki `Sunucu`). Bağlanma hatasında hata çerçevesi gelir ve
 // soket kapanır; oyun içi hatada soket açık kalır. Soket olmayan istek 426, bilinmeyen işlem 400 döner.
-// İstemci → sunucu: baslat | ayril | cevapla (OK mu NOK mu) | puanla, sonraki (10/10 ama; sonraki yalnızca yetkili).
+// İstemci → sunucu: baslat | ayril | cevapla (OK mu NOK mu: `oy`; Quiz Night: `sik` 0–3, kilitli) | puanla, sonraki (10/10 ama ve Quiz Night; sonraki yalnızca yetkili).
 import type { PaketId } from '../icerik/kayit';
 import type {
   Final,
@@ -20,6 +21,7 @@ import type {
   Olay,
   OnOnFinal,
   Oy,
+  QuizFinal,
 } from './oda';
 
 export type Paket = PaketId<'ok-mu-nok'>;
@@ -28,7 +30,12 @@ export type OnPaket = PaketId<'on-on-ama'>;
 
 // Bağlanırken adres sorgusuyla gönderilir (?islem=kur&ad=…&paket=…); tarayıcı soketi tek bağlantıda odaya yönlenir.
 export type Acilis =
-  | { islem: 'kur'; ad: string; paket: Paket | OnPaket; oyun?: OdaTuru }
+  | {
+      islem: 'kur';
+      ad: string;
+      paket: Paket | OnPaket | string;
+      oyun?: OdaTuru;
+    }
   | { islem: 'katil'; kod: string; ad: string }
   | { islem: 'don'; kod: string }; // yeniden bağlanma (KK-37); belirteç adreste değil, ilk mesajda gider
 
@@ -37,6 +44,7 @@ export type Istemci =
   | { t: 'kimlik'; kimlik: Kimlik } // 'don' bağlantısının İLK mesajı: belirteç adrese konmaz (günlüklere sızmasın)
   | { t: 'baslat' }
   | { t: 'cevapla'; oy: Oy }
+  | { t: 'cevapla'; sik: number } // yalnızca Quiz Night (0–3 tam sayı)
   | { t: 'puanla'; puan: number } // yalnızca 10/10 ama odası (0–10 tam sayı)
   | { t: 'sonraki' } // yalnızca 10/10 ama odası, açıklamadan sonra, yalnızca yetkili
   | { t: 'ayril' };
@@ -51,7 +59,10 @@ export type Sunucu =
   | { t: 'tamam'; kod: string; kimlik: Kimlik; ad: string; tur?: OdaTuru } // kur / katil / don başarısı (tur: odanın oyunu)
   | { t: 'hata'; hata: OdaHata }
   | { t: 'gorunum'; gorunum: Gorunum; simdi: number } // simdi = sunucu saati (ms)
-  | { t: 'final'; final: Final | OnOnFinal }; // 10/10 ama odasında OnOnFinal (görünümün `tur`'una bakılır)
+  | { t: 'final'; final: Final | OnOnFinal | QuizFinal }; // 10/10 ama odasında OnOnFinal, Quiz Night odasında QuizFinal (görünümün `tur`'una bakılır)
+
+const oyunOku = (x: string | null): OdaTuru =>
+  x === 'on-on-ama' || x === 'quiz-night' ? x : 'ok-mu-nok';
 
 // Bağlanma adresini (sorgu) okur; bilinmeyen işlem null (sunucu 400 döner). `paket` burada yalnızca okunur,
 // geçerli olup olmadığına sunucu içerik kaydından bakar.
@@ -64,7 +75,7 @@ export function acilisOku(q: URLSearchParams): Acilis | null {
       islem,
       ad,
       paket: (q.get('paket') ?? 'arkadas') as Paket | OnPaket,
-      oyun: q.get('oyun') === 'on-on-ama' ? 'on-on-ama' : 'ok-mu-nok',
+      oyun: oyunOku(q.get('oyun')),
     };
   if (islem === 'katil') return { islem, kod, ad };
   if (islem === 'don') return { islem, kod };
@@ -73,15 +84,25 @@ export function acilisOku(q: URLSearchParams): Acilis | null {
 
 // Doğrulanmış oyuncunun istemci mesajını oda olayına çevirir; tanınmayan ya da bozuk mesaj null.
 export function mesajiOlayaCevir(m: unknown, kimlik: Kimlik): Olay | null {
-  const x = (m ?? {}) as { t?: unknown; oy?: unknown; puan?: unknown };
+  const x = (m ?? {}) as {
+    t?: unknown;
+    oy?: unknown;
+    sik?: unknown;
+    puan?: unknown;
+  };
   switch (x.t) {
     case 'baslat':
     case 'ayril':
     case 'sonraki':
       return { tip: x.t, kimlik };
     case 'cevapla':
-      return x.oy === 'OK' || x.oy === 'NOK'
-        ? { tip: 'cevapla', kimlik, oy: x.oy }
+      if (x.oy === 'OK' || x.oy === 'NOK')
+        return { tip: 'cevapla', kimlik, oy: x.oy };
+      return typeof x.sik === 'number' &&
+        Number.isInteger(x.sik) &&
+        x.sik >= 0 &&
+        x.sik <= 3
+        ? { tip: 'cevapla', kimlik, sik: x.sik }
         : null;
     case 'puanla':
       return typeof x.puan === 'number'

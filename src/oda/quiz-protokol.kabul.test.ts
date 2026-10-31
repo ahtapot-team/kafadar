@@ -7,11 +7,8 @@
 //   Sunucu content/quiz paketlerini pakete katar (üç paket); `kaynaklar`/`uyum` istemciye gitmez.
 //   Smoke: sunucu/test/quiz.ts, .github/workflows/sunucu-smoke.yml içinde çalışır.
 import { describe, expect, it } from 'vitest';
-import { BEKLEYEN } from '../kabul';
 import * as mesaj from './mesaj';
 import { dosyaIcerik } from '../test/yardimci';
-
-const kabulOda = BEKLEYEN.quizOda ? it.fails : it;
 
 type Api = {
   acilisOku(q: URLSearchParams): unknown;
@@ -21,7 +18,7 @@ const M = mesaj as unknown as Api;
 const q = (s: string) => new URLSearchParams(s);
 
 describe('KK-113: protokol', () => {
-  kabulOda('quiz odası kurma adresi okunur', () => {
+  it('quiz odası kurma adresi okunur', () => {
     expect(
       M.acilisOku(q('islem=kur&ad=Ali&oyun=quiz-night&paket=hababam-sinifi')),
     ).toEqual({
@@ -42,7 +39,7 @@ describe('KK-113: protokol', () => {
     ).toMatchObject({ oyun: 'on-on-ama' });
   });
 
-  kabulOda('{t:"cevapla", sik} şık olayına çevrilir; 0 geçerli', () => {
+  it('{t:"cevapla", sik} şık olayına çevrilir; 0 geçerli', () => {
     expect(M.mesajiOlayaCevir({ t: 'cevapla', sik: 2 }, 'k1')).toEqual({
       tip: 'cevapla',
       kimlik: 'k1',
@@ -83,16 +80,13 @@ describe('KK-113: sunucu kabuğu ve smoke bağlantısı (kaynak sözleşmesi)', 
       .map((d) => dosyaIcerik(`sunucu/src/${d}`))
       .join('\n');
 
-  kabulOda(
-    'sunucu quiz-night odasını ve content/quiz paketlerini tanır',
-    () => {
-      const k = sunucu();
-      expect(k).toMatch(/quiz-night/);
-      expect(k).toMatch(/content\/quiz/);
-    },
-  );
+  it('sunucu quiz-night odasını ve content/quiz paketlerini tanır', () => {
+    const k = sunucu();
+    expect(k).toMatch(/quiz-night/);
+    expect(k).toMatch(/content\/quiz/);
+  });
 
-  kabulOda('smoke betiği var ve sunucu-smoke iş akışında çalışır', () => {
+  it('smoke betiği var ve sunucu-smoke iş akışında çalışır', () => {
     expect(dosyaIcerik('sunucu/test/quiz.ts')).toMatch(/quiz-night/);
     expect(dosyaIcerik('.github/workflows/sunucu-smoke.yml')).toMatch(
       /sunucu\/test\/quiz\.ts/,

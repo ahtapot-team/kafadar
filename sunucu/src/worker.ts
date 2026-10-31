@@ -1,6 +1,7 @@
 // Giriş: yönlendirme, oda kurma ve hız sınırı. Protokol (adres, mesajlar): src/oda/mesaj.ts; kurallar: src/oda/oda.ts.
 import { kodGecerliMi, kodUret } from '../../src/oda/oda';
 import { desteBul } from '../../src/icerik';
+import { quizPaketiBul } from './quiz-paketler';
 import { acilisOku } from '../../src/oda/mesaj';
 import { type Env, hataSoketi, rastgele } from './ortak';
 
@@ -32,8 +33,13 @@ export default {
           'Çok fazla oda kurdunuz. Biraz bekleyin.',
         );
       const tur = acilis.oyun ?? 'ok-mu-nok';
-      const deste = desteBul(tur, acilis.paket);
-      if (!deste) return hataSoketi('tanimsiz', 'Bilinmeyen deste.');
+      // Quiz Night paketleri content/quiz'den gelir (yalnızca sunucuda; kaynaklar ve uyum buradan çıkmaz).
+      const quiz =
+        tur === 'quiz-night' ? quizPaketiBul(acilis.paket) : undefined;
+      const deste =
+        tur === 'quiz-night' ? undefined : desteBul(tur, acilis.paket);
+      if (tur === 'quiz-night' ? !quiz : !deste)
+        return hataSoketi('tanimsiz', 'Bilinmeyen deste.');
       for (let i = 0; i < 5; i++) {
         const kod = kodUret(rastgele);
         const kimlik = crypto.randomUUID();
@@ -46,6 +52,7 @@ export default {
             kurucuKimlik: kimlik,
             tur,
             deste,
+            quiz,
             tohum: Math.floor(rastgele() * 2 ** 32),
           }),
         });

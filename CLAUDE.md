@@ -1,6 +1,6 @@
 # Kafadar
 
-Son güncelleme: 2026-10-31 — #224 (Quiz Night ekranları)
+Son güncelleme: 2026-10-31 — #253 (Quiz Night oda modu)
 
 Kafadar, arkadaş/çift/aile için mobil parti oyunları uygulamasıdır (OK mu NOK mu, 10/10 ama, Casus kim). Tek telefonda ya da oda koduyla çok telefonda oynanır. Ayrıntı: `docs/MIMARI.md`.
 
@@ -10,19 +10,19 @@ Expo SDK 58, expo-router, TypeScript, Vitest, Cloudflare Workers + Durable Objec
 
 ## Komutlar
 
-| Komut                                             | Ne yapar                                 |
-| ------------------------------------------------- | ---------------------------------------- |
-| `npm start`                                       | `expo start`                             |
-| `npm run lint`                                    | `eslint .`                               |
-| `npm run format` / `npm run format:check`         | prettier yaz / kontrol                   |
-| `npm run typecheck`                               | `tsc --noEmit && tsc --noEmit -p sunucu` |
-| `npm test`                                        | birim testler (`*.kabul.test.ts` hariç)  |
-| `npm run kabul`                                   | kabul testleri (`vitest run kabul`)      |
-| `npm run icerik`                                  | `node scripts/icerik-dogrula.ts`         |
-| `npm run build` / `npm run build:web`             | `expo export --platform android` / `web` |
-| `npm run kk-harita` / `npm run kk-harita:kontrol` | KK haritasını üret / doğrula             |
-| `npm run belge:kontrol`                           | belgeler kodla uyumlu mu (≤120 satır)    |
-| `npm run sunucu:test`                             | `node sunucu/test/oyun.ts` (oda smoke)   |
+| Komut                                             | Ne yapar                                                             |
+| ------------------------------------------------- | -------------------------------------------------------------------- |
+| `npm start`                                       | `expo start`                                                         |
+| `npm run lint`                                    | `eslint .`                                                           |
+| `npm run format` / `npm run format:check`         | prettier yaz / kontrol                                               |
+| `npm run typecheck`                               | `tsc --noEmit && tsc --noEmit -p sunucu`                             |
+| `npm test`                                        | birim testler (`*.kabul.test.ts` hariç)                              |
+| `npm run kabul`                                   | kabul testleri (`vitest run kabul`)                                  |
+| `npm run icerik`                                  | `node scripts/icerik-dogrula.ts`                                     |
+| `npm run build` / `npm run build:web`             | `expo export --platform android` / `web`                             |
+| `npm run kk-harita` / `npm run kk-harita:kontrol` | KK haritasını üret / doğrula                                         |
+| `npm run belge:kontrol`                           | belgeler kodla uyumlu mu (≤120 satır)                                |
+| `npm run sunucu:test`                             | `node sunucu/test/oyun.ts` (oda smoke; Quiz Night: `quiz.ts`, CI'da) |
 
 ## Klasörler
 
@@ -36,7 +36,7 @@ Expo SDK 58, expo-router, TypeScript, Vitest, Cloudflare Workers + Durable Objec
 - `src/icerik/` — içerik kaydı ve doğrulama. `src/test/yardimci.ts` — test yardımcıları.
 - `src/tema.ts`, `ui.tsx`, `depo.ts`, `durum.tsx`, `desteler.ts`, `titresim.ts`, `uygulama-geri.ts` — kök yardımcılar. `src/games/kategori.ts`: ana ekran kişi sayısı çipleri (kural saf fonksiyon). `tanitim-kutusu.tsx`: tanıtım kartı ve ⓘ `BilgiDugmesi`.
 - `content/decks`, `content/casus`, `content/onon` — deste JSON'ları; `content/quiz` — Quiz Night paketleri (`ask-i-memnu`, `hababam-sinifi`, `prison-break`; taslaklar `docs/quiz/`; `src/icerik/quiz.ts` denetler). `docs/desteler/` — taslak md'ler.
-- `sunucu/` — Cloudflare Worker (`sunucu/src/{worker,oda-do,sinir-do,ortak}.ts`, `test/`).
+- `sunucu/` — Cloudflare Worker (`sunucu/src/{worker,oda-do,sinir-do,ortak,quiz-paketler}.ts`, `test/`).
 - `scripts/` — `icerik-dogrula.ts`, `kk-harita.ts`, `belge-kontrol.ts`. `design/` — tasarımlar. `docs/` — PRD, MIMARI, KK haritası.
 - `web/` — `404.html`, `geri-yukle.html`. `public/` — `index.html`. `.github/workflows/` — CI, önizleme, sunucu.
 

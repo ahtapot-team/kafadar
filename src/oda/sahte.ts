@@ -7,17 +7,19 @@ import {
   type Kimlik,
   type OdaDurum,
   type OdaTuru,
+  type Olay,
   final,
   gorunum,
   isle,
   kodUret,
   odaKur,
   onOnFinal,
+  quizFinal,
 } from './oda';
 import type { TasimaDinleyici, TasimaUretici } from './tasima';
 
 type KurKatilDon =
-  | { t: 'kur'; ad: string; paket: Paket | OnPaket; oyun?: OdaTuru }
+  | { t: 'kur'; ad: string; paket: string; oyun?: OdaTuru }
   | { t: 'katil'; kod: string; ad: string }
   | { t: 'don'; kod: string; kimlik: Kimlik };
 
@@ -102,7 +104,12 @@ export class SahteSunucu {
       if (d.asama === 'bitti')
         this.gonder(b, {
           t: 'final',
-          final: d.tur === 'on-on-ama' ? onOnFinal(d) : final(d),
+          final:
+            d.tur === 'on-on-ama'
+              ? onOnFinal(d)
+              : d.tur === 'quiz-night'
+                ? quizFinal(d)
+                : final(d),
         });
     }
   }
@@ -137,7 +144,7 @@ export class SahteSunucu {
       const { durum, kimlik } = odaKur({
         kod,
         kurucuAd: m.ad,
-        deste: this.desteler[m.paket]!,
+        deste: this.desteler[m.paket as Paket | OnPaket]!, // sahte sunucu Quiz Night paketi taşımaz
         tohum: Math.floor(this.rng() * 1e9),
         simdi: this.simdi,
         tur: m.oyun,
@@ -167,7 +174,11 @@ export class SahteSunucu {
         m.t === 'baslat'
           ? ({ tip: 'baslat', kimlik: b.kimlik } as const)
           : m.t === 'cevapla'
-            ? ({ tip: 'cevapla', kimlik: b.kimlik, oy: m.oy } as const)
+            ? ({
+                tip: 'cevapla',
+                kimlik: b.kimlik,
+                ...('sik' in m ? { sik: m.sik } : { oy: m.oy }),
+              } as Olay)
             : m.t === 'puanla'
               ? ({ tip: 'puanla', kimlik: b.kimlik, puan: m.puan } as const)
               : m.t === 'sonraki'
