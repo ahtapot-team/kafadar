@@ -22,7 +22,7 @@ for (const p of paketKaydi) {
 }
 
 // Açılış sözleri (KK-98). Aktif oyun kimlikleri src/games/registry.ts ile aynı olmalı (kabul testi karşılaştırır).
-const AKTIF_OYUNLAR = ['ok-mu-nok', '10-10-ama', 'casus-kim'];
+const AKTIF_OYUNLAR = ['ok-mu-nok', '10-10-ama', 'casus-kim', 'quiz-night'];
 try {
   const soz = JSON.parse(
     readFileSync(new URL('acilis/sozler.json', kok), 'utf8'),

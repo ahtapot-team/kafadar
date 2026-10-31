@@ -2,6 +2,7 @@ import { durumGecerliMi as casusGecerliMi } from './casus-kim/casus';
 import { okMuNok } from './ok-mu-nok';
 import { durumGecerliMi as okGecerliMi } from './ok-mu-nok/oyun';
 import { durumGecerliMi as ononGecerliMi } from './on-on-ama/onon';
+import { durumGecerliMi as quizGecerliMi } from './quiz-night/quiz';
 import type { Oyun } from './oyun';
 
 const CASUS_MIN = 3; // oyuncu alt sınırı; tanıtımdaki kişi sayısı da bundan türer
@@ -47,6 +48,22 @@ export const oyunlar: Oyun[] = [
       kisi: `${CASUS_MIN}–12 kişi`,
       metin:
         'Telefon elden ele dolaşır. Herkes aynı kelimeyi görür, casus ise yalnızca bir ipucu. Sırayla birbirinize kelimeyle ilgili sorular sorun, ama kelimeyi söylemeyin. Sonunda casusu oylayın. Yakalanan casus kelimeyi bilirse yine kazanır.',
+    },
+  },
+  {
+    id: 'quiz-night',
+    ad: 'Quiz Night',
+    emoji: '🧠',
+    aktif: true,
+    modSecimi: true,
+    minOyuncu: 1,
+    kurulum: '/quiz/paket',
+    ekran: () => import('../oyun-ekranlari/quiz'),
+    gecerliMi: quizGecerliMi,
+    tanitim: {
+      kisi: '1–12 kişi',
+      metin:
+        'Bir dizi seç, 10 soru gelsin: kolaydan zora, 4 şık. Bildiğin kadar puan, sonunda bir unvan. Tek başına kendi hızında oynarsın; tek telefonda grup modunda telefonu tutan okur, herkes sesli cevaplar, "Cevabı göster"den sonra bilenler işaretlenir. Oda modu yakında.',
     },
   },
 ];
