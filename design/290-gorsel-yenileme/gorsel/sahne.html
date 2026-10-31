@@ -6,10 +6,10 @@
 <title>Kafadar — #290 görsel seti (Three.js)</title>
 <!-- #290 görsel seti, yöntem B · Three.js (Semih, msg 1069). Bütün nesneler burada kendimiz modelleniyor; dış model/görsel yok.
      Ortak sahne (ışık, ortam yansıması, yumuşak gölge) Quiz Night örneğindekiyle aynı. Three.js yalnızca bu tasarım dosyasında
-     (cdnjs, sabit 0.160.0); uygulamaya PNG olarak girer.
+     (cdnjs, sabit 0.160.0); uygulamaya WebP olarak girer (#292: ../assets/gorsel/<ad>.webp, 512 px; cwebp komutu LISANS.md'de).
      Kullanım:  sahne.html            → bütün set, oyun/paket zemini üstünde (kontrol sayfası, set.png)
                 sahne.html?nesne=spor → tek nesne, saydam
-                sahne.html?cikti=256  → bütün nesneler 256 px saydam PNG (data URL, #cikti içinde; LISANS.md'deki komutla dosyaya yazılır) -->
+                sahne.html?cikti=512  → bütün nesneler 512 px saydam PNG (data URL, #cikti içinde; &bicim=webp&kalite=0.8 isteğe bağlı) -->
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&display=swap" rel="stylesheet">
 <style>
   :root { --kontur: #0B0920; --golge: #7C6CFF; --marka: #FFD23F; --marka-2: #5B8CFF; --krem: #FFF8E7;
@@ -274,8 +274,8 @@ try {
     const x = c.getContext('2d'); x.imageSmoothingQuality = 'high'; x.drawImage(kaynak, 0, 0, n, n); return c; };
 
   if (sor.has('cikti')) {
-    const n = +sor.get('cikti') || 256;
-    document.getElementById('cikti').textContent = LISTE.map(([id]) => `${id} ${kopya(ciz(id), n).toDataURL('image/png')}`).join('\n');
+    const n = +sor.get('cikti') || 256, bicim = 'image/' + (sor.get('bicim') || 'png'), kalite = +sor.get('kalite') || 0.85;
+    document.getElementById('cikti').textContent = LISTE.map(([id]) => `${id} ${kopya(ciz(id), n).toDataURL(bicim, kalite)}`).join('\n');
   } else if (sor.has('nesne')) {
     document.body.className = 'saydam tek'; document.getElementById('sayfa').hidden = true;
     document.body.append(kopya(ciz(sor.get('nesne')), BOY));
