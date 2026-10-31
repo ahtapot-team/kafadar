@@ -1,0 +1,793 @@
+{
+  "id": "blok3",
+  "ad": "BLOK3",
+  "emoji": "🎤",
+  "kategori": "muzik",
+  "unvanlar": [
+    "Şimdilik Baybay; Eskisi Gibi bir tur daha dene",
+    "Güzel ve İddialı ama henüz Virtüöz değil",
+    "Obsesif dinleyici; Virtüöz olmana bir adım kaldı",
+    "Tam bir Virtüöz; Hako bile sana Affetmem diyemez"
+  ],
+  "sorular": [
+    {
+      "id": "blok3-01",
+      "metin": "BLOK3'ün gerçek adı nedir?",
+      "secenekler": [
+        "Hakan Yıldırım",
+        "Hakan Aydın",
+        "Hakan Demir",
+        "Hakan Kaya"
+      ],
+      "dogru": 1,
+      "zorluk": "kolay",
+      "tur": "dunya",
+      "kaynaklar": [
+        {
+          "ad": "Vikipedi: BLOK3",
+          "url": "https://tr.wikipedia.org/wiki/BLOK3"
+        },
+        {
+          "ad": "Wikipedia (EN): Blok3",
+          "url": "https://en.wikipedia.org/wiki/Blok3"
+        },
+        {
+          "ad": "Biyografiler: Blok3 kimdir",
+          "url": "https://www.biyografiler.com/kimdir/blok3"
+        },
+        {
+          "ad": "Bianet: Spotify 2025 Türkiye özeti",
+          "url": "https://bianet.org/haber/spotify-2025-turkiye-ozeti-rap-ve-melankoli-yine-zirvede-314224"
+        },
+        {
+          "ad": "İstiklal: Blok3 kaç yaşında, nereli, gerçek adı ne?",
+          "url": "https://www.istiklal.com.tr/magazin/blok3-sevgilisi-kim-blok3-kac-yasinda-nereli-gercek-adi-ne-896587h"
+        }
+      ],
+      "uyum": 1.0
+    },
+    {
+      "id": "blok3-02",
+      "metin": "BLOK3 hangi ilçede doğdu?",
+      "secenekler": ["Esenyurt", "Çorlu", "Gebze", "Bağcılar"],
+      "dogru": 2,
+      "zorluk": "kolay",
+      "tur": "dunya",
+      "kaynaklar": [
+        {
+          "ad": "Vikipedi: BLOK3",
+          "url": "https://tr.wikipedia.org/wiki/BLOK3"
+        },
+        {
+          "ad": "Wikipedia (EN): Blok3",
+          "url": "https://en.wikipedia.org/wiki/Blok3"
+        },
+        {
+          "ad": "Biyografiler: Blok3 kimdir",
+          "url": "https://www.biyografiler.com/kimdir/blok3"
+        },
+        {
+          "ad": "Bianet: Spotify 2025 Türkiye özeti",
+          "url": "https://bianet.org/haber/spotify-2025-turkiye-ozeti-rap-ve-melankoli-yine-zirvede-314224"
+        },
+        {
+          "ad": "İstiklal: Blok3 kaç yaşında, nereli, gerçek adı ne?",
+          "url": "https://www.istiklal.com.tr/magazin/blok3-sevgilisi-kim-blok3-kac-yasinda-nereli-gercek-adi-ne-896587h"
+        },
+        {
+          "ad": "Eleman.net: Blok3 kimdir, mesleği nedir?",
+          "url": "https://www.eleman.net/is-rehberi/kimdir/blok3-kimdir-meslegi-nedir-h16281"
+        }
+      ],
+      "uyum": 1.0
+    },
+    {
+      "id": "blok3-03",
+      "metin": "BLOK3, Pantene Altın Kelebek Ödülleri'nde hangi kategoride ödül aldı?",
+      "secenekler": [
+        "En İyi Rapçi",
+        "En İyi Erkek Şarkıcı",
+        "En İyi Yükselen Şarkıcı",
+        "Yılın Şarkısı"
+      ],
+      "dogru": 0,
+      "zorluk": "kolay",
+      "tur": "dunya",
+      "kaynaklar": [
+        {
+          "ad": "Vikipedi: BLOK3",
+          "url": "https://tr.wikipedia.org/wiki/BLOK3"
+        },
+        {
+          "ad": "Wikipedia (EN): Blok3",
+          "url": "https://en.wikipedia.org/wiki/Blok3"
+        },
+        {
+          "ad": "Habertürk: 49. Pantene Altın Kelebek kazananları",
+          "url": "https://www.haberturk.com/altin-kelebek-odullerini-kazananlar-2023-49-pantene-altin-kelebek-odullerini-kimler-hangi-kategorilerde-aldi-3642207-magazin"
+        },
+        {
+          "ad": "İstiklal: Blok3 kaç yaşında, nereli, gerçek adı ne?",
+          "url": "https://www.istiklal.com.tr/magazin/blok3-sevgilisi-kim-blok3-kac-yasinda-nereli-gercek-adi-ne-896587h"
+        },
+        {
+          "ad": "Biyografiler: Blok3 kimdir",
+          "url": "https://www.biyografiler.com/kimdir/blok3"
+        }
+      ],
+      "uyum": 1.0
+    },
+    {
+      "id": "blok3-04",
+      "metin": "BLOK3'ün \"Habibi\" şarkısında yer alan İngiliz rapçi kimdir?",
+      "secenekler": ["Stormzy", "Little Simz", "Dave", "Stefflon Don"],
+      "dogru": 3,
+      "zorluk": "kolay",
+      "tur": "dunya",
+      "kaynaklar": [
+        {
+          "ad": "Vikipedi: BLOK3",
+          "url": "https://tr.wikipedia.org/wiki/BLOK3"
+        },
+        {
+          "ad": "Wikipedia (EN): Blok3",
+          "url": "https://en.wikipedia.org/wiki/Blok3"
+        },
+        {
+          "ad": "Biyografiler: Blok3 kimdir",
+          "url": "https://www.biyografiler.com/kimdir/blok3"
+        },
+        {
+          "ad": "Deezer: Habibi",
+          "url": "https://www.deezer.com/album/578710821"
+        },
+        {
+          "ad": "Apple Music: Habibi - Single",
+          "url": "https://music.apple.com/tr/album/habibi-single/6767001766"
+        }
+      ],
+      "uyum": 1.0
+    },
+    {
+      "id": "blok3-05",
+      "metin": "BLOK3 \"Keşke\" şarkısını hangi rapçiyle birlikte seslendirdi?",
+      "secenekler": ["Lvbel C5", "Ati242", "Uzi", "Motive"],
+      "dogru": 1,
+      "zorluk": "kolay",
+      "tur": "dunya",
+      "kaynaklar": [
+        {
+          "ad": "Wikipedia (EN): Blok3",
+          "url": "https://en.wikipedia.org/wiki/Blok3"
+        },
+        {
+          "ad": "Biyografiler: Blok3 kimdir",
+          "url": "https://www.biyografiler.com/kimdir/blok3"
+        },
+        {
+          "ad": "Bianet: Spotify 2025 Türkiye özeti",
+          "url": "https://bianet.org/haber/spotify-2025-turkiye-ozeti-rap-ve-melankoli-yine-zirvede-314224"
+        },
+        {
+          "ad": "Sözcü: 3 yıl önce kimse tanımıyordu, 2025'in en çok dinlenen ismi oldu",
+          "url": "https://www.sozcu.com.tr/3-yil-once-kimse-tanimiyordu-2025-in-en-cok-dinlenen-ismi-oldu-p266269"
+        },
+        {
+          "ad": "Deezer: Keşke",
+          "url": "https://www.deezer.com/album/730532721"
+        },
+        {
+          "ad": "Apple Music: Keşke - Single",
+          "url": "https://music.apple.com/tr/album/ke%C5%9Fke-single/1803397515"
+        }
+      ],
+      "uyum": 1.0
+    },
+    {
+      "id": "blok3-06",
+      "metin": "BLOK3'ün ilk stüdyo albümü hangisidir?",
+      "secenekler": [
+        "Kayıp Persona",
+        "Beton Rüyalar",
+        "Obsesif",
+        "Gölge Oyunu"
+      ],
+      "dogru": 2,
+      "zorluk": "kolay",
+      "tur": "dunya",
+      "kaynaklar": [
+        {
+          "ad": "Vikipedi: BLOK3",
+          "url": "https://tr.wikipedia.org/wiki/BLOK3"
+        },
+        {
+          "ad": "Wikipedia (EN): Blok3",
+          "url": "https://en.wikipedia.org/wiki/Blok3"
+        },
+        {
+          "ad": "Biyografiler: Blok3 kimdir",
+          "url": "https://www.biyografiler.com/kimdir/blok3"
+        },
+        {
+          "ad": "Bianet: Spotify 2025 Türkiye özeti",
+          "url": "https://bianet.org/haber/spotify-2025-turkiye-ozeti-rap-ve-melankoli-yine-zirvede-314224"
+        }
+      ],
+      "uyum": 1.0
+    },
+    {
+      "id": "blok3-07",
+      "metin": "BLOK3'ün şarkı adlarında da geçen lakabı hangisidir?",
+      "secenekler": ["Hako", "Blokçu", "Hakanito", "Gebzeli"],
+      "dogru": 0,
+      "zorluk": "kolay",
+      "tur": "dunya",
+      "kaynaklar": [
+        {
+          "ad": "Vikipedi: BLOK3",
+          "url": "https://tr.wikipedia.org/wiki/BLOK3"
+        },
+        {
+          "ad": "Biyografiler: Blok3 kimdir",
+          "url": "https://www.biyografiler.com/kimdir/blok3"
+        },
+        {
+          "ad": "Yeni Birlik: Blok3 kimdir, aslen nereli?",
+          "url": "https://www.gazetebirlik.com/kimdir/blok3-kimdir-aslen-nereli-kac-yasinda-boyu-ve-gercek-adi-iste-hayati-ve-kariyeri/291730"
+        },
+        {
+          "ad": "Apple Music: OBSESIF",
+          "url": "https://music.apple.com/tr/album/obsesif/1767436720"
+        }
+      ],
+      "uyum": 1.0
+    },
+    {
+      "id": "blok3-08",
+      "metin": "2023'te yayımlanıp BLOK3'ü geniş kitlelere tanıtan şarkı hangisidir?",
+      "secenekler": ["Habibi", "Keşke", "Mosmor Perde", "Affetmem"],
+      "dogru": 3,
+      "zorluk": "kolay",
+      "tur": "dunya",
+      "kaynaklar": [
+        {
+          "ad": "Vikipedi: BLOK3",
+          "url": "https://tr.wikipedia.org/wiki/BLOK3"
+        },
+        {
+          "ad": "Wikipedia (EN): Blok3",
+          "url": "https://en.wikipedia.org/wiki/Blok3"
+        },
+        {
+          "ad": "Bianet: Spotify 2025 Türkiye özeti",
+          "url": "https://bianet.org/haber/spotify-2025-turkiye-ozeti-rap-ve-melankoli-yine-zirvede-314224"
+        },
+        {
+          "ad": "İşçi Haber: Blok3 kimdir?",
+          "url": "https://www.iscihaber.net/magazin/blok3-kimdir-genc-rap-fenomeninin-hayati-ve-muzik-kariyeri-nasildir/199492"
+        },
+        {
+          "ad": "Yeni Birlik: Blok3 kimdir, aslen nereli?",
+          "url": "https://www.gazetebirlik.com/kimdir/blok3-kimdir-aslen-nereli-kac-yasinda-boyu-ve-gercek-adi-iste-hayati-ve-kariyeri/291730"
+        }
+      ],
+      "uyum": 1.0
+    },
+    {
+      "id": "blok3-09",
+      "metin": "BLOK3'ün Virtüöz EP'si hangi yıl yayımlandı?",
+      "secenekler": ["2022", "2023", "2024", "2025"],
+      "dogru": 3,
+      "zorluk": "orta",
+      "tur": "dunya",
+      "kaynaklar": [
+        {
+          "ad": "Vikipedi: BLOK3",
+          "url": "https://tr.wikipedia.org/wiki/BLOK3"
+        },
+        {
+          "ad": "Wikipedia (EN): Blok3",
+          "url": "https://en.wikipedia.org/wiki/Blok3"
+        },
+        {
+          "ad": "Biyografiler: Blok3 kimdir",
+          "url": "https://www.biyografiler.com/kimdir/blok3"
+        },
+        {
+          "ad": "Deezer: Virtüöz",
+          "url": "https://www.deezer.com/album/785255951"
+        },
+        {
+          "ad": "Apple Music: Virtüöz - EP",
+          "url": "https://music.apple.com/tr/album/virt%C3%BC%C3%B6z-ep/1826044047"
+        },
+        {
+          "ad": "Daily Sabah: Artists shaping German-Turkish music",
+          "url": "https://www.dailysabah.com/arts/music/flow-feeling-fire-artists-shaping-german-turkish-music-right-now"
+        }
+      ],
+      "uyum": 1.0
+    },
+    {
+      "id": "blok3-10",
+      "metin": "BLOK3 \"Dacia\" şarkısını kiminle birlikte seslendirdi?",
+      "secenekler": ["Cenqa", "Semicenk", "Reckol", "Lvbel C5"],
+      "dogru": 0,
+      "zorluk": "orta",
+      "tur": "dunya",
+      "kaynaklar": [
+        {
+          "ad": "Vikipedi: BLOK3",
+          "url": "https://tr.wikipedia.org/wiki/BLOK3"
+        },
+        {
+          "ad": "Wikipedia (EN): Blok3",
+          "url": "https://en.wikipedia.org/wiki/Blok3"
+        },
+        {
+          "ad": "Biyografiler: Blok3 kimdir",
+          "url": "https://www.biyografiler.com/kimdir/blok3"
+        },
+        {
+          "ad": "Deezer: DACIA",
+          "url": "https://www.deezer.com/album/347803547"
+        },
+        {
+          "ad": "Apple Music: DACIA - Single",
+          "url": "https://music.apple.com/tr/album/dacia-single/1640596723"
+        }
+      ],
+      "uyum": 1.0
+    },
+    {
+      "id": "blok3-11",
+      "metin": "Kayıp Persona albümündeki \"Çok Güzel Gülüyorsun\" şarkısında BLOK3'e kim eşlik eder?",
+      "secenekler": ["Ati242", "Cenqa", "Poizi", "Stefflon Don"],
+      "dogru": 2,
+      "zorluk": "orta",
+      "tur": "dunya",
+      "kaynaklar": [
+        {
+          "ad": "Wikipedia (EN): Blok3",
+          "url": "https://en.wikipedia.org/wiki/Blok3"
+        },
+        {
+          "ad": "Biyografiler: Blok3 kimdir",
+          "url": "https://www.biyografiler.com/kimdir/blok3"
+        },
+        {
+          "ad": "Yeni Birlik: BLOK3 yeni albümü Kayıp Persona'yı yayımladı",
+          "url": "https://www.gazetebirlik.com/magazin/blok3-yeni-studyo-albumu-kayip-personayi-muzikseverlerle-bulusturdu/1010429"
+        },
+        {
+          "ad": "Urfanatik: Kayıp Persona albümündeki şarkılar",
+          "url": "https://www.urfanatik.com/blok3un-yeni-albumunde-hangi-sarkilar-var-poizi-ile-duet-mi-kayip-persona-albumundeki-sarkilar-ve-merak-edilenler"
+        },
+        {
+          "ad": "Apple Music: KAYIP PERSONA",
+          "url": "https://music.apple.com/tr/album/kayip-persona/6773420726"
+        }
+      ],
+      "uyum": 1.0
+    },
+    {
+      "id": "blok3-12",
+      "metin": "BLOK3 hangi yıl doğdu?",
+      "secenekler": ["2000", "2002", "2003", "2004"],
+      "dogru": 1,
+      "zorluk": "orta",
+      "tur": "dunya",
+      "kaynaklar": [
+        {
+          "ad": "Vikipedi: BLOK3",
+          "url": "https://tr.wikipedia.org/wiki/BLOK3"
+        },
+        {
+          "ad": "Wikipedia (EN): Blok3",
+          "url": "https://en.wikipedia.org/wiki/Blok3"
+        },
+        {
+          "ad": "Biyografiler: Blok3 kimdir",
+          "url": "https://www.biyografiler.com/kimdir/blok3"
+        },
+        {
+          "ad": "Bianet: Spotify 2025 Türkiye özeti",
+          "url": "https://bianet.org/haber/spotify-2025-turkiye-ozeti-rap-ve-melankoli-yine-zirvede-314224"
+        },
+        {
+          "ad": "İstiklal: Blok3 kaç yaşında, nereli, gerçek adı ne?",
+          "url": "https://www.istiklal.com.tr/magazin/blok3-sevgilisi-kim-blok3-kac-yasinda-nereli-gercek-adi-ne-896587h"
+        },
+        {
+          "ad": "Eleman.net: Blok3 kimdir, mesleği nedir?",
+          "url": "https://www.eleman.net/is-rehberi/kimdir/blok3-kimdir-meslegi-nedir-h16281"
+        }
+      ],
+      "uyum": 1.0
+    },
+    {
+      "id": "blok3-13",
+      "metin": "BLOK3'ün Obsesif ve Kayıp Persona albümlerini yayımlayan plak şirketi hangisidir?",
+      "secenekler": ["Mundo Music", "DMC", "Avrupa Müzik", "Sony Music"],
+      "dogru": 0,
+      "zorluk": "orta",
+      "tur": "dunya",
+      "kaynaklar": [
+        {
+          "ad": "Vikipedi: BLOK3",
+          "url": "https://tr.wikipedia.org/wiki/BLOK3"
+        },
+        {
+          "ad": "Wikipedia (EN): Blok3",
+          "url": "https://en.wikipedia.org/wiki/Blok3"
+        },
+        {
+          "ad": "Biyografiler: Blok3 kimdir",
+          "url": "https://www.biyografiler.com/kimdir/blok3"
+        },
+        {
+          "ad": "Deezer: OBSESIF",
+          "url": "https://www.deezer.com/album/640920651"
+        },
+        {
+          "ad": "Apple Music: KAYIP PERSONA",
+          "url": "https://music.apple.com/tr/album/kayip-persona/6773420726"
+        },
+        {
+          "ad": "MusicBrainz: KAYIP PERSONA",
+          "url": "https://musicbrainz.org/release/eab33d01-34e4-4e23-8806-28b6e7784411"
+        }
+      ],
+      "uyum": 1.0
+    },
+    {
+      "id": "blok3-14",
+      "metin": "BLOK3'ün \"Vur\" teklisi hangi yıl yayımlandı?",
+      "secenekler": ["2020", "2021", "2022", "2023"],
+      "dogru": 2,
+      "zorluk": "orta",
+      "tur": "dunya",
+      "kaynaklar": [
+        {
+          "ad": "Vikipedi: BLOK3",
+          "url": "https://tr.wikipedia.org/wiki/BLOK3"
+        },
+        {
+          "ad": "Wikipedia (EN): Blok3",
+          "url": "https://en.wikipedia.org/wiki/Blok3"
+        },
+        {
+          "ad": "Bianet: Spotify 2025 Türkiye özeti",
+          "url": "https://bianet.org/haber/spotify-2025-turkiye-ozeti-rap-ve-melankoli-yine-zirvede-314224"
+        },
+        {
+          "ad": "İstiklal: Blok3 kaç yaşında, nereli, gerçek adı ne?",
+          "url": "https://www.istiklal.com.tr/magazin/blok3-sevgilisi-kim-blok3-kac-yasinda-nereli-gercek-adi-ne-896587h"
+        },
+        {
+          "ad": "Deezer: VUR",
+          "url": "https://www.deezer.com/album/373712167"
+        },
+        {
+          "ad": "Apple Music: VUR - Single",
+          "url": "https://music.apple.com/tr/album/vur-single/1653643108"
+        }
+      ],
+      "uyum": 1.0
+    },
+    {
+      "id": "blok3-15",
+      "metin": "Hangi şarkı BLOK3'ün Obsesif albümünde yer alır?",
+      "secenekler": ["Affetmem", "Sevmeyi Denemedin", "Keşke", "Vur"],
+      "dogru": 1,
+      "zorluk": "orta",
+      "tur": "dunya",
+      "kaynaklar": [
+        {
+          "ad": "Biyografiler: Blok3 kimdir",
+          "url": "https://www.biyografiler.com/kimdir/blok3"
+        },
+        {
+          "ad": "Deezer: OBSESIF",
+          "url": "https://www.deezer.com/album/640920651"
+        },
+        {
+          "ad": "Apple Music: OBSESIF",
+          "url": "https://music.apple.com/tr/album/obsesif/1767436720"
+        },
+        {
+          "ad": "MusicBrainz: OBSESIF",
+          "url": "https://musicbrainz.org/release/aef3b8f1-a47b-4444-b45f-ec4148d4b05f"
+        }
+      ],
+      "uyum": 1.0
+    },
+    {
+      "id": "blok3-16",
+      "metin": "Hangi şarkı BLOK3'ün Virtüöz EP'sinde yer alır?",
+      "secenekler": ["Habibi", "Dacia", "Vur", "Napıyosun Mesela?"],
+      "dogru": 3,
+      "zorluk": "orta",
+      "tur": "dunya",
+      "kaynaklar": [
+        {
+          "ad": "Biyografiler: Blok3 kimdir",
+          "url": "https://www.biyografiler.com/kimdir/blok3"
+        },
+        {
+          "ad": "Deezer: Virtüöz",
+          "url": "https://www.deezer.com/album/785255951"
+        },
+        {
+          "ad": "Apple Music: Virtüöz - EP",
+          "url": "https://music.apple.com/tr/album/virt%C3%BC%C3%B6z-ep/1826044047"
+        },
+        {
+          "ad": "LyricsRaag: napıyosun mesela ? (Virtüöz) künyesi",
+          "url": "https://lyricsraag.com/napiyosun-mesela-virtuoz-translation/"
+        }
+      ],
+      "uyum": 1.0
+    },
+    {
+      "id": "blok3-17",
+      "metin": "BLOK3'ün Kayıp Persona albümü hangi ay yayımlandı?",
+      "secenekler": ["Mart", "Haziran", "Eylül", "Aralık"],
+      "dogru": 1,
+      "zorluk": "zor",
+      "tur": "dunya",
+      "kaynaklar": [
+        {
+          "ad": "Wikipedia (EN): Blok3",
+          "url": "https://en.wikipedia.org/wiki/Blok3"
+        },
+        {
+          "ad": "Biyografiler: Blok3 kimdir",
+          "url": "https://www.biyografiler.com/kimdir/blok3"
+        },
+        {
+          "ad": "Urfanatik: Kayıp Persona albümündeki şarkılar",
+          "url": "https://www.urfanatik.com/blok3un-yeni-albumunde-hangi-sarkilar-var-poizi-ile-duet-mi-kayip-persona-albumundeki-sarkilar-ve-merak-edilenler"
+        },
+        {
+          "ad": "Deezer: KAYIP PERSONA",
+          "url": "https://www.deezer.com/album/991700241"
+        },
+        {
+          "ad": "Apple Music: KAYIP PERSONA",
+          "url": "https://music.apple.com/tr/album/kayip-persona/6773420726"
+        },
+        {
+          "ad": "MusicBrainz: KAYIP PERSONA",
+          "url": "https://musicbrainz.org/release/eab33d01-34e4-4e23-8806-28b6e7784411"
+        }
+      ],
+      "uyum": 1.0
+    },
+    {
+      "id": "blok3-18",
+      "metin": "BLOK3'ün Obsesif albümü hangi ay yayımlandı?",
+      "secenekler": ["Şubat", "Mayıs", "Eylül", "Kasım"],
+      "dogru": 2,
+      "zorluk": "zor",
+      "tur": "dunya",
+      "kaynaklar": [
+        {
+          "ad": "Wikipedia (EN): Blok3",
+          "url": "https://en.wikipedia.org/wiki/Blok3"
+        },
+        {
+          "ad": "AllMusic: Obsesif (Mundo Music)",
+          "url": "https://www.allmusic.com/album/release/obsesif-mr0006497409"
+        },
+        {
+          "ad": "Deezer: OBSESIF",
+          "url": "https://www.deezer.com/album/640920651"
+        },
+        {
+          "ad": "Apple Music: OBSESIF",
+          "url": "https://music.apple.com/tr/album/obsesif/1767436720"
+        },
+        {
+          "ad": "MusicBrainz: OBSESIF",
+          "url": "https://musicbrainz.org/release/aef3b8f1-a47b-4444-b45f-ec4148d4b05f"
+        }
+      ],
+      "uyum": 1.0
+    },
+    {
+      "id": "blok3-19",
+      "metin": "BLOK3'ün \"Okey Okey\" ve \"Yallah\" teklileri hangi yıl yayımlandı?",
+      "secenekler": ["2018", "2019", "2020", "2021"],
+      "dogru": 3,
+      "zorluk": "zor",
+      "tur": "dunya",
+      "kaynaklar": [
+        {
+          "ad": "Vikipedi: BLOK3",
+          "url": "https://tr.wikipedia.org/wiki/BLOK3"
+        },
+        {
+          "ad": "Wikipedia (EN): Blok3",
+          "url": "https://en.wikipedia.org/wiki/Blok3"
+        },
+        {
+          "ad": "Biyografiler: Blok3 kimdir",
+          "url": "https://www.biyografiler.com/kimdir/blok3"
+        },
+        {
+          "ad": "Deezer: OKEY OKEY",
+          "url": "https://www.deezer.com/album/342792667"
+        },
+        {
+          "ad": "Apple Music: OKEY OKEY - Single",
+          "url": "https://music.apple.com/tr/album/okey-okey-single/1637894470"
+        },
+        {
+          "ad": "MusicBrainz: OKEY OKEY",
+          "url": "https://musicbrainz.org/release/73bc5d23-d9db-4d26-b157-a7a0bba1167a"
+        }
+      ],
+      "uyum": 1.0
+    },
+    {
+      "id": "blok3-20",
+      "metin": "BLOK3'ün 2023'te ödül aldığı Pantene Altın Kelebek kaçıncı kez düzenleniyordu?",
+      "secenekler": ["49.", "50.", "51.", "52."],
+      "dogru": 0,
+      "zorluk": "zor",
+      "tur": "dunya",
+      "kaynaklar": [
+        {
+          "ad": "Vikipedi: BLOK3",
+          "url": "https://tr.wikipedia.org/wiki/BLOK3"
+        },
+        {
+          "ad": "Wikipedia (EN): Blok3",
+          "url": "https://en.wikipedia.org/wiki/Blok3"
+        },
+        {
+          "ad": "Habertürk: 49. Pantene Altın Kelebek kazananları",
+          "url": "https://www.haberturk.com/altin-kelebek-odullerini-kazananlar-2023-49-pantene-altin-kelebek-odullerini-kimler-hangi-kategorilerde-aldi-3642207-magazin"
+        },
+        {
+          "ad": "İstiklal: Blok3 kaç yaşında, nereli, gerçek adı ne?",
+          "url": "https://www.istiklal.com.tr/magazin/blok3-sevgilisi-kim-blok3-kac-yasinda-nereli-gercek-adi-ne-896587h"
+        },
+        {
+          "ad": "Biyografiler: Blok3 kimdir",
+          "url": "https://www.biyografiler.com/kimdir/blok3"
+        },
+        {
+          "ad": "İşçi Haber: Blok3 kimdir?",
+          "url": "https://www.iscihaber.net/magazin/blok3-kimdir-genc-rap-fenomeninin-hayati-ve-muzik-kariyeri-nasildir/199492"
+        }
+      ],
+      "uyum": 1.0
+    },
+    {
+      "id": "blok3-21",
+      "metin": "Hem Virtüöz EP'sinde hem Kayıp Persona albümünde yer alan şarkı hangisidir?",
+      "secenekler": ["Keçi", "Kayıp Kalp", "Git", "Zehirli Gül"],
+      "dogru": 2,
+      "zorluk": "zor",
+      "tur": "dunya",
+      "kaynaklar": [
+        {
+          "ad": "Biyografiler: Blok3 kimdir",
+          "url": "https://www.biyografiler.com/kimdir/blok3"
+        },
+        {
+          "ad": "Urfanatik: Kayıp Persona albümündeki şarkılar",
+          "url": "https://www.urfanatik.com/blok3un-yeni-albumunde-hangi-sarkilar-var-poizi-ile-duet-mi-kayip-persona-albumundeki-sarkilar-ve-merak-edilenler"
+        },
+        {
+          "ad": "Deezer: KAYIP PERSONA",
+          "url": "https://www.deezer.com/album/991700241"
+        },
+        {
+          "ad": "Apple Music: Virtüöz - EP",
+          "url": "https://music.apple.com/tr/album/virt%C3%BC%C3%B6z-ep/1826044047"
+        },
+        {
+          "ad": "Shazam: BLOK3 – git",
+          "url": "https://www.shazam.com/song/1826044054/git"
+        }
+      ],
+      "uyum": 1.0
+    },
+    {
+      "id": "blok3-22",
+      "metin": "BLOK3'ün Obsesif albümü hangi şarkıyla açılır?",
+      "secenekler": ["Zehirli Gül", "ESC*BAR", "Deva", "Her Yerim Yara"],
+      "dogru": 0,
+      "zorluk": "zor",
+      "tur": "dunya",
+      "kaynaklar": [
+        {
+          "ad": "Biyografiler: Blok3 kimdir",
+          "url": "https://www.biyografiler.com/kimdir/blok3"
+        },
+        {
+          "ad": "Deezer: OBSESIF",
+          "url": "https://www.deezer.com/album/640920651"
+        },
+        {
+          "ad": "Apple Music: OBSESIF",
+          "url": "https://music.apple.com/tr/album/obsesif/1767436720"
+        },
+        {
+          "ad": "MusicBrainz: OBSESIF",
+          "url": "https://musicbrainz.org/release/aef3b8f1-a47b-4444-b45f-ec4148d4b05f"
+        }
+      ],
+      "uyum": 1.0
+    },
+    {
+      "id": "blok3-23",
+      "metin": "BLOK3'ün \"Habibi\" şarkısı hangi yıl yayımlandı?",
+      "secenekler": ["2023", "2024", "2025", "2026"],
+      "dogru": 1,
+      "zorluk": "zor",
+      "tur": "dunya",
+      "kaynaklar": [
+        {
+          "ad": "Vikipedi: BLOK3",
+          "url": "https://tr.wikipedia.org/wiki/BLOK3"
+        },
+        {
+          "ad": "Wikipedia (EN): Blok3",
+          "url": "https://en.wikipedia.org/wiki/Blok3"
+        },
+        {
+          "ad": "Biyografiler: Blok3 kimdir",
+          "url": "https://www.biyografiler.com/kimdir/blok3"
+        },
+        {
+          "ad": "Deezer: Habibi",
+          "url": "https://www.deezer.com/album/578710821"
+        },
+        {
+          "ad": "Apple Music: Habibi - Single",
+          "url": "https://music.apple.com/tr/album/habibi-single/6767001766"
+        }
+      ],
+      "uyum": 1.0
+    },
+    {
+      "id": "blok3-24",
+      "metin": "Hangisi BLOK3'ün 2023'te yayımladığı teklilerden biridir?",
+      "secenekler": ["Habibi", "Keşke", "Dacia", "Baybay"],
+      "dogru": 3,
+      "zorluk": "zor",
+      "tur": "dunya",
+      "kaynaklar": [
+        {
+          "ad": "Vikipedi: BLOK3",
+          "url": "https://tr.wikipedia.org/wiki/BLOK3"
+        },
+        {
+          "ad": "Wikipedia (EN): Blok3",
+          "url": "https://en.wikipedia.org/wiki/Blok3"
+        },
+        {
+          "ad": "Biyografiler: Blok3 kimdir",
+          "url": "https://www.biyografiler.com/kimdir/blok3"
+        },
+        {
+          "ad": "Deezer: BAYBAY",
+          "url": "https://www.deezer.com/album/412272787"
+        },
+        {
+          "ad": "Apple Music: BAYBAY - Single",
+          "url": "https://music.apple.com/tr/album/baybay-single/1674684538"
+        },
+        {
+          "ad": "MusicBrainz: BAYBAY",
+          "url": "https://musicbrainz.org/release/0056fb9c-756f-4833-a051-468d538a2e4b"
+        }
+      ],
+      "uyum": 1.0
+    }
+  ]
+}
