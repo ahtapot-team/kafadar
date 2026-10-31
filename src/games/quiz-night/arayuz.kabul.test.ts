@@ -4,7 +4,7 @@
 // SÖZLEŞME (frontend #224 için) — src/games/quiz-night/arayuz.ts (React yok):
 //   MODLAR = [{ id:'tek', etiket:'Tek başına' }, { id:'grup', etiket:'Tek telefonda grup' },
 //             { id:'oda-kur', etiket:'Oda kur' }, { id:'oda-katil', etiket:'Odaya katıl' }]
-//   gorunenModlar(odaAcik = false): Faz 1'de yalnızca 'tek' ve 'grup'; odaAcik=true (Faz 2) dördü
+//   gorunenModlar(odaAcik = true) (Faz 2, #254: varsayılan DÖRT mod); odaAcik=false yalnızca 'tek' ve 'grup'
 //   paketBasligi(ad) = `Ne kadar ${ad} fanısın?` · PAKET_NOTU = 'Resmî değildir · Spoiler içerir'
 //   kokenEtiketi('tr') = 'Türk' · kokenEtiketi('yabanci') = 'Yabancı'
 //   KOKEN_CIPLERI = ['tumu','tr','yabanci'] (varsayılan 'tumu') · paketSuz(paketler, cip): koken'e göre süzer, sıra korunur
@@ -22,6 +22,7 @@
 //       grup: kupa true (🏆), adlar = TÜM birincilerin adı (girdi sırası), puan/unvan birincinin; ortalama YOK.
 //       tek: kupa false, adlar = [oyuncunun adı], puan/unvan kendi sonucu. Kartta soru/cevap alanı yoktur (yalnız bu 5 anahtar).
 import { describe, expect, it } from 'vitest';
+import { BEKLEYEN } from '../../kabul';
 
 type Arayuz = {
   MODLAR: { id: string; etiket: string }[];
@@ -45,7 +46,7 @@ const yukle = async () =>
 const SIKLAR = [0, 1, 2, 3];
 
 describe('KK-107: mod seçimi', () => {
-  it("KK-107: dört mod tanımlıdır; Faz 1'de yalnızca Tek başına ve Tek telefonda grup görünür", async () => {
+  it('KK-107: dört mod tanımlıdır; odaAcik=false iken yalnızca Tek başına ve Tek telefonda grup', async () => {
     const { MODLAR, gorunenModlar } = await yukle();
     expect(MODLAR.map((m) => m.etiket)).toEqual([
       'Tek başına',
@@ -53,7 +54,6 @@ describe('KK-107: mod seçimi', () => {
       'Oda kur',
       'Odaya katıl',
     ]);
-    expect(gorunenModlar().map((m) => m.id)).toEqual(['tek', 'grup']);
     expect(gorunenModlar(false).map((m) => m.id)).toEqual(['tek', 'grup']);
     expect(gorunenModlar(true).map((m) => m.id)).toEqual([
       'tek',
@@ -62,6 +62,20 @@ describe('KK-107: mod seçimi', () => {
       'oda-katil',
     ]);
   });
+
+  // Faz 2 (#252/#254): oda seçenekleri artık varsayılan olarak görünür.
+  (BEKLEYEN.quizOdaEkran ? it.fails : it)(
+    'KK-107: Faz 2: varsayılan olarak dört mod görünür (Oda kur, Odaya katıl dahil)',
+    async () => {
+      const { gorunenModlar } = await yukle();
+      expect(gorunenModlar().map((m) => m.id)).toEqual([
+        'tek',
+        'grup',
+        'oda-kur',
+        'oda-katil',
+      ]);
+    },
+  );
 });
 
 describe('KK-108: paket kartı ve Türk / Yabancı süzgeci', () => {
