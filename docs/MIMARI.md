@@ -1,6 +1,6 @@
 # Kafadar — Mimari
 
-Son güncelleme: 2026-10-31 — #267 (Quiz Night: Galatasaray paketi)
+Son güncelleme: 2026-10-31 — #267 (Quiz Night: Fenerbahçe paketi)
 
 Kısa rehber için `CLAUDE.md`. Bu belge katmanları, veri akışını, oda protokolünü, testleri ve kuralları anlatır.
 
