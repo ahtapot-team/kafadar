@@ -1,6 +1,6 @@
 # Kafadar — Mimari
 
-Son güncelleme: 2026-10-31 — #267 (Quiz Night: Manifest paketi)
+Son güncelleme: 2026-10-31 — #267 (Quiz Night: Mabel Matiz paketi)
 
 Kısa rehber için `CLAUDE.md`. Bu belge katmanları, veri akışını, oda protokolünü, testleri ve kuralları anlatır.
 

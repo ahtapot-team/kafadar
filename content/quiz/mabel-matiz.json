@@ -1,0 +1,779 @@
+{
+  "id": "mabel-matiz",
+  "ad": "Mabel Matiz",
+  "emoji": "🎶",
+  "kategori": "muzik",
+  "unvanlar": [
+    "Yaşım Çocuk diyorsun, Mabel bilgin de öyle",
+    "Gel biraz daha, Gök Nerede'ye az kaldı",
+    "Sarmaşık gibi Mabel'e sarılmışsın",
+    "Fatih sensin! Maya'dan Uçkun'a her şey ezber"
+  ],
+  "sorular": [
+    {
+      "id": "mabel-matiz-01",
+      "metin": "Mabel Matiz'in ilk stüdyo albümü hangi yıl yayımlandı?",
+      "secenekler": ["2009", "2011", "2014", "2017"],
+      "dogru": 1,
+      "zorluk": "kolay",
+      "tur": "dunya",
+      "kaynaklar": [
+        {
+          "ad": "Vikipedi: Mabel Matiz",
+          "url": "https://tr.wikipedia.org/wiki/Mabel_Matiz"
+        },
+        {
+          "ad": "Wikipedia (EN): Mabel Matiz (album)",
+          "url": "https://en.wikipedia.org/wiki/Mabel_Matiz_(album)"
+        },
+        {
+          "ad": "Apple Music: Mabel Matiz (albüm)",
+          "url": "https://music.apple.com/tr/album/767688046"
+        },
+        {
+          "ad": "Hürriyet: Mabel Matiz kimdir, kaç yaşında?",
+          "url": "https://www.hurriyet.com.tr/kelebek/televizyon/mabel-matiz-kimdir-kac-yasinda-mabel-matizin-biyografisi-41557848"
+        },
+        {
+          "ad": "Haberler.com: Mabel Matiz kimdir?",
+          "url": "https://www.haberler.com/mabel-matiz-kimdir-mabel-matiz-kac-yasinda-16363928-haberi/"
+        },
+        {
+          "ad": "Last.fm: Mabel Matiz biyografisi",
+          "url": "https://last.fm/tr/music/Mabel+Matiz/+wiki"
+        },
+        {
+          "ad": "bianet: Mabel Matiz'den dinleyicilerine 15. yıl mektubu (12.05.2026)",
+          "url": "https://bianet.org/haber/mabel-matizden-dinleyicilerine-15-yil-mektubu-birlikte-yazdik-bu-hikayeyi-319549"
+        }
+      ],
+      "uyum": 1.0
+    },
+    {
+      "id": "mabel-matiz-02",
+      "metin": "Mabel Matiz'in \"Maya\" albümü hangi yıl yayımlandı?",
+      "secenekler": ["2012", "2014", "2016", "2018"],
+      "dogru": 3,
+      "zorluk": "kolay",
+      "tur": "dunya",
+      "kaynaklar": [
+        {
+          "ad": "Vikipedi: Maya (albüm)",
+          "url": "https://tr.wikipedia.org/wiki/Maya_(albüm)"
+        },
+        {
+          "ad": "Wikipedia (EN): Maya (Mabel Matiz album)",
+          "url": "https://en.wikipedia.org/wiki/Maya_(Mabel_Matiz_album)"
+        },
+        {
+          "ad": "Apple Music: Maya",
+          "url": "https://music.apple.com/tr/album/1843163427"
+        },
+        {
+          "ad": "Sözcü: Mabel Matiz yeni albümü Maya'yı böyle tanıttı",
+          "url": "https://www.sozcu.com.tr/hayatim/kultur-sanat-haberleri/mabel-matiz-yeni-albumu-mayayi-boyle-tanitti-kendimi-sifalandirma-bicimim/"
+        },
+        {
+          "ad": "Memurlar.net: Türkçe testindeki Mabel Matiz sorusu neydi?",
+          "url": "https://www.memurlar.net/haber/913326/"
+        }
+      ],
+      "uyum": 1.0
+    },
+    {
+      "id": "mabel-matiz-03",
+      "metin": "Mabel Matiz'in 2023'te çıkan 25 şarkılık albümünün adı nedir?",
+      "secenekler": ["Fatih", "Maya", "Aklıselim", "Gök Nerede"],
+      "dogru": 0,
+      "zorluk": "kolay",
+      "tur": "dunya",
+      "kaynaklar": [
+        {
+          "ad": "Apple Music: Fatih",
+          "url": "https://music.apple.com/tr/album/1697132086"
+        },
+        {
+          "ad": "Vikipedi: Fatih (albüm)",
+          "url": "https://tr.wikipedia.org/wiki/Fatih_(albüm)"
+        },
+        {
+          "ad": "Time Out İstanbul: Alkışlar Fatih için",
+          "url": "https://www.timeout.com/istanbul/tr/muzik/alkislar-fatih-icin"
+        },
+        {
+          "ad": "Cumhuriyet: Vitrindeki albümler (29 Temmuz 2023)",
+          "url": "https://www.cumhuriyet.com.tr/kultur-sanat/vitrindeki-albumler-2103542"
+        },
+        {
+          "ad": "T-Vine: Barbican the sole UK date for Mabel Matiz's European 'Fatih' tour",
+          "url": "https://www.t-vine.com/barbican-the-sole-uk-date-for-mabel-matizs-european-fatih-tour"
+        },
+        {
+          "ad": "Albumblitz: Mabel Matiz – Fatih",
+          "url": "https://albumblitz.com/mabel-matiz-fatih"
+        }
+      ],
+      "uyum": 1.0
+    },
+    {
+      "id": "mabel-matiz-04",
+      "metin": "Mabel Matiz, \"Fatih\" albümündeki \"Düldül\" şarkısını hangi sanatçıyla seslendirdi?",
+      "secenekler": ["Sıla", "Hande Yener", "Melike Şahin", "Jehan Barbur"],
+      "dogru": 2,
+      "zorluk": "kolay",
+      "tur": "dunya",
+      "kaynaklar": [
+        {
+          "ad": "Apple Music: Fatih",
+          "url": "https://music.apple.com/tr/album/1697132086"
+        },
+        {
+          "ad": "Vikipedi: Fatih (albüm)",
+          "url": "https://tr.wikipedia.org/wiki/Fatih_(albüm)"
+        },
+        {
+          "ad": "Time Out İstanbul: Alkışlar Fatih için",
+          "url": "https://www.timeout.com/istanbul/tr/muzik/alkislar-fatih-icin"
+        },
+        {
+          "ad": "Posta: Mabel Matiz'in Harbiye serüveni! Zirvede bıraktı",
+          "url": "https://www.posta.com.tr/galeri/mabel-matizin-harbiye-seruveni-zirvede-birakti-2661502"
+        },
+        {
+          "ad": "Wikipedia (EN): Melike Şahin",
+          "url": "https://en.wikipedia.org/wiki/Melike_Şahin"
+        }
+      ],
+      "uyum": 1.0
+    },
+    {
+      "id": "mabel-matiz-05",
+      "metin": "\"Gel\" şarkısı Mabel Matiz'in hangi albümünde yer alır?",
+      "secenekler": ["Yaşım Çocuk", "Maya", "Gök Nerede", "Fatih"],
+      "dogru": 2,
+      "zorluk": "kolay",
+      "tur": "dunya",
+      "kaynaklar": [
+        {
+          "ad": "Vikipedi: Gök Nerede",
+          "url": "https://tr.wikipedia.org/wiki/Gök_Nerede"
+        },
+        {
+          "ad": "Wikipedia (EN): Gök Nerede",
+          "url": "https://en.wikipedia.org/wiki/Gök_Nerede"
+        },
+        {
+          "ad": "Apple Music: Gök Nerede",
+          "url": "https://music.apple.com/tr/album/965167828"
+        },
+        {
+          "ad": "Haberler.com: Mabel Matiz kimdir?",
+          "url": "https://www.haberler.com/mabel-matiz-kimdir-mabel-matiz-kac-yasinda-16363928-haberi/"
+        }
+      ],
+      "uyum": 1.0
+    },
+    {
+      "id": "mabel-matiz-06",
+      "metin": "Mabel Matiz'in \"Gök Nerede\" albümü hangi yıl yayımlandı?",
+      "secenekler": ["2015", "2010", "2017", "2020"],
+      "dogru": 0,
+      "zorluk": "kolay",
+      "tur": "dunya",
+      "kaynaklar": [
+        {
+          "ad": "Vikipedi: Gök Nerede",
+          "url": "https://tr.wikipedia.org/wiki/Gök_Nerede"
+        },
+        {
+          "ad": "Wikipedia (EN): Gök Nerede",
+          "url": "https://en.wikipedia.org/wiki/Gök_Nerede"
+        },
+        {
+          "ad": "Apple Music: Gök Nerede",
+          "url": "https://music.apple.com/tr/album/965167828"
+        },
+        {
+          "ad": "Hürriyet: Mabel Matiz kimdir, kaç yaşında?",
+          "url": "https://www.hurriyet.com.tr/kelebek/televizyon/mabel-matiz-kimdir-kac-yasinda-mabel-matizin-biyografisi-41557848"
+        },
+        {
+          "ad": "Memurlar.net: Türkçe testindeki Mabel Matiz sorusu neydi?",
+          "url": "https://www.memurlar.net/haber/913326/"
+        }
+      ],
+      "uyum": 1.0
+    },
+    {
+      "id": "mabel-matiz-07",
+      "metin": "Söz ve müziği Mabel Matiz'e ait \"Lan\" (2024) şarkısını ilk olarak hangi sanatçı yayımladı?",
+      "secenekler": ["Aleyna Tilki", "Hadise", "Simge", "Zeynep Bastık"],
+      "dogru": 3,
+      "zorluk": "kolay",
+      "tur": "dunya",
+      "kaynaklar": [
+        {
+          "ad": "Yeni Birlik: Zeynep Bastık ve Mabel Matiz'den LAN klibi",
+          "url": "https://www.gazetebirlik.com/zeynep-bastik-ve-mabel-matizden-lan-klibi"
+        },
+        {
+          "ad": "Onedio: Lan şarkısını söz ve müzik sahibi Mabel Matiz'e okutunca",
+          "url": "https://onedio.com/haber/zeynep-bastik-in-soyledigi-lan-sarkisini-yapay-zeka-soz-ve-muzik-sahibi-mabel-matiz-e-okutunca-begeni-yagdi-1211339"
+        },
+        {
+          "ad": "Posta: \"Argo değil Lan!\"",
+          "url": "https://www.posta.com.tr/magazin/argo-degil-lan-2707408"
+        },
+        {
+          "ad": "Tamindir: Zeynep Bastık Spotify Global İlk 50'de (18.03.2024)",
+          "url": "https://www.tamindir.com/haber/zeynep-bastik-spotify-global-ilk-50_86943/"
+        }
+      ],
+      "uyum": 1.0
+    },
+    {
+      "id": "mabel-matiz-08",
+      "metin": "Mabel Matiz, \"Maya\" albümündeki \"Sarmaşık\" şarkısını hangi sanatçıyla birlikte yazdı?",
+      "secenekler": ["Göksel", "Sıla", "Teoman", "Gökhan Türkmen"],
+      "dogru": 1,
+      "zorluk": "kolay",
+      "tur": "dunya",
+      "kaynaklar": [
+        {
+          "ad": "Vikipedi: Maya (albüm)",
+          "url": "https://tr.wikipedia.org/wiki/Maya_(albüm)"
+        },
+        {
+          "ad": "Wikipedia (EN): Maya (Mabel Matiz album)",
+          "url": "https://en.wikipedia.org/wiki/Maya_(Mabel_Matiz_album)"
+        },
+        {
+          "ad": "Hürriyet (Hikmet Demirkol): Yıldızların peşinde bir albüm: Maya",
+          "url": "https://www.hurriyet.com.tr/yazarlar/hikmet-demirkol/yildizlarin-pesinde-bir-album-maya-40885661"
+        },
+        {
+          "ad": "Cumhuriyet: Mabel Matiz'den Maya",
+          "url": "https://www.cumhuriyet.com.tr/haber/mabel-matizden-annesine-maya-1003490"
+        },
+        {
+          "ad": "Milliyet: Mabel Matiz'in \"Maya\"sı vizyonuna sağlık dedirtiyor",
+          "url": "https://www.milliyet.com.tr/mabel-matiz-in--maya-si--vizyonuna-saglik--dedirtiyor-molatik-8493/"
+        }
+      ],
+      "uyum": 1.0
+    },
+    {
+      "id": "mabel-matiz-09",
+      "metin": "\"Maya\" albümündeki \"Mendilimde Kırmızım Var\" şarkısında Mabel Matiz'e hangi sanatçı eşlik etti?",
+      "secenekler": ["Sibel Gürsoy", "Nükhet Duru", "Selda Bağcan", "Nilüfer"],
+      "dogru": 0,
+      "zorluk": "orta",
+      "tur": "dunya",
+      "kaynaklar": [
+        {
+          "ad": "Vikipedi: Maya (albüm)",
+          "url": "https://tr.wikipedia.org/wiki/Maya_(albüm)"
+        },
+        {
+          "ad": "Wikipedia (EN): Maya (Mabel Matiz album)",
+          "url": "https://en.wikipedia.org/wiki/Maya_(Mabel_Matiz_album)"
+        },
+        {
+          "ad": "Hürriyet (Hikmet Demirkol): Yıldızların peşinde bir albüm: Maya",
+          "url": "https://www.hurriyet.com.tr/yazarlar/hikmet-demirkol/yildizlarin-pesinde-bir-album-maya-40885661"
+        },
+        {
+          "ad": "Apple Music: Maya",
+          "url": "https://music.apple.com/tr/album/1843163427"
+        },
+        {
+          "ad": "Küre Ansiklopedi: Mabel Matiz",
+          "url": "https://kureansiklopedi.com/tr/detay/mabel-matiz-7fdd8"
+        }
+      ],
+      "uyum": 1.0
+    },
+    {
+      "id": "mabel-matiz-10",
+      "metin": "Mabel Matiz, 2013 tarihli Aysel Gürel saygı albümünde hangi şarkıyı yorumladı?",
+      "secenekler": ["Laubali", "Değilsin", "Sultan Süleyman", "Yuh Yuh"],
+      "dogru": 2,
+      "zorluk": "orta",
+      "tur": "dunya",
+      "kaynaklar": [
+        {
+          "ad": "Vikipedi: Mabel Matiz",
+          "url": "https://tr.wikipedia.org/wiki/Mabel_Matiz"
+        },
+        {
+          "ad": "Wikipedia (EN): Mabel Matiz",
+          "url": "https://en.wikipedia.org/wiki/Mabel_Matiz"
+        },
+        {
+          "ad": "Hürriyet: Mabel Matiz kimdir, kaç yaşında?",
+          "url": "https://www.hurriyet.com.tr/kelebek/televizyon/mabel-matiz-kimdir-kac-yasinda-mabel-matizin-biyografisi-41557848"
+        },
+        {
+          "ad": "Haberler.com: Mabel Matiz kimdir?",
+          "url": "https://www.haberler.com/mabel-matiz-kimdir-mabel-matiz-kac-yasinda-16363928-haberi/"
+        },
+        {
+          "ad": "Biyografiler.com: Mabel Matiz",
+          "url": "https://www.biyografiler.com/kimdir/mabel-matiz"
+        },
+        {
+          "ad": "Memurlar.net: Türkçe testindeki Mabel Matiz sorusu neydi?",
+          "url": "https://www.memurlar.net/haber/913326/"
+        }
+      ],
+      "uyum": 1.0
+    },
+    {
+      "id": "mabel-matiz-11",
+      "metin": "\"Gök Nerede\" albümündeki \"Bir Hadise Var\" şarkısının söz ve müziği kime aittir?",
+      "secenekler": [
+        "Sezen Aksu",
+        "Nazan Öncel",
+        "Şebnem Ferah",
+        "Candan Erçetin"
+      ],
+      "dogru": 1,
+      "zorluk": "orta",
+      "tur": "dunya",
+      "kaynaklar": [
+        {
+          "ad": "Vikipedi: Gök Nerede",
+          "url": "https://tr.wikipedia.org/wiki/Gök_Nerede"
+        },
+        {
+          "ad": "Wikipedia (EN): Gök Nerede",
+          "url": "https://en.wikipedia.org/wiki/Gök_Nerede"
+        },
+        {
+          "ad": "Haberler.com: Mabel Matiz kimdir?",
+          "url": "https://www.haberler.com/mabel-matiz-kimdir-mabel-matiz-kac-yasinda-16363928-haberi/"
+        },
+        {
+          "ad": "Sondakika.com: Mabel Matiz",
+          "url": "https://www.sondakika.com/kultur-sanat/haber-mabel-matiz-9230921/"
+        }
+      ],
+      "uyum": 1.0
+    },
+    {
+      "id": "mabel-matiz-12",
+      "metin": "\"Yaşım Çocuk\" albümündeki \"Aşk Yok Olmaktır\" aslen hangi sanatçının şarkısıdır?",
+      "secenekler": ["Sezen Aksu", "Ajda Pekkan", "Nilüfer", "Yıldız Tilbe"],
+      "dogru": 3,
+      "zorluk": "orta",
+      "tur": "dunya",
+      "kaynaklar": [
+        {
+          "ad": "Vikipedi: Yaşım Çocuk",
+          "url": "https://tr.wikipedia.org/wiki/Yaşım_Çocuk"
+        },
+        {
+          "ad": "Wikipedia (EN): Yaşım Çocuk",
+          "url": "https://en.wikipedia.org/wiki/Yaşım_Çocuk"
+        },
+        {
+          "ad": "Haberler.com: Mabel Matiz kimdir?",
+          "url": "https://www.haberler.com/mabel-matiz-kimdir-mabel-matiz-kac-yasinda-16363928-haberi/"
+        },
+        {
+          "ad": "Hürriyet (Hikmet Demirkol): Mabel Matiz, ahıra girmeyen koç",
+          "url": "https://www.hurriyet.com.tr/mabel-matiz-ahira-girmeyen-koc-23499270"
+        }
+      ],
+      "uyum": 1.0
+    },
+    {
+      "id": "mabel-matiz-13",
+      "metin": "Milliyet Sanat okurlarının \"Yılın Albümü\" seçtiği Mabel Matiz albümü hangisidir?",
+      "secenekler": ["Gök Nerede", "Maya", "Fatih", "Yaşım Çocuk"],
+      "dogru": 3,
+      "zorluk": "orta",
+      "tur": "dunya",
+      "kaynaklar": [
+        {
+          "ad": "Vikipedi: Mabel Matiz",
+          "url": "https://tr.wikipedia.org/wiki/Mabel_Matiz"
+        },
+        {
+          "ad": "Wikipedia (EN): Mabel Matiz",
+          "url": "https://en.wikipedia.org/wiki/Mabel_Matiz"
+        },
+        {
+          "ad": "Hürriyet: Mabel Matiz kimdir, kaç yaşında?",
+          "url": "https://www.hurriyet.com.tr/kelebek/televizyon/mabel-matiz-kimdir-kac-yasinda-mabel-matizin-biyografisi-41557848"
+        },
+        {
+          "ad": "Haberler.com: Mabel Matiz kimdir?",
+          "url": "https://www.haberler.com/mabel-matiz-kimdir-mabel-matiz-kac-yasinda-16363928-haberi/"
+        },
+        {
+          "ad": "Memurlar.net: Türkçe testindeki Mabel Matiz sorusu neydi?",
+          "url": "https://www.memurlar.net/haber/913326/"
+        }
+      ],
+      "uyum": 1.0
+    },
+    {
+      "id": "mabel-matiz-14",
+      "metin": "Mabel Matiz, 2014 Altın Kelebek Ödülleri'nde hangi dalda ödül aldı?",
+      "secenekler": [
+        "En İyi Çıkış Yapan Solist",
+        "En İyi Albüm",
+        "En İyi Düet",
+        "En İyi Söz Yazarı"
+      ],
+      "dogru": 0,
+      "zorluk": "orta",
+      "tur": "dunya",
+      "kaynaklar": [
+        {
+          "ad": "Vikipedi: Mabel Matiz",
+          "url": "https://tr.wikipedia.org/wiki/Mabel_Matiz"
+        },
+        {
+          "ad": "Haberler.com: Mabel Matiz kimdir?",
+          "url": "https://www.haberler.com/mabel-matiz-kimdir-mabel-matiz-kac-yasinda-16363928-haberi/"
+        },
+        {
+          "ad": "Biyografiler.com: Mabel Matiz",
+          "url": "https://www.biyografiler.com/kimdir/mabel-matiz"
+        },
+        {
+          "ad": "Sondakika.com: Mabel Matiz",
+          "url": "https://www.sondakika.com/kultur-sanat/haber-mabel-matiz-9230921/"
+        }
+      ],
+      "uyum": 1.0
+    },
+    {
+      "id": "mabel-matiz-15",
+      "metin": "\"Fatih\" (2023) albümü hangi plak şirketinden yayımlandı?",
+      "secenekler": ["DMC", "Pose Records", "Sony Music", "Avrupa Müzik"],
+      "dogru": 1,
+      "zorluk": "orta",
+      "tur": "dunya",
+      "kaynaklar": [
+        {
+          "ad": "Apple Music: Fatih",
+          "url": "https://music.apple.com/tr/album/1697132086"
+        },
+        {
+          "ad": "Vikipedi: Fatih (albüm)",
+          "url": "https://tr.wikipedia.org/wiki/Fatih_(albüm)"
+        },
+        {
+          "ad": "Cumhuriyet: Vitrindeki albümler (29 Temmuz 2023)",
+          "url": "https://www.cumhuriyet.com.tr/kultur-sanat/vitrindeki-albumler-2103542"
+        },
+        {
+          "ad": "Wikipedia (EN): Mabel Matiz",
+          "url": "https://en.wikipedia.org/wiki/Mabel_Matiz"
+        }
+      ],
+      "uyum": 1.0
+    },
+    {
+      "id": "mabel-matiz-16",
+      "metin": "\"Fatih\" albümündeki \"İki Satır Yara\" şarkısında Mabel Matiz kiminle düet yaptı?",
+      "secenekler": [
+        "Nükhet Duru",
+        "Ajda Pekkan",
+        "Aşkın Nur Yengi",
+        "Sertab Erener"
+      ],
+      "dogru": 2,
+      "zorluk": "orta",
+      "tur": "dunya",
+      "kaynaklar": [
+        {
+          "ad": "Apple Music: Fatih",
+          "url": "https://music.apple.com/tr/album/1697132086"
+        },
+        {
+          "ad": "Vikipedi: Fatih (albüm)",
+          "url": "https://tr.wikipedia.org/wiki/Fatih_(albüm)"
+        },
+        {
+          "ad": "Time Out İstanbul: Alkışlar Fatih için",
+          "url": "https://www.timeout.com/istanbul/tr/muzik/alkislar-fatih-icin"
+        },
+        {
+          "ad": "T-Vine: Barbican the sole UK date for Mabel Matiz's European 'Fatih' tour",
+          "url": "https://www.t-vine.com/barbican-the-sole-uk-date-for-mabel-matizs-european-fatih-tour"
+        },
+        {
+          "ad": "Posta: Mabel Matiz'in Harbiye serüveni! Zirvede bıraktı",
+          "url": "https://www.posta.com.tr/galeri/mabel-matizin-harbiye-seruveni-zirvede-birakti-2661502"
+        }
+      ],
+      "uyum": 1.0
+    },
+    {
+      "id": "mabel-matiz-17",
+      "metin": "\"Gök Nerede\" (2015) albümünde prodüktör olarak hangi müzisyen yer aldı?",
+      "secenekler": [
+        "Ozan Çolakoğlu",
+        "Can Güngör",
+        "Erdem Kınay",
+        "Volga Tamöz"
+      ],
+      "dogru": 1,
+      "zorluk": "zor",
+      "tur": "dunya",
+      "kaynaklar": [
+        {
+          "ad": "Vikipedi: Gök Nerede",
+          "url": "https://tr.wikipedia.org/wiki/Gök_Nerede"
+        },
+        {
+          "ad": "Hürriyet: Mabel Matiz kimdir, kaç yaşında?",
+          "url": "https://www.hurriyet.com.tr/kelebek/televizyon/mabel-matiz-kimdir-kac-yasinda-mabel-matizin-biyografisi-41557848"
+        },
+        {
+          "ad": "Biyografiler.com: Mabel Matiz",
+          "url": "https://www.biyografiler.com/kimdir/mabel-matiz"
+        },
+        {
+          "ad": "Sondakika.com: Mabel Matiz",
+          "url": "https://www.sondakika.com/kultur-sanat/haber-mabel-matiz-9230921/"
+        },
+        {
+          "ad": "Memurlar.net: Türkçe testindeki Mabel Matiz sorusu neydi?",
+          "url": "https://www.memurlar.net/haber/913326/"
+        }
+      ],
+      "uyum": 0.83
+    },
+    {
+      "id": "mabel-matiz-18",
+      "metin": "\"Gök Nerede\" albümündeki \"Vals\" şarkısının bestesi hangi müzisyene aittir?",
+      "secenekler": [
+        "Evgeny Grinko",
+        "Yann Tiersen",
+        "Ludovico Einaudi",
+        "Fazıl Say"
+      ],
+      "dogru": 0,
+      "zorluk": "zor",
+      "tur": "dunya",
+      "kaynaklar": [
+        {
+          "ad": "Vikipedi: Gök Nerede",
+          "url": "https://tr.wikipedia.org/wiki/Gök_Nerede"
+        },
+        {
+          "ad": "Wikipedia (EN): Gök Nerede",
+          "url": "https://en.wikipedia.org/wiki/Gök_Nerede"
+        },
+        {
+          "ad": "Apple Music: Gök Nerede",
+          "url": "https://music.apple.com/tr/album/965167828"
+        },
+        {
+          "ad": "Haberler.com: Mabel Matiz kimdir?",
+          "url": "https://www.haberler.com/mabel-matiz-kimdir-mabel-matiz-kac-yasinda-16363928-haberi/"
+        },
+        {
+          "ad": "Sondakika.com: Mabel Matiz",
+          "url": "https://www.sondakika.com/kultur-sanat/haber-mabel-matiz-9230921/"
+        }
+      ],
+      "uyum": 1.0
+    },
+    {
+      "id": "mabel-matiz-19",
+      "metin": "\"Maya\" (2018) albümü CD olarak kaç diskten oluşan bir set hâlinde çıktı?",
+      "secenekler": ["Tek disk", "Üç disk", "İki disk", "Dört disk"],
+      "dogru": 2,
+      "zorluk": "zor",
+      "tur": "dunya",
+      "kaynaklar": [
+        {
+          "ad": "Vikipedi: Maya (albüm)",
+          "url": "https://tr.wikipedia.org/wiki/Maya_(albüm)"
+        },
+        {
+          "ad": "Wikipedia (EN): Maya (Mabel Matiz album)",
+          "url": "https://en.wikipedia.org/wiki/Maya_(Mabel_Matiz_album)"
+        },
+        {
+          "ad": "Hürriyet (Hikmet Demirkol): Yıldızların peşinde bir albüm: Maya",
+          "url": "https://www.hurriyet.com.tr/yazarlar/hikmet-demirkol/yildizlarin-pesinde-bir-album-maya-40885661"
+        },
+        {
+          "ad": "Sözcü: Mabel Matiz yeni albümü Maya'yı böyle tanıttı",
+          "url": "https://www.sozcu.com.tr/hayatim/kultur-sanat-haberleri/mabel-matiz-yeni-albumu-mayayi-boyle-tanitti-kendimi-sifalandirma-bicimim/"
+        },
+        {
+          "ad": "Cumhuriyet: Mabel Matiz'den Maya",
+          "url": "https://www.cumhuriyet.com.tr/haber/mabel-matizden-annesine-maya-1003490"
+        }
+      ],
+      "uyum": 1.0
+    },
+    {
+      "id": "mabel-matiz-20",
+      "metin": "\"Maya\" albümündeki \"Kalbime Azap\" şarkısında Mabel Matiz'e hangi sanatçı eşlik etti?",
+      "secenekler": [
+        "Selda Bağcan",
+        "Muazzez Ersoy",
+        "Emel Sayın",
+        "Gülden Karaböcek"
+      ],
+      "dogru": 3,
+      "zorluk": "zor",
+      "tur": "dunya",
+      "kaynaklar": [
+        {
+          "ad": "Vikipedi: Maya (albüm)",
+          "url": "https://tr.wikipedia.org/wiki/Maya_(albüm)"
+        },
+        {
+          "ad": "Wikipedia (EN): Maya (Mabel Matiz album)",
+          "url": "https://en.wikipedia.org/wiki/Maya_(Mabel_Matiz_album)"
+        },
+        {
+          "ad": "Hürriyet (Hikmet Demirkol): Yıldızların peşinde bir albüm: Maya",
+          "url": "https://www.hurriyet.com.tr/yazarlar/hikmet-demirkol/yildizlarin-pesinde-bir-album-maya-40885661"
+        },
+        {
+          "ad": "Apple Music: Maya",
+          "url": "https://music.apple.com/tr/album/1843163427"
+        }
+      ],
+      "uyum": 1.0
+    },
+    {
+      "id": "mabel-matiz-21",
+      "metin": "\"Fatih\" albümündeki \"Aşk Çeşmesi\" şarkısını Mabel Matiz kiminle seslendirdi?",
+      "secenekler": [
+        "Gaye Su Akyol",
+        "Kalben",
+        "Jehan Barbur",
+        "Feride Hilal Akın"
+      ],
+      "dogru": 1,
+      "zorluk": "zor",
+      "tur": "dunya",
+      "kaynaklar": [
+        {
+          "ad": "Apple Music: Fatih",
+          "url": "https://music.apple.com/tr/album/1697132086"
+        },
+        {
+          "ad": "Vikipedi: Fatih (albüm)",
+          "url": "https://tr.wikipedia.org/wiki/Fatih_(albüm)"
+        },
+        {
+          "ad": "Time Out İstanbul: Alkışlar Fatih için",
+          "url": "https://www.timeout.com/istanbul/tr/muzik/alkislar-fatih-icin"
+        },
+        {
+          "ad": "T-Vine: Barbican the sole UK date for Mabel Matiz's European 'Fatih' tour",
+          "url": "https://www.t-vine.com/barbican-the-sole-uk-date-for-mabel-matizs-european-fatih-tour"
+        }
+      ],
+      "uyum": 1.0
+    },
+    {
+      "id": "mabel-matiz-22",
+      "metin": "\"Maya\" (2018) albümünün prodüktörlüğünü Mabel Matiz ile birlikte kim üstlendi?",
+      "secenekler": [
+        "Ozan Doğulu",
+        "Gürsoy Tanç",
+        "Sabi Saltiel",
+        "Haluk Kurosman"
+      ],
+      "dogru": 2,
+      "zorluk": "zor",
+      "tur": "dunya",
+      "kaynaklar": [
+        {
+          "ad": "Vikipedi: Maya (albüm)",
+          "url": "https://tr.wikipedia.org/wiki/Maya_(albüm)"
+        },
+        {
+          "ad": "Wikipedia (EN): Maya (Mabel Matiz album)",
+          "url": "https://en.wikipedia.org/wiki/Maya_(Mabel_Matiz_album)"
+        },
+        {
+          "ad": "Hürriyet (Hikmet Demirkol): Yıldızların peşinde bir albüm: Maya",
+          "url": "https://www.hurriyet.com.tr/yazarlar/hikmet-demirkol/yildizlarin-pesinde-bir-album-maya-40885661"
+        },
+        {
+          "ad": "Milliyet: Mabel Matiz'in \"Maya\"sı vizyonuna sağlık dedirtiyor",
+          "url": "https://www.milliyet.com.tr/mabel-matiz-in--maya-si--vizyonuna-saglik--dedirtiyor-molatik-8493/"
+        }
+      ],
+      "uyum": 1.0
+    },
+    {
+      "id": "mabel-matiz-23",
+      "metin": "Mabel Matiz, 2023'te çıkan \"Uçkun\" şarkısında hangi müzisyenle iş birliği yaptı?",
+      "secenekler": ["Hello Psychaleppo", "Altın Gün", "Baba Zula", "Kolpa"],
+      "dogru": 0,
+      "zorluk": "zor",
+      "tur": "dunya",
+      "kaynaklar": [
+        {
+          "ad": "Apple Music: Fatih",
+          "url": "https://music.apple.com/tr/album/1697132086"
+        },
+        {
+          "ad": "Vikipedi: Fatih (albüm)",
+          "url": "https://tr.wikipedia.org/wiki/Fatih_(albüm)"
+        },
+        {
+          "ad": "Wikipedia (EN): Mabel Matiz",
+          "url": "https://en.wikipedia.org/wiki/Mabel_Matiz"
+        },
+        {
+          "ad": "T-Vine: Barbican the sole UK date for Mabel Matiz's European 'Fatih' tour",
+          "url": "https://www.t-vine.com/barbican-the-sole-uk-date-for-mabel-matizs-european-fatih-tour"
+        },
+        {
+          "ad": "Milliyet (Can Şişman): Mabel Matiz'in Uçkun'u aslında biziz (26.05.2023)",
+          "url": "https://www.milliyet.com.tr/yazarlar/can-sisman/mabel-matizin-uckunu-aslinda-biziz-burnumuz-bati-yuregimiz-dogu-6953760"
+        }
+      ],
+      "uyum": 1.0
+    },
+    {
+      "id": "mabel-matiz-24",
+      "metin": "Mabel Matiz, 2014'te çıkan \"Kör Heves\" şarkısında hangi sanatçıyla iş birliği yaptı?",
+      "secenekler": [
+        "Göksel",
+        "Aylin Aslım",
+        "Feride Hilal Akın",
+        "Ceylan Ertem"
+      ],
+      "dogru": 3,
+      "zorluk": "zor",
+      "tur": "dunya",
+      "kaynaklar": [
+        {
+          "ad": "Apple Music: Kör Heves (Ceylan Ertem feat. Mabel Matiz)",
+          "url": "https://music.apple.com/tr/album/895917216"
+        },
+        {
+          "ad": "Wikipedia (EN): Mabel Matiz",
+          "url": "https://en.wikipedia.org/wiki/Mabel_Matiz"
+        },
+        {
+          "ad": "Biyografiler.com: Mabel Matiz",
+          "url": "https://www.biyografiler.com/kimdir/mabel-matiz"
+        },
+        {
+          "ad": "Habertürk: \"Sonu Amy Winehouse'a benzemesin\" (Ceylan Ertem, 10.01.2015)",
+          "url": "https://www.haberturk.com/kultur-sanat/sonu-amy-winehousea-benzemesin-1028881"
+        }
+      ],
+      "uyum": 1.0
+    }
+  ]
+}
