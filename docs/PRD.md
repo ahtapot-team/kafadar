@@ -502,7 +502,7 @@ Oyunun kişi aralığı `minOyuncu` (varsayılan 2) ile genel üst sınır 12 ar
 | Açılış logosu | Yazı tipi hazır olunca çizilir | Hata: logo yazı tipinden önce çiziliyordu ve telefonda sistem fontunda kalıyordu. | Semih (30.10.2026, msg 805) |
 | Tasarım adımı | Yok | Yeni ekran yok; metin ve kural değişikliği | pm varsayılanı |
 
-## v9: Quiz Night — dizi/film paketleri (Semih, 31.10.2026) — ONAY BEKLİYOR
+## v9: Quiz Night — dizi/film paketleri (Semih, 31.10.2026) — ONAYLANDI (Semih, 31.10.2026, msg 883)
 Issue'lar (Faz 1): #221 tasarım (tasarim), #222 kabul testleri (qa), #223 saf modül ve içerik şeması (backend; #222 bitince), #224 ekranlar (frontend; #221, #222, #223 bitince), #225 ilk 3 paketin taslağı (pm), #226 paketleri JSON'a çevirme (backend; #223 ve #225 bitince).
 Faz 2 (oda modu, KK-113) issue'ları Faz 1 merge edilince açılır.
 Araştırma: `docs/quiz-night-arastirma.md` (#216), `docs/quiz-dizi-film-analiz.md` (#218).
