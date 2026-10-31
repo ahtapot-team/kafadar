@@ -42,8 +42,8 @@ PRD'deki her kabul kriteri için "KK-nn" ifadesi geçen test dosyaları ve gerç
 | KK-36 | Final dağılımı tüm telefonlarda gösterilir: 10 sorunun OK/NOK yüzdeleri (boşlar ayrı), en  | `oda/oda.kabul.test.ts`, `oda/ozet.test.ts`, `oda/ui.kabul.test.ts` | cihaz |
 | KK-37 | Bağlantısı kopan oyuncu (arka plana alma, ağ değişimi, kısa uçak modu) aynı kimlikle geri  | `oda/istemci.test.ts`, `oda/oda.kabul.test.ts`, `oda/onon-istemci.kabul.test.ts`, `oda/ui.kabul.test.ts` | cihaz |
 | KK-38 | Kuran kişi çıkarsa ya da bağlantısı koparsa oyun kalanlarla devam eder. Odada tek oyuncu k | `oda/oda.kabul.test.ts`, `oda/ozet.test.ts`, `oda/ui.kabul.test.ts` | cihaz |
-| KK-39 | Oda ve oyuncu isimleri sunucuda yalnızca oyun süresince tutulur. Oyun bitince ya da oda 1  | `oda/oda.kabul.test.ts`, `oda/ui.kabul.test.ts` | cihaz |
-| KK-40 | Oda mantığı, KK-22 gibi saf ve serileştirilebilir bir durum makinesidir; saat ve rastgelel | `oda/oda.kabul.test.ts`, `oda/ui.kabul.test.ts` | — |
+| KK-39 | Oda ve oyuncu isimleri sunucuda yalnızca oyun süresince tutulur. Oyun bitince ya da oda 1  | `oda/oda.kabul.test.ts`, `oda/quiz-oda.kabul.test.ts`, `oda/ui.kabul.test.ts` | cihaz |
+| KK-40 | Oda mantığı, KK-22 gibi saf ve serileştirilebilir bir durum makinesidir; saat ve rastgelel | `oda/oda.kabul.test.ts`, `oda/quiz-oda.kabul.test.ts`, `oda/ui.kabul.test.ts` | — |
 | KK-41 | Gerçek cihaz kapısı: en az 3 telefonla (iOS ve Android, farklı ağlar) tam bir oyun oynanır | `oda/ui.kabul.test.ts` | cihaz |
 | KK-42 | Ana ekranda Casus kim aktiftir ve OK mu NOK mu ile aynı çekirdeği (oyuncular, paket, ayarl | `games/casus-kim/ui.kabul.test.ts`, `uygulama.kabul.test.ts` | cihaz |
 | KK-43 | En az 3, en çok 12 oyuncu. Casus sayısı varsayılan 1'dir. Oyuncu sayısına göre artırılabil | `games/casus-kim/casus.kabul.test.ts`, `games/casus-kim/ui.kabul.test.ts` | cihaz |
@@ -69,11 +69,11 @@ PRD'deki her kabul kriteri için "KK-nn" ifadesi geçen test dosyaları ve gerç
 | KK-63 | 10/10 ama'da "Tek telefon / Oda kur / Odaya katıl" seçimi vardır. Tek telefon modu (KK-55… | `oda/onon-istemci.kabul.test.ts`, `oda/onon-oda.kabul.test.ts`, `oda/ui.kabul.test.ts`, `sunucu/test/onon.ts` | cihaz |
 | KK-64 | Oyun 10 karttır. Paketi kuran kişi seçer, kart sırasını sunucu belirler. Her kart tüm tele | `oda/onon-istemci.kabul.test.ts`, `oda/onon-oda.kabul.test.ts`, `oda/ui.kabul.test.ts` | cihaz |
 | KK-65 | Puan 0–10 arası tam sayıdır. Süre içinde değiştirilebilir, son puan geçerlidir. Süre bitti | `oda/onon-istemci.kabul.test.ts`, `oda/onon-oda.kabul.test.ts`, `oda/ui.kabul.test.ts` | cihaz |
-| KK-66 | Açıklamaya kadar hiçbir puan başka bir telefona gönderilmez; ağ trafiğinde de görünmez (KK | `oda/onon-oda.kabul.test.ts`, `oda/ui.kabul.test.ts` | cihaz |
+| KK-66 | Açıklamaya kadar hiçbir puan başka bir telefona gönderilmez; ağ trafiğinde de görünmez (KK | `oda/onon-oda.kabul.test.ts`, `oda/quiz-oda.kabul.test.ts`, `oda/ui.kabul.test.ts` | cihaz |
 | KK-67 | Açıklama tüm telefonlarda aynı anda gösterilir: | `oda/onon-istemci.kabul.test.ts`, `oda/onon-oda.kabul.test.ts`, `oda/ui.kabul.test.ts` | cihaz |
-| KK-68 | Açıklamadan sonra "Sonraki kart" düğmesi yalnızca kuranda görünür; diğerleri "Kuran kişi b | `oda/onon-istemci.kabul.test.ts`, `oda/onon-oda.kabul.test.ts`, `oda/ui.kabul.test.ts` | cihaz |
+| KK-68 | Açıklamadan sonra "Sonraki kart" düğmesi yalnızca kuranda görünür; diğerleri "Kuran kişi b | `oda/onon-istemci.kabul.test.ts`, `oda/onon-oda.kabul.test.ts`, `oda/quiz-oda.kabul.test.ts`, `oda/ui.kabul.test.ts` | cihaz |
 | KK-69 | 10. kartın açıklamasından sonra final tüm telefonlarda gösterilir: ödüller (KK-58 kurallar | `oda/onon-istemci.kabul.test.ts`, `oda/onon-oda.kabul.test.ts`, `oda/ui.kabul.test.ts` | cihaz |
-| KK-70 | Yeniden bağlanma, oyuncu belirteci, veri silme ve hız sınırı OK mu NOK mu odasıyla aynıdır | `oda/onon-istemci.kabul.test.ts`, `oda/onon-oda.kabul.test.ts` | cihaz |
+| KK-70 | Yeniden bağlanma, oyuncu belirteci, veri silme ve hız sınırı OK mu NOK mu odasıyla aynıdır | `oda/onon-istemci.kabul.test.ts`, `oda/onon-oda.kabul.test.ts`, `oda/quiz-oda.kabul.test.ts` | cihaz |
 | KK-71 | Oda mantığı saf ve serileştirilebilir bir durum makinesidir (KK-40). OK mu NOK mu odası bo | `oda/onon-oda.kabul.test.ts` | — |
 | KK-72 | Gerçek cihaz kapısı: en az 3 telefonla tam bir 10/10 ama odası oynanır. Kontrol listesi `d | — | cihaz |
 | KK-77 | Ekran okuyucu kartın başlığını ve metnini okur. "Tamam" düğmesinin dokunma alanı en az 48p | `games/tanitim.kabul.test.ts`, `tanitim-ui.kabul.test.ts` | cihaz |
@@ -100,9 +100,9 @@ PRD'deki her kabul kriteri için "KK-nn" ifadesi geçen test dosyaları ve gerç
 | KK-108 | Paket seçimindeki her kartta şunlar bulunur: düz metin başlık "Ne kadar <ad> fanısın?", bi | `games/quiz-night/arayuz.kabul.test.ts`, `games/quiz-night/ui.kabul.test.ts` | cihaz |
 | KK-109 | Bir tur 10 sorudur ve sorular paketin havuzundan tekrarsız seçilir: 3 kolay, 4 orta, 3 zor | `games/quiz-night/quiz.kabul.test.ts`, `games/quiz-night/ui.kabul.test.ts` | cihaz |
 | KK-110 | Soru ekranında şunlar bulunur: üstte "3/10", soru metni, zorluk (kolay / orta / zor, renkl | `games/quiz-night/arayuz.kabul.test.ts`, `games/quiz-night/ui.kabul.test.ts` | cihaz |
-| KK-111 | Sonuç ekranında büyük puan ("8/10") ve unvan gösterilir. Unvan basamakları 0–3, 4–6, 7–9 v | `games/quiz-night/arayuz.kabul.test.ts`, `games/quiz-night/quiz.kabul.test.ts`, `games/quiz-night/ui.kabul.test.ts` | cihaz |
+| KK-111 | Sonuç ekranında büyük puan ("8/10") ve unvan gösterilir. Unvan basamakları 0–3, 4–6, 7–9 v | `games/quiz-night/arayuz.kabul.test.ts`, `games/quiz-night/quiz.kabul.test.ts`, `games/quiz-night/ui.kabul.test.ts`, `oda/quiz-oda.kabul.test.ts` | cihaz |
 | KK-112 | Tek telefonda grup modu şöyle işler: | `games/quiz-night/arayuz.kabul.test.ts`, `games/quiz-night/quiz.kabul.test.ts`, `games/quiz-night/ui.kabul.test.ts` | cihaz |
-| KK-114 | Puan, doğru cevap sayısıdır. Yanlış cevap puan düşürmez ve hız bonusu yoktur. Unvan bu pua | `games/quiz-night/quiz.kabul.test.ts` | — |
+| KK-114 | Puan, doğru cevap sayısıdır. Yanlış cevap puan düşürmez ve hız bonusu yoktur. Unvan bu pua | `games/quiz-night/quiz.kabul.test.ts`, `oda/quiz-oda.kabul.test.ts` | — |
 | KK-115 | İçerik `content/quiz/<paket>.json` dosyalarındadır ve `npm run icerik` (CI'da da) şunları  | `icerik/quiz.kabul.test.ts` | — |
 | KK-116 | İçerik kuralları (insan incelemesi, makineyle denetlenemez): | — | cihaz |
 | KK-117 | Faz 1 en az 3 paketle çıkar, en az biri Türk ve en az biri yabancı yapım olur. Testlerdeki | `icerik/quiz.kabul.test.ts` | cihaz |
