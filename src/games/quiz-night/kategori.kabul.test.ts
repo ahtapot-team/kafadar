@@ -8,7 +8,7 @@
 //   paketSuz(paketler, çip): kategoriye göre süzer, sıra korunur; 'tumu' hepsini verir (eski koken süzgeci kalkar)
 //   paketBasligi(paket: { ad, baslik? }) = baslik varsa baslik, yoksa `Ne kadar ${ad} fanısın?`  (eski paketBasligi(ad) kalkar)
 //   paketNotu(kategori): (metinler aşağıdaki testte) — eski PAKET_NOTU kalkar
-//   kategoriEmoji(kategori) = '🎬' | '🎤' | '⚽'
+//   Kart emojisi paketin kendi `emoji` alanıdır (tasarım #270: kategori emojisi yok); KK-125 emojileri quiz-kategori.kabul.test.ts
 //   kokenMetni(paket: { kategori, koken? }): 'Türk' | 'Yabancı' | null — yalnız dizi-film kartında metin, diğerlerinde null
 //   Ekranlar (app/quiz/paket.tsx, sonuç, paylaşım kartı, oda) başlığı SADECE paketBasligi'ndan alır (ekranlarda "fanısın" metni yok).
 //   testID'ler: quiz-kategori-tumu, quiz-kategori-dizi-film, quiz-kategori-muzik, quiz-kategori-spor (eski quiz-koken-* kalkar).
@@ -33,7 +33,6 @@ type Api = {
   paketSuz<T extends { kategori: Kat }>(p: T[], cip: string): T[];
   paketBasligi(p: { ad: string; baslik?: string }): string;
   paketNotu(k: Kat): string;
-  kategoriEmoji(k: Kat): string;
   kokenMetni(p: { kategori: Kat; koken?: 'tr' | 'yabanci' }): string | null;
 };
 const yol = './arayuz';
@@ -149,7 +148,7 @@ describe('KK-121: paket seçimi ekranı (kaynak sözleşmesi)', () => {
   });
 });
 
-describe('KK-122: paket kartı başlığı, notu, emojisi', () => {
+describe('KK-122: paket kartı başlığı ve notu', () => {
   it('KK-122: başlık baslik alanıdır; yoksa "Ne kadar <ad> fanısın?"', async () => {
     const { paketBasligi } = await yukle();
     expect(paketBasligi({ ad: 'Aşk-ı Memnu' })).toBe(
@@ -175,15 +174,6 @@ describe('KK-122: paket kartı başlığı, notu, emojisi', () => {
     expect(paketNotu('spor')).toBe(
       'Resmî değildir · Kulüple bağlantısı yoktur',
     );
-  });
-
-  it('KK-122: kategori emojisi 🎬 🎤 ⚽', async () => {
-    const { kategoriEmoji } = await yukle();
-    expect([
-      kategoriEmoji('dizi-film'),
-      kategoriEmoji('muzik'),
-      kategoriEmoji('spor'),
-    ]).toEqual(['🎬', '🎤', '⚽']);
   });
 
   it('KK-122: Türk / Yabancı etiketi yalnız Dizi & Film kartında', async () => {
@@ -216,7 +206,7 @@ describe('KK-122: aynı başlık her yerde, yalnız tema renkleri (kaynak sözle
       expect(dosyaIcerik(d), d).toContain('paketBasligi');
   });
 
-  it('KK-122: paket kartı kategori emojisi, notu ve Türk/Yabancı metnini kurallardan alır', () => {
+  it('KK-122: paket kartı notu ve Türk/Yabancı metnini kurallardan alır', () => {
     const k = dosyaIcerik('app/quiz/paket.tsx');
     for (const ad of ['paketNotu', 'kokenMetni']) expect(k, ad).toContain(ad);
     expect(k).not.toMatch(/PAKET_NOTU|kokenEtiketi/);

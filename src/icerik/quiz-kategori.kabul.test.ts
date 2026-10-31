@@ -7,7 +7,8 @@
 //   uygulamaPaketi(dosya): `kategori` ve (varsa) `baslik` alanlarını da taşır; `koken` yalnız dizi-film paketinde çıkar
 //   Mevcut 3 paket (ask-i-memnu, hababam-sinifi, prison-break) kategori:'dizi-film' olur (koken'leri aynen kalır).
 //   KK-125 ilk içerik: Spor 3 paket (Galatasaray, Fenerbahçe, Beşiktaş), Müzik 4 paket (Manifest, Emircan İğrek, BLOK3,
-//   Mabel Matiz); her pakette 24 soru (8 kolay, 8 orta, 8 zor) ve 4 unvan. (Bir paket kaynak yetersizliğiyle çıkarılırsa PRD
+//   Mabel Matiz); paket emojileri (tasarım #270): Galatasaray/Fenerbahçe/Beşiktaş ⚽, Manifest 💃, Emir Can İğrek 🎸,
+//   BLOK3 🎤, Mabel Matiz 🎶; her pakette 24 soru (8 kolay, 8 orta, 8 zor) ve 4 unvan. (Bir paket kaynak yetersizliğiyle çıkarılırsa PRD
 //   gruba sorulur; o zaman bu testin listesi QA'ca güncellenir.)
 import { readdirSync, readFileSync } from 'node:fs';
 import { describe, expect, it } from 'vitest';
@@ -227,6 +228,21 @@ describe('KK-125: ilk içerik (Spor 3, Müzik 4; her pakette 24 soru 8/8/8 ve 4 
           ).toBe(8);
         expect((p.unvanlar as unknown[]).length, String(p.id)).toBe(4);
       }
+    },
+  );
+
+  kabulIcerik(
+    'KK-125: paket emojileri tasarımdaki gibi (Spor ⚽; Manifest 💃, İğrek 🎸, BLOK3 🎤, Mabel Matiz 🎶)',
+    async () => {
+      for (const ad of ['Galatasaray', 'Fenerbahçe', 'Beşiktaş'])
+        expect(var_('spor', ad)?.emoji, ad).toBe('⚽');
+      const m: [string, string][] = [
+        ['Manifest', '💃'],
+        ['İğrek', '🎸'],
+        ['BLOK3', '🎤'],
+        ['Mabel Matiz', '🎶'],
+      ];
+      for (const [ad, e] of m) expect(var_('muzik', ad)?.emoji, ad).toBe(e);
     },
   );
 });
