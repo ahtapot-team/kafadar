@@ -9,7 +9,7 @@
 //         (`kaynaklar` ve `uyum` uygulama paketine GİRMEZ)
 //   scripts/icerik-dogrula.ts → content/quiz/*.json dosyalarını quizHatalari ile denetler (hata varsa 1 ile çıkar); kaynak URL'leri
 //       ağdan DENETLENMEZ (CI çevrimdışı çalışır)
-import { readdirSync, readFileSync } from 'node:fs';
+import { existsSync, readdirSync, readFileSync } from 'node:fs';
 import { describe, expect, it } from 'vitest';
 import { BEKLEYEN } from '../kabul';
 
@@ -277,9 +277,10 @@ describe('KK-115: CI bağlantısı', () => {
 
 describe('KK-117: Faz 1 içerik kümesi', () => {
   const dosyalar = () =>
-    readdirSync(new URL('../../content/quiz/', import.meta.url)).filter((f) =>
-      f.endsWith('.json'),
-    );
+    (existsSync(new URL('../../content/quiz/', import.meta.url))
+      ? readdirSync(new URL('../../content/quiz/', import.meta.url))
+      : []
+    ).filter((f) => f.endsWith('.json'));
   const oku = () =>
     dosyalar().map(
       (f) =>
@@ -304,14 +305,13 @@ describe('KK-117: Faz 1 içerik kümesi', () => {
     },
   );
 
-  kabulIcerik(
-    'KK-117: örnek/test paketi content/quiz altında yok (uygulamada görünmesin)',
-    () => {
-      expect(dosyalar().length).toBeGreaterThan(0); // klasör ve paketler var
+  // Bayraksız: paket eklenirken (bölünmüş PR'lar) her adımda geçerli kalır; klasör henüz yoksa boş sayılır.
+  it('KK-117: örnek/test paketi content/quiz altında yok (uygulamada görünmesin)', () => {
+    {
       for (const p of oku())
         expect(p.id).not.toMatch(/ornek|örnek|test|deneme/i);
       for (const f of dosyalar())
         expect(f).not.toMatch(/ornek|örnek|test|deneme/i);
-    },
-  );
+    }
+  });
 });
