@@ -4,7 +4,7 @@
 // SÖZLEŞME (frontend #224 için):
 //   testID'ler (ekranlarda geçmeli; "-" ile biten önek, sonuna indeks/id eklenir):
 //     mod seçimi (KK-107): quiz-mod-tek, quiz-mod-grup, quiz-mod-oda-kur, quiz-mod-oda-katil (Faz 2, #254)
-//     paket seçimi (KK-108): quiz-koken-tumu, quiz-koken-tr, quiz-koken-yabanci, quiz-paket- (her kart), quiz-paket-notu
+//     paket seçimi (KK-108): quiz-paket- (kategori çipleri: kategori.kabul.test.ts, KK-121) (her kart), quiz-paket-notu
 //     soru (KK-110): quiz-ilerleme ("3/10"), quiz-zorluk, quiz-soru, quiz-sik- (0..3)
 //     grup (KK-112): quiz-goster ("Cevabı göster"), quiz-kim- (her oyuncu çipi), quiz-sonraki
 //     sonuç (KK-111/112): quiz-sonuc, quiz-birinci (🏆 kartı, en üstte), quiz-sira- (satırlar), quiz-tekrar, quiz-baska-paket,
@@ -46,9 +46,6 @@ describe('KK-107…KK-112: ekranlar sözleşmedeki testID adlarını kullanır',
   const TESTIDLER = [
     'quiz-mod-tek', // KK-107
     'quiz-mod-grup',
-    'quiz-koken-tumu', // KK-108
-    'quiz-koken-tr',
-    'quiz-koken-yabanci',
     'quiz-paket-',
     'quiz-paket-notu',
     'quiz-ilerleme', // KK-110
@@ -125,7 +122,7 @@ describe('KK-107…KK-112: ekranlar saf kuralları kullanır', () => {
     expect(k).toMatch(/titresim/);
   });
 
-  it('KK-108: paket kartında afiş/logo/dizi yazı tipi için yeni görsel bağımlılığı yok', () => {
+  it('KK-108 → KK-122: paket kartında afiş/logo/dizi yazı tipi için yeni görsel bağımlılığı yok', () => {
     const paket = JSON.parse(dosyaIcerik('package.json')) as {
       dependencies?: Record<string, string>;
     };

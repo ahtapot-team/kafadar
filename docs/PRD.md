@@ -528,7 +528,7 @@ Kafadar'ın tek başına oynanabilen ilk oyunudur: `minOyuncu` 1'dir ve "1 kişi
   - "Tek başına" oyuncular ekranını atlar ve doğrudan paket seçimine gider.
   - "Tek telefonda grup" 2–12 oyuncuyla mevcut oyuncular ekranını kullanır.
   - Oda seçenekleri Faz 2'ye kadar görünmez.
-- [ ] KK-108: Paket seçimindeki her kartta şunlar bulunur: düz metin başlık "Ne kadar <ad> fanısın?", bir emoji, Türk ya da Yabancı etiketi ve "Resmî değildir · Spoiler içerir" notu. Afiş, logo, dizinin yazı tipi ya da başka bir görsel kullanılmaz. Türk / Yabancı çipi listeyi süzer. Tümü varsayılandır.
+- ~~KK-108~~ (v10 ile değişti → KK-121, KK-122): Paket seçimindeki her kartta şunlar bulunur: düz metin başlık "Ne kadar <ad> fanısın?", bir emoji, Türk ya da Yabancı etiketi ve "Resmî değildir · Spoiler içerir" notu. Afiş, logo, dizinin yazı tipi ya da başka bir görsel kullanılmaz. Türk / Yabancı çipi listeyi süzer. Tümü varsayılandır.
 - [ ] KK-109: Bir tur 10 sorudur ve sorular paketin havuzundan tekrarsız seçilir: 3 kolay, 4 orta, 3 zor, kolaydan zora. Her soruda şıkların sırası karışır. Aynı cihazda aynı paketin bir önceki turunda sorulan sorular sonraki turda gelmez. Seçim tohumlu ve saf bir fonksiyondur: aynı tohum aynı turu verir.
 - [ ] KK-110: Soru ekranında şunlar bulunur: üstte "3/10", soru metni, zorluk (kolay / orta / zor, renkle değil yazıyla) ve 4 büyük şık. Tek başına modda:
   - Şıka dokunulunca cevap kilitlenir ve değiştirilemez.
@@ -583,7 +583,7 @@ Kafadar'ın tek başına oynanabilen ilk oyunudur: `minOyuncu` 1'dir ve "1 kişi
   - Unvanlar karaktere gönderme yapar, oyuncuya yapmaz. Siyaset, din, terör ve şiddet ayrıntısına girilmez.
   - Taslaklar kaynaklarıyla birlikte `docs/quiz/<paket>.md` dosyasında tutulur ve bir insan onaylar.
 - [ ] KK-117: Faz 1 en az 3 paketle çıkar, en az biri Türk ve en az biri yabancı yapım olur. Testlerdeki örnek paket uygulamada görünmez.
-- [ ] KK-118: Uygulamanın adında, `app.json`'da ve mağaza metinlerinde paketlerin dizi ya da film adı geçmez. Bu bir testle denetlenir.
+- ~~KK-118~~ (v10 ile değişti → KK-124): Uygulamanın adında, `app.json`'da ve mağaza metinlerinde paketlerin dizi ya da film adı geçmez. Bu bir testle denetlenir.
 - [ ] KK-119: Diğer oyunlar ve akışlar değişmez. Mevcut kabul testleri yeşil kalır. KK-104'teki "1 kişi çipi boş" testi, artık Quiz Night'ı göstereceği için güncellenir. `CLAUDE.md` ve `docs/MIMARI.md` Quiz Night'ı anlatır.
 
 ### Kapsam dışı (v9)
@@ -622,6 +622,90 @@ Kafadar'ın tek başına oynanabilen ilk oyunudur: `minOyuncu` 1'dir ve "1 kişi
 - backend: Saf modül ve tohumlu tur. Kaynak ve uyum yalnızca doğrulamada kalır. Oda modunda doğru cevap sunucuda bekler. Çekirdek M, oda M.
 - frontend: Mevcut registry, ekran ve paylaşım altyapısı yeterli; yeni bağımlılık yok. Tek kişi ve tek telefon M, oda L.
 - qa: İçerik doğrulama sınır testleri. Oran ve uyum yalnızca alan olarak denetlenebilir. Kaynak adresleri CI'da denetlenmez. Oda en riskli kısım.
+
+## v10: Quiz Night — Müzik ve Spor kategorileri (Semih, 31.10.2026) — ONAYLANDI (Semih, 31.10.2026, msg 976)
+Issue'lar:
+- #261 tasarım (tasarim)
+- #262 kabul testleri (qa)
+- #263 kategori alanı, doğrulama ve saf yardımcılar (backend; #262 bitince)
+- #264 paket ekranı (frontend; #261, #262 ve #263 bitince)
+- #265 Spor taslakları (pm)
+- #266 Müzik taslakları (pm; #265'ten sonra)
+- #267 paketleri JSON'a çevirme (backend; #263 bitince, taslaklar onaylandıkça)
+
+Quiz Night'a iki kategori eklenir: Müzik ve Spor. Alt kategori yoktur.
+- **Spor:** Şimdilik yalnızca Galatasaray, Fenerbahçe ve Beşiktaş.
+- **Müzik:** Türkiye'de bugün popüler gruplar ve sanatçılar: Manifest, Emircan İğrek, BLOK3 ve Mabel Matiz.
+
+Oyun kuralları (tur, puan, unvan, modlar) değişmez. Değişen yalnızca paket seçimi ve içeriktir.
+
+### Akış
+1. Paket ekranında üstte tek bir çip satırı vardır: Tümü · Dizi & Film · Müzik · Spor. Türk / Yabancı çipi kalkar.
+2. Kartlar düz metindir ve bir emoji taşır:
+   - 🎬 "Ne kadar Aşk-ı Memnu fanısın?", Türk etiketi, "Resmî değildir · Spoiler içerir"
+   - 🎤 "Ne kadar Manifest fanısın?", "Resmî değildir · Sanatçıyla bağlantısı yoktur"
+   - ⚽ "Ne kadar Galatasaraylısın?", "Resmî değildir · Kulüple bağlantısı yoktur"
+3. Tur, sonuç, paylaşım ve oda modu v9'daki gibidir. Paket başlığı her yerde aynı yazar.
+
+### Kabul kriterleri (v10)
+- [ ] KK-120: Her Quiz Night paketinde `kategori` alanı vardır: `dizi-film`, `muzik` ya da `spor`. `npm run icerik` bunu denetler; eksik ya da başka bir değer CI'ı kırmızı yapar.
+  - `koken` (`tr` ya da `yabanci`) yalnızca `dizi-film` paketlerinde bulunur ve orada zorunludur.
+  - İsteğe bağlı `baslik` alanı en çok 40 karakterdir.
+  - `muzik` ve `spor` paketlerinde `olay` sorusu bulunmaz; bütün sorular `dunya` türündedir.
+  - Mevcut 3 paket `dizi-film`dir. KK-115'in diğer kuralları aynen geçerlidir.
+- [ ] KK-121: Paket seçiminde yatay ve tek seçimli bir kategori çip satırı vardır. Sıra şudur: Tümü · Dizi & Film · Müzik · Spor.
+  - Tümü varsayılandır ve seçim hatırlanmaz.
+  - Bir çipe dokununca yalnızca o kategorinin paketleri kalır ve sıraları değişmez. Seçili çipe ya da Tümü'ne dokunmak filtreyi kaldırır.
+  - Paketi olmayan kategorinin çipi görünmez. Paketi olan tek bir kategori varsa çip satırı hiç görünmez.
+  - Süzme ve görünür çipler saf fonksiyonlardır. Türk / Yabancı çipi kaldırılır.
+  - Çiplerin dokunma alanı en az 48px'tir ve ekran okuyucu seçili çipi "seçili" diye okur (KK-85 gibi).
+- [ ] KK-122: Paket kartında düz metin başlık, bir emoji ve not bulunur.
+  - Başlık: `baslik` varsa odur, yoksa "Ne kadar <ad> fanısın?". Kart, sonuç ekranı, paylaşım kartı ve oda aynı başlığı gösterir.
+  - Notlar: Dizi & Film için "Resmî değildir · Spoiler içerir", Müzik için "Resmî değildir · Sanatçıyla bağlantısı yoktur", Spor için "Resmî değildir · Kulüple bağlantısı yoktur".
+  - Türk / Yabancı etiketi yalnızca Dizi & Film kartında görünür.
+  - Yalnızca tema renkleri kullanılır. Kulüp renk düzeni, arma, logo, maskot görseli, sanatçı fotoğrafı ve albüm kapağı kullanılmaz.
+- [ ] KK-123: Müzik ve Spor içerik kuralları (insan incelemesi). KK-116'nın kaynak, uyum ve şık kuralları aynen geçerlidir. Ek olarak:
+  - **Spor:** Yalnızca eskimeyen bilgiler sorulur: kuruluş, renkler, stadyumlar, kupalar, efsane futbolcu ve teknik direktörler, tarihi maçlar, rekorlar.
+    - Güncel kadro, teknik direktör, başkan, transfer ve puan durumu sorulmaz.
+    - Yeni sezonla değişebilecek sayılar ya sorulmaz ya da sezonla sabitlenir ("2024–25 sezonu sonunda").
+    - Tartışmalı konular sorulmaz: şampiyonluk sayısı tartışması, şike, hakem tartışmaları, taraftar olayları. Marş sözü yoktur.
+  - **Müzik:** Albümler, şarkı adları, çıkış yılları, ödüller, düetler, konserler, grubun kuruluşu ve üyeleri sorulur.
+    - Şarkı sözü alıntısı, "sözü tamamla" ya da "şarkıyı tanı" sorusu, ses ve klip yoktur.
+    - Dinlenme, takipçi sayısı ve liste sırası gibi hızla değişen sayılar sorulmaz.
+  - **Kişiler:** Sanatçı ve futbolcuların yalnızca kamusal kariyeri sorulur. Özel hayat, ilişki, aile, sağlık, dedikodu ve tartışmalar sorulmaz.
+  - **Unvanlar:** Kulübün tarihine ya da sanatçının şarkı ve albümlerine gönderme yapar. Rakip kulübü ya da başka bir sanatçıyı aşağılayan soru veya unvan olmaz; argo yoktur.
+- [ ] KK-124: Uygulamanın adında, ikonunda, `app.json`'daki metinlerde ve mağaza metinlerinde hiçbir paketin adı geçmez: dizi ve film adları, kulüp ve sanatçı adları. Bu bir testle denetlenir; test yalnızca metin alanlarına bakar. KK-118'in yerini alır.
+- [ ] KK-125: İlk içerik şudur: Spor'da 3 paket (Galatasaray, Fenerbahçe, Beşiktaş), Müzik'te 4 paket (Manifest, Emircan İğrek, BLOK3, Mabel Matiz).
+  - Her pakette 24 soru (8 kolay, 8 orta, 8 zor) ve 4 unvan bulunur.
+  - Önce Spor, sonra Müzik çıkar.
+  - Bir sanatçı için 20 soru en az 4 kaynakla doğrulanamazsa o paket çıkarılır ve yerine kimin geleceği gruba sorulur.
+- [ ] KK-126: Diğer oyunlar ve akışlar değişmez. Mevcut kabul testleri yeşil kalır. KK-108 testleri KK-121 ve KK-122'ye göre güncellenir. `CLAUDE.md` ve `docs/MIMARI.md` kategorileri anlatır.
+
+### Kapsam dışı (v10)
+- Başka kulüpler, milli takım ve başka spor dalları.
+- Alt kategoriler (ör. Müzik › Rap).
+- Şarkı dinletme, söz ve klip içeren sorular.
+- Güncel sezon bilgisi.
+- Ücretli paket: Kulüp ve sanatçı paketleri ücretsiz kalır.
+
+### Kararlar (v10)
+| Karar | Seçim | Gerekçe | Karar veren |
+|---|---|---|---|
+| Kategoriler | Dizi & Film, Müzik, Spor; alt kategori yok | Semih'in isteği | Semih (31.10.2026, msg 971) |
+| Spor kapsamı | Galatasaray, Fenerbahçe, Beşiktaş | Semih'in isteği | Semih (msg 971) |
+| Müzik listesi | Manifest, Emircan İğrek, BLOK3, Mabel Matiz | İlk ikisi Semih'in örnekleri. Spotify Türkiye 2026 yaz listesinde manifest ve BLOK3 ilk sıralarda. Mabel Matiz'in uzun kariyeri kaynak bulmayı kolaylaştırır. | Semih (msg 971); BLOK3 ve Mabel Matiz pm önerisi, Semih "tamam" (msg 976) |
+| Çip düzeni | Tek satır: Tümü · Dizi & Film · Müzik · Spor; Türk / Yabancı çipi kalkar, etiket kartta kalır | Tek dokunuş; iki satır çip kalabalık | pm varsayılanı, Semih (msg 976) |
+| Spor başlığı | "Ne kadar Galatasaraylısın?" (`baslik` alanı) | "Galatasaray fanısın" doğal Türkçe değil | pm varsayılanı, Semih (msg 976) |
+| Telif ve marka | Kendi cümlemizle bilgi sorusu; söz, ses, logo, arma, kulüp rengi ve fotoğraf yok; "Resmî değildir" notu; mağaza metninde ad yok | FSEK, SMK, kişilik hakları, Apple 5.2 ve Google Play fikri mülkiyet kuralları | pm (msg 975), Semih (msg 976) |
+| Para | Kulüp ve sanatçı paketleri ücretsiz kalır | Ücretli olurlarsa markayı ticari kullanmak sayılabilir | pm (msg 975), Semih (msg 976) |
+| Sıra | Önce Spor, sonra Müzik | Spor kaynakları daha bol; içerik yükü bölünür | pm varsayılanı |
+| Tartışmalı konular | Şampiyonluk sayısı tartışması, şike, hakem ve taraftar olayları sorulmaz | Kaynak uyumu tutmaz, taraftar tepkisi çeker | pm varsayılanı |
+
+### Riskler (v10)
+- **İçerik emeği:** 7 paket × 24 soru = 168 soru, her biri için en az 4 kaynak.
+- **Yeni sanatçılar:** Manifest gibi yeni gruplarda kaynak az olabilir. Yedek kural KK-125'te.
+- **Taraftar hassasiyeti:** Kulüp sorusundaki tek bir yanlış bilgi tepki çeker. Uyum kuralı ve tartışmalı konu yasağı bu yüzden var.
+- **Marka:** Kulüp adları tescilli marka. Risk sıfır değildir; mağazaya çıkmadan önce avukata danışılır (#218).
 
 ## Geliştirme ilkesi (Semih, 27.10.2026)
 **Overengineering yok.** En az kodla, en basit çözüm, yalnızca bugünkü ihtiyaç kadar. Yapı genişlemeye açık olacak ama ileriye dönük soyutlama, genel çerçeve ya da "belki lazım olur" kodu yazılmayacak. Yeni bağımlılık yalnızca gerçekten gerekiyorsa eklenir ve PR'da gerekçesi yazılır. Aşağıdaki mimari şartlar bu ilkeye göre en sade haliyle uygulanır. Örneğin oyun kayıt listesi basit bir dizidir, eklenti çatısı değildir.

@@ -1,13 +1,11 @@
-// Quiz Night Faz 1 (issue #222): ekranların saf kuralları — KK-107, KK-108, KK-110, KK-111, KK-112.
+// Quiz Night Faz 1 (issue #222): ekranların saf kuralları — KK-107, KK-110, KK-111, KK-112.
 // Arayüz test aracı yok (Semih 1C): görünüm kararları saf fonksiyon olarak sınanır; ekran bağlantısı (testID/kaynak sözleşmesi)
 // #221 tasarımı gelince bu dosyaya eklenir (#224 öncesi). Dokunma/titreşim/paylaşım telefonda insanlarca doğrulanır.
 // SÖZLEŞME (frontend #224 için) — src/games/quiz-night/arayuz.ts (React yok):
 //   MODLAR = [{ id:'tek', etiket:'Tek başına' }, { id:'grup', etiket:'Tek telefonda grup' },
 //             { id:'oda-kur', etiket:'Oda kur' }, { id:'oda-katil', etiket:'Odaya katıl' }]
 //   gorunenModlar(odaAcik = true) (Faz 2, #254: varsayılan DÖRT mod); odaAcik=false yalnızca 'tek' ve 'grup'
-//   paketBasligi(ad) = `Ne kadar ${ad} fanısın?` · PAKET_NOTU = 'Resmî değildir · Spoiler içerir'
-//   kokenEtiketi('tr') = 'Türk' · kokenEtiketi('yabanci') = 'Yabancı'
-//   KOKEN_CIPLERI = ['tumu','tr','yabanci'] (varsayılan 'tumu') · paketSuz(paketler, cip): koken'e göre süzer, sıra korunur
+//   Paket başlığı/notu/süzgeci (KK-121, KK-122, v10): kategori.kabul.test.ts
 //   ilerlemeMetni(indeks0, toplam = 10) = '3/10' (indeks0 = 2) · zorlukEtiketi('kolay'|'orta'|'zor') = 'Kolay'|'Orta'|'Zor' (yazıyla)
 //   sikRengi(sik, dogru, secilen: number|null): 'ok' | 'nok' | 'notr'
 //       secilen null → hepsi 'notr'; doğru şık 'ok'; yanlış seçilen 'nok'; diğerleri 'notr'
@@ -26,11 +24,6 @@ import { describe, expect, it } from 'vitest';
 type Arayuz = {
   MODLAR: { id: string; etiket: string }[];
   gorunenModlar(odaAcik?: boolean): { id: string; etiket: string }[];
-  paketBasligi(ad: string): string;
-  PAKET_NOTU: string;
-  kokenEtiketi(k: 'tr' | 'yabanci'): string;
-  KOKEN_CIPLERI: string[];
-  paketSuz<T extends { koken: 'tr' | 'yabanci' }>(p: T[], cip: string): T[];
   ilerlemeMetni(indeks: number, toplam?: number): string;
   zorlukEtiketi(z: 'kolay' | 'orta' | 'zor'): string;
   sikRengi(sik: number, dogru: number, secilen: number | null): string;
@@ -74,31 +67,7 @@ describe('KK-107: mod seçimi', () => {
   });
 });
 
-describe('KK-108: paket kartı ve Türk / Yabancı süzgeci', () => {
-  it('KK-108: başlık düz metin "Ne kadar <ad> fanısın?", etiketler ve not', async () => {
-    const { paketBasligi, kokenEtiketi, PAKET_NOTU } = await yukle();
-    expect(paketBasligi('Kurtlar Vadisi')).toBe(
-      'Ne kadar Kurtlar Vadisi fanısın?',
-    );
-    expect(paketBasligi('X')).toBe('Ne kadar X fanısın?');
-    expect(kokenEtiketi('tr')).toBe('Türk');
-    expect(kokenEtiketi('yabanci')).toBe('Yabancı');
-    expect(PAKET_NOTU).toBe('Resmî değildir · Spoiler içerir');
-  });
-
-  it("KK-108: çipler Tümü · Türk · Yabancı; süzgeç koken'e göre, sıra korunur; Tümü hepsini verir", async () => {
-    const { KOKEN_CIPLERI, paketSuz } = await yukle();
-    expect(KOKEN_CIPLERI).toEqual(['tumu', 'tr', 'yabanci']);
-    const p = [
-      { id: 'a', koken: 'tr' as const },
-      { id: 'b', koken: 'yabanci' as const },
-      { id: 'c', koken: 'tr' as const },
-    ];
-    expect(paketSuz(p, 'tumu').map((x) => x.id)).toEqual(['a', 'b', 'c']);
-    expect(paketSuz(p, 'tr').map((x) => x.id)).toEqual(['a', 'c']);
-    expect(paketSuz(p, 'yabanci').map((x) => x.id)).toEqual(['b']);
-  });
-});
+// KK-108 (başlık, not, Türk/Yabancı süzgeci) v10 ile KK-121/KK-122'ye taşındı: kategori.kabul.test.ts.
 
 describe('KK-110: soru ekranı (tek başına)', () => {
   it('KK-110: "3/10" ilerleme ve zorluk yazıyla', async () => {

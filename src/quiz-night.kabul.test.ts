@@ -1,11 +1,11 @@
-// Quiz Night Faz 1 (issue #222): kayıt, ana ekran kartı, marka kuralı, belgeler — KK-106, KK-118, KK-119.
+// Quiz Night Faz 1 (issue #222): kayıt, ana ekran kartı, marka kuralı, belgeler — KK-106, KK-119; marka kuralı KK-124 (v10, KK-118'in yerini alır).
 // SÖZLEŞME (frontend #224 için):
 //   src/games/registry.ts'te { id:'quiz-night', ad:'Quiz Night', emoji:'🧠', aktif:true, minOyuncu:1, tanitim:{ kisi:'1–12 kişi', metin } }
 //   tanitim.metin üç modu (tek başına, grup, oda) anlatır (ⓘ "Nasıl oynanır", KK-91)
 //   CLAUDE.md ve docs/MIMARI.md "Quiz Night"ı anlatır
-// KK-118 (marka): app.json, eas.json, package.json adı ve kayıt metinlerinde dizi/film adı geçmez (paket adları içerik dosyasındadır).
+// KK-124 (marka, v10): app.json, eas.json, package.json adı, kayıt ve mağaza metinlerinde hiçbir paketin adı (dizi/film, kulüp, sanatçı) geçmez.
 // Ekran akışı testleri (testID/kaynak sözleşmesi) #221 tasarımı gelince eklenir.
-import { existsSync, readFileSync } from 'node:fs';
+import { existsSync, readdirSync, readFileSync } from 'node:fs';
 import { describe, expect, it } from 'vitest';
 import { cipEslesir, CIPLER, filtrele, kisiMetni } from './games/kategori';
 import { oyunlar } from './games/registry';
@@ -43,59 +43,99 @@ describe('KK-106: ana ekranda Quiz Night kartı', () => {
   });
 });
 
-describe('KK-118: marka — uygulama adı ve mağaza metinlerinde dizi/film adı yok', () => {
-  // Faz 1 paketlerinin dayandığı yapımlar ve yaygın örnekler (içerik dosyaları hariç her yerde yasak).
+describe('KK-124: marka — uygulama adı ve mağaza metinlerinde hiçbir paketin adı yok', () => {
+  // v10 (KK-118'in yerini alır): content/quiz paketlerinin ad/baslik alanları + planlanan Spor/Müzik adları + yaygın örnekler.
+  // Yalnız METİN alanları denetlenir (JSON anahtarları değil: app.json'daki "manifest" gibi sıradan kelimeler sorun değildir);
+  // büyük/küçük harf yok sayılır, sözcük sınırı aranır ("Manifest" paketi, "manifestation" kelimesini yakalamaz).
+  const paketAdlari = () =>
+    readdirSync(new URL('../content/quiz/', import.meta.url))
+      .filter((f) => f.endsWith('.json'))
+      .flatMap((f) => {
+        const p = JSON.parse(
+          readFileSync(
+            new URL(`../content/quiz/${f}`, import.meta.url),
+            'utf8',
+          ),
+        ) as { ad?: string; baslik?: string };
+        return [p.ad, p.baslik];
+      })
+      .filter((x): x is string => typeof x === 'string' && x.trim() !== '');
   const YASAK = [
-    'kurtlar vadisi',
-    'leyla ile mecnun',
-    'game of thrones',
-    'breaking bad',
-    'harry potter',
-    'squid game',
-    'stranger things',
-    'friends',
-    'avengers',
-    'star wars',
-    'lord of the rings',
-    'şahsiyet',
-    'ezel',
-    'behzat',
-    'çukur',
+    ...paketAdlari(),
+    'Aşk-ı Memnu',
+    'Hababam Sınıfı',
+    'Prison Break',
+    'Galatasaray',
+    'Fenerbahçe',
+    'Beşiktaş',
+    'Manifest',
+    'Emircan İğrek',
+    'BLOK3',
+    'Mabel Matiz',
+    'Kurtlar Vadisi',
+    'Game of Thrones',
+    'Harry Potter',
+    'Squid Game',
+    'Stranger Things',
+    'Friends',
+    'Star Wars',
+    'Sezen Aksu',
+    'Tarkan',
   ];
-  const temiz = (ad: string, metin: string) => {
-    const kucuk = metin.toLocaleLowerCase('tr');
-    for (const y of YASAK)
-      expect(kucuk, `${ad} içinde "${y}"`).not.toContain(y);
+  const kacis = (t: string) => t.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  const metinler = (v: unknown): string[] =>
+    typeof v === 'string'
+      ? [v]
+      : Array.isArray(v)
+        ? v.flatMap(metinler)
+        : v && typeof v === 'object'
+          ? Object.values(v).flatMap(metinler)
+          : [];
+  const temiz = (ad: string, metin: string[]) => {
+    for (const y of YASAK) {
+      const re = new RegExp(
+        `(?<![\\p{L}\\p{N}])${kacis(y.toLocaleLowerCase('tr'))}(?![\\p{L}\\p{N}])`,
+        'u',
+      );
+      for (const m of metin)
+        expect(re.test(m.toLocaleLowerCase('tr')), `${ad} içinde "${y}"`).toBe(
+          false,
+        );
+    }
   };
+  const jsonMetni = (d: string) => metinler(JSON.parse(dosyaIcerik(d)));
 
-  it('KK-118: app.json (ad, slug, açıklamalar) dizi/film adı içermez', () => {
-    temiz('app.json', dosyaIcerik('app.json'));
+  it('KK-124: denetim paket adlarını gerçekten okur (içerik klasöründen en az 3 ad)', () => {
+    expect(paketAdlari().length).toBeGreaterThanOrEqual(3);
   });
 
-  it('KK-118: eas.json, app.config.js ve package.json adı dizi/film adı içermez', () => {
-    for (const d of [
-      'app.config.js',
-      'eas.json',
-      'web/index.html',
-      'public/index.html',
-    ])
+  it('KK-124: app.json metin alanları (ad, slug, açıklamalar) hiçbir paketin adını içermez; anahtarlar sayılmaz', () => {
+    temiz('app.json', jsonMetni('app.json'));
+    expect(() => temiz('x', ['Kafadar Manifest'])).toThrow(); // denetimin kendisi çalışıyor
+    expect(() => temiz('x', ['manifestation', 'Manifestasyon'])).not.toThrow();
+  });
+
+  it('KK-124: eas.json, app.config.js ve package.json adı hiçbir paketin adını içermez', () => {
+    if (existsSync(new URL('../eas.json', import.meta.url)))
+      temiz('eas.json', jsonMetni('eas.json'));
+    for (const d of ['app.config.js', 'web/index.html', 'public/index.html'])
       if (existsSync(new URL(`../${d}`, import.meta.url)))
-        temiz(d, dosyaIcerik(d));
+        temiz(d, [dosyaIcerik(d)]);
     const paket = JSON.parse(dosyaIcerik('package.json')) as {
       name: string;
       description?: string;
     };
-    temiz('package.json', `${paket.name} ${paket.description ?? ''}`);
+    temiz('package.json', [paket.name, paket.description ?? '']);
   });
 
-  it('KK-118: oyun kayıtları (ad, emoji, tanıtım) dizi/film adı içermez', () => {
+  it('KK-124: oyun kayıtları (ad, emoji, tanıtım) hiçbir paketin adını içermez', () => {
     temiz(
       'registry',
-      JSON.stringify(oyunlar.map((o) => ({ ad: o.ad, t: o.tanitim }))),
+      metinler(oyunlar.map((o) => ({ ad: o.ad, t: o.tanitim }))),
     );
   });
 
-  it('KK-118: mağaza metni dosyası varsa (docs/magaza*, store/*) dizi/film adı içermez', () => {
+  it('KK-124: mağaza metni dosyası varsa (docs/magaza*, store/*) hiçbir paketin adını içermez', () => {
     for (const d of [
       'docs/magaza.md',
       'docs/magaza-metinleri.md',
@@ -103,7 +143,7 @@ describe('KK-118: marka — uygulama adı ve mağaza metinlerinde dizi/film adı
       'store/metadata.md',
     ])
       if (existsSync(new URL(`../${d}`, import.meta.url)))
-        temiz(d, readFileSync(new URL(`../${d}`, import.meta.url), 'utf8'));
+        temiz(d, [dosyaIcerik(d)]);
   });
 });
 

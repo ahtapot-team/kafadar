@@ -27,7 +27,8 @@ type Paket = {
   id: string;
   ad: string;
   emoji: string;
-  koken: string;
+  kategori?: string;
+  koken?: string;
   unvanlar: string[];
   sorular: Soru[];
 };
@@ -63,6 +64,7 @@ const taban = (kolay = 8, orta = 8, zor = 8, olay = 8): Paket => {
     id: 'deneme',
     ad: 'Deneme',
     emoji: '🎬',
+    kategori: 'dizi-film', // PRD v10 KK-120
     koken: 'tr',
     unvanlar: ['Yabancı', 'Seyirci', 'Hayran', 'Baş hayran'],
     sorular: z.map((zz, i) => soru(i + 1, zz, i < olay ? 'olay' : 'dunya')),

@@ -132,7 +132,7 @@ En az 3 telefon (karışık iOS/Android), aynı Wi-Fi ve en az bir telefonda mob
 **Sonuç:** ☐ iOS geçti  ☐ Android geçti  İmza: ______
 
 
-## Quiz Night Faz 1 (KK-106…KK-112, KK-116…KK-118)
+## Quiz Night (KK-106…KK-112, KK-116…KK-118; v10: KK-121…KK-125)
 
 1 iOS ve 1 Android cihaz, Expo Go (main kanalı). Cihaz: ______  Sürüm: ______  Tarih: ______  Kim: ______
 
@@ -140,11 +140,15 @@ En az 3 telefon (karışık iOS/Android), aynı Wi-Fi ve en az bir telefonda mob
 |---|---|---|---|---|
 | 1 | KK-106 | Ana ekranda 🧠 Quiz Night kartı "1–12 kişi"; Tümü / 1 kişi / 2 kişi / 3+ kişi çiplerinin hepsinde görünüyor; ⓘ metni üç modu anlatıyor | | |
 | 2 | KK-107 | Oyuna girince mod seçimi var (Faz 1: Tek başına · Tek telefonda grup) | | |
-| 3 | KK-108 | Paket kartları: "Ne kadar … fanısın?", emoji, Türk/Yabancı etiketi, "Resmî değildir · Spoiler içerir"; afiş/logo/özel yazı tipi yok; Türk / Yabancı çipi süzüyor | | |
+| 3 | KK-108 | Paket kartları: "Ne kadar … fanısın?", emoji, "Resmî değildir · …" notu; afiş/logo/özel yazı tipi yok (v10: süzgeç Tümü · Dizi & Film · Müzik · Spor, KK-121/KK-122) | | |
 | 4 | KK-110 | Tek başına: şığa dokununca kilitleniyor, doğru yeşil, yanlış kırmızı ve telefon titriyor; ~1,5 sn sonra sıradaki; "3/10" ve zorluk yazıyla görünüyor; süre yok | | |
 | 5 | KK-111 | Sonuç: büyük "8/10" ve unvan; Tekrar yeni tur (önceki turun soruları gelmiyor); Başka paket; 9:16 paylaşım kartında soru/cevap yok; web'de yedek davranış | | |
 | 6 | KK-112 | Grup: doğru şık "Cevabı göster"e kadar hiçbir biçimde (renk, sıra, titreşim) belli olmuyor; sonra bilenler çiplerden işaretlenip Sonraki; sonuçta sıralama ve herkesin unvanı | | |
 | 7 | KK-116 | İçerik insan incelemesi (her paket, `docs/quiz/<paket>.md`): sorular özgün (replik alıntısı yok), olay sorusu yarıdan az, her bilgi ≥4 bağımsız kaynakla ve ≥%75 uyumlu, çelişen değerler aynı soruda şık değil, unvanlar karaktere gönderme yapıyor (oyuncuya değil), siyaset/din/terör/şiddet ayrıntısı yok, onay var | | |
-| 8 | KK-118 | Uygulama adı, ikon, açılış ve mağaza metinlerinde dizi/film adı yok | | |
+| 8 | KK-124 | Uygulama adı, ikon, açılış ve mağaza metinlerinde hiçbir paketin adı (dizi/film, kulüp, sanatçı) yok | | |
+| 9 | KK-121 | Paket seçimi: Tümü · Dizi & Film · Müzik · Spor çipleri tek seçimli; seçili çip "seçili" okunuyor, dokunma alanı rahat; seçili çipe/Tümü'ne dokununca filtre kalkıyor; yalnız tek kategori varsa çip satırı yok | | |
+| 10 | KK-122 | Kart: başlık, kategori emojisi (🎬 🎤 ⚽), kategoriye göre not; Türk/Yabancı yalnız Dizi & Film'de; kulüp renkleri, arma, logo, sanatçı fotoğrafı, albüm kapağı yok; aynı başlık sonuç, paylaşım kartı ve odada | | |
+| 11 | KK-123 | Müzik/Spor içerik insan incelemesi (`docs/quiz/<paket>.md`): eskimeyen bilgi, güncel kadro/transfer/puan durumu yok, tartışmalı konu ve marş sözü yok, şarkı sözü/"şarkıyı tanı" yok, yalnız kamusal kariyer, unvanlarda aşağılama/argo yok; KK-116 kaynak/uyum kuralları geçerli | | |
+| 12 | KK-125 | İlk içerik oyunda: Spor 3 paket, Müzik 4 paket, her biri oynanabiliyor (24 soru, 4 unvan) | | |
 
 **Sonuç:** ☐ iOS geçti  ☐ Android geçti  İmza: ______
