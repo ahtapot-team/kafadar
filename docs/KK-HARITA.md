@@ -102,7 +102,7 @@ PRD'deki her kabul kriteri için "KK-nn" ifadesi geçen test dosyaları ve gerç
 | KK-110 | Soru ekranında şunlar bulunur: üstte "3/10", soru metni, zorluk (kolay / orta / zor, renkl | `games/quiz-night/arayuz.kabul.test.ts` | cihaz |
 | KK-111 | Sonuç ekranında büyük puan ("8/10") ve unvan gösterilir. Unvan basamakları 0–3, 4–6, 7–9 v | `games/quiz-night/arayuz.kabul.test.ts`, `games/quiz-night/quiz.kabul.test.ts` | cihaz |
 | KK-112 | Tek telefonda grup modu şöyle işler: | `games/quiz-night/arayuz.kabul.test.ts`, `games/quiz-night/quiz.kabul.test.ts` | cihaz |
-| KK-114 | Puan, doğru cevap sayısıdır. Yanlış cevap puan düşürmez ve hız bonusu yoktur. Puan ve unva | `games/quiz-night/quiz.kabul.test.ts` | — |
+| KK-114 | Puan, doğru cevap sayısıdır. Yanlış cevap puan düşürmez ve hız bonusu yoktur. Unvan bu pua | `games/quiz-night/quiz.kabul.test.ts` | — |
 | KK-115 | İçerik `content/quiz/<paket>.json` dosyalarındadır ve `npm run icerik` (CI'da da) şunları  | `icerik/quiz.kabul.test.ts` | — |
 | KK-116 | İçerik kuralları (insan incelemesi, makineyle denetlenemez): | — | cihaz |
 | KK-117 | Faz 1 en az 3 paketle çıkar, en az biri Türk ve en az biri yabancı yapım olur. Testlerdeki | `icerik/quiz.kabul.test.ts` | cihaz |
