@@ -502,6 +502,119 @@ Oyunun kişi aralığı `minOyuncu` (varsayılan 2) ile genel üst sınır 12 ar
 | Açılış logosu | Yazı tipi hazır olunca çizilir | Hata: logo yazı tipinden önce çiziliyordu ve telefonda sistem fontunda kalıyordu. | Semih (30.10.2026, msg 805) |
 | Tasarım adımı | Yok | Yeni ekran yok; metin ve kural değişikliği | pm varsayılanı |
 
+## v9: Quiz Night — dizi/film paketleri (Semih, 31.10.2026) — ONAY BEKLİYOR
+Issue'lar (Faz 1): #221 tasarım (tasarim), #222 kabul testleri (qa), #223 saf modül ve içerik şeması (backend; #222 bitince), #224 ekranlar (frontend; #221, #222, #223 bitince), #225 ilk 3 paketin taslağı (pm), #226 paketleri JSON'a çevirme (backend; #223 ve #225 bitince).
+Faz 2 (oda modu, KK-113) issue'ları Faz 1 merge edilince açılır.
+Araştırma: `docs/quiz-night-arastirma.md` (#216), `docs/quiz-dizi-film-analiz.md` (#218).
+
+Quiz Night, 4 şıklı ve yalnızca metinden oluşan bir bilgi yarışmasıdır. İlk kategori dizi ve film. Her paket tek bir diziye ya da filme aittir ("Ne kadar Aşk-ı Memnu fanısın?"). Sonunda doğru sayısına göre esprili bir unvan verilir. Spor ve diğer kategoriler sonra gelir.
+
+Kafadar'ın tek başına oynanabilen ilk oyunudur: `minOyuncu` 1'dir ve "1 kişi" çipinde görünür (KK-104).
+
+### Akış
+1. **Ana ekran:** 🧠 Quiz Night kartına dokunulur. Kartta "1–12 kişi" yazar.
+2. **Mod:** Tek başına · Tek telefonda grup · Oda kur · Odaya katıl. "Tek başına"da oyuncular ekranı atlanır. "Tek telefonda grup"ta 2–12 isim girilir (mevcut oyuncular ekranı).
+3. **Paket:** Paket kartları düz metindir: "Ne kadar X fanısın?", bir emoji ve "Resmî değildir · Spoiler içerir" notu. Türk / Yabancı çipiyle süzülür.
+4. **Tur:** 10 soru: 3 kolay, 4 orta, 3 zor, kolaydan zora sıralı.
+   - **Tek başına:** Şıka dokunulur ve cevap kilitlenir. Doğru şık `ok`, yanlış seçilen şık `nok` rengini alır. Yaklaşık 1,5 sn sonra sıradaki soru gelir. Süre yok.
+   - **Tek telefonda grup:** Telefonu tutan kişi soruyu ve şıkları sesli okur, herkes sesli cevap verir. "Cevabı göster"e basılınca doğru şık açılır. Telefonu tutan kişi bilenleri oyuncu çiplerinden işaretler ve "Sonraki"ye basar. Telefonu tutan kişi de oynar, çünkü cevabı o da göstere basınca görür. Süre yok.
+   - **Oda (Faz 2):** Herkes kendi telefonundan şık seçer. Soru en çok 20 sn sürer; herkes cevaplayınca beklemeden açıklamaya geçilir. Açıklamadan sonra "Sonraki soru"ya kuran kişi basar.
+5. **Sonuç:** Büyük "8/10" ve paketin unvanı. Grupta ve odada sıralama ile herkesin unvanı gösterilir. "Tekrar" ve "Başka paket" düğmeleri ile 9:16 paylaşım kartı vardır.
+
+### Kabul kriterleri (v9)
+- [ ] KK-106: Ana ekranda 🧠 Quiz Night kartı vardır ve kartta "1–12 kişi" yazar. Kart "Tümü", "1 kişi", "2 kişi" ve "3+ kişi" çiplerinin hepsinde görünür. ⓘ "Nasıl oynanır" metni üç modu da kısaca anlatır (KK-91).
+- [ ] KK-107: Quiz Night'ta "Tek başına · Tek telefonda grup · Oda kur · Odaya katıl" seçimi vardır.
+  - "Tek başına" oyuncular ekranını atlar ve doğrudan paket seçimine gider.
+  - "Tek telefonda grup" 2–12 oyuncuyla mevcut oyuncular ekranını kullanır.
+  - Oda seçenekleri Faz 2'ye kadar görünmez.
+- [ ] KK-108: Paket seçimindeki her kartta şunlar bulunur: düz metin başlık "Ne kadar <ad> fanısın?", bir emoji, Türk ya da Yabancı etiketi ve "Resmî değildir · Spoiler içerir" notu. Afiş, logo, dizinin yazı tipi ya da başka bir görsel kullanılmaz. Türk / Yabancı çipi listeyi süzer. Tümü varsayılandır.
+- [ ] KK-109: Bir tur 10 sorudur ve sorular paketin havuzundan tekrarsız seçilir: 3 kolay, 4 orta, 3 zor, kolaydan zora. Her soruda şıkların sırası karışır. Aynı cihazda aynı paketin bir önceki turunda sorulan sorular sonraki turda gelmez. Seçim tohumlu ve saf bir fonksiyondur: aynı tohum aynı turu verir.
+- [ ] KK-110: Soru ekranında şunlar bulunur: üstte "3/10", soru metni, zorluk (kolay / orta / zor, renkle değil yazıyla) ve 4 büyük şık. Tek başına modda:
+  - Şıka dokunulunca cevap kilitlenir ve değiştirilemez.
+  - Doğru şık `ok`, yanlış seçilen şık `nok` rengini alır ve telefon titrer.
+  - Yaklaşık 1,5 sn sonra sıradaki soru gelir.
+  - Süre yoktur.
+- [ ] KK-111: Sonuç ekranında büyük puan ("8/10") ve unvan gösterilir. Unvan basamakları 0–3, 4–6, 7–9 ve 10 doğrudur; her paketin 4 unvanı vardır.
+  - "Tekrar" düğmesi aynı pakette yeni bir tur açar (KK-109).
+  - "Başka paket" düğmesi paket seçimine döner.
+  - 9:16 paylaşım kartında paket adı, puan, unvan ve Kafadar logosu bulunur. Soru ve cevap yoktur.
+  - Web'de paylaşım menüsü yoksa mevcut oyunlardaki yedek davranış kullanılır.
+- [ ] KK-112: Tek telefonda grup modu şöyle işler:
+  - Doğru şık, "Cevabı göster"e basılana kadar ekranda hiçbir biçimde belli olmaz.
+  - Göster'den sonra doğru şık açılır. Telefonu tutan kişi bilenleri oyuncu çiplerinden işaretler (hiç kimse ya da herkes olabilir) ve "Sonraki"ye basar.
+  - Süre yoktur.
+  - Sonuçta oyuncular doğru sayısına göre sıralanır; eşit puanlılar aynı sıradadır. Her oyuncunun unvanı görünür.
+- [ ] KK-113 (Faz 2, oda modu): Herkes aynı soruyu kendi telefonunda görür ve şık seçer.
+  - Cevap kilitlenir.
+  - Doğru şık, açıklama aşamasına kadar istemcilere gönderilmez; ağ trafiğinde de görünmez (KK-66 gibi).
+  - Soru en çok 20 sn sürer ve süre sunucu saatine göre işler. Herkes cevaplayınca beklemeden açıklamaya geçilir. Açıklamada doğru şık ve kimin neyi seçtiği tüm telefonlarda aynı anda görünür.
+  - Sayaç ince bir çubuktur. Son 5 sn'de telefon titrer; kırmızı kullanılmaz.
+  - Cevap vermeyen oyuncu o soruda yanlış sayılır.
+  - "Sonraki soru" düğmesi yalnızca kuranda görünür, kuran ayrılırsa bir sonraki bağlı oyuncuya geçer (KK-68).
+  - Kod, lobi, yeniden bağlanma ve veri silme kuralları mevcut odalarla aynıdır (KK-70). Kopukken kaçırılan sorular yanlış sayılır.
+  - OK mu NOK mu ve 10/10 ama odaları bozulmaz.
+- [ ] KK-114: Puan, doğru cevap sayısıdır. Yanlış cevap puan düşürmez ve hız bonusu yoktur. Puan ve unvan hesabı saf fonksiyondur.
+- [ ] KK-115: İçerik `content/quiz/<paket>.json` dosyalarındadır ve `npm run icerik` (CI'da da) şunları denetler. Kurala uymayan paket CI'ı kırmızı yapar.
+  - **Paket alanları:** `id`, `ad`, `emoji`, `koken` (`tr` ya da `yabanci`) ve 4 unvan (0–3, 4–6, 7–9, 10; eksiksiz ve çakışmasız).
+  - **Havuz:** 20–30 soru. Her zorluktan en az 6 soru. Olay örgüsü sorusu (`tur: "olay"`) havuzun yarısından azdır; tam yarı reddedilir.
+  - **Her soru:**
+    - benzersiz `id`;
+    - en çok 140 karakterlik `metin`;
+    - tam 4 şık; her şık boş değildir ve en çok 40 karakterdir;
+    - şıklar birbirinin aynısı değildir (büyük/küçük harf ve boşluk farkı yok sayılır);
+    - `dogru` 0–3 arasıdır;
+    - `zorluk` kolay, orta ya da zordur;
+    - `tur` olay ya da dünyadır;
+    - en az 4 `kaynaklar` (ad ve url) ve `uyum` en az 0,75'tir.
+  - **Paket içi:** Aynı metinli iki soru olamaz.
+  - **Uygulama paketi:** `kaynaklar` ve `uyum` alanları uygulama paketine girmez. Kaynak adreslerinin çalışıp çalışmadığı CI'da denetlenmez.
+- [ ] KK-116: İçerik kuralları (insan incelemesi, makineyle denetlenemez):
+  - Sorular bizimdir; replikler birebir alıntılanmaz.
+  - Olay örgüsü soruları paketin yarısından azdır. Gerisi gerçek dünya bilgisidir: oyuncu, yıl, kanal, çekim, kamera arkası ve niş bilgiler.
+  - Büyük olaylarda bölüm numarası sorulabilir (ör. Çakır'ın öldüğü bölüm).
+  - Her bilgi en az 4 bağımsız kaynakla doğrulanır. Birbirini kopyalayan haberler tek kaynak sayılır. Kaynakların en az %75'i aynı cevabı vermelidir; vermiyorsa soru atılır ya da yalnızca kaynakların anlaştığı kısım sorulur.
+  - Kaynaklarda çelişen iki değer aynı soruda şık olarak yan yana gelmez.
+  - Unvanlar karaktere gönderme yapar, oyuncuya yapmaz. Siyaset, din, terör ve şiddet ayrıntısına girilmez.
+  - Taslaklar kaynaklarıyla birlikte `docs/quiz/<paket>.md` dosyasında tutulur ve bir insan onaylar.
+- [ ] KK-117: Faz 1 en az 3 paketle çıkar, en az biri Türk ve en az biri yabancı yapım olur. Testlerdeki örnek paket uygulamada görünmez.
+- [ ] KK-118: Uygulamanın adında, `app.json`'da ve mağaza metinlerinde paketlerin dizi ya da film adı geçmez. Bu bir testle denetlenir.
+- [ ] KK-119: Diğer oyunlar ve akışlar değişmez. Mevcut kabul testleri yeşil kalır. KK-104'teki "1 kişi çipi boş" testi, artık Quiz Night'ı göstereceği için güncellenir. `CLAUDE.md` ve `docs/MIMARI.md` Quiz Night'ı anlatır.
+
+### Kapsam dışı (v9)
+- Spor ve diğer kategoriler (sonraki sürümlerde).
+- Görsel, ses ya da müzik içeren sorular.
+- Hız bonusu, süreli "hızlı tur", zorluk seçimi.
+- Hesap, çevrimiçi skor tablosu, sunucudan paket indirme. Paketler uygulamaya gömülüdür; yeni paket EAS Update ile gelir.
+- Lisans, mağaza yayını.
+
+### Kararlar (v9)
+| Karar | Seçim | Gerekçe | Karar veren |
+|---|---|---|---|
+| İlk kategori | Dizi ve film, eski yapımlar; sonra spor | Semih'in isteği | Semih (31.10.2026, msg 866) |
+| Biçim | Yalnızca metin, 4 şık; görsel yok | Telif riski düşük, üretimi hızlı | Semih (msg 866) |
+| Paketler | Diziye/filme özel "Ne kadar X fanısın?" ve esprili unvan | Fan hissi ve paylaşım | Semih (msg 868) |
+| Bölüm ve niş sorular | Büyük olaylarda bölüm numarası; kamera arkası ve niş bilgiler | Gerçek fanı zorlamak | Semih (msg 874) |
+| Doğruluk | En az 4 bağımsız kaynak, en az %75 uyum | Yanlış cevap güveni bozar | Semih (msg 876) |
+| Tek kişi | Tek başına oynanır, `minOyuncu` 1 | Bu kategori tek kişiyle de oynanabilir | Semih (msg 878) |
+| Tek telefonda grup | Telefonu tutan okur ve bilenleri işaretler; telefon dolaştırılmaz | 10 soru yaklaşık 5 dk sürer; dolaştırmak 5 kişide 25 dakikayı geçer | tasarim önerisi, pm varsayılanı |
+| Süre | Tek başına ve tek telefonda yok; odada 20 sn, herkes cevaplayınca geçer | Acele yok; oda modunda tempo için | tasarim önerisi, pm varsayılanı |
+| Puan | Doğru sayısı; hız bonusu ve eksi puan yok | En sade kural (geliştirme ilkesi) | pm varsayılanı (backend hız bonusu önerdi; sonra eklenebilir) |
+| Faz sırası | Faz 1 tek başına ve tek telefon + içerik; Faz 2 oda | Oda modu en riskli ve en büyük iş | backend, frontend ve qa önerisi |
+| İçerik akışı | pm kaynaklı taslak yazar (`docs/quiz/`), bir insan onaylar, backend JSON'a çevirir | Desteler de böyle yapıldı | pm varsayılanı |
+| Mağaza | Uygulama adında ve mağaza metninde dizi/film adı yok | Apple 5.2.1, Google Play fikri mülkiyet politikası | analiz belgesi (#218) |
+
+### Riskler (v9)
+- **İçerik emeği:** Asıl yük budur. 3 paket yaklaşık 75 soru eder ve her soru için en az 4 kaynak gerekir. %75 uyumu makine kanıtlayamaz; insan incelemesi şarttır.
+- **Telif ve marka:** Risk sıfır değildir. Kurallar KK-116 ve KK-118'de. Mağazaya çıkmadan önce bir fikri mülkiyet avukatına danışılması önerilir (#218).
+- **Oda modu:** Zamanlama ve yeniden bağlanma en riskli kısımdır. Bu yüzden ayrı bir fazdır.
+- **Paketler birbirine benzeyebilir:** Görsel olmadığı için her pakete emoji ve marka renkleri verilir (tasarım).
+
+### Ekip görüşleri (v9 fikir turu)
+- tasarim: 5 ekran. Tek telefonda "sunucu" modu. Sayaç yalnızca odada. Soru en çok 140, şık en çok 40 karakter. Büyüklük M.
+- backend: Saf modül ve tohumlu tur. Kaynak ve uyum yalnızca doğrulamada kalır. Oda modunda doğru cevap sunucuda bekler. Çekirdek M, oda M.
+- frontend: Mevcut registry, ekran ve paylaşım altyapısı yeterli; yeni bağımlılık yok. Tek kişi ve tek telefon M, oda L.
+- qa: İçerik doğrulama sınır testleri. Oran ve uyum yalnızca alan olarak denetlenebilir. Kaynak adresleri CI'da denetlenmez. Oda en riskli kısım.
+
 ## Geliştirme ilkesi (Semih, 27.10.2026)
 **Overengineering yok.** En az kodla, en basit çözüm, yalnızca bugünkü ihtiyaç kadar. Yapı genişlemeye açık olacak ama ileriye dönük soyutlama, genel çerçeve ya da "belki lazım olur" kodu yazılmayacak. Yeni bağımlılık yalnızca gerçekten gerekiyorsa eklenir ve PR'da gerekçesi yazılır. Aşağıdaki mimari şartlar bu ilkeye göre en sade haliyle uygulanır. Örneğin oyun kayıt listesi basit bir dizidir, eklenti çatısı değildir.
 
