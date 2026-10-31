@@ -20,7 +20,7 @@ PRD'deki her kabul kriteri için "KK-nn" ifadesi geçen test dosyaları ve gerç
 | KK-25 | Kart metni geri sayımdan sonra kaybolmaz. Kart küçülüp ekranın üstüne yapışır, oy girişi v | `games/ok-mu-nok/kart.test.ts`, `games/ok-mu-nok/oyun.kabul.test.ts`, `uygulama.kabul.test.ts` | — |
 | KK-26 | Oyun dışı her ekranda (Oyuncular, Paket/Süre, Ayarlar) görünür bir "Geri" düğmesi vardır v | `geri-tusu.kabul.test.ts`, `uygulama.kabul.test.ts` | — |
 | KK-27 | Ana ekranda büyük bir "Ayarlar" düğmesi yoktur. Ayarlar, ana ekranın sağ üstünde küçük ve  | `uygulama.kabul.test.ts` | — |
-| KK-14 | Her oydan ve her karttan sonra oyun kaydedilir. Uygulama kapatılıp açılınca "Devam et / Ye | `core/kayit.kabul.test.ts`, `games/casus-kim/kayit.kabul.test.ts`, `games/casus-kim/ui.kabul.test.ts`, `games/on-on-ama/onon.kabul.test.ts`, `games/on-on-ama/ui.kabul.test.ts`, `uygulama.kabul.test.ts` | cihaz |
+| KK-14 | Her oydan ve her karttan sonra oyun kaydedilir. Uygulama kapatılıp açılınca "Devam et / Ye | `core/kayit.kabul.test.ts`, `games/casus-kim/kayit.kabul.test.ts`, `games/casus-kim/ui.kabul.test.ts`, `games/on-on-ama/onon.kabul.test.ts`, `games/on-on-ama/ui.kabul.test.ts`, `games/quiz-night/ui.kabul.test.ts`, `uygulama.kabul.test.ts` | cihaz |
 | KK-15 | Oyun içindeyken Android geri tuşu ve iOS kaydırarak geri hareketi "Oyundan çık?" onayı ist | `uygulama.kabul.test.ts` | cihaz |
 | KK-16 | Oyun sürerken ekran kendiliğinden kapanmaz. Uçak modunda tüm akış çalışır. | — | cihaz |
 | KK-17 | 375×667'den tablete kadar her ekranda taşma ya da yatay kaydırma olmaz. Ekran dikey kilitl | — | cihaz |
@@ -96,12 +96,12 @@ PRD'deki her kabul kriteri için "KK-nn" ifadesi geçen test dosyaları ve gerç
 | KK-104 | Bir çipe dokunulunca listede yalnızca kişi aralığı çipin aralığıyla kesişen oyunlar kalır  | `games/kategori.kabul.test.ts`, `quiz-night.kabul.test.ts`, `v81.kabul.test.ts` | — |
 | KK-105 | Diğer akışlar değişmez: açılış ekranı (KK-94…KK-100), oyun kartındaki kişi sayısı (KK-89)  | `v81.kabul.test.ts` | — |
 | KK-106 | Ana ekranda 🧠 Quiz Night kartı vardır ve kartta "1–12 kişi" yazar. Kart "Tümü", "1 kişi", | `quiz-night.kabul.test.ts` | cihaz |
-| KK-107 | Quiz Night'ta "Tek başına · Tek telefonda grup · Oda kur · Odaya katıl" seçimi vardır. | `games/quiz-night/arayuz.kabul.test.ts` | cihaz |
-| KK-108 | Paket seçimindeki her kartta şunlar bulunur: düz metin başlık "Ne kadar <ad> fanısın?", bi | `games/quiz-night/arayuz.kabul.test.ts` | cihaz |
-| KK-109 | Bir tur 10 sorudur ve sorular paketin havuzundan tekrarsız seçilir: 3 kolay, 4 orta, 3 zor | `games/quiz-night/quiz.kabul.test.ts` | cihaz |
-| KK-110 | Soru ekranında şunlar bulunur: üstte "3/10", soru metni, zorluk (kolay / orta / zor, renkl | `games/quiz-night/arayuz.kabul.test.ts` | cihaz |
-| KK-111 | Sonuç ekranında büyük puan ("8/10") ve unvan gösterilir. Unvan basamakları 0–3, 4–6, 7–9 v | `games/quiz-night/arayuz.kabul.test.ts`, `games/quiz-night/quiz.kabul.test.ts` | cihaz |
-| KK-112 | Tek telefonda grup modu şöyle işler: | `games/quiz-night/arayuz.kabul.test.ts`, `games/quiz-night/quiz.kabul.test.ts` | cihaz |
+| KK-107 | Quiz Night'ta "Tek başına · Tek telefonda grup · Oda kur · Odaya katıl" seçimi vardır. | `games/quiz-night/arayuz.kabul.test.ts`, `games/quiz-night/ui.kabul.test.ts` | cihaz |
+| KK-108 | Paket seçimindeki her kartta şunlar bulunur: düz metin başlık "Ne kadar <ad> fanısın?", bi | `games/quiz-night/arayuz.kabul.test.ts`, `games/quiz-night/ui.kabul.test.ts` | cihaz |
+| KK-109 | Bir tur 10 sorudur ve sorular paketin havuzundan tekrarsız seçilir: 3 kolay, 4 orta, 3 zor | `games/quiz-night/quiz.kabul.test.ts`, `games/quiz-night/ui.kabul.test.ts` | cihaz |
+| KK-110 | Soru ekranında şunlar bulunur: üstte "3/10", soru metni, zorluk (kolay / orta / zor, renkl | `games/quiz-night/arayuz.kabul.test.ts`, `games/quiz-night/ui.kabul.test.ts` | cihaz |
+| KK-111 | Sonuç ekranında büyük puan ("8/10") ve unvan gösterilir. Unvan basamakları 0–3, 4–6, 7–9 v | `games/quiz-night/arayuz.kabul.test.ts`, `games/quiz-night/quiz.kabul.test.ts`, `games/quiz-night/ui.kabul.test.ts` | cihaz |
+| KK-112 | Tek telefonda grup modu şöyle işler: | `games/quiz-night/arayuz.kabul.test.ts`, `games/quiz-night/quiz.kabul.test.ts`, `games/quiz-night/ui.kabul.test.ts` | cihaz |
 | KK-114 | Puan, doğru cevap sayısıdır. Yanlış cevap puan düşürmez ve hız bonusu yoktur. Unvan bu pua | `games/quiz-night/quiz.kabul.test.ts` | — |
 | KK-115 | İçerik `content/quiz/<paket>.json` dosyalarındadır ve `npm run icerik` (CI'da da) şunları  | `icerik/quiz.kabul.test.ts` | — |
 | KK-116 | İçerik kuralları (insan incelemesi, makineyle denetlenemez): | — | cihaz |
