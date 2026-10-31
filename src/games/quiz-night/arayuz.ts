@@ -65,9 +65,6 @@ const NOT: Record<Kategori, string> = {
 };
 export const paketNotu = (k: Kategori) => NOT_ORTAK + NOT[k];
 
-export const kategoriEmoji = (k: Kategori) =>
-  k === 'dizi-film' ? '🎬' : k === 'muzik' ? '🎤' : '⚽';
-
 // Türk / Yabancı yalnız Dizi & Film kartında.
 export const kokenMetni = (p: { kategori: Kategori; koken?: Koken }) =>
   p.kategori !== 'dizi-film' || !p.koken
