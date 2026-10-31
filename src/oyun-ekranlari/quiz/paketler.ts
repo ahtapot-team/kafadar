@@ -16,7 +16,7 @@ import { uygulamaPaketi } from '../../icerik/quiz';
 export type QuizPaket = {
   id: string;
   ad: string;
-  emoji: string;
+  gorsel: string;
   kategori: Kategori;
   koken?: Koken;
   baslik?: string;

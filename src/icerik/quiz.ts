@@ -68,8 +68,10 @@ function soruHatalari(s: unknown, yer: string): string[] {
 export function quizHatalari(dosya: unknown): string[] {
   if (!nesneMi(dosya)) return ['paket nesne değil'];
   const h: string[] = [];
-  for (const alan of ['id', 'ad', 'emoji'])
+  for (const alan of ['id', 'ad', 'gorsel'])
     if (!dolu(dosya[alan])) h.push(`${alan} boş`);
+  if (dolu(dosya.gorsel) && !/\.(png|webp)$/.test(dosya.gorsel))
+    h.push('gorsel .png ya da .webp dosyası olmalı');
   const kategori = dosya.kategori;
   if (typeof kategori !== 'string' || !KATEGORILER.includes(kategori))
     h.push('kategori dizi-film, muzik ya da spor olmalı');
@@ -121,7 +123,7 @@ export function uygulamaPaketi(dosya: unknown) {
   const p = dosya as {
     id: string;
     ad: string;
-    emoji: string;
+    gorsel: string;
     kategori: string;
     koken?: string;
     baslik?: string;
@@ -138,7 +140,7 @@ export function uygulamaPaketi(dosya: unknown) {
   return {
     id: p.id,
     ad: p.ad,
-    emoji: p.emoji,
+    gorsel: p.gorsel,
     kategori: p.kategori,
     ...(p.koken === undefined ? {} : { koken: p.koken }),
     ...(p.baslik === undefined ? {} : { baslik: p.baslik }),
