@@ -13,7 +13,8 @@ import { readdirSync, readFileSync } from 'node:fs';
 import { describe, expect, it } from 'vitest';
 import { BEKLEYEN } from '../kabul';
 
-const kabulQuiz = BEKLEYEN.quiz ? it.fails : it;
+const kabulQuiz = BEKLEYEN.quizModul ? it.fails : it;
+const kabulIcerik = BEKLEYEN.quizIcerik ? it.fails : it;
 
 type Zorluk = 'kolay' | 'orta' | 'zor';
 type Soru = {
@@ -329,7 +330,7 @@ describe('KK-117: Faz 1 içerik kümesi', () => {
         ) as Paket,
     );
 
-  kabulQuiz(
+  kabulIcerik(
     'KK-117: en az 3 paket; en az biri tr, en az biri yabanci; hepsi geçerli',
     async () => {
       const { quizHatalari } = await yukle();
@@ -342,7 +343,7 @@ describe('KK-117: Faz 1 içerik kümesi', () => {
     },
   );
 
-  kabulQuiz(
+  kabulIcerik(
     'KK-117: örnek/test paketi content/quiz altında yok (uygulamada görünmesin)',
     () => {
       expect(dosyalar().length).toBeGreaterThan(0); // klasör ve paketler var

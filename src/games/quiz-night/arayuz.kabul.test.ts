@@ -18,7 +18,7 @@
 import { describe, expect, it } from 'vitest';
 import { BEKLEYEN } from '../../kabul';
 
-const kabulQuiz = BEKLEYEN.quiz ? it.fails : it;
+const kabulQuiz = BEKLEYEN.quizArayuz ? it.fails : it;
 
 type Arayuz = {
   MODLAR: { id: string; etiket: string }[];
