@@ -9,10 +9,9 @@
 //   ipucu "Kuralları görmek için oyuna basılı tut"; accessibilityActions "Nasıl oynanır".
 //   src/games/kategori.ts: kartEtiketi(oyun) = `${oyun.ad}, ${kisiMetni(oyun)}` (ekran okuyucu, KK-135).
 import { describe, expect, it } from 'vitest';
-import { BEKLEYEN } from '../kabul';
 import { dosyaIcerik } from '../test/yardimci';
 
-const kabulA = BEKLEYEN.anaEkranV11 ? it.fails : it;
+const kabulA = it;
 
 // Yorum satırları sayılmaz (emoji/sabit değer taraması kodu yoklar).
 const kod = (t: string) =>

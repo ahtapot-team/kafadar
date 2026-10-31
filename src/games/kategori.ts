@@ -44,3 +44,7 @@ export function cipSec(secili: CipId, dokunulan: CipId): CipId {
 
 export const kisiMetni = (oyun: Kayit): string =>
   `${oyun.minOyuncu ?? 2}–${UST_SINIR} kişi`;
+
+// Ekran okuyucu: "<oyun adı>, <kişi sayısı>" (KK-135).
+export const kartEtiketi = (oyun: Kayit & Pick<Oyun, 'ad'>): string =>
+  `${oyun.ad}, ${kisiMetni(oyun)}`;
