@@ -177,7 +177,7 @@ export function QuizOdaSoru({
               soluk
               style={{ textAlign: 'center' }}
             >
-              Kuran kişi bekleniyor… {g.oyuncular[0]?.ad}
+              Kuran kişi bekleniyor… {g.yetkiliAd}
             </Yazi>
           )}
         </>

@@ -2,11 +2,8 @@
 // SÖZLEŞME (frontend #260): QuizGorunum.yetkiliAd: string — şu anki yetkilinin (kuran bağlıysa kuran, değilse sırayla ilk bağlı) adı;
 // src/oda-ui/quiz-soru.tsx bekleme yazısında `g.yetkiliAd` kullanır, `oyuncular[0]` KULLANMAZ.
 import { describe, expect, it } from 'vitest';
-import { BEKLEYEN } from '../kabul';
 import { dosyaIcerik } from '../test/yardimci';
 import * as odaModulu from './oda';
-
-const kabulKuran = BEKLEYEN.quizKuranBekleme ? it.fails : it;
 
 type Durum = { tur: string };
 type Soru = {
@@ -70,38 +67,29 @@ function aciklamadaOda() {
 }
 
 describe('#260: kuran bekleme yazısı yetkiliyi göstermeli', () => {
-  kabulKuran(
-    'yetkiliAd: kuran bağlıyken kuranın adı, herkesin görünümünde',
-    () => {
-      const { d, id, t } = aciklamadaOda();
-      for (const i of [0, 1, 2])
-        expect(O.gorunum(d, id[i], t).yetkiliAd, `görünüm ${i}`).toBe('Ali');
-    },
-  );
+  it('yetkiliAd: kuran bağlıyken kuranın adı, herkesin görünümünde', () => {
+    const { d, id, t } = aciklamadaOda();
+    for (const i of [0, 1, 2])
+      expect(O.gorunum(d, id[i], t).yetkiliAd, `görünüm ${i}`).toBe('Ali');
+  });
 
-  kabulKuran(
-    'yetkiliAd: kuran kopunca yeni yetkili (ilk bağlı oyuncu) görünür; dönünce kuran geri gelir',
-    () => {
-      const { d, id, t } = aciklamadaOda();
-      const kopuk = O.isle(d, { tip: 'kop', kimlik: id[0] }, t + 1).durum;
-      expect(O.gorunum(kopuk, id[2], t + 1).yetkiliAd).toBe('Ayşe');
-      const geri = O.isle(kopuk, { tip: 'don', kimlik: id[0] }, t + 2).durum;
-      expect(O.gorunum(geri, id[2], t + 2).yetkiliAd).toBe('Ali');
-    },
-  );
+  it('yetkiliAd: kuran kopunca yeni yetkili (ilk bağlı oyuncu) görünür; dönünce kuran geri gelir', () => {
+    const { d, id, t } = aciklamadaOda();
+    const kopuk = O.isle(d, { tip: 'kop', kimlik: id[0] }, t + 1).durum;
+    expect(O.gorunum(kopuk, id[2], t + 1).yetkiliAd).toBe('Ayşe');
+    const geri = O.isle(kopuk, { tip: 'don', kimlik: id[0] }, t + 2).durum;
+    expect(O.gorunum(geri, id[2], t + 2).yetkiliAd).toBe('Ali');
+  });
 
-  kabulKuran('yetkiliAd: kuran ayrılırsa yeni yetkili görünür', () => {
+  it('yetkiliAd: kuran ayrılırsa yeni yetkili görünür', () => {
     const { d, id, t } = aciklamadaOda();
     const ayrildi = O.isle(d, { tip: 'ayril', kimlik: id[0] }, t + 1).durum;
     expect(O.gorunum(ayrildi, id[2], t + 1).yetkiliAd).toBe('Ayşe');
   });
 
-  kabulKuran(
-    'ekran: bekleme yazısı yetkiliAd kullanır, oyuncular[0] değil',
-    () => {
-      const kaynak = dosyaIcerik('src/oda-ui/quiz-soru.tsx');
-      expect(kaynak).toMatch(/Kuran kişi bekleniyor[^]*?yetkiliAd/);
-      expect(kaynak).not.toMatch(/oyuncular\[0\]/);
-    },
-  );
+  it('ekran: bekleme yazısı yetkiliAd kullanır, oyuncular[0] değil', () => {
+    const kaynak = dosyaIcerik('src/oda-ui/quiz-soru.tsx');
+    expect(kaynak).toMatch(/Kuran kişi bekleniyor[^]*?yetkiliAd/);
+    expect(kaynak).not.toMatch(/oyuncular\[0\]/);
+  });
 });

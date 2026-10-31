@@ -132,6 +132,7 @@ export type QuizGorunum = Omit<Gorunum, 'soru' | 'aciklama' | 'benimOyum'> & {
   soru?: QuizSoruGorunum;
   benimSikkim?: number | null; // yalnızca kendi kilitli şıkkı
   aciklama?: QuizAciklama; // yalnızca açıklamada, her telefonda aynı
+  yetkiliAd: string; // şu anki yetkili (kuran bağlıysa kuran, değilse ilk bağlı); bekleme yazısı için
 };
 
 export const quizGorunumMu = (g: Gorunum | QuizGorunum): g is QuizGorunum =>
@@ -587,6 +588,7 @@ function quizGorunum(d: OdaDurum, kimlik: Kimlik, simdi: number): QuizGorunum {
     benimSikkim: soru ? (d.sikler[kimlik] ?? null) : undefined,
     aciklama: soru && d.acik ? { dogru: s!.dogru, secimler } : undefined,
     sonrakiGorunur: soru && d.acik && yetkili(d) === kimlik,
+    yetkiliAd: aktifler(d).find((p) => p.kimlik === yetkili(d))?.ad ?? '',
   };
 }
 
