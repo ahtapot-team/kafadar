@@ -1,6 +1,6 @@
 # Kafadar — Mimari
 
-Son güncelleme: 2026-10-31 — #260 (Quiz Night oda: yetkiliAd)
+Son güncelleme: 2026-10-31 — #275 (Quiz Night paket başlığı)
 
 Kısa rehber için `CLAUDE.md`. Bu belge katmanları, veri akışını, oda protokolünü, testleri ve kuralları anlatır.
 
