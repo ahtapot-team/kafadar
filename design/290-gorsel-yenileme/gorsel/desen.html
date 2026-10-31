@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kafadar — #292 desen katmanları</title>
+<!-- #292 desen katmanları (kendi çizimimiz, Canvas 2D; dış kaynak yok). Uygulamada zemin rengi, köşe, kontur ve gölge kodla
+     (tema token'ları) çizilir; desen ve parlaklık bu saydam katmandır: token renk → desen → nesne (karar: #292 yorumu).
+     Kullanım:  desen.html                → kontrol sayfası (desenler token renkleri üstünde)
+                desen.html?cikti=1        → 7 desen saydam WebP (data URL, #cikti içinde; LISANS.md'deki komutla dosyaya yazılır)
+     Ölçü: oyun deseni ikonun iç alanı (138 − 2×4 kontur = 130) için çizilir, 512×512. Kategori deseni paket kartının iç alanı için,
+     en geniş kart (430 ekran: 382) en az 127 yükseklikte; 1024×340. Kart hiçbir zaman bu orandan geniş olmaz, cover yalnızca
+     yanlardan kırpar; film şeridi bantları korunur. -->
+<style>
+  body { margin: 0; padding: 20px; background: #16123F; color: #FFF8E7; font: 700 13px system-ui, sans-serif; }
+  .sira { display: flex; flex-wrap: wrap; gap: 16px; margin-bottom: 16px; }
+  canvas { display: block; border: 4px solid #0B0920; box-shadow: 5px 5px 0 #7C6CFF; }
+  .oyun canvas { width: 130px; height: 130px; border-radius: 34px; } .kat canvas { width: 342px; height: 113.6px; border-radius: 20px; }
+</style>
+</head>
+<body>
+<div class="sira oyun" id="oyun"></div><div class="sira kat" id="kat"></div>
+<pre id="cikti" hidden></pre>
+<script>
+const KONTUR = '11,9,32', KREM = '255,248,231', BEYAZ = '255,255,255', RENK = { marka: '#FFD23F', marka2: '#5B8CFF', golge: '#7C6CFF', gece: '#2B2570' };
+const a = (rgb, o) => `rgba(${rgb},${o})`;
+const daire = (x, cx, cy, r, renk) => { x.beginPath(); x.arc(cx, cy, r, 0, 2 * Math.PI); x.fillStyle = renk; x.fill(); };
+// CSS linear-gradient(<aci>deg, beyaz o → 0 %44) parlaklığı: köşeden köşeye CSS gradyan çizgisi
+const parlak = (x, w, h, o) => { const t = 160 * Math.PI / 180, dx = Math.sin(t), dy = -Math.cos(t), L = Math.abs(w * dx) + Math.abs(h * dy);
+  const g = x.createLinearGradient(w / 2 - dx * L / 2, h / 2 - dy * L / 2, w / 2 + dx * L / 2, h / 2 + dy * L / 2);
+  g.addColorStop(0, a(BEYAZ, o)); g.addColorStop(0.44, a(BEYAZ, 0)); x.fillStyle = g; x.fillRect(0, 0, w, h); };
+
+// Oyun desenleri: taban 130×130 birim (ikonun iç alanı)
+const OYUN = {
+  'ok-mu-nok': [RENK.marka, (x, W) => { const g = x.createLinearGradient(0, 0, W, W);   // ikiye bölünmüş: çapraz beyaz şerit, alt yarı koyu
+    g.addColorStop(0, a(BEYAZ, 0)); g.addColorStop(0.48, a(BEYAZ, 0)); g.addColorStop(0.48, a(BEYAZ, 0.6)); g.addColorStop(0.52, a(BEYAZ, 0.6)); g.addColorStop(0.52, a(KONTUR, 0.16)); g.addColorStop(1, a(KONTUR, 0.16));
+    x.fillStyle = g; x.fillRect(0, 0, W, W); }],
+  'on-on-ama': [RENK.marka2, (x, W) => { x.fillStyle = a(BEYAZ, 0.22);                    // 18 ışın, 10° açık / 10° boş
+    for (let i = 0; i < 18; i++) { const b = (i * 20 - 90) * Math.PI / 180; x.beginPath(); x.moveTo(W / 2, W / 2); x.arc(W / 2, W / 2, W, b, b + Math.PI / 18); x.fill(); } }],
+  'casus-kim': [RENK.golge, (x, W, s) => { const r = Math.hypot(65, 65) * s, k = x.createRadialGradient(W / 2, W / 2, 0, W / 2, W / 2, r);
+    k.addColorStop(0.52, a(KONTUR, 0)); k.addColorStop(1, a(KONTUR, 0.4)); x.fillStyle = k; x.fillRect(0, 0, W, W);   // köşe karartma
+    x.save(); x.translate(W / 2, 0.34 * W); x.scale(1, 0.7 / 0.58);                         // spot ışığı (elips %58 × %70, üstte)
+    const sp = x.createRadialGradient(0, 0, 0, 0, 0, 0.58 * W); sp.addColorStop(0, a(KREM, 0.5)); sp.addColorStop(0.72, a(KREM, 0));
+    x.fillStyle = sp; x.fillRect(-W, -W, 2 * W, 3 * W); x.restore(); }],
+  'quiz-night': [RENK.gece, (x, W, s) => {                                                 // gece: hilal ay ve yıldızlar
+    [[0.78, 0.18, 2.5, KREM], [0.86, 0.46, 2, KREM], [0.14, 0.72, 2, KREM], [0.64, 0.84, 2.5, '255,210,63']].forEach(([px, py, r, c]) => daire(x, px * W, py * W, (r + 0.5) * s, a(c, 1)));
+    daire(x, 0.23 * W, 0.24 * W, 14.5 * s, '#FFD23F');
+    x.globalCompositeOperation = 'destination-out'; daire(x, 0.30 * W, 0.19 * W, 11.5 * s, '#000'); x.globalCompositeOperation = 'source-over'; }],
+};
+// Kategori desenleri: taban 382 birim genişlik (en geniş kartın iç alanı), 1024×340
+const KAT = {
+  'dizi-film': [RENK.marka, (x, W, H, s) => {                                             // film şeridi: üst ve alt koyu bant, krem delikler
+    x.fillStyle = a(KONTUR, 1); x.fillRect(0, 0, W, 14 * s); x.fillRect(0, H - 14 * s, W, 14 * s);
+    x.fillStyle = a(KREM, 1); for (let px = 3; px < W / s; px += 14) { x.fillRect(px * s, 4 * s, 7 * s, 6 * s); x.fillRect(px * s, H - 10 * s, 7 * s, 6 * s); } }],
+  'muzik': [RENK.marka2, (x, W, H, s) => { x.strokeStyle = a(KONTUR, 0.13); x.lineWidth = 2 * s;   // plak: sağda iç içe halkalar (r ≤ 160; yazının arkası sade)
+    daire(x, 0.8 * W, H / 2, 2 * s, a(KONTUR, 0.13));
+    for (let r = 10; r <= 160; r += 9) { x.beginPath(); x.arc(0.8 * W, H / 2, r * s, 0, 2 * Math.PI); x.stroke(); } }],
+  'spor': [RENK.golge, (x, W, H, s) => { x.strokeStyle = a(BEYAZ, 0.4); x.lineWidth = 3 * s;      // saha: orta yuvarlak ve orta çizgi, sağda
+    x.beginPath(); x.arc(0.8 * W, H / 2, 31.5 * s, 0, 2 * Math.PI); x.stroke(); x.fillStyle = a(BEYAZ, 0.4); x.fillRect(0.8 * W - 1.5 * s, 0, 3 * s, H); }],
+};
+
+const tuval = (w, h) => { const c = document.createElement('canvas'); c.width = w; c.height = h; return c; };
+const oyunCiz = (id) => { const c = tuval(512, 512), x = c.getContext('2d'); OYUN[id][1](x, 512, 512 / 130); parlak(x, 512, 512, 0.38); return c; };
+const katCiz = (id) => { const c = tuval(1024, 340), x = c.getContext('2d'); KAT[id][1](x, 1024, 340, 1024 / 382); parlak(x, 1024, 340, 0.35); return c; };
+
+const sor = new URLSearchParams(location.search);
+if (sor.has('cikti')) {
+  document.getElementById('cikti').textContent = [...Object.keys(OYUN).map(id => [id, oyunCiz(id)]), ...Object.keys(KAT).map(id => [id, katCiz(id)])]
+    .map(([id, c]) => `${id} ${c.toDataURL('image/' + (sor.get('bicim') || 'webp'), +sor.get('kalite') || 0.8)}`).join('\n');
+} else {
+  Object.keys(OYUN).forEach(id => { const c = oyunCiz(id); c.style.background = OYUN[id][0]; document.getElementById('oyun').append(c); });
+  Object.keys(KAT).forEach(id => { const c = katCiz(id); c.style.background = KAT[id][0]; document.getElementById('kat').append(c); });
+}
+</script>
+</body>
+</html>
