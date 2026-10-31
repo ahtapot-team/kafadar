@@ -4,8 +4,9 @@ import type { QuizPaketi } from '../../src/oda/oda';
 import askIMemnu from '../../content/quiz/ask-i-memnu.json';
 import hababamSinifi from '../../content/quiz/hababam-sinifi.json';
 import prisonBreak from '../../content/quiz/prison-break.json';
+import galatasaray from '../../content/quiz/galatasaray.json';
 
-const PAKETLER = [askIMemnu, hababamSinifi, prisonBreak].map((j) =>
+const PAKETLER = [askIMemnu, hababamSinifi, prisonBreak, galatasaray].map((j) =>
   uygulamaPaketi(j),
 );
 
