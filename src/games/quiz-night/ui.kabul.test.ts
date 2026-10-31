@@ -22,7 +22,7 @@ import type { Depo } from '../../core/kayit';
 import { BEKLEYEN } from '../../kabul';
 import { depoYap, dosyaIcerik, kaynaklar } from '../../test/yardimci';
 
-const kabulQuiz = BEKLEYEN.quizArayuz ? it.fails : it;
+const kabulQuiz = BEKLEYEN.quizEkran ? it.fails : it;
 
 type Onceki = {
   ONCEKI_ANAHTAR(paketId: string): string;
@@ -106,21 +106,18 @@ describe('KK-107…KK-112: ekranlar saf kuralları kullanır', () => {
     expect(ekranKaynagi()).toMatch(/durumGecerliMi/);
   });
 
-  kabulQuiz(
-    'uygulama kodu kaynaklar/uyum alanlarını okumaz (yalnız içerikte durur)',
-    () => {
-      const dosyalar = [...kaynaklar('app'), ...kaynaklar('src')].filter(
-        ({ f }) =>
-          /quiz/i.test(f) &&
-          !f.includes('/icerik/') &&
-          !f.endsWith('quiz.ts') &&
-          !f.endsWith('quiz-dogrula.ts'),
-      );
-      expect(dosyalar.length).toBeGreaterThan(0);
-      for (const { f, icerik } of dosyalar)
-        expect(icerik, f).not.toMatch(/\.kaynaklar\b|\.uyum\b/);
-    },
-  );
+  it('uygulama kodu kaynaklar/uyum alanlarını okumaz (yalnız içerikte durur)', () => {
+    const dosyalar = [...kaynaklar('app'), ...kaynaklar('src')].filter(
+      ({ f }) =>
+        /quiz/i.test(f) &&
+        !f.includes('/icerik/') &&
+        !f.endsWith('quiz.ts') &&
+        !f.endsWith('quiz-dogrula.ts'),
+    );
+    expect(dosyalar.length).toBeGreaterThan(0);
+    for (const { f, icerik } of dosyalar)
+      expect(icerik, f).not.toMatch(/\.kaynaklar\b|\.uyum\b/);
+  });
 
   kabulQuiz(
     'KK-110: titreşim yalnız tek başına yanlış cevapta (mevcut titresim.ts)',
@@ -141,7 +138,7 @@ describe('KK-107…KK-112: ekranlar saf kuralları kullanır', () => {
 });
 
 describe('KK-109: önceki turun soruları cihazda saklanır', () => {
-  kabulQuiz('anahtar pakete özeldir', async () => {
+  it('anahtar pakete özeldir', async () => {
     const { ONCEKI_ANAHTAR } = await yukle();
     expect(ONCEKI_ANAHTAR('ask-i-memnu')).toBe(
       'kafadar:quiz-onceki:ask-i-memnu',
@@ -151,7 +148,7 @@ describe('KK-109: önceki turun soruları cihazda saklanır', () => {
     );
   });
 
-  kabulQuiz("kaydedilen id'ler geri okunur; yalnız son tur kalır", async () => {
+  it("kaydedilen id'ler geri okunur; yalnız son tur kalır", async () => {
     const { oncekiKaydet, oncekiOku } = await yukle();
     const depo = depoYap();
     await oncekiKaydet(depo, 'p', [{ id: 'a' }, { id: 'b' }, { id: 'c' }]);
@@ -160,7 +157,7 @@ describe('KK-109: önceki turun soruları cihazda saklanır', () => {
     expect(await oncekiOku(depo, 'p')).toEqual(['x', 'y']);
   });
 
-  kabulQuiz('paketler birbirini etkilemez', async () => {
+  it('paketler birbirini etkilemez', async () => {
     const { oncekiKaydet, oncekiOku } = await yukle();
     const depo = depoYap();
     await oncekiKaydet(depo, 'p1', [{ id: 'a' }]);
@@ -170,16 +167,13 @@ describe('KK-109: önceki turun soruları cihazda saklanır', () => {
     expect(await oncekiOku(depo, 'p3')).toEqual([]);
   });
 
-  kabulQuiz(
-    'kayıt yok, bozuk ya da dizi değilse boş dizi döner (çökmez)',
-    async () => {
-      const { oncekiOku, ONCEKI_ANAHTAR } = await yukle();
-      const depo = depoYap();
-      expect(await oncekiOku(depo, 'p')).toEqual([]);
-      for (const bozuk of ['{', 'null', '"x"', '{"a":1}', '[1,2]', '["a",2]']) {
-        depo.veri.set(ONCEKI_ANAHTAR('p'), bozuk);
-        expect(await oncekiOku(depo, 'p'), bozuk).toEqual([]);
-      }
-    },
-  );
+  it('kayıt yok, bozuk ya da dizi değilse boş dizi döner (çökmez)', async () => {
+    const { oncekiOku, ONCEKI_ANAHTAR } = await yukle();
+    const depo = depoYap();
+    expect(await oncekiOku(depo, 'p')).toEqual([]);
+    for (const bozuk of ['{', 'null', '"x"', '{"a":1}', '[1,2]', '["a",2]']) {
+      depo.veri.set(ONCEKI_ANAHTAR('p'), bozuk);
+      expect(await oncekiOku(depo, 'p'), bozuk).toEqual([]);
+    }
+  });
 });
