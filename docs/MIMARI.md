@@ -1,6 +1,6 @@
 # Kafadar — Mimari
 
-Son güncelleme: 2026-10-31 — #226 (Quiz Night paketleri)
+Son güncelleme: 2026-10-31 — #244 (Quiz Night beraberlik katsayısı)
 
 Kısa rehber için `CLAUDE.md`. Bu belge katmanları, veri akışını, oda protokolünü, testleri ve kuralları anlatır.
 
@@ -61,7 +61,7 @@ Açılış ekranı `app/_layout.tsx`'te yazı tipi ve ayarlar okunurken görün�
 
 ### Quiz Night (`src/games/quiz-night/quiz.ts`, `src/icerik/quiz.ts`)
 
-Saf kurallar: `turSec(havuz, tohum, onceki?)` (3 kolay + 4 orta + 3 zor, kolaydan zora, şık sırası tohumlu karışır; `onceki` tur soruları mümkünse dışlanır), `puan` (doğru sayısı, hız bonusu yok), `unvanSec` (0–3, 4–6, 7–9, 10), `siralama`; tek başına/tek telefon durum makinesi `baslat`, `cevapla` (cevap kilitli), `ilerle`, `turSonucu`, `durumGecerliMi`. Paketler `content/quiz/<paket>.json` (`docs/quiz/*.md` onaylı taslaklardan çevrilir; üç Faz 1 paketi); `quizHatalari` (`npm run icerik`, ağ yok) 20–30 soru, her zorluktan ≥6, olay sorusu yarıdan az, ≥4 kaynak, uyum ≥0,75 denetler. `uygulamaPaketi` `kaynaklar` ve `uyum` alanlarını uygulamaya sokmaz. Oda türü `quiz` Faz 2'dir.
+Saf kurallar: `turSec(havuz, tohum, onceki?)` (3 kolay + 4 orta + 3 zor, kolaydan zora, şık sırası tohumlu karışır; `onceki` tur soruları mümkünse dışlanır), `puan` (doğru sayısı, hız bonusu yok), `unvanSec` (0–3, 4–6, 7–9, 10), `siralama` (önce doğru sayısı, eşitse `zorlukKatsayisi` kolay 1/orta 2/zor 3 ile `katsayiliToplam`; ikisi de eşitse ortak sıra), `turSonucu` her oyuncu için `katsayi` taşır; tek başına/tek telefon durum makinesi `baslat`, `cevapla` (cevap kilitli), `ilerle`, `turSonucu`, `durumGecerliMi`. Paketler `content/quiz/<paket>.json` (`docs/quiz/*.md` onaylı taslaklardan çevrilir; üç Faz 1 paketi); `quizHatalari` (`npm run icerik`, ağ yok) 20–30 soru, her zorluktan ≥6, olay sorusu yarıdan az, ≥4 kaynak, uyum ≥0,75 denetler. `uygulamaPaketi` `kaynaklar` ve `uyum` alanlarını uygulamaya sokmaz. Oda türü `quiz` Faz 2'dir.
 
 ## Testler
 

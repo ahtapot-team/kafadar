@@ -1,6 +1,6 @@
 # Kafadar
 
-Son güncelleme: 2026-10-31 — #226 (Quiz Night paketleri)
+Son güncelleme: 2026-10-31 — #244 (Quiz Night beraberlik katsayısı)
 
 Kafadar, arkadaş/çift/aile için mobil parti oyunları uygulamasıdır (OK mu NOK mu, 10/10 ama, Casus kim). Tek telefonda ya da oda koduyla çok telefonda oynanır. Ayrıntı: `docs/MIMARI.md`.
 

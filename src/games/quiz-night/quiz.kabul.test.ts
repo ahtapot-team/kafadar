@@ -18,9 +18,6 @@
 //       doğru VE katsayi eşitse aynı `sira` (ortak birincilik), eşitlerde girdi sırası korunur. Çıktı girdideki alanları taşır.
 //   turSonucu(durum) her oyuncunun katsayısını soru zorluklarından hesaplar ve siralama'ya verir (sonuç `katsayi` içerir).
 import { describe, expect, it } from 'vitest';
-import { BEKLEYEN } from '../../kabul';
-
-const kabulBeraberlik = BEKLEYEN.quizBeraberlik ? it.fails : it;
 
 type Zorluk = 'kolay' | 'orta' | 'zor';
 type Soru = {
@@ -225,45 +222,39 @@ describe('KK-114: eşitlikte zorluk katsayısı (kolay 1, orta 2, zor 3)', () =>
   };
   const ek = async () => (await yukle()) as Ek;
 
-  kabulBeraberlik('KK-114: katsayılar kolay 1, orta 2, zor 3', async () => {
+  it('KK-114: katsayılar kolay 1, orta 2, zor 3', async () => {
     const { zorlukKatsayisi } = await ek();
     expect(
       (['kolay', 'orta', 'zor'] as Zorluk[]).map((z) => zorlukKatsayisi(z)),
     ).toEqual([1, 2, 3]);
   });
 
-  kabulBeraberlik(
-    'KK-114: katsayılı toplam yalnız doğru cevaplanan soruları sayar',
-    async () => {
-      const { katsayiliToplam, puan } = await ek();
-      const sorular = [
-        { zorluk: 'kolay' },
-        { zorluk: 'orta' },
-        { zorluk: 'zor' },
-        { zorluk: 'zor' },
-      ] as { zorluk: Zorluk }[];
-      expect(katsayiliToplam(sorular, [true, true, true, true])).toBe(9);
-      expect(katsayiliToplam(sorular, [false, true, false, true])).toBe(5);
-      expect(katsayiliToplam(sorular, [false, false, false, false])).toBe(0);
-      // puan hâlâ yalnız doğru sayısı
-      expect(puan([false, true, false, true])).toBe(2);
-    },
-  );
+  it('KK-114: katsayılı toplam yalnız doğru cevaplanan soruları sayar', async () => {
+    const { katsayiliToplam, puan } = await ek();
+    const sorular = [
+      { zorluk: 'kolay' },
+      { zorluk: 'orta' },
+      { zorluk: 'zor' },
+      { zorluk: 'zor' },
+    ] as { zorluk: Zorluk }[];
+    expect(katsayiliToplam(sorular, [true, true, true, true])).toBe(9);
+    expect(katsayiliToplam(sorular, [false, true, false, true])).toBe(5);
+    expect(katsayiliToplam(sorular, [false, false, false, false])).toBe(0);
+    // puan hâlâ yalnız doğru sayısı
+    expect(puan([false, true, false, true])).toBe(2);
+  });
 
-  kabulBeraberlik(
-    'KK-114: eşit doğru sayısında katsayısı yüksek olan önde; sonra ortak birincilik',
-    async () => {
-      const { siralama } = await ek();
-      const s = siralama([
-        { ad: 'Ali', dogru: 8, katsayi: 14 },
-        { ad: 'Ece', dogru: 8, katsayi: 17 },
-        { ad: 'Can', dogru: 9, katsayi: 9 }, // daha çok doğru, katsayı düşük de olsa önde
-        { ad: 'Zeynep', dogru: 8, katsayi: 17 }, // Ece ile tam eşit
-      ]);
-      expect(s.map((x) => x.ad)).toEqual(['Can', 'Ece', 'Zeynep', 'Ali']);
-      expect(s.map((x) => x.sira)).toEqual([1, 2, 2, 4]);
-    },
-  );
+  it('KK-114: eşit doğru sayısında katsayısı yüksek olan önde; sonra ortak birincilik', async () => {
+    const { siralama } = await ek();
+    const s = siralama([
+      { ad: 'Ali', dogru: 8, katsayi: 14 },
+      { ad: 'Ece', dogru: 8, katsayi: 17 },
+      { ad: 'Can', dogru: 9, katsayi: 9 }, // daha çok doğru, katsayı düşük de olsa önde
+      { ad: 'Zeynep', dogru: 8, katsayi: 17 }, // Ece ile tam eşit
+    ]);
+    expect(s.map((x) => x.ad)).toEqual(['Can', 'Ece', 'Zeynep', 'Ali']);
+    expect(s.map((x) => x.sira)).toEqual([1, 2, 2, 4]);
+  });
 
   it('KK-114: doğru ve katsayı eşitse hepsi birinci (birden çok birinci olabilir; bugün de geçer, bozulmasın)', async () => {
     const { siralama } = await ek();
@@ -276,41 +267,38 @@ describe('KK-114: eşitlikte zorluk katsayısı (kolay 1, orta 2, zor 3)', () =>
     ).toEqual([1, 1, 3]);
   });
 
-  kabulBeraberlik(
-    'KK-114: turSonucu katsayıyı soru zorluklarından hesaplar (aynı doğru sayısında zor soruyu bilen kazanır)',
-    async () => {
-      const q = (await yukle()) as unknown as {
-        baslat(
-          paket: string,
-          havuz: Soru[],
-          tohum: number,
-          oyuncular: string[],
-        ): {
-          sorular: Soru[];
-          [k: string]: unknown;
-        };
-        cevapla(d: unknown, oyuncu: number, sik: number): unknown;
-        ilerle(d: unknown): unknown;
-        turSonucu(d: unknown): { ad: string; dogru: number; sira: number }[];
-      };
-      let d = q.baslat('p', havuzYap(8, 8, 8), 5, ['Ali', 'Ece']) as {
+  it('KK-114: turSonucu katsayıyı soru zorluklarından hesaplar (aynı doğru sayısında zor soruyu bilen kazanır)', async () => {
+    const q = (await yukle()) as unknown as {
+      baslat(
+        paket: string,
+        havuz: Soru[],
+        tohum: number,
+        oyuncular: string[],
+      ): {
         sorular: Soru[];
+        [k: string]: unknown;
       };
-      const n = d.sorular.length; // 10: 3 kolay, 4 orta, 3 zor
-      for (let k = 0; k < n; k++) {
-        const dogru = d.sorular[k].dogru;
-        const yanlis = (dogru + 1) % 4;
-        // Ali: ilk (kolay) soruyu yanlış, geri kalanı doğru. Ece: son (zor) soruyu yanlış, geri kalanı doğru.
-        d = q.cevapla(d, 0, k === 0 ? yanlis : dogru) as typeof d;
-        d = q.cevapla(d, 1, k === n - 1 ? yanlis : dogru) as typeof d;
-        d = q.ilerle(d) as typeof d;
-      }
-      const s = q.turSonucu(d);
-      expect(s.map((x) => x.dogru)).toEqual([9, 9]);
-      expect(s.map((x) => x.ad)).toEqual(['Ali', 'Ece']); // Ali 19 > Ece 17
-      expect(s.map((x) => x.sira)).toEqual([1, 2]);
-    },
-  );
+      cevapla(d: unknown, oyuncu: number, sik: number): unknown;
+      ilerle(d: unknown): unknown;
+      turSonucu(d: unknown): { ad: string; dogru: number; sira: number }[];
+    };
+    let d = q.baslat('p', havuzYap(8, 8, 8), 5, ['Ali', 'Ece']) as {
+      sorular: Soru[];
+    };
+    const n = d.sorular.length; // 10: 3 kolay, 4 orta, 3 zor
+    for (let k = 0; k < n; k++) {
+      const dogru = d.sorular[k].dogru;
+      const yanlis = (dogru + 1) % 4;
+      // Ali: ilk (kolay) soruyu yanlış, geri kalanı doğru. Ece: son (zor) soruyu yanlış, geri kalanı doğru.
+      d = q.cevapla(d, 0, k === 0 ? yanlis : dogru) as typeof d;
+      d = q.cevapla(d, 1, k === n - 1 ? yanlis : dogru) as typeof d;
+      d = q.ilerle(d) as typeof d;
+    }
+    const s = q.turSonucu(d);
+    expect(s.map((x) => x.dogru)).toEqual([9, 9]);
+    expect(s.map((x) => x.ad)).toEqual(['Ali', 'Ece']); // Ali 19 > Ece 17
+    expect(s.map((x) => x.sira)).toEqual([1, 2]);
+  });
 
   it('KK-114: katsayı verilmediyse eski kural (eşit doğru = aynı sıra) bozulmaz', async () => {
     const { siralama } = await ek();
