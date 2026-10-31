@@ -12,6 +12,7 @@ import { bosluk, cizgi, font, renkler, yaricap } from '../../tema';
 import { Dugme, Ekran, Yazi } from '../../ui';
 import { IkonDugme } from '../ortak/ortak';
 import { GizliPaylasim, PaylasDugmesi, usePaylas } from '../ortak/paylasim';
+import { paketBasligi } from '../../games/quiz-night/arayuz';
 import { quizPaketi } from './paketler';
 
 const r = renkler.koyu;
@@ -22,7 +23,13 @@ const kt = (fontSize: number) => ({
 });
 
 // Paylaşım kartı (9:16, koyu tema): paket, birinci(ler) ya da oyuncunun kendisi, puan, unvan. Soru/cevap yok.
-function Kart({ k }: { k: ReturnType<typeof paylasimKarti> }) {
+function Kart({
+  k,
+  baslik,
+}: {
+  k: ReturnType<typeof paylasimKarti>;
+  baslik: string;
+}) {
   return (
     <View
       testID="quiz-kart"
@@ -39,7 +46,8 @@ function Kart({ k }: { k: ReturnType<typeof paylasimKarti> }) {
       }}
     >
       <Text style={kt(11)}>
-        {k.kupa ? '🏆 ' : ''}NE KADAR {k.paket.toLocaleUpperCase('tr')} FANISIN?
+        {k.kupa ? '🏆 ' : ''}
+        {baslik.toLocaleUpperCase('tr')}
       </Text>
       {k.kupa && <Text style={kt(28)}>{k.adlar.join(' & ')}</Text>}
       <Text style={kt(72)}>{k.puan}</Text>
@@ -51,6 +59,7 @@ function Kart({ k }: { k: ReturnType<typeof paylasimKarti> }) {
 type Sonuc = ReturnType<typeof turSonucu>;
 type Veri = {
   ad: string;
+  baslik: string;
   unvanlar: string[];
   sonuc: Sonuc;
   kisi: number; // 1 = tek başına
@@ -66,6 +75,7 @@ export function QuizSonuc({ durum, onBaskaPaket, ...o }: Props) {
   const paket = quizPaketi(durum.paket);
   const v: Veri = {
     ad: paket.ad,
+    baslik: paketBasligi(paket),
     unvanlar: paket.unvanlar,
     sonuc: turSonucu(durum),
     kisi: durum.oyuncular.length,
@@ -133,7 +143,7 @@ export function QuizSonucGorunum({
           <Yazi tur="etiket" style={{ color: renk.kontur }}>
             {grup
               ? `🏆 ${birinciler.length > 1 ? 'Ortak birinci' : 'Birinci'}`
-              : `Ne kadar ${paket.ad} fanısın?`}
+              : v.baslik}
           </Yazi>
           {grup && (
             <Yazi tur="baslik" style={{ color: renk.kontur }}>
@@ -219,7 +229,7 @@ export function QuizSonucGorunum({
       </View>
       <Dugme tur="ikincil" etiket="Ana ekran" onPress={onAnaMenu} />
       <GizliPaylasim gorunum={paylas.ref} baslik="Quiz Night">
-        <Kart k={kart} />
+        <Kart k={kart} baslik={v.baslik} />
       </GizliPaylasim>
     </Ekran>
   );
