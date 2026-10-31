@@ -483,7 +483,7 @@ Oyunun kişi aralığı `minOyuncu` (varsayılan 2) ile genel üst sınır 12 ar
 ### Kabul kriterleri (v8.1)
 - [ ] KK-101: Açılış ekranındaki "Kafadar" yazısı, ana ekrandaki "Kafadar" logosuyla aynı yazı tipinde ve aynı kalınlıkta görünür. Bu hem telefonda (Expo Go) hem web'de geçerlidir. Logo, yazı tipi hazır olmadan çizilmez. Yazı tipi yüklenemezse iki ekran da sistem yazı tipiyle açılır ve açılış ekranı takılı kalmaz (KK-96).
 - [ ] KK-102: Ana ekranda "Bir oyun seç, telefonu ele ver." yazısı yoktur ve yerine başka bir yazı gelmez.
-- [ ] KK-103: Ana ekranda oyun listesinin üstünde yatay, tek seçimli bir çip satırı vardır. Sıra şudur: Tümü · 1 kişi · 2 kişi · 3+ kişi. Kişi çiplerinin hepsi aynı biçimdedir: rakam, ardından "kişi". Dört çip de her zaman görünür; eşleşen oyun olmasa da görünür. Uygulama açılınca "Tümü" seçilidir ve seçim uygulama kapanınca hatırlanmaz. Seçili çipe ya da "Tümü"ne dokunmak filtreyi kaldırır.
+- [ ] KK-103 (v11: çipler alttaki dock'a taşınır → KK-128): Ana ekranda oyun listesinin üstünde yatay, tek seçimli bir çip satırı vardır. Sıra şudur: Tümü · 1 kişi · 2 kişi · 3+ kişi. Kişi çiplerinin hepsi aynı biçimdedir: rakam, ardından "kişi". Dört çip de her zaman görünür; eşleşen oyun olmasa da görünür. Uygulama açılınca "Tümü" seçilidir ve seçim uygulama kapanınca hatırlanmaz. Seçili çipe ya da "Tümü"ne dokunmak filtreyi kaldırır.
 - [ ] KK-104: Bir çipe dokunulunca listede yalnızca kişi aralığı çipin aralığıyla kesişen oyunlar kalır ("Çip kuralları" tablosu) ve sıraları değişmez.
   - "Yakında" durumundaki oyunlar da aynı kurala uyar.
   - `minOyuncu` 1 olan bir oyun "1 kişi" çipinde görünür ve kartında "1–12 kişi" yazar.
@@ -523,7 +523,7 @@ Kafadar'ın tek başına oynanabilen ilk oyunudur: `minOyuncu` 1'dir ve "1 kişi
 5. **Sonuç:** Büyük "8/10" ve paketin unvanı. Grupta ve odada sıralama ile herkesin unvanı gösterilir. Birinci 🏆 ve esprili unvanıyla en üstte öne çıkar; eşit doğru sayısında zor sorular daha çok sayılır. "Tekrar" ve "Başka paket" düğmeleri ile 9:16 paylaşım kartı vardır.
 
 ### Kabul kriterleri (v9)
-- [ ] KK-106: Ana ekranda 🧠 Quiz Night kartı vardır ve kartta "1–12 kişi" yazar. Kart "Tümü", "1 kişi", "2 kişi" ve "3+ kişi" çiplerinin hepsinde görünür. ⓘ "Nasıl oynanır" metni üç modu da kısaca anlatır (KK-91).
+- [ ] KK-106 (v11: emoji kalkar, ikon KK-127 ve KK-134): Ana ekranda Quiz Night kartı vardır ve kartta "1–12 kişi" yazar. Kart "Tümü", "1 kişi", "2 kişi" ve "3+ kişi" çiplerinin hepsinde görünür. ⓘ "Nasıl oynanır" metni üç modu da kısaca anlatır (KK-91).
 - [ ] KK-107: Quiz Night'ta "Tek başına · Tek telefonda grup · Oda kur · Odaya katıl" seçimi vardır.
   - "Tek başına" oyuncular ekranını atlar ve doğrudan paket seçimine gider.
   - "Tek telefonda grup" 2–12 oyuncuyla mevcut oyuncular ekranını kullanır.
@@ -659,7 +659,7 @@ Oyun kuralları (tur, puan, unvan, modlar) değişmez. Değişen yalnızca paket
   - Paketi olmayan kategorinin çipi görünmez. Paketi olan tek bir kategori varsa çip satırı hiç görünmez.
   - Süzme ve görünür çipler saf fonksiyonlardır. Türk / Yabancı çipi kaldırılır.
   - Çiplerin dokunma alanı en az 48px'tir ve ekran okuyucu seçili çipi "seçili" diye okur (KK-85 gibi).
-- [ ] KK-122: Paket kartında düz metin başlık, bir emoji ve not bulunur.
+- [ ] KK-122 (v11: emoji yerine görsel → KK-131, KK-132): Paket kartında düz metin başlık, bir emoji ve not bulunur.
   - Başlık: `baslik` varsa odur, yoksa "Ne kadar <ad> fanısın?". Kart, sonuç ekranı, paylaşım kartı ve oda aynı başlığı gösterir.
   - Notlar: Dizi & Film için "Resmî değildir · Spoiler içerir", Müzik için "Resmî değildir · Sanatçıyla bağlantısı yoktur", Spor için "Resmî değildir · Kulüple bağlantısı yoktur".
   - Türk / Yabancı etiketi yalnızca Dizi & Film kartında görünür.
@@ -707,6 +707,124 @@ Oyun kuralları (tur, puan, unvan, modlar) değişmez. Değişen yalnızca paket
 - **Yeni sanatçılar:** Manifest gibi yeni gruplarda kaynak az olabilir. Yedek kural KK-125'te.
 - **Taraftar hassasiyeti:** Kulüp sorusundaki tek bir yanlış bilgi tepki çeker. Uyum kuralı ve tartışmalı konu yasağı bu yüzden var.
 - **Marka:** Kulüp adları tescilli marka. Risk sıfır değildir; mağazaya çıkmadan önce avukata danışılır (#218).
+
+## v11: Görsel yenileme — ana ekran ve paket ekranı (Semih, 31.10.2026) — ONAY BEKLİYOR
+Issue'lar:
+- #292 tasarım: açık tema, eksik durumlar, uygulamaya hazır görsel seti (tasarim; PR #291 merge edildi)
+- #293 kabul testleri (qa; bu PRD merge edilince)
+- #294 paket `gorsel` alanı, oyun kaydı, son oynanan (backend; #292 ve #293 bitince)
+- #295 ana ekran (frontend; #292, #293 ve #294 bitince)
+- #296 paket ekranı (frontend; #295'ten sonra)
+
+Semih'in isteği (msg 1034): Uygulama "her şey liste" gibi duruyor ve çok sade. Daha 3D bir görünüm isteniyor: emoji yerine görseller, telefonun ana ekranı gibi bir düzen. Her oyun bir uygulama ikonu gibi olacak, adı altında küçük yazacak.
+Konsept #290'da çizildi ve seçildi: PR #291, `design/290-gorsel-yenileme/` (`ana.png`, `paket.png`, `gorsel/`).
+
+Kapsam yalnızca **ana ekran** ve **Quiz Night paket ekranı**. Oyun kuralları ve diğer ekranlar değişmez.
+
+### Akış
+1. Ana ekran telefonun ana ekranına benzer, yukarıdan aşağıya şöyle dizilir:
+   - "Kafadar" logosu ve dişli görselli Ayarlar düğmesi.
+   - "Son oynanan" kartı. Hiç oyun oynanmadıysa onun yerine "Öne çıkan" kartı.
+   - 2 sütunlu oyun ikonları. Her ikonun altında oyunun adı ve kişi sayısı yazar.
+   - "Kuralları görmek için oyuna basılı tut" ipucu.
+   - En altta sabit bir dock'ta "Kaç kişisiniz?" yazısı ve kişi çipleri.
+2. İkona dokunmak oyuna girer (bugünkü gibi tek dokunuş). İkona basılı tutmak oyunun tanıtım kartını açar; kart "Tamam" ile kapanır.
+3. Quiz Night paket ekranında her paket büyük bir 3D karttır. Kartta şunlar bulunur:
+   - Kategori deseni: Dizi & Film için film şeridi, Müzik için plak, Spor için saha çizgisi.
+   - Sağda paketin 3D nesnesi.
+   - Başlık, etiket ve not.
+
+### Kabul kriterleri (v11)
+- [ ] KK-127: Ana ekranda oyunlar 2 sütunlu bir ızgarada ikon olarak görünür. Liste görünümü kalkar.
+  - İkon yuvarlatılmış bir karedir: oyuna özel logo zemini, çıkartma konturu ve gölgesi, üstünde oyunun 3D nesnesi. Nesne büyüktür ama kırpılmaz.
+  - İkonun altında oyunun adı ve kişi sayısı yazar ("2–12 kişi", KK-89). Yazı en az 12px'tir.
+  - İkonların sırası kayıttaki sıradır.
+  - Yeni oyun yine tek bir kayıt satırıyla eklenir (KK-2) ve kayıt satırı ikonu da taşır. Görseli olmayan oyun kaydı testte reddedilir.
+- [ ] KK-128: Kişi çipleri ekranın altındaki sabit bir dock'tadır ve üstünde "Kaç kişisiniz?" yazar. Bu, KK-103'teki "listenin üstünde" konumunun yerini alır.
+  - Çiplerin sırası, biçimi ve süzme kuralı KK-103 ile KK-104'teki gibidir.
+  - Süzülen oyunların ikonu ızgaradan çıkar; kalanların sırası değişmez.
+  - Eşleşen oyun yoksa ızgaranın yerinde "Bu kişi sayısına uygun oyun henüz yok." yazar.
+  - Izgara kaydırılsa da dock görünür kalır.
+- [ ] KK-129: Ana ekranın üstünde tek bir kart vardır:
+  - **Son oynanan:** Bu telefonda en az bir oyun başlatıldıysa görünür. Son başlatılan oyunun ikonunu, adını ve bir alt satırı gösterir. Alt satırda kişi sayısı ve varsa paket adı yazar (ör. "4 kişi · Aile paketi"). Alt satır tek satırdır, sığmazsa "…" ile kısalır.
+  - **Öne çıkan:** Hiç oyun başlatılmadıysa ya da son oyun kayıttan kalkmışsa görünür. Kayıtta öne çıkan olarak işaretli tek oyunu gösterir (bugün Quiz Night).
+  - "Oyna" düğmesi, o oyunun ikonuna dokunmakla aynı yere gider. Oyuncular ve paket ekranları son seçimleri bugünkü gibi hatırlar; yeni bir kısayol akışı eklenmez.
+  - Kart kişi çipleriyle süzülmez.
+  - Son oynanan bilgisi yalnızca telefonda saklanır, sunucuya gitmez.
+  - Kartta hangi oyunun gösterileceğini seçen kural saf bir fonksiyondur ve ekransız test edilir.
+- [ ] KK-130: İkona basılı tutmak (yaklaşık yarım saniye) o oyunun tanıtım kartını açar. Kart "Tamam" ile kapanır ve kullanıcı ana ekranda kalır.
+  - Ana ekranda ⓘ düğmesi yoktur (KK-91). Izgaranın altında "Kuralları görmek için oyuna basılı tut" yazar.
+  - Ekran okuyucu kullananlar için ikonda "Nasıl oynanır" erişilebilirlik eylemi vardır.
+  - Oyun içindeki ⓘ düğmeleri değişmez (KK-91, KK-92).
+- [ ] KK-131: Paket ekranında her paket büyük bir karttır. Bu, KK-122'deki "bir emoji" maddesinin yerini alır.
+  - Kartın zemini kategorinin desenidir: Dizi & Film için film şeridi, Müzik için plak, Spor için saha çizgisi. Kulüp rengi kullanılmaz.
+  - Kartta paketin 3D nesnesi büyük görünür ve kırpılmaz.
+  - Başlık, Türk / Yabancı etiketi ve not KK-122'deki gibidir; yalnızca emoji yerine görsel gelir.
+  - Kategori çipleri KK-121'deki gibidir.
+- [ ] KK-132: Her Quiz Night paketinde zorunlu bir `gorsel` alanı vardır ve bu alan uygulamadaki bir görsel dosyasını gösterir. `emoji` alanı kalkar.
+  - `npm run icerik` alanı ve dosyanın varlığını denetler; eksikse CI kırmızı olur.
+  - Aynı kategorideki paketler aynı görseli paylaşabilir. Bugün üç Spor paketi de kupayı kullanır.
+- [ ] KK-133: Görseller:
+  - Hepsi bizim üretimimizdir: Three.js render ya da çizim. Kaynakları `design/290-gorsel-yenileme/gorsel/` altındadır ve her görselin kaynağı `LISANS.md`'de yazılıdır.
+  - Emoji, hazır ikon seti, web görseli, logo, arma ve gerçek kişi görseli kullanılmaz.
+  - Görseller uygulamayla birlikte gelir, ağdan indirilmez. Uygulama çevrimdışı çalışmaya devam eder.
+  - Her görsel en fazla 50 KB'tır. Eklenen görsellerin toplamı en fazla 1 MB'tır.
+  - Uygulamaya yeni bağımlılık eklenmez. Three.js ve Google Fonts yalnızca `design/` altındaki HTML'lerde kullanılır.
+- [ ] KK-134: Ana ekranda ve paket ekranında emoji karakteri yoktur. Bu bir testle denetlenir. Quiz Night ikonunda da emoji yoktur; KK-106'daki 🧠 bununla kalkar.
+- [ ] KK-135: Erişilebilirlik ve tema:
+  - Dokunma alanları en az 48px'tir (KK-85). Metin kontrastı en az 4.5:1'dir.
+  - Ekran okuyucu ikonu "<oyun adı>, <kişi sayısı>" diye okur, paket kartını başlığıyla okur. Görseller dekoratiftir.
+  - Basınca ikon hafifçe küçülür. "Hareketi azalt" açıksa bu animasyon yapılmaz.
+  - Ekranlar koyu ve açık temada çalışır. Stil değerleri `src/tema.ts` token'larından gelir.
+- [ ] KK-136: Diğer akışlar değişmez: açılış ekranı, oyun ekranları, oda modu ve "Devam et".
+  - Mevcut kabul testleri yeşil kalır. Değişen kriterlerin testleri (KK-103, KK-106, KK-122) güncellenir.
+  - Görünüm önce/sonra ekran görüntüsüyle ve `docs/GERCEK-CIHAZ-KONTROL.md`'deki v11 maddeleriyle kontrol edilir. Piksel karşılaştırması yapılmaz.
+  - `CLAUDE.md`, `docs/MIMARI.md` ve `design/TASARIM-SISTEMI.md` güncellenir.
+
+### Kapsam dışı (v11)
+- Ana ekran ve paket ekranı dışındaki ekranlar: oyun ekranları, sonuç, paylaşım kartı, oda. Buralarda bugün 25 dosyada yaklaşık 50 emoji var; bunlar ayrı bir işte (v11.1) temizlenir. Kararlar tablosuna bakın.
+- Uygulama simgesi (mağaza ikonu).
+- Uygulamada dönen ya da canlı 3D model. Görseller sabit resimdir.
+- Ana ekranı kişiselleştirme: ikon taşıma, gizleme.
+
+### Kararlar (v11)
+| Karar | Seçim | Gerekçe | Karar veren |
+|---|---|---|---|
+| Ana ekran düzeni | Konsept A: telefon ana ekranı, 2 sütun ikon, üstte Son oynanan / Öne çıkan, altta dock'ta kişi çipleri | Semih'in önerisi; 3 konsept arasından seçildi | Semih (31.10.2026, msg 1051) |
+| Emoji | Kullanılmaz | "Ben emoji istemiyorum" | Semih (msg 1051) |
+| Görsel kaynağı | Hepsi bizim üretimimiz, yöntem Three.js render | Hazır setler emoji gibi duruyordu; kendi üretimimizde lisans sorunu da yok | Semih (msg 1059, 1061, 1069) |
+| İkon kaplama | C: nesne büyük ama kırpılmıyor | Küçük boyda kırpılan nesne tanınmıyor | Semih (msg 1082: "agentlarla ortak öneriyi uygula") |
+| Paket ekranı | b: büyük 3D kartlar | Paket sayısı az, görseller burada öne çıksın | Semih (msg 1082) |
+| Ana ekranda kurallar | ⓘ yok; basılı tutma ve ipucu satırı var | Izgara sade kalır; oyun içindeki ⓘ değişmez | tasarim önerisi, Semih (msg 1041) |
+| Öne çıkan oyun | Quiz Night | En yeni oyun | pm varsayılanı |
+| "Oyna" düğmesi | İkona dokunmakla aynı yere gider | Yeni akış yok, kapsam küçük kalır | pm varsayılanı |
+| Paket görseli | `gorsel` zorunlu, `emoji` kalkar | Emoji yedeği istenmiyor; eksik görsel CI'da yakalanır | pm varsayılanı (backend isteğe bağlı alan ve emoji yedeği önermişti) |
+| Görsel biçimi | Uygulamayla gelir, her biri ≤50 KB. PNG mi WebP mi, logo zemini resim mi stil mi: frontend ve tasarim karar verir (#292) | Teknik ayrıntı | backend ve frontend görüşü |
+| Diğer ekranlardaki emoji | v11.1'de ayrı işte metin ya da sade işaretle değiştirilir | v11 küçük kalır, görünür sonuç daha hızlı gelir | pm varsayılanı (Semih isterse v11'e eklenir, iş L'ye büyür) |
+
+### Riskler (v11)
+- **Uygulama boyutu:** Yaklaşık 14 görsel ekleniyor; sınırlar KK-133'te.
+- **Açık tema:** Konsept yalnızca koyu temada çizildi. Açık tema #292'de çizilecek.
+- **Kırılan testler:** registry, kategori, tanıtım, uygulama ve açılış kabul testleri. qa önce bunları günceller (#293).
+- **Uzun basma bilinmeyebilir:** İpucu satırı bunu karşılar. Ekran okuyucu kullananlar için erişilebilirlik eylemi var (KK-130).
+
+### Ekip görüşleri (v11 fikir turu)
+- **tasarim:**
+  - 3 konsept × 2 ekran çizdi.
+  - A için önerileri: 2 sütun, Son oynanan widget'ı, dock, ⓘ yerine basılı tutma.
+  - İkonda C'yi önerdi.
+- **backend:**
+  - Pakete görsel alanı eklenmeli, görseller uygulamayla gelmeli.
+  - Görsel başına 30–50 KB, her görselin lisans kaydı tutulmalı.
+  - Büyüklük: S.
+- **frontend:**
+  - Yeni bağımlılık yok. 256px görsel, sert gölge, basınca küçülme.
+  - Büyüklük: ana ekran M, tüm ekranlar L.
+- **qa:**
+  - Önce PRD'deki ana ekran KK'ları güncellenmeli.
+  - Erişilebilirlik: ≥12px, 4.5:1 kontrast, ≥48px dokunma alanı, ekran okuyucu etiketi, hareketi azalt.
+  - Piksel karşılaştırması yok. Görsel PR'ı koddan ayrı açılmalı.
+  - Büyüklük: L.
 
 ## Geliştirme ilkesi (Semih, 27.10.2026)
 **Overengineering yok.** En az kodla, en basit çözüm, yalnızca bugünkü ihtiyaç kadar. Yapı genişlemeye açık olacak ama ileriye dönük soyutlama, genel çerçeve ya da "belki lazım olur" kodu yazılmayacak. Yeni bağımlılık yalnızca gerçekten gerekiyorsa eklenir ve PR'da gerekçesi yazılır. Aşağıdaki mimari şartlar bu ilkeye göre en sade haliyle uygulanır. Örneğin oyun kayıt listesi basit bir dizidir, eklenti çatısı değildir.

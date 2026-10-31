@@ -151,4 +151,21 @@ En az 3 telefon (karışık iOS/Android), aynı Wi-Fi ve en az bir telefonda mob
 | 11 | KK-123 | Müzik/Spor içerik insan incelemesi (`docs/quiz/<paket>.md`): eskimeyen bilgi, güncel kadro/transfer/puan durumu yok, tartışmalı konu ve marş sözü yok, şarkı sözü/"şarkıyı tanı" yok, yalnız kamusal kariyer, unvanlarda aşağılama/argo yok; KK-116 kaynak/uyum kuralları geçerli | | |
 | 12 | KK-125 | İlk içerik oyunda: Spor 3 paket, Müzik 4 paket, her biri oynanabiliyor (24 soru, 4 unvan) | | |
 
+## Görsel yenileme (v11: KK-127…KK-136)
+
+Taslak: pm (PRD v11). qa #293'te maddeleri ayrıntılandırır ve testleri ekler.
+
+| # | KK | Kontrol | iOS | Android |
+|---|---|---|---|---|
+| 1 | KK-127 | Ana ekran 2 sütunlu ikon ızgarası; ikonda logo zemini, kontur, gölge ve kırpılmamış 3D nesne; altında ad ve "2–12 kişi" okunuyor | | |
+| 2 | KK-128 | Kişi çipleri alttaki dock'ta, "Kaç kişisiniz?" yazıyor; süzünce ikonlar çıkıyor, sıra değişmiyor; kaydırınca dock yerinde | | |
+| 3 | KK-129 | İlk açılışta "Öne çıkan" (Quiz Night); bir oyun oynayınca "Son oynanan" ve doğru alt satır; "Oyna" ikonla aynı yere gidiyor | | |
+| 4 | KK-130 | İkona basılı tutunca tanıtım kartı açılıyor, "Tamam" ile ana ekranda kalınıyor; ipucu satırı var; VoiceOver/TalkBack'te "Nasıl oynanır" eylemi | | |
+| 5 | KK-131 | Paket ekranı büyük kartlar: kategori deseni, kırpılmamış nesne, başlık, etiket ve not; kulüp rengi yok | | |
+| 6 | KK-132 | Her paket kartında kendi görseli var; Spor paketlerinde kupa | | |
+| 7 | KK-133 | Uçak modunda görseller yükleniyor; logo, arma, emoji ya da gerçek kişi görseli yok | | |
+| 8 | KK-134 | Ana ekranda ve paket ekranında hiç emoji yok | | |
+| 9 | KK-135 | Koyu ve açık temada okunuyor; dokunma alanları rahat; "Hareketi azalt" açıkken basma animasyonu yok | | |
+| 10 | KK-136 | Açılış, oyun ekranları, oda modu ve "Devam et" eskisi gibi çalışıyor | | |
+
 **Sonuç:** ☐ iOS geçti  ☐ Android geçti  İmza: ______
