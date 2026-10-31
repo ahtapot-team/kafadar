@@ -11,9 +11,6 @@
 //   siralama(oyuncular: { ad: string; dogru: number }[]): { ad: string; dogru: number; sira: number }[]
 //       doğru sayısına göre azalan; eşit doğru = aynı `sira` (ilk sıra 1); eşitlerde girdi sırası korunur.
 import { describe, expect, it } from 'vitest';
-import { BEKLEYEN } from '../../kabul';
-
-const kabulQuiz = BEKLEYEN.quizModul ? it.fails : it;
 
 type Zorluk = 'kolay' | 'orta' | 'zor';
 type Soru = {
@@ -65,101 +62,83 @@ const ZORLUKLAR = [
 const idler = (t: Soru[]) => t.map((s) => s.id);
 
 describe('KK-109: tur seçimi (tohumlu, saf)', () => {
-  kabulQuiz(
-    'KK-109: 10 soru; 3 kolay + 4 orta + 3 zor, kolaydan zora',
-    async () => {
-      const { turSec } = await yukle();
-      for (const tohum of [1, 2, 3, 42, 999]) {
-        const tur = turSec(havuzYap(8, 8, 8), tohum);
-        expect(tur).toHaveLength(10);
-        expect(tur.map((s) => s.zorluk)).toEqual(ZORLUKLAR);
+  it('KK-109: 10 soru; 3 kolay + 4 orta + 3 zor, kolaydan zora', async () => {
+    const { turSec } = await yukle();
+    for (const tohum of [1, 2, 3, 42, 999]) {
+      const tur = turSec(havuzYap(8, 8, 8), tohum);
+      expect(tur).toHaveLength(10);
+      expect(tur.map((s) => s.zorluk)).toEqual(ZORLUKLAR);
+    }
+  });
+
+  it('KK-109: sorular havuzdan ve tekrarsız (en dar havuz 6/6/6 dahil)', async () => {
+    const { turSec } = await yukle();
+    for (const [k, o, z] of [
+      [8, 8, 8],
+      [6, 6, 6],
+      [10, 10, 10],
+    ]) {
+      const havuz = havuzYap(k, o, z);
+      const kimlikler = new Set(havuz.map((s) => s.id));
+      for (const tohum of [1, 7, 123]) {
+        const tur = idler(turSec(havuz, tohum));
+        expect(new Set(tur).size).toBe(10);
+        expect(tur.every((id) => kimlikler.has(id))).toBe(true);
       }
-    },
-  );
+    }
+  });
 
-  kabulQuiz(
-    'KK-109: sorular havuzdan ve tekrarsız (en dar havuz 6/6/6 dahil)',
-    async () => {
-      const { turSec } = await yukle();
-      for (const [k, o, z] of [
-        [8, 8, 8],
-        [6, 6, 6],
-        [10, 10, 10],
-      ]) {
-        const havuz = havuzYap(k, o, z);
-        const kimlikler = new Set(havuz.map((s) => s.id));
-        for (const tohum of [1, 7, 123]) {
-          const tur = idler(turSec(havuz, tohum));
-          expect(new Set(tur).size).toBe(10);
-          expect(tur.every((id) => kimlikler.has(id))).toBe(true);
-        }
+  it('KK-109: aynı tohum aynı turu verir; farklı tohumlar farklı tur verir', async () => {
+    const { turSec } = await yukle();
+    const havuz = havuzYap(9, 9, 9);
+    expect(turSec(havuz, 5)).toEqual(turSec(havuz, 5));
+    expect(turSec(havuz, 5, ['kolay-1'])).toEqual(
+      turSec(havuz, 5, ['kolay-1']),
+    );
+    const turlar = new Set(
+      Array.from({ length: 20 }, (_, i) => idler(turSec(havuz, i)).join()),
+    );
+    expect(turlar.size).toBeGreaterThan(1);
+  });
+
+  it('KK-109: şık sırası karışır; doğru şıkkın metni değişmez, dogru yeni sıraya işaret eder', async () => {
+    const { turSec } = await yukle();
+    const havuz = havuzYap(8, 8, 8);
+    const asil = new Map(havuz.map((s) => [s.id, s]));
+    let degisen = 0;
+    for (let tohum = 0; tohum < 30; tohum++) {
+      for (const s of turSec(havuz, tohum)) {
+        const o = asil.get(s.id)!;
+        expect([...s.secenekler].sort()).toEqual([...o.secenekler].sort());
+        expect(s.secenekler[s.dogru]).toBe(o.secenekler[o.dogru]);
+        if (s.secenekler.join() !== o.secenekler.join()) degisen++;
       }
-    },
-  );
+    }
+    expect(degisen).toBeGreaterThan(0);
+  });
 
-  kabulQuiz(
-    'KK-109: aynı tohum aynı turu verir; farklı tohumlar farklı tur verir',
-    async () => {
-      const { turSec } = await yukle();
-      const havuz = havuzYap(9, 9, 9);
-      expect(turSec(havuz, 5)).toEqual(turSec(havuz, 5));
-      expect(turSec(havuz, 5, ['kolay-1'])).toEqual(
-        turSec(havuz, 5, ['kolay-1']),
-      );
-      const turlar = new Set(
-        Array.from({ length: 20 }, (_, i) => idler(turSec(havuz, i)).join()),
-      );
-      expect(turlar.size).toBeGreaterThan(1);
-    },
-  );
-
-  kabulQuiz(
-    'KK-109: şık sırası karışır; doğru şıkkın metni değişmez, dogru yeni sıraya işaret eder',
-    async () => {
-      const { turSec } = await yukle();
-      const havuz = havuzYap(8, 8, 8);
-      const asil = new Map(havuz.map((s) => [s.id, s]));
-      let degisen = 0;
-      for (let tohum = 0; tohum < 30; tohum++) {
-        for (const s of turSec(havuz, tohum)) {
-          const o = asil.get(s.id)!;
-          expect([...s.secenekler].sort()).toEqual([...o.secenekler].sort());
-          expect(s.secenekler[s.dogru]).toBe(o.secenekler[o.dogru]);
-          if (s.secenekler.join() !== o.secenekler.join()) degisen++;
-        }
-      }
-      expect(degisen).toBeGreaterThan(0);
-    },
-  );
-
-  kabulQuiz(
-    'KK-109: bir önceki turun soruları sonraki turda gelmez (havuz yetiyorsa)',
-    async () => {
-      const { turSec } = await yukle();
-      const havuz = havuzYap(8, 8, 8); // her zorlukta 8 ≥ 3/4/3 + önceki turdan kalan
-      for (const tohum of [1, 2, 3, 50, 77]) {
-        const onceki = idler(turSec(havuz, tohum));
-        const yeni = turSec(havuz, tohum + 1000, onceki);
-        expect(idler(yeni).filter((id) => onceki.includes(id))).toEqual([]);
-        expect(yeni.map((s) => s.zorluk)).toEqual(ZORLUKLAR);
-      }
-    },
-  );
-
-  kabulQuiz(
-    'KK-109: havuz yetmiyorsa (6/6/6) yine 10 tekrarsız soru, kolay→zor düzeni bozulmaz',
-    async () => {
-      const { turSec } = await yukle();
-      const havuz = havuzYap(6, 6, 6);
-      const onceki = idler(turSec(havuz, 1));
-      const yeni = turSec(havuz, 2, onceki);
-      expect(yeni).toHaveLength(10);
-      expect(new Set(idler(yeni)).size).toBe(10);
+  it('KK-109: bir önceki turun soruları sonraki turda gelmez (havuz yetiyorsa)', async () => {
+    const { turSec } = await yukle();
+    const havuz = havuzYap(8, 8, 8); // her zorlukta 8 ≥ 3/4/3 + önceki turdan kalan
+    for (const tohum of [1, 2, 3, 50, 77]) {
+      const onceki = idler(turSec(havuz, tohum));
+      const yeni = turSec(havuz, tohum + 1000, onceki);
+      expect(idler(yeni).filter((id) => onceki.includes(id))).toEqual([]);
       expect(yeni.map((s) => s.zorluk)).toEqual(ZORLUKLAR);
-    },
-  );
+    }
+  });
 
-  kabulQuiz('KK-109: havuzu değiştirmez (saf)', async () => {
+  it('KK-109: havuz yetmiyorsa (6/6/6) yine 10 tekrarsız soru, kolay→zor düzeni bozulmaz', async () => {
+    const { turSec } = await yukle();
+    const havuz = havuzYap(6, 6, 6);
+    const onceki = idler(turSec(havuz, 1));
+    const yeni = turSec(havuz, 2, onceki);
+    expect(yeni).toHaveLength(10);
+    expect(new Set(idler(yeni)).size).toBe(10);
+    expect(yeni.map((s) => s.zorluk)).toEqual(ZORLUKLAR);
+  });
+
+  it('KK-109: havuzu değiştirmez (saf)', async () => {
     const { turSec } = await yukle();
     const havuz = havuzYap(8, 8, 8);
     const once = JSON.stringify(havuz);
@@ -169,24 +148,21 @@ describe('KK-109: tur seçimi (tohumlu, saf)', () => {
 });
 
 describe('KK-114: puan = doğru sayısı', () => {
-  kabulQuiz(
-    'KK-114: puan doğru cevap sayısıdır; yanlış düşürmez, sıra/hız etkilemez',
-    async () => {
-      const { puan } = await yukle();
-      expect(puan([])).toBe(0);
-      expect(puan(Array(10).fill(false))).toBe(0);
-      expect(puan(Array(10).fill(true))).toBe(10);
-      expect(
-        puan([true, false, true, false, false, true, true, true, false, true]),
-      ).toBe(6);
-      expect(puan([false, false, true])).toBe(puan([true, false, false]));
-    },
-  );
+  it('KK-114: puan doğru cevap sayısıdır; yanlış düşürmez, sıra/hız etkilemez', async () => {
+    const { puan } = await yukle();
+    expect(puan([])).toBe(0);
+    expect(puan(Array(10).fill(false))).toBe(0);
+    expect(puan(Array(10).fill(true))).toBe(10);
+    expect(
+      puan([true, false, true, false, false, true, true, true, false, true]),
+    ).toBe(6);
+    expect(puan([false, false, true])).toBe(puan([true, false, false]));
+  });
 });
 
 describe('KK-111: unvan basamakları 0–3, 4–6, 7–9, 10', () => {
   const unvanlar = ['Yabancı', 'Seyirci', 'Hayran', 'Baş hayran'];
-  kabulQuiz('KK-111: sınırlar 3/4, 6/7, 9/10', async () => {
+  it('KK-111: sınırlar 3/4, 6/7, 9/10', async () => {
     const { unvanSec } = await yukle();
     const beklenen = [0, 0, 0, 0, 1, 1, 1, 2, 2, 2, 3].map((i) => unvanlar[i]);
     for (let p = 0; p <= 10; p++)
@@ -198,38 +174,30 @@ describe('KK-111: unvan basamakları 0–3, 4–6, 7–9, 10', () => {
 });
 
 describe('KK-112: grup sonucu sıralaması', () => {
-  kabulQuiz(
-    'KK-112: doğru sayısına göre azalan; eşit puanlılar aynı sırada',
-    async () => {
-      const { siralama } = await yukle();
-      const s = siralama([
-        { ad: 'Ali', dogru: 5 },
-        { ad: 'Ece', dogru: 8 },
-        { ad: 'Can', dogru: 5 },
-        { ad: 'Zeynep', dogru: 2 },
-      ]);
-      expect(s.map((x) => x.ad)).toEqual(['Ece', 'Ali', 'Can', 'Zeynep']); // eşitlerde girdi sırası
-      expect(s[0].sira).toBe(1);
-      expect(s[1].sira).toBe(s[2].sira); // Ali = Can
-      expect(s[1].sira).toBeGreaterThan(s[0].sira);
-      expect(s[3].sira).toBeGreaterThan(s[2].sira);
-    },
-  );
+  it('KK-112: doğru sayısına göre azalan; eşit puanlılar aynı sırada', async () => {
+    const { siralama } = await yukle();
+    const s = siralama([
+      { ad: 'Ali', dogru: 5 },
+      { ad: 'Ece', dogru: 8 },
+      { ad: 'Can', dogru: 5 },
+      { ad: 'Zeynep', dogru: 2 },
+    ]);
+    expect(s.map((x) => x.ad)).toEqual(['Ece', 'Ali', 'Can', 'Zeynep']); // eşitlerde girdi sırası
+    expect(s[0].sira).toBe(1);
+    expect(s[1].sira).toBe(s[2].sira); // Ali = Can
+    expect(s[1].sira).toBeGreaterThan(s[0].sira);
+    expect(s[3].sira).toBeGreaterThan(s[2].sira);
+  });
 
-  kabulQuiz(
-    'KK-112: herkes aynı puandaysa herkes birinci; tek oyuncu birinci',
-    async () => {
-      const { siralama } = await yukle();
-      expect(
-        siralama([
-          { ad: 'A', dogru: 0 },
-          { ad: 'B', dogru: 0 },
-        ]).map((x) => x.sira),
-      ).toEqual([1, 1]);
-      expect(siralama([{ ad: 'A', dogru: 10 }]).map((x) => x.sira)).toEqual([
-        1,
-      ]);
-      expect(siralama([])).toEqual([]);
-    },
-  );
+  it('KK-112: herkes aynı puandaysa herkes birinci; tek oyuncu birinci', async () => {
+    const { siralama } = await yukle();
+    expect(
+      siralama([
+        { ad: 'A', dogru: 0 },
+        { ad: 'B', dogru: 0 },
+      ]).map((x) => x.sira),
+    ).toEqual([1, 1]);
+    expect(siralama([{ ad: 'A', dogru: 10 }]).map((x) => x.sira)).toEqual([1]);
+    expect(siralama([])).toEqual([]);
+  });
 });

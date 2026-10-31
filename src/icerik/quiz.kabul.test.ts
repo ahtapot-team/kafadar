@@ -13,7 +13,6 @@ import { readdirSync, readFileSync } from 'node:fs';
 import { describe, expect, it } from 'vitest';
 import { BEKLEYEN } from '../kabul';
 
-const kabulQuiz = BEKLEYEN.quizModul ? it.fails : it;
 const kabulIcerik = BEKLEYEN.quizIcerik ? it.fails : it;
 
 type Zorluk = 'kolay' | 'orta' | 'zor';
@@ -81,22 +80,19 @@ const gecersiz = async (p: unknown) =>
   expect((await yukle()).quizHatalari(p).length).toBeGreaterThan(0);
 
 describe('KK-115: paket alanları', () => {
-  kabulQuiz('KK-115: geçerli paket hatasız', async () => {
+  it('KK-115: geçerli paket hatasız', async () => {
     expect(await gecerli(taban())).toEqual([]);
   });
 
-  kabulQuiz(
-    'KK-115: koken yalnız tr ya da yabanci; id/ad/emoji boş olamaz',
-    async () => {
-      await gecersiz(boz((p) => (p.koken = 'ingiliz')));
-      await gecersiz(boz((p) => (p.koken = '')));
-      expect(await gecerli(boz((p) => (p.koken = 'yabanci')))).toEqual([]);
-      for (const alan of ['id', 'ad', 'emoji'] as const)
-        await gecersiz(boz((p) => (p[alan] = '  ')));
-    },
-  );
+  it('KK-115: koken yalnız tr ya da yabanci; id/ad/emoji boş olamaz', async () => {
+    await gecersiz(boz((p) => (p.koken = 'ingiliz')));
+    await gecersiz(boz((p) => (p.koken = '')));
+    expect(await gecerli(boz((p) => (p.koken = 'yabanci')))).toEqual([]);
+    for (const alan of ['id', 'ad', 'emoji'] as const)
+      await gecersiz(boz((p) => (p[alan] = '  ')));
+  });
 
-  kabulQuiz('KK-115: tam 4 unvan, her biri dolu', async () => {
+  it('KK-115: tam 4 unvan, her biri dolu', async () => {
     await gecersiz(boz((p) => (p.unvanlar = ['a', 'b', 'c'])));
     await gecersiz(boz((p) => (p.unvanlar = ['a', 'b', 'c', 'd', 'e'])));
     await gecersiz(boz((p) => (p.unvanlar = ['a', 'b', '', 'd'])));
@@ -109,101 +105,83 @@ describe('KK-115: paket alanları', () => {
 });
 
 describe('KK-115: havuz', () => {
-  kabulQuiz('KK-115: havuz 20–30 soru (19 ve 31 reddedilir)', async () => {
+  it('KK-115: havuz 20–30 soru (19 ve 31 reddedilir)', async () => {
     expect(await gecerli(taban(7, 7, 6))).toEqual([]); // 20
     expect(await gecerli(taban(10, 10, 10))).toEqual([]); // 30
     await gecersiz(taban(7, 6, 6)); // 19
     await gecersiz(taban(11, 10, 10)); // 31
   });
 
-  kabulQuiz(
-    'KK-115: her zorluktan en az 6 (5 reddedilir, 6 geçer)',
-    async () => {
-      expect(await gecerli(taban(6, 9, 9))).toEqual([]);
-      await gecersiz(taban(5, 10, 9));
-      await gecersiz(taban(9, 5, 10));
-      await gecersiz(taban(10, 9, 5));
-    },
-  );
+  it('KK-115: her zorluktan en az 6 (5 reddedilir, 6 geçer)', async () => {
+    expect(await gecerli(taban(6, 9, 9))).toEqual([]);
+    await gecersiz(taban(5, 10, 9));
+    await gecersiz(taban(9, 5, 10));
+    await gecersiz(taban(10, 9, 5));
+  });
 
-  kabulQuiz(
-    'KK-115: olay sorusu havuzun yarısından azdır (24 soruda 11 geçer, 12 = tam yarı reddedilir)',
-    async () => {
-      expect(await gecerli(taban(8, 8, 8, 11))).toEqual([]);
-      await gecersiz(taban(8, 8, 8, 12));
-      await gecersiz(taban(8, 8, 8, 24));
-      expect(await gecerli(taban(8, 8, 8, 0))).toEqual([]);
-      // 21 soruda yarı 10,5 → 10 geçer, 11 reddedilir
-      expect(await gecerli(taban(7, 7, 7, 10))).toEqual([]);
-      await gecersiz(taban(7, 7, 7, 11));
-    },
-  );
+  it('KK-115: olay sorusu havuzun yarısından azdır (24 soruda 11 geçer, 12 = tam yarı reddedilir)', async () => {
+    expect(await gecerli(taban(8, 8, 8, 11))).toEqual([]);
+    await gecersiz(taban(8, 8, 8, 12));
+    await gecersiz(taban(8, 8, 8, 24));
+    expect(await gecerli(taban(8, 8, 8, 0))).toEqual([]);
+    // 21 soruda yarı 10,5 → 10 geçer, 11 reddedilir
+    expect(await gecerli(taban(7, 7, 7, 10))).toEqual([]);
+    await gecersiz(taban(7, 7, 7, 11));
+  });
 
-  kabulQuiz(
-    'KK-115: aynı metinli iki soru olamaz (id farklı olsa da)',
-    async () => {
-      await gecersiz(boz((p) => (p.sorular[1].metin = p.sorular[0].metin)));
-    },
-  );
+  it('KK-115: aynı metinli iki soru olamaz (id farklı olsa da)', async () => {
+    await gecersiz(boz((p) => (p.sorular[1].metin = p.sorular[0].metin)));
+  });
 });
 
 describe('KK-115: her soru', () => {
   const sorulu = (f: (s: Soru) => void) => boz((p) => f(p.sorular[3]));
 
-  kabulQuiz('KK-115: benzersiz id', async () => {
+  it('KK-115: benzersiz id', async () => {
     await gecersiz(boz((p) => (p.sorular[1].id = p.sorular[0].id)));
     await gecersiz(sorulu((s) => (s.id = '')));
   });
 
-  kabulQuiz(
-    'KK-115: metin en çok 140 karakter (140 geçer, 141 reddedilir), boş olamaz',
-    async () => {
-      expect(await gecerli(sorulu((s) => (s.metin = 'a'.repeat(140))))).toEqual(
-        [],
-      );
-      await gecersiz(sorulu((s) => (s.metin = 'a'.repeat(141))));
-      await gecersiz(sorulu((s) => (s.metin = '   ')));
-    },
-  );
+  it('KK-115: metin en çok 140 karakter (140 geçer, 141 reddedilir), boş olamaz', async () => {
+    expect(await gecerli(sorulu((s) => (s.metin = 'a'.repeat(140))))).toEqual(
+      [],
+    );
+    await gecersiz(sorulu((s) => (s.metin = 'a'.repeat(141))));
+    await gecersiz(sorulu((s) => (s.metin = '   ')));
+  });
 
-  kabulQuiz('KK-115: tam 4 şık (3 ve 5 reddedilir)', async () => {
+  it('KK-115: tam 4 şık (3 ve 5 reddedilir)', async () => {
     await gecersiz(sorulu((s) => (s.secenekler = ['a', 'b', 'c'])));
     await gecersiz(sorulu((s) => (s.secenekler = ['a', 'b', 'c', 'd', 'e'])));
   });
 
-  kabulQuiz(
-    'KK-115: şık boş olamaz, en çok 40 karakter (40 geçer, 41 reddedilir)',
-    async () => {
-      await gecersiz(sorulu((s) => (s.secenekler[2] = '')));
-      await gecersiz(sorulu((s) => (s.secenekler[2] = '  ')));
-      expect(
-        await gecerli(sorulu((s) => (s.secenekler[2] = 'x'.repeat(40)))),
-      ).toEqual([]);
-      await gecersiz(sorulu((s) => (s.secenekler[2] = 'x'.repeat(41))));
-    },
-  );
+  it('KK-115: şık boş olamaz, en çok 40 karakter (40 geçer, 41 reddedilir)', async () => {
+    await gecersiz(sorulu((s) => (s.secenekler[2] = '')));
+    await gecersiz(sorulu((s) => (s.secenekler[2] = '  ')));
+    expect(
+      await gecerli(sorulu((s) => (s.secenekler[2] = 'x'.repeat(40)))),
+    ).toEqual([]);
+    await gecersiz(sorulu((s) => (s.secenekler[2] = 'x'.repeat(41))));
+  });
 
-  kabulQuiz(
-    'KK-115: şıklar birbirinin aynı olamaz (büyük/küçük harf ve boşluk yok sayılır)',
-    async () => {
-      await gecersiz(
-        sorulu((s) => (s.secenekler = ['Evet', 'Hayır', 'Evet', 'Belki'])),
-      );
-      await gecersiz(
-        sorulu((s) => (s.secenekler = ['Evet', 'Hayır', ' evet ', 'Belki'])),
-      );
-      await gecersiz(
-        sorulu((s) => (s.secenekler = ['Ali Veli', 'x', 'y', 'ali  veli'])),
-      );
-      expect(
-        await gecerli(
-          sorulu((s) => (s.secenekler = ['Evet', 'Hayır', 'Belki', 'Hiçbiri'])),
-        ),
-      ).toEqual([]);
-    },
-  );
+  it('KK-115: şıklar birbirinin aynı olamaz (büyük/küçük harf ve boşluk yok sayılır)', async () => {
+    await gecersiz(
+      sorulu((s) => (s.secenekler = ['Evet', 'Hayır', 'Evet', 'Belki'])),
+    );
+    await gecersiz(
+      sorulu((s) => (s.secenekler = ['Evet', 'Hayır', ' evet ', 'Belki'])),
+    );
+    await gecersiz(
+      sorulu((s) => (s.secenekler = ['Ali Veli', 'x', 'y', 'ali  veli'])),
+    );
+    expect(
+      await gecerli(
+        sorulu((s) => (s.secenekler = ['Evet', 'Hayır', 'Belki', 'Hiçbiri'])),
+      ),
+    ).toEqual([]);
+  });
 
-  kabulQuiz('KK-115: dogru 0–3 tam sayı', async () => {
+  it('KK-115: dogru 0–3 tam sayı', async () => {
     for (const d of [0, 1, 2, 3])
       expect(await gecerli(sorulu((s) => (s.dogru = d)))).toEqual([]);
     await gecersiz(sorulu((s) => (s.dogru = -1)));
@@ -211,53 +189,42 @@ describe('KK-115: her soru', () => {
     await gecersiz(sorulu((s) => (s.dogru = 1.5)));
   });
 
-  kabulQuiz(
-    'KK-115: zorluk kolay/orta/zor, tur olay/dunya dışına izin yok',
-    async () => {
-      await gecersiz(
-        sorulu((s) => ((s as { zorluk: string }).zorluk = 'çok zor')),
-      );
-      await gecersiz(sorulu((s) => (s.tur = 'karisik')));
-      await gecersiz(sorulu((s) => (s.tur = '')));
-    },
-  );
+  it('KK-115: zorluk kolay/orta/zor, tur olay/dunya dışına izin yok', async () => {
+    await gecersiz(
+      sorulu((s) => ((s as { zorluk: string }).zorluk = 'çok zor')),
+    );
+    await gecersiz(sorulu((s) => (s.tur = 'karisik')));
+    await gecersiz(sorulu((s) => (s.tur = '')));
+  });
 
-  kabulQuiz(
-    'KK-115: en az 4 kaynak (3 reddedilir), her kaynakta ad ve url',
-    async () => {
-      await gecersiz(sorulu((s) => (s.kaynaklar = s.kaynaklar.slice(0, 3))));
-      expect(
-        await gecerli(
-          sorulu((s) =>
-            s.kaynaklar.push({ ad: 'Beşinci', url: 'https://ornek.test/5' }),
-          ),
+  it('KK-115: en az 4 kaynak (3 reddedilir), her kaynakta ad ve url', async () => {
+    await gecersiz(sorulu((s) => (s.kaynaklar = s.kaynaklar.slice(0, 3))));
+    expect(
+      await gecerli(
+        sorulu((s) =>
+          s.kaynaklar.push({ ad: 'Beşinci', url: 'https://ornek.test/5' }),
         ),
-      ).toEqual([]);
-      await gecersiz(sorulu((s) => (s.kaynaklar[0].url = '')));
-      await gecersiz(sorulu((s) => (s.kaynaklar[0].ad = '')));
-      await gecersiz(
-        sorulu((s) => ((s as { kaynaklar?: unknown }).kaynaklar = undefined)),
-      );
-    },
-  );
+      ),
+    ).toEqual([]);
+    await gecersiz(sorulu((s) => (s.kaynaklar[0].url = '')));
+    await gecersiz(sorulu((s) => (s.kaynaklar[0].ad = '')));
+    await gecersiz(
+      sorulu((s) => ((s as { kaynaklar?: unknown }).kaynaklar = undefined)),
+    );
+  });
 
-  kabulQuiz(
-    'KK-115: uyum en az 0,75 (0,74 reddedilir, 0,75 ve 1 geçer); sayı olmalı',
-    async () => {
-      expect(await gecerli(sorulu((s) => (s.uyum = 0.75)))).toEqual([]);
-      expect(await gecerli(sorulu((s) => (s.uyum = 1)))).toEqual([]);
-      await gecersiz(sorulu((s) => (s.uyum = 0.74)));
-      await gecersiz(sorulu((s) => (s.uyum = 0)));
-      await gecersiz(sorulu((s) => ((s as { uyum?: unknown }).uyum = '0.9')));
-      await gecersiz(
-        sorulu((s) => ((s as { uyum?: unknown }).uyum = undefined)),
-      );
-    },
-  );
+  it('KK-115: uyum en az 0,75 (0,74 reddedilir, 0,75 ve 1 geçer); sayı olmalı', async () => {
+    expect(await gecerli(sorulu((s) => (s.uyum = 0.75)))).toEqual([]);
+    expect(await gecerli(sorulu((s) => (s.uyum = 1)))).toEqual([]);
+    await gecersiz(sorulu((s) => (s.uyum = 0.74)));
+    await gecersiz(sorulu((s) => (s.uyum = 0)));
+    await gecersiz(sorulu((s) => ((s as { uyum?: unknown }).uyum = '0.9')));
+    await gecersiz(sorulu((s) => ((s as { uyum?: unknown }).uyum = undefined)));
+  });
 });
 
 describe('KK-115: bozuk biçim atmaz, hata döndürür', () => {
-  kabulQuiz('KK-115: null, boş nesne, sorular dizi değil', async () => {
+  it('KK-115: null, boş nesne, sorular dizi değil', async () => {
     const { quizHatalari } = await yukle();
     for (const x of [
       null,
@@ -277,41 +244,35 @@ describe('KK-115: bozuk biçim atmaz, hata döndürür', () => {
 });
 
 describe('KK-115: uygulama paketi', () => {
-  kabulQuiz(
-    'KK-115: kaynaklar ve uyum uygulama paketine girmez; oyun alanları kalır',
-    async () => {
-      const { uygulamaPaketi } = await yukle();
-      const p = uygulamaPaketi(taban());
-      const json = JSON.stringify(p);
-      expect(json).not.toContain('kaynaklar');
-      expect(json).not.toContain('uyum');
-      expect(json).not.toContain('ornek.test');
-      expect(p.sorular).toHaveLength(24);
-      expect(Object.keys(p.sorular[0]).sort()).toEqual([
-        'dogru',
-        'id',
-        'metin',
-        'secenekler',
-        'tur',
-        'zorluk',
-      ]);
-    },
-  );
+  it('KK-115: kaynaklar ve uyum uygulama paketine girmez; oyun alanları kalır', async () => {
+    const { uygulamaPaketi } = await yukle();
+    const p = uygulamaPaketi(taban());
+    const json = JSON.stringify(p);
+    expect(json).not.toContain('kaynaklar');
+    expect(json).not.toContain('uyum');
+    expect(json).not.toContain('ornek.test');
+    expect(p.sorular).toHaveLength(24);
+    expect(Object.keys(p.sorular[0]).sort()).toEqual([
+      'dogru',
+      'id',
+      'metin',
+      'secenekler',
+      'tur',
+      'zorluk',
+    ]);
+  });
 });
 
 describe('KK-115: CI bağlantısı', () => {
-  kabulQuiz(
-    'KK-115: scripts/icerik-dogrula.ts content/quiz paketlerini quizHatalari ile denetler, ağ kullanmaz',
-    () => {
-      const k = readFileSync(
-        new URL('../../scripts/icerik-dogrula.ts', import.meta.url),
-        'utf8',
-      );
-      expect(k).toMatch(/quizHatalari/);
-      expect(k).toMatch(/quiz/);
-      expect(k).not.toMatch(/fetch\(|https?\.get|XMLHttpRequest/);
-    },
-  );
+  it('KK-115: scripts/icerik-dogrula.ts content/quiz paketlerini quizHatalari ile denetler, ağ kullanmaz', () => {
+    const k = readFileSync(
+      new URL('../../scripts/icerik-dogrula.ts', import.meta.url),
+      'utf8',
+    );
+    expect(k).toMatch(/quizHatalari/);
+    expect(k).toMatch(/quiz/);
+    expect(k).not.toMatch(/fetch\(|https?\.get|XMLHttpRequest/);
+  });
 });
 
 describe('KK-117: Faz 1 içerik kümesi', () => {
