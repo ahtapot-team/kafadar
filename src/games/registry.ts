@@ -17,7 +17,7 @@ export const oyunlar: Oyun[] = [
     tanitim: {
       kisi: '2–12 kişi',
       metin:
-        'Kartta bir durum çıkar: "İlk buluşmada hesabı bölmek". 3-2-1\'de herkes başparmağıyla OK 👍 ya da NOK 👎 gösterir. Telefonu tutan kişi oyları girer, sonra kimin tek başına kaldığı ortaya çıkar. Oda modunda herkes kendi telefonundan oy verir.',
+        'Kartta bir durum çıkar: "İlk buluşmada hesabı bölmek". 3-2-1\'de herkes başparmağıyla OK (yukarı) ya da NOK (aşağı) gösterir. Telefonu tutan kişi oyları girer, sonra kimin tek başına kaldığı ortaya çıkar. Oda modunda herkes kendi telefonundan oy verir.',
     },
   },
   {
