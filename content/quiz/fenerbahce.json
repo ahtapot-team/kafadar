@@ -1,0 +1,766 @@
+{
+  "id": "fenerbahce",
+  "ad": "Fenerbahçe",
+  "baslik": "Ne kadar Fenerbahçelisin?",
+  "emoji": "⚽",
+  "kategori": "spor",
+  "unvanlar": [
+    "Papazın Çayırı'nda yolunu arayan çaylak",
+    "Kadıköy iskelesinde ısınan genç kanarya",
+    "Old Trafford gecesini ezbere anlatan sarı-lacivertli",
+    "Ordinaryüs'ün kürsüsüne layık gerçek Fenerbahçeli"
+  ],
+  "sorular": [
+    {
+      "id": "fenerbahce-01",
+      "metin": "Fenerbahçe hangi yıl kuruldu?",
+      "secenekler": ["1899", "1907", "1914", "1923"],
+      "dogru": 1,
+      "zorluk": "kolay",
+      "tur": "dunya",
+      "kaynaklar": [
+        {
+          "ad": "Vikipedi: Fenerbahçe Spor Kulübü",
+          "url": "https://tr.wikipedia.org/wiki/Fenerbahçe_Spor_Kulübü"
+        },
+        {
+          "ad": "Wikipedia (EN): Fenerbahçe S.K. (football)",
+          "url": "https://en.wikipedia.org/wiki/Fenerbahçe_S.K._(football)"
+        },
+        {
+          "ad": "Habertürk: Fenerbahçe 113 yaşında",
+          "url": "https://www.haberturk.com/fenerbahce-113-yasinda-2665096"
+        },
+        {
+          "ad": "Yeni Birlik: Fenerbahçe ilk başkanı kimdir, kurucuları kimlerdir, ilk renkleri neydi?",
+          "url": "https://www.gazetebirlik.com/spor/fenerbahce-ilk-baskani-kimdir-kuruculari-kimlerdir-ilk-renkleri-neydi-ilk-stadi-neresi-ilk-kupasi-ne-zaman-kazanildi/964996"
+        },
+        {
+          "ad": "Football History: Fenerbahçe",
+          "url": "https://footballhistory.org/club/fenerbahce.html"
+        },
+        {
+          "ad": "Bianet: Yaşa Fenerbahçe",
+          "url": "https://bianet.org/haber/yasa-fenerbahce-36077"
+        }
+      ],
+      "uyum": 1.0
+    },
+    {
+      "id": "fenerbahce-02",
+      "metin": "Fenerbahçe İstanbul'un hangi ilçesinde kuruldu?",
+      "secenekler": ["Beyoğlu", "Üsküdar", "Kadıköy", "Fatih"],
+      "dogru": 2,
+      "zorluk": "kolay",
+      "tur": "dunya",
+      "kaynaklar": [
+        {
+          "ad": "Vikipedi: Fenerbahçe Spor Kulübü",
+          "url": "https://tr.wikipedia.org/wiki/Fenerbahçe_Spor_Kulübü"
+        },
+        {
+          "ad": "Wikipedia (EN): Fenerbahçe S.K. (football)",
+          "url": "https://en.wikipedia.org/wiki/Fenerbahçe_S.K._(football)"
+        },
+        {
+          "ad": "Habertürk: Fenerbahçe 113 yaşında",
+          "url": "https://www.haberturk.com/fenerbahce-113-yasinda-2665096"
+        },
+        {
+          "ad": "Yeni Birlik: Fenerbahçe ilk başkanı kimdir, kurucuları kimlerdir, ilk renkleri neydi?",
+          "url": "https://www.gazetebirlik.com/spor/fenerbahce-ilk-baskani-kimdir-kuruculari-kimlerdir-ilk-renkleri-neydi-ilk-stadi-neresi-ilk-kupasi-ne-zaman-kazanildi/964996"
+        }
+      ],
+      "uyum": 1.0
+    },
+    {
+      "id": "fenerbahce-03",
+      "metin": "Fenerbahçe'nin bugünkü renkleri hangileridir?",
+      "secenekler": [
+        "Sarı-lacivert",
+        "Mavi-beyaz",
+        "Yeşil-beyaz",
+        "Turuncu-siyah"
+      ],
+      "dogru": 0,
+      "zorluk": "kolay",
+      "tur": "dunya",
+      "kaynaklar": [
+        {
+          "ad": "Vikipedi: Fenerbahçe Spor Kulübü",
+          "url": "https://tr.wikipedia.org/wiki/Fenerbahçe_Spor_Kulübü"
+        },
+        {
+          "ad": "Wikipedia (EN): Fenerbahçe S.K. (football)",
+          "url": "https://en.wikipedia.org/wiki/Fenerbahçe_S.K._(football)"
+        },
+        {
+          "ad": "Habertürk: Fenerbahçe 113 yaşında",
+          "url": "https://www.haberturk.com/fenerbahce-113-yasinda-2665096"
+        },
+        {
+          "ad": "Yeni Birlik: Fenerbahçe ilk başkanı kimdir, kurucuları kimlerdir, ilk renkleri neydi?",
+          "url": "https://www.gazetebirlik.com/spor/fenerbahce-ilk-baskani-kimdir-kuruculari-kimlerdir-ilk-renkleri-neydi-ilk-stadi-neresi-ilk-kupasi-ne-zaman-kazanildi/964996"
+        }
+      ],
+      "uyum": 1.0
+    },
+    {
+      "id": "fenerbahce-04",
+      "metin": "Fenerbahçe'nin en bilinen lakabı hangisidir?",
+      "secenekler": [
+        "Sarı Martılar",
+        "Lacivert Yunuslar",
+        "Sarı Arılar",
+        "Sarı Kanaryalar"
+      ],
+      "dogru": 3,
+      "zorluk": "kolay",
+      "tur": "dunya",
+      "kaynaklar": [
+        {
+          "ad": "Vikipedi: Fenerbahçe Spor Kulübü",
+          "url": "https://tr.wikipedia.org/wiki/Fenerbahçe_Spor_Kulübü"
+        },
+        {
+          "ad": "Wikipedia (EN): Fenerbahçe S.K. (football)",
+          "url": "https://en.wikipedia.org/wiki/Fenerbahçe_S.K._(football)"
+        },
+        {
+          "ad": "Football History: Fenerbahçe",
+          "url": "https://footballhistory.org/club/fenerbahce.html"
+        },
+        {
+          "ad": "Habertürk: Fenerbahçe 113 yaşında",
+          "url": "https://www.haberturk.com/fenerbahce-113-yasinda-2665096"
+        }
+      ],
+      "uyum": 1.0
+    },
+    {
+      "id": "fenerbahce-05",
+      "metin": "Fenerbahçe'nin kurucularından olup kulübün ilk başkanı olan kimdir?",
+      "secenekler": [
+        "Şükrü Saracoğlu",
+        "Lefter Küçükandonyadis",
+        "Ziya Songülen",
+        "Can Bartu"
+      ],
+      "dogru": 2,
+      "zorluk": "kolay",
+      "tur": "dunya",
+      "kaynaklar": [
+        {
+          "ad": "Vikipedi: Fenerbahçe Spor Kulübü",
+          "url": "https://tr.wikipedia.org/wiki/Fenerbahçe_Spor_Kulübü"
+        },
+        {
+          "ad": "Wikipedia (EN): Fenerbahçe S.K. (football)",
+          "url": "https://en.wikipedia.org/wiki/Fenerbahçe_S.K._(football)"
+        },
+        {
+          "ad": "Habertürk: Fenerbahçe 113 yaşında",
+          "url": "https://www.haberturk.com/fenerbahce-113-yasinda-2665096"
+        },
+        {
+          "ad": "Yeni Birlik: Fenerbahçe ilk başkanı kimdir, kurucuları kimlerdir, ilk renkleri neydi?",
+          "url": "https://www.gazetebirlik.com/spor/fenerbahce-ilk-baskani-kimdir-kuruculari-kimlerdir-ilk-renkleri-neydi-ilk-stadi-neresi-ilk-kupasi-ne-zaman-kazanildi/964996"
+        }
+      ],
+      "uyum": 1.0
+    },
+    {
+      "id": "fenerbahce-06",
+      "metin": "Fenerbahçe'nin Kadıköy'deki stadyumu adını kulübün hangi eski başkanından alır?",
+      "secenekler": [
+        "Şükrü Saracoğlu",
+        "Ziya Songülen",
+        "Zeki Rıza Sporel",
+        "Lefter Küçükandonyadis"
+      ],
+      "dogru": 0,
+      "zorluk": "kolay",
+      "tur": "dunya",
+      "kaynaklar": [
+        {
+          "ad": "Vikipedi: Fenerbahçe Spor Kulübü",
+          "url": "https://tr.wikipedia.org/wiki/Fenerbahçe_Spor_Kulübü"
+        },
+        {
+          "ad": "Wikipedia (EN): Şükrü Saracoğlu Stadium",
+          "url": "https://en.wikipedia.org/wiki/Şükrü_Saracoğlu_Stadium"
+        },
+        {
+          "ad": "Football History: Fenerbahçe",
+          "url": "https://footballhistory.org/club/fenerbahce.html"
+        },
+        {
+          "ad": "Kürê Ansiklopedi: Fenerbahçe Şükrü Saracoğlu Spor Kompleksi",
+          "url": "https://kureansiklopedi.com/tr/detay/ulker-stadyumu-fenerbahce-sukru-saracoglu-spor-k-2"
+        },
+        {
+          "ad": "Football Stadiums: Şükrü Saracoğlu Stadium",
+          "url": "https://www.football-stadiums.co.uk/?p=452"
+        }
+      ],
+      "uyum": 1.0
+    },
+    {
+      "id": "fenerbahce-07",
+      "metin": "Fenerbahçe'nin kuruluş yıl dönümü her yıl hangi gün kutlanır?",
+      "secenekler": ["1 Mart", "14 Nisan", "6 Haziran", "3 Mayıs"],
+      "dogru": 3,
+      "zorluk": "kolay",
+      "tur": "dunya",
+      "kaynaklar": [
+        {
+          "ad": "Vikipedi: Fenerbahçe Spor Kulübü",
+          "url": "https://tr.wikipedia.org/wiki/Fenerbahçe_Spor_Kulübü"
+        },
+        {
+          "ad": "Wikipedia (EN): Fenerbahçe S.K. (football)",
+          "url": "https://en.wikipedia.org/wiki/Fenerbahçe_S.K._(football)"
+        },
+        {
+          "ad": "Habertürk: Fenerbahçe 113 yaşında",
+          "url": "https://www.haberturk.com/fenerbahce-113-yasinda-2665096"
+        },
+        {
+          "ad": "Sporx: Fenerbahçe Spor Kulübü 118 yaşında",
+          "url": "https://www.sporx.com/fenerbahce-spor-kulubu-118-yasinda-SXHBQ1115315SXQ"
+        },
+        {
+          "ad": "TGRT Haber: Fenerbahçe Kulübü 113 yaşında",
+          "url": "https://www.tgrthaber.com/spor/fenerbahce-kulubu-113-yasinda-2709192"
+        }
+      ],
+      "uyum": 1.0
+    },
+    {
+      "id": "fenerbahce-08",
+      "metin": "Kulübe ve semte adını veren \"fener\" neyi anlatır?",
+      "secenekler": [
+        "Bir sokak lambasını",
+        "Burnundaki deniz fenerini",
+        "Eski bir gemiyi",
+        "Kurucunun soyadını"
+      ],
+      "dogru": 1,
+      "zorluk": "kolay",
+      "tur": "dunya",
+      "kaynaklar": [
+        {
+          "ad": "Vikipedi: Fenerbahçe, Kadıköy",
+          "url": "https://tr.wikipedia.org/wiki/Fenerbahçe,_Kadıköy"
+        },
+        {
+          "ad": "Wikipedia (EN): Fenerbahçe, Kadıköy",
+          "url": "https://en.wikipedia.org/wiki/Fenerbahçe,_Kadıköy"
+        },
+        {
+          "ad": "Hürriyet: Deniz fenerleri",
+          "url": "https://www.hurriyet.com.tr/deniz-fenerleri-39052940"
+        },
+        {
+          "ad": "Nomadic Niko: Fenerbahçe",
+          "url": "https://nomadicniko.com/turkey/istanbul/fenerbahce"
+        }
+      ],
+      "uyum": 1.0
+    },
+    {
+      "id": "fenerbahce-09",
+      "metin": "Fenerbahçe efsanesi Lefter Küçükandonyadis hangi lakapla anılır?",
+      "secenekler": ["Ordinaryüs", "Sinyor", "Usta", "Doktor"],
+      "dogru": 0,
+      "zorluk": "orta",
+      "tur": "dunya",
+      "kaynaklar": [
+        {
+          "ad": "Wikipedia (EN): Fenerbahçe S.K. (football)",
+          "url": "https://en.wikipedia.org/wiki/Fenerbahçe_S.K._(football)"
+        },
+        {
+          "ad": "Habertürk: Türk futboluna damga vuran Ordinaryüs",
+          "url": "https://www.haberturk.com/turk-futboluna-damga-vuran-ordinaryus-2108206"
+        },
+        {
+          "ad": "beIN Sports: Fenerbahçe ve Türk futbolunun efsanesi Lefter Küçükandonyadis",
+          "url": "https://beinsports.com.tr/haber/fenerbahce-ve-turk-futbolunun-efsanesi-lefter-kucukandonyadis-3"
+        },
+        {
+          "ad": "Hürriyet Daily News: Turkish football mourns loss of Lefter Küçükandonyadis",
+          "url": "https://hurriyetdailynews.com/turkish-football-mourns-loss-of-lefter-kucukandonyanis--11537"
+        },
+        {
+          "ad": "Kürê Ansiklopedi: Lefter Küçükandonyadis",
+          "url": "https://kureansiklopedi.com/tr/detay/lefter-kucukandonyadis-d677c"
+        }
+      ],
+      "uyum": 1.0
+    },
+    {
+      "id": "fenerbahce-10",
+      "metin": "2004–2012 yılları arasında Fenerbahçe'de oynayan Brezilyalı efsane kimdir?",
+      "secenekler": ["Ronaldinho", "Kaká", "Alex de Souza", "Rivaldo"],
+      "dogru": 2,
+      "zorluk": "orta",
+      "tur": "dunya",
+      "kaynaklar": [
+        {
+          "ad": "Kürê Ansiklopedi: Alex de Souza",
+          "url": "https://kureansiklopedi.com/tr/detay/alex-de-souza-2"
+        },
+        {
+          "ad": "These Football Times: Alex, the magical Brazilian who became Turkish football's greatest import",
+          "url": "https://thesefootballtimes.co/2017/09/29/alex-the-magical-brazilian-who-became-turkish-footballs-greatest-import-fenerbahce/"
+        },
+        {
+          "ad": "Daily Sabah: Fener's legendary player Alex quits football",
+          "url": "https://dailysabah.com/football/2014/12/07/feners-legendary-player-alex-quits-football"
+        },
+        {
+          "ad": "Wikipedia (EN): Alex (footballer, born 1977)",
+          "url": "https://en.wikipedia.org/wiki/Alex_(footballer,_born_1977)"
+        }
+      ],
+      "uyum": 1.0
+    },
+    {
+      "id": "fenerbahce-11",
+      "metin": "Fenerbahçe'yi 2007–08 sezonunda Şampiyonlar Ligi'nde çeyrek finale taşıyan Brezilyalı teknik direktör kimdir?",
+      "secenekler": ["Dunga", "Tite", "Carlos Alberto Parreira", "Zico"],
+      "dogru": 3,
+      "zorluk": "orta",
+      "tur": "dunya",
+      "kaynaklar": [
+        {
+          "ad": "Vikipedi: Zico",
+          "url": "https://tr.wikipedia.org/wiki/Zico"
+        },
+        {
+          "ad": "Wikipedia (EN): Fenerbahçe S.K. (football)",
+          "url": "https://en.wikipedia.org/wiki/Fenerbahçe_S.K._(football)"
+        },
+        {
+          "ad": "UEFA: Fenerbahçe – Sevilla maç raporu",
+          "url": "https://www.uefa.com/uefachampionsleague/news/0254-0d7bc1dafa46-1c521275404a-1000/"
+        },
+        {
+          "ad": "Hürriyet: Volkan the hero as Turkey's Fenerbahçe beats Sevilla",
+          "url": "https://hurriyet.com.tr/gundem/volkan-the-hero-as-turkeys-fenerbahce-beats-sevilla-8378093"
+        }
+      ],
+      "uyum": 1.0
+    },
+    {
+      "id": "fenerbahce-12",
+      "metin": "Fenerbahçe'nin kazandığı ilk uluslararası kupa hangisidir?",
+      "secenekler": [
+        "UEFA Kupası",
+        "Balkanlar Kupası",
+        "Kupa Galipleri Kupası",
+        "Intertoto Kupası"
+      ],
+      "dogru": 1,
+      "zorluk": "orta",
+      "tur": "dunya",
+      "kaynaklar": [
+        {
+          "ad": "Vikipedi: Fenerbahçe Spor Kulübü",
+          "url": "https://tr.wikipedia.org/wiki/Fenerbahçe_Spor_Kulübü"
+        },
+        {
+          "ad": "Wikipedia (EN): Fenerbahçe S.K. (football)",
+          "url": "https://en.wikipedia.org/wiki/Fenerbahçe_S.K._(football)"
+        },
+        {
+          "ad": "Football History: Fenerbahçe",
+          "url": "https://footballhistory.org/club/fenerbahce.html"
+        },
+        {
+          "ad": "Bianet: Yaşa Fenerbahçe",
+          "url": "https://bianet.org/haber/yasa-fenerbahce-36077"
+        }
+      ],
+      "uyum": 1.0
+    },
+    {
+      "id": "fenerbahce-13",
+      "metin": "Fenerbahçe 2012–13 UEFA Avrupa Ligi'nde hangi tura kadar yükseldi?",
+      "secenekler": ["Son 16", "Çeyrek final", "Yarı final", "Final"],
+      "dogru": 2,
+      "zorluk": "orta",
+      "tur": "dunya",
+      "kaynaklar": [
+        {
+          "ad": "Vikipedi: Fenerbahçe Spor Kulübü",
+          "url": "https://tr.wikipedia.org/wiki/Fenerbahçe_Spor_Kulübü"
+        },
+        {
+          "ad": "Wikipedia (EN): Fenerbahçe S.K. (football)",
+          "url": "https://en.wikipedia.org/wiki/Fenerbahçe_S.K._(football)"
+        },
+        {
+          "ad": "Habertürk: Fenerbahçe 113 yaşında",
+          "url": "https://www.haberturk.com/fenerbahce-113-yasinda-2665096"
+        },
+        {
+          "ad": "Football History: Fenerbahçe",
+          "url": "https://footballhistory.org/club/fenerbahce.html"
+        },
+        {
+          "ad": "Sporx: Fenerbahçe'nin 192. Avrupa sınavı",
+          "url": "https://www.sporx.com/fenerbahcenin-192-avrupa-sinavi-SXHBQ481068SXQ"
+        }
+      ],
+      "uyum": 1.0
+    },
+    {
+      "id": "fenerbahce-14",
+      "metin": "2009'da Fenerbahçe'nin Kadıköy'deki stadyumunda hangi kupanın finali oynandı?",
+      "secenekler": [
+        "UEFA Kupası",
+        "Şampiyonlar Ligi",
+        "Kupa Galipleri Kupası",
+        "UEFA Süper Kupası"
+      ],
+      "dogru": 0,
+      "zorluk": "orta",
+      "tur": "dunya",
+      "kaynaklar": [
+        {
+          "ad": "Wikipedia (EN): Şükrü Saracoğlu Stadium",
+          "url": "https://en.wikipedia.org/wiki/Şükrü_Saracoğlu_Stadium"
+        },
+        {
+          "ad": "UEFA: Pitmen strike gold in Istanbul",
+          "url": "https://www.uefa.com/uefaeuropaleague/news/01e0-0e73987a4c1c-fbc005fd6616-1000--pitmen-strike-gold-in-istanbul"
+        },
+        {
+          "ad": "Hürriyet: Shakhtar wins UEFA Cup but supporters fail to create magic",
+          "url": "https://www.hurriyet.com.tr/gundem/shakhtar-wins-uefa-cup-but-supporters-fail-to-create-magic-11699730"
+        },
+        {
+          "ad": "DFB Datencenter: Shakhtar Donetsk – Werder Bremen (UEFA Cup 2008/09)",
+          "url": "https://datencenter.dfb.de/en/data-center/europa-league/2008-2009/0/shakhtar-donetsk-werder-bremen-64121"
+        },
+        {
+          "ad": "Kürê Ansiklopedi: Fenerbahçe Şükrü Saracoğlu Spor Kompleksi",
+          "url": "https://kureansiklopedi.com/tr/detay/ulker-stadyumu-fenerbahce-sukru-saracoglu-spor-k-2"
+        },
+        {
+          "ad": "Football Stadiums: Şükrü Saracoğlu Stadium",
+          "url": "https://www.football-stadiums.co.uk/?p=452"
+        }
+      ],
+      "uyum": 1.0
+    },
+    {
+      "id": "fenerbahce-15",
+      "metin": "Fenerbahçe 2007–08 Şampiyonlar Ligi son 16 turunda hangi takımı penaltılarla eledi?",
+      "secenekler": ["Valencia", "Porto", "Lyon", "Sevilla"],
+      "dogru": 3,
+      "zorluk": "orta",
+      "tur": "dunya",
+      "kaynaklar": [
+        {
+          "ad": "UEFA: Fenerbahçe – Sevilla maç raporu",
+          "url": "https://www.uefa.com/uefachampionsleague/news/0254-0d7bc1dafa46-1c521275404a-1000/"
+        },
+        {
+          "ad": "The Irish Times: Fenerbahce have last word to keep dream alive",
+          "url": "https://www.irishtimes.com/sport/fenerbahce-have-last-word-to-keep-dream-alive-1.900062"
+        },
+        {
+          "ad": "Irish Examiner: Fenerbahçe – Sevilla",
+          "url": "https://www.irishexaminer.com/sport/soccer/arid-20056962.html"
+        },
+        {
+          "ad": "Hürriyet: Volkan the hero as Turkey's Fenerbahçe beats Sevilla",
+          "url": "https://hurriyet.com.tr/gundem/volkan-the-hero-as-turkeys-fenerbahce-beats-sevilla-8378093"
+        },
+        {
+          "ad": "Wikipedia (EN): Fenerbahçe S.K. (football)",
+          "url": "https://en.wikipedia.org/wiki/Fenerbahçe_S.K._(football)"
+        }
+      ],
+      "uyum": 1.0
+    },
+    {
+      "id": "fenerbahce-16",
+      "metin": "Fenerbahçe'nin kuruluş yıllarındaki ilk renkleri hangileriydi?",
+      "secenekler": [
+        "Sarı-lacivert",
+        "Sarı-beyaz",
+        "Lacivert-beyaz",
+        "Sarı-yeşil"
+      ],
+      "dogru": 1,
+      "zorluk": "orta",
+      "tur": "dunya",
+      "kaynaklar": [
+        {
+          "ad": "Vikipedi: Fenerbahçe Spor Kulübü",
+          "url": "https://tr.wikipedia.org/wiki/Fenerbahçe_Spor_Kulübü"
+        },
+        {
+          "ad": "Wikipedia (EN): Fenerbahçe S.K. (football)",
+          "url": "https://en.wikipedia.org/wiki/Fenerbahçe_S.K._(football)"
+        },
+        {
+          "ad": "Habertürk: Fenerbahçe 113 yaşında",
+          "url": "https://www.haberturk.com/fenerbahce-113-yasinda-2665096"
+        },
+        {
+          "ad": "Yeni Birlik: Fenerbahçe ilk başkanı kimdir, kurucuları kimlerdir, ilk renkleri neydi?",
+          "url": "https://www.gazetebirlik.com/spor/fenerbahce-ilk-baskani-kimdir-kuruculari-kimlerdir-ilk-renkleri-neydi-ilk-stadi-neresi-ilk-kupasi-ne-zaman-kazanildi/964996"
+        }
+      ],
+      "uyum": 1.0
+    },
+    {
+      "id": "fenerbahce-17",
+      "metin": "Fenerbahçe'nin Kadıköy'deki stadyumunun bulunduğu arazinin eski adı nedir?",
+      "secenekler": [
+        "Veliefendi Çayırı",
+        "Kağıthane Çayırı",
+        "Çamlıca Çayırı",
+        "Papazın Çayırı"
+      ],
+      "dogru": 3,
+      "zorluk": "zor",
+      "tur": "dunya",
+      "kaynaklar": [
+        {
+          "ad": "Wikipedia (EN): Şükrü Saracoğlu Stadium",
+          "url": "https://en.wikipedia.org/wiki/Şükrü_Saracoğlu_Stadium"
+        },
+        {
+          "ad": "Habertürk: Fenerbahçe 113 yaşında",
+          "url": "https://www.haberturk.com/fenerbahce-113-yasinda-2665096"
+        },
+        {
+          "ad": "Yeni Birlik: Fenerbahçe ilk başkanı kimdir, kurucuları kimlerdir, ilk renkleri neydi?",
+          "url": "https://www.gazetebirlik.com/spor/fenerbahce-ilk-baskani-kimdir-kuruculari-kimlerdir-ilk-renkleri-neydi-ilk-stadi-neresi-ilk-kupasi-ne-zaman-kazanildi/964996"
+        },
+        {
+          "ad": "Kürê Ansiklopedi: Fenerbahçe Şükrü Saracoğlu Spor Kompleksi",
+          "url": "https://kureansiklopedi.com/tr/detay/ulker-stadyumu-fenerbahce-sukru-saracoglu-spor-k-2"
+        },
+        {
+          "ad": "Football Stadiums: Şükrü Saracoğlu Stadium",
+          "url": "https://www.football-stadiums.co.uk/?p=452"
+        }
+      ],
+      "uyum": 1.0
+    },
+    {
+      "id": "fenerbahce-18",
+      "metin": "Fenerbahçe, 1959–60'taki ilk Avrupa kupası eşleşmesinde hangi Macar takımını eledi?",
+      "secenekler": ["Csepel", "Ferencváros", "Honvéd", "Újpest"],
+      "dogru": 0,
+      "zorluk": "zor",
+      "tur": "dunya",
+      "kaynaklar": [
+        {
+          "ad": "Wikipedia (EN): List of Fenerbahçe S.K. records and statistics",
+          "url": "https://en.wikipedia.org/wiki/List_of_Fenerbahçe_S.K._records_and_statistics"
+        },
+        {
+          "ad": "TFF: Tamsaha dergisi, sayı 196",
+          "url": "https://www.tff.org/Resources/Tamsaha/196/100-101/"
+        },
+        {
+          "ad": "UEFA: Csepel – Fenerbahçe karşılaşma geçmişi",
+          "url": "https://www.uefa.com/uefachampionsleague/history/h2h/52692/52957"
+        },
+        {
+          "ad": "Sporx: Fenerbahçe'nin 192. Avrupa sınavı",
+          "url": "https://www.sporx.com/fenerbahcenin-192-avrupa-sinavi-SXHBQ481068SXQ"
+        }
+      ],
+      "uyum": 1.0
+    },
+    {
+      "id": "fenerbahce-19",
+      "metin": "Fenerbahçe, 1968–69 Avrupa Şampiyon Kulüpler Kupası ilk turunda hangi İngiliz takımını eledi?",
+      "secenekler": ["Leeds United", "Manchester City", "Liverpool", "Everton"],
+      "dogru": 1,
+      "zorluk": "zor",
+      "tur": "dunya",
+      "kaynaklar": [
+        {
+          "ad": "Wikipedia (EN): Manchester City F.C. in international football",
+          "url": "https://en.wikipedia.org/wiki/Manchester_City_F.C._in_international_football"
+        },
+        {
+          "ad": "DFB Datencenter: Fenerbahçe SK – Manchester City (Europapokal 1968/69)",
+          "url": "https://datencenter.dfb.de/en/data-center/champions-league/1968-1969/1st-round/fenerbahce-sk-manchester-city-649166"
+        },
+        {
+          "ad": "Bianet: Yaşa Fenerbahçe",
+          "url": "https://bianet.org/haber/yasa-fenerbahce-36077"
+        },
+        {
+          "ad": "Goal: Türk takımlarının İngiliz takımlarına karşı karnesi",
+          "url": "https://www.goal.com/tr/haber/tuerk-takimlarinin-ingiliz-takimlarina-karsi-karnesi/12r72bq7hoxez1eytph206u5q0"
+        }
+      ],
+      "uyum": 1.0
+    },
+    {
+      "id": "fenerbahce-20",
+      "metin": "Fenerbahçe'nin 1996'da Old Trafford'da Manchester United'ı 1–0 yendiği maçta golü kim attı?",
+      "secenekler": [
+        "Jay-Jay Okocha",
+        "Kemalettin Şentürk",
+        "Elvir Bolić",
+        "Uche Okechukwu"
+      ],
+      "dogru": 2,
+      "zorluk": "zor",
+      "tur": "dunya",
+      "kaynaklar": [
+        {
+          "ad": "Karar: Fenerbahçe'nin tarihe geçen Old Trafford zaferinde o isim hafızalara kazındı",
+          "url": "https://www.karar.com/fenerbahcenin-tarihe-gecen-old-trafford-zaferinde-o-isim-hafizalara-kazindi-282467"
+        },
+        {
+          "ad": "Daily Sabah: Fenerbahçe looking to bring back memories",
+          "url": "https://www.dailysabah.com/football/2016/10/20/fenerbahce-looking-to-bring-back-memories"
+        },
+        {
+          "ad": "Wikipedia (EN): Elvir Bolić",
+          "url": "https://en.wikipedia.org/wiki/Elvir_Bolić"
+        },
+        {
+          "ad": "Goal: Şimdi neredeler? Fenerbahçe'nin Manchester United'ı Old Trafford'da yendiği maçın 11'i",
+          "url": "https://www.goal.com/tr/galeri-listesi/simdi-neredeler-veya-fenerbahce-nin-manchester-united-i-old-trafford-da-yendigi-mactaki-11-i/bltb666f4cd6c795f8f"
+        },
+        {
+          "ad": "MUFCInfo: Sebastião Lazaroni",
+          "url": "https://www.mufcinfo.com/manupag/opponent_manager/sebastiao-lazaroni"
+        }
+      ],
+      "uyum": 1.0
+    },
+    {
+      "id": "fenerbahce-21",
+      "metin": "1958 ve 1962 Dünya Kupalarını kazanan, 1970'lerde Fenerbahçe'yi çalıştıran Brezilyalı kimdir?",
+      "secenekler": ["Pelé", "Garrincha", "Didi", "Vavá"],
+      "dogru": 2,
+      "zorluk": "zor",
+      "tur": "dunya",
+      "kaynaklar": [
+        {
+          "ad": "Vikipedi: Didi (1928 doğumlu futbolcu)",
+          "url": "https://tr.wikipedia.org/wiki/Didi_(1928_doğumlu_futbolcu)"
+        },
+        {
+          "ad": "Wikipedia (EN): Fenerbahçe S.K. (football)",
+          "url": "https://en.wikipedia.org/wiki/Fenerbahçe_S.K._(football)"
+        },
+        {
+          "ad": "GZT: Samba fırtınasını Türkiye'ye taşıyan efsane: Didi",
+          "url": "https://www.gzt.com/spor/samba-firtinasini-turkiyeye-tasiyan-efsane-didi-2963761"
+        },
+        {
+          "ad": "CNN Türk: Türk futboluna damgasını vuran yabancı antrenörler",
+          "url": "https://cnnturk.com/spor/futbol/turk-futboluna-damgasini-vuran-yabanci-antrenorler-507679"
+        },
+        {
+          "ad": "Fanatik: Fenerbahçe teknik direktörleri (1959–2016)",
+          "url": "https://www.fanatik.com.tr/fenerbahce-teknik-direktorleri-1959-2016-arasi-1247073"
+        }
+      ],
+      "uyum": 1.0
+    },
+    {
+      "id": "fenerbahce-22",
+      "metin": "Todor Veselinović yönetimindeki Fenerbahçe, 1988–89 sezonunda ligde kaç gol attı?",
+      "secenekler": ["89", "96", "110", "103"],
+      "dogru": 3,
+      "zorluk": "zor",
+      "tur": "dunya",
+      "kaynaklar": [
+        {
+          "ad": "CNN Türk: Türk futboluna damgasını vuran yabancı antrenörler",
+          "url": "https://cnnturk.com/spor/futbol/turk-futboluna-damgasini-vuran-yabanci-antrenorler-507679"
+        },
+        {
+          "ad": "GZT: Bir sezonda 103 gol atmanın formülünü yazan takım: Fenerbahçe",
+          "url": "https://www.gzt.com/spor/bir-sezonda-103-gol-atmanin-formulunu-yazan-takim-fenerbahce-2798701"
+        },
+        {
+          "ad": "Goal: Jorge Jesus yönetimindeki Fenerbahçe 103 gollü rekoru kırabilir",
+          "url": "https://www.goal.com/tr/haber/jorge-jesus-yonetimindeki-fenerbahce-103-gollu-rekoru-kirabilir/blt1ade00bbf4461294"
+        },
+        {
+          "ad": "Wikipedia (EN): List of Fenerbahçe S.K. records and statistics",
+          "url": "https://en.wikipedia.org/wiki/List_of_Fenerbahçe_S.K._records_and_statistics"
+        }
+      ],
+      "uyum": 0.8
+    },
+    {
+      "id": "fenerbahce-23",
+      "metin": "Lefter Küçükandonyadis 1951'de hangi İtalyan kulübüne transfer oldu?",
+      "secenekler": ["Fiorentina", "Juventus", "Milan", "Roma"],
+      "dogru": 0,
+      "zorluk": "zor",
+      "tur": "dunya",
+      "kaynaklar": [
+        {
+          "ad": "Kürê Ansiklopedi: Lefter Küçükandonyadis",
+          "url": "https://kureansiklopedi.com/tr/detay/lefter-kucukandonyadis-d677c"
+        },
+        {
+          "ad": "Fox Sports: Former Turkey captain Lefter Küçükandonyadis dies",
+          "url": "https://www.foxsports.com/stories/soccer/former-turkey-captain-lefter-kucukandonyadis-dies"
+        },
+        {
+          "ad": "Karar: Lefter Küçükandonyadis kimdir?",
+          "url": "https://www.karar.com/lefter-kucukandonyadis-kimdir-1601294"
+        },
+        {
+          "ad": "Wikipedia (EN): Lefter Küçükandonyadis",
+          "url": "https://en.wikipedia.org/wiki/Lefter_Küçükandonyadis"
+        }
+      ],
+      "uyum": 1.0
+    },
+    {
+      "id": "fenerbahce-24",
+      "metin": "Avrupa kupalarında final oynayan ilk Türk futbolcu olarak bilinen Fenerbahçe efsanesi kimdir?",
+      "secenekler": [
+        "Lefter Küçükandonyadis",
+        "Can Bartu",
+        "Cemil Turan",
+        "Ogün Altıparmak"
+      ],
+      "dogru": 1,
+      "zorluk": "zor",
+      "tur": "dunya",
+      "kaynaklar": [
+        {
+          "ad": "Wikipedia (EN): Fenerbahçe S.K. (football)",
+          "url": "https://en.wikipedia.org/wiki/Fenerbahçe_S.K._(football)"
+        },
+        {
+          "ad": "Kürê Ansiklopedi: Can Bartu",
+          "url": "https://kureansiklopedi.com/tr/detay/can-bartu-f55f1"
+        },
+        {
+          "ad": "Habertürk: Can Bartu'nun inanılmaz hayat hikayesi",
+          "url": "https://www.haberturk.com/can-bartu-nin-inanilmaz-hayat-hikayesi-2430925-spor"
+        },
+        {
+          "ad": "BirGün: Elveda Sinyor",
+          "url": "https://www.birgun.net/haber/elveda-sinyor-252864"
+        }
+      ],
+      "uyum": 1.0
+    }
+  ]
+}

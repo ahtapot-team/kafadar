@@ -5,10 +5,15 @@ import askIMemnu from '../../content/quiz/ask-i-memnu.json';
 import hababamSinifi from '../../content/quiz/hababam-sinifi.json';
 import prisonBreak from '../../content/quiz/prison-break.json';
 import galatasaray from '../../content/quiz/galatasaray.json';
+import fenerbahce from '../../content/quiz/fenerbahce.json';
 
-const PAKETLER = [askIMemnu, hababamSinifi, prisonBreak, galatasaray].map((j) =>
-  uygulamaPaketi(j),
-);
+const PAKETLER = [
+  askIMemnu,
+  hababamSinifi,
+  prisonBreak,
+  galatasaray,
+  fenerbahce,
+].map((j) => uygulamaPaketi(j));
 
 export function quizPaketiBul(id: string): QuizPaketi | undefined {
   const p = PAKETLER.find((x) => x.id === id);
