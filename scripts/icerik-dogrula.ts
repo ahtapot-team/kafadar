@@ -1,7 +1,8 @@
 // Kayıttaki (src/icerik/kayit.ts) her deste dosyasını doğrular; kayıtsız deste dosyası da hatadır. Hata varsa 1 ile çıkar.
-import { readdirSync, readFileSync } from 'node:fs';
+import { existsSync, readdirSync, readFileSync } from 'node:fs';
 import { icerikHatalari } from '../src/icerik/dogrula.ts';
 import { paketKaydi } from '../src/icerik/kayit.ts';
+import { quizHatalari } from '../src/icerik/quiz.ts';
 import { sozHatalari } from '../src/icerik/soz.ts';
 
 const kok = new URL('../content/', import.meta.url);
@@ -32,8 +33,23 @@ try {
   hata('acilis/sozler.json', `okunamadı: ${(e as Error).message}`);
 }
 
+// Quiz Night paketleri (KK-115): content/quiz/*.json şemayla denetlenir; kaynak URL'leri ağdan denetlenmez.
+const quizKlasoru = new URL('quiz/', kok);
+const quizDosyalari = existsSync(quizKlasoru)
+  ? readdirSync(quizKlasoru).filter((d) => d.endsWith('.json'))
+  : [];
+for (const f of quizDosyalari) {
+  try {
+    const paket = JSON.parse(readFileSync(new URL(f, quizKlasoru), 'utf8'));
+    for (const m of quizHatalari(paket)) hata(`quiz/${f}`, m);
+  } catch (e) {
+    hata(`quiz/${f}`, `okunamadı: ${(e as Error).message}`);
+  }
+}
+
 const kayitli = new Set<string>(paketKaydi.map((p) => p.dosya));
 kayitli.add('acilis/sozler.json');
+for (const f of quizDosyalari) kayitli.add(`quiz/${f}`);
 for (const klasor of readdirSync(kok))
   for (const f of readdirSync(new URL(`${klasor}/`, kok)).filter((d) =>
     d.endsWith('.json'),
