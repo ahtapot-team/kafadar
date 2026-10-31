@@ -45,7 +45,7 @@ import {
   kenarBosluk,
   yaricap,
 } from '../src/tema';
-import { Cip, Diyalog, Dugme, Yazi } from '../src/ui';
+import { Cip, Diyalog, Dugme, useHareketAzalt, Yazi } from '../src/ui';
 
 // Logo açılışı ≤1 sn (KK-1). "Hareketi azalt" açıksa yalnızca kısa solma.
 function Logo() {
@@ -128,21 +128,6 @@ function AyarlarIkonu() {
       />
     </Pressable>
   );
-}
-
-// "Hareketi azalt" açıksa basma animasyonu yerine yalnız opaklık değişir (KK-135).
-function useHareketAzalt() {
-  const [azalt, setAzalt] = useState(false);
-  useEffect(() => {
-    let iptal = false;
-    AccessibilityInfo.isReduceMotionEnabled().then((v) => {
-      if (!iptal) setAzalt(v);
-    });
-    return () => {
-      iptal = true;
-    };
-  }, []);
-  return azalt;
 }
 
 // Oyun ikonu: zemin (token) + desen + taşan nesne (Bileşen 14).

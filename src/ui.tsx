@@ -1,6 +1,7 @@
 // Ortak bileşenler (tasarım sistemi v1): Ekran, Yazi, Dugme, Cip, Diyalog, GeriCubugu.
-import { useState, type ReactNode } from 'react';
+import { useEffect, useState, type ReactNode } from 'react';
 import {
+  AccessibilityInfo,
   Modal,
   Pressable,
   ScrollView,
@@ -319,4 +320,19 @@ export function Girdi({ style, ...p }: TextInputProps) {
       {...p}
     />
   );
+}
+
+// "Hareketi azalt" açıksa basma animasyonu yerine yalnız opaklık değişir (KK-135).
+export function useHareketAzalt() {
+  const [azalt, setAzalt] = useState(false);
+  useEffect(() => {
+    let iptal = false;
+    AccessibilityInfo.isReduceMotionEnabled().then((v) => {
+      if (!iptal) setAzalt(v);
+    });
+    return () => {
+      iptal = true;
+    };
+  }, []);
+  return azalt;
 }
