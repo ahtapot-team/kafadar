@@ -1,4 +1,5 @@
 // Quiz Night oda sonucu (KK-113, KK-111, KK-114): grup sonucuyla aynı görünüm; birinci 🏆 ve unvanıyla en üstte.
+import { paketBasligi } from '../games/quiz-night/arayuz';
 import type { IstemciDurumu } from '../oda/istemci';
 import { quizPaketleri } from '../oyun-ekranlari/quiz/paketler';
 import { QuizSonucGorunum } from '../oyun-ekranlari/quiz/sonuc';
@@ -25,6 +26,7 @@ export function QuizOdaFinal({
     <QuizSonucGorunum
       v={{
         ad: f.paket,
+        baslik: paketBasligi(paket),
         unvanlar: paket.unvanlar,
         sonuc: f.siralama,
         kisi: f.siralama.length,

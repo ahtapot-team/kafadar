@@ -13,24 +13,68 @@ export const MODLAR: { id: ModId; etiket: string }[] = [
 export const gorunenModlar = (odaAcik = true) =>
   odaAcik ? MODLAR : MODLAR.filter((m) => m.id === 'tek' || m.id === 'grup');
 
-export const paketBasligi = (ad: string) => `Ne kadar ${ad} fanısın?`;
-export const PAKET_NOTU = 'Resmî değildir · Spoiler içerir';
-
 export type Koken = 'tr' | 'yabanci';
-export type KokenCipi = 'tumu' | Koken;
-export const KOKEN_CIPLERI: KokenCipi[] = ['tumu', 'tr', 'yabanci'];
-export const kokenEtiketi = (k: Koken) => (k === 'tr' ? 'Türk' : 'Yabancı');
-export const KOKEN_CIP_ETIKETI: Record<KokenCipi, string> = {
+export type Kategori = 'dizi-film' | 'muzik' | 'spor';
+export type KategoriCipi = 'tumu' | Kategori;
+
+// Başlık `baslik` varsa o, yoksa "Ne kadar <ad> fanısın?" (KK-122); ekranlar başlığı yalnız buradan alır.
+export const paketBasligi = (p: { ad: string; baslik?: string }) =>
+  p.baslik ?? `Ne kadar ${p.ad} fanısın?`;
+
+export const KATEGORI_CIPLERI: KategoriCipi[] = [
+  'tumu',
+  'dizi-film',
+  'muzik',
+  'spor',
+];
+const ETIKET: Record<KategoriCipi, string> = {
   tumu: 'Tümü',
-  tr: 'Türk',
-  yabanci: 'Yabancı',
+  'dizi-film': 'Dizi & Film',
+  muzik: 'Müzik',
+  spor: 'Spor',
+};
+export const kategoriEtiketi = (c: KategoriCipi) => ETIKET[c];
+
+// Paketi olan kategorilerin çipleri; 0 ya da 1 kategori varsa satır hiç görünmez (KK-121).
+export const gorunenKategoriCipleri = (
+  paketler: readonly { kategori: Kategori }[],
+): KategoriCipi[] => {
+  const var_ = KATEGORI_CIPLERI.filter(
+    (c) => c !== 'tumu' && paketler.some((p) => p.kategori === c),
+  );
+  return var_.length < 2 ? [] : ['tumu', ...var_];
 };
 
-export const paketSuz = <P extends { koken: Koken }>(
+// Seçili çipe ya da Tümü'ne dokunmak filtreyi kaldırır.
+export const kategoriSec = (
+  secili: KategoriCipi,
+  dokunulan: KategoriCipi,
+): KategoriCipi => (dokunulan === secili ? 'tumu' : dokunulan);
+
+export const paketSuz = <P extends { kategori: Kategori }>(
   paketler: readonly P[],
-  cip: KokenCipi,
+  cip: KategoriCipi,
 ): P[] =>
-  cip === 'tumu' ? [...paketler] : paketler.filter((p) => p.koken === cip);
+  cip === 'tumu' ? [...paketler] : paketler.filter((p) => p.kategori === cip);
+
+const NOT_ORTAK = 'Resmî değildir · ';
+const NOT: Record<Kategori, string> = {
+  'dizi-film': 'Spoiler içerir',
+  muzik: 'Sanatçıyla bağlantısı yoktur',
+  spor: 'Kulüple bağlantısı yoktur',
+};
+export const paketNotu = (k: Kategori) => NOT_ORTAK + NOT[k];
+
+export const kategoriEmoji = (k: Kategori) =>
+  k === 'dizi-film' ? '🎬' : k === 'muzik' ? '🎤' : '⚽';
+
+// Türk / Yabancı yalnız Dizi & Film kartında.
+export const kokenMetni = (p: { kategori: Kategori; koken?: Koken }) =>
+  p.kategori !== 'dizi-film' || !p.koken
+    ? null
+    : p.koken === 'tr'
+      ? 'Türk'
+      : 'Yabancı';
 
 export const ilerlemeMetni = (indeks0: number, toplam = TUR_SORU_SAYISI) =>
   `${indeks0 + 1}/${toplam}`;
