@@ -8,7 +8,7 @@
 //   paketSuz(paketler, çip): kategoriye göre süzer, sıra korunur; 'tumu' hepsini verir (eski koken süzgeci kalkar)
 //   paketBasligi(paket: { ad, baslik? }) = baslik varsa baslik, yoksa `Ne kadar ${ad} fanısın?`  (eski paketBasligi(ad) kalkar)
 //   paketNotu(kategori): (metinler aşağıdaki testte) — eski PAKET_NOTU kalkar
-//   Kart emojisi paketin kendi `emoji` alanıdır (tasarım #270: kategori emojisi yok); KK-125 emojileri quiz-kategori.kabul.test.ts
+//   Kart görseli v11'de paketin `gorsel` alanıdır (emoji kalktı, KK-131/132; paket-v11.kabul.test.ts).
 //   kokenMetni(paket: { kategori, koken? }): 'Türk' | 'Yabancı' | null — yalnız dizi-film kartında metin, diğerlerinde null
 //   Ekranlar (app/quiz/paket.tsx, sonuç, paylaşım kartı, oda) başlığı SADECE paketBasligi'ndan alır (ekranlarda "fanısın" metni yok).
 //   testID'ler: quiz-kategori-tumu, quiz-kategori-dizi-film, quiz-kategori-muzik, quiz-kategori-spor (eski quiz-koken-* kalkar).
@@ -213,13 +213,11 @@ describe('KK-122: aynı başlık her yerde, yalnız tema renkleri (kaynak sözle
     expect(k).not.toMatch(/PAKET_NOTU|kokenEtiketi/);
   });
 
-  // Zaten geçer; v10 sonrası da geçmeli (kulüp renkleri, arma, logo, görsel yok).
-  it('KK-122: paket ekranında sabit renk, görsel dosyası ya da Image yok (kulüp renkleri/arma/logo/albüm kapağı)', () => {
+  // Zaten geçer; v11'de de geçmeli: görseller paketin `gorsel` alanından gelir (KK-131/132), ekranda dosya adı ya da sabit renk yok.
+  it('KK-122: paket ekranında sabit renk ve sabit görsel dosya adı yok (kulüp renkleri/arma/logo/albüm kapağı)', () => {
     const k = dosyaIcerik('app/quiz/paket.tsx');
     expect(k).not.toMatch(/#[0-9a-fA-F]{3,8}\b|rgba?\(/);
-    expect(k).not.toMatch(
-      /<Image\b|ImageBackground|\.png|\.jpe?g|\.webp|\.svg/,
-    );
+    expect(k).not.toMatch(/\.png|\.jpe?g|\.webp|\.svg/);
   });
 });
 
