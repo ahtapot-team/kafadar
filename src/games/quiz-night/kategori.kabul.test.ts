@@ -197,7 +197,8 @@ describe('KK-122: aynı başlık her yerde, yalnız tema renkleri (kaynak sözle
 
   it('KK-122: "fanısın" başlığı yalnız arayuz.ts\'te üretilir; sonuç, paket ve oda ekranı paketBasligi kullanır', () => {
     for (const { f, icerik } of diger())
-      expect(icerik, f).not.toMatch(/fanısın/);
+      // Paket ekranı başlığı "Neyin fanısın?" (#275, tasarım kategori.html) kart başlığı değildir; tek istisna.
+      expect(icerik.replaceAll('Neyin fanısın?', ''), f).not.toMatch(/fanısın/);
     for (const d of [
       'app/quiz/paket.tsx',
       'src/oyun-ekranlari/quiz/sonuc.tsx',
