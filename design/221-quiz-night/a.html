@@ -1,0 +1,482 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kafadar — Quiz Night</title>
+<!-- #221 (PRD v9, KK-106…KK-113). a.html ve b.html aynı şablondur; yalnızca VARYANT değişir (A · Sade liste, B · Yarışma kartı).
+     Kullanım: ?tema=koyu|acik  &bolum=tek|grup-oda (boşsa hepsi)  &boy=375x667  &panel=<kimlik> (tek panel, ör. uzun).
+     Renk kuralı: ok/nok yalnızca doğru/yanlış; zorluk yazıyla; sayaç marka, kırmızı yok. Tek dış kaynak: Google Fonts.
+     Örnek içerik (Aşk-ı Memnu) yalnızca yerleşim içindir; gerçek sorular #225'te kaynaklarıyla doğrulanır. -->
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&display=swap" rel="stylesheet">
+<style>
+  :root { --kontur: #0B0920; --golge: #7C6CFF; --marka: #FFD23F; --marka-2: #5B8CFF; --ok: #3DDC84; --nok: #FF5A4E; --w: 375px; --h: 667px; }
+  [data-tema="koyu"], .koyu { --zemin: #16123F; --yuzey: #2B2570; --metin: #FFF8E7; --soluk: #B9B3E8; }
+  [data-tema="acik"] { --zemin: #FFF8E7; --yuzey: #FFFFFF; --metin: #16123F; --soluk: #5B5585; }
+  * { box-sizing: border-box; }
+  body { margin: 0; padding: 32px 24px; background: #DCD9E8; font-family: 'Bricolage Grotesque', system-ui, sans-serif; }
+  body.tek-panel { padding: 8px; display: grid; place-items: center; min-height: 100vh; }
+  h1 { margin: 0 0 24px; font-size: 22px; color: #2a2640; text-align: center; }
+  #ekranlar { display: flex; flex-wrap: wrap; gap: 36px 28px; justify-content: center; }
+  figure { margin: 0; } figcaption { font-size: 14px; font-weight: 700; color: #4a4566; margin-bottom: 8px; max-width: var(--w); line-height: 1.35; }
+  .ekran { position: relative; width: var(--w); height: var(--h); overflow: hidden; border-radius: 28px; background: var(--zemin); color: var(--metin);
+    display: flex; flex-direction: column; gap: 12px; padding: 34px 20px 22px; box-shadow: 0 16px 40px rgba(20,16,50,.22); }
+  .esnek { flex: 1; min-height: 0; }
+  .ust { display: flex; align-items: center; gap: 10px; flex: none; }
+  .ust .orta { flex: 1; text-align: center; }
+  .kare { width: 44px; height: 44px; flex: none; border-radius: 12px; border: 3px solid var(--kontur); background: var(--yuzey); color: var(--metin);
+    display: grid; place-items: center; font-weight: 800; font-size: 18px; }
+  .bilgi-i { width: 24px; height: 24px; border-radius: 50%; background: var(--marka); border: 3px solid var(--kontur); color: var(--kontur);
+    display: inline-grid; place-items: center; font-size: 13px; font-weight: 800; flex: none; }
+  .bilgi-yazili { height: 44px; display: inline-flex; align-items: center; gap: 8px; padding: 0 14px 0 9px; border-radius: 12px; border: 3px solid var(--kontur);
+    background: var(--yuzey); font-weight: 800; font-size: 15px; white-space: nowrap; }
+  .etiket { font-size: 12px; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; color: var(--soluk); }
+  .govde { font-size: 15px; font-weight: 500; line-height: 1.4; color: var(--soluk); margin: 0; }
+  .baslik { margin: 0; font-size: 30px; font-weight: 800; letter-spacing: -0.03em; line-height: 1.05; }
+  .dg { display: flex; flex-direction: column; align-items: center; justify-content: center; width: 100%; min-height: 58px; border-radius: 20px; border: 4px solid var(--kontur);
+    background: var(--marka); color: var(--kontur); box-shadow: 5px 5px 0 var(--golge); font: 800 19px 'Bricolage Grotesque', sans-serif; flex: none; padding: 6px 14px; }
+  .dg small { font-size: 14px; font-weight: 500; }
+  .dg.ikincil { background: var(--yuzey); color: var(--metin); }
+  .dg.ikincil small { color: var(--soluk); }
+  .dg.bekle { background: var(--yuzey); color: var(--soluk); border-style: dashed; box-shadow: none; font-size: 17px; }
+  .dgler { display: flex; gap: 12px; flex: none; } .dgler .dg { flex: 1; width: auto; }
+  .rozet { display: inline-flex; align-items: center; gap: 5px; height: 30px; padding: 0 10px; border-radius: 12px; border: 3px solid var(--kontur);
+    background: var(--yuzey); color: var(--metin); font-size: 13px; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase; white-space: nowrap; flex: none; }
+  .rozet.m2 { background: var(--marka-2); color: var(--kontur); }
+  .rozet.oda { background: var(--marka-2); color: var(--kontur); transform: rotate(2deg); }
+  .sticker { display: inline-block; transform: rotate(-4deg); padding: 4px 14px 8px; border-radius: 16px; border: 4px solid var(--kontur);
+    box-shadow: 5px 5px 0 var(--golge); font-weight: 800; letter-spacing: -0.03em; line-height: 1; color: var(--kontur); white-space: nowrap; }
+  .tik { width: 20px; height: 20px; border-radius: 50%; background: var(--marka); border: 2px solid var(--kontur); display: inline-grid; place-items: center; color: var(--kontur); font-size: 11px; font-weight: 800; flex: none; }
+  /* Ana ekran (#183 ile aynı) */
+  .logo { align-self: flex-start; background: var(--marka); color: var(--kontur); border: 4px solid var(--kontur); border-radius: 20px; padding: 4px 16px 8px;
+    box-shadow: 5px 5px 0 var(--golge); transform: rotate(-4deg); font-size: 48px; font-weight: 800; letter-spacing: -0.03em; line-height: 1; margin-top: 6px; }
+  .ayar { position: absolute; top: 34px; right: 22px; width: 48px; height: 48px; border-radius: 12px; border: 3px solid var(--kontur); background: var(--yuzey); display: grid; place-items: center; font-size: 20px; }
+  .cipler { display: flex; gap: 8px; padding-bottom: 5px; flex: none; }
+  .fcip { flex: 1 1 auto; display: inline-flex; align-items: center; justify-content: center; height: 48px; padding: 0 8px; border-radius: 12px; border: 3px solid var(--kontur);
+    background: var(--yuzey); color: var(--metin); font-size: 16px; font-weight: 800; white-space: nowrap; }
+  .fcip.sec { background: var(--marka-2); color: var(--kontur); box-shadow: 5px 5px 0 var(--golge); }
+  .fcip.ok { background: var(--ok); color: var(--kontur); box-shadow: 5px 5px 0 var(--golge); }
+  .oyun { background: var(--marka); color: var(--kontur); border: 4px solid var(--kontur); border-radius: 20px; padding: 12px 18px 14px; box-shadow: 5px 5px 0 var(--golge); flex: none; }
+  .oyun b { display: block; font-size: 21px; line-height: 1.1; } .oyun span { font-size: 17px; font-weight: 500; }
+  /* Paket — A: satır kartı */
+  .pliste { display: flex; flex-direction: column; gap: 12px; }
+  .paket { display: flex; gap: 12px; align-items: center; padding: 11px 14px 11px 11px; border-radius: 20px; border: 4px solid var(--kontur); background: var(--yuzey);
+    box-shadow: 5px 5px 0 var(--golge); flex: none; }
+  .emo { width: 52px; height: 52px; flex: none; border-radius: 50%; border: 3px solid var(--kontur); display: grid; place-items: center; font-size: 26px; }
+  .paket b { display: block; font-size: 17px; line-height: 1.2; }
+  .meta { display: flex; align-items: center; gap: 8px; margin-top: 5px; font-size: 12px; font-weight: 700; color: var(--soluk); }
+  .meta .rozet { height: 24px; font-size: 11px; padding: 0 7px; border-width: 2px; background: var(--zemin); }
+  /* Paket — B: çıkartma ızgarası */
+  .pizgara { display: grid; grid-template-columns: 1fr 1fr; gap: 16px 14px; }
+  .pk { position: relative; min-height: 164px; display: flex; flex-direction: column; gap: 6px; padding: 12px 12px 11px; border-radius: 22px; border: 4px solid var(--kontur);
+    color: var(--kontur); box-shadow: 5px 5px 0 var(--golge); }
+  .pk .e { font-size: 34px; line-height: 1; }
+  .pk b { font-size: 16px; line-height: 1.15; }
+  .pk .k { position: absolute; top: 10px; right: 10px; height: 22px; padding: 0 7px; border-radius: 8px; background: var(--kontur); color: #FFF8E7;
+    font-size: 10px; font-weight: 800; letter-spacing: .06em; display: grid; place-items: center; }
+  .pk .n { margin-top: auto; font-size: 11px; font-weight: 700; opacity: .78; line-height: 1.25; }
+  /* Soru metni: ≤90 karakter 22/28, fazlası 19/25 */
+  .soru { margin: 0; font-size: 22px; font-weight: 800; line-height: 1.27; letter-spacing: -0.01em; }
+  .soru.uzun { font-size: 19px; line-height: 1.3; }
+  /* Şık — A: tam genişlik satır */
+  .siklar { display: flex; flex-direction: column; gap: 10px; }
+  .sik { position: relative; display: flex; align-items: center; gap: 12px; min-height: 56px; padding: 8px 12px 8px 10px; border-radius: 20px; border: 4px solid var(--kontur);
+    background: var(--yuzey); color: var(--metin); box-shadow: 5px 5px 0 var(--golge); font-size: 17px; font-weight: 700; line-height: 1.25; }
+  .harf { width: 32px; height: 32px; flex: none; border-radius: 50%; border: 3px solid var(--kontur); background: var(--zemin); color: var(--metin);
+    display: grid; place-items: center; font-size: 15px; font-weight: 800; }
+  .sik .yazi { flex: 1; min-width: 0; }
+  .isaret { width: 30px; height: 30px; flex: none; border-radius: 50%; background: var(--kontur); display: grid; place-items: center; font-size: 16px; font-weight: 800; }
+  .dogru { background: var(--ok); color: var(--kontur); } .dogru .isaret { color: var(--ok); }
+  .yanlis { background: var(--nok); color: var(--kontur); } .yanlis .isaret { color: var(--nok); }
+  .dogru .harf, .yanlis .harf, .senin .harf { background: #FFF8E7; color: var(--kontur); }
+  .sonuk { opacity: .45; box-shadow: none; }
+  .yari { opacity: .72; box-shadow: none; }
+  .duz { box-shadow: none; }
+  .senin { background: var(--marka-2); color: var(--kontur); }
+  .senin .rozet { height: 24px; font-size: 11px; padding: 0 7px; border-width: 2px; background: var(--kontur); color: #FFF8E7; }
+  .kimler { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 5px; }
+  .kimler span { height: 22px; padding: 0 7px; border-radius: 8px; border: 2px solid var(--kontur); background: #FFF8E7; color: var(--kontur); font-size: 11.5px; font-weight: 800;
+    display: inline-flex; align-items: center; gap: 3px; }
+  .kimler span.ben { background: var(--kontur); color: #FFF8E7; }
+  .kimler .yok { border-style: dashed; background: transparent; color: inherit; opacity: .8; }
+  /* Şık — B: 2×2 karo */
+  .karolar { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .karolar .sik { flex-direction: column; align-items: flex-start; gap: 8px; min-height: 112px; padding: 10px 12px 12px; border-radius: 22px; font-size: 16px; line-height: 1.22; }
+  .karolar .harf { width: 34px; height: 34px; border-radius: 10px; background: var(--kontur); color: var(--marka); font-size: 18px; border: 0; }
+  .karolar .dogru .harf, .karolar .yanlis .harf, .karolar .senin .harf { background: var(--kontur); color: #FFF8E7; }
+  .karolar .isaret { position: absolute; top: 9px; right: 9px; }
+  .karolar .senin .rozet { position: absolute; top: 12px; right: 10px; }
+  /* Soru kartı — B */
+  .skart { position: relative; flex: none; padding: 20px 16px 16px; border-radius: 24px; border: 4px solid var(--kontur); background: var(--marka); color: var(--kontur);
+    box-shadow: 7px 7px 0 var(--golge); transform: rotate(-1.5deg); margin: 8px 4px 4px; }
+  .skart .soru { font-size: 21px; } .skart .soru.uzun { font-size: 18px; }
+  .skart .kose { position: absolute; top: -15px; right: 14px; transform: rotate(4deg); background: var(--zemin); color: var(--metin); }
+  /* Sayaç (oda): ince çubuk, marka dolgu, kırmızı yok */
+  .sure { display: flex; align-items: center; gap: 10px; flex: none; }
+  .sure .yol { flex: 1; height: 12px; border-radius: 6px; border: 3px solid var(--kontur); background: var(--yuzey); overflow: hidden; }
+  .sure .yol i { display: block; height: 100%; background: var(--marka); }
+  .sure b { font-size: 15px; font-variant-numeric: tabular-nums; min-width: 40px; text-align: right; }
+  .titre { display: inline-block; animation: none; }
+  /* Sonuç */
+  .puan { font-size: 104px; font-weight: 800; letter-spacing: -0.05em; line-height: .95; font-variant-numeric: tabular-nums; }
+  .puan small { font-size: 42px; color: var(--soluk); letter-spacing: -0.02em; }
+  .unvan { padding: 14px 18px 16px; border-radius: 24px; border: 4px solid var(--kontur); background: var(--marka); color: var(--kontur); box-shadow: 7px 7px 0 var(--golge);
+    transform: rotate(-1.5deg); }
+  .unvan .etiket { color: #3a3560; } .unvan b { display: block; font-size: 22px; line-height: 1.2; margin-top: 4px; }
+  .kutular { display: grid; grid-template-columns: repeat(10, 1fr); gap: 5px; }
+  .kutular i { height: 28px; border-radius: 8px; border: 3px solid var(--kontur); display: grid; place-items: center; font-style: normal; font-size: 13px; font-weight: 800; color: var(--kontur); }
+  .bantlar { display: flex; flex-direction: column; gap: 7px; min-height: 0; overflow: hidden; }
+  .bant { display: flex; flex-direction: column; gap: 3px; }
+  .bant-u { font-size: 13px; font-weight: 700; color: var(--soluk); line-height: 1.3; padding: 0 2px 2px; }
+  .b .bant-u { align-self: flex-start; color: var(--kontur); background: var(--marka); border: 3px solid var(--kontur); border-radius: 12px; padding: 3px 10px 5px;
+    transform: rotate(-1deg); margin: 0 0 2px 2px; box-shadow: 3px 3px 0 var(--golge); font-size: 12.5px; }
+  .sira1 { display: grid; grid-template-columns: 26px 1fr auto; gap: 10px; align-items: center; height: 34px; padding: 0 12px 0 5px; border-radius: 14px;
+    border: 3px solid var(--kontur); background: var(--yuzey); flex: none; }
+  .sira1 .no { width: 24px; height: 24px; border-radius: 50%; border: 2px solid var(--kontur); display: grid; place-items: center; font-weight: 800; font-size: 12px; background: var(--zemin); color: var(--metin); }
+  .sira1 .no.bir { background: var(--marka); color: var(--kontur); }
+  .sira1 b { font-size: 15px; } .sira1 em { font-style: normal; font-size: 17px; font-weight: 800; font-variant-numeric: tabular-nums; }
+  .sira1.ben { background: var(--marka-2); color: var(--kontur); }
+  /* Kim bildi */
+  .bildi { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+  .bildi .fcip { box-shadow: none; } .bildi .fcip.ok { box-shadow: 4px 4px 0 var(--golge); }
+  .bekleyen { display: flex; flex-wrap: wrap; gap: 6px; }
+  .bekleyen > span { display: inline-flex; align-items: center; gap: 5px; height: 30px; padding: 0 9px 0 5px; border-radius: 12px; border: 3px solid var(--kontur); background: var(--yuzey); font-size: 13px; font-weight: 800; }
+  .bekleyen > span.yok { border-style: dashed; padding-left: 9px; color: var(--soluk); background: transparent; border-color: var(--soluk); }
+  /* Diyalog */
+  .perde { position: absolute; inset: 0; background: rgba(11,9,32,.7); display: flex; align-items: center; padding: 20px; }
+  .diyalog { width: 100%; padding: 20px 18px 18px; border-radius: 30px; border: 4px solid var(--kontur); background: var(--yuzey); box-shadow: 8px 8px 0 var(--golge); display: flex; flex-direction: column; gap: 12px; }
+  .diyalog h3 { margin: 0; font-size: 24px; line-height: 1.1; }
+  .diyalog .m { font-size: 15px; font-weight: 600; line-height: 1.4; } .diyalog .m b { display: block; font-size: 16px; }
+  /* Paylaşım kartı (9:16, 1080×1920'nin ölçekli görünümü; her zaman koyu) */
+  .paylas { padding: 30px 24px 22px; gap: 16px; border-radius: 0; }
+  /* Ölçü paneli */
+  .olcu { gap: 9px; }
+  .olcu h3 { margin: 0; font-size: 13px; font-weight: 800; letter-spacing: 1.1px; text-transform: uppercase; color: var(--soluk); }
+  .olcu ul { margin: 0; padding-left: 17px; font-size: 12.5px; line-height: 1.38; font-weight: 500; }
+  .olcu code { font-family: ui-monospace, Menlo, monospace; font-size: 11px; font-weight: 600; }
+</style>
+</head>
+<body>
+<h1 id="baslik">Kafadar — Quiz Night</h1>
+<div id="ekranlar"></div>
+<script>
+const VARYANT = 'a';
+const V = { a: 'A · Sade liste', b: 'B · Yarışma kartı' }[VARYANT];
+const B = VARYANT === 'b';
+const p = new URLSearchParams(location.search);
+const tema = p.get('tema') === 'acik' ? 'acik' : 'koyu';
+const bolum = p.get('bolum') || 'hepsi';
+const tekPanel = p.get('panel');
+const [w, h] = (p.get('boy') || '375x667').split('x').map(Number);
+document.documentElement.dataset.tema = tema;
+document.documentElement.style.setProperty('--w', w + 'px');
+document.documentElement.style.setProperty('--h', h + 'px');
+document.getElementById('baslik').textContent =
+  `Kafadar — Quiz Night · ${V} · ${{ tek: 'Tek başına', 'grup-oda': 'Grup ve oda', hepsi: 'Tüm ekranlar' }[bolum]} · ${tema === 'koyu' ? 'Koyu' : 'Açık'} · ${w}×${h}`;
+
+// ---------- Örnek içerik (yerleşim için; doğrulama #225) ----------
+const PAKETLER = [
+  { ad: 'Aşk-ı Memnu', e: '💔', k: 'Türk' }, { ad: 'Friends', e: '☕', k: 'Yabancı' },
+  { ad: 'Leyla ile Mecnun', e: '🌙', k: 'Türk' }, { ad: 'Breaking Bad', e: '🧪', k: 'Yabancı' },
+  { ad: 'Deli Yürek', e: '🦅', k: 'Türk' }, { ad: 'Yüzüklerin Efendisi', e: '💍', k: 'Yabancı' },
+];
+const UNVAN = {
+  dusuk: 'Yalının kapısından bile içeri girememişsin.',     // 0–3
+  orta: 'Nihal gibi her şeyi en son sen öğreniyorsun.',     // 4–6
+  iyi: 'Firdevs Hanım seni beş çayına davet etti.',         // 7–9
+  tam: 'Beşir bile yalının sırlarını senden öğreniyor.',    // 10
+};
+const unvan = (n) => n <= 3 ? UNVAN.dusuk : n <= 6 ? UNVAN.orta : n <= 9 ? UNVAN.iyi : UNVAN.tam;
+const S = {
+  kanal: { no: 3, z: 'Kolay', m: 'Aşk-ı Memnu ilk olarak hangi televizyon kanalında yayınlandı?', s: ['ATV', 'Kanal D', 'Show TV', 'Star TV'], d: 1 },
+  sezon: { no: 4, z: 'Orta', m: 'Aşk-ı Memnu toplam kaç sezon sürdü?', s: ['1 sezon', '2 sezon', '3 sezon', '4 sezon'], d: 1 },
+  final: { no: 5, z: 'Orta', m: 'Dizinin final bölümü hangi yıl yayınlandı?', s: ['2009', '2011', '2010', '2008'], d: 2 },
+  soyad: { no: 6, z: 'Orta', m: 'Bihter, Adnan Bey ile evlenmeden önce hangi soyadını taşıyordu?', s: ['Haznedar', 'Yöreoğlu', 'Ziyagil', 'Karaca'], d: 1 },
+  // En uzun örnek: metin tam 140, şıklar 39–40 karakter (KK-115 sınırı)
+  uzun: { no: 8, z: 'Zor', m: "Halit Ziya Uşaklıgil'in Aşk-ı Memnu romanı, kitap olarak basılmadan önce, ilk kez hangi dergide ve hangi yıllar arasında tefrika edilmiştir?",
+    s: ['Resimli Kitap dergisinde, 1908 ile 1909', 'Servet-i Fünun dergisinde, 1899 ile 1900', 'İkdam gazetesinde, 1902 ile 1903 yılları', 'Malûmat dergisinde, 1896 ile 1897'], d: 1 },
+};
+const HARF = ['A', 'B', 'C', 'D'];
+
+// ---------- Parçalar ----------
+const bilgiKisa = '<span class="kare" aria-label="Nasıl oynanır"><span class="bilgi-i">i</span></span>';
+const bilgiYazili = '<span class="bilgi-yazili"><span class="bilgi-i">i</span>Nasıl oynanır</span>';
+const geri = '<span class="kare" aria-label="Geri">‹</span>';
+const cik = '<span class="kare" aria-label="Oyundan çık">✕</span>';
+const zorluk = (z) => `<span class="rozet">${z === 'Kolay' ? '●○○' : z === 'Orta' ? '●●○' : '●●●'}&nbsp;${z}</span>`;
+
+// Oyun içi üst çubuk: ✕ · orta etiket · sağ rozet · ⓘ (mevcut UstCubuk)
+const ustOyun = (q, { oda = false, kuran = false } = {}) => B
+  ? `<div class="ust">${cik}${oda ? `<span class="rozet oda">ODA${kuran ? ' ★' : ''}</span>` : ''}<span class="orta"><span class="sticker" style="background: var(--marka-2); font-size: 24px; padding: 3px 12px 7px">${q.no}/10</span></span>${bilgiKisa}</div>`
+  : `<div class="ust">${cik}<span class="orta etiket">${oda ? `<span class="rozet oda">ODA${kuran ? ' ★' : ''}</span>` : 'Aşk-ı Memnu'}</span><span class="rozet m2">${q.no}/10</span>${bilgiKisa}</div>`;
+
+// Soru gövdesi: A = metin + satır şıklar, B = eğik kart + 2×2 karo
+// durum: her şık için '', 'dogru', 'yanlis', 'sonuk', 'yari', 'duz', 'senin'; ek: şık içi ek HTML (kimler)
+const soruGovde = (q, durum = [], ek = [], { rozetUst = true } = {}) => {
+  const uzun = q.m.length > 90 ? ' uzun' : '';
+  const sik = (s, i) => {
+    const c = durum[i] || '';
+    const isaret = c.includes('dogru') ? '<span class="isaret" aria-hidden="true">✓</span>' : c.includes('yanlis') ? '<span class="isaret" aria-hidden="true">✕</span>' : '';
+    const senin = c.includes('senin') ? '<span class="rozet">Senin</span>' : '';
+    return `<div class="sik ${c}" role="button"><span class="harf">${HARF[i]}</span><span class="yazi">${s}${ek[i] || ''}</span>${isaret}${senin}</div>`;
+  };
+  if (B) return `<div class="skart"><span class="rozet kose">${zorluk(q.z).replace(/<\/?span[^>]*>/g, '')}</span><p class="soru${uzun}">${q.m}</p></div>
+    <div class="karolar">${q.s.map(sik).join('')}</div>`;
+  return `${rozetUst ? `<div>${zorluk(q.z)}</div>` : ''}<p class="soru${uzun}">${q.m}</p><div class="siklar">${q.s.map(sik).join('')}</div>`;
+};
+const durumlar = (q, { sec = -1, goster = true, sonuk = 'sonuk' } = {}) => q.s.map((_, i) =>
+  !goster ? '' : i === q.d ? 'dogru' : i === sec ? 'yanlis' : sonuk);
+
+const sonucUst = (puan) => B
+  ? `<div class="esnek" style="display: flex; flex-direction: column; justify-content: center; gap: 22px">
+      <div class="unvan" style="transform: rotate(-3deg); padding: 18px 18px 20px; box-shadow: 9px 9px 0 var(--golge)">
+        <div class="etiket">Ne kadar Aşk-ı Memnu fanısın?</div>
+        <div class="puan" style="color: var(--kontur); margin: 6px 0 4px">${puan}<small style="color: #3a3560">/10</small></div>
+        <b>${unvan(puan)}</b>
+      </div>
+      <div><div class="etiket" style="margin-bottom: 8px">Soru soru</div>
+        <div class="kutular">${[1,1,1,0,1,1,1,0,1,1].map(x => `<i style="background: var(--${x ? 'ok' : 'nok'})" aria-label="${x ? 'doğru' : 'yanlış'}">${x ? '✓' : '✕'}</i>`).join('')}</div></div>
+    </div>`
+  : `<div class="esnek" style="display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 20px; text-align: center">
+      <div class="etiket">Ne kadar Aşk-ı Memnu fanısın?</div>
+      <div class="puan">${puan}<small>/10</small></div>
+      <div class="unvan" style="width: 100%; text-align: left"><div class="etiket">Unvanın</div><b>${unvan(puan)}</b></div>
+    </div>`;
+
+// ---------- Paneller ----------
+const P = [];
+const ekle = (bol, id, ad, html) => P.push({ bol, id, ad, html });
+
+ekle('tek', 'ana', '1 · Ana ekran, “1 kişi” seçili: yalnız Quiz Night kalır (KK-106)', `<section class="ekran" style="gap: 16px; padding: 34px 22px 22px">
+  <div class="logo">Kafadar</div><div class="ayar" aria-label="Ayarlar">⚙️</div>
+  <p class="govde" style="font-size: 17px">Bir oyun seç, telefonu ele ver.</p>
+  <div class="cipler"><span class="fcip">Tümü</span><span class="fcip sec">✓ 1 kişi</span><span class="fcip">2 kişi</span><span class="fcip">3+ kişi</span></div>
+  <div class="oyun"><b>Quiz Night</b><span>👥 1–12 kişi</span></div>
+  <div class="esnek"></div>
+  <p class="govde" style="font-size: 12px; text-align: center">“Tümü”, “2 kişi” ve “3+ kişi”de de görünür; kayıt sırasında en sonda. Kartta emoji yok (diğer oyunlar gibi); 🧠 kayıt emojisi açılış ekranında kullanılır.</p>
+</section>`);
+
+ekle('tek', 'mod', '2 · Mod seçimi, Faz 1: oda seçenekleri gizli (KK-107)', `<section class="ekran">
+  <div class="ust">${geri}<span class="orta"></span>${bilgiYazili}</div>
+  <h2 class="baslik">Nasıl oynuyoruz?</h2>
+  <div class="dg"><span>Tek başına</span></div><p class="govde" style="margin-top: -4px">10 soru, kendi hızında. Süre yok.</p>
+  <div class="dg ikincil"><span>Tek telefonda grup</span></div><p class="govde" style="margin-top: -4px">Telefonu tutan okur, herkes sesli cevaplar. 2–12 kişi.</p>
+  <div class="esnek"></div>
+  <p class="govde" style="font-size: 12px; text-align: center">“Tek başına” oyuncular ekranını atlar, doğrudan paket seçimine gider. Grup mevcut oyuncular ekranını kullanır.</p>
+</section>`);
+
+ekle('tek', 'bilgi', '3 · ⓘ Nasıl oynanır: üç mod kısaca (KK-106, KK-91)', `<section class="ekran">
+  <div class="ust">${geri}<span class="orta"></span>${bilgiYazili}</div>
+  <h2 class="baslik">Nasıl oynuyoruz?</h2>
+  <div class="dg"><span>Tek başına</span></div><div class="dg ikincil"><span>Tek telefonda grup</span></div>
+  <div class="perde"><div class="diyalog">
+    <div><span class="rozet" style="background: var(--kontur); color: var(--marka)">👥 1–12 kişi</span></div>
+    <h3>Quiz Night</h3>
+    <div class="m">Bir dizi ya da film seç, 10 soru gelsin: kolaydan zora, 4 şık. Bildiğin kadar puan, sonunda bir unvan.</div>
+    <div class="m"><b>Tek başına</b>Şıka dokun, cevap kilitlenir. Süre yok.</div>
+    <div class="m"><b>Tek telefonda grup</b>Telefonu tutan okur, herkes sesli cevaplar. “Cevabı göster”den sonra bilenleri işaretle.</div>
+    <div class="m"><b>Oda</b>Herkes kendi telefonundan seçer, her soru en çok 20 sn. <span style="color: var(--soluk)">(Faz 2)</span></div>
+    <div class="dg" style="min-height: 56px">Tamam</div>
+  </div></div>
+</section>`);
+
+ekle('tek', 'paket', '4 · Paket seçimi, “Tümü” varsayılan; Türk / Yabancı süzer (KK-108)', B
+  ? `<section class="ekran">
+  <div class="ust">${geri}<span class="orta"></span>${bilgiYazili}</div>
+  <h2 class="baslik">Hangi dizi?</h2>
+  <div class="cipler"><span class="fcip sec">✓ Tümü</span><span class="fcip">Türk</span><span class="fcip">Yabancı</span></div>
+  <div class="pizgara">${PAKETLER.map((x, i) => `<div class="pk" role="button" style="background: var(--${i % 3 === 1 ? 'marka-2' : 'marka'}); transform: rotate(${i % 2 ? 1.5 : -1.5}deg)">
+    <span class="k">${x.k.toLocaleUpperCase('tr')}</span><span class="e">${x.e}</span><b>Ne kadar ${x.ad} fanısın?</b><span class="n">Resmî değildir · Spoiler içerir</span></div>`).join('')}</div>
+</section>`
+  : `<section class="ekran">
+  <div class="ust">${geri}<span class="orta"></span>${bilgiYazili}</div>
+  <h2 class="baslik">Hangi dizi?</h2>
+  <div class="cipler"><span class="fcip sec">✓ Tümü</span><span class="fcip">Türk</span><span class="fcip">Yabancı</span></div>
+  <div class="pliste">${PAKETLER.map((x, i) => `<div class="paket" role="button"><span class="emo" style="background: var(--${i % 2 ? 'marka-2' : 'marka'})">${x.e}</span>
+    <div><b>Ne kadar ${x.ad} fanısın?</b><div class="meta"><span class="rozet">${x.k}</span>Resmî değildir · Spoiler içerir</div></div></div>`).join('')}</div>
+</section>`);
+
+ekle('tek', 'soru', '5 · Soru, cevaptan önce: “3/10”, zorluk yazıyla, 4 büyük şık (KK-110)', `<section class="ekran">
+  ${ustOyun(S.kanal)}${soruGovde(S.kanal)}
+  <div class="esnek"></div>
+</section>`);
+
+ekle('tek', 'cevap', '6 · Cevaptan sonra: yanlış seçilen nok + ✕, doğru ok + ✓, titreşim; ~1,5 sn sonra sıradaki (KK-110)', `<section class="ekran">
+  ${ustOyun(S.final)}${soruGovde(S.final, durumlar(S.final, { sec: 0 }))}
+  <div class="esnek"></div>
+  <p class="govde" style="text-align: center; font-size: 13px">Cevap kilitli · sıradaki soru geliyor</p>
+</section>`);
+
+ekle('tek', 'uzun', '7 · En uzun örnek: soru 140, şık 40 karakter; metin 22 → 19 küçülür (KK-115)', `<section class="ekran">
+  ${ustOyun(S.uzun)}${soruGovde(S.uzun)}
+  <div class="esnek"></div>
+</section>`);
+
+ekle('tek', 'sonuc', '8 · Sonuç: büyük puan + unvan; Tekrar · Başka paket (KK-111)', `<section class="ekran">
+  <div class="ust"><span class="orta etiket">Quiz Night · Tek başına</span>${bilgiKisa}</div>
+  ${sonucUst(8)}
+  <div class="dg">Paylaş</div>
+  <div class="dgler"><div class="dg ikincil">Tekrar</div><div class="dg ikincil">Başka paket</div></div>
+</section>`);
+
+ekle('tek', 'paylas', '9 · Paylaşım kartı 9:16 (1080×1920, ×2,88): paket, puan, unvan, logo; soru/cevap/isim yok (KK-111)', B
+  ? `<section class="ekran paylas koyu" style="background: var(--zemin)">
+  <div style="display: flex; justify-content: space-between; align-items: center"><span class="sticker" style="background: var(--marka); font-size: 36px; padding: 4px 16px 9px">Kafadar!</span>
+    <span class="sticker" style="background: var(--marka-2); font-size: 15px; transform: rotate(3deg)">🧠 Quiz Night</span></div>
+  <div class="esnek" style="display: flex; flex-direction: column; justify-content: center; gap: 26px">
+    <div class="unvan" style="transform: rotate(-3deg); padding: 20px 18px 22px; box-shadow: 9px 9px 0 var(--golge)">
+      <div class="etiket" style="font-size: 13px">Ne kadar Aşk-ı Memnu fanısın?</div>
+      <div class="puan" style="color: var(--kontur); font-size: 120px; margin: 6px 0">8<small style="color: #3a3560">/10</small></div>
+      <b style="font-size: 23px">${unvan(8)}</b>
+    </div>
+    <div class="kutular">${[1,1,1,0,1,1,1,0,1,1].map(x => `<i style="background: var(--${x ? 'ok' : 'nok'})">${x ? '✓' : '✕'}</i>`).join('')}</div>
+  </div>
+  <div style="text-align: center; font-size: 13px; font-weight: 700; color: var(--soluk)">Kafadar ile oynandı · Quiz Night</div>
+</section>`
+  : `<section class="ekran paylas koyu" style="background: var(--zemin)">
+  <div><span class="sticker" style="background: var(--marka); font-size: 36px; padding: 4px 16px 9px">Kafadar!</span></div>
+  <div class="esnek" style="display: flex; flex-direction: column; justify-content: center; gap: 18px">
+    <div class="etiket" style="font-size: 13px">🧠 Quiz Night</div>
+    <div style="font-size: 30px; font-weight: 800; line-height: 1.1; letter-spacing: -0.02em">Ne kadar Aşk-ı Memnu fanısın?</div>
+    <div class="puan" style="font-size: 132px">8<small style="font-size: 52px">/10</small></div>
+    <div class="unvan"><div class="etiket">Unvanım</div><b style="font-size: 23px">${unvan(8)}</b></div>
+  </div>
+  <div style="text-align: center; font-size: 13px; font-weight: 700; color: var(--soluk)">Kafadar ile oynandı · Quiz Night</div>
+</section>`);
+
+ekle('tek', 'olcu', '10 · Ölçüler ve kurallar', `<section class="ekran olcu">
+  <h3>Şık ${B ? '(2×2 karo)' : '(satır)'}</h3>
+  <ul>
+    ${B ? '<li>Karo en az 112 yükseklik, aralık <code>bosluk.m</code>; harf 34 kare <code>kontur</code> zemin <code>marka</code> yazı; metin 16/800, alt sınır yok, karo uzar</li>'
+        : '<li>En az 56 yükseklik, tam genişlik, aralık <code>bosluk.m</code>-2; harf 32 daire; metin 17/700, iki satıra kadar</li>'}
+    <li><code>cizgi.kalin</code>, <code>yaricap.dugme</code>, <code>yuzey</code>, 5px <code>golge</code>; basınca düğme gibi 5→1px</li>
+    <li>Doğru: <code>ok</code> + ✓ · yanlış seçilen: <code>nok</code> + ✕ · diğerleri opaklık .45. Renk hiçbir yerde tek başına değil</li>
+    <li>Grupta göster'den önce şıklar düz (gölgesiz) ve dokunulmaz; doğru şık hiçbir biçimde belli olmaz</li>
+    <li>Oda: kilitli şık <code>marka2</code> + “SENİN”; açıklamada şık içinde kim seçti çipleri</li>
+  </ul>
+  <h3>Yazı</h3>
+  <ul>
+    <li>Soru: <code>font.kalin</code> ${B ? '21/27 kartta' : '22/28'}; 90 karakterden uzunsa ${B ? '18/23' : '19/25'} (yeni <code>yazi.soru</code>). Sistem büyütmesinde ekran kayar, şık kesilmez</li>
+    <li>Sonuç sırası unvan bandına göre gruplu; eşit puan aynı sıra (1, 1, 3)</li>
+    <li>Zorluk: “●○○ Kolay / ●●○ Orta / ●●● Zor”, <code>yuzey</code> rozet; renk değişmez</li>
+    <li>Puan: 104/800 <code>tabular-nums</code> (<code>yazi.sayi</code> ×1,5)</li>
+  </ul>
+  <h3>Hareket</h3>
+  <ul>
+    <li>Tek başına: seçim <code>oySecimi</code> 160ms + titreşim (doğru <code>notificationSuccess</code>, yanlış <code>notificationError</code>); 1500ms sonra <code>ekranGecisi</code></li>
+    <li>Oda sayacı: sunucu saatine göre doğrusal azalır; son 5 sn her saniye <code>impactLight</code>, renk aynı. Hareketi azalt: saniyede bir adım</li>
+  </ul>
+</section>`);
+
+// ---------- Grup ----------
+const GRUP = ['Ayşe', 'Murat', 'Can', 'Deniz', 'Elif'];
+ekle('grup-oda', 'grup-soru', '11 · Grup: soru sesli okunur, şıklar dokunulmaz, doğru şık gizli (KK-112)', `<section class="ekran">
+  ${ustOyun(S.sezon)}
+  <div class="etiket">📣 Sesli oku · herkes cevabını söylesin</div>
+  ${soruGovde(S.sezon, ['duz', 'duz', 'duz', 'duz'])}
+  <div class="esnek"></div>
+  <div class="dg">Cevabı göster</div>
+</section>`);
+
+ekle('grup-oda', 'grup-goster', '12 · Göster’den sonra: doğru şık açılır, bilenler işaretlenir (hiç kimse ya da herkes olabilir)', `<section class="ekran">
+  ${ustOyun(S.sezon)}
+  ${B ? `<div class="skart" style="padding: 16px 14px 12px"><span class="rozet kose">●●○&nbsp;Orta</span><p class="soru" style="font-size: 18px">${S.sezon.m}</p></div>`
+      : `<div>${zorluk(S.sezon.z)}</div><p class="soru" style="font-size: 19px">${S.sezon.m}</p>`}
+  <div class="etiket">Doğru cevap</div>
+  <div class="sik dogru" style="min-height: 60px"><span class="harf">B</span><span class="yazi" style="font-size: 19px; font-weight: 800">2 sezon</span><span class="isaret">✓</span></div>
+  <div class="etiket" style="margin-top: 4px">Kim bildi?</div>
+  <div class="bildi">${GRUP.map(n => ['Ayşe', 'Can', 'Deniz'].includes(n) ? `<span class="fcip ok">✓ ${n}</span>` : `<span class="fcip">${n}</span>`).join('')}</div>
+  <p class="govde" style="font-size: 13px">Hiç kimse ya da herkes olabilir. 12 kişiye kadar 3 sütun × 4 satır sığar.</p>
+  <div class="esnek"></div>
+  <div class="dg">Sonraki</div>
+</section>`);
+
+// Sıra listesi unvan bandına göre gruplanır: unvan bir kez yazılır, 12 kişide de sığar (fazlası kayar, düğmeler sabit)
+const siraListe = (liste, ben) => {
+  const bantlar = [];
+  liste.forEach(x => { const u = unvan(x[2]); const son = bantlar[bantlar.length - 1]; if (son && son.u === u) son.l.push(x); else bantlar.push({ u, l: [x] }); });
+  return `<div class="bantlar">${bantlar.map(b => `<div class="bant"><div class="bant-u">“${b.u}”</div>${b.l.map(([no, ad, pu]) =>
+    `<div class="sira1${ad === ben ? ' ben' : ''}"><span class="no${no === 1 ? ' bir' : ''}">${no}</span><b>${ad === ben ? 'Sen (' + ad + ')' : ad}</b><em>${pu}/10</em></div>`).join('')}</div>`).join('')}</div>`;
+};
+const GSIRA = [[1, 'Ayşe', 9], [1, 'Can', 9], [3, 'Murat', 7], [4, 'Deniz', 5], [5, 'Elif', 2]];
+ekle('grup-oda', 'grup-sonuc', '13 · Grup sonucu: doğru sayısına göre sıra, eşitler aynı sırada (1, 1, 3), unvan bandına göre gruplu, herkesin unvanı görünür (KK-112)', `<section class="ekran">
+  <div class="ust"><span class="orta etiket">Aşk-ı Memnu · Grup · 5 kişi</span>${bilgiKisa}</div>
+  <h2 class="baslik">${B ? '<span class="sticker" style="background: var(--marka); font-size: 30px">Kim kazandı?</span>' : 'Sıralama'}</h2>
+  ${siraListe(GSIRA)}
+  <div class="esnek"></div>
+  <div class="dg">Paylaş</div>
+  <div class="dgler"><div class="dg ikincil">Tekrar</div><div class="dg ikincil">Başka paket</div></div>
+</section>`);
+
+// ---------- Oda (Faz 2) ----------
+ekle('grup-oda', 'oda-mod', '14 · Mod seçimi, Faz 2: dört seçenek (KK-107, KK-113)', `<section class="ekran">
+  <div class="ust">${geri}<span class="orta"></span>${bilgiYazili}</div>
+  <h2 class="baslik">Nasıl oynuyoruz?</h2>
+  <div class="dg"><span>Tek başına</span><small>10 soru, kendi hızında. Süre yok.</small></div>
+  <div class="dg ikincil"><span>Tek telefonda grup</span><small>Telefonu tutan okur, herkes sesli cevaplar.</small></div>
+  <div class="dg ikincil"><span>Oda kur</span><small>Herkes kendi telefonundan oynar.</small></div>
+  <div class="dg ikincil"><span>Odaya katıl</span><small>Arkadaşının 6 haneli kodu ile.</small></div>
+  <div class="esnek"></div>
+  <p class="govde" style="font-size: 12px; text-align: center">Kod, QR, lobi ve yeniden bağlanma mevcut odalarla aynı (KK-70).</p>
+</section>`);
+
+const ODA_CEVAP = [['Ayşe', 1], ['Can', 1], ['Deniz', 1], ['Murat ★', 1], ['Mert', 1], ['Elif', 0], ['Zeynep', 0], ['Ali', 0]];
+const bekleyen = (liste) => `<div class="bekleyen">${liste.map(([n, c]) => c ? `<span><span class="tik">✓</span>${n}</span>` : `<span class="yok">${n}…</span>`).join('')}</div>`;
+ekle('grup-oda', 'oda-soru', '15 · Oda soru (Deniz’in telefonu): cevap kilitli, ince sayaç 12 sn; kim cevapladı görünür, ne dedi görünmez', `<section class="ekran">
+  ${ustOyun(S.soyad, { oda: true })}
+  <div class="sure" aria-label="12 saniye kaldı"><div class="yol"><i style="width: 60%"></i></div><b>12 sn</b></div>
+  ${soruGovde(S.soyad, ['duz', 'senin', 'duz', 'duz'])}
+  <div class="esnek"></div>
+  <div class="etiket">5/8 cevapladı</div>
+  ${bekleyen(ODA_CEVAP)}
+</section>`);
+
+ekle('grup-oda', 'oda-son5', '16 · Son 5 sn (Elif’in telefonu, henüz seçmedi): telefon titrer, çubuk yine marka, kırmızı yok', `<section class="ekran">
+  ${ustOyun(S.soyad, { oda: true })}
+  <div class="sure" aria-label="4 saniye kaldı"><div class="yol"><i style="width: 20%"></i></div><b>📳 4 sn</b></div>
+  ${soruGovde(S.soyad)}
+  <div class="esnek"></div>
+  <div class="etiket">7/8 cevapladı</div>
+  ${bekleyen(ODA_CEVAP.map(([n, c]) => [n, n === 'Elif' ? 0 : 1]))}
+</section>`);
+
+const KIM = [['Mert', 'Elif'], ['Ayşe', 'Can', 'Deniz', 'Murat ★'], ['Zeynep'], []];
+const kimler = (ben) => KIM.map(l => `<div class="kimler">${l.length ? l.map(n => `<span class="${n.startsWith(ben) ? 'ben' : ''}">${n.startsWith(ben) ? 'Sen' + (n.includes('★') ? ' ★' : '') : n}</span>`).join('') : '<span class="yok">kimse</span>'}</div>`);
+ekle('grup-oda', 'oda-aciklama', '17 · Açıklama (kuran Murat ★): doğru şık ve kim neyi seçti tüm telefonlarda aynı anda; “Sonraki soru” yalnızca kuranda', `<section class="ekran">
+  ${ustOyun(S.soyad, { oda: true, kuran: true })}
+  ${soruGovde(S.soyad, ['yari', 'dogru', 'yari', 'yari'], kimler('Murat'), { rozetUst: false })}
+  <p class="govde" style="font-size: 13px">Ali cevap vermedi · yanlış sayıldı</p>
+  <div class="esnek"></div>
+  <div class="dg">Sonraki soru</div>
+</section>`);
+
+ekle('grup-oda', 'oda-aciklama-2', '18 · Aynı an, Elif’in telefonu: kendi yanlışı nok + ✕; kuran bekleniyor (kuran ayrılırsa sıradakine geçer)', `<section class="ekran">
+  ${ustOyun(S.soyad, { oda: true })}
+  ${soruGovde(S.soyad, ['yanlis', 'dogru', 'yari', 'yari'], kimler('Elif'), { rozetUst: false })}
+  <p class="govde" style="font-size: 13px">Ali cevap vermedi · yanlış sayıldı</p>
+  <div class="esnek"></div>
+  <div class="dg bekle">Kuran kişi bekleniyor… Murat ★</div>
+</section>`);
+
+const OSIRA = [[1, 'Ayşe', 9], [2, 'Can', 8], [3, 'Deniz', 7], [3, 'Murat ★', 7], [5, 'Mert', 6], [6, 'Elif', 5], [7, 'Zeynep', 4], [8, 'Ali', 2]];
+ekle('grup-oda', 'oda-sonuc', '19 · Oda sonucu (Deniz’in telefonu): aynı gruplu sıra, “Sen” vurgulu; paylaşım kendi puanıyla', `<section class="ekran" style="gap: 10px">
+  <div class="ust"><span class="rozet oda">ODA</span><span class="orta etiket">Aşk-ı Memnu · 8 kişi</span>${bilgiKisa}</div>
+  <h2 class="baslik" style="font-size: 26px">${B ? '<span class="sticker" style="background: var(--marka-2); font-size: 21px; padding: 3px 12px 6px">Sen 3. sıradasın · 7/10</span>' : 'Sen 3. sıradasın · 7/10'}</h2>
+  ${siraListe(OSIRA, 'Deniz')}
+  <div class="esnek"></div>
+  <div class="dgler"><div class="dg">Paylaş</div><div class="dg bekle" style="font-size: 14px">Tekrar: Murat ★</div></div>
+</section>`);
+
+// ---------- Yerleştir ----------
+if (B) document.body.classList.add('b');
+const kap = document.getElementById('ekranlar');
+const secilen = tekPanel ? P.filter(x => x.id === tekPanel) : P.filter(x => bolum === 'hepsi' || x.bol === bolum);
+if (tekPanel) { document.body.classList.add('tek-panel'); document.getElementById('baslik').remove(); }
+secilen.forEach(x => {
+  const f = document.createElement('figure');
+  if (!tekPanel) { const c = document.createElement('figcaption'); c.textContent = x.ad; f.append(c); }
+  f.insertAdjacentHTML('beforeend', x.html); kap.append(f);
+});
+</script>
+</body>
+</html>
