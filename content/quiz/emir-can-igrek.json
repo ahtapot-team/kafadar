@@ -1,0 +1,750 @@
+{
+  "id": "emir-can-igrek",
+  "ad": "Emir Can İğrek",
+  "emoji": "🎸",
+  "kategori": "muzik",
+  "unvanlar": [
+    "Parti İptal! Şimdilik yalnızca Nalan'ı biliyorsun",
+    "Ağır Roman'ı yarıladın, Kor yavaş yavaş harlanıyor",
+    "Kor gibi yanıyorsun, Volkswagen Arena'da ön sıradasın",
+    "Fiyakalı! Emir Can İğrek fanlarının en fiyakalısı"
+  ],
+  "sorular": [
+    {
+      "id": "emir-can-igrek-01",
+      "metin": "Emir Can İğrek 2019'da hangi şarkısıyla geniş kitlelere ulaşıp çıkış yakaladı?",
+      "secenekler": ["Kor", "Nalan", "Dargın", "Beyoğlu"],
+      "dogru": 1,
+      "zorluk": "kolay",
+      "tur": "dunya",
+      "kaynaklar": [
+        {
+          "ad": "Vikipedi: Emir Can İğrek",
+          "url": "https://tr.wikipedia.org/wiki/Emir_Can_İğrek"
+        },
+        {
+          "ad": "Kürê Ansiklopedi: Emir Can İğrek",
+          "url": "https://kureansiklopedi.com/tr/detay/emir-can-igrek-751827"
+        },
+        {
+          "ad": "Milliyet Cadde (14.04.2021): Emir Can İğrek: Şarkı açıyorum, deli deli hareketler yapıyorum",
+          "url": "https://www.milliyet.com.tr/cadde/emir-can-igrek-sarki-aciyorum-deli-deli-hareketler-yapiyorum-6481457"
+        },
+        {
+          "ad": "Onedio: Hızlı yükselişiyle dikkatleri çeken Emir Can İğrek kimdir?",
+          "url": "https://onedio.com/haber/hizli-yukselisiyle-dikkatleri-ceken-emir-can-igrek-kimdir-994844"
+        },
+        {
+          "ad": "CNN Türk (01.11.2023): Emir Can İğrek kimdir?",
+          "url": "https://www.cnnturk.com/spor/futbol/sarkici-emir-can-igrek-kimdir-2057813"
+        }
+      ],
+      "uyum": 1.0
+    },
+    {
+      "id": "emir-can-igrek-02",
+      "metin": "Emir Can İğrek, 2020'de yayımlanan \"Dargın\" şarkısını hangi sanatçıyla düet olarak seslendirdi?",
+      "secenekler": ["Simge", "Melike Şahin", "Sena Şener", "Zeynep Bastık"],
+      "dogru": 3,
+      "zorluk": "kolay",
+      "tur": "dunya",
+      "kaynaklar": [
+        {
+          "ad": "Apple Music: Dargın",
+          "url": "https://music.apple.com/tr/album/darg%C4%B1n-single/1528535810"
+        },
+        {
+          "ad": "Deezer: Dargın",
+          "url": "https://www.deezer.com/album/168355102"
+        },
+        {
+          "ad": "Vikipedi: Emir Can İğrek",
+          "url": "https://tr.wikipedia.org/wiki/Emir_Can_İğrek"
+        },
+        {
+          "ad": "Wikipedia (EN): Emir Can İğrek",
+          "url": "https://en.wikipedia.org/wiki/Emir_Can_İğrek"
+        },
+        {
+          "ad": "Kürê Ansiklopedi: Emir Can İğrek",
+          "url": "https://kureansiklopedi.com/tr/detay/emir-can-igrek-751827"
+        }
+      ],
+      "uyum": 1.0
+    },
+    {
+      "id": "emir-can-igrek-03",
+      "metin": "2022'de çıkan \"Bana Unutmayı Anlat\" düetinde Emir Can İğrek'e kim eşlik eder?",
+      "secenekler": ["Cem Adrian", "Mabel Matiz", "Kenan Doğulu", "Can Bonomo"],
+      "dogru": 0,
+      "zorluk": "kolay",
+      "tur": "dunya",
+      "kaynaklar": [
+        {
+          "ad": "Apple Music: Bana Unutmayı Anlat",
+          "url": "https://music.apple.com/tr/album/bana-unutmay%C4%B1-anlat-single/1620901588"
+        },
+        {
+          "ad": "Deezer: Bana Unutmayı Anlat",
+          "url": "https://www.deezer.com/album/313472537"
+        },
+        {
+          "ad": "Vikipedi: Emir Can İğrek",
+          "url": "https://tr.wikipedia.org/wiki/Emir_Can_İğrek"
+        },
+        {
+          "ad": "Vikipedi: Cem Adrian",
+          "url": "https://tr.wikipedia.org/wiki/Cem_Adrian"
+        },
+        {
+          "ad": "Wikipedia (EN): Emir Can İğrek",
+          "url": "https://en.wikipedia.org/wiki/Emir_Can_İğrek"
+        }
+      ],
+      "uyum": 1.0
+    },
+    {
+      "id": "emir-can-igrek-04",
+      "metin": "Emir Can İğrek'in ilk stüdyo albümü hangisidir?",
+      "secenekler": ["Parti İptal", "Fiyakalı", "Ağır Roman", "Sapa"],
+      "dogru": 2,
+      "zorluk": "kolay",
+      "tur": "dunya",
+      "kaynaklar": [
+        {
+          "ad": "Vikipedi: Emir Can İğrek",
+          "url": "https://tr.wikipedia.org/wiki/Emir_Can_İğrek"
+        },
+        {
+          "ad": "Vikipedi: Ağır Roman (albüm)",
+          "url": "https://tr.wikipedia.org/wiki/Ağır_Roman_(albüm)"
+        },
+        {
+          "ad": "Wikipedia (EN): Emir Can İğrek",
+          "url": "https://en.wikipedia.org/wiki/Emir_Can_İğrek"
+        },
+        {
+          "ad": "Kürê Ansiklopedi: Emir Can İğrek",
+          "url": "https://kureansiklopedi.com/tr/detay/emir-can-igrek-751827"
+        },
+        {
+          "ad": "CNN Türk (01.11.2023): Emir Can İğrek kimdir?",
+          "url": "https://www.cnnturk.com/spor/futbol/sarkici-emir-can-igrek-kimdir-2057813"
+        }
+      ],
+      "uyum": 1.0
+    },
+    {
+      "id": "emir-can-igrek-05",
+      "metin": "2020 tarihli \"Darbe\" şarkısında Emir Can İğrek hangi rapçiyle buluştu?",
+      "secenekler": ["Patron", "Ceza", "Gazapizm", "Sagopa Kajmer"],
+      "dogru": 0,
+      "zorluk": "kolay",
+      "tur": "dunya",
+      "kaynaklar": [
+        {
+          "ad": "Apple Music: Darbe",
+          "url": "https://music.apple.com/tr/album/darbe-single/1512869940"
+        },
+        {
+          "ad": "Deezer: Darbe",
+          "url": "https://www.deezer.com/album/147641732"
+        },
+        {
+          "ad": "Vikipedi: Emir Can İğrek",
+          "url": "https://tr.wikipedia.org/wiki/Emir_Can_İğrek"
+        },
+        {
+          "ad": "Vikipedi: Patron (müzisyen)",
+          "url": "https://tr.wikipedia.org/wiki/Patron_(müzisyen)"
+        },
+        {
+          "ad": "Milliyet Cadde (14.04.2021): Emir Can İğrek: Şarkı açıyorum, deli deli hareketler yapıyorum",
+          "url": "https://www.milliyet.com.tr/cadde/emir-can-igrek-sarki-aciyorum-deli-deli-hareketler-yapiyorum-6481457"
+        }
+      ],
+      "uyum": 1.0
+    },
+    {
+      "id": "emir-can-igrek-06",
+      "metin": "\"Ali Cabbar\" şarkısı Emir Can İğrek'in hangi albümünde yer alır?",
+      "secenekler": ["Ağır Roman", "Parti İptal", "Fiyakalı", "Sapa"],
+      "dogru": 1,
+      "zorluk": "kolay",
+      "tur": "dunya",
+      "kaynaklar": [
+        {
+          "ad": "Apple Music: Parti İptal",
+          "url": "https://music.apple.com/tr/album/parti-i-ptal/1689223627"
+        },
+        {
+          "ad": "Deezer: Parti İptal",
+          "url": "https://www.deezer.com/album/445211095"
+        },
+        {
+          "ad": "Vikipedi: Ali Cabbar",
+          "url": "https://tr.wikipedia.org/wiki/Ali_Cabbar"
+        },
+        {
+          "ad": "haberler.com (Magazinkolik, 22.07.2023): Parti İptal'in öne çıkan şarkısı Ali Cabbar",
+          "url": "https://www.haberler.com/emir-can-igrek-in-yeni-albumu-parti-iptal-in-one-c-16142962-haberi/"
+        },
+        {
+          "ad": "Türkiye Gazetesi (21.07.2023): Emir Can İğrek, Ali Cabbar hakkında konuştu",
+          "url": "https://www.turkiyegazetesi.com.tr/magazin/ali-cabbar-sarkisi-calinti-mi-emir-can-igrek-ilk-kez-konustu-978139"
+        }
+      ],
+      "uyum": 1.0
+    },
+    {
+      "id": "emir-can-igrek-07",
+      "metin": "Emir Can İğrek'in \"Fiyakalı\" albümü hangi yıl yayımlandı?",
+      "secenekler": ["2023", "2024", "2025", "2026"],
+      "dogru": 3,
+      "zorluk": "kolay",
+      "tur": "dunya",
+      "kaynaklar": [
+        {
+          "ad": "Apple Music: FİYAKALI",
+          "url": "https://music.apple.com/tr/album/fi-yakali/6771524214"
+        },
+        {
+          "ad": "Deezer: FİYAKALI",
+          "url": "https://www.deezer.com/album/987328521"
+        },
+        {
+          "ad": "Vikipedi: Emir Can İğrek",
+          "url": "https://tr.wikipedia.org/wiki/Emir_Can_İğrek"
+        },
+        {
+          "ad": "Habertürk (05.07.2026): Magazin sayfası, Emir Can İğrek'in Fiyakalı albümü",
+          "url": "https://www.haberturk.com/fatma-turgut-yapay-zekaya-karisiyim-3896342-magazin"
+        },
+        {
+          "ad": "Lyricsfa: Emir Can İğrek – FİYAKALI şarkı listesi",
+          "url": "https://lyricsfa.com/emir-can-igrek-fiyakali-album-tracklist/"
+        }
+      ],
+      "uyum": 1.0
+    },
+    {
+      "id": "emir-can-igrek-08",
+      "metin": "Emir Can İğrek'in doğduğu ve müziğe sahne gruplarıyla başladığı ilçe hangisidir?",
+      "secenekler": ["Çorlu", "Silivri", "Çerkezköy", "Lüleburgaz"],
+      "dogru": 2,
+      "zorluk": "kolay",
+      "tur": "dunya",
+      "kaynaklar": [
+        {
+          "ad": "Çerkezköy Bakış (19.08.2019): İlk şarkılarını yazdığı yerde konser verecek",
+          "url": "https://web.archive.org/web/20200802195436/https://www.cerkezkoybakis.com.tr/gundem/ilk-sarkilarini-yazdigi-yerde-konser-verecek-h107820.html"
+        },
+        {
+          "ad": "Vikipedi: Emir Can İğrek",
+          "url": "https://tr.wikipedia.org/wiki/Emir_Can_İğrek"
+        },
+        {
+          "ad": "Wikipedia (EN): Emir Can İğrek",
+          "url": "https://en.wikipedia.org/wiki/Emir_Can_İğrek"
+        },
+        {
+          "ad": "Kürê Ansiklopedi: Emir Can İğrek",
+          "url": "https://kureansiklopedi.com/tr/detay/emir-can-igrek-751827"
+        },
+        {
+          "ad": "Onedio: Hızlı yükselişiyle dikkatleri çeken Emir Can İğrek kimdir?",
+          "url": "https://onedio.com/haber/hizli-yukselisiyle-dikkatleri-ceken-emir-can-igrek-kimdir-994844"
+        }
+      ],
+      "uyum": 1.0
+    },
+    {
+      "id": "emir-can-igrek-09",
+      "metin": "Emir Can İğrek'in \"Parti İptal\" albümü hangi yıl çıktı?",
+      "secenekler": ["2023", "2021", "2022", "2024"],
+      "dogru": 0,
+      "zorluk": "orta",
+      "tur": "dunya",
+      "kaynaklar": [
+        {
+          "ad": "Apple Music: Parti İptal",
+          "url": "https://music.apple.com/tr/album/parti-i-ptal/1689223627"
+        },
+        {
+          "ad": "Deezer: Parti İptal",
+          "url": "https://www.deezer.com/album/445211095"
+        },
+        {
+          "ad": "Vikipedi: Emir Can İğrek",
+          "url": "https://tr.wikipedia.org/wiki/Emir_Can_İğrek"
+        },
+        {
+          "ad": "Wikipedia (EN): Emir Can İğrek",
+          "url": "https://en.wikipedia.org/wiki/Emir_Can_İğrek"
+        },
+        {
+          "ad": "Posta – Uğur Alkapar (05.07.2023): Fanlık böyle olur",
+          "url": "https://www.posta.com.tr/yazarlar/ugur-alkapar/fanlik-boyle-olur-2648975"
+        }
+      ],
+      "uyum": 1.0
+    },
+    {
+      "id": "emir-can-igrek-10",
+      "metin": "Emir Can İğrek'in \"Ağır Roman\" albümü hangi yıl yayımlandı?",
+      "secenekler": ["2016", "2017", "2018", "2019"],
+      "dogru": 2,
+      "zorluk": "orta",
+      "tur": "dunya",
+      "kaynaklar": [
+        {
+          "ad": "Apple Music: Ağır Roman",
+          "url": "https://music.apple.com/tr/album/a%C4%9F%C4%B1r-roman/1444374647"
+        },
+        {
+          "ad": "Deezer: Ağır Roman",
+          "url": "https://www.deezer.com/album/79655512"
+        },
+        {
+          "ad": "Vikipedi: Ağır Roman (albüm)",
+          "url": "https://tr.wikipedia.org/wiki/Ağır_Roman_(albüm)"
+        },
+        {
+          "ad": "Wikipedia (EN): Emir Can İğrek",
+          "url": "https://en.wikipedia.org/wiki/Emir_Can_İğrek"
+        },
+        {
+          "ad": "Kürê Ansiklopedi: Emir Can İğrek",
+          "url": "https://kureansiklopedi.com/tr/detay/emir-can-igrek-751827"
+        }
+      ],
+      "uyum": 1.0
+    },
+    {
+      "id": "emir-can-igrek-11",
+      "metin": "\"Görünce Dünyamın Yıkıldığını\" şarkısının 2022 tarihli canlı kaydını kiminle yayımladı?",
+      "secenekler": ["Allâme", "Şanışer", "Server Uraz", "Hidra"],
+      "dogru": 1,
+      "zorluk": "orta",
+      "tur": "dunya",
+      "kaynaklar": [
+        {
+          "ad": "Apple Music: Görünce Dünyamın Yıkıldığını (Live)",
+          "url": "https://music.apple.com/tr/album/g%C3%B6r%C3%BCnce-d%C3%BCnyam%C4%B1n-y%C4%B1k%C4%B1ld%C4%B1%C4%9F%C4%B1n%C4%B1-live-single/1726548647"
+        },
+        {
+          "ad": "Deezer: Görünce Dünyamın Yıkıldığını (Live)",
+          "url": "https://www.deezer.com/album/536976902"
+        },
+        {
+          "ad": "Vikipedi: Emir Can İğrek",
+          "url": "https://tr.wikipedia.org/wiki/Emir_Can_İğrek"
+        },
+        {
+          "ad": "Vikipedi: Şanışer",
+          "url": "https://tr.wikipedia.org/wiki/Şanışer"
+        },
+        {
+          "ad": "Wikipedia (EN): Emir Can İğrek",
+          "url": "https://en.wikipedia.org/wiki/Emir_Can_İğrek"
+        }
+      ],
+      "uyum": 1.0
+    },
+    {
+      "id": "emir-can-igrek-12",
+      "metin": "Emir Can İğrek'in 2022'de yorumladığı \"Gurbete Kaçacağım\" hangi grubun \"Zamansız\" projesinde yer aldı?",
+      "secenekler": ["MFÖ", "Mor ve Ötesi", "Moğollar", "Yeni Türkü"],
+      "dogru": 3,
+      "zorluk": "orta",
+      "tur": "dunya",
+      "kaynaklar": [
+        {
+          "ad": "Apple Music: Gurbete Kaçacağım (Yeni Türkü Zamansız)",
+          "url": "https://music.apple.com/tr/album/gurbete-ka%C3%A7aca%C4%9F%C4%B1m-yeni-t%C3%BCrk%C3%BC-zamans%C4%B1z-single/1608385727"
+        },
+        {
+          "ad": "Deezer: Gurbete Kaçacağım (Yeni Türkü Zamansız)",
+          "url": "https://www.deezer.com/album/292821172"
+        },
+        {
+          "ad": "Spotify: Gurbete Kaçacağım (Yeni Türkü Zamansız)",
+          "url": "https://open.spotify.com/album/31RkENObWq8roloGikkV5i"
+        },
+        {
+          "ad": "Vikipedi: Emir Can İğrek",
+          "url": "https://tr.wikipedia.org/wiki/Emir_Can_İğrek"
+        },
+        {
+          "ad": "Wikipedia (EN): Emir Can İğrek",
+          "url": "https://en.wikipedia.org/wiki/Emir_Can_İğrek"
+        },
+        {
+          "ad": "Kürê Ansiklopedi: Emir Can İğrek",
+          "url": "https://kureansiklopedi.com/tr/detay/emir-can-igrek-751827"
+        }
+      ],
+      "uyum": 1.0
+    },
+    {
+      "id": "emir-can-igrek-13",
+      "metin": "Emir Can İğrek'in 13 Ocak 2023 konseri canlı EP olarak da yayımlandı. Konser hangi salondaydı?",
+      "secenekler": [
+        "Zorlu PSM",
+        "Volkswagen Arena",
+        "Bostancı Gösteri Merkezi",
+        "Ülker Sports Arena"
+      ],
+      "dogru": 1,
+      "zorluk": "orta",
+      "tur": "dunya",
+      "kaynaklar": [
+        {
+          "ad": "Volkswagen Arena: Emir Can İğrek etkinlik sayfası",
+          "url": "https://www.vwarena.com/tr/etkinlik-detay/e1v5j"
+        },
+        {
+          "ad": "Songkick: Emir Can İğrek at Volkswagen Arena",
+          "url": "https://www.songkick.com/concerts/40724029-emir-can-igrek-at-volkswagen-arena"
+        },
+        {
+          "ad": "Apple Music: Volkswagen Arena 2023 (Live) – EP",
+          "url": "https://music.apple.com/tr/album/volkswagen-arena-2023-live-ep/1677853086"
+        },
+        {
+          "ad": "Deezer: Volkswagen Arena 2023 (Live)",
+          "url": "https://www.deezer.com/album/418915307"
+        },
+        {
+          "ad": "Spotify: Volkswagen Arena 2023 (Live)",
+          "url": "https://open.spotify.com/intl-tr/album/3MzSF0O2HCXf8v2EP0por2"
+        }
+      ],
+      "uyum": 1.0
+    },
+    {
+      "id": "emir-can-igrek-14",
+      "metin": "\"Fiyakalı\" albümündeki \"Uyanıp Kabusuma\" şarkısında Emir Can İğrek'e hangi sanatçı eşlik eder?",
+      "secenekler": ["Teoman", "Haluk Levent", "Kıraç", "Ogün Sanlısoy"],
+      "dogru": 0,
+      "zorluk": "orta",
+      "tur": "dunya",
+      "kaynaklar": [
+        {
+          "ad": "Apple Music: FİYAKALI",
+          "url": "https://music.apple.com/tr/album/fi-yakali/6771524214"
+        },
+        {
+          "ad": "Deezer: FİYAKALI",
+          "url": "https://www.deezer.com/album/987328521"
+        },
+        {
+          "ad": "Habertürk (05.07.2026): Magazin sayfası, Emir Can İğrek'in Fiyakalı albümü",
+          "url": "https://www.haberturk.com/fatma-turgut-yapay-zekaya-karisiyim-3896342-magazin"
+        },
+        {
+          "ad": "Lyricsfa: Emir Can İğrek – Uyanıp Kabusuma (feat. Teoman)",
+          "url": "https://lyricsfa.com/emir-can-igrek-uyanip-kabusuma-lyrics/"
+        }
+      ],
+      "uyum": 1.0
+    },
+    {
+      "id": "emir-can-igrek-15",
+      "metin": "Emir Can İğrek'in \"Kor\" şarkısı tekli olarak hangi yıl yayımlandı?",
+      "secenekler": ["2019", "2020", "2021", "2022"],
+      "dogru": 2,
+      "zorluk": "orta",
+      "tur": "dunya",
+      "kaynaklar": [
+        {
+          "ad": "Apple Music: Kor",
+          "url": "https://music.apple.com/tr/album/kor-single/1586903824"
+        },
+        {
+          "ad": "Deezer: Kor",
+          "url": "https://www.deezer.com/album/260412342"
+        },
+        {
+          "ad": "Vikipedi: Emir Can İğrek",
+          "url": "https://tr.wikipedia.org/wiki/Emir_Can_İğrek"
+        },
+        {
+          "ad": "Wikipedia (EN): Emir Can İğrek",
+          "url": "https://en.wikipedia.org/wiki/Emir_Can_İğrek"
+        },
+        {
+          "ad": "Kürê Ansiklopedi: Emir Can İğrek",
+          "url": "https://kureansiklopedi.com/tr/detay/emir-can-igrek-751827"
+        }
+      ],
+      "uyum": 1.0
+    },
+    {
+      "id": "emir-can-igrek-16",
+      "metin": "Emir Can İğrek'in 2025 tarihli \"Ayrılmayalım\" yorumu hangi söz yazarı ve bestecinin şarkılarına adanan projede yer aldı?",
+      "secenekler": ["Ümit Besen", "Kayahan", "Fikret Kızılok", "Selami Şahin"],
+      "dogru": 3,
+      "zorluk": "orta",
+      "tur": "dunya",
+      "kaynaklar": [
+        {
+          "ad": "Apple Music: Ayrılmayalım (Selami Şahin Şarkıları 3)",
+          "url": "https://music.apple.com/tr/album/ayr%C4%B1lmayal%C4%B1m-selami-%C5%9Fahin-%C5%9Fark%C4%B1lar%C4%B1-3-single/1832495456"
+        },
+        {
+          "ad": "Deezer: Ayrılmayalım",
+          "url": "https://www.deezer.com/album/803030571"
+        },
+        {
+          "ad": "Vikipedi: Emir Can İğrek",
+          "url": "https://tr.wikipedia.org/wiki/Emir_Can_İğrek"
+        },
+        {
+          "ad": "Lyricsfa: Emir Can İğrek – Ayrılmayalım (Selami Şahin Şarkıları 3)",
+          "url": "https://lyricsfa.com/emir-can-igrek-ayrilmayalim-lyrics/"
+        }
+      ],
+      "uyum": 1.0
+    },
+    {
+      "id": "emir-can-igrek-17",
+      "metin": "Emir Can İğrek, PowerTürk Müzik Ödülleri 2020'de hangi kategoride ödül kazandı?",
+      "secenekler": [
+        "En Güçlü Erkek Şarkıcı",
+        "En Güçlü Albüm",
+        "En Güçlü Çıkış Yapan Şarkıcı",
+        "En Güçlü Şarkı"
+      ],
+      "dogru": 2,
+      "zorluk": "zor",
+      "tur": "dunya",
+      "kaynaklar": [
+        {
+          "ad": "Hürriyet Kelebek (2020): İşte popun en güçlü isimleri",
+          "url": "https://web.archive.org/web/20200319081438/https://www.hurriyet.com.tr/kelebek/magazin/iste-popun-en-guclu-isimleri-41443839"
+        },
+        {
+          "ad": "PowerTürk (YouTube): PowerTürk Müzik Ödülleri 2020'de En Güçlü Çıkış Yapan Şarkıcı: Emir Can İğrek",
+          "url": "https://www.youtube.com/watch?v=drQB8bBf_yc"
+        },
+        {
+          "ad": "Vikipedi: PowerTürk Müzik Ödülleri",
+          "url": "https://tr.wikipedia.org/wiki/PowerTürk_Müzik_Ödülleri"
+        },
+        {
+          "ad": "Vikipedi: Emir Can İğrek",
+          "url": "https://tr.wikipedia.org/wiki/Emir_Can_İğrek"
+        },
+        {
+          "ad": "Wikipedia (EN): Emir Can İğrek",
+          "url": "https://en.wikipedia.org/wiki/Emir_Can_İğrek"
+        }
+      ],
+      "uyum": 1.0
+    },
+    {
+      "id": "emir-can-igrek-18",
+      "metin": "Emir Can İğrek, PowerTürk Müzik Ödülleri 2022'de hangi şarkısının klibiyle ödül kazandı?",
+      "secenekler": ["Kor", "Felfena", "Dargın", "Nalan"],
+      "dogru": 0,
+      "zorluk": "zor",
+      "tur": "dunya",
+      "kaynaklar": [
+        {
+          "ad": "Habertürk (28.02.2022): Yılın en güçlü isimleri belli oldu",
+          "url": "https://www.haberturk.com/yilin-en-guclu-isimleri-belli-oldu-3359148-magazin"
+        },
+        {
+          "ad": "Vikipedi: PowerTürk Müzik Ödülleri",
+          "url": "https://tr.wikipedia.org/wiki/PowerTürk_Müzik_Ödülleri"
+        },
+        {
+          "ad": "Vikipedi: Emir Can İğrek",
+          "url": "https://tr.wikipedia.org/wiki/Emir_Can_İğrek"
+        },
+        {
+          "ad": "PowerApp: PowerTürk Müzik Ödülleri adayları, Emir Can İğrek – En Güçlü Klip",
+          "url": "https://www.powerapp.com.tr/kategori/powerturk-muzik-odulleri-adaylar/emir-can-igrek-en-guclu-klip.html"
+        }
+      ],
+      "uyum": 1.0
+    },
+    {
+      "id": "emir-can-igrek-19",
+      "metin": "Emir Can İğrek'in 2026 tarihli \"Fiyakalı\" albümü hangi müzik şirketinin etiketiyle yayımlandı?",
+      "secenekler": [
+        "Sony Music Türkiye",
+        "Doğan Music Company",
+        "Avrupa Müzik",
+        "Hypers Music"
+      ],
+      "dogru": 3,
+      "zorluk": "zor",
+      "tur": "dunya",
+      "kaynaklar": [
+        {
+          "ad": "Apple Music: FİYAKALI (℗ 2026 Hypers Music)",
+          "url": "https://music.apple.com/tr/album/fi-yakali/6771524214"
+        },
+        {
+          "ad": "Deezer: FİYAKALI",
+          "url": "https://www.deezer.com/album/987328521"
+        },
+        {
+          "ad": "Lyricsfa: Emir Can İğrek – FİYAKALI şarkı listesi",
+          "url": "https://lyricsfa.com/emir-can-igrek-fiyakali-album-tracklist/"
+        },
+        {
+          "ad": "Vikipedi: Emir Can İğrek",
+          "url": "https://tr.wikipedia.org/wiki/Emir_Can_İğrek"
+        }
+      ],
+      "uyum": 1.0
+    },
+    {
+      "id": "emir-can-igrek-20",
+      "metin": "\"Fiyakalı\"da \"Aklın Varsa\" şarkısının ayrıca hangi müzisyenin adını taşıyan klarnet versiyonu bulunur?",
+      "secenekler": [
+        "Serkan Çağrı",
+        "Hüsnü Şenlendirici",
+        "Barbaros Erköse",
+        "Selim Sesler"
+      ],
+      "dogru": 1,
+      "zorluk": "zor",
+      "tur": "dunya",
+      "kaynaklar": [
+        {
+          "ad": "Apple Music: FİYAKALI",
+          "url": "https://music.apple.com/tr/album/fi-yakali/6771524214"
+        },
+        {
+          "ad": "Deezer: FİYAKALI",
+          "url": "https://www.deezer.com/album/987328521"
+        },
+        {
+          "ad": "Habertürk (05.07.2026): Magazin sayfası, Emir Can İğrek'in Fiyakalı albümü",
+          "url": "https://www.haberturk.com/fatma-turgut-yapay-zekaya-karisiyim-3896342-magazin"
+        },
+        {
+          "ad": "Lyricsfa: Emir Can İğrek – FİYAKALI şarkı listesi",
+          "url": "https://lyricsfa.com/emir-can-igrek-fiyakali-album-tracklist/"
+        }
+      ],
+      "uyum": 1.0
+    },
+    {
+      "id": "emir-can-igrek-21",
+      "metin": "\"Fiyakalı\" albümündeki \"Sehven\" şarkısını Emir Can İğrek hangi grupla birlikte seslendirir?",
+      "secenekler": ["Madrigal", "Adamlar", "Dedublüman", "Kolpa"],
+      "dogru": 2,
+      "zorluk": "zor",
+      "tur": "dunya",
+      "kaynaklar": [
+        {
+          "ad": "Apple Music: FİYAKALI",
+          "url": "https://music.apple.com/tr/album/fi-yakali/6771524214"
+        },
+        {
+          "ad": "Deezer: FİYAKALI",
+          "url": "https://www.deezer.com/album/987328521"
+        },
+        {
+          "ad": "Habertürk (05.07.2026): Magazin sayfası, Emir Can İğrek'in Fiyakalı albümü",
+          "url": "https://www.haberturk.com/fatma-turgut-yapay-zekaya-karisiyim-3896342-magazin"
+        },
+        {
+          "ad": "LyricsRaag: Sehven – FİYAKALI | Dedublüman, Emir Can İğrek",
+          "url": "https://lyricsraag.com/sehven-fiyakali-translation/"
+        }
+      ],
+      "uyum": 1.0
+    },
+    {
+      "id": "emir-can-igrek-22",
+      "metin": "2023'te çıkan \"Parti İptal\" albümünde kaç şarkı yer alır?",
+      "secenekler": ["10", "12", "14", "16"],
+      "dogru": 1,
+      "zorluk": "zor",
+      "tur": "dunya",
+      "kaynaklar": [
+        {
+          "ad": "Apple Music: Parti İptal",
+          "url": "https://music.apple.com/tr/album/parti-i-ptal/1689223627"
+        },
+        {
+          "ad": "Deezer: Parti İptal",
+          "url": "https://www.deezer.com/album/445211095"
+        },
+        {
+          "ad": "Posta – Uğur Alkapar (05.07.2023): Fanlık böyle olur",
+          "url": "https://www.posta.com.tr/yazarlar/ugur-alkapar/fanlik-boyle-olur-2648975"
+        },
+        {
+          "ad": "Türkiye Gazetesi (21.07.2023): Emir Can İğrek, Ali Cabbar hakkında konuştu",
+          "url": "https://www.turkiyegazetesi.com.tr/magazin/ali-cabbar-sarkisi-calinti-mi-emir-can-igrek-ilk-kez-konustu-978139"
+        }
+      ],
+      "uyum": 1.0
+    },
+    {
+      "id": "emir-can-igrek-23",
+      "metin": "Haziran 2026'da çıkan \"Fiyakalı\" albümünde kaç şarkı yer alır?",
+      "secenekler": ["8", "10", "12", "14"],
+      "dogru": 3,
+      "zorluk": "zor",
+      "tur": "dunya",
+      "kaynaklar": [
+        {
+          "ad": "Apple Music: FİYAKALI",
+          "url": "https://music.apple.com/tr/album/fi-yakali/6771524214"
+        },
+        {
+          "ad": "Deezer: FİYAKALI",
+          "url": "https://www.deezer.com/album/987328521"
+        },
+        {
+          "ad": "Habertürk (05.07.2026): Magazin sayfası, Emir Can İğrek'in Fiyakalı albümü",
+          "url": "https://www.haberturk.com/fatma-turgut-yapay-zekaya-karisiyim-3896342-magazin"
+        },
+        {
+          "ad": "Lyricsfa: Emir Can İğrek – FİYAKALI şarkı listesi",
+          "url": "https://lyricsfa.com/emir-can-igrek-fiyakali-album-tracklist/"
+        }
+      ],
+      "uyum": 1.0
+    },
+    {
+      "id": "emir-can-igrek-24",
+      "metin": "SAYGI1 projesi kapsamında Aralık 2024'te çıkan \"Sevdam Ağlıyor\" yorumunu Emir Can İğrek kiminle seslendirdi?",
+      "secenekler": ["Sertab Erener", "Nilüfer", "Ajda Pekkan", "Hande Yener"],
+      "dogru": 0,
+      "zorluk": "zor",
+      "tur": "dunya",
+      "kaynaklar": [
+        {
+          "ad": "Apple Music: Sevdam Ağlıyor (SAYGI1)",
+          "url": "https://music.apple.com/tr/album/sevdam-a%C4%9Fl%C4%B1yor-saygi1-single/1785607742"
+        },
+        {
+          "ad": "Deezer: Sevdam Ağlıyor (SAYGI1)",
+          "url": "https://www.deezer.com/album/684625771"
+        },
+        {
+          "ad": "Yandex Soru-Cevap: Emir Can İğrek",
+          "url": "https://yandex.com.tr/yacevap/t/emircanigrek"
+        },
+        {
+          "ad": "Gazete Birlik (21.11.2024): Sertab Erener'in Saygı1 konseri İstanbul'da unutulmaz bir geceye dönüştü",
+          "url": "https://www.gazetebirlik.com/gundem/sertab-erenerin-saygi1-konseri-istanbulda-unutulmaz-bir-geceye-donustu/256423"
+        },
+        {
+          "ad": "Wikipedia (EN): Sertab Erener discography",
+          "url": "https://en.wikipedia.org/wiki/Sertab_Erener_discography"
+        }
+      ],
+      "uyum": 1.0
+    }
+  ]
+}
