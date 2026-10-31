@@ -12,10 +12,9 @@
 //   gruba sorulur; o zaman bu testin listesi QA'ca güncellenir.)
 import { readdirSync, readFileSync } from 'node:fs';
 import { describe, expect, it } from 'vitest';
-import { BEKLEYEN } from '../kabul';
 
-// KK-120 (#263) bitti: düz `it`. KK-125 ilk içeriği #267 getirir; o zamana dek BEKLEYEN.quizKategoriIcerik kalır.
-const kabulIcerik = BEKLEYEN.quizKategoriIcerik ? it.fails : it;
+// KK-120/KK-125 içerik bitti: düz `it` (#267).
+const kabulIcerik = it;
 const kabulSema = it;
 
 type Dosya = Record<string, unknown>;
