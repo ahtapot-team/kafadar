@@ -1,0 +1,293 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kafadar — #290 görsel seti (Three.js)</title>
+<!-- #290 görsel seti, yöntem B · Three.js (Semih, msg 1069). Bütün nesneler burada kendimiz modelleniyor; dış model/görsel yok.
+     Ortak sahne (ışık, ortam yansıması, yumuşak gölge) Quiz Night örneğindekiyle aynı. Three.js yalnızca bu tasarım dosyasında
+     (cdnjs, sabit 0.160.0); uygulamaya PNG olarak girer.
+     Kullanım:  sahne.html            → bütün set, oyun/paket zemini üstünde (kontrol sayfası, set.png)
+                sahne.html?nesne=spor → tek nesne, saydam
+                sahne.html?cikti=256  → bütün nesneler 256 px saydam PNG (data URL, #cikti içinde; LISANS.md'deki komutla dosyaya yazılır) -->
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&display=swap" rel="stylesheet">
+<style>
+  :root { --kontur: #0B0920; --golge: #7C6CFF; --marka: #FFD23F; --marka-2: #5B8CFF; --krem: #FFF8E7;
+    --zemin: #16123F; --yuzey: #2B2570; --metin: #FFF8E7; --soluk: #B9B3E8; }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--zemin); font-family: 'Bricolage Grotesque', system-ui, sans-serif; color: var(--metin); }
+  body.saydam { background: transparent; }
+  .cerceve { width: 390px; margin: 0 auto; padding: 22px 20px 30px; zoom: 2; }
+  h1 { margin: 0; font-size: 18px; font-weight: 800; } h1 small { display: block; font-size: 12px; font-weight: 700; color: var(--soluk); }
+  .izgara { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px 14px; margin-top: 20px; }
+  .uyg { display: flex; flex-direction: column; align-items: center; text-align: center; }
+  .ikon { position: relative; width: 100px; height: 100px; border-radius: 28px; border: 3px solid var(--kontur); box-shadow: 4px 4px 0 var(--golge);
+    background: var(--c); overflow: hidden; display: grid; place-items: center; }
+  .ikon::after { content: ''; position: absolute; inset: 0; background: linear-gradient(160deg, rgba(255,255,255,.38), rgba(255,255,255,0) 44%); }
+  .ikon canvas { position: relative; z-index: 1; width: 84px; height: 84px; }
+  .uyg b { margin-top: 8px; font-size: 13px; font-weight: 800; line-height: 1.15; }
+  .not { margin-top: 22px; font-size: 12px; font-weight: 700; line-height: 1.45; color: var(--soluk); }
+  .tek canvas { display: block; width: 100vmin; height: 100vmin; }
+</style>
+</head>
+<body>
+<div class="cerceve" id="sayfa">
+  <h1>Görsel seti · Three.js<small>13 nesne, ortak ışık ve gölge; zemin oyun/paket rengi</small></h1>
+  <div class="izgara" id="izgara"></div>
+  <p class="not" id="not">Her nesne aynı sahnede, aynı ışıkla render edilir; PNG'ler saydam zeminli, yumuşak gölge içinde.</p>
+</div>
+<pre id="cikti" hidden></pre>
+<script type="module">
+import * as THREE from 'https://cdnjs.cloudflare.com/ajax/libs/three.js/0.160.0/three.module.min.js';
+
+const V2 = (x, y) => new THREE.Vector2(x, y), BOY = 1024;
+const RENK = { kontur: 0x0B0920, golge: 0x7C6CFF, marka: 0xFFD23F, mavi: 0x5B8CFF, krem: 0xFFF8E7, yuzey: 0x2B2570, pembe: 0xFF5A7A, gumus: 0xD9D4F7 };
+
+// ---- Malzemeler ve şekil yardımcıları ----
+const plastik = (c, o = {}) => new THREE.MeshPhysicalMaterial({ color: c, roughness: 0.34, clearcoat: 0.6, clearcoatRoughness: 0.2, ...o });
+const metal = (c = RENK.gumus, r = 0.28) => new THREE.MeshStandardMaterial({ color: c, metalness: 1, roughness: r });
+const camKabuk = () => new THREE.MeshPhysicalMaterial({ color: 0, roughness: 0.06, clearcoat: 1, clearcoatRoughness: 0.04, envMapIntensity: 1.4,
+  transparent: true, blending: THREE.AdditiveBlending, depthWrite: false });
+const ekle = (g, geo, mat, p = [0, 0, 0], r = [0, 0, 0], s) => {
+  const m = new THREE.Mesh(geo, mat); m.position.set(...p); m.rotation.set(...r); if (s) m.scale.set(...s); g.add(m); return m;
+};
+const sisir = (shape, d, b, s = b * 0.8, seg = 10) => new THREE.ExtrudeGeometry(shape, { depth: d, bevelEnabled: true, bevelThickness: b,
+  bevelSize: s, bevelSegments: seg, curveSegments: 40 }).center();
+const dikdortgen = (w, h, r) => {
+  const s = new THREE.Shape(), x = -w / 2, y = -h / 2;
+  s.moveTo(x + r, y); s.lineTo(x + w - r, y); s.absarc(x + w - r, y + r, r, -Math.PI / 2, 0); s.lineTo(x + w, y + h - r);
+  s.absarc(x + w - r, y + h - r, r, 0, Math.PI / 2); s.lineTo(x + r, y + h); s.absarc(x + r, y + h - r, r, Math.PI / 2, Math.PI);
+  s.lineTo(x, y + r); s.absarc(x + r, y + r, r, Math.PI, Math.PI * 1.5); return s;
+};
+// Yuvarlak köşeli kutu: dış ölçü w×h×d, köşe r, kenar yumuşaklığı b
+const kutu = (w, h, d, r, b) => sisir(dikdortgen(w - 2 * b, h - 2 * b, Math.max(r - b, 0.02)), Math.max(d - 2 * b, 0.01), b, b, 10);
+const yildiz = (R, r, n = 5, k = 0.2) => {
+  const P = [], s = new THREE.Shape();
+  for (let i = 0; i < 2 * n; i++) { const a = Math.PI / 2 + i * Math.PI / n, rr = i % 2 ? r : R; P.push(V2(Math.cos(a) * rr, Math.sin(a) * rr)); }
+  P.forEach((v, i) => {
+    const t = i % 2 ? k * 0.5 : k, a = v.clone().lerp(P[(i + P.length - 1) % P.length], t), b = v.clone().lerp(P[(i + 1) % P.length], t);
+    i ? s.lineTo(a.x, a.y) : s.moveTo(a.x, a.y); s.quadraticCurveTo(v.x, v.y, b.x, b.y);
+  });
+  return s;
+};
+// Yuvarlak kenarlı disk (lathe, eksen y)
+const disk = (r, h, b = 0.2) => {
+  const p = [V2(0.001, -h / 2)];
+  for (let i = 0; i <= 8; i++) { const a = -Math.PI / 2 + i / 16 * Math.PI; p.push(V2(r - b + Math.cos(a) * b, -h / 2 + b + Math.sin(a) * b)); }
+  for (let i = 0; i <= 8; i++) { const a = i / 16 * Math.PI; p.push(V2(r - b + Math.cos(a) * b, h / 2 - b + Math.sin(a) * b)); }
+  p.push(V2(0.001, h / 2)); return new THREE.LatheGeometry(p, 64);
+};
+const egri = (a, c, b, n = 16) => new THREE.QuadraticBezierCurve(V2(...a), V2(...c), V2(...b)).getPoints(n);
+const doku = (w, h, ciz) => { const c = document.createElement('canvas'); c.width = w; c.height = h; ciz(c.getContext('2d'), w, h);
+  const t = new THREE.CanvasTexture(c); t.colorSpace = THREE.SRGBColorSpace; return t; };
+
+// ---- Nesneler (her biri kendi grubunda; boyut ve konum sonra ortak olarak oturtulur) ----
+const NESNE = {
+  'ok-mu-nok'() { // başparmak yukarı: mavi eldiven, krem manşet
+    const g = new THREE.Group(), m = plastik(RENK.mavi);
+    ekle(g, kutu(3.0, 3.6, 1.8, 0.9, 0.6), m, [0.35, -0.5, -0.1]);
+    [[0.7, 2.0], [-0.18, 2.0], [-1.06, 1.85], [-1.92, 1.6]].forEach(([y, l]) =>
+      ekle(g, new THREE.CapsuleGeometry(0.58, l, 8, 24), m, [(2.0 - l) / 2, y, 0.6], [0, 0, Math.PI / 2]));
+    ekle(g, new THREE.CapsuleGeometry(0.74, 1.5, 8, 24), m, [-0.45, 2.3, 0.2], [0, 0, -0.18]);
+    ekle(g, kutu(1.0, 3.9, 2.1, 0.45, 0.4), plastik(RENK.krem), [2.1, -0.6, -0.1]);
+    g.rotation.set(0.12, -0.4, -0.06); return g;
+  },
+  'on-on-ama'() { // kabarık yıldız
+    const g = new THREE.Group();
+    ekle(g, sisir(yildiz(3.2, 1.45), 0.5, 0.7, 0.5), plastik(RENK.marka));
+    g.rotation.set(0.3, -0.45, 0.1); return g;
+  },
+  'casus-kim'() { // büyüteç: sarı çerçeve, mavi cam, koyu sap
+    const g = new THREE.Group(), R = 2.1, yon = -Math.PI / 4, d = (k) => [Math.cos(yon) * k, Math.sin(yon) * k, 0];
+    ekle(g, new THREE.TorusGeometry(R, 0.42, 32, 96), plastik(RENK.marka));
+    const cam = new THREE.SphereGeometry(R, 48, 24);
+    ekle(g, cam, new THREE.MeshPhysicalMaterial({ color: 0x9CC0FF, transparent: true, opacity: 0.4, roughness: 0.1 }), [0, 0, 0], [0, 0, 0], [1, 1, 0.16]).userData.golgesiz = true;
+    const k = ekle(g, cam, camKabuk(), [0, 0, 0.02], [0, 0, 0], [1, 1, 0.2]); k.renderOrder = 2; k.userData.golgesiz = true;
+    ekle(g, disk(0.52, 0.8, 0.12), plastik(RENK.marka), d(R + 0.7), [0, 0, yon - Math.PI / 2]);
+    ekle(g, new THREE.CapsuleGeometry(0.5, 2.2, 8, 24), plastik(RENK.yuzey), d(R + 2.35), [0, 0, yon - Math.PI / 2]);
+    g.rotation.set(0.2, -0.35, 0); return g;
+  },
+  'quiz-night'() { // yanan ampul, soru işareti teli (örnek B'nin aynısı) + hale
+    const g = new THREE.Group(), q = (x, y) => new THREE.Vector3((x - 50) / 10, (55 - y) / 10, 0);
+    const yol = new THREE.CubicBezierCurve(V2(1.15, -0.95), V2(1.15, -0.2), V2(2.6, 0.35), V2(2.6, 1.7)).getPoints(24);
+    for (let i = 1; i <= 32; i++) { const t = i / 32 * Math.PI / 2; yol.push(V2(Math.max(2.6 * Math.cos(t), 0.001), 1.7 + 2.6 * Math.sin(t))); }
+    const camGeo = new THREE.LatheGeometry(yol, 96);
+    ekle(g, camGeo, new THREE.MeshStandardMaterial({ color: RENK.marka, emissive: 0xFFB21E, emissiveIntensity: 0.42, roughness: 0.55 }), [0, 0, 0], [0, 0, 0], [1, 1, 0.55]);
+    const k = ekle(g, camGeo, camKabuk()); k.renderOrder = 2; k.userData.golgesiz = true;
+    const yasla = (x, y) => { const v = q(x, y), dy = v.y - 1.7; v.z = 0.55 * Math.sqrt(Math.max(0, 6.76 - v.x * v.x - dy * dy)) + 0.32; return v; };
+    const tel = new THREE.CurvePath();
+    tel.add(new THREE.CubicBezierCurve3(yasla(41, 32.5), yasla(41, 23), yasla(59, 23), yasla(59, 32.5)));
+    tel.add(new THREE.CubicBezierCurve3(yasla(59, 32.5), yasla(59, 40), yasla(50, 39.5), yasla(50, 48)));
+    const telMat = new THREE.MeshStandardMaterial({ color: 0xB04A06, emissive: 0xFF6A00, emissiveIntensity: 0.12, roughness: 0.3, metalness: 0.1 });
+    [new THREE.TubeGeometry(tel, 120, 0.3, 20), new THREE.SphereGeometry(0.3, 20, 12).translate(...yasla(41, 32.5).toArray()),
+     new THREE.SphereGeometry(0.3, 20, 12).translate(...yasla(50, 48).toArray()), new THREE.SphereGeometry(0.36, 24, 16).translate(...yasla(50, 56).toArray())]
+      .forEach(geo => ekle(g, geo, telMat));
+    const dis = [[66.7, 3.2, 1.3], [73.3, 3.1, 1.24], [79.7, 3.0, 1.16]], duy = [];
+    for (let y = 84.2; y >= 63; y -= 0.15) {
+      let rr = 1.02; for (const [c, h, rp] of dis) { const u = (y - c) / h; if (Math.abs(u) < 1) rr = Math.max(rr, 1.02 + (rp - 1.02) * Math.sqrt(1 - u * u)); }
+      duy.push(V2(rr, (55 - y) / 10));
+    }
+    ekle(g, new THREE.LatheGeometry(duy, 96), metal());
+    const uc = [[0.72, 84.1], [0.7, 85.5], [0.62, 88], [0.48, 90.2], [0.28, 91.3], [0.001, 91.6]].map(([x, y]) => V2(x, (55 - y) / 10));
+    ekle(g, new THREE.LatheGeometry(uc, 64), new THREE.MeshStandardMaterial({ color: 0x221D4A, metalness: 0.4, roughness: 0.4, side: THREE.DoubleSide }));
+    const hale = doku(256, 256, (c, w) => { const r = c.createRadialGradient(w / 2, w / 2, 0, w / 2, w / 2, w / 2);
+      r.addColorStop(0, 'rgba(255,210,63,.6)'); r.addColorStop(0.55, 'rgba(255,210,63,.2)'); r.addColorStop(1, 'rgba(255,210,63,0)'); c.fillStyle = r; c.fillRect(0, 0, w, w); });
+    const h = ekle(g, new THREE.PlaneGeometry(8.4, 8.4), new THREE.MeshBasicMaterial({ map: hale, transparent: true, depthWrite: false }), [0, 1.5, -2.75]);
+    h.userData = { haric: true, golgesiz: true };
+    g.rotation.set(0.15, 0, 12 * Math.PI / 180); return g;
+  },
+  ayarlar() { // 8 dişli çark
+    const g = new THREE.Group(), s = new THREE.Shape(), n = 8, A = 2 * Math.PI / n, R = 3, r = 2.35;
+    for (let i = 0; i < n; i++) [[-0.5, r], [-0.2, r], [-0.13, R], [0.13, R], [0.2, r]].forEach(([t, rr], j) => {
+      const a = (i + t) * A, x = Math.cos(a) * rr, y = Math.sin(a) * rr; (i || j) ? s.lineTo(x, y) : s.moveTo(x, y); });
+    const delik = new THREE.Path(); delik.absarc(0, 0, 0.95, 0, Math.PI * 2, true); s.holes.push(delik);
+    ekle(g, sisir(s, 0.7, 0.3, 0.2, 5), new THREE.MeshPhysicalMaterial({ color: 0xC9C0FF, metalness: 0.55, roughness: 0.3, clearcoat: 0.6 }));
+    g.rotation.set(0.4, -0.5, 0.25); return g;
+  },
+  'ask-i-memnu'() { // kabarık kalp
+    const g = new THREE.Group(), s = new THREE.Shape();
+    for (let i = 0; i < 120; i++) { const t = i / 120 * Math.PI * 2, x = 16 * Math.sin(t) ** 3, y = 13 * Math.cos(t) - 5 * Math.cos(2 * t) - 2 * Math.cos(3 * t) - Math.cos(4 * t);
+      i ? s.lineTo(x / 5, y / 5) : s.moveTo(x / 5, y / 5); }
+    ekle(g, sisir(s, 0.6, 1.0, 0.55, 12), plastik(RENK.pembe));
+    g.rotation.set(0.25, -0.4, -0.15); return g;
+  },
+  'hababam-sinifi'() { // spiralli defter: mavi kapak, krem sayfa ve etiket
+    const g = new THREE.Group(), mavi = plastik(RENK.mavi), koyu = plastik(RENK.yuzey);
+    [0.45, -0.45].forEach(z => ekle(g, kutu(3.8, 4.8, 0.3, 0.35, 0.12), mavi, [0, 0, z]));
+    ekle(g, kutu(3.55, 4.55, 0.6, 0.15, 0.08), plastik(RENK.krem, { clearcoat: 0, roughness: 0.6 }), [0.05, 0, 0]);
+    ekle(g, kutu(2.3, 1.0, 0.1, 0.2, 0.04), plastik(RENK.krem), [0.25, 1.15, 0.62]);
+    ekle(g, new THREE.BoxGeometry(1.6, 0.12, 0.04), koyu, [0.25, 1.32, 0.68]); ekle(g, new THREE.BoxGeometry(1.0, 0.12, 0.04), koyu, [-0.05, 0.98, 0.68]);
+    for (let i = 0; i < 8; i++) ekle(g, new THREE.TorusGeometry(0.65, 0.08, 12, 32), metal(), [-1.9, -1.99 + i * 0.57, 0], [Math.PI / 2, 0, 0]);
+    g.rotation.set(0.3, -0.55, 0.15); return g;
+  },
+  'prison-break'() { // açık asma kilit
+    const g = new THREE.Group(), m = metal(0xE4E0FA, 0.22);
+    ekle(g, kutu(4.0, 3.4, 1.4, 0.7, 0.45), plastik(RENK.mavi), [0, -1.0, 0]);
+    const kol = new THREE.Group(); kol.position.set(-1.3, 0.7, 0); kol.rotation.y = -0.55; g.add(kol);
+    ekle(kol, new THREE.TorusGeometry(1.3, 0.34, 24, 64, Math.PI), m, [1.3, 1.6, 0]);
+    ekle(kol, new THREE.CylinderGeometry(0.34, 0.34, 2.1, 24), m, [0, 0.55, 0]);
+    ekle(kol, new THREE.CapsuleGeometry(0.34, 0.6, 8, 24), m, [2.6, 1.3, 0]);
+    const koyu = plastik(RENK.kontur, { clearcoat: 0 });
+    ekle(g, new THREE.CylinderGeometry(0.38, 0.38, 0.12, 32), koyu, [0, -0.85, 0.68], [Math.PI / 2, 0, 0]);
+    ekle(g, new THREE.BoxGeometry(0.34, 0.8, 0.12), koyu, [0, -1.25, 0.68]);
+    g.rotation.set(0.2, -0.4, 0.1); return g;
+  },
+  manifest() { // megafon: sarı huni, koyu iç, krem bilezik, koyu sap
+    const g = new THREE.Group(), ic = new THREE.Group(), sari = plastik(RENK.marka, { side: THREE.DoubleSide }), koyu = plastik(RENK.yuzey, { side: THREE.DoubleSide });
+    const dis = [], icp = [V2(0.001, -1.5)];
+    for (let i = 0; i <= 24; i++) { const t = i / 24, r = 0.55 + 1.35 * t ** 1.6, y = -1.6 + 3.6 * t; dis.push(V2(r, y)); icp.push(V2(r * 0.93 - 0.05, y + 0.02)); }
+    dis.push(V2(2.12, 2.08), V2(2.08, 2.25), V2(1.85, 2.2));
+    ekle(ic, new THREE.LatheGeometry(dis, 72), sari); ekle(ic, new THREE.LatheGeometry(icp, 72), koyu);
+    ekle(ic, new THREE.CylinderGeometry(0.55, 0.45, 0.8, 32), koyu, [0, -2.0, 0]);
+    ekle(ic, new THREE.SphereGeometry(0.45, 24, 12), koyu, [0, -2.4, 0], [0, 0, 0], [1, 0.5, 1]);
+    ekle(ic, new THREE.TorusGeometry(0.66, 0.13, 12, 40), plastik(RENK.krem), [0, -1.2, 0], [Math.PI / 2, 0, 0]);
+    ekle(ic, new THREE.CapsuleGeometry(0.32, 1.1, 8, 20), koyu, [1.31, -0.84, 0], [0, 0, -1.92]);
+    ic.rotation.z = -(Math.PI / 2 - 0.35); g.add(ic);
+    g.rotation.set(0.1, -0.6, 0); return g;
+  },
+  'emir-can-igrek'() { // kulaklık: krem kafa bandı, sarı kupalar, koyu yastık
+    const g = new THREE.Group(), krem = plastik(RENK.krem), sari = plastik(RENK.marka), koyu = plastik(RENK.yuzey);
+    ekle(g, new THREE.TorusGeometry(2.3, 0.3, 24, 96, Math.PI), krem, [0, 0.2, 0]);
+    [-1, 1].forEach(s => {
+      ekle(g, new THREE.CylinderGeometry(0.3, 0.3, 0.7, 20), krem, [s * 2.3, -0.1, 0]);
+      ekle(g, disk(1.15, 0.9, 0.3), sari, [s * 2.25, -1.1, 0], [0, 0, Math.PI / 2]);
+      ekle(g, new THREE.TorusGeometry(0.8, 0.32, 16, 40), koyu, [s * 1.75, -1.1, 0], [0, Math.PI / 2, 0]);
+      ekle(g, disk(0.75, 0.16, 0.06), krem, [s * 2.72, -1.1, 0], [0, 0, Math.PI / 2]);
+    });
+    g.rotation.set(0.15, -0.6, 0.08); return g;
+  },
+  blok3() { // mikrofon: gümüş ızgaralı baş, sarı bant, koyu sap
+    const g = new THREE.Group(), sari = plastik(RENK.marka);
+    const izgara = doku(512, 256, (c, w, h) => { c.fillStyle = '#fff'; c.fillRect(0, 0, w, h); c.fillStyle = '#6b6690';
+      for (let y = 8, j = 0; y < h; y += 16, j++) for (let x = j % 2 ? 8 : 0; x < w; x += 16) { c.beginPath(); c.arc(x, y, 4.5, 0, 7); c.fill(); } });
+    ekle(g, new THREE.SphereGeometry(1.5, 48, 32), new THREE.MeshStandardMaterial({ color: 0xE4E0FA, map: izgara, metalness: 0.85, roughness: 0.38 }), [0, 1.0, 0]);
+    ekle(g, new THREE.TorusGeometry(1.5, 0.14, 16, 64), sari, [0, 1.0, 0], [Math.PI / 2, 0, 0]);
+    ekle(g, disk(0.85, 0.5, 0.15), sari, [0, -0.55, 0]);
+    const sap = [V2(0.001, -4.5), V2(0.35, -4.47), V2(0.48, -4.35), V2(0.52, -4.15), V2(0.78, -0.7), V2(0.001, -0.7)];
+    ekle(g, new THREE.LatheGeometry(sap, 48), plastik(RENK.yuzey));
+    g.rotation.set(0.25, -0.3, 0.45); return g;
+  },
+  'mabel-matiz'() { // bağlı iki sekizlik nota
+    const g = new THREE.Group(), m = plastik(RENK.marka);
+    [[-1.35, -1.9], [1.55, -1.3]].forEach(([x, y]) => ekle(g, new THREE.SphereGeometry(1, 40, 24), m, [x, y, 0], [0, 0, 0.45], [1.15, 0.82, 0.62]));
+    ekle(g, new THREE.CapsuleGeometry(0.18, 4.0, 6, 16), m, [-0.42, 0.25, 0]); ekle(g, new THREE.CapsuleGeometry(0.18, 4.0, 6, 16), m, [2.48, 0.85, 0]);
+    ekle(g, kutu(3.3, 0.7, 0.45, 0.15, 0.12), m, [1.03, 2.55, 0], [0, 0, Math.atan2(0.6, 2.9)]);
+    g.rotation.set(0.15, -0.45, 0.05); return g;
+  },
+  spor() { // altın kupa, koyu kaide, krem yıldız
+    const g = new THREE.Group(), altin = new THREE.MeshPhysicalMaterial({ color: 0xFFC93C, metalness: 0.5, roughness: 0.28, clearcoat: 0.8, side: THREE.DoubleSide });
+    const P = [V2(0.001, -2.2), V2(0.95, -2.2), V2(1.0, -2.1), V2(0.95, -2.0), V2(0.4, -1.7), V2(0.28, -1.3), V2(0.45, -1.05), V2(0.28, -0.8),
+      ...egri([0.35, -0.5], [2.05, -0.4], [2.05, 1.6]), V2(2.15, 1.95), V2(2.0, 2.06), V2(1.86, 1.92), ...egri([1.86, 1.6], [1.8, 0.2], [0.001, 0.2]).slice(1)];
+    ekle(g, new THREE.LatheGeometry(P, 96), altin);
+    [1, -1].forEach(s => ekle(g, new THREE.TorusGeometry(0.75, 0.17, 16, 48, Math.PI), altin, [s * 1.85, 0.9, 0], [0, 0, -s * Math.PI / 2]));
+    ekle(g, disk(1.45, 0.75, 0.2), plastik(RENK.yuzey), [0, -2.6, 0]);
+    ekle(g, disk(1.2, 0.25, 0.08), altin, [0, -2.2, 0]);
+    ekle(g, sisir(yildiz(0.55, 0.25), 0.05, 0.12, 0.08, 4), plastik(RENK.krem), [0, 0.75, 1.92], [-0.12, 0, 0]);
+    g.rotation.set(0.22, -0.25, 0); return g;
+  },
+};
+
+// ---- Ortak sahne (Quiz Night örneği B ile aynı ışık düzeni) ----
+const LISTE = [['ok-mu-nok', 'OK mu NOK mu', '--marka'], ['on-on-ama', '10/10 ama', '--marka-2'], ['casus-kim', 'Casus kim', '--golge'],
+  ['quiz-night', 'Quiz Night', '--yuzey'], ['ayarlar', 'Ayarlar', '--yuzey'], ['ask-i-memnu', 'Aşk-ı Memnu', '--marka'],
+  ['hababam-sinifi', 'Hababam Sınıfı', '--marka'], ['prison-break', 'Prison Break', '--marka'], ['manifest', 'Manifest', '--marka-2'],
+  ['emir-can-igrek', 'Emir Can İğrek', '--marka-2'], ['blok3', 'BLOK3', '--marka-2'], ['mabel-matiz', 'Mabel Matiz', '--marka-2'], ['spor', 'Spor', '--golge']];
+const sor = new URLSearchParams(location.search), not = document.getElementById('not');
+
+try {
+  const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true, preserveDrawingBuffer: true });
+  renderer.setPixelRatio(1); renderer.setSize(BOY, BOY, false);
+  renderer.shadowMap.enabled = true; renderer.shadowMap.type = THREE.PCFShadowMap;
+  const scene = new THREE.Scene(), camera = new THREE.PerspectiveCamera(2 * Math.atan(5 / 20) * 180 / Math.PI, 1, 1, 60);
+  camera.position.set(0, 0, 20); camera.lookAt(0, 0, 0);
+
+  const env = new THREE.Scene();
+  env.add(new THREE.Mesh(new THREE.SphereGeometry(30, 32, 16), new THREE.MeshBasicMaterial({ color: 0x1B1650, side: THREE.BackSide })));
+  [[10, 7, 0xFFFFFF, 3, -9, 10, 9], [6, 12, 0xFFD23F, 1.6, 12, 1, 4], [16, 5, 0x7C6CFF, 2, 0, -12, 5], [3, 12, 0xFFFFFF, 2.5, 10, 6, -8]]
+    .forEach(([w, h, c, k, x, y, z]) => { const m = new THREE.Mesh(new THREE.PlaneGeometry(w, h), new THREE.MeshBasicMaterial({ color: new THREE.Color(c).multiplyScalar(k), side: THREE.DoubleSide }));
+      m.position.set(x, y, z); m.lookAt(0, 0, 0); env.add(m); });
+  const pmrem = new THREE.PMREMGenerator(renderer);
+  scene.environment = pmrem.fromScene(env, 0.03).texture;
+
+  scene.add(new THREE.HemisphereLight(0xFFF8E7, 0x7C6CFF, 0.6));
+  const anahtar = new THREE.DirectionalLight(0xFFFFFF, 2.2); anahtar.position.set(-4, 6, 6); scene.add(anahtar);
+  const kenar = new THREE.DirectionalLight(0x7C6CFF, 2.5); kenar.position.set(6, -2, -3); scene.add(kenar);
+  const golgeIsik = new THREE.DirectionalLight(0xFFFFFF, 0.35); golgeIsik.position.set(-0.7, 1.8, 10); golgeIsik.castShadow = true;
+  Object.assign(golgeIsik.shadow.camera, { left: -6, right: 6, top: 6, bottom: -6, near: 1, far: 30 });
+  golgeIsik.shadow.mapSize.set(1024, 1024); golgeIsik.shadow.radius = 7; golgeIsik.shadow.bias = -0.002; scene.add(golgeIsik);
+  const zemin = new THREE.Mesh(new THREE.PlaneGeometry(30, 30), new THREE.ShadowMaterial({ color: RENK.kontur, opacity: 0.45 }));
+  zemin.receiveShadow = true; scene.add(zemin);
+  const yuva = new THREE.Group(); scene.add(yuva);
+
+  // Nesneyi ortala, en uzun kenarı 7.6 birime (karenin %76'sı) ölçekle; gölge sağ alta düşer, ona yer bırak
+  const ciz = (id) => {
+    yuva.clear();
+    const g = NESNE[id](), kutuB = new THREE.Box3(); g.updateMatrixWorld(true);
+    g.traverse(o => { if (o.isMesh) { o.castShadow = !o.userData.golgesiz; if (!o.userData.haric) kutuB.expandByObject(o); } });
+    const b = kutuB.getSize(new THREE.Vector3()), m = kutuB.getCenter(new THREE.Vector3()), k = 7.6 / Math.max(b.x, b.y);
+    g.position.copy(m).negate();
+    const dis = new THREE.Group(); dis.add(g); dis.scale.setScalar(k); dis.position.set(-0.15, 0.2, 0); yuva.add(dis);
+    zemin.position.z = (kutuB.min.z - m.z) * k - 0.4;
+    renderer.render(scene, camera); return renderer.domElement;
+  };
+  const kopya = (kaynak, n, c = document.createElement('canvas')) => { c.width = n; c.height = n;
+    const x = c.getContext('2d'); x.imageSmoothingQuality = 'high'; x.drawImage(kaynak, 0, 0, n, n); return c; };
+
+  if (sor.has('cikti')) {
+    const n = +sor.get('cikti') || 256;
+    document.getElementById('cikti').textContent = LISTE.map(([id]) => `${id} ${kopya(ciz(id), n).toDataURL('image/png')}`).join('\n');
+  } else if (sor.has('nesne')) {
+    document.body.className = 'saydam tek'; document.getElementById('sayfa').hidden = true;
+    document.body.append(kopya(ciz(sor.get('nesne')), BOY));
+  } else {
+    document.getElementById('izgara').innerHTML = LISTE.map(([id, ad, c]) =>
+      `<div class="uyg"><div class="ikon" style="--c: var(${c})"><canvas data-id="${id}"></canvas></div><b>${ad}</b></div>`).join('');
+    document.querySelectorAll('canvas[data-id]').forEach(c => kopya(ciz(c.dataset.id), 168, c));
+  }
+  pmrem.dispose();
+} catch (e) {
+  not.textContent = 'WebGL açılamadı: ' + e.message;
+}
+</script>
+</body>
+</html>

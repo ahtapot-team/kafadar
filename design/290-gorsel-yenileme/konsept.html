@@ -4,8 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Kafadar — #290 Görsel yenileme (2. tur)</title>
-<!-- #290 2. tur: ana ekran = konsept A (Semih, msg 1051); ikon = oyuna özel logo zemini + 3dicons nesnesi (Semih, msg 1053: C).
-     Emoji yok. Görseller: gorsel/ (3dicons, CC0; bkz. gorsel/LISANS.md). Logo zeminleri düz CSS (kendi çizimimiz).
+<!-- #290 2. tur: ana ekran = konsept A (Semih, msg 1051); ikon = oyuna özel logo zemini + kendi çizdiğimiz 3D nesne (Semih, msg 1053: C; yöntem Three.js, msg 1069: B).
+     Emoji yok. Görseller: gorsel/ (gorsel/sahne.html'den render, bkz. gorsel/LISANS.md). Logo zeminleri düz CSS (kendi çizimimiz).
      Kullanım: ?ekran=ana | paket-a | paket-b (tek ekran, 390×844, PNG için). Tek dış kaynak: Google Fonts. -->
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&display=swap" rel="stylesheet">
 <style>
@@ -41,12 +41,12 @@
   .fcip { flex: 1 1 auto; height: 48px; display: inline-flex; align-items: center; justify-content: center; gap: 4px; padding: 0 9px; border-radius: 14px;
     border: 3px solid var(--kontur); background: var(--yuzey); color: var(--metin); font-size: 15px; font-weight: 800; white-space: nowrap; }
   .fcip.sec { background: var(--marka-2); color: var(--kontur); box-shadow: 4px 4px 0 var(--golge); }
-  /* ---- Logo zemini: oyuna özel renk + şekil (kendi çizimimiz), üstünde 3dicons nesnesi ---- */
+  /* ---- Logo zemini: oyuna özel renk + şekil (kendi çizimimiz), üstünde kendi 3D nesnemiz ---- */
   .ikon { position: relative; width: 138px; height: 138px; border-radius: 38px; border: 4px solid var(--kontur); box-shadow: 6px 6px 0 var(--golge);
     background: var(--c); overflow: hidden; display: grid; place-items: center; flex: none; }
   .ikon::before { content: ''; position: absolute; inset: 0; background: var(--desen); }
   .ikon::after { content: ''; position: absolute; inset: 0; background: linear-gradient(160deg, rgba(255,255,255,.38), rgba(255,255,255,0) 44%); }
-  .ikon img { position: relative; z-index: 1; width: 100px; height: 100px; filter: drop-shadow(0 6px 0 rgba(11,9,32,.25)); }
+  .ikon img { position: relative; z-index: 1; width: 100px; height: 100px; }
   /* Oyunlar */
   .z-ok { --c: var(--marka); --desen: linear-gradient(135deg, transparent 48%, rgba(255,255,255,.6) 48% 52%, rgba(11,9,32,.16) 52%); }
   .z-onon { --c: var(--marka-2); --desen: repeating-conic-gradient(from 0deg at 50% 50%, rgba(255,255,255,.22) 0 10deg, transparent 10deg 20deg); }
@@ -86,7 +86,7 @@
   .bolum small { display: block; margin-top: 2px; font-size: 12px; font-weight: 700; color: var(--soluk); }
   .klasor { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px 12px; flex: none; }
   .klasor .ikon { width: 92px; height: 92px; border-radius: 27px; border-width: 3px; box-shadow: 5px 5px 0 var(--golge); }
-  .klasor .ikon img { width: 66px; height: 66px; filter: drop-shadow(0 4px 0 rgba(11,9,32,.25)); }
+  .klasor .ikon img { width: 66px; height: 66px; }
   .klasor .z-spor { --desen: radial-gradient(circle, transparent 0 20px, rgba(255,255,255,.4) 20px 23px, transparent 23px),
     linear-gradient(90deg, transparent calc(50% - 1.5px), rgba(255,255,255,.4) 0 calc(50% + 1.5px), transparent 0); }
   .klasor .uyg b { margin-top: 9px; font-size: 14px; } .klasor .uyg small { font-size: 12px; }
@@ -99,7 +99,7 @@
   .kart > * { position: relative; z-index: 1; }
   .kart b { display: block; font-size: 18px; font-weight: 800; line-height: 1.15; }
   .kart .meta { margin-top: 6px; font-size: 12px; font-weight: 700; line-height: 1.5; } .kart .nw { white-space: nowrap; }
-  .kart img { position: absolute; right: 4px; top: -24px; width: 112px; height: 112px; z-index: 2; filter: drop-shadow(0 6px 0 rgba(11,9,32,.3)); }
+  .kart img { position: absolute; right: 4px; top: -24px; width: 112px; height: 112px; z-index: 2; }
   .rozet { display: inline-flex; align-items: center; height: 22px; padding: 0 7px; margin-right: 7px; border-radius: 10px; border: 2px solid var(--kontur);
     background: var(--zemin); color: var(--metin); font-size: 12px; font-weight: 800; vertical-align: 1px; }
   .sol { position: absolute; left: 0; right: 0; bottom: 0; height: 70px; background: linear-gradient(transparent, var(--zemin)); pointer-events: none; }
