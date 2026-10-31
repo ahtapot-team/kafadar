@@ -6,6 +6,7 @@ import hababamSinifi from '../../content/quiz/hababam-sinifi.json';
 import prisonBreak from '../../content/quiz/prison-break.json';
 import galatasaray from '../../content/quiz/galatasaray.json';
 import fenerbahce from '../../content/quiz/fenerbahce.json';
+import besiktas from '../../content/quiz/besiktas.json';
 
 const PAKETLER = [
   askIMemnu,
@@ -13,6 +14,7 @@ const PAKETLER = [
   prisonBreak,
   galatasaray,
   fenerbahce,
+  besiktas,
 ].map((j) => uygulamaPaketi(j));
 
 export function quizPaketiBul(id: string): QuizPaketi | undefined {

@@ -189,7 +189,8 @@ describe('KK-125: ilk içerik (Spor 3, Müzik 4; her pakette 24 soru 8/8/8 ve 4 
       (p) => p.kategori === kategori && norm(p.ad).includes(norm(ad)),
     );
 
-  kabulIcerik(
+  // Spor paketleri #267 PR 3/7 ile tamamlandı: düz `it`; Müzik gelince bayrak silinir.
+  kabulSema(
     'KK-125: Spor: Galatasaray, Fenerbahçe, Beşiktaş paketleri var',
     async () => {
       for (const ad of ['Galatasaray', 'Fenerbahçe', 'Beşiktaş'])
