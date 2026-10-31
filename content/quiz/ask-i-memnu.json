@@ -1,0 +1,735 @@
+{
+  "id": "ask-i-memnu",
+  "ad": "Aşk-ı Memnu",
+  "emoji": "🥀",
+  "koken": "tr",
+  "unvanlar": [
+    "Matmazel'den ders almanın vakti gelmiş",
+    "Firdevs Hanım'ın çay davetine kıl payı girdin",
+    "Beşir gibi yalıda olan biten her şeyi görüyorsun",
+    "Ziyagil yalısının tapusu sende mi?"
+  ],
+  "sorular": [
+    {
+      "id": "ask-i-memnu-01",
+      "metin": "Aşk-ı Memnu dizisi ilk kez hangi kanalda yayımlandı?",
+      "secenekler": ["Show TV", "Kanal D", "ATV", "Star TV"],
+      "dogru": 1,
+      "zorluk": "kolay",
+      "tur": "dunya",
+      "kaynaklar": [
+        {
+          "ad": "Vikipedi — Aşk-ı Memnu (dizi, 2008)",
+          "url": "https://tr.wikipedia.org/wiki/Aşk-ı_Memnu_(dizi,_2008)"
+        },
+        {
+          "ad": "Küre Ansiklopedi",
+          "url": "https://kureansiklopedi.com/tr/detay/ask-i-memnu-dizi-35309"
+        },
+        {
+          "ad": "Timeturk",
+          "url": "https://www.timeturk.com/dizi-film/ask-i-memnu-dizisi-konusu-nedir-ask-i-memnu-oyuncu-kadrosunda-kimler-var/haber-1745008"
+        },
+        {
+          "ad": "SeriesReminder",
+          "url": "https://seriesreminder.com/series/forbidden-love-2008"
+        }
+      ],
+      "uyum": 1.0
+    },
+    {
+      "id": "ask-i-memnu-02",
+      "metin": "Dizide Bihter karakterini hangi oyuncu canlandırdı?",
+      "secenekler": [
+        "Beren Saat",
+        "Tuba Büyüküstün",
+        "Songül Öden",
+        "Fahriye Evcen"
+      ],
+      "dogru": 0,
+      "zorluk": "kolay",
+      "tur": "dunya",
+      "kaynaklar": [
+        {
+          "ad": "Beyazperde",
+          "url": "https://www.beyazperde.com/diziler/dizi-9618/"
+        },
+        {
+          "ad": "Sinemalar.com",
+          "url": "https://www.sinemalar.com/dizi/20489/ask-i-memnu"
+        },
+        {
+          "ad": "Küre Ansiklopedi",
+          "url": "https://kureansiklopedi.com/tr/detay/ask-i-memnu-dizi-35309"
+        },
+        {
+          "ad": "Timeturk",
+          "url": "https://www.timeturk.com/dizi-film/ask-i-memnu-dizisi-konusu-nedir-ask-i-memnu-oyuncu-kadrosunda-kimler-var/haber-1745008"
+        }
+      ],
+      "uyum": 1.0
+    },
+    {
+      "id": "ask-i-memnu-03",
+      "metin": "Dizide Behlül karakterini hangi oyuncu canlandırdı?",
+      "secenekler": [
+        "Engin Akyürek",
+        "Çağatay Ulusoy",
+        "Kıvanç Tatlıtuğ",
+        "Burak Özçivit"
+      ],
+      "dogru": 2,
+      "zorluk": "kolay",
+      "tur": "dunya",
+      "kaynaklar": [
+        {
+          "ad": "Beyazperde",
+          "url": "https://www.beyazperde.com/diziler/dizi-9618/"
+        },
+        {
+          "ad": "Sinemalar.com",
+          "url": "https://www.sinemalar.com/dizi/20489/ask-i-memnu"
+        },
+        {
+          "ad": "Küre Ansiklopedi",
+          "url": "https://kureansiklopedi.com/tr/detay/ask-i-memnu-dizi-35309"
+        },
+        {
+          "ad": "Timeturk",
+          "url": "https://www.timeturk.com/dizi-film/ask-i-memnu-dizisi-konusu-nedir-ask-i-memnu-oyuncu-kadrosunda-kimler-var/haber-1745008"
+        }
+      ],
+      "uyum": 1.0
+    },
+    {
+      "id": "ask-i-memnu-04",
+      "metin": "Dizinin uyarlandığı Aşk-ı Memnu romanını kim yazdı?",
+      "secenekler": [
+        "Reşat Nuri Güntekin",
+        "Halide Edib Adıvar",
+        "Yakup Kadri Karaosmanoğlu",
+        "Halit Ziya Uşaklıgil"
+      ],
+      "dogru": 3,
+      "zorluk": "kolay",
+      "tur": "dunya",
+      "kaynaklar": [
+        {
+          "ad": "Küre Ansiklopedi",
+          "url": "https://kureansiklopedi.com/tr/detay/ask-i-memnu-dizi-35309"
+        },
+        {
+          "ad": "Habertürk",
+          "url": "https://www.haberturk.com/ask-i-memnu-hangi-yil-cekildi-ne-zaman-yayinlandi-3696773"
+        },
+        {
+          "ad": "İstiklal",
+          "url": "https://www.istiklal.com.tr/ask-i-memnu-ne-zaman-basliyor-2024-ask-i-memnu-tekrari-nerede-yayinlanacak"
+        },
+        {
+          "ad": "Milliyet (Molatik)",
+          "url": "https://www.milliyet.com.tr/Romanlardan-uyarlanan-13-yerli-dizi-molatik-3199/"
+        }
+      ],
+      "uyum": 1.0
+    },
+    {
+      "id": "ask-i-memnu-05",
+      "metin": "Dizide Bihter'in annesinin adı nedir?",
+      "secenekler": ["Saadet", "Münire", "Firdevs", "Nermin"],
+      "dogru": 2,
+      "zorluk": "kolay",
+      "tur": "olay",
+      "kaynaklar": [
+        {
+          "ad": "Biyografiler",
+          "url": "https://www.biyografiler.com/film/ask-i-memnu-2008"
+        },
+        {
+          "ad": "Beyazperde",
+          "url": "https://www.beyazperde.com/diziler/dizi-9618/"
+        },
+        {
+          "ad": "TheTVDB (1. bölüm)",
+          "url": "https://www.thetvdb.com/series/forbidden-love-2008/episodes/4193703"
+        },
+        {
+          "ad": "Timeturk",
+          "url": "https://www.timeturk.com/dizi-film/ask-i-memnu-dizisi-konusu-nedir-ask-i-memnu-oyuncu-kadrosunda-kimler-var/haber-1745008"
+        }
+      ],
+      "uyum": 1.0
+    },
+    {
+      "id": "ask-i-memnu-06",
+      "metin": "Dizide Adnan Ziyagil'in kızının adı nedir?",
+      "secenekler": ["Nihal", "Feride", "Şükran", "Ayşen"],
+      "dogru": 0,
+      "zorluk": "kolay",
+      "tur": "olay",
+      "kaynaklar": [
+        {
+          "ad": "Biyografiler",
+          "url": "https://www.biyografiler.com/film/ask-i-memnu-2008"
+        },
+        {
+          "ad": "Beyazperde",
+          "url": "https://www.beyazperde.com/diziler/dizi-9618/"
+        },
+        {
+          "ad": "TheTVDB (1. bölüm)",
+          "url": "https://www.thetvdb.com/series/forbidden-love-2008/episodes/4193703"
+        },
+        {
+          "ad": "İstiklal",
+          "url": "https://www.istiklal.com.tr/ask-i-memnu-ne-zaman-basliyor-2024-ask-i-memnu-tekrari-nerede-yayinlanacak"
+        }
+      ],
+      "uyum": 1.0
+    },
+    {
+      "id": "ask-i-memnu-07",
+      "metin": "Dizide Adnan Ziyagil'i hangi oyuncu canlandırdı?",
+      "secenekler": [
+        "Haluk Bilginer",
+        "Tamer Levent",
+        "Kenan İmirzalıoğlu",
+        "Selçuk Yöntem"
+      ],
+      "dogru": 3,
+      "zorluk": "kolay",
+      "tur": "dunya",
+      "kaynaklar": [
+        {
+          "ad": "Beyazperde",
+          "url": "https://www.beyazperde.com/diziler/dizi-9618/"
+        },
+        {
+          "ad": "Sinemalar.com",
+          "url": "https://www.sinemalar.com/dizi/20489/ask-i-memnu"
+        },
+        {
+          "ad": "Küre Ansiklopedi",
+          "url": "https://kureansiklopedi.com/tr/detay/ask-i-memnu-dizi-35309"
+        },
+        {
+          "ad": "Timeturk",
+          "url": "https://www.timeturk.com/dizi-film/ask-i-memnu-dizisi-konusu-nedir-ask-i-memnu-oyuncu-kadrosunda-kimler-var/haber-1745008"
+        }
+      ],
+      "uyum": 1.0
+    },
+    {
+      "id": "ask-i-memnu-08",
+      "metin": "Dizide Bihter'in annesini hangi oyuncu canlandırdı?",
+      "secenekler": [
+        "Hülya Koçyiğit",
+        "Nebahat Çehre",
+        "Fatma Girik",
+        "Perran Kutman"
+      ],
+      "dogru": 1,
+      "zorluk": "kolay",
+      "tur": "dunya",
+      "kaynaklar": [
+        {
+          "ad": "Beyazperde",
+          "url": "https://www.beyazperde.com/diziler/dizi-9618/"
+        },
+        {
+          "ad": "Sinemalar.com",
+          "url": "https://www.sinemalar.com/dizi/20489/ask-i-memnu"
+        },
+        {
+          "ad": "Küre Ansiklopedi",
+          "url": "https://kureansiklopedi.com/tr/detay/ask-i-memnu-dizi-35309"
+        },
+        {
+          "ad": "Timeturk",
+          "url": "https://www.timeturk.com/dizi-film/ask-i-memnu-dizisi-konusu-nedir-ask-i-memnu-oyuncu-kadrosunda-kimler-var/haber-1745008"
+        }
+      ],
+      "uyum": 1.0
+    },
+    {
+      "id": "ask-i-memnu-09",
+      "metin": "2008 yapımı Aşk-ı Memnu dizisinin yönetmeni kimdir?",
+      "secenekler": [
+        "Çağan Irmak",
+        "Zeynep Günay Tan",
+        "Hilal Saral",
+        "Uluç Bayraktar"
+      ],
+      "dogru": 2,
+      "zorluk": "orta",
+      "tur": "dunya",
+      "kaynaklar": [
+        {
+          "ad": "Küre Ansiklopedi",
+          "url": "https://kureansiklopedi.com/tr/detay/ask-i-memnu-dizi-35309"
+        },
+        {
+          "ad": "Biyografiler",
+          "url": "https://www.biyografiler.com/film/ask-i-memnu-2008"
+        },
+        {
+          "ad": "Sinemalar.com",
+          "url": "https://www.sinemalar.com/dizi/20489/ask-i-memnu"
+        },
+        {
+          "ad": "Karar",
+          "url": "https://www.karar.com/ask-i-memnu-ekranlara-geri-donuyor-1611374"
+        }
+      ],
+      "uyum": 1.0
+    },
+    {
+      "id": "ask-i-memnu-10",
+      "metin": "Dizinin müziklerini hangi besteci yaptı?",
+      "secenekler": [
+        "Toygar Işıklı",
+        "Fahir Atakoğlu",
+        "Yıldıray Gürgen",
+        "Aytekin Ataş"
+      ],
+      "dogru": 0,
+      "zorluk": "orta",
+      "tur": "dunya",
+      "kaynaklar": [
+        {
+          "ad": "Küre Ansiklopedi",
+          "url": "https://kureansiklopedi.com/tr/detay/ask-i-memnu-dizi-35309"
+        },
+        {
+          "ad": "Sinemalar.com",
+          "url": "https://www.sinemalar.com/dizi/20489/ask-i-memnu"
+        },
+        {
+          "ad": "Habertürk",
+          "url": "https://www.haberturk.com/ask-i-memnu-hangi-yil-cekildi-ne-zaman-yayinlandi-3696773"
+        },
+        {
+          "ad": "Karar",
+          "url": "https://www.karar.com/ask-i-memnu-ekranlara-geri-donuyor-1611374"
+        }
+      ],
+      "uyum": 1.0
+    },
+    {
+      "id": "ask-i-memnu-11",
+      "metin": "Diziyi hangi yapım şirketi üretti?",
+      "secenekler": ["TMC Film", "Tims Productions", "Pana Film", "Ay Yapım"],
+      "dogru": 3,
+      "zorluk": "orta",
+      "tur": "dunya",
+      "kaynaklar": [
+        {
+          "ad": "Küre Ansiklopedi",
+          "url": "https://kureansiklopedi.com/tr/detay/ask-i-memnu-dizi-35309"
+        },
+        {
+          "ad": "Biyografiler",
+          "url": "https://www.biyografiler.com/film/ask-i-memnu-2008"
+        },
+        {
+          "ad": "Karar",
+          "url": "https://www.karar.com/ask-i-memnu-ekranlara-geri-donuyor-1611374"
+        },
+        {
+          "ad": "Vikipedi — Aşk-ı Memnu (dizi, 2008)",
+          "url": "https://tr.wikipedia.org/wiki/Aşk-ı_Memnu_(dizi,_2008)"
+        }
+      ],
+      "uyum": 1.0
+    },
+    {
+      "id": "ask-i-memnu-12",
+      "metin": "Dizinin senaryosunu hangi ikili yazdı?",
+      "secenekler": [
+        "Meral Okay & Yılmaz Şahin",
+        "Ece Yörenç & Melek Gençoğlu",
+        "Kerem Deren & Pınar Bulut",
+        "Ayşe Kulin & Nazlı Eray"
+      ],
+      "dogru": 1,
+      "zorluk": "orta",
+      "tur": "dunya",
+      "kaynaklar": [
+        {
+          "ad": "Küre Ansiklopedi",
+          "url": "https://kureansiklopedi.com/tr/detay/ask-i-memnu-dizi-35309"
+        },
+        {
+          "ad": "Biyografiler",
+          "url": "https://www.biyografiler.com/film/ask-i-memnu-2008"
+        },
+        {
+          "ad": "Karar",
+          "url": "https://www.karar.com/ask-i-memnu-ekranlara-geri-donuyor-1611374"
+        },
+        {
+          "ad": "Hürriyet Kelebek",
+          "url": "https://www.hurriyet.com.tr/kelebek/televizyon/ask-i-memnunun-senaristleri-romanyadaki-davayi-kazandi-41430821"
+        }
+      ],
+      "uyum": 1.0
+    },
+    {
+      "id": "ask-i-memnu-13",
+      "metin": "Dizide Matmazel karakterini hangi oyuncu canlandırdı?",
+      "secenekler": [
+        "Zerrin Tekindor",
+        "Ayda Aksel",
+        "Demet Akbağ",
+        "Nur Sürer"
+      ],
+      "dogru": 0,
+      "zorluk": "orta",
+      "tur": "dunya",
+      "kaynaklar": [
+        {
+          "ad": "Sinemalar.com",
+          "url": "https://www.sinemalar.com/dizi/20489/ask-i-memnu"
+        },
+        {
+          "ad": "Karar",
+          "url": "https://www.karar.com/ask-i-memnu-ekranlara-geri-donuyor-1611374"
+        },
+        {
+          "ad": "Timeturk",
+          "url": "https://www.timeturk.com/dizi-film/ask-i-memnu-dizisi-konusu-nedir-ask-i-memnu-oyuncu-kadrosunda-kimler-var/haber-1745008"
+        },
+        {
+          "ad": "Vikipedi — Aşk-ı Memnu (dizi, 2008)",
+          "url": "https://tr.wikipedia.org/wiki/Aşk-ı_Memnu_(dizi,_2008)"
+        }
+      ],
+      "uyum": 1.0
+    },
+    {
+      "id": "ask-i-memnu-14",
+      "metin": "Dizide Ziyagil yalısı olarak kullanılan ve sonradan müze olan yapı hangisi?",
+      "secenekler": [
+        "Sait Halim Paşa Yalısı",
+        "Küçüksu Kasrı",
+        "Vehbi Koç Büyükdere Evi",
+        "Kıbrıslı Yalısı"
+      ],
+      "dogru": 2,
+      "zorluk": "orta",
+      "tur": "dunya",
+      "kaynaklar": [
+        {
+          "ad": "Posta",
+          "url": "https://www.posta.com.tr/galeri/ask-i-memnunun-cekildigi-yali-muze-oldu-2300260"
+        },
+        {
+          "ad": "TGRT Haber",
+          "url": "https://www.tgrthaber.com/mavikadin/ask-i-memnunun-cekildigi-yaliya-ziyaretci-akini-tur-duzenleniyor"
+        },
+        {
+          "ad": "Yeni Ankara",
+          "url": "https://www.yeniankara.com.tr/yasam-ve-saglik/unlu-dizilerin-cekildigi-evler-nerede-181081"
+        },
+        {
+          "ad": "Daily Sabah",
+          "url": "https://www.dailysabah.com/life/turkish-tv-series-also-dazzle-with-their-locations/news"
+        }
+      ],
+      "uyum": 1.0
+    },
+    {
+      "id": "ask-i-memnu-15",
+      "metin": "Bihter'in evlenmeden önceki soyadı nedir?",
+      "secenekler": ["Akgündüz", "Kozanoğlu", "Saraçoğlu", "Yöreoğlu"],
+      "dogru": 3,
+      "zorluk": "orta",
+      "tur": "olay",
+      "kaynaklar": [
+        {
+          "ad": "Biyografiler",
+          "url": "https://www.biyografiler.com/film/ask-i-memnu-2008"
+        },
+        {
+          "ad": "Timeturk",
+          "url": "https://www.timeturk.com/dizi-film/ask-i-memnu-dizisi-konusu-nedir-ask-i-memnu-oyuncu-kadrosunda-kimler-var/haber-1745008"
+        },
+        {
+          "ad": "Karar",
+          "url": "https://www.karar.com/ask-i-memnu-ekranlara-geri-donuyor-1611374"
+        },
+        {
+          "ad": "Habertürk",
+          "url": "https://www.haberturk.com/ask-i-memnu-hangi-yil-cekildi-ne-zaman-yayinlandi-3696773"
+        }
+      ],
+      "uyum": 1.0
+    },
+    {
+      "id": "ask-i-memnu-16",
+      "metin": "Bihter'in kız kardeşinin adı nedir?",
+      "secenekler": ["Leman", "Peyker", "Neriman", "Sevgül"],
+      "dogru": 1,
+      "zorluk": "orta",
+      "tur": "olay",
+      "kaynaklar": [
+        {
+          "ad": "Timeturk",
+          "url": "https://www.timeturk.com/dizi-film/ask-i-memnu-dizisi-konusu-nedir-ask-i-memnu-oyuncu-kadrosunda-kimler-var/haber-1745008"
+        },
+        {
+          "ad": "Wikipedia — Aşk-ı Memnu (2008 TV series)",
+          "url": "https://en.wikipedia.org/wiki/Aşk-ı_Memnu_(2008_TV_series)"
+        },
+        {
+          "ad": "Türk Edebiyatı",
+          "url": "https://www.turkedebiyati.org/?p=27412"
+        },
+        {
+          "ad": "Bilgenç",
+          "url": "https://www.bilgenc.com/ask-i-memnu-roman-ozeti/"
+        }
+      ],
+      "uyum": 1.0
+    },
+    {
+      "id": "ask-i-memnu-17",
+      "metin": "Behlül'ün dizideki soyadı nedir?",
+      "secenekler": ["Haznedar", "Kaptanoğlu", "Saygın", "Arıkan"],
+      "dogru": 0,
+      "zorluk": "zor",
+      "tur": "olay",
+      "kaynaklar": [
+        {
+          "ad": "Beyazperde",
+          "url": "https://www.beyazperde.com/diziler/dizi-9618/"
+        },
+        {
+          "ad": "Sinemalar.com",
+          "url": "https://www.sinemalar.com/dizi/20489/ask-i-memnu"
+        },
+        {
+          "ad": "Timeturk",
+          "url": "https://www.timeturk.com/dizi-film/ask-i-memnu-dizisi-konusu-nedir-ask-i-memnu-oyuncu-kadrosunda-kimler-var/haber-1745008"
+        },
+        {
+          "ad": "Diken",
+          "url": "https://www.diken.com.tr/?p=1594882"
+        }
+      ],
+      "uyum": 1.0
+    },
+    {
+      "id": "ask-i-memnu-18",
+      "metin": "Bihter'in hayatını kaybettiği sahne dizinin kaçıncı bölümünde yer aldı?",
+      "secenekler": ["65. bölüm", "72. bölüm", "77. bölüm", "79. bölüm"],
+      "dogru": 3,
+      "zorluk": "zor",
+      "tur": "olay",
+      "kaynaklar": [
+        {
+          "ad": "Milliyet",
+          "url": "https://www.milliyet.com.tr/gundem/ask-i-memnunun-final-bolumunun-adi-nedir-2854425"
+        },
+        {
+          "ad": "Habertürk",
+          "url": "https://www.haberturk.com/ask-i-memnu-hangi-yil-cekildi-ne-zaman-yayinlandi-3696773"
+        },
+        {
+          "ad": "Aydınlık",
+          "url": "https://www.aydinlik.com.tr/haber/ask-i-memnu-meger-mesaji-cok-onceden-vermis-ask-i-memnuda-soke-eden-o-ayrinti-415449"
+        },
+        {
+          "ad": "TheTVDB (79. bölüm)",
+          "url": "https://www.thetvdb.com/series/forbidden-love-2008/episodes/4263851"
+        }
+      ],
+      "uyum": 0.8
+    },
+    {
+      "id": "ask-i-memnu-19",
+      "metin": "Ziyagil ailesinin Fransız mürebbiyesi Matmazel'in soyadı nedir?",
+      "secenekler": ["Dubois", "de Courton", "Lefèvre", "Moreau"],
+      "dogru": 1,
+      "zorluk": "zor",
+      "tur": "olay",
+      "kaynaklar": [
+        {
+          "ad": "Vikipedi — Aşk-ı Memnu (dizi, 2008)",
+          "url": "https://tr.wikipedia.org/wiki/Aşk-ı_Memnu_(dizi,_2008)"
+        },
+        {
+          "ad": "Timeturk",
+          "url": "https://www.timeturk.com/dizi-film/ask-i-memnu-dizisi-konusu-nedir-ask-i-memnu-oyuncu-kadrosunda-kimler-var/haber-1745008"
+        },
+        {
+          "ad": "Habertürk",
+          "url": "https://www.haberturk.com/ask-i-memnu-hangi-yil-cekildi-ne-zaman-yayinlandi-3696773"
+        },
+        {
+          "ad": "Türk Edebiyatı",
+          "url": "https://www.turkedebiyati.org/?p=27412"
+        },
+        {
+          "ad": "JustWatch (1975)",
+          "url": "https://www.justwatch.com/tr/tv-sovu/ask-i-memnu-1975"
+        }
+      ],
+      "uyum": 1.0
+    },
+    {
+      "id": "ask-i-memnu-20",
+      "metin": "Romanın 1975 TRT uyarlamasında Bihter'i hangi oyuncu canlandırdı?",
+      "secenekler": [
+        "Türkan Şoray",
+        "Filiz Akın",
+        "Müjde Ar",
+        "Gülşen Bubikoğlu"
+      ],
+      "dogru": 2,
+      "zorluk": "zor",
+      "tur": "dunya",
+      "kaynaklar": [
+        {
+          "ad": "Vikipedi — Aşk-ı Memnu (dizi, 1975)",
+          "url": "https://tr.wikipedia.org/wiki/Aşk-ı_Memnu_(dizi,_1975)"
+        },
+        {
+          "ad": "Posta",
+          "url": "https://www.posta.com.tr/magazin/eski-versiyonda-final-nasildi-33902"
+        },
+        {
+          "ad": "Eğitim Sistem",
+          "url": "https://www.egitimsistem.com/aski-memnu-romaninin-1975-yilindaki-ilk-televizyon-uyarlamasinda-behlul-karakterini-67753h.htm"
+        },
+        {
+          "ad": "JustWatch (1975)",
+          "url": "https://www.justwatch.com/tr/tv-sovu/ask-i-memnu-1975"
+        }
+      ],
+      "uyum": 1.0
+    },
+    {
+      "id": "ask-i-memnu-21",
+      "metin": "Romanın 1975 TRT uyarlamasının yönetmeni kimdir?",
+      "secenekler": [
+        "Atıf Yılmaz",
+        "Lütfi Ömer Akad",
+        "Metin Erksan",
+        "Halit Refiğ"
+      ],
+      "dogru": 3,
+      "zorluk": "zor",
+      "tur": "dunya",
+      "kaynaklar": [
+        {
+          "ad": "Sinemalar.com",
+          "url": "https://www.sinemalar.com/dizi/77688/ask-i-memnui"
+        },
+        {
+          "ad": "İstanbul Modern",
+          "url": "https://www.istanbulmodern.org/en/film/forbidden-love"
+        },
+        {
+          "ad": "İstiklal",
+          "url": "https://www.istiklal.com.tr/ask-i-memnu-ne-zaman-basliyor-2024-ask-i-memnu-tekrari-nerede-yayinlanacak"
+        },
+        {
+          "ad": "Eğitim Sistem",
+          "url": "https://www.egitimsistem.com/aski-memnu-romaninin-1975-yilindaki-ilk-televizyon-uyarlamasinda-behlul-karakterini-67753h.htm"
+        },
+        {
+          "ad": "Posta",
+          "url": "https://www.posta.com.tr/magazin/eski-versiyonda-final-nasildi-33902"
+        }
+      ],
+      "uyum": 1.0
+    },
+    {
+      "id": "ask-i-memnu-22",
+      "metin": "Telemundo'nun Aşk-ı Memnu uyarlaması hangi adla yayımlandı?",
+      "secenekler": [
+        "Pasión prohibida",
+        "Fruto prohibido",
+        "Pecado de amor",
+        "Deseo oculto"
+      ],
+      "dogru": 0,
+      "zorluk": "zor",
+      "tur": "dunya",
+      "kaynaklar": [
+        {
+          "ad": "Wikipedia — Pasión prohibida",
+          "url": "https://en.wikipedia.org/wiki/Pasión_prohibida"
+        },
+        {
+          "ad": "Hürriyet Daily News",
+          "url": "https://hurriyetdailynews.com/famous-tv-series-ask-i-memnu-to-be-shot-in-us-26404"
+        },
+        {
+          "ad": "Karar",
+          "url": "https://www.karar.com/ask-i-memnu-ekranlara-geri-donuyor-1611374"
+        },
+        {
+          "ad": "Habertürk",
+          "url": "https://www.haberturk.com/ask-i-memnu-hangi-yil-cekildi-ne-zaman-yayinlandi-3696773"
+        }
+      ],
+      "uyum": 1.0
+    },
+    {
+      "id": "ask-i-memnu-23",
+      "metin": "Aşk-ı Memnu romanı ilk olarak hangi dergide tefrika edildi?",
+      "secenekler": ["Resimli Ay", "Varlık", "Servet-i Fünun", "Dergâh"],
+      "dogru": 2,
+      "zorluk": "zor",
+      "tur": "dunya",
+      "kaynaklar": [
+        {
+          "ad": "Aga Khan Library",
+          "url": "https://agakhanlibrary.org/?p=12237"
+        },
+        {
+          "ad": "Milli Kütüphane Dijital Kütüphane",
+          "url": "https://dijital-kutuphane.mkutup.gov.tr/en/periodicals/articlecatalog/details/20067"
+        },
+        {
+          "ad": "Türk Edebiyatı",
+          "url": "https://www.turkedebiyati.org/?p=27412"
+        },
+        {
+          "ad": "Wikipedia — Aşk-ı Memnu (novel)",
+          "url": "https://en.wikipedia.org/wiki/Aşk-ı_Memnu_(novel)"
+        }
+      ],
+      "uyum": 1.0
+    },
+    {
+      "id": "ask-i-memnu-24",
+      "metin": "Dizinin senaristleri, izinsiz bir kopyası yüzünden hangi ülkedeki bir kanala açtıkları davayı kazandı?",
+      "secenekler": ["Yunanistan", "Romanya", "Bulgaristan", "Sırbistan"],
+      "dogru": 1,
+      "zorluk": "zor",
+      "tur": "dunya",
+      "kaynaklar": [
+        {
+          "ad": "Posta",
+          "url": "https://www.posta.com.tr/magazin/hukuk-savasini-ask-i-memnu-kazandi-2236104"
+        },
+        {
+          "ad": "Senal News",
+          "url": "https://senalnews.com/en/content/forbidden-love-screenwriters-won-a-lawsuit-in-romania"
+        },
+        {
+          "ad": "Europa Liberă România",
+          "url": "https://romania.rferl.org/a/dou%C4%83-scriitoare-din-turcia-au-dat-%C3%AEn-judecat%C4%83-televiziunea-antena-1/29836347.html"
+        },
+        {
+          "ad": "Hürriyet Kelebek",
+          "url": "https://www.hurriyet.com.tr/kelebek/televizyon/ask-i-memnunun-senaristleri-romanyadaki-davayi-kazandi-41430821"
+        }
+      ],
+      "uyum": 1.0
+    }
+  ]
+}
