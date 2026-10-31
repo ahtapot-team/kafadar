@@ -5,6 +5,13 @@ import type { Deste, Kart } from '../core/deste';
 import { puanMi } from '../core/dogrula';
 import { karistir, rngOlustur } from '../core/rng';
 import { oduluHesapla } from '../core/puan-oduller';
+import {
+  katsayiliToplam,
+  siralama,
+  turSec,
+  type Soru,
+  type Zorluk,
+} from '../games/quiz-night/quiz.ts';
 
 export type Kimlik = string; // katılımda sunucunun verdiği, cihazda saklanan oyuncu belirteci
 export type Oy = 'OK' | 'NOK';
@@ -13,19 +20,44 @@ export const SORU_MS = 15_000;
 export const SORU_SAYISI = 10;
 export const OYUNCU_MAKS = 12;
 export const BOSTA_MS = 3_600_000;
+export const QUIZ_SORU_MS = 20_000; // Quiz Night soru süresi (KK-113)
 
 type Oyuncu = { kimlik: Kimlik; ad: string; bagli: boolean; ayrildi: boolean };
 type Gecmis = { kartId: string; oylar: Record<Kimlik, Oy | null> };
 
 // 'lobi' → 'soru' → 'bitti'. JSON'a çevrilebilir. Oylar yalnızca sunucuda tutulur; istemciye gorunum() verilir.
 // Oda türü: her oda tek bir oyun türündedir (KK-63). Varsayılan 'ok-mu-nok'.
-export type OdaTuru = 'ok-mu-nok' | 'on-on-ama';
+export type OdaTuru = 'ok-mu-nok' | 'on-on-ama' | 'quiz-night';
+
+// Quiz Night odası paketi: `sorular` havuzdur, tur `turSec` ile seçilir. `kaynaklar`/`uyum` gibi fazla alanlar duruma ve mesajlara girmez.
+export type QuizPaketi = {
+  id: string;
+  ad: string;
+  unvanlar: string[];
+  sorular: Soru[];
+};
+// Soru aşamasında istemciye giden soru: doğru şık yok (KK-113).
+export type QuizSoruGorunum = {
+  id: string;
+  metin: string;
+  secenekler: string[];
+  zorluk: Zorluk;
+};
 
 export type OdaDurum = {
   tur: OdaTuru;
   acik: boolean; // yalnızca 10/10 ama: şu anki kartın açıklaması gösteriliyor (kuran "Sonraki kart"ı bekler)
   puanlar: Record<Kimlik, number>; // yalnızca 10/10 ama: şu anki kartın gizli puanları (0–10)
   puanGecmis: { kartId: string; puanlar: Record<Kimlik, number | null> }[]; // yalnızca 10/10 ama: açıklanmış kartlar (puansız = null)
+  // --- yalnızca Quiz Night odası (tur === 'quiz-night'); diğer odalarda boş ---
+  quiz: { id: string; ad: string; unvanlar: string[] } | null;
+  qSorular: Soru[]; // turSec ile seçilen 10 soru (doğru şıkla; yalnızca sunucuda)
+  sikler: Record<Kimlik, number>; // şu anki sorunun kilitli cevapları
+  qGecmis: {
+    id: string;
+    dogru: number;
+    secimler: Record<Kimlik, number | null>;
+  }[]; // açıklanmış sorular (cevapsız = null)
   asama: 'lobi' | 'soru' | 'bitti';
   kod: string;
   kurucu: Kimlik;
@@ -46,6 +78,7 @@ export type Olay =
   | { tip: 'katil'; ad: string; kimlik?: Kimlik }
   | { tip: 'baslat'; kimlik: Kimlik } // yalnızca kuran
   | { tip: 'cevapla'; kimlik: Kimlik; oy: Oy } // süre içinde değiştirilebilir, son cevap geçerli
+  | { tip: 'cevapla'; kimlik: Kimlik; sik: number } // yalnızca Quiz Night; 0–3, KİLİTLİ (ikinci cevap 'gecersiz')
   | { tip: 'kop'; kimlik: Kimlik } // bağlantı koptu
   | { tip: 'don'; kimlik: Kimlik } // aynı kimlikle geri döndü
   | { tip: 'ayril'; kimlik: Kimlik }
@@ -92,6 +125,33 @@ export type Gorunum = {
   benimPuanim?: number | null; // yalnızca kendi gizli puanı (açıklamadan önce)
   aciklama?: Aciklama; // yalnızca açıklama aşamasında, herkeste aynı (KK-67)
   sonrakiGorunur?: boolean; // "Sonraki kart" yalnızca yetkilide true (KK-68)
+};
+
+// Quiz Night görünümü (tur === 'quiz-night'): ortak alanlar Gorunum ile aynı; soru ve açıklama kendi biçiminde (KK-113).
+export type QuizGorunum = Omit<Gorunum, 'soru' | 'aciklama' | 'benimOyum'> & {
+  soru?: QuizSoruGorunum;
+  benimSikkim?: number | null; // yalnızca kendi kilitli şıkkı
+  aciklama?: QuizAciklama; // yalnızca açıklamada, her telefonda aynı
+};
+
+export const quizGorunumMu = (g: Gorunum | QuizGorunum): g is QuizGorunum =>
+  g.tur === 'quiz-night';
+
+// Quiz Night açıklaması: doğru şık ve kimin neyi seçtiği (null = cevapsız), her telefonda aynı.
+export type QuizAciklama = {
+  dogru: number;
+  secimler: Record<string, number | null>;
+};
+
+// Quiz Night finali: sıralama Faz 1 `turSonucu` ile aynı biçim ve kural (KK-114); ayrılanlar sıralamada yoktur.
+export type QuizFinal = {
+  paket: string;
+  siralama: { ad: string; dogru: number; katsayi: number; sira: number }[];
+  sorular: {
+    id: string;
+    dogru: number;
+    secimler: Record<string, number | null>;
+  }[];
 };
 
 // KK-67: boş (puan vermeyen) kişi ortalamaya ve uçlara girmez; hiç puan yoksa ortalama/uçlar null.
@@ -153,7 +213,8 @@ export function odaKur(s: {
   kod: string;
   kurucuAd: string;
   kurucuKimlik?: Kimlik; // sunucunun crypto ile ürettiği belirteç
-  deste: Deste;
+  deste?: Deste; // 'quiz-night' dışındaki odalarda
+  quiz?: QuizPaketi; // yalnızca 'quiz-night'
   tohum: number;
   simdi: number;
   tur?: OdaTuru; // varsayılan 'ok-mu-nok'
@@ -167,7 +228,26 @@ export function odaKur(s: {
     kod: s.kod,
     kurucu: '',
     oyuncular: [],
-    sorular: karistir(s.deste.cards, rngOlustur(s.tohum)).slice(0, SORU_SAYISI),
+    quiz: s.quiz
+      ? { id: s.quiz.id, ad: s.quiz.ad, unvanlar: s.quiz.unvanlar }
+      : null,
+    qSorular: s.quiz
+      ? turSec(s.quiz.sorular, s.tohum).map(
+          ({ id, metin, secenekler, dogru, zorluk, tur }) => ({
+            id,
+            metin,
+            secenekler,
+            dogru,
+            zorluk,
+            tur,
+          }),
+        )
+      : [],
+    sikler: {},
+    qGecmis: [],
+    sorular: s.deste
+      ? karistir(s.deste.cards, rngOlustur(s.tohum)).slice(0, SORU_SAYISI)
+      : [],
     tohum: s.tohum,
     sayac: 0,
     no: 0,
@@ -207,6 +287,7 @@ const hata = (durum: OdaDurum, kod: Hata['kod'], mesaj: string): Sonuc => ({
 });
 
 const onOn = (d: OdaDurum) => d.tur === 'on-on-ama';
+const quizMi = (d: OdaDurum) => d.tur === 'quiz-night';
 const ort1 = (p: number[]) =>
   p.length === 0
     ? null
@@ -223,6 +304,19 @@ function acikla(d: OdaDurum, simdi: number) {
   const puanlar: Record<Kimlik, number | null> = {};
   for (const p of aktifler(d)) puanlar[p.kimlik] = d.puanlar[p.kimlik] ?? null;
   d.puanGecmis.push({ kartId: d.sorular[d.no].id, puanlar });
+  d.acik = true;
+  d.sonEtkinlik = simdi;
+}
+
+// Quiz Night: açıklamayı başlatır; o sorunun cevapları geçmişe yazılır (cevap vermeyen null).
+function quizAcikla(d: OdaDurum, simdi: number) {
+  const secimler: Record<Kimlik, number | null> = {};
+  for (const p of aktifler(d)) secimler[p.kimlik] = d.sikler[p.kimlik] ?? null;
+  d.qGecmis.push({
+    id: d.qSorular[d.no].id,
+    dogru: d.qSorular[d.no].dogru,
+    secimler,
+  });
   d.acik = true;
   d.sonEtkinlik = simdi;
 }
@@ -249,7 +343,11 @@ function ilerle(d: OdaDurum, simdi: number) {
 function belkiIlerle(d: OdaDurum, simdi: number) {
   const bagli = aktifler(d).filter((p) => p.bagli);
   if (d.asama !== 'soru' || bagli.length === 0) return;
-  if (onOn(d)) {
+  if (quizMi(d)) {
+    // Quiz Night: bağlı herkes cevaplayınca beklemeden açıklama; açıklama süresiz bekler.
+    if (!d.acik && bagli.every((p) => d.sikler[p.kimlik] !== undefined))
+      quizAcikla(d, simdi);
+  } else if (onOn(d)) {
     // 10/10 ama: herkes puan verince açıklama (0 da puandır); açıklama süresiz bekler.
     if (!d.acik && bagli.every((p) => d.puanlar[p.kimlik] !== undefined))
       acikla(d, simdi);
@@ -297,6 +395,21 @@ export function isle(durum: OdaDurum, olay: Olay, simdi: number): Sonuc {
       if (d.asama === 'bitti') return hata(durum, 'kapali', 'Oyun bitti.');
       if (d.asama === 'lobi')
         return hata(durum, 'yetkisiz', 'Oyun henüz başlamadı.');
+      if (quizMi(d)) {
+        const sik = 'sik' in olay ? olay.sik : undefined;
+        if (!Number.isInteger(sik) || sik! < 0 || sik! > 3)
+          return hata(durum, 'gecersiz', 'Şık 0–3 arasında olmalı.');
+        if (d.acik || d.sikler[o!.kimlik] !== undefined)
+          return hata(durum, 'gecersiz', 'Bu soruyu zaten cevapladın.');
+        if (simdi - d.baslangic >= QUIZ_SORU_MS)
+          return hata(durum, 'sure-doldu', 'Süre doldu, cevap sayılmadı.');
+        d.sikler[o!.kimlik] = sik!;
+        d.sonEtkinlik = simdi;
+        belkiIlerle(d, simdi);
+        return { durum: d };
+      }
+      if (!('oy' in olay))
+        return hata(durum, 'gecersiz', 'Bu odada şık değil OK/NOK denir.');
       if (simdi - d.baslangic >= SORU_MS)
         return hata(durum, 'sure-doldu', 'Süre doldu, cevap sayılmadı.');
       d.oylar[o!.kimlik] = olay.oy;
@@ -325,6 +438,7 @@ export function isle(durum: OdaDurum, olay: Olay, simdi: number): Sonuc {
       o!.bagli = false;
       delete d.oylar[o!.kimlik];
       delete d.puanlar[o!.kimlik];
+      if (quizMi(d)) delete d.sikler[o!.kimlik];
       if (aktifler(d).length <= 1) bitir(d, simdi);
       else belkiIlerle(d, simdi);
       return { durum: d };
@@ -349,7 +463,7 @@ export function isle(durum: OdaDurum, olay: Olay, simdi: number): Sonuc {
       belkiIlerle(d, simdi);
       return { durum: d };
     case 'sonraki':
-      if (!onOn(d))
+      if (!onOn(d) && !quizMi(d))
         return hata(durum, 'gecersiz', 'Bu odada sonraki kart yok.');
       if (d.asama !== 'soru' || !d.acik)
         return hata(
@@ -365,8 +479,14 @@ export function isle(durum: OdaDurum, olay: Olay, simdi: number): Sonuc {
         );
       d.acik = false;
       d.puanlar = {};
+      d.sikler = {};
       d.sonEtkinlik = simdi;
-      if (d.puanGecmis.length >= d.sorular.length) bitir(d, simdi);
+      if (
+        quizMi(d)
+          ? d.qGecmis.length >= d.qSorular.length
+          : d.puanGecmis.length >= d.sorular.length
+      )
+        bitir(d, simdi);
       else {
         d.no++;
         d.baslangic = simdi;
@@ -374,7 +494,14 @@ export function isle(durum: OdaDurum, olay: Olay, simdi: number): Sonuc {
       return { durum: d };
     case 'zaman':
       // 10/10 ama: açıklama süresiz bekler; yalnızca puan toplanırken süre dolunca açıklanır.
-      if (d.asama === 'soru' && simdi - d.baslangic >= SORU_MS) {
+      if (quizMi(d)) {
+        if (
+          d.asama === 'soru' &&
+          !d.acik &&
+          simdi - d.baslangic >= QUIZ_SORU_MS
+        )
+          quizAcikla(d, simdi);
+      } else if (d.asama === 'soru' && simdi - d.baslangic >= SORU_MS) {
         if (!onOn(d)) ilerle(d, simdi);
         else if (!d.acik) acikla(d, simdi);
       }
@@ -389,6 +516,8 @@ export function gorunum(
 ): Gorunum {
   const d = durum;
   const soru = d.asama === 'soru';
+  // Quiz Night'ta gövde QuizGorunum biçimindedir (tur === 'quiz-night'); istemci `quizGorunumMu` ile daraltır.
+  if (quizMi(d)) return quizGorunum(d, kimlik, simdi) as unknown as Gorunum;
   const on = onOn(d);
   const verenler = aktifler(d).filter((p) =>
     on ? d.puanlar[p.kimlik] !== undefined : d.oylar[p.kimlik],
@@ -417,6 +546,72 @@ export function gorunum(
     benimPuanim: soru ? (d.puanlar[kimlik] ?? null) : undefined,
     aciklama: soru && d.acik ? aciklamaOlustur(d) : undefined,
     sonrakiGorunur: soru && d.acik && yetkili(d) === kimlik,
+  };
+}
+
+// Quiz Night görünümü: soru aşamasında doğru şık, kaynaklar ve uyum hiçbir alanda yoktur; başkasının şıkkı yalnız açıklamada (KK-113).
+function quizGorunum(d: OdaDurum, kimlik: Kimlik, simdi: number): QuizGorunum {
+  const soru = d.asama === 'soru';
+  const s = soru ? d.qSorular[d.no] : undefined;
+  const ad = (k: Kimlik) => d.oyuncular.find((p) => p.kimlik === k)?.ad ?? '';
+  const secimler: Record<string, number | null> = {};
+  if (soru && d.acik)
+    for (const [k, v] of Object.entries(
+      d.qGecmis[d.qGecmis.length - 1].secimler,
+    ))
+      secimler[ad(k)] = v;
+  return {
+    tur: d.tur,
+    asama: d.asama,
+    kod: d.kod,
+    oyuncular: aktifler(d).map((p) => ({ ad: p.ad, bagli: p.bagli })),
+    baslatGorunur: d.asama === 'lobi' && kimlik === d.kurucu,
+    baslatAktif: d.asama === 'lobi' && d.oyuncular.length >= 2,
+    soruNo: soru ? d.no + 1 : undefined,
+    soru: s && {
+      id: s.id,
+      metin: s.metin,
+      secenekler: s.secenekler,
+      zorluk: s.zorluk,
+    },
+    kalanMs:
+      soru && !d.acik
+        ? Math.max(0, QUIZ_SORU_MS - (simdi - d.baslangic))
+        : undefined,
+    cevapladi: soru
+      ? aktifler(d)
+          .filter((p) => d.sikler[p.kimlik] !== undefined)
+          .map((p) => p.ad)
+      : [],
+    toplam: aktifler(d).length,
+    benimSikkim: soru ? (d.sikler[kimlik] ?? null) : undefined,
+    aciklama: soru && d.acik ? { dogru: s!.dogru, secimler } : undefined,
+    sonrakiGorunur: soru && d.acik && yetkili(d) === kimlik,
+  };
+}
+
+// Quiz Night finali: sıralama Faz 1 kuralıyla (doğru sayısı, eşitse zorluk katsayılı toplam, o da eşitse aynı sıra).
+export function quizFinal(durum: OdaDurum): QuizFinal {
+  const d = durum;
+  const kalan = aktifler(d);
+  const siralamaGirdisi = kalan.map((p) => {
+    const dogruMu = d.qGecmis.map((g) => g.secimler[p.kimlik] === g.dogru);
+    return {
+      ad: p.ad,
+      dogru: dogruMu.filter(Boolean).length,
+      katsayi: katsayiliToplam(d.qSorular.slice(0, dogruMu.length), dogruMu),
+    };
+  });
+  return {
+    paket: d.quiz?.ad ?? '',
+    siralama: siralama(siralamaGirdisi),
+    sorular: d.qGecmis.map((g) => ({
+      id: g.id,
+      dogru: g.dogru,
+      secimler: Object.fromEntries(
+        kalan.map((p) => [p.ad, g.secimler[p.kimlik] ?? null]),
+      ),
+    })),
   };
 }
 

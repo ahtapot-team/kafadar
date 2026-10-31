@@ -4,12 +4,14 @@ import { DurableObject } from 'cloudflare:workers';
 import {
   BOSTA_MS,
   type OdaDurum,
+  QUIZ_SORU_MS,
   SORU_MS,
   final,
   gorunum,
   isle,
   odaKur,
   onOnFinal,
+  quizFinal,
   silinmeli,
 } from '../../src/oda/oda';
 import { acilisOku, kimlikMesaji, mesajiOlayaCevir } from '../../src/oda/mesaj';
@@ -41,7 +43,9 @@ export class Oda extends DurableObject<Env> {
       BOSTA_MS;
     // 10/10 ama açıklaması süresiz bekler: o sırada soru süresi alarmı kurulmaz.
     const sure =
-      d.asama === 'soru' && !d.acik ? d.baslangic + SORU_MS : Infinity;
+      d.asama === 'soru' && !d.acik
+        ? d.baslangic + (d.tur === 'quiz-night' ? QUIZ_SORU_MS : SORU_MS)
+        : Infinity;
     const bekleyen = this.bekleyenler().map((a) => (a.bas ?? 0) + KIMLIK_MS);
     return this.ctx.storage.setAlarm(Math.min(silme, sure, ...bekleyen) + 1);
   }
@@ -64,7 +68,12 @@ export class Oda extends DurableObject<Env> {
         if (d.asama === 'bitti')
           gonder(ws, {
             t: 'final',
-            final: d.tur === 'on-on-ama' ? onOnFinal(d) : final(d),
+            final:
+              d.tur === 'on-on-ama'
+                ? onOnFinal(d)
+                : d.tur === 'quiz-night'
+                  ? quizFinal(d)
+                  : final(d),
           });
       } catch {
         /* kapanmakta olan soket: diğerlerine yayın sürsün */
@@ -154,7 +163,16 @@ export class Oda extends DurableObject<Env> {
     }
 
     const olay = mesajiOlayaCevir(m, kimlik);
-    if (!olay) return;
+    if (!olay) {
+      // Bozuk Quiz Night şıkkı sessizce yutulmaz: istemci hata alır.
+      const x = m as { t?: unknown; sik?: unknown } | null;
+      if (x?.t === 'cevapla' && x.sik !== undefined)
+        gonder(ws, {
+          t: 'hata',
+          hata: { kod: 'gecersiz', mesaj: 'Şık 0–3 arasında olmalı.' },
+        });
+      return;
+    }
     const d = await this.yukle();
     if (!d) return;
     const s = isle(d, olay, Date.now());
