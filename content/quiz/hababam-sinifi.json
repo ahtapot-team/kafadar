@@ -1,0 +1,791 @@
+{
+  "id": "hababam-sinifi",
+  "ad": "Hababam Sınıfı",
+  "emoji": "🏫",
+  "koken": "tr",
+  "unvanlar": [
+    "Sınıfta kaldın ama Hafize Ana sana çorba saklıyor",
+    "Damat Ferit'le arka sırada idare ediyorsun",
+    "Badi Ekrem'in koşusundan alnının akıyla çıktın",
+    "Mahmut Hoca'nın gözbebeği, Hababam'ın birincisi"
+  ],
+  "sorular": [
+    {
+      "id": "hababam-sinifi-01",
+      "metin": "Hababam Sınıfı romanının yazarı kimdir?",
+      "secenekler": [
+        "Aziz Nesin",
+        "Rıfat Ilgaz",
+        "Orhan Kemal",
+        "Muzaffer İzgü"
+      ],
+      "dogru": 1,
+      "zorluk": "kolay",
+      "tur": "dunya",
+      "kaynaklar": [
+        {
+          "ad": "Vikipedi: Hababam Sınıfı (film)",
+          "url": "https://tr.wikipedia.org/wiki/Hababam_Sınıfı_(film)"
+        },
+        {
+          "ad": "Wikipedia (EN): Hababam Sınıfı",
+          "url": "https://en.wikipedia.org/wiki/Hababam_Sınıfı"
+        },
+        {
+          "ad": "Kürê Ansiklopedi: Hababam Sınıfı (Film)",
+          "url": "https://kureansiklopedi.com/tr/detay/hababam-sinifi-film-f1f6e"
+        },
+        {
+          "ad": "Beyazperde: Hababam Sınıfı",
+          "url": "https://www.beyazperde.com/filmler/film-186607/"
+        }
+      ],
+      "uyum": 1.0
+    },
+    {
+      "id": "hababam-sinifi-02",
+      "metin": "1975'te vizyona giren ilk Hababam Sınıfı filmini kim yönetti?",
+      "secenekler": [
+        "Atıf Yılmaz",
+        "Osman F. Seden",
+        "Ertem Eğilmez",
+        "Yılmaz Atadeniz"
+      ],
+      "dogru": 2,
+      "zorluk": "kolay",
+      "tur": "dunya",
+      "kaynaklar": [
+        {
+          "ad": "Vikipedi: Hababam Sınıfı (film)",
+          "url": "https://tr.wikipedia.org/wiki/Hababam_Sınıfı_(film)"
+        },
+        {
+          "ad": "Wikipedia (EN): Hababam Sınıfı",
+          "url": "https://en.wikipedia.org/wiki/Hababam_Sınıfı"
+        },
+        {
+          "ad": "Kürê Ansiklopedi: Hababam Sınıfı (Film)",
+          "url": "https://kureansiklopedi.com/tr/detay/hababam-sinifi-film-f1f6e"
+        },
+        {
+          "ad": "Beyazperde: Hababam Sınıfı",
+          "url": "https://www.beyazperde.com/filmler/film-186607/"
+        },
+        {
+          "ad": "CNN Türk: Hababam Sınıfı'nın 50 yılı",
+          "url": "https://cnnturk.com/magazin/galeri/hababam-sinifinin-50-yili-usta-oyuncular-yarim-asir-sonra-ayni-siralara-oturdu-2271692"
+        }
+      ],
+      "uyum": 1.0
+    },
+    {
+      "id": "hababam-sinifi-03",
+      "metin": "Hababam Sınıfı filmlerinde Mahmut Hoca'yı hangi oyuncu canlandırdı?",
+      "secenekler": [
+        "Münir Özkul",
+        "Şener Şen",
+        "Şevket Altuğ",
+        "Sıtkı Akçatepe"
+      ],
+      "dogru": 0,
+      "zorluk": "kolay",
+      "tur": "dunya",
+      "kaynaklar": [
+        {
+          "ad": "Vikipedi: Hababam Sınıfı (film)",
+          "url": "https://tr.wikipedia.org/wiki/Hababam_Sınıfı_(film)"
+        },
+        {
+          "ad": "Wikipedia (EN): Hababam Sınıfı",
+          "url": "https://en.wikipedia.org/wiki/Hababam_Sınıfı"
+        },
+        {
+          "ad": "Kürê Ansiklopedi: Hababam Sınıfı (Film)",
+          "url": "https://kureansiklopedi.com/tr/detay/hababam-sinifi-film-f1f6e"
+        },
+        {
+          "ad": "Beyazperde: Hababam Sınıfı",
+          "url": "https://www.beyazperde.com/filmler/film-186607/"
+        }
+      ],
+      "uyum": 1.0
+    },
+    {
+      "id": "hababam-sinifi-04",
+      "metin": "İnek Şaban karakterine filmlerde hangi oyuncu hayat verdi?",
+      "secenekler": [
+        "Halit Akçatepe",
+        "Tarık Akan",
+        "İlyas Salman",
+        "Kemal Sunal"
+      ],
+      "dogru": 3,
+      "zorluk": "kolay",
+      "tur": "dunya",
+      "kaynaklar": [
+        {
+          "ad": "Vikipedi: Hababam Sınıfı (film)",
+          "url": "https://tr.wikipedia.org/wiki/Hababam_Sınıfı_(film)"
+        },
+        {
+          "ad": "Wikipedia (EN): Hababam Sınıfı",
+          "url": "https://en.wikipedia.org/wiki/Hababam_Sınıfı"
+        },
+        {
+          "ad": "Kürê Ansiklopedi: Hababam Sınıfı (Film)",
+          "url": "https://kureansiklopedi.com/tr/detay/hababam-sinifi-film-f1f6e"
+        },
+        {
+          "ad": "Beyazperde: Hababam Sınıfı",
+          "url": "https://www.beyazperde.com/filmler/film-186607/"
+        },
+        {
+          "ad": "CNN Türk: Hababam Sınıfı'nın 50 yılı",
+          "url": "https://cnnturk.com/magazin/galeri/hababam-sinifinin-50-yili-usta-oyuncular-yarim-asir-sonra-ayni-siralara-oturdu-2271692"
+        }
+      ],
+      "uyum": 1.0
+    },
+    {
+      "id": "hababam-sinifi-05",
+      "metin": "Damat Ferit karakterini hangi oyuncu canlandırdı?",
+      "secenekler": ["Kadir İnanır", "Tarık Akan", "Cüneyt Arkın", "Ediz Hun"],
+      "dogru": 1,
+      "zorluk": "kolay",
+      "tur": "dunya",
+      "kaynaklar": [
+        {
+          "ad": "Vikipedi: Hababam Sınıfı (film)",
+          "url": "https://tr.wikipedia.org/wiki/Hababam_Sınıfı_(film)"
+        },
+        {
+          "ad": "Wikipedia (EN): Hababam Sınıfı",
+          "url": "https://en.wikipedia.org/wiki/Hababam_Sınıfı"
+        },
+        {
+          "ad": "Kürê Ansiklopedi: Hababam Sınıfı (Film)",
+          "url": "https://kureansiklopedi.com/tr/detay/hababam-sinifi-film-f1f6e"
+        },
+        {
+          "ad": "Beyazperde: Hababam Sınıfı",
+          "url": "https://www.beyazperde.com/filmler/film-186607/"
+        }
+      ],
+      "uyum": 1.0
+    },
+    {
+      "id": "hababam-sinifi-06",
+      "metin": "Hababam Sınıfı'nın okuduğu okulun filmlerdeki adı nedir?",
+      "secenekler": [
+        "Özel Çamlıca Lisesi",
+        "Özel Moda Lisesi",
+        "Özel Kadıköy Lisesi",
+        "Özel Beyoğlu Lisesi"
+      ],
+      "dogru": 0,
+      "zorluk": "kolay",
+      "tur": "olay",
+      "kaynaklar": [
+        {
+          "ad": "Vikipedi: Hababam Sınıfı (film)",
+          "url": "https://tr.wikipedia.org/wiki/Hababam_Sınıfı_(film)"
+        },
+        {
+          "ad": "Beyazperde: Hababam Sınıfı",
+          "url": "https://www.beyazperde.com/filmler/film-186607/"
+        },
+        {
+          "ad": "Kürê Ansiklopedi: Hababam Sınıfı Tatilde (Film)",
+          "url": "https://kureansiklopedi.com/tr/detay/hababam-sinifi-tatilde-film-864f9"
+        },
+        {
+          "ad": "CNN Türk: Hababam Sınıfı Güle Güle oyuncuları",
+          "url": "https://www.cnnturk.com/magazin/hababam-sinifi-gule-gule-ne-zaman-cekildi-hababam-sinifi-gule-gule-oyunculari-kimler-nerede-cekildi-2138307"
+        },
+        {
+          "ad": "Cumhuriyet: Hababam Sınıfı Güle Güle filminin konusu",
+          "url": "https://www.cumhuriyet.com.tr/tv-rehberi/hababam-sinifi-gule-gule-filminin-konusu-ne-oyunculari-kim-hababam-sinifi-gule-gule-filmi-nerede-cekildi-2018296"
+        }
+      ],
+      "uyum": 1.0
+    },
+    {
+      "id": "hababam-sinifi-07",
+      "metin": "İlk filmde Mahmut Hoca okula hangi görevle gelir?",
+      "secenekler": [
+        "Okul müdürü",
+        "Milli Eğitim müfettişi",
+        "Müdür yardımcısı",
+        "Beden eğitimi öğretmeni"
+      ],
+      "dogru": 2,
+      "zorluk": "kolay",
+      "tur": "olay",
+      "kaynaklar": [
+        {
+          "ad": "Vikipedi: Hababam Sınıfı (film)",
+          "url": "https://tr.wikipedia.org/wiki/Hababam_Sınıfı_(film)"
+        },
+        {
+          "ad": "Wikipedia (EN): Hababam Sınıfı",
+          "url": "https://en.wikipedia.org/wiki/Hababam_Sınıfı"
+        },
+        {
+          "ad": "Kürê Ansiklopedi: Hababam Sınıfı (Film)",
+          "url": "https://kureansiklopedi.com/tr/detay/hababam-sinifi-film-f1f6e"
+        },
+        {
+          "ad": "Beyazperde: Hababam Sınıfı",
+          "url": "https://www.beyazperde.com/filmler/film-186607/"
+        }
+      ],
+      "uyum": 1.0
+    },
+    {
+      "id": "hababam-sinifi-08",
+      "metin": "Mahmut Hoca'nın Hababam Sınıfı'ndaki meşhur lakabı nedir?",
+      "secenekler": ["Kara Mahmut", "Deli Mahmut", "Sert Mahmut", "Kel Mahmut"],
+      "dogru": 3,
+      "zorluk": "kolay",
+      "tur": "olay",
+      "kaynaklar": [
+        {
+          "ad": "Vikipedi: Hababam Sınıfı (film)",
+          "url": "https://tr.wikipedia.org/wiki/Hababam_Sınıfı_(film)"
+        },
+        {
+          "ad": "Kürê Ansiklopedi: Hababam Sınıfı Tatilde (Film)",
+          "url": "https://kureansiklopedi.com/tr/detay/hababam-sinifi-tatilde-film-864f9"
+        },
+        {
+          "ad": "Beyazperde: Hababam Sınıfı Dokuz Doğuruyor",
+          "url": "https://www.beyazperde.com/filmler/film-186608/"
+        },
+        {
+          "ad": "CNN Türk: Hababam Sınıfı Tatilde oyuncuları",
+          "url": "https://www.cnnturk.com/magazin/iste-hababam-sinifi-tatilde-filmi-oyunculari-hababam-sinifi-tatilde-konusu-nedir-okulu-nerede-cekildi-2020319"
+        },
+        {
+          "ad": "Evrensel: Hababam Sınıfı 60 yaşında",
+          "url": "https://www.evrensel.net/haber/285940/rifat-ilgazin-olumsuz-yapiti-hababam-sinifi-60-yasinda"
+        }
+      ],
+      "uyum": 1.0
+    },
+    {
+      "id": "hababam-sinifi-09",
+      "metin": "Güdük Necmi'yi canlandıran oyuncu kimdir?",
+      "secenekler": [
+        "Halit Akçatepe",
+        "Cem Gürdap",
+        "Ahmet Arıman",
+        "Şevket Altuğ"
+      ],
+      "dogru": 0,
+      "zorluk": "orta",
+      "tur": "dunya",
+      "kaynaklar": [
+        {
+          "ad": "Vikipedi: Hababam Sınıfı (film)",
+          "url": "https://tr.wikipedia.org/wiki/Hababam_Sınıfı_(film)"
+        },
+        {
+          "ad": "Wikipedia (EN): Hababam Sınıfı",
+          "url": "https://en.wikipedia.org/wiki/Hababam_Sınıfı"
+        },
+        {
+          "ad": "Kürê Ansiklopedi: Hababam Sınıfı (Film)",
+          "url": "https://kureansiklopedi.com/tr/detay/hababam-sinifi-film-f1f6e"
+        },
+        {
+          "ad": "ListeList: Hababam Sınıfı bilinmeyen detaylar",
+          "url": "https://listelist.com/hababam-sinifi-bilinmeyen-detaylar/"
+        }
+      ],
+      "uyum": 1.0
+    },
+    {
+      "id": "hababam-sinifi-10",
+      "metin": "Badi Ekrem karakterini hangi oyuncu canlandırdı?",
+      "secenekler": [
+        "Şevket Altuğ",
+        "İlyas Salman",
+        "Şener Şen",
+        "Halit Akçatepe"
+      ],
+      "dogru": 2,
+      "zorluk": "orta",
+      "tur": "dunya",
+      "kaynaklar": [
+        {
+          "ad": "Vikipedi: Hababam Sınıfı Sınıfta Kaldı (film)",
+          "url": "https://tr.wikipedia.org/wiki/Hababam_Sınıfı_Sınıfta_Kaldı_(film)"
+        },
+        {
+          "ad": "Kürê Ansiklopedi: Hababam Sınıfı Sınıfta Kaldı (Film)",
+          "url": "https://kureansiklopedi.com/tr/detay/hababam-sinifi-sinifta-kaldi-film-91209"
+        },
+        {
+          "ad": "Beyazperde: Hababam Sınıfı Dokuz Doğuruyor",
+          "url": "https://www.beyazperde.com/filmler/film-186608/"
+        },
+        {
+          "ad": "Posta: Hababam Sınıfı Tatilde oyuncuları",
+          "url": "https://www.posta.com.tr/magazin/hababam-sinifi-tatilde-filmi-ne-zaman-ve-nerede-cekildi-hababam-sinifi-tatilde-oyunculari-kimler-2433678"
+        },
+        {
+          "ad": "ListeList: Hababam Sınıfı bilinmeyen detaylar",
+          "url": "https://listelist.com/hababam-sinifi-bilinmeyen-detaylar/"
+        }
+      ],
+      "uyum": 1.0
+    },
+    {
+      "id": "hababam-sinifi-11",
+      "metin": "İlk Hababam Sınıfı filminin müziklerini hangi besteci yaptı?",
+      "secenekler": [
+        "Cahit Berkay",
+        "Melih Kibar",
+        "Attila Özdemiroğlu",
+        "Zülfü Livaneli"
+      ],
+      "dogru": 1,
+      "zorluk": "orta",
+      "tur": "dunya",
+      "kaynaklar": [
+        {
+          "ad": "Vikipedi: Hababam Sınıfı (film)",
+          "url": "https://tr.wikipedia.org/wiki/Hababam_Sınıfı_(film)"
+        },
+        {
+          "ad": "Wikipedia (EN): Hababam Sınıfı",
+          "url": "https://en.wikipedia.org/wiki/Hababam_Sınıfı"
+        },
+        {
+          "ad": "Kürê Ansiklopedi: Hababam Sınıfı (Film)",
+          "url": "https://kureansiklopedi.com/tr/detay/hababam-sinifi-film-f1f6e"
+        },
+        {
+          "ad": "NTV: Yeşilçam'ın sevilen film müziklerinin bestecisi Melih Kibar anılıyor",
+          "url": "https://www.ntv.com.tr/n-life/kultur-ve-sanat/yesilcamin-sevilen-film-muziklerinin-bestecisi-melih-kibar-aniliyor,mQlfNeQEJEuV0zckGqCZjg"
+        }
+      ],
+      "uyum": 1.0
+    },
+    {
+      "id": "hababam-sinifi-12",
+      "metin": "Filmlerde Özel Çamlıca Lisesi olarak kullanılan tarihi yapı hangisidir?",
+      "secenekler": [
+        "Küçüksu Kasrı",
+        "Ihlamur Kasrı",
+        "Beylerbeyi Sarayı",
+        "Adile Sultan Kasrı"
+      ],
+      "dogru": 3,
+      "zorluk": "orta",
+      "tur": "dunya",
+      "kaynaklar": [
+        {
+          "ad": "Vikipedi: Hababam Sınıfı (film)",
+          "url": "https://tr.wikipedia.org/wiki/Hababam_Sınıfı_(film)"
+        },
+        {
+          "ad": "CNN Türk: Hababam Sınıfı'nın 50 yılı",
+          "url": "https://cnnturk.com/magazin/galeri/hababam-sinifinin-50-yili-usta-oyuncular-yarim-asir-sonra-ayni-siralara-oturdu-2271692"
+        },
+        {
+          "ad": "Milliyet: Hababam Sınıfı Dokuz Doğuruyor nerede çekildi",
+          "url": "https://www.milliyet.com.tr/cadde/hababam-sinifi-dokuz-doguruyor-oyunculari-kim-hababam-sinifi-dokuz-doguruyor-nerede-cekildi-konusu-nedir-6503532"
+        },
+        {
+          "ad": "Türkgün: Hababam Sınıfı Sınıfta Kaldı nerede çekildi",
+          "url": "https://www.turkgun.com/hababam-sinifi-sinifta-kaldi-filmi-ne-zaman-nerede-cekildi-konusu-ne-oyunculari-kimler-haber-165866"
+        },
+        {
+          "ad": "Kürê Ansiklopedi: Hababam Sınıfı (Film)",
+          "url": "https://kureansiklopedi.com/tr/detay/hababam-sinifi-film-f1f6e"
+        }
+      ],
+      "uyum": 1.0
+    },
+    {
+      "id": "hababam-sinifi-13",
+      "metin": "İlk Hababam Sınıfı filmi hangi yıl vizyona girdi?",
+      "secenekler": ["1971", "1975", "1979", "1983"],
+      "dogru": 1,
+      "zorluk": "orta",
+      "tur": "dunya",
+      "kaynaklar": [
+        {
+          "ad": "Vikipedi: Hababam Sınıfı (film)",
+          "url": "https://tr.wikipedia.org/wiki/Hababam_Sınıfı_(film)"
+        },
+        {
+          "ad": "Wikipedia (EN): Hababam Sınıfı",
+          "url": "https://en.wikipedia.org/wiki/Hababam_Sınıfı"
+        },
+        {
+          "ad": "Kürê Ansiklopedi: Hababam Sınıfı (Film)",
+          "url": "https://kureansiklopedi.com/tr/detay/hababam-sinifi-film-f1f6e"
+        },
+        {
+          "ad": "NTV: Hem ağlatan hem güldüren mizah yazarı Rıfat Ilgaz",
+          "url": "https://www.ntv.com.tr/sanat/hem-aglatan-hem-gulduren-mizah-yazari-rifat-ilgaz,xbvL4jD-eEaFgaQ-SGBjww"
+        },
+        {
+          "ad": "CNN Türk: Hababam Sınıfı'nın 50 yılı",
+          "url": "https://cnnturk.com/magazin/galeri/hababam-sinifinin-50-yili-usta-oyuncular-yarim-asir-sonra-ayni-siralara-oturdu-2271692"
+        },
+        {
+          "ad": "ListeList: Hababam Sınıfı bilinmeyen detaylar",
+          "url": "https://listelist.com/hababam-sinifi-bilinmeyen-detaylar/"
+        }
+      ],
+      "uyum": 0.86
+    },
+    {
+      "id": "hababam-sinifi-14",
+      "metin": "Tatilde filminde okul müdürü kız öğrencileri neden okula kabul eder?",
+      "secenekler": [
+        "Daha fazla para kazanmak için",
+        "Bakanlık emri geldiği için",
+        "Mahmut Hoca istediği için",
+        "Kız lisesi kapandığı için"
+      ],
+      "dogru": 0,
+      "zorluk": "orta",
+      "tur": "olay",
+      "kaynaklar": [
+        {
+          "ad": "Vikipedi: Hababam Sınıfı Tatilde",
+          "url": "https://tr.wikipedia.org/wiki/Hababam_Sınıfı_Tatilde"
+        },
+        {
+          "ad": "Kürê Ansiklopedi: Hababam Sınıfı Tatilde (Film)",
+          "url": "https://kureansiklopedi.com/tr/detay/hababam-sinifi-tatilde-film-864f9"
+        },
+        {
+          "ad": "CNN Türk: Hababam Sınıfı Tatilde konusu",
+          "url": "https://www.cnnturk.com/magazin/iste-hababam-sinifi-tatilde-filmi-oyunculari-hababam-sinifi-tatilde-konusu-nedir-okulu-nerede-cekildi-2020319"
+        },
+        {
+          "ad": "Milliyet: Hababam Sınıfı Tatilde oyuncuları",
+          "url": "https://www.milliyet.com.tr/cadde/hababam-sinifi-tatilde-oyunculari-kim-hababam-sinifi-tatilde-filmi-kac-yilinda-cekildi-nerede-ve-ne-zaman-cekildi-6497714"
+        }
+      ],
+      "uyum": 1.0
+    },
+    {
+      "id": "hababam-sinifi-15",
+      "metin": "Sınıfta Kaldı'da İnek Şaban, sahte aşk mektuplarının kimden geldiğini sanır?",
+      "secenekler": [
+        "Hafize Ana",
+        "Kız lisesi müdiresi",
+        "Hürrem Hoca",
+        "Semra Hoca"
+      ],
+      "dogru": 3,
+      "zorluk": "orta",
+      "tur": "olay",
+      "kaynaklar": [
+        {
+          "ad": "Vikipedi: Hababam Sınıfı Sınıfta Kaldı (film)",
+          "url": "https://tr.wikipedia.org/wiki/Hababam_Sınıfı_Sınıfta_Kaldı_(film)"
+        },
+        {
+          "ad": "Wikipedia (EN): Hababam Sınıfı Sınıfta Kaldı",
+          "url": "https://en.wikipedia.org/wiki/Hababam_Sınıfı_Sınıfta_Kaldı"
+        },
+        {
+          "ad": "Kürê Ansiklopedi: Hababam Sınıfı Sınıfta Kaldı (Film)",
+          "url": "https://kureansiklopedi.com/tr/detay/hababam-sinifi-sinifta-kaldi-film-91209"
+        },
+        {
+          "ad": "Habertürk: Hababam Sınıfı Sınıfta Kaldı konusu",
+          "url": "https://www.haberturk.com/hababam-sinifi-sinifta-kaldi-konusu-ne-oyunculari-kim-3688717"
+        }
+      ],
+      "uyum": 1.0
+    },
+    {
+      "id": "hababam-sinifi-16",
+      "metin": "İlk film için kadroda düşünülen ama sonunda filmde yer almayan ikili hangisi?",
+      "secenekler": [
+        "Sadri Alışık ve Ayhan Işık",
+        "Cüneyt Arkın ve Fikret Hakan",
+        "Zeki Alasya ve Metin Akpınar",
+        "Erol Günaydın ve Öztürk Serengil"
+      ],
+      "dogru": 2,
+      "zorluk": "orta",
+      "tur": "dunya",
+      "kaynaklar": [
+        {
+          "ad": "Vikipedi: Hababam Sınıfı (film)",
+          "url": "https://tr.wikipedia.org/wiki/Hababam_Sınıfı_(film)"
+        },
+        {
+          "ad": "Posta: Hababam Sınıfı hakkında bilmediğiniz 15 şaşırtıcı bilgi",
+          "url": "https://www.posta.com.tr/galeri/hababam-sinifi-hakkinda-bilmediginiz-15-sasirtici-bilgi-1314511"
+        },
+        {
+          "ad": "Habertürk: Hababam Sınıfı seks furyasına meydan okudu",
+          "url": "https://www.haberturk.com/hababam-sinifi-seks-furyasina-meydan-okudu-2651777"
+        },
+        {
+          "ad": "ListeList: Hababam Sınıfı hakkında",
+          "url": "https://listelist.com/hababam-sinifi-hakkinda"
+        }
+      ],
+      "uyum": 1.0
+    },
+    {
+      "id": "hababam-sinifi-17",
+      "metin": "İlk Hababam Sınıfı filminin senaryosunu kim yazdı?",
+      "secenekler": ["Safa Önal", "Bülent Oran", "Umur Bugay", "Yavuz Turgul"],
+      "dogru": 2,
+      "zorluk": "zor",
+      "tur": "dunya",
+      "kaynaklar": [
+        {
+          "ad": "Vikipedi: Hababam Sınıfı (film)",
+          "url": "https://tr.wikipedia.org/wiki/Hababam_Sınıfı_(film)"
+        },
+        {
+          "ad": "Wikipedia (EN): Hababam Sınıfı",
+          "url": "https://en.wikipedia.org/wiki/Hababam_Sınıfı"
+        },
+        {
+          "ad": "Kürê Ansiklopedi: Hababam Sınıfı (Film)",
+          "url": "https://kureansiklopedi.com/tr/detay/hababam-sinifi-film-f1f6e"
+        },
+        {
+          "ad": "Beyazperde: Hababam Sınıfı",
+          "url": "https://www.beyazperde.com/filmler/film-186607/"
+        },
+        {
+          "ad": "Habertürk: Hababam Sınıfı seks furyasına meydan okudu",
+          "url": "https://www.haberturk.com/hababam-sinifi-seks-furyasina-meydan-okudu-2651777"
+        }
+      ],
+      "uyum": 1.0
+    },
+    {
+      "id": "hababam-sinifi-18",
+      "metin": "Rıfat Ilgaz, Hababam öykülerini Dolmuş dergisinde hangi takma adla yazdı?",
+      "secenekler": ["Stepne", "Debriyaj", "Direksiyon", "Kaporta"],
+      "dogru": 0,
+      "zorluk": "zor",
+      "tur": "dunya",
+      "kaynaklar": [
+        {
+          "ad": "Vikipedi: Hababam Sınıfı (roman)",
+          "url": "https://tr.wikipedia.org/wiki/Hababam_Sınıfı_(roman)"
+        },
+        {
+          "ad": "Evrensel: Hababam Sınıfı 60 yaşında",
+          "url": "https://www.evrensel.net/haber/285940/rifat-ilgazin-olumsuz-yapiti-hababam-sinifi-60-yasinda"
+        },
+        {
+          "ad": "NTV: Hem ağlatan hem güldüren mizah yazarı Rıfat Ilgaz",
+          "url": "https://www.ntv.com.tr/sanat/hem-aglatan-hem-gulduren-mizah-yazari-rifat-ilgaz,xbvL4jD-eEaFgaQ-SGBjww"
+        },
+        {
+          "ad": "Kürê Ansiklopedi: Rıfat Ilgaz",
+          "url": "https://kureansiklopedi.com/tr/detay/rifat-ilgaz-860a7"
+        }
+      ],
+      "uyum": 1.0
+    },
+    {
+      "id": "hababam-sinifi-19",
+      "metin": "Hababam Sınıfı Dokuz Doğuruyor filminin yönetmeni kimdir?",
+      "secenekler": [
+        "Atıf Yılmaz",
+        "Osman F. Seden",
+        "Zeki Ökten",
+        "Kartal Tibet"
+      ],
+      "dogru": 3,
+      "zorluk": "zor",
+      "tur": "dunya",
+      "kaynaklar": [
+        {
+          "ad": "Vikipedi: Hababam Sınıfı Dokuz Doğuruyor",
+          "url": "https://tr.wikipedia.org/wiki/Hababam_Sınıfı_Dokuz_Doğuruyor"
+        },
+        {
+          "ad": "Beyazperde: Hababam Sınıfı Dokuz Doğuruyor",
+          "url": "https://www.beyazperde.com/filmler/film-186608/"
+        },
+        {
+          "ad": "Milliyet: Hababam Sınıfı Dokuz Doğuruyor konusu",
+          "url": "https://www.milliyet.com.tr/cadde/hababam-sinifi-dokuz-doguruyor-oyunculari-kim-hababam-sinifi-dokuz-doguruyor-nerede-cekildi-konusu-nedir-6503532"
+        },
+        {
+          "ad": "Wikipedia (EN): Kartal Tibet",
+          "url": "https://en.wikipedia.org/wiki/Kartal_Tibet"
+        }
+      ],
+      "uyum": 0.8
+    },
+    {
+      "id": "hababam-sinifi-20",
+      "metin": "Dokuz Doğuruyor'da sınıfa katılan aşiret reisinin oğlu yeni öğrenci kimdir?",
+      "secenekler": ["Kıvırcık Ömer", "Bilo", "Çalışkan Ahmet", "Süslü Selim"],
+      "dogru": 1,
+      "zorluk": "zor",
+      "tur": "olay",
+      "kaynaklar": [
+        {
+          "ad": "Vikipedi: Hababam Sınıfı Dokuz Doğuruyor",
+          "url": "https://tr.wikipedia.org/wiki/Hababam_Sınıfı_Dokuz_Doğuruyor"
+        },
+        {
+          "ad": "Beyazperde: Hababam Sınıfı Dokuz Doğuruyor",
+          "url": "https://www.beyazperde.com/filmler/film-186608/"
+        },
+        {
+          "ad": "Milliyet: Hababam Sınıfı Dokuz Doğuruyor konusu",
+          "url": "https://www.milliyet.com.tr/cadde/hababam-sinifi-dokuz-doguruyor-oyunculari-kim-hababam-sinifi-dokuz-doguruyor-nerede-cekildi-konusu-nedir-6503532"
+        },
+        {
+          "ad": "Cumhuriyet: Hababam Sınıfı Dokuz Doğuruyor filmi konusu",
+          "url": "https://www.cumhuriyet.com.tr/galeri/hababam-sinifi-dokuz-doguruyor-filmi-konusu-nedir-hababam-sinifi-dokuz-doguruyor-oyunculari-kimler-1954336"
+        },
+        {
+          "ad": "Gazete Birlik: Hababam Sınıfı Dokuz Doğuruyor oyuncuları",
+          "url": "https://www.gazetebirlik.com/genel/hababam-sinifi-dokuz-doguruyor-filmi-ne-zaman-kac-yilinda-cekildi-oyunculari-ve-karakterler-kimler/270259"
+        }
+      ],
+      "uyum": 1.0
+    },
+    {
+      "id": "hababam-sinifi-21",
+      "metin": "Güle Güle'de tayini Özel Çamlıca Lisesi'ne çıkan Doğulu edebiyat öğretmeni kimdir?",
+      "secenekler": ["Bilo Ağa", "Paşa Nuri", "Mehmet Bülbül", "Badi Ekrem"],
+      "dogru": 2,
+      "zorluk": "zor",
+      "tur": "olay",
+      "kaynaklar": [
+        {
+          "ad": "Vikipedi: Hababam Sınıfı Güle Güle",
+          "url": "https://tr.wikipedia.org/wiki/Hababam_Sınıfı_Güle_Güle"
+        },
+        {
+          "ad": "CNN Türk: Hababam Sınıfı Güle Güle oyuncuları",
+          "url": "https://www.cnnturk.com/magazin/hababam-sinifi-gule-gule-ne-zaman-cekildi-hababam-sinifi-gule-gule-oyunculari-kimler-nerede-cekildi-2138307"
+        },
+        {
+          "ad": "Cumhuriyet: Hababam Sınıfı Güle Güle filminin konusu",
+          "url": "https://www.cumhuriyet.com.tr/tv-rehberi/hababam-sinifi-gule-gule-filminin-konusu-ne-oyunculari-kim-hababam-sinifi-gule-gule-filmi-nerede-cekildi-2018296"
+        },
+        {
+          "ad": "Beyazperde: Hababam Sınıfı Güle Güle",
+          "url": "https://www.beyazperde.com/filmler/film-186611/"
+        }
+      ],
+      "uyum": 1.0
+    },
+    {
+      "id": "hababam-sinifi-22",
+      "metin": "Domdom Ali karakterini hangi oyuncu canlandırdı?",
+      "secenekler": [
+        "Feridun Şavlı",
+        "Cem Gürdap",
+        "Bülent İğdiroğlu",
+        "Cengiz Nezir"
+      ],
+      "dogru": 0,
+      "zorluk": "zor",
+      "tur": "dunya",
+      "kaynaklar": [
+        {
+          "ad": "Vikipedi: Hababam Sınıfı (film)",
+          "url": "https://tr.wikipedia.org/wiki/Hababam_Sınıfı_(film)"
+        },
+        {
+          "ad": "Wikipedia (EN): Hababam Sınıfı",
+          "url": "https://en.wikipedia.org/wiki/Hababam_Sınıfı"
+        },
+        {
+          "ad": "Kürê Ansiklopedi: Hababam Sınıfı (Film)",
+          "url": "https://kureansiklopedi.com/tr/detay/hababam-sinifi-film-f1f6e"
+        },
+        {
+          "ad": "ListeList: Hababam Sınıfı bilinmeyen detaylar",
+          "url": "https://listelist.com/hababam-sinifi-bilinmeyen-detaylar/"
+        },
+        {
+          "ad": "Posta: Hababam Sınıfı Tatilde oyuncuları",
+          "url": "https://www.posta.com.tr/magazin/hababam-sinifi-tatilde-filmi-ne-zaman-ve-nerede-cekildi-hababam-sinifi-tatilde-oyunculari-kimler-2433678"
+        }
+      ],
+      "uyum": 1.0
+    },
+    {
+      "id": "hababam-sinifi-23",
+      "metin": "Ayşen Gruda ilk Hababam Sınıfı filminde hangi rolde göründü?",
+      "secenekler": [
+        "Kız lisesi müdiresi",
+        "Bilgi yarışması sunucusu",
+        "Okul hemşiresi",
+        "Gazete muhabiri"
+      ],
+      "dogru": 1,
+      "zorluk": "zor",
+      "tur": "dunya",
+      "kaynaklar": [
+        {
+          "ad": "Vikipedi: Hababam Sınıfı (film)",
+          "url": "https://tr.wikipedia.org/wiki/Hababam_Sınıfı_(film)"
+        },
+        {
+          "ad": "Kürê Ansiklopedi: Hababam Sınıfı (Film)",
+          "url": "https://kureansiklopedi.com/tr/detay/hababam-sinifi-film-f1f6e"
+        },
+        {
+          "ad": "Memurlar.net: Ayşen Gruda",
+          "url": "https://www.memurlar.net/haber/804558/aysen-gruda-hayatini-kaybetti.html"
+        },
+        {
+          "ad": "Posta: Hababam Sınıfı hakkında bilmediğiniz 15 şaşırtıcı bilgi",
+          "url": "https://www.posta.com.tr/galeri/hababam-sinifi-hakkinda-bilmediginiz-15-sasirtici-bilgi-1314511"
+        }
+      ],
+      "uyum": 1.0
+    },
+    {
+      "id": "hababam-sinifi-24",
+      "metin": "Rıfat Ilgaz'ın romanda kendisini anlattığı öğrenci karakteri hangisidir?",
+      "secenekler": [
+        "İnek Şaban",
+        "Hayta İsmail",
+        "Tulum Hayri",
+        "Güdük Necmi"
+      ],
+      "dogru": 3,
+      "zorluk": "zor",
+      "tur": "dunya",
+      "kaynaklar": [
+        {
+          "ad": "Vikipedi: Hababam Sınıfı (roman)",
+          "url": "https://tr.wikipedia.org/wiki/Hababam_Sınıfı_(roman)"
+        },
+        {
+          "ad": "Evrensel: Hababam Sınıfı 60 yaşında",
+          "url": "https://www.evrensel.net/haber/285940/rifat-ilgazin-olumsuz-yapiti-hababam-sinifi-60-yasinda"
+        },
+        {
+          "ad": "Sözcü: Güdük Necmi",
+          "url": "https://www.sozcu.com.tr/guduk-necmi-wp1769794"
+        },
+        {
+          "ad": "Posta: Rıfat Ilgaz'ın oğlundan yıllar sonra gelen itiraf",
+          "url": "https://www.posta.com.tr/gundem/rifat-ilgazin-oglundan-yillar-sonra-gelen-itiraf-babam-hababam-sinifi-ni-izlemek-istemezdi-2057374"
+        }
+      ],
+      "uyum": 1.0
+    }
+  ]
+}

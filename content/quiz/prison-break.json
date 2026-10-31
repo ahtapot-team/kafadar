@@ -1,0 +1,760 @@
+{
+  "id": "prison-break",
+  "ad": "Prison Break",
+  "emoji": "🔐",
+  "koken": "yabanci",
+  "unvanlar": [
+    "Hâlâ Fox River'ın kapısındasın, Bellick seni süzüyor",
+    "Sucre'yle hücre arkadaşısın, planın yarısını biliyorsun",
+    "Tac Mahal'i bitirdin, Müdür Pope seninle gurur duyuyor",
+    "Plan sırtına işlenmiş, Scofield sana danışıyor"
+  ],
+  "sorular": [
+    {
+      "id": "prison-break-01",
+      "metin": "Prison Break'te Michael Scofield'ı hangi oyuncu canlandırdı?",
+      "secenekler": [
+        "Dominic Purcell",
+        "Wentworth Miller",
+        "Robert Knepper",
+        "Amaury Nolasco"
+      ],
+      "dogru": 1,
+      "zorluk": "kolay",
+      "tur": "dunya",
+      "kaynaklar": [
+        {
+          "ad": "Wikipedia: Prison Break",
+          "url": "https://en.wikipedia.org/wiki/Prison_Break"
+        },
+        {
+          "ad": "Rotten Tomatoes: Prison Break",
+          "url": "https://www.rottentomatoes.com/tv/prison_break"
+        },
+        {
+          "ad": "TVmaze: Prison Break oyuncu kadrosu",
+          "url": "https://www.tvmaze.com/shows/541/prison-break/cast"
+        },
+        {
+          "ad": "Movieplayer.it: Prison Break cast",
+          "url": "https://movieplayer.it/serietv/prison-break_55/cast/"
+        }
+      ],
+      "uyum": 1.0
+    },
+    {
+      "id": "prison-break-02",
+      "metin": "Lincoln Burrows rolündeki oyuncu kimdir?",
+      "secenekler": [
+        "Dominic Purcell",
+        "Peter Stormare",
+        "Rockmond Dunbar",
+        "William Fichtner"
+      ],
+      "dogru": 0,
+      "zorluk": "kolay",
+      "tur": "dunya",
+      "kaynaklar": [
+        {
+          "ad": "Wikipedia: Prison Break",
+          "url": "https://en.wikipedia.org/wiki/Prison_Break"
+        },
+        {
+          "ad": "Rotten Tomatoes: Prison Break",
+          "url": "https://www.rottentomatoes.com/tv/prison_break"
+        },
+        {
+          "ad": "TVmaze: Prison Break oyuncu kadrosu",
+          "url": "https://www.tvmaze.com/shows/541/prison-break/cast"
+        },
+        {
+          "ad": "Movieplayer.it: Prison Break cast",
+          "url": "https://movieplayer.it/serietv/prison-break_55/cast/"
+        }
+      ],
+      "uyum": 1.0
+    },
+    {
+      "id": "prison-break-03",
+      "metin": "Prison Break, Türkiye'de dublajlı yayınlanırken hangi adla biliniyordu?",
+      "secenekler": ["Firar", "Kaçış Planı", "Büyük Kaçış", "Esaretin Bedeli"],
+      "dogru": 2,
+      "zorluk": "kolay",
+      "tur": "dunya",
+      "kaynaklar": [
+        {
+          "ad": "İşçi Haber: Prison Break geri dönüyor",
+          "url": "https://www.iscihaber.net/magazin/prison-break-geri-donuyor/99500"
+        },
+        {
+          "ad": "NTV: Prison Break yeniden çekiliyor",
+          "url": "https://www.ntv.com.tr/n-life/kultur-ve-sanat/galeri-prison-break-yeniden-cekiliyor-eski-oyuncular-geri-donecek-mi,4QUdHNKwDk-CwFnb6e1_Bw"
+        },
+        {
+          "ad": "Log: Hafta sonu ne izlesek, Prison Break",
+          "url": "https://www.log.com.tr/hafta-sonu-ne-izlesek-prison-break"
+        },
+        {
+          "ad": "Listelist: Prison Break konusu",
+          "url": "https://listelist.com/prison-break-konusu-baslamasi"
+        },
+        {
+          "ad": "CNN Türk: Prison Break 5. sezon yayın tarihi",
+          "url": "https://cnnturk.com/magazin/dizi/prison-break-5-sezon-yayin-tarihi-aciklandi-591525"
+        }
+      ],
+      "uyum": 1.0
+    },
+    {
+      "id": "prison-break-04",
+      "metin": "Michael, Fox River'a girebilmek için hangi suçu işler?",
+      "secenekler": [
+        "Araba hırsızlığı",
+        "Kundakçılık",
+        "Sahtecilik",
+        "Banka soygunu"
+      ],
+      "dogru": 3,
+      "zorluk": "kolay",
+      "tur": "olay",
+      "kaynaklar": [
+        {
+          "ad": "Wikipedia: Pilot (Prison Break)",
+          "url": "https://en.wikipedia.org/wiki/Pilot_(Prison_Break)"
+        },
+        {
+          "ad": "Impulse Gamer: Prison Break The Conspiracy",
+          "url": "https://www.impulsegamer.com/ps3/ps3prisonbreaktheconspiracy.htm"
+        },
+        {
+          "ad": "ESRB: Prison Break The Conspiracy",
+          "url": "https://www.esrb.org/ratings/28419/prison-break-the-conspiracy/"
+        },
+        {
+          "ad": "FunTrivia: Prison Break Pilot Episode",
+          "url": "https://www.funtrivia.com/trivia-quiz/Television/Prison-Break--Pilot-Episode-216186.html"
+        }
+      ],
+      "uyum": 1.0
+    },
+    {
+      "id": "prison-break-05",
+      "metin": "Lincoln, kimi öldürmekle suçlanıp idama mahkûm edilmiştir?",
+      "secenekler": [
+        "Bir FBI ajanını",
+        "Başkan Yardımcısı'nın kardeşini",
+        "Bir eyalet senatörünü",
+        "Fox River'ın müdürünü"
+      ],
+      "dogru": 1,
+      "zorluk": "kolay",
+      "tur": "olay",
+      "kaynaklar": [
+        {
+          "ad": "Wikipedia: Prison Break",
+          "url": "https://en.wikipedia.org/wiki/Prison_Break"
+        },
+        {
+          "ad": "FunTrivia: Prison Break Pilot Episode",
+          "url": "https://www.funtrivia.com/trivia-quiz/Television/Prison-Break--Pilot-Episode-216186.html"
+        },
+        {
+          "ad": "SensaCine: Prison Break 1. sezon",
+          "url": "https://www.sensacine.com.mx/series/serie-451/temporada-1079/"
+        },
+        {
+          "ad": "Deseret News: Prison's revolving door",
+          "url": "https://www.deseret.com/2007/2/12/20001543/prison-s-revolving-door/"
+        }
+      ],
+      "uyum": 1.0
+    },
+    {
+      "id": "prison-break-06",
+      "metin": "Sara Tancredi, Fox River'da hangi görevde çalışır?",
+      "secenekler": ["Gardiyan", "Avukat", "Revir doktoru", "Psikolog"],
+      "dogru": 2,
+      "zorluk": "kolay",
+      "tur": "olay",
+      "kaynaklar": [
+        {
+          "ad": "Wikipedia: Prison Break",
+          "url": "https://en.wikipedia.org/wiki/Prison_Break"
+        },
+        {
+          "ad": "FunTrivia: Prison Break Pilot Episode",
+          "url": "https://www.funtrivia.com/trivia-quiz/Television/Prison-Break--Pilot-Episode-216186.html"
+        },
+        {
+          "ad": "Slashfilm: Does Sara die in Prison Break?",
+          "url": "https://www.slashfilm.com/1782955/does-sara-die-prison-break/"
+        },
+        {
+          "ad": "Cineserie: Que devient Sarah Wayne Callies",
+          "url": "https://www.cineserie.com/news/people/que-deviennent-ils/que-devient-sarah-wayne-callies-prison-break-2855187/"
+        }
+      ],
+      "uyum": 1.0
+    },
+    {
+      "id": "prison-break-07",
+      "metin": "2. sezonda kaçakların peşine düşen Alexander Mahone hangi kurumda çalışır?",
+      "secenekler": ["FBI", "CIA", "NSA", "DEA"],
+      "dogru": 0,
+      "zorluk": "kolay",
+      "tur": "olay",
+      "kaynaklar": [
+        {
+          "ad": "Wikipedia: Prison Break",
+          "url": "https://en.wikipedia.org/wiki/Prison_Break"
+        },
+        {
+          "ad": "HeraldNet: In season two, Prison Break leaves jail in the dust",
+          "url": "https://www.heraldnet.com/2006/08/20/in-season-two-prison-break-leaves-jail-in-the-dust/"
+        },
+        {
+          "ad": "TV Guide: Prison Break's William",
+          "url": "https://www.tvguide.com/news/prison-breaks-william-41894/"
+        },
+        {
+          "ad": "Soap Central: What happened to Mahone",
+          "url": "https://www.soapcentral.com/shows/what-happened-mahone-prison-break-character-details-explored"
+        }
+      ],
+      "uyum": 1.0
+    },
+    {
+      "id": "prison-break-08",
+      "metin": "3. sezonda Michael'ın tutulduğu Sona hapishanesi hangi ülkededir?",
+      "secenekler": ["Meksika", "Panama", "Kolombiya", "Kosta Rika"],
+      "dogru": 1,
+      "zorluk": "kolay",
+      "tur": "olay",
+      "kaynaklar": [
+        {
+          "ad": "Wikipedia: Prison Break",
+          "url": "https://en.wikipedia.org/wiki/Prison_Break"
+        },
+        {
+          "ad": "PopMatters: Prison Break Season 3",
+          "url": "https://www.popmatters.com/prison-break-season-3-2496119646.html"
+        },
+        {
+          "ad": "Big Picture Big Sound: Prison Break Season Three Blu-ray",
+          "url": "https://www.bigpicturebigsound.com/Prison_Break_Season_Three_on_Blu-ray_Disc.shtml"
+        },
+        {
+          "ad": "DVDfever: Prison Break Season 3",
+          "url": "https://dvd-fever.co.uk/hjpb3"
+        }
+      ],
+      "uyum": 1.0
+    },
+    {
+      "id": "prison-break-09",
+      "metin": "Fox River hapishanesi sahneleri ağırlıkla hangi gerçek cezaevinde çekildi?",
+      "secenekler": ["Alcatraz", "San Quentin", "Sing Sing", "Joliet Cezaevi"],
+      "dogru": 3,
+      "zorluk": "orta",
+      "tur": "dunya",
+      "kaynaklar": [
+        {
+          "ad": "Wikipedia: Prison Break",
+          "url": "https://en.wikipedia.org/wiki/Prison_Break"
+        },
+        {
+          "ad": "TV Festival: 10 facts about Prison Break",
+          "url": "https://www.tvfestival.com/en/news/10-facts-about-prison-break/251"
+        },
+        {
+          "ad": "WhatCulture: 20 things you didn't know about Prison Break",
+          "url": "https://whatculture.com/tv/20-things-you-didnt-know-about-prison-break"
+        },
+        {
+          "ad": "Honolulu Advertiser (2005)",
+          "url": "https://archives-new.honoluluadvertiser.com/article/2005/Aug/29/il/FP508290308.html"
+        },
+        {
+          "ad": "The Cinemaholic: Where was Prison Break filmed",
+          "url": "https://thecinemaholic.com/where-prison-break-filmed"
+        }
+      ],
+      "uyum": 1.0
+    },
+    {
+      "id": "prison-break-10",
+      "metin": "T-Bag karakterini hangi oyuncu canlandırdı?",
+      "secenekler": [
+        "Robert Knepper",
+        "Wade Williams",
+        "Peter Stormare",
+        "Rockmond Dunbar"
+      ],
+      "dogru": 0,
+      "zorluk": "orta",
+      "tur": "dunya",
+      "kaynaklar": [
+        {
+          "ad": "Wikipedia: Prison Break",
+          "url": "https://en.wikipedia.org/wiki/Prison_Break"
+        },
+        {
+          "ad": "Rotten Tomatoes: Prison Break",
+          "url": "https://www.rottentomatoes.com/tv/prison_break"
+        },
+        {
+          "ad": "TVmaze: Prison Break oyuncu kadrosu",
+          "url": "https://www.tvmaze.com/shows/541/prison-break/cast"
+        },
+        {
+          "ad": "Movieplayer.it: Prison Break cast",
+          "url": "https://movieplayer.it/serietv/prison-break_55/cast/"
+        }
+      ],
+      "uyum": 1.0
+    },
+    {
+      "id": "prison-break-11",
+      "metin": "Wentworth Miller, Michael Scofield rolüyle hangi ödüle aday gösterildi?",
+      "secenekler": ["Primetime Emmy", "Altın Küre", "BAFTA TV", "Tony"],
+      "dogru": 1,
+      "zorluk": "orta",
+      "tur": "dunya",
+      "kaynaklar": [
+        {
+          "ad": "Wikipedia: Prison Break",
+          "url": "https://en.wikipedia.org/wiki/Prison_Break"
+        },
+        {
+          "ad": "Golden Globes: Wentworth Miller",
+          "url": "https://www.goldenglobes.com/person/wentworth-miller"
+        },
+        {
+          "ad": "Honolulu Advertiser (2006)",
+          "url": "https://the.honoluluadvertiser.com/article/2006/Jan/14/en/FP601140301.html"
+        },
+        {
+          "ad": "Awards Archive: 2006 Golden Globe, drama dizisi en iyi erkek oyuncu",
+          "url": "https://www.awardsarchive.com/2006-golden-globe-awards-best-actor-in-a-television-series-drama-winner-and-nominees"
+        }
+      ],
+      "uyum": 1.0
+    },
+    {
+      "id": "prison-break-12",
+      "metin": "Wentworth Miller, The Flash ve Legends of Tomorrow'da hangi kötü karakteri oynadı?",
+      "secenekler": [
+        "Heat Wave",
+        "Reverse-Flash",
+        "Captain Cold",
+        "Gorilla Grodd"
+      ],
+      "dogru": 2,
+      "zorluk": "orta",
+      "tur": "dunya",
+      "kaynaklar": [
+        {
+          "ad": "TheWrap: Prison Break stars to reunite on The Flash",
+          "url": "https://www.thewrap.com/prison-break-stars-dominic-purcell-wentworth-miller-to-reunite-on-the-flash"
+        },
+        {
+          "ad": "TVLine: The Flash season 1 spoilers",
+          "url": "https://tvline.com/2015/01/15/the-flash-season-1-spoilers-wentworth-miller-dominic-purcell/"
+        },
+        {
+          "ad": "ScreenCrush: Dominic Purcell Heat Wave",
+          "url": "https://screencrush.com/cw-the-flash-dominic-purcell-heat-wave-prison-break/"
+        },
+        {
+          "ad": "MovieWeb: Flash TV cast Heat Wave",
+          "url": "https://movieweb.com/flash-tv-cast-heat-wave-dominic-purcell/"
+        }
+      ],
+      "uyum": 1.0
+    },
+    {
+      "id": "prison-break-13",
+      "metin": "5. sezonun Yemen'de geçen sahneleri hangi ülkede çekildi?",
+      "secenekler": ["Fas", "Mısır", "Ürdün", "Tunus"],
+      "dogru": 0,
+      "zorluk": "orta",
+      "tur": "dunya",
+      "kaynaklar": [
+        {
+          "ad": "Wikipedia: Prison Break season 5",
+          "url": "https://en.wikipedia.org/wiki/Prison_Break_season_5"
+        },
+        {
+          "ad": "Morocco World News: Prison Break fifth season shot in Rabat, Casablanca, Ouarzazate",
+          "url": "https://www.moroccoworldnews.com/2017/06/98350/prison-break-fifth-season-shot-rabat-casablanca-ouarzazate/"
+        },
+        {
+          "ad": "Bladi.net: Prison Break tournage Maroc",
+          "url": "https://www.bladi.net/prison-break-tournage-maroc,44926.html"
+        },
+        {
+          "ad": "The Cinemaholic: Where was Prison Break filmed",
+          "url": "https://thecinemaholic.com/where-prison-break-filmed"
+        }
+      ],
+      "uyum": 1.0
+    },
+    {
+      "id": "prison-break-14",
+      "metin": "Prison Break dizisinin yaratıcısı kimdir?",
+      "secenekler": [
+        "Vince Gilligan",
+        "Joel Surnow",
+        "Damon Lindelof",
+        "Paul Scheuring"
+      ],
+      "dogru": 3,
+      "zorluk": "orta",
+      "tur": "dunya",
+      "kaynaklar": [
+        {
+          "ad": "Wikipedia: Prison Break",
+          "url": "https://en.wikipedia.org/wiki/Prison_Break"
+        },
+        {
+          "ad": "Movieplayer.it: Prison Break cast",
+          "url": "https://movieplayer.it/serietv/prison-break_55/cast/"
+        },
+        {
+          "ad": "TV Festival: 10 facts about Prison Break",
+          "url": "https://www.tvfestival.com/en/news/10-facts-about-prison-break/251"
+        },
+        {
+          "ad": "JoBlo: Cast and crew discuss the Odyssey-inspired revival",
+          "url": "https://www.joblo.com/cast-crew-discuss-the-odyssey-inspired-revival-of-prison-break-111/amp/"
+        }
+      ],
+      "uyum": 1.0
+    },
+    {
+      "id": "prison-break-15",
+      "metin": "Fox River'dan firar eden mahkûm grubu hangi adla anılır?",
+      "secenekler": [
+        "Fox River Altılısı",
+        "Fox River Sekizlisi",
+        "Chicago Yedilisi",
+        "Illinois Onlusu"
+      ],
+      "dogru": 1,
+      "zorluk": "orta",
+      "tur": "olay",
+      "kaynaklar": [
+        {
+          "ad": "Wikipedia: Prison Break",
+          "url": "https://en.wikipedia.org/wiki/Prison_Break"
+        },
+        {
+          "ad": "HeraldNet: In season two, Prison Break leaves jail in the dust",
+          "url": "https://www.heraldnet.com/2006/08/20/in-season-two-prison-break-leaves-jail-in-the-dust/"
+        },
+        {
+          "ad": "WhatCulture: Ranking the Fox River 8",
+          "url": "https://whatculture.com/tv/prison-break-ranking-the-fox-river-8"
+        },
+        {
+          "ad": "Critical Hits: Quem eram os oito de Fox River",
+          "url": "https://criticalhits.com.br/cinema-e-tv/prison-break-quem-eram-os-oito-de-fox-river/"
+        }
+      ],
+      "uyum": 1.0
+    },
+    {
+      "id": "prison-break-16",
+      "metin": "Michael, Müdür Pope'un eşine hediye edeceği hangi maketin yapımına yardım eder?",
+      "secenekler": [
+        "Eyfel Kulesi",
+        "Kolezyum",
+        "Tac Mahal",
+        "Özgürlük Heykeli"
+      ],
+      "dogru": 2,
+      "zorluk": "orta",
+      "tur": "olay",
+      "kaynaklar": [
+        {
+          "ad": "Wikipedia: Prison Break season 1",
+          "url": "https://en.wikipedia.org/wiki/Prison_Break_season_1"
+        },
+        {
+          "ad": "TVOvermind: Prison Break",
+          "url": "https://tvovermind.com/?p=325312"
+        },
+        {
+          "ad": "Cinefilos: I 15 più grandi personaggi di Prison Break",
+          "url": "https://www.cinefilos.it/photogallery/prison-break-i-15-piu-grandi-personaggi-in-ordine-di-importanza-639668"
+        },
+        {
+          "ad": "Prisonbr3ak: Warden Henry Pope",
+          "url": "https://prisonbr3ak.blogspot.com/2008/01/warden-henry-pope-season-1-for-his-40th.html"
+        }
+      ],
+      "uyum": 1.0
+    },
+    {
+      "id": "prison-break-17",
+      "metin": "Prison Break'in jenerik müziğini kim besteledi?",
+      "secenekler": [
+        "Hans Zimmer",
+        "Bear McCreary",
+        "Sean Callery",
+        "Ramin Djawadi"
+      ],
+      "dogru": 3,
+      "zorluk": "zor",
+      "tur": "dunya",
+      "kaynaklar": [
+        {
+          "ad": "Wikipedia: Prison Break",
+          "url": "https://en.wikipedia.org/wiki/Prison_Break"
+        },
+        {
+          "ad": "Television Academy: Prison Break",
+          "url": "https://www.televisionacademy.com/shows/prison-break"
+        },
+        {
+          "ad": "Filmmusic: Ramin Djawadi",
+          "url": "https://filmmusic.com/content/article/?id=253"
+        },
+        {
+          "ad": "Classic FM: Game of Thrones theme composer",
+          "url": "https://www.classicfm.com/discover-music/periods-genres/film-tv/game-of-thrones-theme-music-composer/"
+        }
+      ],
+      "uyum": 1.0
+    },
+    {
+      "id": "prison-break-18",
+      "metin": "Prison Break'in pilot bölümünü hangi yönetmen çekti?",
+      "secenekler": [
+        "Brett Ratner",
+        "J.J. Abrams",
+        "Michael Bay",
+        "David Fincher"
+      ],
+      "dogru": 0,
+      "zorluk": "zor",
+      "tur": "dunya",
+      "kaynaklar": [
+        {
+          "ad": "Wikipedia: Pilot (Prison Break)",
+          "url": "https://en.wikipedia.org/wiki/Pilot_(Prison_Break)"
+        },
+        {
+          "ad": "Honolulu Advertiser (2005)",
+          "url": "https://archives-new.honoluluadvertiser.com/article/2005/Aug/29/il/FP508290308.html"
+        },
+        {
+          "ad": "PTSnob: Greatest TV pilots, Prison Break",
+          "url": "https://www.ptsnob.com/2013/06/tv-greatest-tv-pilots-prison-break.html"
+        },
+        {
+          "ad": "TVmaze: Brett Ratner",
+          "url": "https://www.tvmaze.com/people/49054/brett-ratner"
+        }
+      ],
+      "uyum": 1.0
+    },
+    {
+      "id": "prison-break-19",
+      "metin": "Prison Break'in Rusya'da çekilen uyarlamasının adı nedir?",
+      "secenekler": ["Svoboda", "Pobeg", "Tyurma", "Zona"],
+      "dogru": 1,
+      "zorluk": "zor",
+      "tur": "dunya",
+      "kaynaklar": [
+        {
+          "ad": "Wikipedia: Prison Break",
+          "url": "https://en.wikipedia.org/wiki/Prison_Break"
+        },
+        {
+          "ad": "WhatCulture: 20 things you didn't know about Prison Break",
+          "url": "https://whatculture.com/tv/20-things-you-didnt-know-about-prison-break"
+        },
+        {
+          "ad": "Boss Hunting: Russian Prison Break remake",
+          "url": "https://www.bosshunting.com.au/entertainment/tv/russian-prison-break-remake/"
+        },
+        {
+          "ad": "Kino Mail.ru: Pobeg (Побег)",
+          "url": "https://kino.mail.ru/series_766277_pobeg/"
+        },
+        {
+          "ad": "Stuki-Druki: Pobeg (2010)",
+          "url": "https://stuki-druki.com/serial/pobeg-2010.php"
+        }
+      ],
+      "uyum": 1.0
+    },
+    {
+      "id": "prison-break-20",
+      "metin": "Paul Scheuring, 5. sezonu hangi destanın modern bir anlatımı olarak tanımladı?",
+      "secenekler": ["İlyada", "Gılgamış Destanı", "Aeneis", "Odysseia"],
+      "dogru": 3,
+      "zorluk": "zor",
+      "tur": "dunya",
+      "kaynaklar": [
+        {
+          "ad": "TVLine: Prison Break revival, modern retelling of The Odyssey",
+          "url": "https://www.tvline.com/2108497/prison-break-first-revival-modern-retelling-homer-the-odyssey"
+        },
+        {
+          "ad": "IBTimes UK: Season 5 trailer, Michael and Odysseus",
+          "url": "https://www.ibtimes.co.uk/prison-break-season-5-trailer-reveals-similarities-between-michael-greek-hero-odysseus-1605999"
+        },
+        {
+          "ad": "JoBlo: Cast and crew discuss the Odyssey-inspired revival",
+          "url": "https://www.joblo.com/cast-crew-discuss-the-odyssey-inspired-revival-of-prison-break-111/amp/"
+        },
+        {
+          "ad": "Redbrick: Archaising today's modern arts",
+          "url": "https://www.redbrick.me/archaising-todays-modern-arts/"
+        },
+        {
+          "ad": "WhatCulture: 20 things you didn't know about Prison Break",
+          "url": "https://whatculture.com/tv/20-things-you-didnt-know-about-prison-break"
+        }
+      ],
+      "uyum": 1.0
+    },
+    {
+      "id": "prison-break-21",
+      "metin": "2010 oyunu Prison Break: The Conspiracy'de oyuncunun yönettiği ana karakter kimdir?",
+      "secenekler": [
+        "Michael Scofield",
+        "Alexander Mahone",
+        "Tom Paxton",
+        "Lincoln Burrows"
+      ],
+      "dogru": 2,
+      "zorluk": "zor",
+      "tur": "dunya",
+      "kaynaklar": [
+        {
+          "ad": "Wikipedia: Prison Break",
+          "url": "https://en.wikipedia.org/wiki/Prison_Break"
+        },
+        {
+          "ad": "Impulse Gamer: Prison Break The Conspiracy",
+          "url": "https://www.impulsegamer.com/ps3/ps3prisonbreaktheconspiracy.htm"
+        },
+        {
+          "ad": "WorthPlaying: Prison Break The Conspiracy review",
+          "url": "https://worthplaying.com/article/2010/4/13/reviews/73632-ps3x360-review-prison-break-the-conspiracy/"
+        },
+        {
+          "ad": "ESRB: Prison Break The Conspiracy",
+          "url": "https://www.esrb.org/ratings/28419/prison-break-the-conspiracy/"
+        },
+        {
+          "ad": "LaunchBox Games Database: Prison Break The Conspiracy",
+          "url": "https://gamesdb.launchbox-app.com/games/details/15702"
+        }
+      ],
+      "uyum": 1.0
+    },
+    {
+      "id": "prison-break-22",
+      "metin": "Fox River mahkûmu Charles Westmoreland'in aslında hangi efsanevi kaçak olduğu ortaya çıkar?",
+      "secenekler": [
+        "John Dillinger",
+        "Frank Abagnale",
+        "D.B. Cooper",
+        "Al Capone"
+      ],
+      "dogru": 2,
+      "zorluk": "zor",
+      "tur": "olay",
+      "kaynaklar": [
+        {
+          "ad": "Wikipedia: Prison Break season 1",
+          "url": "https://en.wikipedia.org/wiki/Prison_Break_season_1"
+        },
+        {
+          "ad": "Deseret News: From prison to Tooele",
+          "url": "https://www.deseret.com/2006/5/15/19953295/from-prison-to-tooele/"
+        },
+        {
+          "ad": "Koimoi: Prison Break's saddest death and D.B. Cooper",
+          "url": "https://www.koimoi.com/television/prison-breaks-saddest-death-was-based-on-one-of-americas-greatest-unsolved-mysteries/"
+        },
+        {
+          "ad": "Slashfilm: Most memorable D.B. Cooper references",
+          "url": "https://www.slashfilm.com/929815/the-most-memorable-d-b-cooper-references-in-movies-and-tv/"
+        },
+        {
+          "ad": "Cinefilos: I 15 più grandi personaggi di Prison Break",
+          "url": "https://www.cinefilos.it/photogallery/prison-break-i-15-piu-grandi-personaggi-in-ordine-di-importanza-639668"
+        }
+      ],
+      "uyum": 1.0
+    },
+    {
+      "id": "prison-break-23",
+      "metin": "5. sezonda Michael, Yemen'deki Ogygia hapishanesinde hangi takma adla tanınır?",
+      "secenekler": [
+        "Kaniel Outis",
+        "Daniel Oates",
+        "Nikos Ortiz",
+        "Kane Otis"
+      ],
+      "dogru": 0,
+      "zorluk": "zor",
+      "tur": "olay",
+      "kaynaklar": [
+        {
+          "ad": "Wikipedia: Prison Break season 5",
+          "url": "https://en.wikipedia.org/wiki/Prison_Break_season_5"
+        },
+        {
+          "ad": "HollywoodLife: Prison Break premiere recap",
+          "url": "https://hollywoodlife.com/2017/04/04/prison-break-premiere-michael-alive-terrorist-ogygia-recap/"
+        },
+        {
+          "ad": "TVLine: Prison Break season 5 episode 2 recap",
+          "url": "https://www.tvline.com/recaps/prison-break-recap-season-5-episode-2-817605/"
+        },
+        {
+          "ad": "Redbrick: Archaising today's modern arts",
+          "url": "https://www.redbrick.me/archaising-todays-modern-arts/"
+        },
+        {
+          "ad": "Serienjunkies: Prison Break Kaniel Outis review",
+          "url": "https://www.serienjunkies.de/news/redaktion/prison-break-kaniel-outis-review-92633032.html"
+        }
+      ],
+      "uyum": 1.0
+    },
+    {
+      "id": "prison-break-24",
+      "metin": "4. sezonda ekip, Şirket'in elinden hangi gizli veri kaynağını almaya çalışır?",
+      "secenekler": ["Fibonacci", "Pandora", "Ogygia", "Scylla"],
+      "dogru": 3,
+      "zorluk": "zor",
+      "tur": "olay",
+      "kaynaklar": [
+        {
+          "ad": "Wikipedia: Prison Break",
+          "url": "https://en.wikipedia.org/wiki/Prison_Break"
+        },
+        {
+          "ad": "PopMatters: Prison Break Season 4",
+          "url": "https://popmatters.com/109949-prison-break-season-4-2496071955.html"
+        },
+        {
+          "ad": "Doux Reviews: Prison Break season four",
+          "url": "https://www.douxreviews.com/2016/05/prison-break-season-four.html?m=1"
+        },
+        {
+          "ad": "DVDfever: Prison Break Season 4",
+          "url": "https://dvd-fever.co.uk/dopb4o"
+        }
+      ],
+      "uyum": 1.0
+    }
+  ]
+}

@@ -11,9 +11,6 @@
 //       ağdan DENETLENMEZ (CI çevrimdışı çalışır)
 import { readdirSync, readFileSync } from 'node:fs';
 import { describe, expect, it } from 'vitest';
-import { BEKLEYEN } from '../kabul';
-
-const kabulIcerik = BEKLEYEN.quizIcerik ? it.fails : it;
 
 type Zorluk = 'kolay' | 'orta' | 'zor';
 type Soru = {
@@ -291,27 +288,20 @@ describe('KK-117: Faz 1 içerik kümesi', () => {
         ) as Paket,
     );
 
-  kabulIcerik(
-    'KK-117: en az 3 paket; en az biri tr, en az biri yabanci; hepsi geçerli',
-    async () => {
-      const { quizHatalari } = await yukle();
-      const paketler = oku();
-      expect(paketler.length).toBeGreaterThanOrEqual(3);
-      expect(paketler.some((p) => p.koken === 'tr')).toBe(true);
-      expect(paketler.some((p) => p.koken === 'yabanci')).toBe(true);
-      for (const p of paketler) expect(quizHatalari(p)).toEqual([]);
-      expect(new Set(paketler.map((p) => p.id)).size).toBe(paketler.length);
-    },
-  );
+  it('KK-117: en az 3 paket; en az biri tr, en az biri yabanci; hepsi geçerli', async () => {
+    const { quizHatalari } = await yukle();
+    const paketler = oku();
+    expect(paketler.length).toBeGreaterThanOrEqual(3);
+    expect(paketler.some((p) => p.koken === 'tr')).toBe(true);
+    expect(paketler.some((p) => p.koken === 'yabanci')).toBe(true);
+    for (const p of paketler) expect(quizHatalari(p)).toEqual([]);
+    expect(new Set(paketler.map((p) => p.id)).size).toBe(paketler.length);
+  });
 
-  kabulIcerik(
-    'KK-117: örnek/test paketi content/quiz altında yok (uygulamada görünmesin)',
-    () => {
-      expect(dosyalar().length).toBeGreaterThan(0); // klasör ve paketler var
-      for (const p of oku())
-        expect(p.id).not.toMatch(/ornek|örnek|test|deneme/i);
-      for (const f of dosyalar())
-        expect(f).not.toMatch(/ornek|örnek|test|deneme/i);
-    },
-  );
+  it('KK-117: örnek/test paketi content/quiz altında yok (uygulamada görünmesin)', () => {
+    expect(dosyalar().length).toBeGreaterThan(0); // klasör ve paketler var
+    for (const p of oku()) expect(p.id).not.toMatch(/ornek|örnek|test|deneme/i);
+    for (const f of dosyalar())
+      expect(f).not.toMatch(/ornek|örnek|test|deneme/i);
+  });
 });
