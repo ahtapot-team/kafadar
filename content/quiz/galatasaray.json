@@ -1,0 +1,765 @@
+{
+  "id": "galatasaray",
+  "ad": "Galatasaray",
+  "baslik": "Ne kadar Galatasaraylısın?",
+  "emoji": "⚽",
+  "kategori": "spor",
+  "unvanlar": [
+    "Mekteb-i Sultani'ye yeni yazıldın, Ali Sami Yen bekliyor",
+    "Ali Sami Yen tribünündesin, Taçsız Kral'ı izliyorsun",
+    "Kopenhag'da penaltı sırası sende, Taffarel arkanda",
+    "Avrupa'yı fetheden aslan; Kopenhag'dan Monako'ya oradaydın"
+  ],
+  "sorular": [
+    {
+      "id": "galatasaray-01",
+      "metin": "Galatasaray hangi yıl kuruldu?",
+      "secenekler": ["1903", "1905", "1907", "1909"],
+      "dogru": 1,
+      "zorluk": "kolay",
+      "tur": "dunya",
+      "kaynaklar": [
+        {
+          "ad": "Vikipedi: Galatasaray (futbol takımı)",
+          "url": "https://tr.wikipedia.org/wiki/Galatasaray_(futbol_takımı)"
+        },
+        {
+          "ad": "Wikipedia (EN): Galatasaray S.K. (football)",
+          "url": "https://en.wikipedia.org/wiki/Galatasaray_S.K._(football)"
+        },
+        {
+          "ad": "Kürê Ansiklopedi: Galatasaray Spor Kulübü",
+          "url": "https://kureansiklopedi.com/tr/detay/galatasaray-spor-kulubu-ccb95"
+        },
+        {
+          "ad": "Galatasaray SK: Galatasaray Nasıl Kuruldu",
+          "url": "https://www.galatasaray.org/s/galatasaray-nasil-kuruldu/13"
+        },
+        {
+          "ad": "beIN SPORTS: Türk sporunun sarı-kırmızılı çınarı Galatasaray 120 yaşında",
+          "url": "https://beinsports.com.tr/haber/turk-sporunun-sari-kirmizili-cinari-galatasaray-120-yasinda"
+        }
+      ],
+      "uyum": 1.0
+    },
+    {
+      "id": "galatasaray-02",
+      "metin": "Galatasaray'ı okul arkadaşlarıyla birlikte kuran isim kimdir?",
+      "secenekler": [
+        "Ali Sami Yen",
+        "Metin Oktay",
+        "Bülent Korkmaz",
+        "Cevad Prekazi"
+      ],
+      "dogru": 0,
+      "zorluk": "kolay",
+      "tur": "dunya",
+      "kaynaklar": [
+        {
+          "ad": "Vikipedi: Galatasaray (futbol takımı)",
+          "url": "https://tr.wikipedia.org/wiki/Galatasaray_(futbol_takımı)"
+        },
+        {
+          "ad": "Wikipedia (EN): Galatasaray S.K. (football)",
+          "url": "https://en.wikipedia.org/wiki/Galatasaray_S.K._(football)"
+        },
+        {
+          "ad": "Kürê Ansiklopedi: Galatasaray Spor Kulübü",
+          "url": "https://kureansiklopedi.com/tr/detay/galatasaray-spor-kulubu-ccb95"
+        },
+        {
+          "ad": "Galatasaray SK: Galatasaray Nasıl Kuruldu",
+          "url": "https://www.galatasaray.org/s/galatasaray-nasil-kuruldu/13"
+        },
+        {
+          "ad": "beIN SPORTS: Türk sporunun sarı-kırmızılı çınarı Galatasaray 120 yaşında",
+          "url": "https://beinsports.com.tr/haber/turk-sporunun-sari-kirmizili-cinari-galatasaray-120-yasinda"
+        }
+      ],
+      "uyum": 1.0
+    },
+    {
+      "id": "galatasaray-03",
+      "metin": "Galatasaray Spor Kulübü hangi okulda kuruldu?",
+      "secenekler": [
+        "Kabataş Erkek Lisesi",
+        "İstanbul Erkek Lisesi",
+        "Galatasaray Lisesi",
+        "Vefa Lisesi"
+      ],
+      "dogru": 2,
+      "zorluk": "kolay",
+      "tur": "dunya",
+      "kaynaklar": [
+        {
+          "ad": "Vikipedi: Galatasaray (futbol takımı)",
+          "url": "https://tr.wikipedia.org/wiki/Galatasaray_(futbol_takımı)"
+        },
+        {
+          "ad": "Wikipedia (EN): Galatasaray High School",
+          "url": "https://en.wikipedia.org/wiki/Galatasaray_High_School"
+        },
+        {
+          "ad": "Kürê Ansiklopedi: Galatasaray Spor Kulübü",
+          "url": "https://kureansiklopedi.com/tr/detay/galatasaray-spor-kulubu-ccb95"
+        },
+        {
+          "ad": "Galatasaray SK: Galatasaray Nasıl Kuruldu",
+          "url": "https://www.galatasaray.org/s/galatasaray-nasil-kuruldu/13"
+        },
+        {
+          "ad": "beIN SPORTS: Türk sporunun sarı-kırmızılı çınarı Galatasaray 120 yaşında",
+          "url": "https://beinsports.com.tr/haber/turk-sporunun-sari-kirmizili-cinari-galatasaray-120-yasinda"
+        }
+      ],
+      "uyum": 1.0
+    },
+    {
+      "id": "galatasaray-04",
+      "metin": "Galatasaray'ın renkleri hangileridir?",
+      "secenekler": [
+        "Sarı-lacivert",
+        "Yeşil-beyaz",
+        "Bordo-mavi",
+        "Sarı-kırmızı"
+      ],
+      "dogru": 3,
+      "zorluk": "kolay",
+      "tur": "dunya",
+      "kaynaklar": [
+        {
+          "ad": "Vikipedi: Galatasaray (futbol takımı)",
+          "url": "https://tr.wikipedia.org/wiki/Galatasaray_(futbol_takımı)"
+        },
+        {
+          "ad": "Wikipedia (EN): Galatasaray S.K. (football)",
+          "url": "https://en.wikipedia.org/wiki/Galatasaray_S.K._(football)"
+        },
+        {
+          "ad": "Kürê Ansiklopedi: Galatasaray Spor Kulübü",
+          "url": "https://kureansiklopedi.com/tr/detay/galatasaray-spor-kulubu-ccb95"
+        },
+        {
+          "ad": "Galatasaray SK: Künye",
+          "url": "https://www.galatasaray.org/s/renklerin-oykusu/14"
+        },
+        {
+          "ad": "beIN SPORTS: Türk sporunun sarı-kırmızılı çınarı Galatasaray 120 yaşında",
+          "url": "https://beinsports.com.tr/haber/turk-sporunun-sari-kirmizili-cinari-galatasaray-120-yasinda"
+        }
+      ],
+      "uyum": 1.0
+    },
+    {
+      "id": "galatasaray-05",
+      "metin": "Galatasaray için en sık kullanılan lakaplardan biri hangisidir?",
+      "secenekler": ["Cimbom", "Kanarya", "Kartal", "Fırtına"],
+      "dogru": 0,
+      "zorluk": "kolay",
+      "tur": "dunya",
+      "kaynaklar": [
+        {
+          "ad": "Vikipedi: Galatasaray (futbol takımı)",
+          "url": "https://tr.wikipedia.org/wiki/Galatasaray_(futbol_takımı)"
+        },
+        {
+          "ad": "Wikipedia (EN): Galatasaray S.K. (football)",
+          "url": "https://en.wikipedia.org/wiki/Galatasaray_S.K._(football)"
+        },
+        {
+          "ad": "Kürê Ansiklopedi: Galatasaray Spor Kulübü",
+          "url": "https://kureansiklopedi.com/tr/detay/galatasaray-spor-kulubu-ccb95"
+        },
+        {
+          "ad": "Sporx: Cim Bom'u yaratanlar yıkıldı, çöktü!",
+          "url": "https://www.sporx.com/cim-bomu-yaratanlar-yikildi-coktu-SXHBQ270753SXQ"
+        }
+      ],
+      "uyum": 1.0
+    },
+    {
+      "id": "galatasaray-06",
+      "metin": "Galatasaray UEFA Kupası'nı hangi yıl kazandı?",
+      "secenekler": ["1998", "2000", "2002", "2004"],
+      "dogru": 1,
+      "zorluk": "kolay",
+      "tur": "dunya",
+      "kaynaklar": [
+        {
+          "ad": "Vikipedi: Galatasaray (futbol takımı)",
+          "url": "https://tr.wikipedia.org/wiki/Galatasaray_(futbol_takımı)"
+        },
+        {
+          "ad": "Wikipedia (EN): 2000 UEFA Cup final",
+          "url": "https://en.wikipedia.org/wiki/2000_UEFA_Cup_final"
+        },
+        {
+          "ad": "Kürê Ansiklopedi: Galatasaray Spor Kulübü",
+          "url": "https://kureansiklopedi.com/tr/detay/galatasaray-spor-kulubu-ccb95"
+        },
+        {
+          "ad": "UEFA: 1999/2000: Galatasaray the pride of Turkey",
+          "url": "https://www.uefa.com/uefaeuropaleague/news/016e-0e6a3091ff2c-b6d02ad6a643-1000"
+        },
+        {
+          "ad": "Fanatik: Tarihte bugün! UEFA zaferinin 19. yılı",
+          "url": "https://www.fanatik.com.tr/galatasaray/tarihte-bugun-uefa-zaferinin-19-yili-2064071"
+        }
+      ],
+      "uyum": 1.0
+    },
+    {
+      "id": "galatasaray-07",
+      "metin": "Galatasaray 2000 UEFA Kupası finalinde hangi takımı yendi?",
+      "secenekler": ["Liverpool", "Chelsea", "Tottenham", "Arsenal"],
+      "dogru": 3,
+      "zorluk": "kolay",
+      "tur": "dunya",
+      "kaynaklar": [
+        {
+          "ad": "Wikipedia (EN): 2000 UEFA Cup final",
+          "url": "https://en.wikipedia.org/wiki/2000_UEFA_Cup_final"
+        },
+        {
+          "ad": "Kürê Ansiklopedi: Galatasaray Spor Kulübü'nün 2000 UEFA Kupası Zaferi",
+          "url": "https://kureansiklopedi.com/tr/detay/galatasaray-spor-kulubunun-2000-uefa-kupasi-zaferi"
+        },
+        {
+          "ad": "UEFA: 1999/2000: Galatasaray the pride of Turkey",
+          "url": "https://www.uefa.com/uefaeuropaleague/news/016e-0e6a3091ff2c-b6d02ad6a643-1000"
+        },
+        {
+          "ad": "Fanatik: Tarihte bugün! UEFA zaferinin 19. yılı",
+          "url": "https://www.fanatik.com.tr/galatasaray/tarihte-bugun-uefa-zaferinin-19-yili-2064071"
+        },
+        {
+          "ad": "RTÉ: Soccer: Arsenal lose to Galatasaray in UEFA Cup Final",
+          "url": "https://www.rte.ie/sport/soccer/2000/0517/149442-euro1"
+        }
+      ],
+      "uyum": 1.0
+    },
+    {
+      "id": "galatasaray-08",
+      "metin": "2000'de UEFA Kupası'nı kazanan Galatasaray'ın teknik direktörü kimdi?",
+      "secenekler": [
+        "Mustafa Denizli",
+        "Mircea Lucescu",
+        "Fatih Terim",
+        "Jupp Derwall"
+      ],
+      "dogru": 2,
+      "zorluk": "kolay",
+      "tur": "dunya",
+      "kaynaklar": [
+        {
+          "ad": "Wikipedia (EN): 2000 UEFA Cup final",
+          "url": "https://en.wikipedia.org/wiki/2000_UEFA_Cup_final"
+        },
+        {
+          "ad": "Vikipedi: 2000 UEFA Kupası finali",
+          "url": "https://tr.wikipedia.org/wiki/2000_UEFA_Kupası_Finali"
+        },
+        {
+          "ad": "Kürê Ansiklopedi: Galatasaray Spor Kulübü'nün 2000 UEFA Kupası Zaferi",
+          "url": "https://kureansiklopedi.com/tr/detay/galatasaray-spor-kulubunun-2000-uefa-kupasi-zaferi"
+        },
+        {
+          "ad": "UEFA: 1999/2000: Galatasaray the pride of Turkey",
+          "url": "https://www.uefa.com/uefaeuropaleague/news/016e-0e6a3091ff2c-b6d02ad6a643-1000"
+        },
+        {
+          "ad": "beIN SPORTS: Türk sporunun sarı-kırmızılı çınarı Galatasaray 120 yaşında",
+          "url": "https://beinsports.com.tr/haber/turk-sporunun-sari-kirmizili-cinari-galatasaray-120-yasinda"
+        }
+      ],
+      "uyum": 1.0
+    },
+    {
+      "id": "galatasaray-09",
+      "metin": "2000 UEFA Kupası finali hangi şehirde oynandı?",
+      "secenekler": ["Stockholm", "Amsterdam", "Kopenhag", "Brüksel"],
+      "dogru": 2,
+      "zorluk": "orta",
+      "tur": "dunya",
+      "kaynaklar": [
+        {
+          "ad": "Wikipedia (EN): 2000 UEFA Cup final",
+          "url": "https://en.wikipedia.org/wiki/2000_UEFA_Cup_final"
+        },
+        {
+          "ad": "Vikipedi: 2000 UEFA Kupası finali",
+          "url": "https://tr.wikipedia.org/wiki/2000_UEFA_Kupası_Finali"
+        },
+        {
+          "ad": "Kürê Ansiklopedi: Galatasaray Spor Kulübü'nün 2000 UEFA Kupası Zaferi",
+          "url": "https://kureansiklopedi.com/tr/detay/galatasaray-spor-kulubunun-2000-uefa-kupasi-zaferi"
+        },
+        {
+          "ad": "UEFA: 1999/2000: Galatasaray the pride of Turkey",
+          "url": "https://www.uefa.com/uefaeuropaleague/news/016e-0e6a3091ff2c-b6d02ad6a643-1000"
+        },
+        {
+          "ad": "Fanatik: Tarihte bugün! UEFA zaferinin 19. yılı",
+          "url": "https://www.fanatik.com.tr/galatasaray/tarihte-bugun-uefa-zaferinin-19-yili-2064071"
+        }
+      ],
+      "uyum": 1.0
+    },
+    {
+      "id": "galatasaray-10",
+      "metin": "2000 UEFA Kupası finalinde Galatasaray'a kupayı getiren son penaltıyı kim attı?",
+      "secenekler": [
+        "Gheorghe Popescu",
+        "Gheorghe Hagi",
+        "Ergün Penbe",
+        "Ümit Davala"
+      ],
+      "dogru": 0,
+      "zorluk": "orta",
+      "tur": "dunya",
+      "kaynaklar": [
+        {
+          "ad": "Wikipedia (EN): 2000 UEFA Cup final",
+          "url": "https://en.wikipedia.org/wiki/2000_UEFA_Cup_final"
+        },
+        {
+          "ad": "Vikipedi: 2000 UEFA Kupası finali",
+          "url": "https://tr.wikipedia.org/wiki/2000_UEFA_Kupası_Finali"
+        },
+        {
+          "ad": "UEFA: Galatasaray's greatest European nights",
+          "url": "https://www.uefa.com/uefaeuropaleague/news/022a-0e955df4b0ba-c88c45dd5431-1000--galatasaray-s-greatest-european-nights"
+        },
+        {
+          "ad": "Fanatik: Tarihte bugün! UEFA zaferinin 19. yılı",
+          "url": "https://www.fanatik.com.tr/galatasaray/tarihte-bugun-uefa-zaferinin-19-yili-2064071"
+        },
+        {
+          "ad": "RTÉ: Soccer: Arsenal lose to Galatasaray in UEFA Cup Final",
+          "url": "https://www.rte.ie/sport/soccer/2000/0517/149442-euro1"
+        }
+      ],
+      "uyum": 1.0
+    },
+    {
+      "id": "galatasaray-11",
+      "metin": "2000 UEFA Kupası finalinde Galatasaray kalesini koruyan Brezilyalı kaleci kimdi?",
+      "secenekler": [
+        "Dida",
+        "Júlio César",
+        "Faryd Mondragón",
+        "Cláudio Taffarel"
+      ],
+      "dogru": 3,
+      "zorluk": "orta",
+      "tur": "dunya",
+      "kaynaklar": [
+        {
+          "ad": "Wikipedia (EN): 2000 UEFA Cup final",
+          "url": "https://en.wikipedia.org/wiki/2000_UEFA_Cup_final"
+        },
+        {
+          "ad": "Vikipedi: 2000 UEFA Kupası finali",
+          "url": "https://tr.wikipedia.org/wiki/2000_UEFA_Kupası_Finali"
+        },
+        {
+          "ad": "Kürê Ansiklopedi: Galatasaray Spor Kulübü'nün 2000 UEFA Kupası Zaferi",
+          "url": "https://kureansiklopedi.com/tr/detay/galatasaray-spor-kulubunun-2000-uefa-kupasi-zaferi"
+        },
+        {
+          "ad": "Anadolu Ajansı: Brazilian legend lauds Galatasaray 2000 as 'great team'",
+          "url": "https://aa.com.tr/en/sports/brazilian-legend-lauds-galatasaray-2000-as-great-team/1953189"
+        }
+      ],
+      "uyum": 1.0
+    },
+    {
+      "id": "galatasaray-12",
+      "metin": "2000 UEFA Süper Kupası'nda Real Madrid'e iki gol atıp kupayı altın golle getiren golcü kimdir?",
+      "secenekler": [
+        "Arif Erdem",
+        "Mário Jardel",
+        "Gheorghe Hagi",
+        "Ümit Davala"
+      ],
+      "dogru": 1,
+      "zorluk": "orta",
+      "tur": "dunya",
+      "kaynaklar": [
+        {
+          "ad": "Wikipedia (EN): 2000 UEFA Super Cup",
+          "url": "https://en.wikipedia.org/wiki/2000_UEFA_Super_Cup"
+        },
+        {
+          "ad": "Vikipedi: 2000 UEFA Süper Kupası",
+          "url": "https://tr.wikipedia.org/wiki/2000_UEFA_Süper_Kupası"
+        },
+        {
+          "ad": "UEFA: 2000 Super Cup: Jardel doubles up for Galatasaray",
+          "url": "https://www.uefa.com/uefasupercup/news/0250-0c50f17834ea-0281ce4ac370-1000--2000-super-cup-jardel-doubles-up-for-galatasaray/"
+        },
+        {
+          "ad": "Habertürk: Galatasaray Süper Kupayı Aldı",
+          "url": "https://www.haberturk.com/galatasaray-super-kupayi-aldi-983381"
+        }
+      ],
+      "uyum": 1.0
+    },
+    {
+      "id": "galatasaray-13",
+      "metin": "Galatasaray, 1996–97 sezonundan başlayarak üst üste kaç kez lig şampiyonu oldu?",
+      "secenekler": ["2", "3", "4", "5"],
+      "dogru": 2,
+      "zorluk": "orta",
+      "tur": "dunya",
+      "kaynaklar": [
+        {
+          "ad": "Wikipedia (EN): List of Turkish football champions",
+          "url": "https://en.wikipedia.org/wiki/List_of_Turkish_football_champions"
+        },
+        {
+          "ad": "Vikipedi: Fatih Terim",
+          "url": "https://tr.wikipedia.org/wiki/Fatih_Terim"
+        },
+        {
+          "ad": "Gazete Vatan: Fatih Terim kimdir? Fatih Terim Galatasaray kariyeri",
+          "url": "https://www.gazetevatan.com/gundem/fatih-terim-kimdir-fatih-terim-galatasaray-kariyeri-1128701"
+        },
+        {
+          "ad": "Sporx: Fatih Terim rekorun eşiğinde",
+          "url": "https://www.sporx.com/fatih-terim-rekorun-esiginde-SXHBQ279589SXQ"
+        }
+      ],
+      "uyum": 1.0
+    },
+    {
+      "id": "galatasaray-14",
+      "metin": "Galatasaray efsanesi Metin Oktay hangi lakapla anılır?",
+      "secenekler": ["Taçsız Kral", "Kara Şimşek", "Altın Ayak", "Sarı Kartal"],
+      "dogru": 0,
+      "zorluk": "orta",
+      "tur": "dunya",
+      "kaynaklar": [
+        {
+          "ad": "Vikipedi: Metin Oktay",
+          "url": "https://tr.wikipedia.org/wiki/Metin_Oktay"
+        },
+        {
+          "ad": "Kürê Ansiklopedi: Metin Oktay",
+          "url": "https://kureansiklopedi.com/tr/detay/metin-oktay-70d8b"
+        },
+        {
+          "ad": "Milliyet: 'Taçsız Kral' kimdir? Kaç yaşında vefat etti?",
+          "url": "https://www.milliyet.com.tr/skorer/metin-oktay-olum-yil-donumunde-aniliyor-tacsiz-kral-kimdir-kac-yasinda-vefat-etti-6033041"
+        },
+        {
+          "ad": "A Spor: \"Taçsız Kral\" Metin Oktay vefatının 32. yılında anıldı",
+          "url": "https://www.aspor.com.tr/galatasaray/2023/09/13/galatasaray-haberleri-tacsiz-kral-metin-oktay-vefatinin-32-yilinda-anildi/amp"
+        },
+        {
+          "ad": "Fanatik: Süper Lig'in 'kral' golcüleri",
+          "url": "https://www.fanatik.com.tr/super-ligin-kral-golculeri-2082091"
+        }
+      ],
+      "uyum": 1.0
+    },
+    {
+      "id": "galatasaray-15",
+      "metin": "Galatasaray'ın efsanevi eski evi Ali Sami Yen Stadı İstanbul'un hangi semtindeydi?",
+      "secenekler": ["Bakırköy", "Mecidiyeköy", "Fatih", "Üsküdar"],
+      "dogru": 1,
+      "zorluk": "orta",
+      "tur": "dunya",
+      "kaynaklar": [
+        {
+          "ad": "Vikipedi: Ali Sami Yen Stadyumu",
+          "url": "https://tr.wikipedia.org/wiki/Ali_Sami_Yen_Stadyumu"
+        },
+        {
+          "ad": "Wikipedia (EN): Ali Sami Yen Stadium",
+          "url": "https://en.wikipedia.org/wiki/Ali_Sami_Yen_Stadium"
+        },
+        {
+          "ad": "Kürê Ansiklopedi: Galatasaray Spor Kulübü",
+          "url": "https://kureansiklopedi.com/tr/detay/galatasaray-spor-kulubu-ccb95"
+        },
+        {
+          "ad": "Istanbul.com: Galatasaray SK Stadyumu",
+          "url": "https://istanbul.com/tr/blog/galatasaray-sk-stadium"
+        }
+      ],
+      "uyum": 1.0
+    },
+    {
+      "id": "galatasaray-16",
+      "metin": "Galatasaray, ilk kez düzenlenen Türkiye Kupası'nı kazandı. Bu hangi sezondu?",
+      "secenekler": ["1950–51", "1954–55", "1959–60", "1962–63"],
+      "dogru": 3,
+      "zorluk": "orta",
+      "tur": "dunya",
+      "kaynaklar": [
+        {
+          "ad": "Vikipedi: Türkiye Kupası",
+          "url": "https://tr.wikipedia.org/wiki/Türkiye_Kupası"
+        },
+        {
+          "ad": "Wikipedia (EN): 1962–63 in Turkish football",
+          "url": "https://en.wikipedia.org/wiki/1962–63_in_Turkish_football"
+        },
+        {
+          "ad": "Fanatik: Türkiye Kupası'nı en çok hangi takım aldı, en çok finali kim oynadı?",
+          "url": "https://www.fanatik.com.tr/futbol/turkiye-kupasini-en-cok-hangi-takim-aldi-en-cok-finali-kim-oynadi-2161289"
+        },
+        {
+          "ad": "Milliyet: Türkiye Kupası'nı ilk kazanan takım hangisidir? Türkiye Kupası tarihçesi",
+          "url": "https://www.milliyet.com.tr/molatik/spor/turkiye-kupasini-ilk-kazanan-takim-hangisidir-turkiye-kupasi-tarihcesi-81818"
+        }
+      ],
+      "uyum": 1.0
+    },
+    {
+      "id": "galatasaray-17",
+      "metin": "Kulübe \"Galatasaray\" adı konmadan önce önerilen isimlerden biri hangisidir?",
+      "secenekler": ["Victoria", "Fortuna", "Aurora", "Gloria"],
+      "dogru": 3,
+      "zorluk": "zor",
+      "tur": "dunya",
+      "kaynaklar": [
+        {
+          "ad": "Vikipedi: Galatasaray (futbol takımı)",
+          "url": "https://tr.wikipedia.org/wiki/Galatasaray_(futbol_takımı)"
+        },
+        {
+          "ad": "Wikipedia (EN): Galatasaray S.K. (football)",
+          "url": "https://en.wikipedia.org/wiki/Galatasaray_S.K._(football)"
+        },
+        {
+          "ad": "Galatasaray SK: Galatasaray Nasıl Kuruldu",
+          "url": "https://www.galatasaray.org/s/galatasaray-nasil-kuruldu/13"
+        },
+        {
+          "ad": "beIN SPORTS: Türk sporunun sarı-kırmızılı çınarı Galatasaray 120 yaşında",
+          "url": "https://beinsports.com.tr/haber/turk-sporunun-sari-kirmizili-cinari-galatasaray-120-yasinda"
+        }
+      ],
+      "uyum": 1.0
+    },
+    {
+      "id": "galatasaray-18",
+      "metin": "Galatasaray tarihindeki ilk maçını hangi skorla kazandı?",
+      "secenekler": ["1-0", "2-0", "3-1", "4-2"],
+      "dogru": 1,
+      "zorluk": "zor",
+      "tur": "dunya",
+      "kaynaklar": [
+        {
+          "ad": "Vikipedi: Galatasaray (futbol takımı)",
+          "url": "https://tr.wikipedia.org/wiki/Galatasaray_(futbol_takımı)"
+        },
+        {
+          "ad": "Wikipedia (EN): Galatasaray S.K. (football)",
+          "url": "https://en.wikipedia.org/wiki/Galatasaray_S.K._(football)"
+        },
+        {
+          "ad": "Kürê Ansiklopedi: Galatasaray Spor Kulübü",
+          "url": "https://kureansiklopedi.com/tr/detay/galatasaray-spor-kulubu-ccb95"
+        },
+        {
+          "ad": "Galatasaray SK: Galatasaray Nasıl Kuruldu",
+          "url": "https://www.galatasaray.org/s/galatasaray-nasil-kuruldu/13"
+        },
+        {
+          "ad": "beIN SPORTS: Türk sporunun sarı-kırmızılı çınarı Galatasaray 120 yaşında",
+          "url": "https://beinsports.com.tr/haber/turk-sporunun-sari-kirmizili-cinari-galatasaray-120-yasinda"
+        }
+      ],
+      "uyum": 1.0
+    },
+    {
+      "id": "galatasaray-19",
+      "metin": "Galatasaray'da hem golcü hem teknik direktör olarak efsaneleşen \"Baba\" lakaplı isim kimdir?",
+      "secenekler": [
+        "Gündüz Kılıç",
+        "Metin Oktay",
+        "Turgay Şeren",
+        "Tanju Çolak"
+      ],
+      "dogru": 0,
+      "zorluk": "zor",
+      "tur": "dunya",
+      "kaynaklar": [
+        {
+          "ad": "Vikipedi: Gündüz Kılıç",
+          "url": "https://tr.wikipedia.org/wiki/Gündüz_Kılıç"
+        },
+        {
+          "ad": "Wikipedia (EN): Gündüz Kılıç",
+          "url": "https://en.wikipedia.org/wiki/Gündüz_Kılıç"
+        },
+        {
+          "ad": "Fanatik: Galatasaray, \"Baba Gündüz\"ü unutmadı! Gündüz Kılıç kimdir?",
+          "url": "https://www.fanatik.com.tr/galatasaray/galatasaray-baba-gunduzu-unutmadi-gunduz-kilic-kimdir-2144425"
+        },
+        {
+          "ad": "beIN SPORTS: Galatasaray, Baba Gündüz'ü andı",
+          "url": "https://beinsports.com.tr/haber/galatasaray-baba-gunduzu-andi-2"
+        }
+      ],
+      "uyum": 1.0
+    },
+    {
+      "id": "galatasaray-20",
+      "metin": "Efsane kaleci Turgay Şeren, 1951'de Berlin'de oynanan maçtaki kurtarışlarından sonra hangi lakabı aldı?",
+      "secenekler": [
+        "Berlin Kartalı",
+        "Ren Aslanı",
+        "Berlin Panteri",
+        "Kuzey Kaplanı"
+      ],
+      "dogru": 2,
+      "zorluk": "zor",
+      "tur": "dunya",
+      "kaynaklar": [
+        {
+          "ad": "Vikipedi: Turgay Şeren",
+          "url": "https://tr.wikipedia.org/wiki/Turgay_Şeren"
+        },
+        {
+          "ad": "Wikipedia (EN): Galatasaray S.K. (football)",
+          "url": "https://en.wikipedia.org/wiki/Galatasaray_S.K._(football)"
+        },
+        {
+          "ad": "NTV: Turgay Şeren hayatını kaybetti",
+          "url": "https://www.ntv.com.tr/spor/turgay-seren-hayatini-kaybetti,NsUz0rbwAUSFN1mYRdOH5Q"
+        },
+        {
+          "ad": "Fanatik: Berlin Panteri Turgay Şeren, vefatının 5. yıl dönümünde anılıyor",
+          "url": "https://www.fanatik.com.tr/galatasaray/berlin-panteri-turgay-seren-vefatinin-5-yil-donumunde-aniliyor-2230082"
+        }
+      ],
+      "uyum": 1.0
+    },
+    {
+      "id": "galatasaray-21",
+      "metin": "1987–88 sezonunda 39 lig golüyle Avrupa Altın Ayakkabı'yı kazanan Galatasaraylı golcü kimdir?",
+      "secenekler": [
+        "Uğur Tütüneker",
+        "Metin Oktay",
+        "Cüneyt Tanman",
+        "Tanju Çolak"
+      ],
+      "dogru": 3,
+      "zorluk": "zor",
+      "tur": "dunya",
+      "kaynaklar": [
+        {
+          "ad": "Wikipedia (EN): European Golden Shoe",
+          "url": "https://en.wikipedia.org/wiki/European_Golden_Shoe"
+        },
+        {
+          "ad": "Vikipedi: Tanju Çolak",
+          "url": "https://tr.wikipedia.org/wiki/Tanju_Çolak"
+        },
+        {
+          "ad": "These Football Times: Tanju Çolak: the controversial Turkish star who won the European Golden Shoe",
+          "url": "https://thesefootballtimes.co/2018/09/07/tanju-colak-the-controversial-turkish-star-who-won-the-european-golden-shoe-and-scored-116-in-124-for-galatasaray/"
+        },
+        {
+          "ad": "Guinness World Records: Most goals by a football (soccer) player in a single season of the Turkish Süper Lig",
+          "url": "https://www.guinnessworldrecords.com/world-records/479325-most-goals-by-a-football-soccer-player-in-a-single-season-of-the-turkish-super"
+        }
+      ],
+      "uyum": 1.0
+    },
+    {
+      "id": "galatasaray-22",
+      "metin": "1988–89'da ilk maçı deplasmanda 3-0 kaybeden Galatasaray, Neuchâtel Xamax'ı İstanbul'da kaç kaç yendi?",
+      "secenekler": ["4-0", "4-1", "5-0", "6-1"],
+      "dogru": 2,
+      "zorluk": "zor",
+      "tur": "dunya",
+      "kaynaklar": [
+        {
+          "ad": "Vikipedi: Galatasaray (futbol takımı)",
+          "url": "https://tr.wikipedia.org/wiki/Galatasaray_(futbol_takımı)"
+        },
+        {
+          "ad": "Wikipedia (EN): 1988–89 European Cup",
+          "url": "https://en.wikipedia.org/wiki/1988–89_European_Cup"
+        },
+        {
+          "ad": "UEFA: Galatasaray's greatest European nights",
+          "url": "https://www.uefa.com/uefaeuropaleague/news/022a-0e955df4b0ba-c88c45dd5431-1000--galatasaray-s-greatest-european-nights"
+        },
+        {
+          "ad": "Habertürk: Galatasaray, Neuchatel Xamax tekrarlamaya çalışacak!",
+          "url": "https://www.haberturk.com/galatasaray-neuchatel-xamax-tekrarlamaya-calisacak-3766792-spor"
+        },
+        {
+          "ad": "Milliyet: G.Saray'ın unutulmaz Şampiyonlar Ligi zaferleri!",
+          "url": "https://www.milliyet.com.tr/skorer/galeri/g-sarayin-unutulmaz-sampiyonlar-ligi-zaferleri-1597686"
+        }
+      ],
+      "uyum": 1.0
+    },
+    {
+      "id": "galatasaray-23",
+      "metin": "Galatasaray, 1988–89 Şampiyon Kulüpler Kupası'nda yarı finalde hangi takıma elendi?",
+      "secenekler": ["Steaua Bükreş", "Milan", "Benfica", "PSV Eindhoven"],
+      "dogru": 0,
+      "zorluk": "zor",
+      "tur": "dunya",
+      "kaynaklar": [
+        {
+          "ad": "Vikipedi: Galatasaray (futbol takımı)",
+          "url": "https://tr.wikipedia.org/wiki/Galatasaray_(futbol_takımı)"
+        },
+        {
+          "ad": "Wikipedia (EN): 1988–89 European Cup",
+          "url": "https://en.wikipedia.org/wiki/1988–89_European_Cup"
+        },
+        {
+          "ad": "UEFA: Galatasaray's greatest European nights",
+          "url": "https://www.uefa.com/uefaeuropaleague/news/022a-0e955df4b0ba-c88c45dd5431-1000--galatasaray-s-greatest-european-nights"
+        },
+        {
+          "ad": "DFB Datencenter: Galatasaray SK – FCSB Bukarest, 1988/89 yarı final",
+          "url": "https://datencenter.dfb.de/en/data-center/champions-league/1988-1989/semi-final/galatasaray-sk-steaua-bucure-ti-648141"
+        },
+        {
+          "ad": "Hürriyet: Galatasaray'ın rakibi S.Bükreş'i tanıyalım",
+          "url": "https://www.hurriyet.com.tr/sporarena/galatasarayin-rakibi-s-bukresi-taniyalim-9565219"
+        }
+      ],
+      "uyum": 1.0
+    },
+    {
+      "id": "galatasaray-24",
+      "metin": "1993–94 Şampiyonlar Ligi'nde Old Trafford'da oynanan Manchester United – Galatasaray maçı kaç kaç bitti?",
+      "secenekler": ["2-2", "3-3", "4-4", "3-2"],
+      "dogru": 1,
+      "zorluk": "zor",
+      "tur": "dunya",
+      "kaynaklar": [
+        {
+          "ad": "Wikipedia (EN): 1993–94 UEFA Champions League",
+          "url": "https://en.wikipedia.org/wiki/1993–94_UEFA_Champions_League"
+        },
+        {
+          "ad": "UEFA: Galatasaray vs Man United facts",
+          "url": "https://www.uefa.com/uefachampionsleague/news/0287-19798db990ec-44c84cc28098-1000--galatasaray-vs-man-united-facts"
+        },
+        {
+          "ad": "Milliyet: G.Saray'ın unutulmaz Şampiyonlar Ligi zaferleri!",
+          "url": "https://www.milliyet.com.tr/skorer/galeri/g-sarayin-unutulmaz-sampiyonlar-ligi-zaferleri-1597686"
+        },
+        {
+          "ad": "The Irish Times: Welcome back to Hell: Manchester United meet Galatasaray again 30 years after notorious clash",
+          "url": "https://www.irishtimes.com/sport/soccer/2023/11/27/welcome-back-to-hell-manchester-united-meet-galatasaray-again-30-years-after-notorious-clash"
+        }
+      ],
+      "uyum": 1.0
+    }
+  ]
+}
