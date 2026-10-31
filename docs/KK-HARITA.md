@@ -71,7 +71,7 @@ PRD'deki her kabul kriteri için "KK-nn" ifadesi geçen test dosyaları ve gerç
 | KK-65 | Puan 0–10 arası tam sayıdır. Süre içinde değiştirilebilir, son puan geçerlidir. Süre bitti | `oda/onon-istemci.kabul.test.ts`, `oda/onon-oda.kabul.test.ts`, `oda/ui.kabul.test.ts` | cihaz |
 | KK-66 | Açıklamaya kadar hiçbir puan başka bir telefona gönderilmez; ağ trafiğinde de görünmez (KK | `oda/onon-oda.kabul.test.ts`, `oda/quiz-oda.kabul.test.ts`, `oda/ui.kabul.test.ts` | cihaz |
 | KK-67 | Açıklama tüm telefonlarda aynı anda gösterilir: | `oda/onon-istemci.kabul.test.ts`, `oda/onon-oda.kabul.test.ts`, `oda/ui.kabul.test.ts` | cihaz |
-| KK-68 | Açıklamadan sonra "Sonraki kart" düğmesi yalnızca kuranda görünür; diğerleri "Kuran kişi b | `oda/onon-istemci.kabul.test.ts`, `oda/onon-oda.kabul.test.ts`, `oda/quiz-oda.kabul.test.ts`, `oda/ui.kabul.test.ts` | cihaz |
+| KK-68 | Açıklamadan sonra "Sonraki kart" düğmesi yalnızca kuranda görünür; diğerleri "Kuran kişi b | `oda/onon-istemci.kabul.test.ts`, `oda/onon-oda.kabul.test.ts`, `oda/quiz-kuran-bekleme.kabul.test.ts`, `oda/quiz-oda.kabul.test.ts`, `oda/ui.kabul.test.ts` | cihaz |
 | KK-69 | 10. kartın açıklamasından sonra final tüm telefonlarda gösterilir: ödüller (KK-58 kurallar | `oda/onon-istemci.kabul.test.ts`, `oda/onon-oda.kabul.test.ts`, `oda/ui.kabul.test.ts` | cihaz |
 | KK-70 | Yeniden bağlanma, oyuncu belirteci, veri silme ve hız sınırı OK mu NOK mu odasıyla aynıdır | `oda/onon-istemci.kabul.test.ts`, `oda/onon-oda.kabul.test.ts`, `oda/quiz-oda.kabul.test.ts`, `oda/quiz-protokol.kabul.test.ts` | cihaz |
 | KK-71 | Oda mantığı saf ve serileştirilebilir bir durum makinesidir (KK-40). OK mu NOK mu odası bo | `oda/onon-oda.kabul.test.ts` | — |
@@ -92,10 +92,8 @@ PRD'deki her kabul kriteri için "KK-nn" ifadesi geçen test dosyaları ve gerç
 | KK-100 | Mevcut akışlar değişmez: "Devam et", oda davet bağlantısıyla katılım ve ayarlar eskisi gib | `acilis.kabul.test.ts`, `v81.kabul.test.ts` | — |
 | KK-101 | Açılış ekranındaki "Kafadar" yazısı, ana ekrandaki "Kafadar" logosuyla aynı yazı tipinde v | `v81.kabul.test.ts` | — |
 | KK-102 | Ana ekranda "Bir oyun seç, telefonu ele ver." yazısı yoktur ve yerine başka bir yazı gelme | `v81.kabul.test.ts` | — |
-| KK-103 | Ana ekranda oyun listesinin üstünde yatay, tek seçimli bir çip satırı vardır. Sıra şudur:  | `games/kategori.kabul.test.ts`, `v81.kabul.test.ts` | — |
 | KK-104 | Bir çipe dokunulunca listede yalnızca kişi aralığı çipin aralığıyla kesişen oyunlar kalır  | `games/kategori.kabul.test.ts`, `quiz-night.kabul.test.ts`, `v81.kabul.test.ts` | — |
 | KK-105 | Diğer akışlar değişmez: açılış ekranı (KK-94…KK-100), oyun kartındaki kişi sayısı (KK-89)  | `v81.kabul.test.ts` | — |
-| KK-106 | Ana ekranda 🧠 Quiz Night kartı vardır ve kartta "1–12 kişi" yazar. Kart "Tümü", "1 kişi", | `quiz-night.kabul.test.ts` | cihaz |
 | KK-107 | Quiz Night'ta "Tek başına · Tek telefonda grup · Oda kur · Odaya katıl" seçimi vardır. | `games/quiz-night/arayuz.kabul.test.ts`, `games/quiz-night/ui.kabul.test.ts` | cihaz |
 | KK-109 | Bir tur 10 sorudur ve sorular paketin havuzundan tekrarsız seçilir: 3 kolay, 4 orta, 3 zor | `games/quiz-night/quiz.kabul.test.ts`, `games/quiz-night/ui.kabul.test.ts` | cihaz |
 | KK-110 | Soru ekranında şunlar bulunur: üstte "3/10", soru metni, zorluk (kolay / orta / zor, renkl | `games/quiz-night/arayuz.kabul.test.ts`, `games/quiz-night/ui.kabul.test.ts` | cihaz |
@@ -108,8 +106,17 @@ PRD'deki her kabul kriteri için "KK-nn" ifadesi geçen test dosyaları ve gerç
 | KK-119 | Diğer oyunlar ve akışlar değişmez. Mevcut kabul testleri yeşil kalır. KK-104'teki "1 kişi  | `games/kategori.kabul.test.ts`, `quiz-night.kabul.test.ts` | — |
 | KK-120 | Her Quiz Night paketinde `kategori` alanı vardır: `dizi-film`, `muzik` ya da `spor`. `npm  | `icerik/quiz-kategori.kabul.test.ts`, `icerik/quiz.kabul.test.ts` | — |
 | KK-121 | Paket seçiminde yatay ve tek seçimli bir kategori çip satırı vardır. Sıra şudur: Tümü · Di | `games/quiz-night/arayuz.kabul.test.ts`, `games/quiz-night/kategori.kabul.test.ts`, `games/quiz-night/ui.kabul.test.ts` | cihaz |
-| KK-122 | Paket kartında düz metin başlık, bir emoji ve not bulunur. | `games/quiz-night/arayuz.kabul.test.ts`, `games/quiz-night/kategori.kabul.test.ts`, `games/quiz-night/ui.kabul.test.ts` | cihaz |
 | KK-123 | Müzik ve Spor içerik kuralları (insan incelemesi). KK-116'nın kaynak, uyum ve şık kurallar | — | cihaz |
 | KK-124 | Uygulamanın adında, ikonunda, `app.json`'daki metinlerde ve mağaza metinlerinde hiçbir pak | `quiz-night.kabul.test.ts` | cihaz |
 | KK-125 | İlk içerik şudur: Spor'da 3 paket (Galatasaray, Fenerbahçe, Beşiktaş), Müzik'te 4 paket (M | `games/quiz-night/kategori.kabul.test.ts`, `icerik/quiz-kategori.kabul.test.ts` | cihaz |
 | KK-126 | Diğer oyunlar ve akışlar değişmez. Mevcut kabul testleri yeşil kalır. KK-108 testleri KK-1 | `games/quiz-night/kategori.kabul.test.ts` | — |
+| KK-127 | Ana ekranda oyunlar 2 sütunlu bir ızgarada ikon olarak görünür. Liste görünümü kalkar. | — | cihaz |
+| KK-128 | Kişi çipleri ekranın altındaki sabit bir dock'tadır ve üstünde "Kaç kişisiniz?" yazar. Bu, | — | cihaz |
+| KK-129 | Ana ekranın üstünde tek bir kart vardır: | — | cihaz |
+| KK-130 | İkona basılı tutmak (yaklaşık yarım saniye) o oyunun tanıtım kartını açar. Kart "Tamam" il | — | cihaz |
+| KK-131 | Paket ekranında her paket büyük bir karttır. Bu, KK-122'deki "bir emoji" maddesinin yerini | — | cihaz |
+| KK-132 | Her Quiz Night paketinde zorunlu bir `gorsel` alanı vardır ve bu alan uygulamadaki bir gör | — | cihaz |
+| KK-133 | Görseller: | — | cihaz |
+| KK-134 | Ana ekranda ve paket ekranında emoji karakteri yoktur. Bu bir testle denetlenir. Quiz Nigh | — | cihaz |
+| KK-135 | Erişilebilirlik ve tema: | — | cihaz |
+| KK-136 | Diğer akışlar değişmez: açılış ekranı, oyun ekranları, oda modu ve "Devam et". | — | cihaz |
