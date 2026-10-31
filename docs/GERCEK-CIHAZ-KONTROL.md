@@ -131,3 +131,20 @@ En az 3 telefon (karışık iOS/Android), aynı Wi-Fi ve en az bir telefonda mob
 
 **Sonuç:** ☐ iOS geçti  ☐ Android geçti  İmza: ______
 
+
+## Quiz Night Faz 1 (KK-106…KK-112, KK-116…KK-118)
+
+1 iOS ve 1 Android cihaz, Expo Go (main kanalı). Cihaz: ______  Sürüm: ______  Tarih: ______  Kim: ______
+
+| # | KK | Kontrol | iOS | Android |
+|---|---|---|---|---|
+| 1 | KK-106 | Ana ekranda 🧠 Quiz Night kartı "1–12 kişi"; Tümü / 1 kişi / 2 kişi / 3+ kişi çiplerinin hepsinde görünüyor; ⓘ metni üç modu anlatıyor | | |
+| 2 | KK-107 | Oyuna girince mod seçimi var (Faz 1: Tek başına · Tek telefonda grup) | | |
+| 3 | KK-108 | Paket kartları: "Ne kadar … fanısın?", emoji, Türk/Yabancı etiketi, "Resmî değildir · Spoiler içerir"; afiş/logo/özel yazı tipi yok; Türk / Yabancı çipi süzüyor | | |
+| 4 | KK-110 | Tek başına: şığa dokununca kilitleniyor, doğru yeşil, yanlış kırmızı ve telefon titriyor; ~1,5 sn sonra sıradaki; "3/10" ve zorluk yazıyla görünüyor; süre yok | | |
+| 5 | KK-111 | Sonuç: büyük "8/10" ve unvan; Tekrar yeni tur (önceki turun soruları gelmiyor); Başka paket; 9:16 paylaşım kartında soru/cevap yok; web'de yedek davranış | | |
+| 6 | KK-112 | Grup: doğru şık "Cevabı göster"e kadar hiçbir biçimde (renk, sıra, titreşim) belli olmuyor; sonra bilenler çiplerden işaretlenip Sonraki; sonuçta sıralama ve herkesin unvanı | | |
+| 7 | KK-116 | İçerik insan incelemesi (her paket, `docs/quiz/<paket>.md`): sorular özgün (replik alıntısı yok), olay sorusu yarıdan az, her bilgi ≥4 bağımsız kaynakla ve ≥%75 uyumlu, çelişen değerler aynı soruda şık değil, unvanlar karaktere gönderme yapıyor (oyuncuya değil), siyaset/din/terör/şiddet ayrıntısı yok, onay var | | |
+| 8 | KK-118 | Uygulama adı, ikon, açılış ve mağaza metinlerinde dizi/film adı yok | | |
+
+**Sonuç:** ☐ iOS geçti  ☐ Android geçti  İmza: ______

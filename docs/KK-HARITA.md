@@ -80,7 +80,7 @@ PRD'deki her kabul kriteri için "KK-nn" ifadesi geçen test dosyaları ve gerç
 | KK-85 | Çiplerin dokunma alanı en az 48px'tir. Ekran okuyucu seçili çipi "seçili" diye okur. Çiple | `games/kategori.kabul.test.ts` | — |
 | KK-89 | Oyun kartında tür rozeti yoktur; yalnızca kişi sayısı görünür (ör. "2–12 kişi") ve tanıtım | `games/kategori.kabul.test.ts`, `v81.kabul.test.ts` | — |
 | KK-90 | Oyun tanıtım kartı hiçbir zaman kendiliğinden açılmaz: oyunu ilk seçerken de, odaya kodla  | `nasil-oynanir.kabul.test.ts` | — |
-| KK-91 | Oyun seçildikten sonraki her ekranın sağ üstünde küçük bir ⓘ düğmesi vardır: mod seçimi, o | `nasil-oynanir.kabul.test.ts`, `v81.kabul.test.ts` | — |
+| KK-91 | Oyun seçildikten sonraki her ekranın sağ üstünde küçük bir ⓘ düğmesi vardır: mod seçimi, o | `nasil-oynanir.kabul.test.ts`, `quiz-night.kabul.test.ts`, `v81.kabul.test.ts` | — |
 | KK-92 | ⓘ düğmesinin dokunma alanı en az 48px'tir. Ekran okuyucu düğmeyi "Nasıl oynanır" diye okur | `nasil-oynanir.kabul.test.ts` | — |
 | KK-93 | Oyun akışları değişmez: mod seçimi, "Devam et" ve oda modu eskisi gibi çalışır. Mevcut kab | `games/kategori.kabul.test.ts`, `tanitim-ui.kabul.test.ts` | — |
 | KK-94 | Uygulama her açıldığında (web'de sayfa yenilendiğinde de) önce açılış ekranı görünür. Ekra | `acilis.kabul.test.ts`, `v81.kabul.test.ts` | — |
@@ -93,5 +93,18 @@ PRD'deki her kabul kriteri için "KK-nn" ifadesi geçen test dosyaları ve gerç
 | KK-101 | Açılış ekranındaki "Kafadar" yazısı, ana ekrandaki "Kafadar" logosuyla aynı yazı tipinde v | `v81.kabul.test.ts` | — |
 | KK-102 | Ana ekranda "Bir oyun seç, telefonu ele ver." yazısı yoktur ve yerine başka bir yazı gelme | `v81.kabul.test.ts` | — |
 | KK-103 | Ana ekranda oyun listesinin üstünde yatay, tek seçimli bir çip satırı vardır. Sıra şudur:  | `games/kategori.kabul.test.ts`, `v81.kabul.test.ts` | — |
-| KK-104 | Bir çipe dokunulunca listede yalnızca kişi aralığı çipin aralığıyla kesişen oyunlar kalır  | `games/kategori.kabul.test.ts`, `v81.kabul.test.ts` | — |
+| KK-104 | Bir çipe dokunulunca listede yalnızca kişi aralığı çipin aralığıyla kesişen oyunlar kalır  | `games/kategori.kabul.test.ts`, `quiz-night.kabul.test.ts`, `v81.kabul.test.ts` | — |
 | KK-105 | Diğer akışlar değişmez: açılış ekranı (KK-94…KK-100), oyun kartındaki kişi sayısı (KK-89)  | `v81.kabul.test.ts` | — |
+| KK-106 | Ana ekranda 🧠 Quiz Night kartı vardır ve kartta "1–12 kişi" yazar. Kart "Tümü", "1 kişi", | `quiz-night.kabul.test.ts` | cihaz |
+| KK-107 | Quiz Night'ta "Tek başına · Tek telefonda grup · Oda kur · Odaya katıl" seçimi vardır. | `games/quiz-night/arayuz.kabul.test.ts` | cihaz |
+| KK-108 | Paket seçimindeki her kartta şunlar bulunur: düz metin başlık "Ne kadar <ad> fanısın?", bi | `games/quiz-night/arayuz.kabul.test.ts` | cihaz |
+| KK-109 | Bir tur 10 sorudur ve sorular paketin havuzundan tekrarsız seçilir: 3 kolay, 4 orta, 3 zor | `games/quiz-night/quiz.kabul.test.ts` | cihaz |
+| KK-110 | Soru ekranında şunlar bulunur: üstte "3/10", soru metni, zorluk (kolay / orta / zor, renkl | `games/quiz-night/arayuz.kabul.test.ts` | cihaz |
+| KK-111 | Sonuç ekranında büyük puan ("8/10") ve unvan gösterilir. Unvan basamakları 0–3, 4–6, 7–9 v | `games/quiz-night/arayuz.kabul.test.ts`, `games/quiz-night/quiz.kabul.test.ts` | cihaz |
+| KK-112 | Tek telefonda grup modu şöyle işler: | `games/quiz-night/arayuz.kabul.test.ts`, `games/quiz-night/quiz.kabul.test.ts` | cihaz |
+| KK-114 | Puan, doğru cevap sayısıdır. Yanlış cevap puan düşürmez ve hız bonusu yoktur. Puan ve unva | `games/quiz-night/quiz.kabul.test.ts` | — |
+| KK-115 | İçerik `content/quiz/<paket>.json` dosyalarındadır ve `npm run icerik` (CI'da da) şunları  | `icerik/quiz.kabul.test.ts` | — |
+| KK-116 | İçerik kuralları (insan incelemesi, makineyle denetlenemez): | — | cihaz |
+| KK-117 | Faz 1 en az 3 paketle çıkar, en az biri Türk ve en az biri yabancı yapım olur. Testlerdeki | `icerik/quiz.kabul.test.ts` | cihaz |
+| KK-118 | Uygulamanın adında, `app.json`'da ve mağaza metinlerinde paketlerin dizi ya da film adı ge | `quiz-night.kabul.test.ts` | cihaz |
+| KK-119 | Diğer oyunlar ve akışlar değişmez. Mevcut kabul testleri yeşil kalır. KK-104'teki "1 kişi  | `games/kategori.kabul.test.ts`, `quiz-night.kabul.test.ts` | — |
