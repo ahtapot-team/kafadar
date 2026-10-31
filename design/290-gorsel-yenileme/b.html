@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kafadar — #290 B · 3D çıkartma kartlar</title>
+<!-- #290 görsel yenileme, konsept B · 3D çıkartma kartlar. Bugünkü yapı korunur; her kartta büyük 3D görsel kartın kenarından taşar.
+     Kullanım: ?ekran=ana|paket (tek ekran, 390×844, PNG için). Görseller: gorsel/ (Microsoft Fluent Emoji 3D, MIT; bkz. gorsel/LISANS.md).
+     Kural: yalnızca tema renkleri (B · Çıkartma); logo, arma, fotoğraf yok. Tek dış kaynak: Google Fonts. -->
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&display=swap" rel="stylesheet">
+<style>
+  :root { --kontur: #0B0920; --golge: #7C6CFF; --marka: #FFD23F; --marka-2: #5B8CFF; --krem: #FFF8E7;
+    --zemin: #16123F; --yuzey: #2B2570; --metin: #FFF8E7; --soluk: #B9B3E8; }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: #DCD9E8; font-family: 'Bricolage Grotesque', system-ui, sans-serif; }
+  h1 { margin: 28px 0 0; font-size: 22px; color: #2a2640; text-align: center; }
+  .sahne { display: flex; flex-wrap: wrap; gap: 32px; justify-content: center; padding: 20px 24px 40px; }
+  figure { margin: 0; } figcaption { max-width: 390px; margin-bottom: 8px; font-size: 14px; font-weight: 700; line-height: 1.35; color: #4a4566; }
+  .ekran { position: relative; width: 390px; height: 844px; overflow: hidden; border-radius: 40px; background: var(--zemin); color: var(--metin);
+    box-shadow: 0 16px 40px rgba(20,16,50,.22); display: flex; flex-direction: column; padding: 0 20px; }
+  body.tek h1, body.tek figcaption { display: none; } body.tek .sahne { padding: 0; } body.tek .ekran { border-radius: 0; box-shadow: none; }
+  .durum { height: 50px; flex: none; display: flex; align-items: center; justify-content: space-between; padding: 0 10px; font-size: 15px; font-weight: 800; }
+  .pil { width: 26px; height: 13px; border: 2px solid var(--metin); border-radius: 4px; padding: 1px; } .pil::after { content: ''; display: block; width: 70%; height: 100%; background: var(--metin); border-radius: 1px; }
+  .ust { display: flex; align-items: center; gap: 10px; flex: none; }
+  .ust .orta { flex: 1; }
+  .logo { display: inline-block; transform: rotate(-3deg); padding: 2px 14px 6px; border-radius: 16px; border: 4px solid var(--kontur); background: var(--marka);
+    box-shadow: 6px 6px 0 var(--golge); color: var(--kontur); font-size: 36px; font-weight: 800; letter-spacing: -0.04em; }
+  .kare { width: 48px; height: 48px; flex: none; border-radius: 14px; border: 3px solid var(--kontur); background: var(--yuzey); display: grid; place-items: center;
+    font-weight: 800; font-size: 28px; color: var(--metin); }
+  .kare img { width: 30px; height: 30px; }
+  .slogan { margin: 16px 0 14px; font-size: 17px; font-weight: 700; color: var(--soluk); flex: none; }
+  .bilgi-i { width: 26px; height: 26px; border-radius: 50%; background: var(--marka); border: 3px solid var(--kontur); color: var(--kontur);
+    display: inline-grid; place-items: center; font-size: 14px; font-weight: 800; flex: none; }
+  .bilgi-yazili { height: 48px; display: inline-flex; align-items: center; gap: 8px; padding: 0 14px 0 9px; border-radius: 14px; border: 3px solid var(--kontur);
+    background: var(--yuzey); font-weight: 800; font-size: 15px; white-space: nowrap; }
+  .cipler { display: flex; gap: 8px; flex: none; }
+  .fcip { flex: 1 1 auto; height: 48px; display: inline-flex; align-items: center; justify-content: center; gap: 4px; padding: 0 9px; border-radius: 14px;
+    border: 3px solid var(--kontur); background: var(--yuzey); color: var(--metin); font-size: 15px; font-weight: 800; white-space: nowrap; }
+  .fcip.sec { background: var(--marka-2); color: var(--kontur); box-shadow: 4px 4px 0 var(--golge); }
+  /* Oyun kartı: renkli çıkartma, 3D görsel sağ üst kenardan taşar */
+  .oyunlar { display: flex; flex-direction: column; gap: 20px; margin-top: 28px; flex: none; }
+  .oyun { position: relative; height: 118px; border-radius: 26px; border: 4px solid var(--kontur); box-shadow: 6px 6px 0 var(--golge); color: var(--kontur);
+    background: linear-gradient(160deg, rgba(255,255,255,.35), rgba(255,255,255,0) 45%), var(--c); padding: 16px 0 0 18px; transform: rotate(var(--r)); }
+  .oyun b { display: block; font-size: 25px; font-weight: 800; letter-spacing: -0.02em; line-height: 1.1; }
+  .oyun .alt { display: flex; align-items: center; gap: 10px; margin-top: 8px; font-size: 15px; font-weight: 800; }
+  .oyun .bilgi-i { position: relative; width: 30px; height: 30px; background: var(--krem); }
+  .oyun .bilgi-i::before { content: ''; position: absolute; inset: -12px; } /* 54px dokunma alanı */
+  .oyun img { position: absolute; right: 8px; top: -26px; width: 128px; height: 128px; filter: drop-shadow(0 7px 0 rgba(11,9,32,.25)); }
+  /* Paket kartı: #261 düzeni, emoji dairesi yerine eğik renkli kare + taşan 3D görsel */
+  .baslik { margin: 10px 0 12px; font-size: 30px; font-weight: 800; letter-spacing: -0.03em; flex: none; }
+  .pliste { display: flex; flex-direction: column; gap: 18px; margin-top: 22px; flex: none; }
+  .paket { position: relative; display: flex; gap: 12px; align-items: center; min-height: 84px; padding: 10px 14px 10px 92px; border-radius: 20px;
+    border: 4px solid var(--kontur); background: var(--yuzey); box-shadow: 5px 5px 0 var(--golge); }
+  .paket .kutu { position: absolute; left: 10px; top: -12px; width: 70px; height: 70px; border-radius: 18px; border: 3px solid var(--kontur);
+    background: linear-gradient(160deg, rgba(255,255,255,.35), rgba(255,255,255,0) 50%), var(--c); transform: rotate(-6deg); box-shadow: 3px 3px 0 var(--kontur); }
+  .paket .kutu img { position: absolute; left: 50%; top: 50%; width: 76px; height: 76px; transform: translate(-50%, -54%) rotate(6deg); filter: drop-shadow(0 4px 0 rgba(11,9,32,.25)); }
+  .paket b { display: block; font-size: 17px; line-height: 1.2; }
+  .meta { margin-top: 5px; font-size: 12px; font-weight: 700; line-height: 1.5; color: var(--soluk); }
+  .meta .nw { white-space: nowrap; }
+  .rozet { display: inline-flex; align-items: center; height: 22px; padding: 0 7px; margin-right: 7px; border-radius: 10px; border: 2px solid var(--kontur);
+    background: var(--zemin); color: var(--metin); font-size: 12px; font-weight: 800; vertical-align: 1px; }
+  .sol { position: absolute; left: 0; right: 0; bottom: 0; height: 70px; background: linear-gradient(transparent, var(--zemin)); pointer-events: none; }
+</style>
+</head>
+<body>
+<h1>Kafadar — #290 Görsel yenileme · B · 3D çıkartma kartlar · Koyu · 390×844</h1>
+<div class="sahne" id="sahne"></div>
+<script>
+const p = new URLSearchParams(location.search);
+const tek = p.get('ekran');
+const G = (ad) => `gorsel/${ad}.png`;
+const durum = '<div class="durum"><span>21:30</span><span class="pil"></span></div>';
+const OYUN = [
+  { ad: 'OK mu NOK mu', kisi: '2–12 kişi', g: 'ok-mu-nok', c: 'marka', r: '-1deg' },
+  { ad: '10/10 ama', kisi: '2–12 kişi', g: 'on-on-ama', c: 'marka-2', r: '1deg' },
+  { ad: 'Casus kim', kisi: '3–12 kişi', g: 'casus-kim', c: 'golge', r: '-1deg' },
+  { ad: 'Quiz Night', kisi: '1–12 kişi', g: 'quiz-night', c: 'krem', r: '1deg' },
+];
+const oyun = (o) => `<div class="oyun" style="--c: var(--${o.c}); --r: ${o.r}" role="button" aria-label="${o.ad}, ${o.kisi}">
+  <b>${o.ad}</b><div class="alt"><span>👥 ${o.kisi}</span><span class="bilgi-i" role="button" aria-label="${o.ad}: nasıl oynanır">i</span></div>
+  <img src="${G(o.g)}" alt=""></div>`;
+const ana = `<section class="ekran">${durum}
+  <div class="ust"><span class="logo">Kafadar</span><span class="orta"></span><span class="kare" aria-label="Ayarlar"><img src="${G('ayarlar')}" alt=""></span></div>
+  <p class="slogan">Bir oyun seç, telefonu ele ver.</p>
+  <div class="cipler" role="radiogroup" aria-label="Kişi sayısı"><span class="fcip sec" role="radio" aria-checked="true">✓ Tümü</span><span class="fcip" role="radio" aria-checked="false">1 kişi</span><span class="fcip" role="radio" aria-checked="false">2 kişi</span><span class="fcip" role="radio" aria-checked="false">3+ kişi</span></div>
+  <div class="oyunlar">${OYUN.map(oyun).join('')}</div>
+</section>`;
+
+const NOT = { 'dizi-film': 'Resmî değildir · Spoiler içerir', muzik: 'Resmî değildir · Sanatçıyla bağlantısı yoktur', spor: 'Resmî değildir · Kulüple bağlantısı yoktur' };
+const RENK = { 'dizi-film': 'marka', muzik: 'marka-2', spor: 'golge' };
+const PAKET = [
+  { k: 'dizi-film', ad: 'Aşk-ı Memnu', g: 'ask-i-memnu', koken: 'Türk' },
+  { k: 'dizi-film', ad: 'Hababam Sınıfı', g: 'hababam-sinifi', koken: 'Türk' },
+  { k: 'dizi-film', ad: 'Prison Break', g: 'prison-break', koken: 'Yabancı' },
+  { k: 'muzik', ad: 'Manifest', g: 'manifest' },
+  { k: 'muzik', ad: 'Emir Can İğrek', g: 'emir-can-igrek' },
+  { k: 'muzik', ad: 'BLOK3', g: 'blok3' },
+  { k: 'muzik', ad: 'Mabel Matiz', g: 'mabel-matiz' },
+  { k: 'spor', ad: 'Galatasaray', g: 'futbol', baslik: 'Ne kadar Galatasaraylısın?' },
+];
+const kart = (x) => `<div class="paket" role="button"><span class="kutu" style="--c: var(--${RENK[x.k]})" aria-hidden="true"><img src="${G(x.g)}" alt=""></span>
+  <div><b>${x.baslik || `Ne kadar ${x.ad} fanısın?`}</b><div class="meta">${x.koken ? `<span class="rozet">${x.koken}</span>` : ''}${NOT[x.k].split(' · ').map(t => `<span class="nw">${t}</span>`).join(' · ')}</div></div></div>`;
+const paket = `<section class="ekran">${durum}
+  <div class="ust"><span class="kare" aria-label="Geri">←</span><span class="orta"></span><span class="bilgi-yazili"><span class="bilgi-i">i</span>Nasıl oynanır</span></div>
+  <h2 class="baslik">Neyin fanısın?</h2>
+  <div class="cipler" role="radiogroup" aria-label="Kategori"><span class="fcip sec">✓ Tümü</span><span class="fcip">Dizi & Film</span><span class="fcip">Müzik</span><span class="fcip">Spor</span></div>
+  <div class="pliste">${PAKET.map(kart).join('')}</div>
+  <div class="sol"></div>
+</section>`;
+
+const EKRAN = [
+  { id: 'ana', ad: '1 · Ana ekran: bugünkü düzen; renkli çıkartma kartlar, 3D görsel kartın sağ üst kenarından taşar; ⓘ kişi satırında (54px alan)', html: ana },
+  { id: 'paket', ad: '2 · Paket ekranı (Quiz Night): #261 kartları; emoji dairesi yerine eğik renkli kare + 3D görsel. Başlık, rozet, not aynı', html: paket },
+];
+if (tek) document.body.classList.add('tek');
+document.getElementById('sahne').innerHTML = EKRAN.filter(e => !tek || e.id === tek)
+  .map(e => `<figure><figcaption>${e.ad}</figcaption>${e.html}</figure>`).join('');
+</script>
+</body>
+</html>

@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kafadar — #290 C · Oyun rafı</title>
+<!-- #290 görsel yenileme, konsept C · Oyun rafı. Oyunlar rafta duran kutu oyunları; paketler kategori başına yatay kayan raf.
+     Kullanım: ?ekran=ana|paket (tek ekran, 390×844, PNG için). Görseller: gorsel/ (Microsoft Fluent Emoji 3D, MIT; bkz. gorsel/LISANS.md).
+     Kutular düz CSS (eğik ön/yan/üst yüz); 3D kütüphane yok. Kural: yalnızca tema renkleri; logo, arma, fotoğraf yok. Tek dış kaynak: Google Fonts. -->
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&display=swap" rel="stylesheet">
+<style>
+  :root { --kontur: #0B0920; --golge: #7C6CFF; --marka: #FFD23F; --marka-2: #5B8CFF; --krem: #FFF8E7;
+    --zemin: #16123F; --yuzey: #2B2570; --metin: #FFF8E7; --soluk: #B9B3E8; }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: #DCD9E8; font-family: 'Bricolage Grotesque', system-ui, sans-serif; }
+  h1 { margin: 28px 0 0; font-size: 22px; color: #2a2640; text-align: center; }
+  .sahne { display: flex; flex-wrap: wrap; gap: 32px; justify-content: center; padding: 20px 24px 40px; }
+  figure { margin: 0; } figcaption { max-width: 390px; margin-bottom: 8px; font-size: 14px; font-weight: 700; line-height: 1.35; color: #4a4566; }
+  .ekran { position: relative; width: 390px; height: 844px; overflow: hidden; border-radius: 40px; color: var(--metin); display: flex; flex-direction: column; padding: 0 20px;
+    box-shadow: 0 16px 40px rgba(20,16,50,.22); background: repeating-linear-gradient(90deg, var(--zemin) 0 38px, #1B1648 38px 76px); }
+  body.tek h1, body.tek figcaption { display: none; } body.tek .sahne { padding: 0; } body.tek .ekran { border-radius: 0; box-shadow: none; }
+  .durum { height: 50px; flex: none; display: flex; align-items: center; justify-content: space-between; padding: 0 10px; font-size: 15px; font-weight: 800; }
+  .pil { width: 26px; height: 13px; border: 2px solid var(--metin); border-radius: 4px; padding: 1px; } .pil::after { content: ''; display: block; width: 70%; height: 100%; background: var(--metin); border-radius: 1px; }
+  .ust { display: flex; align-items: center; gap: 10px; flex: none; }
+  .ust .orta { flex: 1; }
+  .logo { display: inline-block; transform: rotate(-3deg); padding: 2px 12px 5px; border-radius: 14px; border: 4px solid var(--kontur); background: var(--marka);
+    box-shadow: 5px 5px 0 var(--golge); color: var(--kontur); font-size: 27px; font-weight: 800; letter-spacing: -0.04em; }
+  .kare { width: 48px; height: 48px; flex: none; border-radius: 14px; border: 3px solid var(--kontur); background: var(--yuzey); display: grid; place-items: center;
+    font-weight: 800; font-size: 24px; color: var(--metin); }
+  .kare img { width: 30px; height: 30px; }
+  .bilgi-i { position: relative; width: 26px; height: 26px; border-radius: 50%; background: var(--marka); border: 3px solid var(--kontur); color: var(--kontur);
+    display: inline-grid; place-items: center; font-size: 14px; font-weight: 800; flex: none; }
+  .bilgi-yazili { height: 48px; display: inline-flex; align-items: center; gap: 8px; padding: 0 14px 0 9px; border-radius: 14px; border: 3px solid var(--kontur);
+    background: var(--yuzey); font-weight: 800; font-size: 15px; white-space: nowrap; }
+  .cipler { display: flex; gap: 8px; flex: none; margin-top: 18px; }
+  .fcip { flex: 1 1 auto; height: 48px; display: inline-flex; align-items: center; justify-content: center; gap: 4px; padding: 0 9px; border-radius: 14px;
+    border: 3px solid var(--kontur); background: var(--yuzey); color: var(--metin); font-size: 15px; font-weight: 800; white-space: nowrap; }
+  .fcip.sec { background: var(--marka-2); color: var(--kontur); box-shadow: 4px 4px 0 var(--golge); }
+  /* Kutu: ön yüz + eğik üst ve yan yüz (derinlik --d) */
+  .kutu { position: relative; width: var(--w); height: var(--h); flex: none; margin-top: var(--d); margin-right: var(--d); }
+  .kutu .on, .kutu .tep, .kutu .yan { position: absolute; border: 3px solid var(--kontur); }
+  .kutu .on { inset: 0; border-radius: 6px; background: linear-gradient(160deg, rgba(255,255,255,.35), rgba(255,255,255,0) 45%), var(--c);
+    display: flex; flex-direction: column; align-items: center; justify-content: space-between; padding: 10px 6px 8px; color: var(--kontur); overflow: hidden; }
+  .kutu .tep { left: 0; top: calc(-1 * var(--d)); width: var(--w); height: calc(var(--d) + 2px); background: var(--c); transform-origin: bottom left; transform: skewX(-45deg);
+    box-shadow: inset 0 0 0 99px rgba(255,255,255,.28); }
+  .kutu .yan { left: calc(var(--w) - 2px); top: 0; width: calc(var(--d) + 2px); height: var(--h); background: var(--c); transform-origin: top left; transform: skewY(-45deg);
+    box-shadow: inset 0 0 0 99px rgba(11,9,32,.35); }
+  .kutu img { width: var(--g); height: var(--g); filter: drop-shadow(0 5px 0 rgba(11,9,32,.25)); }
+  .kutu .ad { width: 100%; padding: 4px 4px 5px; border-radius: 8px; border: 2px solid var(--kontur); background: var(--krem); text-align: center;
+    font-weight: 800; line-height: 1.1; }
+  .kutu .koken { position: absolute; z-index: 1; top: 6px; left: 6px; padding: 1px 6px 2px; border-radius: 8px; border: 2px solid var(--kontur); background: var(--zemin); color: var(--metin);
+    font-size: 12px; font-weight: 800; }
+  /* Raf tahtası */
+  .raf { position: relative; height: 22px; margin: 0 -20px; border-top: 3px solid var(--kontur); border-bottom: 4px solid var(--kontur); flex: none;
+    background: linear-gradient(var(--golge) 0 7px, #5A4BD6 7px); box-shadow: 0 10px 0 rgba(11,9,32,.35); }
+  /* Ana ekran */
+  .bolme { display: flex; justify-content: space-around; align-items: flex-end; padding: 0 6px; margin-top: 26px; flex: none; }
+  .etiketler { display: flex; justify-content: space-around; margin-top: 12px; flex: none; }
+  .etiket { height: 48px; min-width: 150px; display: inline-flex; align-items: center; justify-content: center; gap: 10px; padding: 0 12px; border-radius: 12px; border: 3px solid var(--kontur);
+    background: var(--krem); color: var(--kontur); font-size: 15px; font-weight: 800; transform: rotate(var(--r, 0deg)); box-shadow: 3px 3px 0 var(--kontur); }
+  .etiket .bilgi-i::before { content: ''; position: absolute; inset: -12px; } /* 50px dokunma alanı */
+  /* Paket ekranı */
+  .baslik { margin: 10px 0 0; font-size: 30px; font-weight: 800; letter-spacing: -0.03em; flex: none; }
+  .bolum { margin: 18px 0 0; flex: none; }
+  .bolum .ust-yazi { font-size: 12px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
+  .bolum small { display: block; margin-top: 2px; font-size: 12px; font-weight: 700; color: var(--soluk); }
+  .kaydir { display: flex; gap: 22px; align-items: flex-end; padding: 2px 0 0 4px; margin-right: -20px; overflow: hidden; flex: none;
+    -webkit-mask-image: linear-gradient(90deg, #000 78%, transparent); mask-image: linear-gradient(90deg, #000 78%, transparent); }
+</style>
+</head>
+<body>
+<h1>Kafadar — #290 Görsel yenileme · C · Oyun rafı · Koyu · 390×844</h1>
+<div class="sahne" id="sahne"></div>
+<script>
+const p = new URLSearchParams(location.search);
+const tek = p.get('ekran');
+const G = (ad) => `gorsel/${ad}.png`;
+const durum = '<div class="durum"><span>21:30</span><span class="pil"></span></div>';
+// boyut: [genişlik, yükseklik, derinlik, görsel, yazı boyu]
+const kutu = (o, [w, h, d, g, f]) => `<div class="kutu" style="--c: var(--${o.c}); --w: ${w}px; --h: ${h}px; --d: ${d}px; --g: ${g}px" role="button" aria-label="${o.ad}">
+  <span class="tep"></span><span class="yan"></span><div class="on">${o.koken ? `<span class="koken">${o.koken}</span>` : ''}<img src="${G(o.g)}" alt="">
+  <span class="ad" style="font-size: ${f}px">${o.ad}</span></div></div>`;
+const OYUN = [
+  { ad: 'OK mu NOK mu', kisi: '2–12 kişi', g: 'ok-mu-nok', c: 'marka', b: [146, 170, 20, 92, 14], r: '-2deg' },
+  { ad: '10/10 ama', kisi: '2–12 kişi', g: 'on-on-ama', c: 'marka-2', b: [138, 146, 20, 78, 15], r: '1.5deg' },
+  { ad: 'Casus kim', kisi: '3–12 kişi', g: 'casus-kim', c: 'golge', b: [138, 150, 20, 84, 15], r: '1.5deg' },
+  { ad: 'Quiz Night', kisi: '1–12 kişi', g: 'quiz-night', c: 'krem', b: [142, 168, 20, 92, 15], r: '-2deg' },
+];
+const etiket = (o) => `<span class="etiket" style="--r: ${o.r}">👥 ${o.kisi}<span class="bilgi-i" role="button" aria-label="${o.ad}: nasıl oynanır">i</span></span>`;
+const raf = (oyunlar) => `<div class="bolme">${oyunlar.map(o => kutu(o, o.b)).join('')}</div><div class="raf"></div>
+  <div class="etiketler">${oyunlar.map(etiket).join('')}</div>`;
+const ana = `<section class="ekran">${durum}
+  <div class="ust"><span class="logo">Kafadar</span><span class="orta"></span><span class="kare" aria-label="Ayarlar"><img src="${G('ayarlar')}" alt=""></span></div>
+  <div class="cipler" role="radiogroup" aria-label="Kişi sayısı"><span class="fcip sec" role="radio" aria-checked="true">✓ Tümü</span><span class="fcip" role="radio" aria-checked="false">1 kişi</span><span class="fcip" role="radio" aria-checked="false">2 kişi</span><span class="fcip" role="radio" aria-checked="false">3+ kişi</span></div>
+  ${raf(OYUN.slice(0, 2))}${raf(OYUN.slice(2))}
+</section>`;
+
+const KAT = [
+  { ad: 'Dizi & Film', not: 'Resmî değildir · Spoiler içerir', c: 'marka', p: [['Aşk-ı Memnu', 'ask-i-memnu', 'Türk'], ['Hababam Sınıfı', 'hababam-sinifi', 'Türk'], ['Prison Break', 'prison-break', 'Yabancı']] },
+  { ad: 'Müzik', not: 'Resmî değildir · Sanatçıyla bağlantısı yoktur', c: 'marka-2', p: [['Manifest', 'manifest'], ['Emir Can İğrek', 'emir-can-igrek'], ['BLOK3', 'blok3'], ['Mabel Matiz', 'mabel-matiz']] },
+  { ad: 'Spor', not: 'Resmî değildir · Kulüple bağlantısı yoktur', c: 'golge', p: [['Galatasaray', 'futbol'], ['Fenerbahçe', 'futbol'], ['Beşiktaş', 'futbol']] },
+];
+const paket = `<section class="ekran">${durum}
+  <div class="ust"><span class="kare" aria-label="Geri">←</span><span class="orta"></span><span class="bilgi-yazili"><span class="bilgi-i">i</span>Nasıl oynanır</span></div>
+  <h2 class="baslik">Neyin fanısın?</h2>
+  ${KAT.map(k => `<div class="bolum"><div class="ust-yazi">${k.ad}</div><small>${k.not}</small></div>
+    <div class="kaydir">${k.p.map(([ad, g, koken]) => kutu({ ad, g, koken, c: k.c }, [108, 132, 14, 62, 13])).join('')}</div><div class="raf"></div>`).join('')}
+</section>`;
+
+const EKRAN = [
+  { id: 'ana', ad: '1 · Ana ekran: iki raf, oyunlar kutu oyunu gibi; kişi sayısı ve ⓘ rafın altındaki etikette (48px); kişi çipleri üstte', html: ana },
+  { id: 'paket', ad: '2 · Paket ekranı (Quiz Night): kategori başına yatay kayan raf; not raf başlığında; çip satırı yok (raf = kategori), "Ne kadar … fanısın?" sonraki ekranda', html: paket },
+];
+if (tek) document.body.classList.add('tek');
+document.getElementById('sahne').innerHTML = EKRAN.filter(e => !tek || e.id === tek)
+  .map(e => `<figure><figcaption>${e.ad}</figcaption>${e.html}</figure>`).join('');
+</script>
+</body>
+</html>
