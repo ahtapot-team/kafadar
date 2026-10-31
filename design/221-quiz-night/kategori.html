@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kafadar — Quiz Night Kategoriler</title>
+<!-- #261 (PRD v10, KK-121, KK-122, KK-124): paket ekranında kategori çipleri, Müzik ve Spor kartları. Diğer ekranlar ekranlar.html'de (C · Karma).
+     Seçilen: A · Sade çip satırı + emoji seti 1 (Semih, Telegram 985). Üç seçenekli şablon (A/B/C, emoji 1/2): commit f42cc4a.
+     Kullanım: ?tema=koyu|acik  &boy=375x667  &panel=<kimlik> (tek panel).
+     Kural: yalnızca tema renkleri; kulüp renk düzeni, arma, logo, maskot görseli, fotoğraf, albüm kapağı yok. Tek dış kaynak: Google Fonts. -->
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&display=swap" rel="stylesheet">
+<style>
+  :root { --kontur: #0B0920; --golge: #7C6CFF; --marka: #FFD23F; --marka-2: #5B8CFF; --ok: #3DDC84; --nok: #FF5A4E; --w: 375px; --h: 667px; }
+  [data-tema="koyu"] { --zemin: #16123F; --yuzey: #2B2570; --metin: #FFF8E7; --soluk: #B9B3E8; }
+  [data-tema="acik"] { --zemin: #FFF8E7; --yuzey: #FFFFFF; --metin: #16123F; --soluk: #5B5585; }
+  * { box-sizing: border-box; }
+  body { margin: 0; padding: 32px 24px; background: #DCD9E8; font-family: 'Bricolage Grotesque', system-ui, sans-serif; }
+  body.tek-panel { padding: 8px; display: grid; place-items: center; min-height: 100vh; }
+  h1 { margin: 0 0 24px; font-size: 22px; color: #2a2640; text-align: center; }
+  #ekranlar { display: flex; flex-wrap: wrap; gap: 36px 28px; justify-content: center; }
+  figure { margin: 0; } figcaption { font-size: 14px; font-weight: 700; color: #4a4566; margin-bottom: 8px; max-width: var(--w); line-height: 1.35; }
+  .ekran { position: relative; width: var(--w); height: var(--h); overflow: hidden; border-radius: 28px; background: var(--zemin); color: var(--metin);
+    display: flex; flex-direction: column; gap: 12px; padding: 34px 20px 0; box-shadow: 0 16px 40px rgba(20,16,50,.22); }
+  .ust { display: flex; align-items: center; gap: 10px; flex: none; }
+  .ust .orta { flex: 1; }
+  .kare { width: 44px; height: 44px; flex: none; border-radius: 12px; border: 3px solid var(--kontur); background: var(--yuzey); color: var(--metin);
+    display: grid; place-items: center; font-weight: 800; font-size: 18px; }
+  .bilgi-i { width: 24px; height: 24px; border-radius: 50%; background: var(--marka); border: 3px solid var(--kontur); color: var(--kontur);
+    display: inline-grid; place-items: center; font-size: 13px; font-weight: 800; flex: none; }
+  .bilgi-yazili { height: 44px; display: inline-flex; align-items: center; gap: 8px; padding: 0 14px 0 9px; border-radius: 12px; border: 3px solid var(--kontur);
+    background: var(--yuzey); font-weight: 800; font-size: 15px; white-space: nowrap; }
+  .baslik { margin: 0; font-size: 30px; font-weight: 800; letter-spacing: -0.03em; line-height: 1.05; flex: none; }
+  .rozet { display: inline-flex; align-items: center; height: 24px; padding: 0 7px; border-radius: 10px; border: 2px solid var(--kontur); background: var(--zemin); color: var(--metin);
+    font-size: 11px; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase; white-space: nowrap; flex: none; }
+  /* Kategori çipleri: mevcut çip bileşeni (#183), tek seçimli, 48 yükseklik */
+  .cipler { display: flex; gap: 8px; padding-bottom: 5px; flex: none; }
+  .fcip { flex: 1 1 auto; display: inline-flex; align-items: center; justify-content: center; gap: 5px; height: 48px; padding: 0 9px; border-radius: 12px; border: 3px solid var(--kontur);
+    background: var(--yuzey); color: var(--metin); font-size: 15px; font-weight: 800; white-space: nowrap; }
+  .fcip.sec { background: var(--marka-2); color: var(--kontur); box-shadow: 5px 5px 0 var(--golge); }
+  /* Paket kartı (C · paket satırı ile aynı) */
+  .pliste { display: flex; flex-direction: column; gap: 12px; padding-bottom: 20px; min-height: 0; }
+  .paket { display: flex; gap: 12px; align-items: center; padding: 10px 14px 10px 10px; border-radius: 20px; border: 4px solid var(--kontur); background: var(--yuzey);
+    box-shadow: 5px 5px 0 var(--golge); flex: none; }
+  .emo { width: 50px; height: 50px; flex: none; border-radius: 50%; border: 3px solid var(--kontur); display: grid; place-items: center; font-size: 25px; }
+  .paket b { display: block; font-size: 17px; line-height: 1.2; }
+  .meta { margin-top: 5px; font-size: 12px; font-weight: 700; line-height: 1.5; color: var(--soluk); }
+  .meta .nw { white-space: nowrap; }
+  .meta .rozet { margin-right: 7px; vertical-align: 1px; }
+  /* Emoji tablosu */
+  .tablo { padding: 22px 18px; gap: 8px; }
+  .tablo h3 { margin: 4px 0 0; font-size: 13px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; color: var(--soluk); }
+  .esatir { display: grid; grid-template-columns: 1fr 44px; gap: 8px; align-items: center; min-height: 52px; padding: 6px 8px 6px 12px; border-radius: 16px; border: 3px solid var(--kontur); background: var(--yuzey); }
+  .esatir b { font-size: 15px; line-height: 1.2; } .esatir small { display: block; font-size: 11px; font-weight: 700; color: var(--soluk); }
+  .esatir span { width: 40px; height: 40px; border-radius: 50%; border: 3px solid var(--kontur); display: grid; place-items: center; font-size: 20px; }
+  .ebas { display: grid; grid-template-columns: 1fr 44px; gap: 8px; padding: 0 8px 0 12px; font-size: 11px; font-weight: 800; color: var(--soluk); text-align: center; }
+  .ebas :first-child { text-align: left; }
+  .not { margin: 2px 0 0; font-size: 12px; font-weight: 600; line-height: 1.4; color: var(--soluk); }
+</style>
+</head>
+<body>
+<h1 id="baslik">Kafadar — Quiz Night Kategoriler</h1>
+<div id="ekranlar"></div>
+<script>
+const p = new URLSearchParams(location.search);
+const tema = p.get('tema') === 'acik' ? 'acik' : 'koyu';
+const tekPanel = p.get('panel');
+const [w, h] = (p.get('boy') || '375x667').split('x').map(Number);
+document.documentElement.dataset.tema = tema;
+document.documentElement.style.setProperty('--w', w + 'px');
+document.documentElement.style.setProperty('--h', h + 'px');
+document.getElementById('baslik').textContent = `Kafadar — Quiz Night · #261 Kategoriler · A · Sade çip satırı · ${tema === 'koyu' ? 'Koyu' : 'Açık'} · ${w}×${h}`;
+
+// ---------- İçerik ----------
+// Kategori: sıra KK-121. Çiplerde emoji yok. Dizi & Film paketleri mevcut JSON'lardan (content/quiz).
+const KAT = [
+  { id: 'dizi-film', ad: 'Dizi & Film', not: 'Resmî değildir · Spoiler içerir' },
+  { id: 'muzik', ad: 'Müzik', not: 'Resmî değildir · Sanatçıyla bağlantısı yoktur' },
+  { id: 'spor', ad: 'Spor', not: 'Resmî değildir · Kulüple bağlantısı yoktur' },
+];
+// Emoji dairesi kategoriye göre: Dizi & Film marka, Müzik marka2, Spor golge (mor: üç kulübün hiçbirinin rengi değil, üçünde aynı)
+const ZEMIN = { 'dizi-film': 'marka', muzik: 'marka-2', spor: 'golge' };
+// Emoji seti 1: tarafsız. Spor'da üç kulüpte ⚽ (lakap/maskot çağrışımı yok, KK-122)
+const PAKET = [
+  { k: 'dizi-film', ad: 'Aşk-ı Memnu', e: '🥀', koken: 'Türk' },
+  { k: 'dizi-film', ad: 'Hababam Sınıfı', e: '🏫', koken: 'Türk' },
+  { k: 'dizi-film', ad: 'Prison Break', e: '🔐', koken: 'Yabancı' },
+  { k: 'muzik', ad: 'Manifest', e: '💃', neden: 'T-pop kız grubu, dans' },
+  { k: 'muzik', ad: 'Emir Can İğrek', e: '🎸', neden: 'Gitarla söz yazarı' },
+  { k: 'muzik', ad: 'BLOK3', e: '🎤', neden: 'Rap' },
+  { k: 'muzik', ad: 'Mabel Matiz', e: '🎶', neden: 'Pop; genel nota' },
+  { k: 'spor', ad: 'Galatasaray', baslik: 'Ne kadar Galatasaraylısın?', e: '⚽', neden: 'Üç kulüpte aynı' },
+  { k: 'spor', ad: 'Fenerbahçe', baslik: 'Ne kadar Fenerbahçelisin?', e: '⚽', neden: 'Üç kulüpte aynı' },
+  { k: 'spor', ad: 'Beşiktaş', baslik: 'Ne kadar Beşiktaşlısın?', e: '⚽', neden: 'Üç kulüpte aynı' },
+];
+const baslikOf = (x) => x.baslik || `Ne kadar ${x.ad} fanısın?`;
+const notOf = (x) => KAT.find(k => k.id === x.k).not;
+
+// ---------- Parçalar ----------
+const geri = '<span class="kare" aria-label="Geri">‹</span>';
+const bilgi = '<span class="bilgi-yazili"><span class="bilgi-i">i</span>Nasıl oynanır</span>';
+const kart = (x) => `<div class="paket" role="button"><span class="emo" style="background: var(--${ZEMIN[x.k]})" aria-hidden="true">${x.e}</span>
+  <div><b>${baslikOf(x)}</b><div class="meta">${x.koken ? `<span class="rozet">${x.koken}</span>` : ''}${notOf(x).split(' · ').map(t => `<span class="nw">${t}</span>`).join(' · ')}</div></div></div>`;
+// Görünür çipler: paketi olan kategoriler; tek kategori varsa satır yok (KK-121)
+const cipSatiri = (paketler, sec) => {
+  const dolu = KAT.filter(k => paketler.some(x => x.k === k.id));
+  if (dolu.length < 2) return '';
+  const c = [{ id: 'tumu', ad: 'Tümü' }, ...dolu];
+  const cipler = c.map(k => {
+    const s = k.id === sec;
+    return `<span class="fcip${s ? ' sec' : ''}" role="radio" aria-checked="${s}">${s ? '✓ ' : ''}${k.ad}</span>`;
+  }).join('');
+  return `<div class="cipler" role="radiogroup" aria-label="Kategori">${cipler}</div>`;
+};
+const liste = (paketler, sec) => {
+  const l = sec === 'tumu' ? paketler : paketler.filter(x => x.k === sec);
+  return `<div class="pliste">${l.map(kart).join('')}</div>`;
+};
+const ekran = (paketler, sec) => `<section class="ekran">
+  <div class="ust">${geri}<span class="orta"></span>${bilgi}</div>
+  <h2 class="baslik">Neyin fanısın?</h2>
+  ${cipSatiri(paketler, sec)}
+  ${liste(paketler, sec)}
+</section>`;
+
+// ---------- Paneller ----------
+const P = [];
+const ekle = (id, ad, html) => P.push({ id, ad, html });
+const HEPSI = PAKET;
+ekle('tumu', '1 · Tümü (varsayılan, hatırlanmaz): 10 paket kayıt sırasıyla, liste kayar (KK-121)', ekran(HEPSI, 'tumu'));
+ekle('dizi', '2 · Dizi & Film: Türk / Yabancı etiketi yalnızca burada; not “Spoiler içerir” (KK-122)', ekran(HEPSI, 'dizi-film'));
+ekle('muzik', '3 · Müzik: “Ne kadar <sanatçı> fanısın?”, not “Sanatçıyla bağlantısı yoktur” (KK-122)', ekran(HEPSI, 'muzik'));
+ekle('spor', '4 · Spor: başlık “Ne kadar Galatasaraylısın?” (baslik alanı), not “Kulüple bağlantısı yoktur”; kulüp rengi yok (KK-122)', ekran(HEPSI, 'spor'));
+ekle('bugun', '5 · Tek kategori (bugün: yalnızca Dizi & Film): çip satırı hiç görünmez (KK-121)', ekran(HEPSI.filter(x => x.k === 'dizi-film'), 'tumu'));
+ekle('kismi', '6 · Müzik henüz yokken (önce Spor çıkar): yalnızca dolu kategorilerin çipi (KK-121, KK-125)', ekran(HEPSI.filter(x => x.k !== 'muzik'), 'tumu'));
+
+const satir = (x) => `<div class="esatir"><div><b>${baslikOf(x)}</b><small>${x.neden}</small></div>
+  <span style="background: var(--${ZEMIN[x.k]})">${x.e}</span></div>`;
+ekle('emoji', '7 · Emoji (seti 1, tarafsız) ve kart başlıkları: Spor 3, Müzik 4 paket (KK-122, KK-125)', `<section class="ekran tablo">
+  <div class="ebas"><span>Paket</span><span>Emoji</span></div>
+  <h3>Spor</h3>${PAKET.filter(x => x.k === 'spor').map(satir).join('')}
+  <h3>Müzik</h3>${PAKET.filter(x => x.k === 'muzik').map(satir).join('')}
+  <p class="not">Lakap çağrışımlı emoji (🦁 🐤 🦅) kullanılmaz: maskot yasağı (KK-122). Emoji dairesi Spor'da üç kulüpte de mor (<code>golge</code>). Manifest ve Emir Can İğrek paketleri beklemede; emojileri hazır.</p>
+</section>`);
+
+// ---------- Yerleştir ----------
+const kap = document.getElementById('ekranlar');
+const secilen = tekPanel ? P.filter(x => x.id === tekPanel) : P;
+if (tekPanel) { document.body.classList.add('tek-panel'); document.getElementById('baslik').remove(); }
+secilen.forEach(x => {
+  const f = document.createElement('figure');
+  if (!tekPanel) { const c = document.createElement('figcaption'); c.textContent = x.ad; f.append(c); }
+  f.insertAdjacentHTML('beforeend', x.html); kap.append(f);
+});
+</script>
+</body>
+</html>
