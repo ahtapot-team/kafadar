@@ -19,11 +19,12 @@ function prdTablosu() {
 describe("KK-77: tanıtım metinleri registry'den", () => {
   const tablo = prdTablosu();
 
-  it('PRD tablosunda üç oyun var (OK mu NOK mu, Casus kim, 10/10 ama)', () => {
+  it('PRD tablosunda dört oyun var (OK mu NOK mu, Casus kim, 10/10 ama, Quiz Night)', () => {
     expect(tablo.map((t) => t.oyun)).toEqual([
       'OK mu NOK mu',
       'Casus kim',
       '10/10 ama',
+      'Quiz Night',
     ]);
   });
 

@@ -225,7 +225,7 @@ describe('KK-97: söz seçimi saf fonksiyon (src/core/rng ile)', () => {
     expect(sozAltYazisi(sozler[2], oyunlar)).toBeNull();
   });
 
-  it('KK-97: her oyun kaydında emoji alanı var (ok-mu-nok 👍, 10-10-ama 🔟, casus-kim 🕵️)', async () => {
+  it('KK-97: her oyun kaydında emoji alanı var (ok-mu-nok 👍, 10-10-ama 🔟, casus-kim 🕵️, quiz-night 🧠)', async () => {
     const { oyunlar } = await import('./games/registry');
     const emoji = Object.fromEntries(
       oyunlar.map((o) => [o.id, (o as { emoji?: string }).emoji]),
@@ -234,6 +234,7 @@ describe('KK-97: söz seçimi saf fonksiyon (src/core/rng ile)', () => {
       'ok-mu-nok': '👍',
       '10-10-ama': '🔟',
       'casus-kim': '🕵️',
+      'quiz-night': '🧠',
     });
   });
 

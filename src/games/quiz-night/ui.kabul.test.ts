@@ -19,10 +19,7 @@
 //     Tur bitince (sonuç aşamasına geçerken) oncekiKaydet; yeni tur/Tekrar'da oncekiOku → turSec(havuz, tohum, onceki).
 import { describe, expect, it } from 'vitest';
 import type { Depo } from '../../core/kayit';
-import { BEKLEYEN } from '../../kabul';
 import { depoYap, dosyaIcerik, kaynaklar } from '../../test/yardimci';
-
-const kabulQuiz = BEKLEYEN.quizEkran ? it.fails : it;
 
 type Onceki = {
   ONCEKI_ANAHTAR(paketId: string): string;
@@ -70,12 +67,12 @@ describe('KK-107…KK-112: ekranlar sözleşmedeki testID adlarını kullanır',
     'quiz-kart',
   ];
 
-  kabulQuiz('tüm testID adları ekran kaynaklarında geçer', () => {
+  it('tüm testID adları ekran kaynaklarında geçer', () => {
     const k = ekranKaynagi();
     expect(TESTIDLER.filter((t) => !k.includes(t))).toEqual([]);
   });
 
-  kabulQuiz('KK-107: Faz 1 ekranlarında oda seçenekleri yoktur', () => {
+  it('KK-107: Faz 1 ekranlarında oda seçenekleri yoktur', () => {
     const k = ekranKaynagi();
     expect(k).not.toMatch(/quiz-mod-oda/);
     expect(k).toMatch(/gorunenModlar/); // mod listesi kuraldan gelir
@@ -83,7 +80,7 @@ describe('KK-107…KK-112: ekranlar sözleşmedeki testID adlarını kullanır',
 });
 
 describe('KK-107…KK-112: ekranlar saf kuralları kullanır', () => {
-  kabulQuiz('ekran kodu sözleşmedeki kuralları çağırır', () => {
+  it('ekran kodu sözleşmedeki kuralları çağırır', () => {
     const k = ekranKaynagi();
     for (const ad of [
       'gorunenModlar',
@@ -102,7 +99,7 @@ describe('KK-107…KK-112: ekranlar saf kuralları kullanır', () => {
       expect(k, ad).toContain(ad);
   });
 
-  kabulQuiz('kayıttan okurken durumGecerliMi kullanılır (KK-14)', () => {
+  it('kayıttan okurken durumGecerliMi kullanılır (KK-14)', () => {
     expect(ekranKaynagi()).toMatch(/durumGecerliMi/);
   });
 
@@ -119,13 +116,10 @@ describe('KK-107…KK-112: ekranlar saf kuralları kullanır', () => {
       expect(icerik, f).not.toMatch(/\.kaynaklar\b|\.uyum\b/);
   });
 
-  kabulQuiz(
-    'KK-110: titreşim yalnız tek başına yanlış cevapta (mevcut titresim.ts)',
-    () => {
-      const k = ekranKaynagi();
-      expect(k).toMatch(/titresim/);
-    },
-  );
+  it('KK-110: titreşim yalnız tek başına yanlış cevapta (mevcut titresim.ts)', () => {
+    const k = ekranKaynagi();
+    expect(k).toMatch(/titresim/);
+  });
 
   it('KK-108: paket kartında afiş/logo/dizi yazı tipi için yeni görsel bağımlılığı yok', () => {
     const paket = JSON.parse(dosyaIcerik('package.json')) as {

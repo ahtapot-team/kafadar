@@ -1,6 +1,6 @@
 # Kafadar
 
-Son güncelleme: 2026-10-31 — #244 (Quiz Night beraberlik katsayısı)
+Son güncelleme: 2026-10-31 — #224 (Quiz Night ekranları)
 
 Kafadar, arkadaş/çift/aile için mobil parti oyunları uygulamasıdır (OK mu NOK mu, 10/10 ama, Casus kim). Tek telefonda ya da oda koduyla çok telefonda oynanır. Ayrıntı: `docs/MIMARI.md`.
 
@@ -26,10 +26,10 @@ Expo SDK 58, expo-router, TypeScript, Vitest, Cloudflare Workers + Durable Objec
 
 ## Klasörler
 
-- `app/` — yalnızca ince expo-router sarmalayıcıları (`index`, `oyun`, `oyuncular`, `paket`, `mod`, `ayarlar`, `casus/`, `onon/`, `oda/`).
+- `app/` — yalnızca ince expo-router sarmalayıcıları (`index`, `oyun`, `oyuncular`, `paket`, `mod`, `ayarlar`, `casus/`, `onon/`, `quiz/`, `oda/`).
 - `src/core/` — saf ortak mantık (deste, doğrula, oturum, oyuncular, rng, saat…).
 - `src/games/` — oyun kuralları (`ok-mu-nok`, `on-on-ama` (oyun id'si `10-10-ama`), `casus-kim`, `quiz-night`: Quiz Night, ayrıntı MIMARI) + `registry.ts`. Yeni oyun: modül + registry satırı (kişi çipleri `minOyuncu`'dan türer; ayrıntı: MIMARI "Yeni oyun nasıl eklenir").
-- `src/oyun-ekranlari/` — oyun ekranları; ortak parçalar `ortak/`.
+- `src/oyun-ekranlari/` — oyun ekranları (Quiz Night: `quiz/`); ortak parçalar `ortak/`.
 - `src/oda/` — oda kuralları ve protokol (`oda.ts`, `mesaj.ts`, `istemci.ts`).
 - `src/oda-ui/` — oda modu ekran parçaları. `src/baglanti/` — WebSocket bağlamı ve QR.
 - `src/acilis/ekran.tsx` — açılış ekranı (`app/_layout.tsx` gezgin (`Yigin`) yazı tipi hazır olunca bağlanır, açılış ekranı üstüne biner; en az 3 sn, dokununca geçer; kurallar `src/core/acilis.ts`, `soz.ts`). Sözler: `content/acilis/sozler.json` (`npm run icerik` denetler).

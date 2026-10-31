@@ -3,9 +3,15 @@ import { View } from 'react-native';
 import { useDurum } from '../src/durum';
 import { BilgiDugmesi } from '../src/tanitim-kutusu';
 import { Dugme, Ekran, GeriCubugu, Yazi } from '../src/ui';
+import QuizMod from './quiz/mod';
 
 // OK mu NOK mu mod seçimi (KK-28). Tek telefon modu değişmeden çevrimdışı çalışır.
 export default function Mod() {
+  const { oyunId } = useDurum();
+  return oyunId === 'quiz-night' ? <QuizMod /> : <OkMod />;
+}
+
+function OkMod() {
   const router = useRouter();
   const { oyunId } = useDurum();
   return (

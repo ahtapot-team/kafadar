@@ -11,6 +11,7 @@ describe('KK-1: ana ekran oyun listesi', () => {
       'ok-mu-nok': true,
       '10-10-ama': true,
       'casus-kim': true, // KK-42: #81'de aktif
+      'quiz-night': true, // #224
     });
   });
 });
