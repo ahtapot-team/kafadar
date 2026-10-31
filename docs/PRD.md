@@ -503,7 +503,7 @@ Oyunun kişi aralığı `minOyuncu` (varsayılan 2) ile genel üst sınır 12 ar
 | Tasarım adımı | Yok | Yeni ekran yok; metin ve kural değişikliği | pm varsayılanı |
 
 ## v9: Quiz Night — dizi/film paketleri (Semih, 31.10.2026) — ONAYLANDI (Semih, 31.10.2026, msg 883)
-Issue'lar (Faz 1): #221 tasarım (tasarim), #222 kabul testleri (qa), #223 saf modül ve içerik şeması (backend; #222 bitince), #224 ekranlar (frontend; #221, #222, #223 bitince), #225 ilk 3 paketin taslağı (pm), #226 paketleri JSON'a çevirme (backend; #223 ve #225 bitince).
+Issue'lar (Faz 1): #221 tasarım (tasarim), #222 kabul testleri (qa), #223 saf modül ve içerik şeması (backend; #222 bitince), #224 ekranlar (frontend; #221, #222, #223 bitince), #225 ilk 3 paketin taslağı (pm), #226 paketleri JSON'a çevirme (backend; #223 ve #225 bitince). Güncelleme (Semih, msg 925): #243 beraberlik ve kazanan kabul testleri (qa), #244 beraberlikte zorluk katsayısı (backend; #243 bitince); #221 paylaşım kartı ve #224 sonuç ekranı buna göre.
 Faz 2 (oda modu, KK-113) issue'ları Faz 1 merge edilince açılır.
 Araştırma: `docs/quiz-night-arastirma.md` (#216), `docs/quiz-dizi-film-analiz.md` (#218).
 
@@ -519,7 +519,7 @@ Kafadar'ın tek başına oynanabilen ilk oyunudur: `minOyuncu` 1'dir ve "1 kişi
    - **Tek başına:** Şıka dokunulur ve cevap kilitlenir. Doğru şık `ok`, yanlış seçilen şık `nok` rengini alır. Yaklaşık 1,5 sn sonra sıradaki soru gelir. Süre yok.
    - **Tek telefonda grup:** Telefonu tutan kişi soruyu ve şıkları sesli okur, herkes sesli cevap verir. "Cevabı göster"e basılınca doğru şık açılır. Telefonu tutan kişi bilenleri oyuncu çiplerinden işaretler ve "Sonraki"ye basar. Telefonu tutan kişi de oynar, çünkü cevabı o da göstere basınca görür. Süre yok.
    - **Oda (Faz 2):** Herkes kendi telefonundan şık seçer. Soru en çok 20 sn sürer; herkes cevaplayınca beklemeden açıklamaya geçilir. Açıklamadan sonra "Sonraki soru"ya kuran kişi basar.
-5. **Sonuç:** Büyük "8/10" ve paketin unvanı. Grupta ve odada sıralama ile herkesin unvanı gösterilir. "Tekrar" ve "Başka paket" düğmeleri ile 9:16 paylaşım kartı vardır.
+5. **Sonuç:** Büyük "8/10" ve paketin unvanı. Grupta ve odada sıralama ile herkesin unvanı gösterilir. Birinci 🏆 ve esprili unvanıyla en üstte öne çıkar; eşit doğru sayısında zor sorular daha çok sayılır. "Tekrar" ve "Başka paket" düğmeleri ile 9:16 paylaşım kartı vardır.
 
 ### Kabul kriterleri (v9)
 - [ ] KK-106: Ana ekranda 🧠 Quiz Night kartı vardır ve kartta "1–12 kişi" yazar. Kart "Tümü", "1 kişi", "2 kişi" ve "3+ kişi" çiplerinin hepsinde görünür. ⓘ "Nasıl oynanır" metni üç modu da kısaca anlatır (KK-91).
@@ -538,12 +538,14 @@ Kafadar'ın tek başına oynanabilen ilk oyunudur: `minOyuncu` 1'dir ve "1 kişi
   - "Tekrar" düğmesi aynı pakette yeni bir tur açar (KK-109).
   - "Başka paket" düğmesi paket seçimine döner.
   - 9:16 paylaşım kartında paket adı, puan, unvan ve Kafadar logosu bulunur. Soru ve cevap yoktur.
+  - Grupta (ve odada) paylaşım kartı birinciyi gösterir: 🏆, adı, puanı ve unvanı. Ortak birincilik varsa hepsinin adı yazar. Tek başına modda kart oyuncunun kendi sonucudur.
   - Web'de paylaşım menüsü yoksa mevcut oyunlardaki yedek davranış kullanılır.
 - [ ] KK-112: Tek telefonda grup modu şöyle işler:
   - Doğru şık, "Cevabı göster"e basılana kadar ekranda hiçbir biçimde belli olmaz.
   - Göster'den sonra doğru şık açılır. Telefonu tutan kişi bilenleri oyuncu çiplerinden işaretler (hiç kimse ya da herkes olabilir) ve "Sonraki"ye basar.
   - Süre yoktur.
-  - Sonuçta oyuncular doğru sayısına göre sıralanır; eşit puanlılar aynı sıradadır. Her oyuncunun unvanı görünür.
+  - Sonuçta oyuncular KK-114'teki kurala göre sıralanır. Her oyuncunun unvanı görünür.
+  - Birinci (ya da ortak birinciler) 🏆 ve esprili unvanıyla en üstte, büyük gösterilir.
 - [ ] KK-113 (Faz 2, oda modu): Herkes aynı soruyu kendi telefonunda görür ve şık seçer.
   - Cevap kilitlenir.
   - Doğru şık, açıklama aşamasına kadar istemcilere gönderilmez; ağ trafiğinde de görünmez (KK-66 gibi).
@@ -553,7 +555,10 @@ Kafadar'ın tek başına oynanabilen ilk oyunudur: `minOyuncu` 1'dir ve "1 kişi
   - "Sonraki soru" düğmesi yalnızca kuranda görünür, kuran ayrılırsa bir sonraki bağlı oyuncuya geçer (KK-68).
   - Kod, lobi, yeniden bağlanma ve veri silme kuralları mevcut odalarla aynıdır (KK-70). Kopukken kaçırılan sorular yanlış sayılır.
   - OK mu NOK mu ve 10/10 ama odaları bozulmaz.
-- [ ] KK-114: Puan, doğru cevap sayısıdır. Yanlış cevap puan düşürmez ve hız bonusu yoktur. Puan ve unvan hesabı saf fonksiyondur.
+- [ ] KK-114: Puan, doğru cevap sayısıdır. Yanlış cevap puan düşürmez ve hız bonusu yoktur. Unvan bu puana göre verilir.
+  - Sıralama önce doğru sayısına göredir. Eşitlikte zorluk katsayılı toplam belirler: kolay 1, orta 2, zor 3.
+  - Katsayılı toplam da eşitse oyuncular aynı sıradadır; birden çok birinci olabilir.
+  - Puan, unvan ve sıralama hesabı saf fonksiyondur. Oda modu (KK-113) aynı kuralı kullanır.
 - [ ] KK-115: İçerik `content/quiz/<paket>.json` dosyalarındadır ve `npm run icerik` (CI'da da) şunları denetler. Kurala uymayan paket CI'ı kırmızı yapar.
   - **Paket alanları:** `id`, `ad`, `emoji`, `koken` (`tr` ya da `yabanci`) ve 4 unvan (0–3, 4–6, 7–9, 10; eksiksiz ve çakışmasız).
   - **Havuz:** 20–30 soru. Her zorluktan en az 6 soru. Olay örgüsü sorusu (`tur: "olay"`) havuzun yarısından azdır; tam yarı reddedilir.
@@ -599,6 +604,8 @@ Kafadar'ın tek başına oynanabilen ilk oyunudur: `minOyuncu` 1'dir ve "1 kişi
 | Tek telefonda grup | Telefonu tutan okur ve bilenleri işaretler; telefon dolaştırılmaz | 10 soru yaklaşık 5 dk sürer; dolaştırmak 5 kişide 25 dakikayı geçer | tasarim önerisi, pm varsayılanı |
 | Süre | Tek başına ve tek telefonda yok; odada 20 sn, herkes cevaplayınca geçer | Acele yok; oda modunda tempo için | tasarim önerisi, pm varsayılanı |
 | Puan | Doğru sayısı; hız bonusu ve eksi puan yok | En sade kural (geliştirme ilkesi) | pm varsayılanı (backend hız bonusu önerdi; sonra eklenebilir) |
+| Kazanan ve beraberlik | Birinci öne çıkar ve paylaşım kartında yer alır; eşit doğru sayısında zorluk katsayısı (kolay 1, orta 2, zor 3) belirler, o da eşitse ortak birincilik | Grupta kazanan önemli | Semih (msg 925); katsayılar ve ortak birincilik pm varsayılanı |
+| Grup paylaşım kartı | Birincinin adı, puanı ve unvanı | Ortalama yerine kazanan | Semih (msg 925) |
 | Faz sırası | Faz 1 tek başına ve tek telefon + içerik; Faz 2 oda | Oda modu en riskli ve en büyük iş | backend, frontend ve qa önerisi |
 | İçerik akışı | pm kaynaklı taslak yazar (`docs/quiz/`), bir insan onaylar, backend JSON'a çevirir | Desteler de böyle yapıldı | pm varsayılanı |
 | Mağaza | Uygulama adında ve mağaza metninde dizi/film adı yok | Apple 5.2.1, Google Play fikri mülkiyet politikası | analiz belgesi (#218) |
