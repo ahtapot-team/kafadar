@@ -86,7 +86,7 @@ PRD'deki her kabul kriteri için "KK-nn" ifadesi geçen test dosyaları ve gerç
 | KK-94 | Uygulama her açıldığında (web'de sayfa yenilendiğinde de) önce açılış ekranı görünür. Ekra | `acilis.kabul.test.ts`, `v81.kabul.test.ts` | — |
 | KK-95 | Yüzde yalnızca ileri gider. Hazırlık (yazı tipleri ve kayıtlı ayarlar) bitmeden %100 olmaz | `acilis.kabul.test.ts`, `v81.kabul.test.ts` | — |
 | KK-96 | Ekrana dokunmak kalan bekleme süresini atlar. Hazırlık bittiyse hemen geçer, bitmediyse ha | `acilis.kabul.test.ts`, `v81.kabul.test.ts` | — |
-| KK-97 | Söz her açılışta bütün sözler arasından rastgele seçilir. Oyuna ait sözün altında oyunun a | `acilis.kabul.test.ts`, `v81.kabul.test.ts` | — |
+| KK-97 | Söz her açılışta bütün sözler arasından rastgele seçilir. Oyuna ait sözün altında oyunun a | `acilis.kabul.test.ts`, `games/gorsel-veri.kabul.test.ts`, `v81.kabul.test.ts` | — |
 | KK-98 | Sözler `content/` altında tek bir JSON dosyasındadır; yeni söz eklemek kod değişikliği ger | `acilis.kabul.test.ts`, `icerik/soz.kabul.test.ts`, `v81.kabul.test.ts` | — |
 | KK-99 | Ekran okuyucu yüzdeyi ve sözü okur. Açılış ekranı koyu ve açık temada çalışır; stil değerl | `acilis.kabul.test.ts`, `v81.kabul.test.ts` | — |
 | KK-100 | Mevcut akışlar değişmez: "Devam et", oda davet bağlantısıyla katılım ve ayarlar eskisi gib | `acilis.kabul.test.ts`, `v81.kabul.test.ts` | — |
@@ -105,18 +105,18 @@ PRD'deki her kabul kriteri için "KK-nn" ifadesi geçen test dosyaları ve gerç
 | KK-117 | Faz 1 en az 3 paketle çıkar, en az biri Türk ve en az biri yabancı yapım olur. Testlerdeki | `icerik/quiz.kabul.test.ts` | cihaz |
 | KK-119 | Diğer oyunlar ve akışlar değişmez. Mevcut kabul testleri yeşil kalır. KK-104'teki "1 kişi  | `games/kategori.kabul.test.ts`, `quiz-night.kabul.test.ts` | — |
 | KK-120 | Her Quiz Night paketinde `kategori` alanı vardır: `dizi-film`, `muzik` ya da `spor`. `npm  | `icerik/quiz-kategori.kabul.test.ts`, `icerik/quiz.kabul.test.ts` | — |
-| KK-121 | Paket seçiminde yatay ve tek seçimli bir kategori çip satırı vardır. Sıra şudur: Tümü · Di | `games/quiz-night/arayuz.kabul.test.ts`, `games/quiz-night/kategori.kabul.test.ts`, `games/quiz-night/ui.kabul.test.ts` | cihaz |
+| KK-121 | Paket seçiminde yatay ve tek seçimli bir kategori çip satırı vardır. Sıra şudur: Tümü · Di | `games/quiz-night/arayuz.kabul.test.ts`, `games/quiz-night/kategori.kabul.test.ts`, `games/quiz-night/paket-v11.kabul.test.ts`, `games/quiz-night/ui.kabul.test.ts` | cihaz |
 | KK-123 | Müzik ve Spor içerik kuralları (insan incelemesi). KK-116'nın kaynak, uyum ve şık kurallar | — | cihaz |
 | KK-124 | Uygulamanın adında, ikonunda, `app.json`'daki metinlerde ve mağaza metinlerinde hiçbir pak | `quiz-night.kabul.test.ts` | cihaz |
-| KK-125 | İlk içerik şudur: Spor'da 3 paket (Galatasaray, Fenerbahçe, Beşiktaş), Müzik'te 4 paket (M | `games/quiz-night/kategori.kabul.test.ts`, `icerik/quiz-kategori.kabul.test.ts` | cihaz |
+| KK-125 | İlk içerik şudur: Spor'da 3 paket (Galatasaray, Fenerbahçe, Beşiktaş), Müzik'te 4 paket (M | `icerik/quiz-kategori.kabul.test.ts` | cihaz |
 | KK-126 | Diğer oyunlar ve akışlar değişmez. Mevcut kabul testleri yeşil kalır. KK-108 testleri KK-1 | `games/quiz-night/kategori.kabul.test.ts` | — |
-| KK-127 | Ana ekranda oyunlar 2 sütunlu bir ızgarada ikon olarak görünür. Liste görünümü kalkar. | — | cihaz |
-| KK-128 | Kişi çipleri ekranın altındaki sabit bir dock'tadır ve üstünde "Kaç kişisiniz?" yazar. Bu, | — | cihaz |
-| KK-129 | Ana ekranın üstünde tek bir kart vardır: | — | cihaz |
-| KK-130 | İkona basılı tutmak (yaklaşık yarım saniye) o oyunun tanıtım kartını açar. Kart "Tamam" il | — | cihaz |
-| KK-131 | Paket ekranında her paket büyük bir karttır. Bu, KK-122'deki "bir emoji" maddesinin yerini | — | cihaz |
-| KK-132 | Her Quiz Night paketinde zorunlu bir `gorsel` alanı vardır ve bu alan uygulamadaki bir gör | — | cihaz |
-| KK-133 | Görseller: | — | cihaz |
-| KK-134 | Ana ekranda ve paket ekranında emoji karakteri yoktur. Bu bir testle denetlenir. Quiz Nigh | — | cihaz |
-| KK-135 | Erişilebilirlik ve tema: | — | cihaz |
-| KK-136 | Diğer akışlar değişmez: açılış ekranı, oyun ekranları, oda modu ve "Devam et". | — | cihaz |
+| KK-127 | Ana ekranda oyunlar 2 sütunlu bir ızgarada ikon olarak görünür. Liste görünümü kalkar. | `games/ana-ekran-v11.kabul.test.ts`, `games/gorsel-veri.kabul.test.ts`, `quiz-night.kabul.test.ts` | cihaz |
+| KK-128 | Kişi çipleri ekranın altındaki sabit bir dock'tadır ve üstünde "Kaç kişisiniz?" yazar. Bu, | `games/ana-ekran-v11.kabul.test.ts`, `games/kategori.kabul.test.ts` | cihaz |
+| KK-129 | Ana ekranın üstünde tek bir kart vardır: | `games/ana-ekran-v11.kabul.test.ts`, `games/gorsel-veri.kabul.test.ts` | cihaz |
+| KK-130 | İkona basılı tutmak (yaklaşık yarım saniye) o oyunun tanıtım kartını açar. Kart "Tamam" il | `games/ana-ekran-v11.kabul.test.ts` | cihaz |
+| KK-131 | Paket ekranında her paket büyük bir karttır. Bu, KK-122'deki "bir emoji" maddesinin yerini | `games/quiz-night/kategori.kabul.test.ts`, `games/quiz-night/paket-v11.kabul.test.ts` | cihaz |
+| KK-132 | Her Quiz Night paketinde zorunlu bir `gorsel` alanı vardır ve bu alan uygulamadaki bir gör | `games/gorsel-veri.kabul.test.ts`, `games/quiz-night/paket-v11.kabul.test.ts`, `icerik/quiz-kategori.kabul.test.ts`, `icerik/quiz.kabul.test.ts` | cihaz |
+| KK-133 | Görseller: | `games/gorsel-veri.kabul.test.ts` | cihaz |
+| KK-134 | Ana ekranda ve paket ekranında emoji karakteri yoktur. Bu bir testle denetlenir. Quiz Nigh | `games/ana-ekran-v11.kabul.test.ts`, `games/quiz-night/paket-v11.kabul.test.ts` | cihaz |
+| KK-135 | Erişilebilirlik ve tema: | `games/ana-ekran-v11.kabul.test.ts`, `games/quiz-night/paket-v11.kabul.test.ts` | cihaz |
+| KK-136 | Diğer akışlar değişmez: açılış ekranı, oyun ekranları, oda modu ve "Devam et". | `games/gorsel-veri.kabul.test.ts` | cihaz |

@@ -14,11 +14,10 @@ import { dosyaIcerik } from './test/yardimci';
 const quiz = () => oyunlar.find((o) => o.id === 'quiz-night');
 
 describe('KK-106: ana ekranda Quiz Night kartı', () => {
-  it('KK-106: kayıt: 🧠 Quiz Night, aktif, 1–12 kişi', () => {
+  it('KK-106: kayıt: Quiz Night, aktif, 1–12 kişi (v11: ana ekran ikonu gorsel, emoji değil; KK-127/134)', () => {
     const q = quiz();
     expect(q).toBeDefined();
     expect(q!.ad).toBe('Quiz Night');
-    expect(q!.emoji).toBe('🧠');
     expect(q!.aktif).toBe(true);
     expect(q!.minOyuncu).toBe(1);
     expect(kisiMetni(q!)).toBe('1–12 kişi');

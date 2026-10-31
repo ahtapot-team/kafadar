@@ -72,11 +72,10 @@ describe('KK-103: kişi çipleri satırı', () => {
     expect(k).toContain('kategori-cipleri');
   });
 
-  it('KK-103: çip satırı oyun listesinin üstünde, ilk seçim Tümü, seçim kalıcı değil', () => {
+  it('KK-103: ilk seçim Tümü, seçim kalıcı değil (v11: çip satırı alttaki dock, KK-128; konum testi ana-ekran-v11.kabul.test.ts)', () => {
     const k = oku('app/index.tsx');
     expect(k).toContain('cip-');
     expect(k).toMatch(/useState(<[^>]*>)?\(\s*'tumu'\s*\)/);
-    expect(k.indexOf('kategori-cipleri')).toBeLessThan(k.indexOf('ana-oyun-'));
     expect(k).toContain("from '../src/games/kategori'");
     expect(k).not.toMatch(/depo\.setItem\([^)]*cip/i);
   });

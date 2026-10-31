@@ -153,19 +153,19 @@ En az 3 telefon (karışık iOS/Android), aynı Wi-Fi ve en az bir telefonda mob
 
 ## Görsel yenileme (v11: KK-127…KK-136)
 
-Taslak: pm (PRD v11). qa #293'te maddeleri ayrıntılandırır ve testleri ekler.
+Her satır koyu temada, sonra açık temada bakılır (Ayarlar → Tema); sonuç kutusuna iki temada da geçtiyse ✅ yazılır. Ekran görüntüsü: değişiklikten önce/sonra (KK-136). Uçak modunda da bir kez bakılır (satır 7).
 
 | # | KK | Kontrol | iOS | Android |
 |---|---|---|---|---|
-| 1 | KK-127 | Ana ekran 2 sütunlu ikon ızgarası; ikonda logo zemini, kontur, gölge ve kırpılmamış 3D nesne; altında ad ve "2–12 kişi" okunuyor | | |
-| 2 | KK-128 | Kişi çipleri alttaki dock'ta, "Kaç kişisiniz?" yazıyor; süzünce ikonlar çıkıyor, sıra değişmiyor; kaydırınca dock yerinde | | |
-| 3 | KK-129 | İlk açılışta "Öne çıkan" (Quiz Night); bir oyun oynayınca "Son oynanan" ve doğru alt satır; "Oyna" ikonla aynı yere gidiyor | | |
-| 4 | KK-130 | İkona basılı tutunca tanıtım kartı açılıyor, "Tamam" ile ana ekranda kalınıyor; ipucu satırı var; VoiceOver/TalkBack'te "Nasıl oynanır" eylemi | | |
-| 5 | KK-131 | Paket ekranı büyük kartlar: kategori deseni, kırpılmamış nesne, başlık, etiket ve not; kulüp rengi yok | | |
-| 6 | KK-132 | Her paket kartında kendi görseli var; Spor paketlerinde kupa | | |
-| 7 | KK-133 | Uçak modunda görseller yükleniyor; logo, arma, emoji ya da gerçek kişi görseli yok | | |
-| 8 | KK-134 | Ana ekranda ve paket ekranında hiç emoji yok | | |
-| 9 | KK-135 | Koyu ve açık temada okunuyor; dokunma alanları rahat; "Hareketi azalt" açıkken basma animasyonu yok | | |
-| 10 | KK-136 | Açılış, oyun ekranları, oda modu ve "Devam et" eskisi gibi çalışıyor | | |
+| 1 | KK-127 | Ana ekran 2 sütunlu ikon ızgarası: 4 oyun kayıt sırasıyla (OK mu NOK mu, 10/10 ama, Casus kim, Quiz Night). Her ikonda logo zemini, kontur, gölge ve **kırpılmamış** 3D nesne; altında oyun adı ve kişi sayısı ("2–12 kişi", Quiz Night "1–12 kişi") okunuyor, yazı küçük değil (≥12 px). İkona dokununca oyun eskisi gibi açılıyor (mod/oyuncular) | | |
+| 2 | KK-128 | Alttaki dock'ta "Kaç kişisiniz?" ve Tümü · 1 kişi · 2 kişi · 3+ kişi çipleri var. "1 kişi": yalnız Quiz Night kalıyor; "2 kişi": Casus kim kalkıyor; "3+ kişi": hepsi. Kalan ikonların sırası değişmiyor. Boş listede "Bu kişi sayısına uygun oyun henüz yok.". Kaydırınca dock yerinde, klavye/alt çubuk üstüne binmiyor. Seçili çipe tekrar dokununca süzgeç kalkıyor | | |
+| 3 | KK-129 | Temiz kurulumda üstte "Öne çıkan" Quiz Night, "Oyna" çalışıyor. Bir oyun başlatıp ana ekrana dönünce "Son oynanan": ikon, ad, alt satır ("4 kişi · <paket adı>" / paketsiz oyunda "4 kişi"), tek satır, uzunsa üç nokta. "Oyna" ikona dokunmayla aynı yere gidiyor. Çip süzgeci üst kartı gizlemiyor. Uygulamayı kapatıp açınca "Son oynanan" duruyor | | |
+| 4 | KK-130 | İkona ~0,5 sn basılı tutunca tanıtım kartı açılıyor, "Tamam" ile ana ekranda kalınıyor (kartın dışına dokunmak kapatmıyor); kısa dokunuş oyunu açıyor. Ana ekranda ⓘ yok; "Kuralları görmek için oyuna basılı tut" ipucu satırı görünüyor. VoiceOver/TalkBack: ikonda "Nasıl oynanır" eylemi var ve kartı açıyor. Oyun içindeki ⓘ eskisi gibi | | |
+| 5 | KK-131 | Paket ekranı (Quiz Night → paket): büyük kartlar; kategoriye göre desen (Dizi & Film film şeridi, Müzik plak, Spor saha çizgileri); büyük, kırpılmamış 3D nesne; başlık ("Ne kadar … fanısın?"), Türk/Yabancı etiketi (yalnız Dizi & Film) ve not okunuyor; kulüp rengi, arma, logo yok. Kategori çipleri (Tümü · Dizi & Film · Müzik · Spor) süzüyor | | |
+| 6 | KK-132 | Her paket kartında kendi nesnesi: Aşk-ı Memnu kalp, Hababam defter, Prison Break kilit, Manifest megafon, Emir Can İğrek kulaklık, BLOK3 mikrofon, Mabel Matiz nota; üç Spor paketinde (Galatasaray, Fenerbahçe, Beşiktaş) aynı kupa. Boş/kırık görsel yok | | |
+| 7 | KK-133 | **Uçak modunda** uygulama açılıp ana ekran ve paket ekranı görselleri yükleniyor (ağdan inmiyor, kare/boşluk yok). Görsellerde logo, arma, emoji, gerçek kişi yok. İlk açılış ve ekran geçişlerinde takılma yok | | |
+| 8 | KK-134 | Ana ekranda ve paket ekranında hiç emoji yok (ayarlar düğmesi, kişi sayısı, oyun/paket kartları dahil); Quiz Night ikonunda 🧠 yok | | |
+| 9 | KK-135 | Koyu **ve** açık temada: yazılar okunuyor (kontrast), dokunma alanları rahat (≥48 px; ikon, çip, Oyna, Tamam). VoiceOver/TalkBack: ikon "<oyun adı>, <kişi sayısı>", paket kartı başlıkla okunuyor, resimler okunmuyor. Ayarlar → Erişilebilirlik "Hareketi azalt" açıkken basma animasyonu yok; kapalıyken var | | |
+| 10 | KK-136 | Açılış ekranı, her oyunun akışı (OK mu NOK mu, 10/10 ama, Casus kim, Quiz Night tek başına/grup/oda), oda modu ve "Devam et" eskisi gibi çalışıyor; açılış ekranı rozeti hâlâ doğru | | |
 
 **Sonuç:** ☐ iOS geçti  ☐ Android geçti  İmza: ______

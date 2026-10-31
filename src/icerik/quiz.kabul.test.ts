@@ -1,6 +1,6 @@
 // Quiz Night Faz 1 (issue #222): içerik şeması denetimi — KK-115, KK-117. `npm run icerik` (CI) bu denetimi çalıştırır.
 // SÖZLEŞME (backend #223 için):
-//   content/quiz/<paket>.json → { id, ad, emoji, koken:'tr'|'yabanci', unvanlar:[4 metin],
+//   content/quiz/<paket>.json → { id, ad, emoji (v11: kalkar, yerine zorunlu gorsel; bkz. src/games/gorsel-veri.kabul.test.ts), koken:'tr'|'yabanci', unvanlar:[4 metin],
 //       sorular:[{ id, metin, secenekler:[4], dogru:0–3, zorluk:'kolay'|'orta'|'zor', tur:'olay'|'dunya',
 //                  kaynaklar:[{ ad, url }] (≥4), uyum: sayı (≥0.75) }] }
 //   src/icerik/quiz.ts (Node doğrudan çalıştırır: içe aktarmalar .ts uzantılı, React yok)
@@ -26,7 +26,8 @@ type Soru = {
 type Paket = {
   id: string;
   ad: string;
-  emoji: string;
+  emoji?: string;
+  gorsel?: string;
   kategori?: string;
   koken?: string;
   unvanlar: string[];
@@ -64,6 +65,7 @@ const taban = (kolay = 8, orta = 8, zor = 8, olay = 8): Paket => {
     id: 'deneme',
     ad: 'Deneme',
     emoji: '🎬',
+    gorsel: 'design/290-gorsel-yenileme/gorsel/spor.png', // v11 KK-132: zorunlu alan (emoji artık aranmaz)
     kategori: 'dizi-film', // PRD v10 KK-120
     koken: 'tr',
     unvanlar: ['Yabancı', 'Seyirci', 'Hayran', 'Baş hayran'],
@@ -83,11 +85,11 @@ describe('KK-115: paket alanları', () => {
     expect(await gecerli(taban())).toEqual([]);
   });
 
-  it('KK-115: koken yalnız tr ya da yabanci; id/ad/emoji boş olamaz', async () => {
+  it('KK-115: koken yalnız tr ya da yabanci; id/ad boş olamaz (v11: emoji alanı aranmaz, KK-132)', async () => {
     await gecersiz(boz((p) => (p.koken = 'ingiliz')));
     await gecersiz(boz((p) => (p.koken = '')));
     expect(await gecerli(boz((p) => (p.koken = 'yabanci')))).toEqual([]);
-    for (const alan of ['id', 'ad', 'emoji'] as const)
+    for (const alan of ['id', 'ad'] as const)
       await gecersiz(boz((p) => (p[alan] = '  ')));
   });
 
