@@ -14,7 +14,7 @@ Kurallar ve token'lar: [`TASARIM-SISTEMI.md`](TASARIM-SISTEMI.md). Her klasör b
 | `171-kategoriler/` | #171 | Ana ekran kategori çipleri, oyun kartı rozeti (v7) | ⚠️ Kısmen eski | Çip biçimi geçerli (A · Sade liste, Metehan). Kategori çipleri ve tür rozeti v7.1'de kalktı → `183-kisi-filtresi/`. B · Sticker raf `arsiv/`'de. |
 | `183-kisi-filtresi/` | #183 | Kişi çipleri, rozetsiz oyun kartı, boş liste (`ana.html`); ⓘ Nasıl oynanır (`b.html`) (v7.1) | ✅ Geçerli (B) | Ana ekranda varyant yok. ⓘ: B · Yazılı (Semih): oyun öncesi "ⓘ Nasıl oynanır" hapı, oyun içinde kısa ⓘ. A · Yalın `arsiv/`'de. |
 | `190-acilis/` | #190 | Açılış ekranı: logo, yükleme yüzdesi, söz (v8) | ✅ Geçerli (B) | B · Renkli çıkartma (Semih). `0` numaralı ekran sistem açılış görseli önerisidir. A · Sade ortalı `arsiv/`'de. |
-| `221-quiz-night/` | #221 | Quiz Night: tek başına, tek telefonda grup, oda farkları (Faz 2), paylaşım kartı (v9) | 🕓 Seçim bekliyor | `a.html` A · Sade liste, `b.html` B · Yarışma kartı. Seçimden sonra elenen `arsiv/`e taşınır. |
+| `221-quiz-night/` | #221 | Quiz Night: tek başına, tek telefonda grup, oda farkları (Faz 2), paylaşım kartı (v9) | 🕓 Seçim bekliyor | `ekranlar.html?varyant=a` A · Sade liste, `?varyant=b` B · Yarışma kartı. Seçimden sonra elenen `arsiv/`e taşınır. |
 | `arsiv/` | — | Elenen seçenekler | 🗄 Arşiv | Referans alınmaz. `arsiv/2-gorsel-yon/`: A · Neon Gece, C · Gece Dergisi. `arsiv/171-kategoriler/`: B · Sticker raf. `arsiv/183-kisi-filtresi/`: A · Yalın ⓘ. `arsiv/190-acilis/`: A · Sade ortalı. |
 
 **Yeni tasarım eklerken:**

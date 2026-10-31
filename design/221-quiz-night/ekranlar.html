@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Kafadar — Quiz Night</title>
-<!-- #221 (PRD v9, KK-106…KK-113). a.html ve b.html aynı şablondur; yalnızca VARYANT değişir (A · Sade liste, B · Yarışma kartı).
+<!-- #221 (PRD v9, KK-106…KK-113). Tek şablon, iki seçenek: ?varyant=a (A · Sade liste, varsayılan) ya da ?varyant=b (B · Yarışma kartı).
      Kullanım: ?tema=koyu|acik  &bolum=tek|grup-oda (boşsa hepsi)  &boy=375x667  &panel=<kimlik> (tek panel, ör. uzun).
      Renk kuralı: ok/nok yalnızca doğru/yanlış; zorluk yazıyla; sayaç marka, kırmızı yok. Tek dış kaynak: Google Fonts.
      Örnek içerik (Aşk-ı Memnu) yalnızca yerleşim içindir; gerçek sorular #225'te kaynaklarıyla doğrulanır. -->
@@ -160,7 +160,7 @@
 <h1 id="baslik">Kafadar — Quiz Night</h1>
 <div id="ekranlar"></div>
 <script>
-const VARYANT = 'b';
+const VARYANT = new URLSearchParams(location.search).get('varyant') === 'b' ? 'b' : 'a';
 const V = { a: 'A · Sade liste', b: 'B · Yarışma kartı' }[VARYANT];
 const B = VARYANT === 'b';
 const p = new URLSearchParams(location.search);
