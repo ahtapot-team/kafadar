@@ -6,7 +6,7 @@
 <title>Kafadar — #290 Görsel yenileme (2. tur)</title>
 <!-- #290 2. tur: ana ekran = konsept A (Semih, msg 1051); ikon = oyuna özel logo zemini + kendi çizdiğimiz 3D nesne (Semih, msg 1053: C; yöntem Three.js, msg 1069: B).
      Emoji yok. Görseller: gorsel/ (gorsel/sahne.html'den render, bkz. gorsel/LISANS.md). Logo zeminleri düz CSS (kendi çizimimiz).
-     Kullanım: ?ekran=ana | paket-a | paket-b (tek ekran, 390×844, PNG için). Tek dış kaynak: Google Fonts. -->
+     Kullanım: ?ekran=ana | paket (tek ekran, 390×844, PNG için). Tek dış kaynak: Google Fonts. -->
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&display=swap" rel="stylesheet">
 <style>
   :root { --kontur: #0B0920; --golge: #7C6CFF; --marka: #FFD23F; --marka-2: #5B8CFF; --krem: #FFF8E7;
@@ -31,7 +31,7 @@
     box-shadow: 5px 5px 0 var(--golge); color: var(--kontur); font-size: 27px; font-weight: 800; letter-spacing: -0.04em; }
   .kare { width: 48px; height: 48px; flex: none; border-radius: 14px; border: 3px solid var(--kontur); background: var(--yuzey); display: grid; place-items: center;
     font-weight: 800; font-size: 24px; color: var(--metin); }
-  .kare img { width: 34px; height: 34px; }
+  .kare img { width: 46px; height: 46px; margin: -4px; }
   .bilgi-i { width: 26px; height: 26px; border-radius: 50%; background: var(--marka); border: 3px solid var(--kontur); color: var(--kontur);
     display: inline-grid; place-items: center; font-size: 14px; font-weight: 800; flex: none; }
   .bilgi-yazili { height: 48px; display: inline-flex; align-items: center; gap: 8px; padding: 0 14px 0 9px; border-radius: 14px; border: 3px solid var(--kontur);
@@ -46,7 +46,7 @@
     background: var(--c); overflow: hidden; display: grid; place-items: center; flex: none; }
   .ikon::before { content: ''; position: absolute; inset: 0; background: var(--desen); }
   .ikon::after { content: ''; position: absolute; inset: 0; background: linear-gradient(160deg, rgba(255,255,255,.38), rgba(255,255,255,0) 44%); }
-  .ikon img { position: relative; z-index: 1; width: 100px; height: 100px; }
+  .ikon img { position: relative; z-index: 1; width: 166px; height: 166px; margin: -20px; } /* C (Semih msg 1082): nesne büyük, kırpılmadan */
   /* Oyunlar */
   .z-ok { --c: var(--marka); --desen: linear-gradient(135deg, transparent 48%, rgba(255,255,255,.6) 48% 52%, rgba(11,9,32,.16) 52%); }
   .z-onon { --c: var(--marka-2); --desen: repeating-conic-gradient(from 0deg at 50% 50%, rgba(255,255,255,.22) 0 10deg, transparent 10deg 20deg); }
@@ -65,7 +65,7 @@
   .widget { margin-top: 18px; flex: none; display: flex; align-items: center; gap: 12px; padding: 12px; border-radius: 26px; border: 4px solid var(--kontur);
     background: var(--yuzey); box-shadow: 6px 6px 0 var(--golge); }
   .widget .ikon { width: 62px; height: 62px; border-radius: 18px; border-width: 3px; box-shadow: none; }
-  .widget .ikon img { width: 46px; height: 46px; }
+  .widget .ikon img { width: 74px; height: 74px; margin: -9px; }
   .widget .yazi { flex: 1; min-width: 0; }
   .widget b { display: block; white-space: nowrap; font-size: 17px; line-height: 1.15; margin: 2px 0; }
   .widget small { font-size: 13px; font-weight: 700; color: var(--soluk); }
@@ -82,14 +82,6 @@
   .dock .ust-yazi { margin: 0 4px 7px; }
   /* ---- Paket ekranı ---- */
   .baslik { margin: 10px 0 12px; font-size: 30px; font-weight: 800; letter-spacing: -0.03em; flex: none; }
-  .bolum { margin: 20px 0 10px; flex: none; } .bolum .ust-yazi { color: var(--metin); }
-  .bolum small { display: block; margin-top: 2px; font-size: 12px; font-weight: 700; color: var(--soluk); }
-  .klasor { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px 12px; flex: none; }
-  .klasor .ikon { width: 92px; height: 92px; border-radius: 27px; border-width: 3px; box-shadow: 5px 5px 0 var(--golge); }
-  .klasor .ikon img { width: 66px; height: 66px; }
-  .klasor .z-spor { --desen: radial-gradient(circle, transparent 0 20px, rgba(255,255,255,.4) 20px 23px, transparent 23px),
-    linear-gradient(90deg, transparent calc(50% - 1.5px), rgba(255,255,255,.4) 0 calc(50% + 1.5px), transparent 0); }
-  .klasor .uyg b { margin-top: 9px; font-size: 14px; } .klasor .uyg small { font-size: 12px; }
   /* b: büyük 3D kart, kart zemini kategori logo zemini, nesne sağ üstten taşar */
   .kartlar { display: flex; flex-direction: column; gap: 22px; margin-top: 26px; flex: none; }
   .kart { position: relative; min-height: 108px; padding: 22px 116px 16px 16px; border-radius: 24px; border: 4px solid var(--kontur); box-shadow: 6px 6px 0 var(--golge);
@@ -152,13 +144,7 @@ const PAKET = [
 const paketUst = `${durum}${ust('<span class="kare" aria-label="Geri">←</span>', '<span class="bilgi-yazili"><span class="bilgi-i">i</span>Nasıl oynanır</span>')}
   <h2 class="baslik">Neyin fanısın?</h2>
   <div class="cipler" role="radiogroup" aria-label="Kategori"><span class="fcip sec">✓ Tümü</span><span class="fcip">Dizi & Film</span><span class="fcip">Müzik</span><span class="fcip">Spor</span></div>`;
-const paketA = `<section class="ekran"><div class="duvar"></div>${paketUst}
-  ${Object.entries(KAT).map(([k, c]) => `<div class="bolum"><div class="ust-yazi">${c.ad}</div><small>${c.not}</small></div>
-    <div class="klasor">${PAKET.filter(x => x.k === k).map(x => `<div class="uyg" role="button" aria-label="${x.baslik || `Ne kadar ${x.ad} fanısın?`}">${ikon('z-' + k, x.g)}
-      <b>${x.ad}</b>${x.koken ? `<small>${x.koken}</small>` : ''}</div>`).join('')}</div>`).join('')}
-  <div class="sol"></div>
-</section>`;
-const paketB = `<section class="ekran"><div class="duvar"></div>${paketUst}
+const paket = `<section class="ekran"><div class="duvar"></div>${paketUst}
   <div class="kartlar">${PAKET.map(x => `<div class="kart z-${x.k}" role="button"><b>${x.baslik || `Ne kadar ${x.ad} fanısın?`}</b>
     <div class="meta">${x.koken ? `<span class="rozet">${x.koken}</span>` : ''}${KAT[x.k].not.split(' · ').map(t => `<span class="nw">${t}</span>`).join(' · ')}</div>
     <img src="${G(x.g)}" alt=""></div>`).join('')}</div>
@@ -167,8 +153,7 @@ const paketB = `<section class="ekran"><div class="duvar"></div>${paketUst}
 
 const EKRAN = [
   { id: 'ana', ad: 'Ana ekran (A): 2 sütun ikon; logo zemini oyuna özel (OK mu NOK mu ikiye bölünmüş, 10/10 ışınlar, Casus kim spot ışığı, Quiz Night gece). ⓘ yok: ikona basılı tutunca tanıtım kartı açılır. Üstte Son oynanan (ilk açılışta Öne çıkan), altta dock\'ta kişi çipleri', html: ana },
-  { id: 'paket-a', ad: 'Paket ekranı a · Izgara: kategori başlıklı 3 sütun ikon (Dizi & Film film şeridi, Müzik plak, Spor saha çizgisi). "Ne kadar … fanısın?" sonraki ekranda', html: paketA },
-  { id: 'paket-b', ad: 'Paket ekranı b · Büyük 3D kartlar: kart zemini kategori logo zemini, nesne kartın sağ üstünden taşar. Başlık, rozet, not #261 ile aynı', html: paketB },
+  { id: 'paket', ad: 'Paket ekranı (b, Semih msg 1082) · Büyük 3D kartlar: kart zemini kategori logo zemini, nesne kartın sağ üstünden taşar. Başlık, rozet, not #261 ile aynı', html: paket },
 ];
 if (tek) document.body.classList.add('tek');
 document.getElementById('sahne').innerHTML = EKRAN.filter(e => !tek || e.id === tek)

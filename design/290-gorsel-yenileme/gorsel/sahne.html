@@ -24,7 +24,7 @@
   .ikon { position: relative; width: 100px; height: 100px; border-radius: 28px; border: 3px solid var(--kontur); box-shadow: 4px 4px 0 var(--golge);
     background: var(--c); overflow: hidden; display: grid; place-items: center; }
   .ikon::after { content: ''; position: absolute; inset: 0; background: linear-gradient(160deg, rgba(255,255,255,.38), rgba(255,255,255,0) 44%); }
-  .ikon canvas { position: relative; z-index: 1; width: 84px; height: 84px; }
+  .ikon canvas { position: relative; z-index: 1; width: 120px; height: 120px; margin: -10px; }
   .uyg b { margin-top: 8px; font-size: 13px; font-weight: 800; line-height: 1.15; }
   .not { margin-top: 22px; font-size: 12px; font-weight: 700; line-height: 1.45; color: var(--soluk); }
   .tek canvas { display: block; width: 100vmin; height: 100vmin; }
@@ -282,7 +282,7 @@ try {
   } else {
     document.getElementById('izgara').innerHTML = LISTE.map(([id, ad, c]) =>
       `<div class="uyg"><div class="ikon" style="--c: var(${c})"><canvas data-id="${id}"></canvas></div><b>${ad}</b></div>`).join('');
-    document.querySelectorAll('canvas[data-id]').forEach(c => kopya(ciz(c.dataset.id), 168, c));
+    document.querySelectorAll('canvas[data-id]').forEach(c => kopya(ciz(c.dataset.id), 240, c));
   }
   pmrem.dispose();
 } catch (e) {
