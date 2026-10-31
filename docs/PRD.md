@@ -708,7 +708,7 @@ Oyun kuralları (tur, puan, unvan, modlar) değişmez. Değişen yalnızca paket
 - **Taraftar hassasiyeti:** Kulüp sorusundaki tek bir yanlış bilgi tepki çeker. Uyum kuralı ve tartışmalı konu yasağı bu yüzden var.
 - **Marka:** Kulüp adları tescilli marka. Risk sıfır değildir; mağazaya çıkmadan önce avukata danışılır (#218).
 
-## v11: Görsel yenileme — ana ekran ve paket ekranı (Semih, 31.10.2026) — ONAY BEKLİYOR
+## v11: Görsel yenileme — ana ekran ve paket ekranı (Semih, 31.10.2026) — ONAYLANDI (Semih, 31.10.2026, msg 1089)
 Issue'lar:
 - #292 tasarım: açık tema, eksik durumlar, uygulamaya hazır görsel seti (tasarim; PR #291 merge edildi)
 - #293 kabul testleri (qa; bu PRD merge edilince)
