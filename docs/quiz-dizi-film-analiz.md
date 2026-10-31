@@ -71,7 +71,7 @@ Bu öneri; fikir turu, PRD ve onayla netleşecek.
 
 1. Castle Rock v. Carol Publishing (Seinfeld Aptitude Test), Wikipedia: https://en.wikipedia.org/wiki/Castle_Rock_Entertainment,_Inc._v._Carol_Publishing_Group_Inc. · Justia (ilk derece kararı): https://law.justia.com/cases/federal/district-courts/FSupp/955/260/1516124
 2. Warner Bros. v. RDR Books (Harry Potter Lexicon), ABD Telif Ofisi özeti: https://www.copyright.gov/fair-use/summaries/warnerbros-rdrbooks-sdny2008.pdf · DMLP: https://www.dmlp.org/node/2035
-3. Trivial Pursuit Friends sürümü: https://www.moonpig.com/uk/gifts/trivial-pursuit-friends-edition/game50 · Trivial Pursuit Harry Potter sürümü (USAopoly): https://www.dillards.com/p/usaopoly-trivial-pursuit-world-of-harry-potter-ultimate-edition/514638772
+3. Trivial Pursuit Friends sürümü: https://boardgameoracle.com/en-GB/boardgame/price/GFQ4UdfDMi/trivial-pursuit-friends · Trivial Pursuit Harry Potter sürümü (USAopoly): https://www.dillards.com/p/usaopoly-trivial-pursuit-world-of-harry-potter-ultimate-edition/514638772
 4. 6769 sayılı Sınai Mülkiyet Kanunu (SMK), mevzuat.gov.tr: https://www.mevzuat.gov.tr/mevzuatmetin/1.5.6769.pdf · Lexpera, markanın kullanım amacını göstermek üzere kullanılması: https://www.lexpera.com.tr/literatur/kitaplar/v-bolum-mal-veya-hizmetin-kullanim-amacini-gostermek-uzere-markanin-kullanilmasi-978-625-5878-62-5
 5. Karar, "Kurtlar Vadisi Darbe" için savcılığa başvuru: https://www.karar.com/kurtlar-vadisi-darbe-icin-savciliga-basvuru-275213 · Vatan, başvuru reddedildi: https://www.gazetevatan.com/gundem/kurtlar-vadisi-darbe-basvurusu-reddedildi-977854
 6. Apple App Review Guidelines (5.2.1): https://developer.apple.com/app-store/review/guidelines/
