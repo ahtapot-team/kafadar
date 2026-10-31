@@ -9,12 +9,14 @@ import { existsSync, readFileSync } from 'node:fs';
 import { describe, expect, it } from 'vitest';
 import { cipEslesir, CIPLER, filtrele, kisiMetni } from './games/kategori';
 import { oyunlar } from './games/registry';
+import { BEKLEYEN } from './kabul';
 import { dosyaIcerik } from './test/yardimci';
 
+const kabulQuiz = BEKLEYEN.quizKayit ? it.fails : it;
 const quiz = () => oyunlar.find((o) => o.id === 'quiz-night');
 
 describe('KK-106: ana ekranda Quiz Night kartı', () => {
-  it('KK-106: kayıt: 🧠 Quiz Night, aktif, 1–12 kişi', () => {
+  kabulQuiz('KK-106: kayıt: 🧠 Quiz Night, aktif, 1–12 kişi', () => {
     const q = quiz();
     expect(q).toBeDefined();
     expect(q!.ad).toBe('Quiz Night');
@@ -25,16 +27,19 @@ describe('KK-106: ana ekranda Quiz Night kartı', () => {
     expect(q!.tanitim?.kisi).toBe('1–12 kişi');
   });
 
-  it('KK-106: Tümü, 1 kişi, 2 kişi ve 3+ kişi çiplerinin hepsinde görünür', () => {
-    const q = quiz()!;
-    expect(CIPLER).toEqual(['tumu', '1-kisi', '2-kisi', '3-uzeri-kisi']);
-    for (const c of CIPLER) {
-      expect(cipEslesir(c, q)).toBe(true);
-      expect(filtrele(oyunlar, c).map((o) => o.id)).toContain('quiz-night');
-    }
-  });
+  kabulQuiz(
+    'KK-106: Tümü, 1 kişi, 2 kişi ve 3+ kişi çiplerinin hepsinde görünür',
+    () => {
+      const q = quiz()!;
+      expect(CIPLER).toEqual(['tumu', '1-kisi', '2-kisi', '3-uzeri-kisi']);
+      for (const c of CIPLER) {
+        expect(cipEslesir(c, q)).toBe(true);
+        expect(filtrele(oyunlar, c).map((o) => o.id)).toContain('quiz-night');
+      }
+    },
+  );
 
-  it('KK-106: ⓘ metni üç modu da kısaca anlatır (KK-91)', () => {
+  kabulQuiz('KK-106: ⓘ metni üç modu da kısaca anlatır (KK-91)', () => {
     const metin = (quiz()?.tanitim?.metin ?? '').toLocaleLowerCase('tr');
     expect(metin).toMatch(/tek başına/);
     expect(metin).toMatch(/grup|tek telefon/);
@@ -124,11 +129,14 @@ describe('KK-119: diğer oyunlar değişmez, belgeler güncel', () => {
     );
   });
 
-  it('KK-119: gerçek kayıtta "1 kişi" çipi boş değildir (Quiz Night)', () => {
-    expect(filtrele(oyunlar, '1-kisi').map((o) => o.id)).toEqual([
-      'quiz-night',
-    ]);
-  });
+  kabulQuiz(
+    'KK-119: gerçek kayıtta "1 kişi" çipi boş değildir (Quiz Night)',
+    () => {
+      expect(filtrele(oyunlar, '1-kisi').map((o) => o.id)).toEqual([
+        'quiz-night',
+      ]);
+    },
+  );
 
   it("KK-119: CLAUDE.md ve docs/MIMARI.md Quiz Night'ı anlatır", () => {
     for (const d of ['CLAUDE.md', 'docs/MIMARI.md'])

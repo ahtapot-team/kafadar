@@ -41,16 +41,6 @@
     {"id": "s-037", "text": "\"Sanırım bu, güzel bir dostluğun başlangıcı.\" Oyun bitince de geçerli.", "oyun": "genel"},
     {"id": "s-038", "text": "\"Kurallar daha çok yönerge gibidir.\" Korsanlarda öyle; Kafadar'da kural kuraldır.", "oyun": "genel"},
     {"id": "s-039", "text": "\"Sevgi neydi? Sevgi iyilikti, dostluktu, sevgi emekti.\" Oyundan sonra masayı toplamak da emek.", "oyun": "genel"},
-    {"id": "s-040", "text": "Bir elin nesi var, iki elin sesi var. Altı elin ise kahkahası.", "oyun": "genel"},
-    {"id": "s-041", "text": "Bilmediğin soruya 'ben zaten bunu biliyordum' demek de bir beceridir. Burada puan getirmez ama.", "oyun": "quiz-night"},
-    {"id": "s-042", "text": "Dört şık var, doğru bir tane. Gerisi, 'ama ben şuydu sanmıştım' diyenlere.", "oyun": "quiz-night"},
-    {"id": "s-043", "text": "Bu quizde yanlış cevap puan düşürmez; sadece masadaki kıskançlık seviyesini yükseltir.", "oyun": "quiz-night"},
-    {"id": "s-044", "text": "Unvan puana göre verilir, kibir kimseye bedava. Yine de iyi taşı.", "oyun": "quiz-night"},
-    {"id": "s-045", "text": "Son soruya geldin. Ya efsane olursun ya çok iyi bir anı bırakırsın.", "oyun": "quiz-night"},
-    {"id": "s-046", "text": "Telefonu tutan okur, herkes bağırır, bilen sessizce gülümser. Klasik.", "oyun": "quiz-night"},
-    {"id": "s-047", "text": "'Bunu bilmem zaten' diyenler listesi bu turun sonunda açıklanır.", "oyun": "quiz-night"},
-    {"id": "s-048", "text": "Şıklardan ikisini hemen eleyebiliyorsan yarı yoldasın. Kalanı cesaret.", "oyun": "quiz-night"},
-    {"id": "s-049", "text": "Bir dizi seç, bir fan ol. Fanlığın puanı ise 10 üzerinden hesaplanır.", "oyun": "quiz-night"},
-    {"id": "s-050", "text": "İlk kolay sorulara dikkat: en çok gurur orada kırılır.", "oyun": "quiz-night"}
+    {"id": "s-040", "text": "Bir elin nesi var, iki elin sesi var. Altı elin ise kahkahası.", "oyun": "genel"}
   ]
 }

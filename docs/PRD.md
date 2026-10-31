@@ -309,7 +309,6 @@ Bir oyun o telefonda ilk kez açıldığında oyunu 3–4 satırda anlatan bir k
 | OK mu NOK mu | 2–12 kişi | Kartta bir durum çıkar: "İlk buluşmada hesabı bölmek". 3-2-1'de herkes başparmağıyla OK 👍 ya da NOK 👎 gösterir. Telefonu tutan kişi oyları girer, sonra kimin tek başına kaldığı ortaya çıkar. Oda modunda herkes kendi telefonundan oy verir. |
 | Casus kim | 3–12 kişi | Telefon elden ele dolaşır. Herkes aynı kelimeyi görür, casus ise yalnızca bir ipucu. Sırayla birbirinize kelimeyle ilgili sorular sorun, ama kelimeyi söylemeyin. Sonunda casusu oylayın. Yakalanan casus kelimeyi bilirse yine kazanır. |
 | 10/10 ama | 2–12 kişi | Kartta kusursuz biri ve bir "ama" var: "10/10 ama sabah 5'te kalkıyor". Herkes parmaklarıyla 0–10 arası yeni puanını gösterir, telefonu tutan kişi puanları girer. Ortalama ve en uç puanlar açıklanır. Oda modunda puanlar gizlidir ve her karttan sonra açılır. |
-| Quiz Night | 1–12 kişi | Bir dizi seç, 10 soru gelsin: kolaydan zora, 4 şık. Bildiğin kadar puan, sonunda bir unvan. Tek başına kendi hızında oynarsın; tek telefonda grup modunda telefonu tutan okur, herkes sesli cevaplar, "Cevabı göster"den sonra bilenler işaretlenir. Oda modu yakında. |
 
 ### Kapsam dışı (v6)
 - Adım adım etkileşimli eğitim. Video. Ayarlardan "tanıtımları sıfırla" seçeneği.
