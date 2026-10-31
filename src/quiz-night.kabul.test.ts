@@ -13,7 +13,6 @@ import { BEKLEYEN } from './kabul';
 import { dosyaIcerik } from './test/yardimci';
 
 const kabulQuiz = BEKLEYEN.quizKayit ? it.fails : it;
-const kabulBelge = BEKLEYEN.quizModul ? it.fails : it; // belgeleri #223 yazar (belge:kontrol kuralı)
 const quiz = () => oyunlar.find((o) => o.id === 'quiz-night');
 
 describe('KK-106: ana ekranda Quiz Night kartı', () => {
@@ -139,7 +138,7 @@ describe('KK-119: diğer oyunlar değişmez, belgeler güncel', () => {
     },
   );
 
-  kabulBelge("KK-119: CLAUDE.md ve docs/MIMARI.md Quiz Night'ı anlatır", () => {
+  it("KK-119: CLAUDE.md ve docs/MIMARI.md Quiz Night'ı anlatır", () => {
     for (const d of ['CLAUDE.md', 'docs/MIMARI.md'])
       expect(dosyaIcerik(d), d).toMatch(/Quiz Night/);
   });
