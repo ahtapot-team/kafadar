@@ -1,0 +1,796 @@
+{
+  "id": "manifest",
+  "ad": "Manifest",
+  "emoji": "💃",
+  "kategori": "muzik",
+  "unvanlar": [
+    "Zamansızdık ama sen biraz geç kaldın",
+    "Daha İyi olacak, Manifestival'in yolundasın",
+    "Hileli değil, puanın hakkıyla kazanılmış",
+    "Başrol Sensin, Manifest'in bir numaralı fanı"
+  ],
+  "sorular": [
+    {
+      "id": "manifest-01",
+      "metin": "Manifest hangi yetenek yarışmasının sonunda kuruldu?",
+      "secenekler": [
+        "O Ses Türkiye",
+        "Big5 Türkiye",
+        "Popstar",
+        "Yetenek Sizsiniz Türkiye"
+      ],
+      "dogru": 1,
+      "zorluk": "kolay",
+      "tur": "dunya",
+      "kaynaklar": [
+        {
+          "ad": "Vikipedi: Manifest (müzik grubu)",
+          "url": "https://tr.wikipedia.org/wiki/Manifest_(müzik_grubu)"
+        },
+        {
+          "ad": "Wikipedia (EN): Manifest (band)",
+          "url": "https://en.wikipedia.org/wiki/Manifest_(band)"
+        },
+        {
+          "ad": "bianet: Türkiye'nin yeni kız grubu: Manifest",
+          "url": "https://bianet.org/yazi/turkiyenin-yeni-kiz-grubu-manifest-310955"
+        },
+        {
+          "ad": "TGRT Haber: Türkiye'nin yeni kız grubu Manifest kimlerden oluşuyor?",
+          "url": "https://www.tgrthaber.com/mavikadin/turkiyenin-yeni-kiz-grubu-manifest-kimlerden-olusuyor-sarkilari-neler"
+        },
+        {
+          "ad": "C-Heads: Turkey's hottest pop group Manifest take Istanbul by storm with Manifestival",
+          "url": "https://www.c-heads.com/2025/07/08/turkeys-hottest-pop-group-manifest-take-istanbul-by-storm-with-manifestival"
+        },
+        {
+          "ad": "Milliyet: Manifest'in toz pembe dünyasına daldık",
+          "url": "https://www.milliyet.com.tr/pazar/manifestin-toz-pembe-dunyasina-daldik-7633494"
+        }
+      ],
+      "uyum": 1.0
+    },
+    {
+      "id": "manifest-02",
+      "metin": "Manifest'in ilk stüdyo albümünün adı nedir?",
+      "secenekler": ["Manifestival", "Toz Pembe", "Başrol Sensin", "Daha İyi"],
+      "dogru": 0,
+      "zorluk": "kolay",
+      "tur": "dunya",
+      "kaynaklar": [
+        {
+          "ad": "Vikipedi: Manifest (müzik grubu)",
+          "url": "https://tr.wikipedia.org/wiki/Manifest_(müzik_grubu)"
+        },
+        {
+          "ad": "Wikipedia (EN): Manifest (band)",
+          "url": "https://en.wikipedia.org/wiki/Manifest_(band)"
+        },
+        {
+          "ad": "bianet: Türkiye'nin yeni kız grubu: Manifest",
+          "url": "https://bianet.org/yazi/turkiyenin-yeni-kiz-grubu-manifest-310955"
+        },
+        {
+          "ad": "Earmilk: Manifest goes full throttle with Manifestival album",
+          "url": "https://earmilk.com/2025/07/14/manifest-goes-full-throttle-with-genre-blending-masterpiece-manifestival-album/"
+        },
+        {
+          "ad": "Ignite Music: Girl group Manifest unveils debut album Manifestival",
+          "url": "https://www.ignitemusicmag.co/post/girl-group-manifest-unveils-debut-album-manifestival"
+        },
+        {
+          "ad": "C-Heads: Turkey's hottest pop group Manifest take Istanbul by storm with Manifestival",
+          "url": "https://www.c-heads.com/2025/07/08/turkeys-hottest-pop-group-manifest-take-istanbul-by-storm-with-manifestival"
+        }
+      ],
+      "uyum": 1.0
+    },
+    {
+      "id": "manifest-03",
+      "metin": "Ekim 2026 itibarıyla Manifest kaç üyeden oluşuyor?",
+      "secenekler": ["4", "8", "6", "7"],
+      "dogru": 2,
+      "zorluk": "kolay",
+      "tur": "dunya",
+      "kaynaklar": [
+        {
+          "ad": "Vikipedi: Manifest (müzik grubu)",
+          "url": "https://tr.wikipedia.org/wiki/Manifest_(müzik_grubu)"
+        },
+        {
+          "ad": "Wikipedia (EN): Manifest (band)",
+          "url": "https://en.wikipedia.org/wiki/Manifest_(band)"
+        },
+        {
+          "ad": "bianet: Türkiye'nin yeni kız grubu: Manifest",
+          "url": "https://bianet.org/yazi/turkiyenin-yeni-kiz-grubu-manifest-310955"
+        },
+        {
+          "ad": "C-Heads: Turkey's hottest pop group Manifest take Istanbul by storm with Manifestival",
+          "url": "https://www.c-heads.com/2025/07/08/turkeys-hottest-pop-group-manifest-take-istanbul-by-storm-with-manifestival"
+        },
+        {
+          "ad": "Official Charts: Manifest interview — Tralala and Wembley",
+          "url": "https://www.officialcharts.com/chart-news/manifest-interview-tralala-wembley/"
+        },
+        {
+          "ad": "The Irish News (PA): Manifest hope UK arena debut will kick off global career",
+          "url": "https://www.irishnews.com/entertainment/turkish-girl-group-manifest-hope-uk-arena-debut-will-kick-off-global-career-J3USXFSPGJNVLC6TXF2IB77WRY/"
+        }
+      ],
+      "uyum": 1.0
+    },
+    {
+      "id": "manifest-04",
+      "metin": "Manifest'in ilk teklisi hangisidir?",
+      "secenekler": ["Hileli", "Toz Pembe", "Tralala", "Zamansızdık"],
+      "dogru": 3,
+      "zorluk": "kolay",
+      "tur": "dunya",
+      "kaynaklar": [
+        {
+          "ad": "Vikipedi: Manifest (müzik grubu)",
+          "url": "https://tr.wikipedia.org/wiki/Manifest_(müzik_grubu)"
+        },
+        {
+          "ad": "Wikipedia (EN): Manifestival",
+          "url": "https://en.wikipedia.org/wiki/Manifestival"
+        },
+        {
+          "ad": "Politikam: Manifest'in ilk şarkısı yayınlandı",
+          "url": "https://www.politikam.com/turkiyenin-yeni-kadin-muzik-grubu-manifestin-ilk-sarkisi-yayinlandi-peki-manifestin-uyeleri-kimler-kac-yasindalar-iste-tum-merak-edilenler"
+        },
+        {
+          "ad": "TGRT Haber: Türkiye'nin yeni kız grubu Manifest kimlerden oluşuyor?",
+          "url": "https://www.tgrthaber.com/mavikadin/turkiyenin-yeni-kiz-grubu-manifest-kimlerden-olusuyor-sarkilari-neler"
+        },
+        {
+          "ad": "Oggusto: Manifest",
+          "url": "https://www.oggusto.com/etkinlik-rehberi/manifest"
+        }
+      ],
+      "uyum": 1.0
+    },
+    {
+      "id": "manifest-05",
+      "metin": "Manifest'in Ajda Pekkan'la düet yaptığı 2026 şarkısı hangisidir?",
+      "secenekler": ["Hileli", "Zehir", "Arıyo", "Durma"],
+      "dogru": 0,
+      "zorluk": "kolay",
+      "tur": "dunya",
+      "kaynaklar": [
+        {
+          "ad": "Vikipedi: Manifest (müzik grubu)",
+          "url": "https://tr.wikipedia.org/wiki/Manifest_(müzik_grubu)"
+        },
+        {
+          "ad": "NTV: Ajda Pekkan ile Manifest'ten düet",
+          "url": "https://www.ntv.com.tr/yasam/ajda-pekkan-ile-manifestten-duet-binlerce-yorum-geldi-1723349"
+        },
+        {
+          "ad": "Evrensel: Ajda Pekkan ve Manifest aynı şarkıda buluştu",
+          "url": "https://www.evrensel.net/haber/5982978/ajda-pekkan-ve-manifest-ayni-sarkida-bulustu-hileli-olay-yaratti"
+        },
+        {
+          "ad": "Türkiye Today: Ajda Pekkan joins girl group Manifest for 'Hileli'",
+          "url": "https://www.turkiyetoday.com/culture/turkish-superstar-ajda-pekkan-joins-girl-group-manifest-for-hileli-crossover-3219614"
+        },
+        {
+          "ad": "Onedio: Ajda Pekkan ve Manifest'in Hileli düetine övgü yağdı",
+          "url": "https://onedio.com/haber/efsane-bulusma-ajda-pekkan-ve-manifest-in-hileli-duetine-ovgu-yagdi-1358168"
+        }
+      ],
+      "uyum": 1.0
+    },
+    {
+      "id": "manifest-06",
+      "metin": "Manifest'in \"Tralala\" teklisi hangi dilde söylenmiştir?",
+      "secenekler": ["Türkçe", "İngilizce", "Korece", "İspanyolca"],
+      "dogru": 1,
+      "zorluk": "kolay",
+      "tur": "dunya",
+      "kaynaklar": [
+        {
+          "ad": "Vikipedi: Manifest (müzik grubu)",
+          "url": "https://tr.wikipedia.org/wiki/Manifest_(müzik_grubu)"
+        },
+        {
+          "ad": "Euronews Türkçe: Manifest, ilk İngilizce şarkı ve ilk İngiltere konseriyle Londra'da",
+          "url": "https://tr.euronews.com/2026/09/26/manifest-ilk-ingilizce-sarki-ve-ilk-ingiltere-konseri-ile-londrada-yeni-donemine-basliyor"
+        },
+        {
+          "ad": "Posta: Manifest'ten İngilizce single",
+          "url": "https://www.posta.com.tr/magazin/manifestten-ingilizce-single-3049746"
+        },
+        {
+          "ad": "Official Charts: Manifest interview — Tralala and Wembley",
+          "url": "https://www.officialcharts.com/chart-news/manifest-interview-tralala-wembley/"
+        },
+        {
+          "ad": "Daily Sabah: Turkish girl group Manifest releases English single 'Tralala'",
+          "url": "https://www.dailysabah.com/arts/music/turkish-girl-group-manifest-releases-1st-english-single-tralala/amp"
+        },
+        {
+          "ad": "The Irish News (PA): Manifest hope UK arena debut will kick off global career",
+          "url": "https://www.irishnews.com/entertainment/turkish-girl-group-manifest-hope-uk-arena-debut-will-kick-off-global-career-J3USXFSPGJNVLC6TXF2IB77WRY/"
+        }
+      ],
+      "uyum": 1.0
+    },
+    {
+      "id": "manifest-07",
+      "metin": "Manifest ilk konserlerini hangi şehirde verdi?",
+      "secenekler": ["Ankara", "İzmir", "İstanbul", "Antalya"],
+      "dogru": 2,
+      "zorluk": "kolay",
+      "tur": "dunya",
+      "kaynaklar": [
+        {
+          "ad": "Vikipedi: Manifest (müzik grubu)",
+          "url": "https://tr.wikipedia.org/wiki/Manifest_(müzik_grubu)"
+        },
+        {
+          "ad": "Wikipedia (EN): Manifest (band)",
+          "url": "https://en.wikipedia.org/wiki/Manifest_(band)"
+        },
+        {
+          "ad": "bianet: Türkiye'nin yeni kız grubu: Manifest",
+          "url": "https://bianet.org/yazi/turkiyenin-yeni-kiz-grubu-manifest-310955"
+        },
+        {
+          "ad": "Oggusto: Manifest",
+          "url": "https://www.oggusto.com/etkinlik-rehberi/manifest"
+        }
+      ],
+      "uyum": 1.0
+    },
+    {
+      "id": "manifest-08",
+      "metin": "Manifest üyesi Mina'nın soyadı nedir?",
+      "secenekler": ["Uluca", "Pınar", "Bahat", "Solak"],
+      "dogru": 3,
+      "zorluk": "kolay",
+      "tur": "dunya",
+      "kaynaklar": [
+        {
+          "ad": "Vikipedi: Manifest (müzik grubu)",
+          "url": "https://tr.wikipedia.org/wiki/Manifest_(müzik_grubu)"
+        },
+        {
+          "ad": "Wikipedia (EN): Manifest (band)",
+          "url": "https://en.wikipedia.org/wiki/Manifest_(band)"
+        },
+        {
+          "ad": "bianet: Türkiye'nin yeni kız grubu: Manifest",
+          "url": "https://bianet.org/yazi/turkiyenin-yeni-kiz-grubu-manifest-310955"
+        },
+        {
+          "ad": "C-Heads: Turkey's hottest pop group Manifest take Istanbul by storm with Manifestival",
+          "url": "https://www.c-heads.com/2025/07/08/turkeys-hottest-pop-group-manifest-take-istanbul-by-storm-with-manifestival"
+        },
+        {
+          "ad": "Official Charts: Manifest interview — Tralala and Wembley",
+          "url": "https://www.officialcharts.com/chart-news/manifest-interview-tralala-wembley/"
+        }
+      ],
+      "uyum": 1.0
+    },
+    {
+      "id": "manifest-09",
+      "metin": "Manifest'in ilk stüdyo albümünde kaç şarkı var?",
+      "secenekler": ["8", "10", "11", "13"],
+      "dogru": 2,
+      "zorluk": "orta",
+      "tur": "dunya",
+      "kaynaklar": [
+        {
+          "ad": "Wikipedia (EN): Manifestival",
+          "url": "https://en.wikipedia.org/wiki/Manifestival"
+        },
+        {
+          "ad": "Earmilk: Manifest goes full throttle with Manifestival album",
+          "url": "https://earmilk.com/2025/07/14/manifest-goes-full-throttle-with-genre-blending-masterpiece-manifestival-album/"
+        },
+        {
+          "ad": "Ignite Music: Girl group Manifest unveils debut album Manifestival",
+          "url": "https://www.ignitemusicmag.co/post/girl-group-manifest-unveils-debut-album-manifestival"
+        },
+        {
+          "ad": "t-vine: Turkish pop group Manifest to make UK debut at London's OVO Arena Wembley",
+          "url": "https://www.t-vine.com/turkish-pop-group-manifest-to-make-uk-debut-at-londons-ovo-arena-wembley"
+        },
+        {
+          "ad": "Oggusto: Manifest",
+          "url": "https://www.oggusto.com/etkinlik-rehberi/manifest"
+        }
+      ],
+      "uyum": 1.0
+    },
+    {
+      "id": "manifest-10",
+      "metin": "Big5 Türkiye'yi düzenleyen ve Manifest'in müziğini yayımlayan şirket hangisidir?",
+      "secenekler": ["Hypers", "DMC", "Avrupa Müzik", "Poll Production"],
+      "dogru": 0,
+      "zorluk": "orta",
+      "tur": "dunya",
+      "kaynaklar": [
+        {
+          "ad": "Vikipedi: Manifest (müzik grubu)",
+          "url": "https://tr.wikipedia.org/wiki/Manifest_(müzik_grubu)"
+        },
+        {
+          "ad": "Wikipedia (EN): Manifest (band)",
+          "url": "https://en.wikipedia.org/wiki/Manifest_(band)"
+        },
+        {
+          "ad": "TGRT Haber: Türkiye'nin yeni kız grubu Manifest kimlerden oluşuyor?",
+          "url": "https://www.tgrthaber.com/mavikadin/turkiyenin-yeni-kiz-grubu-manifest-kimlerden-olusuyor-sarkilari-neler"
+        },
+        {
+          "ad": "Politikam: Manifest'in ilk şarkısı yayınlandı",
+          "url": "https://www.politikam.com/turkiyenin-yeni-kadin-muzik-grubu-manifestin-ilk-sarkisi-yayinlandi-peki-manifestin-uyeleri-kimler-kac-yasindalar-iste-tum-merak-edilenler"
+        },
+        {
+          "ad": "Listelist: Manifest grubu üyeleri",
+          "url": "https://listelist.com/manifest-grubu-uyeleri"
+        }
+      ],
+      "uyum": 1.0
+    },
+    {
+      "id": "manifest-11",
+      "metin": "Manifest üyesi Hilal'in soyadı nedir?",
+      "secenekler": ["Oktay", "Bahat", "Uluca", "Yelekçi"],
+      "dogru": 3,
+      "zorluk": "orta",
+      "tur": "dunya",
+      "kaynaklar": [
+        {
+          "ad": "Vikipedi: Manifest (müzik grubu)",
+          "url": "https://tr.wikipedia.org/wiki/Manifest_(müzik_grubu)"
+        },
+        {
+          "ad": "Wikipedia (EN): Manifest (band)",
+          "url": "https://en.wikipedia.org/wiki/Manifest_(band)"
+        },
+        {
+          "ad": "bianet: Türkiye'nin yeni kız grubu: Manifest",
+          "url": "https://bianet.org/yazi/turkiyenin-yeni-kiz-grubu-manifest-310955"
+        },
+        {
+          "ad": "C-Heads: Turkey's hottest pop group Manifest take Istanbul by storm with Manifestival",
+          "url": "https://www.c-heads.com/2025/07/08/turkeys-hottest-pop-group-manifest-take-istanbul-by-storm-with-manifestival"
+        },
+        {
+          "ad": "Official Charts: Manifest interview — Tralala and Wembley",
+          "url": "https://www.officialcharts.com/chart-news/manifest-interview-tralala-wembley/"
+        }
+      ],
+      "uyum": 1.0
+    },
+    {
+      "id": "manifest-12",
+      "metin": "Manifest Temmuz 2026'da Priştine'de hangi festivalde sahne aldı?",
+      "secenekler": [
+        "EXIT Festival",
+        "Sunny Hill Festival",
+        "Sziget Festival",
+        "Primavera Sound"
+      ],
+      "dogru": 1,
+      "zorluk": "orta",
+      "tur": "dunya",
+      "kaynaklar": [
+        {
+          "ad": "Vikipedi: Manifest (müzik grubu)",
+          "url": "https://tr.wikipedia.org/wiki/Manifest_(müzik_grubu)"
+        },
+        {
+          "ad": "Wikipedia (EN): Manifest (band)",
+          "url": "https://en.wikipedia.org/wiki/Manifest_(band)"
+        },
+        {
+          "ad": "Politikam: Manifest grubu Kosova'da rüzgar estirdi",
+          "url": "https://www.politikam.com/manifest-grubu-kosovada-ruzgar-estirdi-dua-lipa-ile-unutulmaz-bulusma"
+        },
+        {
+          "ad": "Euronews Türkçe: Manifest, ilk İngilizce şarkı ve ilk İngiltere konseriyle Londra'da",
+          "url": "https://tr.euronews.com/2026/09/26/manifest-ilk-ingilizce-sarki-ve-ilk-ingiltere-konseri-ile-londrada-yeni-donemine-basliyor"
+        },
+        {
+          "ad": "Milliyet: Manifest'in toz pembe dünyasına daldık",
+          "url": "https://www.milliyet.com.tr/pazar/manifestin-toz-pembe-dunyasina-daldik-7633494"
+        }
+      ],
+      "uyum": 1.0
+    },
+    {
+      "id": "manifest-13",
+      "metin": "Grubun adı olan \"manifest\" kelimesini 2024'ün kelimesi seçen sözlük hangisidir?",
+      "secenekler": ["Cambridge", "Oxford", "Collins", "Merriam-Webster"],
+      "dogru": 0,
+      "zorluk": "orta",
+      "tur": "dunya",
+      "kaynaklar": [
+        {
+          "ad": "Euronews: Cambridge Dictionary make 'manifest' their 2024 word of the year",
+          "url": "https://www.euronews.com/culture/2024/11/20/cambridge-dictionary-make-manifest-their-2024-word-of-the-year"
+        },
+        {
+          "ad": "CBC News: 2024 word of the year",
+          "url": "https://amp.cbc.ca/news/world/2024-word-of-the-year-1.7388213"
+        },
+        {
+          "ad": "The Bookseller: Cambridge Dictionary crowns 'manifest' as 2024's word of the year",
+          "url": "https://thebookseller.com/news/cambridge-dictionary-crowns-manifest-as-2024s-word-of-the-year"
+        },
+        {
+          "ad": "Radio X: Cambridge Dictionary reveals 'manifest' as word of the year",
+          "url": "https://radiox.co.uk/news/uk-world/cambridge-dictionary-reveals-manifest-as-word"
+        }
+      ],
+      "uyum": 1.0
+    },
+    {
+      "id": "manifest-14",
+      "metin": "Manifest'in ilk stüdyo albümü hangi ay yayımlandı?",
+      "secenekler": ["Mart 2025", "Haziran 2025", "Eylül 2025", "Aralık 2025"],
+      "dogru": 1,
+      "zorluk": "orta",
+      "tur": "dunya",
+      "kaynaklar": [
+        {
+          "ad": "Vikipedi: Manifest (müzik grubu)",
+          "url": "https://tr.wikipedia.org/wiki/Manifest_(müzik_grubu)"
+        },
+        {
+          "ad": "Wikipedia (EN): Manifest (band)",
+          "url": "https://en.wikipedia.org/wiki/Manifest_(band)"
+        },
+        {
+          "ad": "bianet: Türkiye'nin yeni kız grubu: Manifest",
+          "url": "https://bianet.org/yazi/turkiyenin-yeni-kiz-grubu-manifest-310955"
+        },
+        {
+          "ad": "C-Heads: Turkey's hottest pop group Manifest take Istanbul by storm with Manifestival",
+          "url": "https://www.c-heads.com/2025/07/08/turkeys-hottest-pop-group-manifest-take-istanbul-by-storm-with-manifestival"
+        },
+        {
+          "ad": "Oggusto: Manifest",
+          "url": "https://www.oggusto.com/etkinlik-rehberi/manifest"
+        },
+        {
+          "ad": "Backseat Mafia: Manifest is back with new single KTS",
+          "url": "https://www.backseatmafia.com/news-turkiye-pop-risers-manifest-is-back-and-bolder-than-ever-with-their-fiery-new-single-kts-kalbimin-tek-sahibi"
+        }
+      ],
+      "uyum": 1.0
+    },
+    {
+      "id": "manifest-15",
+      "metin": "Manifest'in Ajda Pekkan'la düeti hangi ay yayımlandı?",
+      "secenekler": ["Ocak 2026", "Mart 2026", "Mayıs 2026", "Eylül 2026"],
+      "dogru": 2,
+      "zorluk": "orta",
+      "tur": "dunya",
+      "kaynaklar": [
+        {
+          "ad": "Vikipedi: Manifest (müzik grubu)",
+          "url": "https://tr.wikipedia.org/wiki/Manifest_(müzik_grubu)"
+        },
+        {
+          "ad": "NTV: Ajda Pekkan ile Manifest'ten düet",
+          "url": "https://www.ntv.com.tr/yasam/ajda-pekkan-ile-manifestten-duet-binlerce-yorum-geldi-1723349"
+        },
+        {
+          "ad": "Türkiye Today: Ajda Pekkan joins girl group Manifest for 'Hileli'",
+          "url": "https://www.turkiyetoday.com/culture/turkish-superstar-ajda-pekkan-joins-girl-group-manifest-for-hileli-crossover-3219614"
+        },
+        {
+          "ad": "Yenibakış: Manifest ve Ajda Pekkan'ın Hileli şarkısını kim yazdı?",
+          "url": "https://www.yenibakishaber.com/manifest-ajda-pekkan-hileli-sarkisini-kim-yazdi-manifest-hileli-sarki-sozleri"
+        }
+      ],
+      "uyum": 1.0
+    },
+    {
+      "id": "manifest-16",
+      "metin": "Big5 Türkiye yarışması hangi platformda yayınlandı?",
+      "secenekler": ["Netflix", "TV8", "Show TV", "YouTube"],
+      "dogru": 3,
+      "zorluk": "orta",
+      "tur": "dunya",
+      "kaynaklar": [
+        {
+          "ad": "Vikipedi: Manifest (müzik grubu)",
+          "url": "https://tr.wikipedia.org/wiki/Manifest_(müzik_grubu)"
+        },
+        {
+          "ad": "Wikipedia (EN): Manifest (band)",
+          "url": "https://en.wikipedia.org/wiki/Manifest_(band)"
+        },
+        {
+          "ad": "bianet: Türkiye'nin yeni kız grubu: Manifest",
+          "url": "https://bianet.org/yazi/turkiyenin-yeni-kiz-grubu-manifest-310955"
+        },
+        {
+          "ad": "Milliyet: Manifest'in toz pembe dünyasına daldık",
+          "url": "https://www.milliyet.com.tr/pazar/manifestin-toz-pembe-dunyasina-daldik-7633494"
+        }
+      ],
+      "uyum": 1.0
+    },
+    {
+      "id": "manifest-17",
+      "metin": "Manifest'in ilk teklisi hangi ay yayımlandı?",
+      "secenekler": ["Şubat 2025", "Kasım 2024", "Mayıs 2025", "Eylül 2025"],
+      "dogru": 0,
+      "zorluk": "zor",
+      "tur": "dunya",
+      "kaynaklar": [
+        {
+          "ad": "Vikipedi: Manifest (müzik grubu)",
+          "url": "https://tr.wikipedia.org/wiki/Manifest_(müzik_grubu)"
+        },
+        {
+          "ad": "Politikam: Manifest'in ilk şarkısı yayınlandı",
+          "url": "https://www.politikam.com/turkiyenin-yeni-kadin-muzik-grubu-manifestin-ilk-sarkisi-yayinlandi-peki-manifestin-uyeleri-kimler-kac-yasindalar-iste-tum-merak-edilenler"
+        },
+        {
+          "ad": "TGRT Haber: Türkiye'nin yeni kız grubu Manifest kimlerden oluşuyor?",
+          "url": "https://www.tgrthaber.com/mavikadin/turkiyenin-yeni-kiz-grubu-manifest-kimlerden-olusuyor-sarkilari-neler"
+        },
+        {
+          "ad": "Oggusto: Manifest",
+          "url": "https://www.oggusto.com/etkinlik-rehberi/manifest"
+        },
+        {
+          "ad": "Ignite Music: Turkish pop group Manifest return with latest single KTS",
+          "url": "https://www.ignitemusicmag.co/post/turkish-pop-group-manifest-return-with-latest-single-kts"
+        }
+      ],
+      "uyum": 1.0
+    },
+    {
+      "id": "manifest-18",
+      "metin": "Manifest başlangıçta kaç kişilik bir grup olarak planlanmıştı?",
+      "secenekler": ["4", "5", "7", "8"],
+      "dogru": 1,
+      "zorluk": "zor",
+      "tur": "dunya",
+      "kaynaklar": [
+        {
+          "ad": "Vikipedi: Manifest (müzik grubu)",
+          "url": "https://tr.wikipedia.org/wiki/Manifest_(müzik_grubu)"
+        },
+        {
+          "ad": "bianet: Türkiye'nin yeni kız grubu: Manifest",
+          "url": "https://bianet.org/yazi/turkiyenin-yeni-kiz-grubu-manifest-310955"
+        },
+        {
+          "ad": "C-Heads: Turkey's hottest pop group Manifest take Istanbul by storm with Manifestival",
+          "url": "https://www.c-heads.com/2025/07/08/turkeys-hottest-pop-group-manifest-take-istanbul-by-storm-with-manifestival"
+        },
+        {
+          "ad": "The Irish News (PA): Manifest hope UK arena debut will kick off global career",
+          "url": "https://www.irishnews.com/entertainment/turkish-girl-group-manifest-hope-uk-arena-debut-will-kick-off-global-career-J3USXFSPGJNVLC6TXF2IB77WRY/"
+        }
+      ],
+      "uyum": 1.0
+    },
+    {
+      "id": "manifest-19",
+      "metin": "Manifest'in ilk Birleşik Krallık konseri hangi tarihte yapıldı?",
+      "secenekler": [
+        "18 Eylül 2026",
+        "2 Ekim 2026",
+        "16 Ekim 2026",
+        "30 Ekim 2026"
+      ],
+      "dogru": 2,
+      "zorluk": "zor",
+      "tur": "dunya",
+      "kaynaklar": [
+        {
+          "ad": "t-vine: Turkish pop group Manifest to make UK debut at London's OVO Arena Wembley",
+          "url": "https://www.t-vine.com/turkish-pop-group-manifest-to-make-uk-debut-at-londons-ovo-arena-wembley"
+        },
+        {
+          "ad": "Euronews Türkçe: Manifest, ilk İngilizce şarkı ve ilk İngiltere konseriyle Londra'da",
+          "url": "https://tr.euronews.com/2026/09/26/manifest-ilk-ingilizce-sarki-ve-ilk-ingiltere-konseri-ile-londrada-yeni-donemine-basliyor"
+        },
+        {
+          "ad": "Official Charts: Manifest interview — Tralala and Wembley",
+          "url": "https://www.officialcharts.com/chart-news/manifest-interview-tralala-wembley/"
+        },
+        {
+          "ad": "Daily Sabah: Turkish girl group Manifest releases English single 'Tralala'",
+          "url": "https://www.dailysabah.com/arts/music/turkish-girl-group-manifest-releases-1st-english-single-tralala/amp"
+        },
+        {
+          "ad": "Son Dakika: Manifest'in Tralala şarkısı",
+          "url": "https://www.sondakika.com/haber/haber-manifestin-tralala-sarkisi-spotify-global-20318045/"
+        }
+      ],
+      "uyum": 1.0
+    },
+    {
+      "id": "manifest-20",
+      "metin": "Manifest Mayıs 2026'daki İstanbul konser serisini hangi salonda verdi?",
+      "secenekler": [
+        "Volkswagen Arena",
+        "Sinan Erdem Spor Salonu",
+        "Zorlu PSM",
+        "Ülker Spor ve Etkinlik Salonu"
+      ],
+      "dogru": 3,
+      "zorluk": "zor",
+      "tur": "dunya",
+      "kaynaklar": [
+        {
+          "ad": "Vikipedi: Manifest (müzik grubu)",
+          "url": "https://tr.wikipedia.org/wiki/Manifest_(müzik_grubu)"
+        },
+        {
+          "ad": "İstiklal: Manifest İstanbul konseri 2026",
+          "url": "https://www.istiklal.com.tr/editorun-sectikleri/manifest-istanbul-konseri-2026-bilet-tarihleri-1086470h"
+        },
+        {
+          "ad": "Politikam: Manifest Ülker Arena 4 günlük konser serisi tamamlandı",
+          "url": "https://www.politikam.com/manifest-ulker-arena-4-gunluk-konser-serisi-tamamlandi-teknik-detaylar-ve-turne-takvimi"
+        },
+        {
+          "ad": "Gazete Oksijen: Manifest Türkiye turnesinde",
+          "url": "https://gazeteoksijen.com/yazarlar/alper-bahcekapili/manifest-turkiye-turnesinde-275354"
+        },
+        {
+          "ad": "Concert Archives: Manifest",
+          "url": "https://www.concertarchives.org/bands/manifest"
+        }
+      ],
+      "uyum": 1.0
+    },
+    {
+      "id": "manifest-21",
+      "metin": "Manifest Mayıs 2026'da İstanbul'da üst üste kaç gece sahne aldı?",
+      "secenekler": ["2", "3", "4", "6"],
+      "dogru": 2,
+      "zorluk": "zor",
+      "tur": "dunya",
+      "kaynaklar": [
+        {
+          "ad": "Vikipedi: Manifest (müzik grubu)",
+          "url": "https://tr.wikipedia.org/wiki/Manifest_(müzik_grubu)"
+        },
+        {
+          "ad": "İstiklal: Manifest İstanbul konseri 2026",
+          "url": "https://www.istiklal.com.tr/editorun-sectikleri/manifest-istanbul-konseri-2026-bilet-tarihleri-1086470h"
+        },
+        {
+          "ad": "Politikam: Manifest Ülker Arena 4 günlük konser serisi tamamlandı",
+          "url": "https://www.politikam.com/manifest-ulker-arena-4-gunluk-konser-serisi-tamamlandi-teknik-detaylar-ve-turne-takvimi"
+        },
+        {
+          "ad": "Gazete Oksijen: Manifest Türkiye turnesinde",
+          "url": "https://gazeteoksijen.com/yazarlar/alper-bahcekapili/manifest-turkiye-turnesinde-275354"
+        },
+        {
+          "ad": "Concert Archives: Manifest",
+          "url": "https://www.concertarchives.org/bands/manifest"
+        }
+      ],
+      "uyum": 1.0
+    },
+    {
+      "id": "manifest-22",
+      "metin": "Manifest'in \"Toz Pembe\" teklisi hangi ay yayımlandı?",
+      "secenekler": ["Mart 2026", "Temmuz 2026", "Ekim 2026", "Kasım 2025"],
+      "dogru": 1,
+      "zorluk": "zor",
+      "tur": "dunya",
+      "kaynaklar": [
+        {
+          "ad": "Vikipedi: Manifest (müzik grubu)",
+          "url": "https://tr.wikipedia.org/wiki/Manifest_(müzik_grubu)"
+        },
+        {
+          "ad": "Wikipedia (EN): Manifest (band)",
+          "url": "https://en.wikipedia.org/wiki/Manifest_(band)"
+        },
+        {
+          "ad": "24 Saat: Manifest'in yeni şarkısı Toz Pembe yayınlandı",
+          "url": "https://www.24saatgazetesi.com/manifestin-yeni-sarkisi-toz-pembe-yayinlandi"
+        },
+        {
+          "ad": "Politikam: Manifest'in yeni teklisi Toz Pembe yayında",
+          "url": "https://www.politikam.com/manifestin-yeni-teklisi-toz-pembe-yayinda-merakla-beklenen-sarki-hakkinda-bilgiler"
+        },
+        {
+          "ad": "Yeniçağ: Manifest'in yeni şarkısının yayınlanacağı tarih belli oldu",
+          "url": "https://www.yenicaggazetesi.com/manifestin-yeni-sarkisinin-yayinlanacagi-tarih-belli-oldu-iste-merak-edilenler-1047237h.htm"
+        }
+      ],
+      "uyum": 1.0
+    },
+    {
+      "id": "manifest-23",
+      "metin": "Manifest'in ilk Birleşik Krallık konseri hangi salonda yapıldı?",
+      "secenekler": [
+        "OVO Arena Wembley",
+        "The O2",
+        "Royal Albert Hall",
+        "Eventim Apollo"
+      ],
+      "dogru": 0,
+      "zorluk": "zor",
+      "tur": "dunya",
+      "kaynaklar": [
+        {
+          "ad": "t-vine: Turkish pop group Manifest to make UK debut at London's OVO Arena Wembley",
+          "url": "https://www.t-vine.com/turkish-pop-group-manifest-to-make-uk-debut-at-londons-ovo-arena-wembley"
+        },
+        {
+          "ad": "Euronews Türkçe: Manifest, ilk İngilizce şarkı ve ilk İngiltere konseriyle Londra'da",
+          "url": "https://tr.euronews.com/2026/09/26/manifest-ilk-ingilizce-sarki-ve-ilk-ingiltere-konseri-ile-londrada-yeni-donemine-basliyor"
+        },
+        {
+          "ad": "Official Charts: Manifest interview — Tralala and Wembley",
+          "url": "https://www.officialcharts.com/chart-news/manifest-interview-tralala-wembley/"
+        },
+        {
+          "ad": "Daily Sabah: Turkish girl group Manifest releases English single 'Tralala'",
+          "url": "https://www.dailysabah.com/arts/music/turkish-girl-group-manifest-releases-1st-english-single-tralala/amp"
+        },
+        {
+          "ad": "The Irish News (PA): Manifest hope UK arena debut will kick off global career",
+          "url": "https://www.irishnews.com/entertainment/turkish-girl-group-manifest-hope-uk-arena-debut-will-kick-off-global-career-J3USXFSPGJNVLC6TXF2IB77WRY/"
+        },
+        {
+          "ad": "Gazete Oksijen: Manifest İngiltere'de ilk konserini verdi",
+          "url": "https://gazeteoksijen.com/muzik/manifest-ingilterede-ilk-konserini-verdi-292995"
+        },
+        {
+          "ad": "Posta: Manifest ilk Londra konserini verdi",
+          "url": "https://www.posta.com.tr/galeri/manifest-ilk-londra-konserini-verdi-sahnede-turk-bayragi-actilar-3053036"
+        }
+      ],
+      "uyum": 1.0
+    },
+    {
+      "id": "manifest-24",
+      "metin": "Manifest'in \"Tralala\" teklisi hangi ay yayımlandı?",
+      "secenekler": [
+        "Haziran 2026",
+        "Ağustos 2026",
+        "Aralık 2025",
+        "Ekim 2026"
+      ],
+      "dogru": 3,
+      "zorluk": "zor",
+      "tur": "dunya",
+      "kaynaklar": [
+        {
+          "ad": "Vikipedi: Manifest (müzik grubu)",
+          "url": "https://tr.wikipedia.org/wiki/Manifest_(müzik_grubu)"
+        },
+        {
+          "ad": "Euronews Türkçe: Manifest, ilk İngilizce şarkı ve ilk İngiltere konseriyle Londra'da",
+          "url": "https://tr.euronews.com/2026/09/26/manifest-ilk-ingilizce-sarki-ve-ilk-ingiltere-konseri-ile-londrada-yeni-donemine-basliyor"
+        },
+        {
+          "ad": "Posta: Manifest'ten İngilizce single",
+          "url": "https://www.posta.com.tr/magazin/manifestten-ingilizce-single-3049746"
+        },
+        {
+          "ad": "Daily Sabah: Turkish girl group Manifest releases English single 'Tralala'",
+          "url": "https://www.dailysabah.com/arts/music/turkish-girl-group-manifest-releases-1st-english-single-tralala/amp"
+        },
+        {
+          "ad": "Son Dakika: Manifest'in Tralala şarkısı",
+          "url": "https://www.sondakika.com/haber/haber-manifestin-tralala-sarkisi-spotify-global-20318045/"
+        }
+      ],
+      "uyum": 1.0
+    }
+  ]
+}
