@@ -505,7 +505,7 @@ Oyunun kişi aralığı `minOyuncu` (varsayılan 2) ile genel üst sınır 12 ar
 
 ## v9: Quiz Night — dizi/film paketleri (Semih, 31.10.2026) — ONAYLANDI (Semih, 31.10.2026, msg 883)
 Issue'lar (Faz 1): #221 tasarım (tasarim), #222 kabul testleri (qa), #223 saf modül ve içerik şeması (backend; #222 bitince), #224 ekranlar (frontend; #221, #222, #223 bitince), #225 ilk 3 paketin taslağı (pm), #226 paketleri JSON'a çevirme (backend; #223 ve #225 bitince). Güncelleme (Semih, msg 925): #243 beraberlik ve kazanan kabul testleri (qa), #244 beraberlikte zorluk katsayısı (backend; #243 bitince); #221 paylaşım kartı ve #224 sonuç ekranı buna göre.
-Faz 2 (oda modu, KK-113) issue'ları Faz 1 merge edilince açılır.
+Faz 2 (oda modu, KK-113): #252 kabul testleri (qa), #253 sunucu ve oda kuralları (backend; #252 bitince), #254 oda ekranları (frontend; #252 ve #253 bitince). Tasarım #221'de (C, "Oda (Faz 2)" bölümü).
 Araştırma: `docs/quiz-night-arastirma.md` (#216), `docs/quiz-dizi-film-analiz.md` (#218).
 
 Quiz Night, 4 şıklı ve yalnızca metinden oluşan bir bilgi yarışmasıdır. İlk kategori dizi ve film. Her paket tek bir diziye ya da filme aittir ("Ne kadar Aşk-ı Memnu fanısın?"). Sonunda doğru sayısına göre esprili bir unvan verilir. Spor ve diğer kategoriler sonra gelir.
