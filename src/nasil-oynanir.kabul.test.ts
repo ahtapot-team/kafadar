@@ -48,10 +48,12 @@ describe('KK-90: tanıtım kartı kendiliğinden açılmaz', () => {
         expect(icerik, `${f}: ${yasak}`).not.toContain(yasak);
   });
 
-  it('KK-90: ana ekran oyun seçerken tanıtım karşılamaz (kart/tanıtım koduna dokunmaz), giriş tek dokunuş', () => {
+  it('KK-90: ana ekran oyun seçerken tanıtım karşılamaz, giriş tek dokunuş (v11/KK-130: kart yalnızca uzun basmayla açılır)', () => {
     const ana = dosya('app/index.tsx');
-    expect(ana).not.toMatch(/tanitim/i);
-    expect(ana).not.toContain('TanitimKarti');
+    // v11: ana ekran TanitimKarti'ni uzun basmayla açabilir; kendiliğinden (useEffect/ilk açılış) açılamaz, "görüldü" tutulmaz.
+    expect(ana).not.toMatch(/useEffect\([\s\S]{0,200}tanitim/i);
+    expect(ana).not.toMatch(/tanitimGerekli|tanitimGorulduMu|tanitimiIsaretle/);
+    if (/TanitimKarti/.test(ana)) expect(ana).toMatch(/onLongPress=/);
     expect(ana).toContain("oyun.modSecimi ? '/mod' : '/oyuncular'");
   });
 
@@ -61,9 +63,10 @@ describe('KK-90: tanıtım kartı kendiliğinden açılmaz', () => {
     expect(lobi).not.toMatch(/tanitimGerekli|tanitimGorulduMu/);
   });
 
-  it('KK-90: TanitimKarti yalnızca BilgiDugmesi içinden kullanılır (başka hiçbir ekran kartı açmaz)', () => {
+  it('KK-90: TanitimKarti yalnızca BilgiDugmesi içinden ve ana ekranda uzun basmayla kullanılır (başka hiçbir ekran kartı açmaz)', () => {
+    // v11 (KK-130): ana ekran (app/index.tsx) uzun basmayla açar; başka hiçbir ekran açmaz.
     const kullananlar = tum()
-      .filter(({ f }) => f !== BILESEN)
+      .filter(({ f }) => f !== BILESEN && f !== 'app/index.tsx')
       .filter(({ icerik }) => /<TanitimKarti\b/.test(icerik))
       .map(({ f }) => f);
     expect(kullananlar).toEqual([]);
