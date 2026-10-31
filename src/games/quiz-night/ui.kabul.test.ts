@@ -3,7 +3,7 @@
 // doğrulanır (docs/GERCEK-CIHAZ-KONTROL.md). Saf kurallar `arayuz.ts` (arayuz.kabul.test.ts), kalıcılık `onceki.ts` (aşağıda).
 // SÖZLEŞME (frontend #224 için):
 //   testID'ler (ekranlarda geçmeli; "-" ile biten önek, sonuna indeks/id eklenir):
-//     mod seçimi (KK-107): quiz-mod-tek, quiz-mod-grup (Faz 1'de oda testID'leri YOK: quiz-mod-oda-kur / quiz-mod-oda-katil)
+//     mod seçimi (KK-107): quiz-mod-tek, quiz-mod-grup, quiz-mod-oda-kur, quiz-mod-oda-katil (Faz 2, #254)
 //     paket seçimi (KK-108): quiz-koken-tumu, quiz-koken-tr, quiz-koken-yabanci, quiz-paket- (her kart), quiz-paket-notu
 //     soru (KK-110): quiz-ilerleme ("3/10"), quiz-zorluk, quiz-soru, quiz-sik- (0..3)
 //     grup (KK-112): quiz-goster ("Cevabı göster"), quiz-kim- (her oyuncu çipi), quiz-sonraki
@@ -18,6 +18,7 @@
 //     oncekiOku(depo, paketId): Promise<string[]>   kayıt yok / bozuk / dizi değil → []; paketler birbirinden ayrı
 //     Tur bitince (sonuç aşamasına geçerken) oncekiKaydet; yeni tur/Tekrar'da oncekiOku → turSec(havuz, tohum, onceki).
 import { describe, expect, it } from 'vitest';
+import { BEKLEYEN } from '../../kabul';
 import type { Depo } from '../../core/kayit';
 import { depoYap, dosyaIcerik, kaynaklar } from '../../test/yardimci';
 
@@ -72,11 +73,18 @@ describe('KK-107…KK-112: ekranlar sözleşmedeki testID adlarını kullanır',
     expect(TESTIDLER.filter((t) => !k.includes(t))).toEqual([]);
   });
 
-  it('KK-107: Faz 1 ekranlarında oda seçenekleri yoktur', () => {
-    const k = ekranKaynagi();
-    expect(k).not.toMatch(/quiz-mod-oda/);
-    expect(k).toMatch(/gorunenModlar/); // mod listesi kuraldan gelir
+  it('KK-107: mod listesi kuraldan gelir (gorunenModlar)', () => {
+    expect(ekranKaynagi()).toMatch(/gorunenModlar/);
   });
+
+  (BEKLEYEN.quizOdaEkran ? it.fails : it)(
+    "KK-107: Faz 2: oda seçeneklerinin testID'leri ekranlarda vardır (quiz-mod-oda-kur, quiz-mod-oda-katil)",
+    () => {
+      const k = ekranKaynagi();
+      expect(k).toMatch(/quiz-mod-oda-kur/);
+      expect(k).toMatch(/quiz-mod-oda-katil/);
+    },
+  );
 });
 
 describe('KK-107…KK-112: ekranlar saf kuralları kullanır', () => {
