@@ -111,5 +111,5 @@ PRD'deki her kabul kriteri için "KK-nn" ifadesi geçen test dosyaları ve gerç
 | KK-122 | Paket kartında düz metin başlık, bir emoji ve not bulunur. | `games/quiz-night/arayuz.kabul.test.ts`, `games/quiz-night/kategori.kabul.test.ts`, `games/quiz-night/ui.kabul.test.ts` | cihaz |
 | KK-123 | Müzik ve Spor içerik kuralları (insan incelemesi). KK-116'nın kaynak, uyum ve şık kurallar | — | cihaz |
 | KK-124 | Uygulamanın adında, ikonunda, `app.json`'daki metinlerde ve mağaza metinlerinde hiçbir pak | `quiz-night.kabul.test.ts` | cihaz |
-| KK-125 | İlk içerik şudur: Spor'da 3 paket (Galatasaray, Fenerbahçe, Beşiktaş), Müzik'te 4 paket (M | `icerik/quiz-kategori.kabul.test.ts` | cihaz |
+| KK-125 | İlk içerik şudur: Spor'da 3 paket (Galatasaray, Fenerbahçe, Beşiktaş), Müzik'te 4 paket (M | `games/quiz-night/kategori.kabul.test.ts`, `icerik/quiz-kategori.kabul.test.ts` | cihaz |
 | KK-126 | Diğer oyunlar ve akışlar değişmez. Mevcut kabul testleri yeşil kalır. KK-108 testleri KK-1 | `games/quiz-night/kategori.kabul.test.ts` | — |
