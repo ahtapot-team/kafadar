@@ -2,7 +2,7 @@
   "id": "besiktas",
   "ad": "Beşiktaş",
   "baslik": "Ne kadar Beşiktaşlısın?",
-  "emoji": "⚽",
+  "gorsel": "assets/gorsel/spor.webp",
   "kategori": "spor",
   "unvanlar": [
     "Kartal yavrusu: Şeref Stadı'nda ilk antrenmanına çıktın",

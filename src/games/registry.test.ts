@@ -11,6 +11,7 @@ describe('registry', () => {
       id: 'sahte',
       ad: 'Sahte',
       emoji: '🧪',
+      gorsel: 'assets/gorsel/sahte.webp',
       aktif: true,
     };
     expect([...oyunlar, sahte].map((o) => o.id)).toContain('sahte');

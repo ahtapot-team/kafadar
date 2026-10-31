@@ -22,6 +22,8 @@ export type Oyun = {
   id: string;
   ad: string;
   emoji: string; // açılış ekranı rozeti (#192)
+  gorsel: string; // ikon görseli: depo kökünden yol, .png/.webp, design/ dışında (KK-127)
+  onecikan?: true; // ana ekran üst kartında varsayılan; tam bir aktif oyunda (KK-129)
   aktif: boolean;
   // Ekran tembel yüklenir: mantık testleri (node) React Native'e dokunmaz.
   ekran?: () => Promise<{ default: ComponentType<OyunEkraniProps> }>;

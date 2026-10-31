@@ -17,13 +17,14 @@ export const oyunlar: Oyun[] = [
     tanitim: {
       kisi: '2–12 kişi',
       metin:
-        'Kartta bir durum çıkar: "İlk buluşmada hesabı bölmek". 3-2-1\'de herkes başparmağıyla OK 👍 ya da NOK 👎 gösterir. Telefonu tutan kişi oyları girer, sonra kimin tek başına kaldığı ortaya çıkar. Oda modunda herkes kendi telefonundan oy verir.',
+        'Kartta bir durum çıkar: "İlk buluşmada hesabı bölmek". 3-2-1\'de herkes başparmağıyla OK (yukarı) ya da NOK (aşağı) gösterir. Telefonu tutan kişi oyları girer, sonra kimin tek başına kaldığı ortaya çıkar. Oda modunda herkes kendi telefonundan oy verir.',
     },
   },
   {
     id: '10-10-ama',
     ad: '10/10 ama',
     emoji: '🔟',
+    gorsel: 'assets/gorsel/on-on-ama.webp',
     aktif: true,
     modSecimi: true, // Tek telefon / Oda kur / Odaya katıl (KK-63)
     kurulum: '/onon/hazirlik',
@@ -39,6 +40,7 @@ export const oyunlar: Oyun[] = [
     id: 'casus-kim',
     ad: 'Casus kim',
     emoji: '🕵️',
+    gorsel: 'assets/gorsel/casus-kim.webp',
     aktif: true,
     minOyuncu: CASUS_MIN,
     kurulum: '/casus/hazirlik',
@@ -54,6 +56,8 @@ export const oyunlar: Oyun[] = [
     id: 'quiz-night',
     ad: 'Quiz Night',
     emoji: '🧠',
+    gorsel: 'assets/gorsel/quiz-night.webp',
+    onecikan: true,
     aktif: true,
     modSecimi: true,
     minOyuncu: 1,
