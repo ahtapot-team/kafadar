@@ -635,7 +635,7 @@ Issue'lar:
 
 Quiz Night'a iki kategori eklenir: Müzik ve Spor. Alt kategori yoktur.
 - **Spor:** Şimdilik yalnızca Galatasaray, Fenerbahçe ve Beşiktaş.
-- **Müzik:** Türkiye'de bugün popüler gruplar ve sanatçılar: Manifest, Emircan İğrek, BLOK3 ve Mabel Matiz.
+- **Müzik:** Türkiye'de bugün popüler gruplar ve sanatçılar: Manifest, Emir Can İğrek, BLOK3 ve Mabel Matiz.
 
 Oyun kuralları (tur, puan, unvan, modlar) değişmez. Değişen yalnızca paket seçimi ve içeriktir.
 
@@ -672,10 +672,10 @@ Oyun kuralları (tur, puan, unvan, modlar) değişmez. Değişen yalnızca paket
   - **Müzik:** Albümler, şarkı adları, çıkış yılları, ödüller, düetler, konserler, grubun kuruluşu ve üyeleri sorulur.
     - Şarkı sözü alıntısı, "sözü tamamla" ya da "şarkıyı tanı" sorusu, ses ve klip yoktur.
     - Dinlenme, takipçi sayısı ve liste sırası gibi hızla değişen sayılar sorulmaz.
-  - **Kişiler:** Sanatçı ve futbolcuların yalnızca kamusal kariyeri sorulur. Özel hayat, ilişki, aile, sağlık, dedikodu ve tartışmalar sorulmaz.
+  - **Kişiler:** Sanatçı ve futbolcuların yalnızca kamusal kariyeri sorulur. Özel hayat, ilişki, aile, sağlık, dedikodu, tartışmalar, soruşturma ve davalar sorulmaz.
   - **Unvanlar:** Kulübün tarihine ya da sanatçının şarkı ve albümlerine gönderme yapar. Rakip kulübü ya da başka bir sanatçıyı aşağılayan soru veya unvan olmaz; argo yoktur.
 - [ ] KK-124: Uygulamanın adında, ikonunda, `app.json`'daki metinlerde ve mağaza metinlerinde hiçbir paketin adı geçmez: dizi ve film adları, kulüp ve sanatçı adları. Bu bir testle denetlenir; test yalnızca metin alanlarına bakar. KK-118'in yerini alır.
-- [ ] KK-125: İlk içerik şudur: Spor'da 3 paket (Galatasaray, Fenerbahçe, Beşiktaş), Müzik'te 4 paket (Manifest, Emircan İğrek, BLOK3, Mabel Matiz).
+- [ ] KK-125: İlk içerik şudur: Spor'da 3 paket (Galatasaray, Fenerbahçe, Beşiktaş), Müzik'te 4 paket (Manifest, Emir Can İğrek, BLOK3, Mabel Matiz).
   - Her pakette 24 soru (8 kolay, 8 orta, 8 zor) ve 4 unvan bulunur.
   - Önce Spor, sonra Müzik çıkar.
   - Bir sanatçı için 20 soru en az 4 kaynakla doğrulanamazsa o paket çıkarılır ve yerine kimin geleceği gruba sorulur.
@@ -693,13 +693,14 @@ Oyun kuralları (tur, puan, unvan, modlar) değişmez. Değişen yalnızca paket
 |---|---|---|---|
 | Kategoriler | Dizi & Film, Müzik, Spor; alt kategori yok | Semih'in isteği | Semih (31.10.2026, msg 971) |
 | Spor kapsamı | Galatasaray, Fenerbahçe, Beşiktaş | Semih'in isteği | Semih (msg 971) |
-| Müzik listesi | Manifest, Emircan İğrek, BLOK3, Mabel Matiz | İlk ikisi Semih'in örnekleri. Spotify Türkiye 2026 yaz listesinde manifest ve BLOK3 ilk sıralarda. Mabel Matiz'in uzun kariyeri kaynak bulmayı kolaylaştırır. | Semih (msg 971); BLOK3 ve Mabel Matiz pm önerisi, Semih "tamam" (msg 976) |
+| Müzik listesi | Manifest, Emir Can İğrek, BLOK3, Mabel Matiz | İlk ikisi Semih'in örnekleri. Spotify Türkiye 2026 yaz listesinde manifest ve BLOK3 ilk sıralarda. Mabel Matiz'in uzun kariyeri kaynak bulmayı kolaylaştırır. | Semih (msg 971); BLOK3 ve Mabel Matiz pm önerisi, Semih "tamam" (msg 976) |
 | Çip düzeni | Tek satır: Tümü · Dizi & Film · Müzik · Spor; Türk / Yabancı çipi kalkar, etiket kartta kalır | Tek dokunuş; iki satır çip kalabalık | pm varsayılanı, Semih (msg 976) |
 | Spor başlığı | "Ne kadar Galatasaraylısın?" (`baslik` alanı) | "Galatasaray fanısın" doğal Türkçe değil | pm varsayılanı, Semih (msg 976) |
 | Telif ve marka | Kendi cümlemizle bilgi sorusu; söz, ses, logo, arma, kulüp rengi ve fotoğraf yok; "Resmî değildir" notu; mağaza metninde ad yok | FSEK, SMK, kişilik hakları, Apple 5.2 ve Google Play fikri mülkiyet kuralları | pm (msg 975), Semih (msg 976) |
 | Para | Kulüp ve sanatçı paketleri ücretsiz kalır | Ücretli olurlarsa markayı ticari kullanmak sayılabilir | pm (msg 975), Semih (msg 976) |
 | Sıra | Önce Spor, sonra Müzik | Spor kaynakları daha bol; içerik yükü bölünür | pm varsayılanı |
 | Tartışmalı konular | Şampiyonluk sayısı tartışması, şike, hakem ve taraftar olayları sorulmaz | Kaynak uyumu tutmaz, taraftar tepkisi çeker | pm varsayılanı |
+| Manifest ve Emir Can İğrek | Dahil; soruşturmalar, gözaltı ve davalar hakkında soru yok (KK-123) | İkisi hakkında süren soruşturma haberleri var; dava sonuçlanırsa paket kaldırılabilir (risk kabul edildi) | Semih (msg 988: "emir can iğrek ve manifest de olsun") |
 
 ### Riskler (v10)
 - **İçerik emeği:** 7 paket × 24 soru = 168 soru, her biri için en az 4 kaynak.
