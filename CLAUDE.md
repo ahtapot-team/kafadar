@@ -35,7 +35,7 @@ Expo SDK 58, expo-router, TypeScript, Vitest, Cloudflare Workers + Durable Objec
 - `src/acilis/ekran.tsx` — açılış ekranı (`app/_layout.tsx` gezgin (`Yigin`) yazı tipi hazır olunca bağlanır, açılış ekranı üstüne biner; en az 3 sn, dokununca geçer; kurallar `src/core/acilis.ts`, `soz.ts`). Sözler: `content/acilis/sozler.json` (`npm run icerik` denetler).
 - `src/icerik/` — içerik kaydı ve doğrulama. `src/test/yardimci.ts` — test yardımcıları.
 - `src/tema.ts`, `ui.tsx`, `depo.ts`, `durum.tsx`, `desteler.ts`, `titresim.ts`, `uygulama-geri.ts` — kök yardımcılar. `src/games/kategori.ts`: ana ekran kişi sayısı çipleri (kural saf fonksiyon). `tanitim-kutusu.tsx`: tanıtım kartı ve ⓘ `BilgiDugmesi`.
-- `content/decks`, `content/casus`, `content/onon` — deste JSON'ları; `content/quiz` — Quiz Night paketleri (`ask-i-memnu`, `hababam-sinifi`, `prison-break`; taslaklar `docs/quiz/`; `src/icerik/quiz.ts` denetler). `docs/desteler/` — taslak md'ler.
+- `content/decks`, `content/casus`, `content/onon` — deste JSON'ları; `content/quiz` — Quiz Night paketleri (`kategori`: dizi-film/muzik/spor; `ask-i-memnu`, `hababam-sinifi`, `prison-break`; taslaklar `docs/quiz/`; `src/icerik/quiz.ts` denetler). `docs/desteler/` — taslak md'ler.
 - `sunucu/` — Cloudflare Worker (`sunucu/src/{worker,oda-do,sinir-do,ortak,quiz-paketler}.ts`, `test/`).
 - `scripts/` — `icerik-dogrula.ts`, `kk-harita.ts`, `belge-kontrol.ts`. `design/` — tasarımlar. `docs/` — PRD, MIMARI, KK haritası.
 - `web/` — `404.html`, `geri-yukle.html`. `public/` — `index.html`. `.github/workflows/` — CI, önizleme, sunucu.

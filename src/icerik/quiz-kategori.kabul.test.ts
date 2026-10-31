@@ -13,7 +13,9 @@ import { readdirSync, readFileSync } from 'node:fs';
 import { describe, expect, it } from 'vitest';
 import { BEKLEYEN } from '../kabul';
 
+// KK-120 (#263) bitti: düz `it`. KK-125 ilk içeriği #267 getirir; o zamana dek BEKLEYEN.quizKategoriIcerik kalır.
 const kabulIcerik = BEKLEYEN.quizKategoriIcerik ? it.fails : it;
+const kabulSema = it;
 
 type Dosya = Record<string, unknown>;
 type DogrulaApi = {
@@ -60,7 +62,7 @@ const temiz = async (d: unknown) =>
   expect((await yukle()).quizHatalari(d)).toEqual([]);
 
 describe('KK-120: kategori alanı', () => {
-  kabulIcerik(
+  kabulSema(
     'KK-120: üç kategori geçerli; eksik ya da başka değer reddedilir',
     async () => {
       await temiz(dizi());
@@ -79,7 +81,7 @@ describe('KK-120: kategori alanı', () => {
     await hatali(dizi({ koken: 'diger' }));
   });
 
-  kabulIcerik(
+  kabulSema(
     'KK-120: koken yalnız dizi-film paketinde bulunur (muzik/spor için tr ya da yabanci de reddedilir)',
     async () => {
       for (const k of ['muzik', 'spor']) {
@@ -90,7 +92,7 @@ describe('KK-120: kategori alanı', () => {
     },
   );
 
-  kabulIcerik(
+  kabulSema(
     'KK-120: baslik isteğe bağlı, en çok 40 karakter (40 geçer, 41 reddedilir)',
     async () => {
       await temiz(dizi({ baslik: 'a'.repeat(40) }));
@@ -101,7 +103,7 @@ describe('KK-120: kategori alanı', () => {
     },
   );
 
-  kabulIcerik(
+  kabulSema(
     'KK-120: muzik ve spor paketinde olay sorusu yok (tek olay bile reddedilir); dizi-film için KK-115 kuralı sürer',
     async () => {
       for (const k of ['muzik', 'spor']) {
@@ -114,7 +116,7 @@ describe('KK-120: kategori alanı', () => {
     },
   );
 
-  kabulIcerik(
+  kabulSema(
     'KK-120: uygulama paketi kategori ve baslik taşır; koken yalnız dizi-film için çıkar; kaynaklar/uyum girmez',
     async () => {
       const { uygulamaPaketi } = await yukle();
@@ -149,7 +151,7 @@ const paketleri = (): Dosya[] =>
     );
 
 describe('KK-120: gerçek paketler', () => {
-  kabulIcerik(
+  kabulSema(
     'KK-120: her paketin kategorisi var; mevcut 3 paket dizi-film ve koken taşır',
     async () => {
       const ps = paketleri();
@@ -166,7 +168,7 @@ describe('KK-120: gerçek paketler', () => {
     },
   );
 
-  kabulIcerik(
+  kabulSema(
     'KK-120: tüm gerçek paketler quizHatalari ile geçerli (npm run icerik)',
     async () => {
       const { quizHatalari } = await yukle();

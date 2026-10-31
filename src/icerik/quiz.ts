@@ -8,6 +8,8 @@ export const KAYNAK_EN_AZ = 4;
 export const UYUM_EN_AZ = 0.75;
 const ZORLUKLAR = ['kolay', 'orta', 'zor'];
 const TURLER = ['olay', 'dunya'];
+export const KATEGORILER = ['dizi-film', 'muzik', 'spor'];
+export const BASLIK_EN_FAZLA = 40;
 
 const nesneMi = (x: unknown): x is Record<string, unknown> =>
   typeof x === 'object' && x !== null && !Array.isArray(x);
@@ -68,8 +70,19 @@ export function quizHatalari(dosya: unknown): string[] {
   const h: string[] = [];
   for (const alan of ['id', 'ad', 'emoji'])
     if (!dolu(dosya[alan])) h.push(`${alan} boş`);
-  if (dosya.koken !== 'tr' && dosya.koken !== 'yabanci')
-    h.push('koken tr ya da yabanci olmalı');
+  const kategori = dosya.kategori;
+  if (typeof kategori !== 'string' || !KATEGORILER.includes(kategori))
+    h.push('kategori dizi-film, muzik ya da spor olmalı');
+  if (kategori === 'dizi-film') {
+    if (dosya.koken !== 'tr' && dosya.koken !== 'yabanci')
+      h.push('koken tr ya da yabanci olmalı');
+  } else if ('koken' in dosya) h.push('koken yalnız dizi-film paketinde olur');
+  if ('baslik' in dosya) {
+    const b = dosya.baslik;
+    if (!dolu(b)) h.push('baslik boş olamaz (yoksa alanı hiç yazma)');
+    else if (b.length > BASLIK_EN_FAZLA)
+      h.push(`baslik ${b.length} karakter (en fazla ${BASLIK_EN_FAZLA})`);
+  }
   const u = dosya.unvanlar;
   if (!Array.isArray(u) || u.length !== 4 || !u.every(dolu))
     h.push('tam 4 dolu unvan olmalı');
@@ -86,7 +99,9 @@ export function quizHatalari(dosya: unknown): string[] {
     if (n < ZORLUK_EN_AZ) h.push(`${z} sorusu ${n} (en az ${ZORLUK_EN_AZ})`);
   }
   const olay = gecerli.filter((s) => s.tur === 'olay').length;
-  if (olay * 2 >= sorular.length)
+  if (kategori === 'muzik' || kategori === 'spor') {
+    if (olay > 0) h.push(`${kategori} paketinde olay sorusu olmaz (${olay})`);
+  } else if (olay * 2 >= sorular.length)
     h.push(
       `olay sorusu havuzun yarısından az olmalı (${olay}/${sorular.length})`,
     );
@@ -107,7 +122,9 @@ export function uygulamaPaketi(dosya: unknown) {
     id: string;
     ad: string;
     emoji: string;
-    koken: string;
+    kategori: string;
+    koken?: string;
+    baslik?: string;
     unvanlar: string[];
     sorular: {
       id: string;
@@ -122,7 +139,9 @@ export function uygulamaPaketi(dosya: unknown) {
     id: p.id,
     ad: p.ad,
     emoji: p.emoji,
-    koken: p.koken,
+    kategori: p.kategori,
+    ...(p.koken === undefined ? {} : { koken: p.koken }),
+    ...(p.baslik === undefined ? {} : { baslik: p.baslik }),
     unvanlar: p.unvanlar,
     sorular: p.sorular.map(({ id, metin, secenekler, dogru, zorluk, tur }) => ({
       id,
